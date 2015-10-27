@@ -1,0 +1,17 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "OKHOSTING.Translator Class Library",
+  "authors": [ "one" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "System.Collections": "4.0.10-beta-23019",
+		"System.Linq": "4.0.0-beta-23019",
+  },
+
+  "frameworks": {
+		"dotnet": { }
+  }
+}
