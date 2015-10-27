@@ -5,7 +5,8 @@ namespace OKHOSTING.UI
 {
 	public abstract class View
 	{
-		IEnumerable<View> SubViews;
+		public IEnumerable<View> SubViews;
+		public bool Visible;
 
 		public abstract void NavigateTo(View view);
 	}
