@@ -8,16 +8,41 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class Button : Windows.UI.Xaml.Controls.Button, UI.Controls.IButton
 	{
+		public Button()
+		{
+			base.Click += Button_Click;
+		}
+
+		private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			if (Click != null)
+			{
+				Click(sender, new EventArgs());
+			}
+		}
+
 		public IPage Page
 		{
 			get
 			{
 				throw new NotImplementedException();
 			}
-
 			set
 			{
 				throw new NotImplementedException();
+			}
+		}
+
+		public string Text
+		{
+			get
+			{
+				return (string) base.Content;
+			}
+
+			set
+			{
+				base.Content = value;
 			}
 		}
 
@@ -27,7 +52,6 @@ namespace OKHOSTING.UI.UWP.Controls
 			{
 				return base.Visibility == Windows.UI.Xaml.Visibility.Visible;
 			}
-
 			set
 			{
 				if (value)
@@ -41,6 +65,6 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public event EventHandler Click;
+		public new event EventHandler Click;
 	}
 }
