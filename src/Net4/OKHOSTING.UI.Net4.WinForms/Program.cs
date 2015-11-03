@@ -16,7 +16,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+			Application.Run(new Page());
 		}
 	}
 }
