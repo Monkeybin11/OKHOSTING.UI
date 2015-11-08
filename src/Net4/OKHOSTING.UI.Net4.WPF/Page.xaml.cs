@@ -22,18 +22,9 @@ namespace OKHOSTING.UI.Net4.WPF
 	{
 		public Page()
 		{
-			base.Loaded += Page_Loaded;
 			InitializeComponent();
-		}
-
-		public new event EventHandler Loaded;
-
-		private void Page_Loaded(object sender, RoutedEventArgs e)
-		{
-			if (Loaded != null)
-			{
-				Loaded(sender, new EventArgs());
-			}
+			Platform.Current = new Platform(this);
+			Platform.Current.Controller.Run();
 		}
 
 		IControl IPage.Content

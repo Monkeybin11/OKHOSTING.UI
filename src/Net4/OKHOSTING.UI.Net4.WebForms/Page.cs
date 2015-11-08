@@ -8,6 +8,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 {
 	public class Page : System.Web.UI.Page, IPage
 	{
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+			Platform.Current = new Platform(this);
+			Platform.Current.Controller.Run();
+		}
+
 		public IControl Content
 		{
 			get
@@ -17,20 +24,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 			set
 			{
 				Controls.Clear();
-				Controls.Add((System.Web.UI.Control) value);
-			}
-		}
 
-		public event EventHandler Loaded;
-
-		protected override void OnLoad(EventArgs e)
-		{
-			base.OnLoad(e);
-
-			if (Loaded != null)
-			{
-				Loaded(this, e);
-			}
+				if (value != null)
+				{
+					Controls.Add((System.Web.UI.Control)value);
+				}
+            }
 		}
 	}
 }

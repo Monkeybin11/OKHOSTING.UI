@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activator.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Controls\Button.cs">
       <SubType>Component</SubType>
     </Compile>

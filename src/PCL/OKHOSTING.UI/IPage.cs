@@ -18,7 +18,5 @@ namespace OKHOSTING.UI
 		/// Each window only contains one main view, which can optionally be a container and contain more views
 		/// </summary>
 		Controls.IControl Content { get; set; }
-
-		event EventHandler Loaded;
 	}
 }

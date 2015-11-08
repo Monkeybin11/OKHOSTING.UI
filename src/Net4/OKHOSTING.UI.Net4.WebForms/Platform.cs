@@ -2,27 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Net4.WPF.Controls;
+using OKHOSTING.UI.Net4.WebForms.Controls;
 
-namespace OKHOSTING.UI.Net4.WPF
+namespace OKHOSTING.UI.Net4.WebForms
 {
-	public class Activator : UI.Activator
+	public class Platform : UI.Platform
 	{
-		public override IControl Create<T>()
+		public Platform(IPage page): base(page)
+		{
+		}
+
+		public override T Create<T>()
 		{
 			if (typeof(T) == typeof(IButton))
 			{
-				return new Button();
+				return new Button() as T;
 			}
 
 			if (typeof(T) == typeof(ILabel))
 			{
-				return new Label();
+				return new Label() as T;
 			}
 
 			if (typeof(T) == typeof(ITextBox))
 			{
-				return new TextBox();
+				return new TextBox() as T;
 			}
 
 			throw new NotSupportedException();

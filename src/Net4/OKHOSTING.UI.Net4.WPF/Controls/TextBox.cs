@@ -9,36 +9,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class TextBox : System.Windows.Controls.TextBox, UI.Controls.ITextBox
 	{
-		public TextBoxMode Mode
+		public bool Multiline
 		{
 			get
 			{
-				if (base.TextWrapping == System.Windows.TextWrapping.Wrap)
-				{
-					return TextBoxMode.MultiLine;
-				}
-
-				return TextBoxMode.SingleLine;
+				return base.TextWrapping == System.Windows.TextWrapping.Wrap;
 			}
-
 			set
 			{
-				switch (value)
+				if (value)
 				{
-					case TextBoxMode.MultiLine:
-						base.TextWrapping = System.Windows.TextWrapping.Wrap;
-						base.AcceptsReturn = true;
-						break;
-
-					case TextBoxMode.Password:
-						base.TextWrapping = System.Windows.TextWrapping.NoWrap;
-						base.AcceptsReturn = false;
-						break;
-
-					case TextBoxMode.SingleLine:
-						base.TextWrapping = System.Windows.TextWrapping.NoWrap;
-						base.AcceptsReturn = false;
-						break;
+					base.TextWrapping = System.Windows.TextWrapping.Wrap;
+					base.AcceptsReturn = true;
+				}
+				else
+				{
+					base.TextWrapping = System.Windows.TextWrapping.NoWrap;
+					base.AcceptsReturn = false;
 				}
 			}
 		}

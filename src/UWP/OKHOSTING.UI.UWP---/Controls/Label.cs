@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OKHOSTING.UI.Controls
+namespace OKHOSTING.UI.UWP.Controls
 {
-	public enum TextBoxMode
+	public class Label2 : Label, UI.Controls.ILabel
 	{
-		SingleLine,
-		MultiLine,
-		Password
 	}
 }

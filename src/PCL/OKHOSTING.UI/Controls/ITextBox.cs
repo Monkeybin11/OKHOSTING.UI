@@ -9,6 +9,6 @@ namespace OKHOSTING.UI.Controls
 	public interface ITextBox: IControl
 	{ 
 		string Text { get; set; }
-		TextBoxMode Mode { get; set; }
+		bool Multiline { get; set; }
 	}
 }

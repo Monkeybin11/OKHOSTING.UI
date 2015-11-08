@@ -8,37 +8,21 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class TextBox : System.Web.UI.WebControls.TextBox, UI.Controls.ITextBox
 	{
-		public TextBoxMode Mode
+		public bool Multiline
 		{
 			get
 			{
-				switch (base.TextMode)
-				{
-					case System.Web.UI.WebControls.TextBoxMode.MultiLine:
-						return TextBoxMode.MultiLine;
-
-					case System.Web.UI.WebControls.TextBoxMode.Password:
-						return TextBoxMode.Password;
-
-					default:
-						return TextBoxMode.SingleLine;
-				}
+				return base.TextMode == System.Web.UI.WebControls.TextBoxMode.MultiLine;
 			}
 			set
 			{
-				switch (value)
+				if (value)
 				{
-					case TextBoxMode.MultiLine:
-						base.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
-						break;
-
-					case TextBoxMode.Password:
-						base.TextMode = System.Web.UI.WebControls.TextBoxMode.Password;
-						break;
-
-					default:
-						base.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
-						break;
+					base.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
+				}
+				else
+				{
+					base.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
 				}
 			}
 		}
@@ -49,7 +33,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				return base.ID;
 			}
-
 			set
 			{
 				base.ID = value;

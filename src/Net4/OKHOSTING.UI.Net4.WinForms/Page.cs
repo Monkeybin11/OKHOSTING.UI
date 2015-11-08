@@ -15,18 +15,14 @@ namespace OKHOSTING.UI.Net4.WinForms
 	{
 		public Page()
 		{
-			base.Load += Page_Load;
 			InitializeComponent();
 		}
 
-		public event EventHandler Loaded;
-
-		private void Page_Load(object sender, EventArgs e)
+		protected override void OnLoad(EventArgs e)
 		{
-			if (Loaded != null)
-			{
-				Loaded(sender, new EventArgs());
-			}
+			base.OnLoad(e);
+			Platform.Current = new Platform(this);
+			Platform.Current.Controller.Run();
 		}
 
 		public IControl Content
@@ -39,7 +35,11 @@ namespace OKHOSTING.UI.Net4.WinForms
 			set
 			{
 				Controls.Clear();
-				Controls.Add((Control) value);
+
+				if (value != null)
+				{
+					Controls.Add((Control) value);
+				}
 			}
 		}
 

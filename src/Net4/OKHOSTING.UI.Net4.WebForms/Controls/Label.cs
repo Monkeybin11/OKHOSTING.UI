@@ -6,8 +6,12 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class Label : System.Web.UI.WebControls.Label, UI.Controls.ILabel
+	public class Label : System.Web.UI.WebControls.Label, ILabel
 	{
+		public Label()
+		{
+		}
+
 		public string Name
 		{
 			get
