@@ -18,6 +18,9 @@ namespace OKHOSTING.UI
 			}
 
 			Page = page;
+
+            //testing
+            ControllerStack.Push(new Test.LoginController());
 		}
 
 		/// <summary>
@@ -34,19 +37,7 @@ namespace OKHOSTING.UI
 		/// </returns>
 		public abstract T Create<T>() where T : class, IControl;
 		
-		protected readonly Stack<Controller> ControllerStack = new Stack<Controller>();
-
-		public virtual void Run(Controller controller)
-		{
-			Page.Content = null;
-			ControllerStack.Push(controller);
-		}
-
-		public virtual void FinishController()
-		{
-			Page.Content = null;
-			ControllerStack.Pop();
-		}
+		internal readonly Stack<Controller> ControllerStack = new Stack<Controller>();
 
 		/// <summary>
 		/// Gets the controller currently at the top of the stack (meaning it currently has control)

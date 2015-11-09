@@ -12,6 +12,22 @@ namespace OKHOSTING.UI
 	/// </summary>
 	public abstract class Controller
 	{
-		public abstract void Run();
-	}
+        public virtual void Start()
+        {
+            Platform.Current.Page.Content = null;
+            Platform.Current.ControllerStack.Push(this);
+        }
+
+        public virtual void Finish()
+        {
+            Platform.Current.ControllerStack.Pop();
+
+            if (Platform.Current.Page.Content != null)
+            {
+                Platform.Current.Page.Content.Dispose();
+            }
+
+            Platform.Current.Page.Content = null;
+        }
+    }
 }

@@ -47,14 +47,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				}
 				else
 				{
-					base.Visibility = System.Windows.Visibility.Collapsed;
+					base.Visibility = System.Windows.Visibility.Hidden;
 				}
 			}
 		}
 
 		public new event EventHandler Click;
 
-		protected override void OnClick()
+        public void Dispose()
+        {
+        }
+
+        protected override void OnClick()
 		{
 			base.OnClick();
 

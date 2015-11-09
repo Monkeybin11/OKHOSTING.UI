@@ -24,7 +24,7 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			InitializeComponent();
 			Platform.Current = new Platform(this);
-			Platform.Current.Controller.Run();
+			Platform.Current.Controller.Start();
 		}
 
 		IControl IPage.Content

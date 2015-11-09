@@ -12,24 +12,35 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 		}
 
-		public override T Create<T>()
-		{
-			if (typeof(T) == typeof(IButton))
-			{
-				return new Button() as T;
-			}
+        public override T Create<T>()
+        {
+            if (typeof(T) == typeof(IButton))
+            {
+                return new Button() as T;
+            }
 
-			if (typeof(T) == typeof(ILabel))
-			{
-				return new Label() as T;
-			}
+            if (typeof(T) == typeof(ILabel))
+            {
+                return new Label() as T;
+            }
 
-			if (typeof(T) == typeof(ITextBox))
-			{
-				return new TextBox() as T;
-			}
+            if (typeof(T) == typeof(ITextBox))
+            {
+                return new TextBox() as T;
+            }
 
-			throw new NotSupportedException();
+            if (typeof(T) == typeof(IPasswordTextBox))
+            {
+                return new PasswordTextBox() as T;
+            }
+
+            if (typeof(T) == typeof(UI.Controls.Layouts.IGrid))
+            {
+                return new Controls.Layouts.Grid() as T;
+            }
+
+
+            throw new NotSupportedException();
 		}
 	}
 }

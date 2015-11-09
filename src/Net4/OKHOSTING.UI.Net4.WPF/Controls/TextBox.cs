@@ -7,8 +7,8 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class TextBox : System.Windows.Controls.TextBox, UI.Controls.ITextBox
-	{
+	public class TextBox : System.Windows.Controls.TextBox, ITextBox
+    {
 		public bool Multiline
 		{
 			get
@@ -52,9 +52,13 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				}
 				else
 				{
-					base.Visibility = System.Windows.Visibility.Collapsed;
+					base.Visibility = System.Windows.Visibility.Hidden;
 				}
 			}
 		}
-	}
+
+        public void Dispose()
+        {
+        }
+    }
 }

@@ -20,7 +20,7 @@ namespace OKHOSTING.UI.UWP
         {
             this.InitializeComponent();
 			Platform.Current = new Platform(this);
-			Platform.Current.Controller.Run();
+			Platform.Current.Controller.Start();
 		}
 
 		public new IControl Content

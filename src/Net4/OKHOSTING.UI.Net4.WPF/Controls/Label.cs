@@ -44,9 +44,13 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				}
 				else
 				{
-					base.Visibility = System.Windows.Visibility.Collapsed;
+					base.Visibility = System.Windows.Visibility.Hidden;
 				}
 			}
 		}
-	}
+
+        public void Dispose()
+        {
+        }
+    }
 }

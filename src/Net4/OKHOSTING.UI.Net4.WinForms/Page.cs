@@ -22,14 +22,19 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			base.OnLoad(e);
 			Platform.Current = new Platform(this);
-			Platform.Current.Controller.Run();
+			Platform.Current.Controller.Start();
 		}
 
 		public IControl Content
 		{
 			get
 			{
-				return (IControl) Controls[0];
+                if (base.Controls.Count == 0)
+                {
+                    return null;
+                }
+
+                return (IControl) Controls[0];
 			}
 
 			set

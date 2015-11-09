@@ -28,11 +28,19 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Text = "Page";
+            this.SuspendLayout();
+            // 
+            // Page
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Name = "Page";
+            this.Text = "Page";
+            this.ResumeLayout(false);
+
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }

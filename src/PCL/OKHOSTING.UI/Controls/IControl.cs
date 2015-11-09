@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Controls
 {
-	public interface IControl
+	public interface IControl: IDisposable
 	{
 		string Name { get; set; }
 

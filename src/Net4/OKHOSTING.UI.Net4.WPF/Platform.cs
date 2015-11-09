@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Net4.WPF.Controls;
+using OKHOSTING.UI.Controls.Layouts;
 
 namespace OKHOSTING.UI.Net4.WPF
 {
@@ -29,7 +30,17 @@ namespace OKHOSTING.UI.Net4.WPF
 				return new TextBox() as T;
 			}
 
-			throw new NotSupportedException();
+            if (typeof(T) == typeof(IPasswordTextBox))
+            {
+                return new PasswordTextBox() as T;
+            }
+
+            if (typeof(T) == typeof(IGrid))
+            {
+                return new Controls.Layouts.Grid() as T;
+            }
+
+            throw new NotSupportedException();
 		}
 	}
 }
