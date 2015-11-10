@@ -52,7 +52,6 @@
     <Compile Include="Controls\PasswordTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Platform.cs" />
     <Compile Include="Controls\Button.cs">
       <SubType>Component</SubType>
     </Compile>

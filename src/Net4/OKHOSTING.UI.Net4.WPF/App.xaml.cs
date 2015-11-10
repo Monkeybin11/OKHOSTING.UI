@@ -8,5 +8,5 @@ namespace OKHOSTING.UI.Net4.WPF
 	/// </summary>
 	public partial class App : Application
 	{
-    }
+	}
 }

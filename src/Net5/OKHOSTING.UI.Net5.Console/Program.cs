@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Net5.Console
 {
-    public class Program
-    {
-        public void Main(string[] args)
-        {
-        }
-    }
+	public class Program
+	{
+		public void Main(string[] args)
+		{
+		}
+	}
 }

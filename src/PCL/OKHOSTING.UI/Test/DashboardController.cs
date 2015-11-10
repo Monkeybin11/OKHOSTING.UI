@@ -5,15 +5,15 @@ using System;
 
 namespace OKHOSTING.UI.Test
 {
-    public class DashboardController : Controller
-    {
-        public override void Start()
-        {
-            ILabel label = Platform.Current.Create<ILabel>();
-            label.Text = "hola amigo!";
+	public class DashboardController : Controller
+	{
+		public override void Start()
+		{
+			ILabel label = CurrentPage.Create<ILabel>();
+			label.Text = "hola amigo!";
 
-            Platform.Current.Page.Title = "Escritorio";
-            Platform.Current.Page.Content = label;
-        }
-    }
+			CurrentPage.Title = "Escritorio";
+			CurrentPage.Content = label;
+		}
+	}
 }

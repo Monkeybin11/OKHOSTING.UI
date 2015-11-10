@@ -52,7 +52,6 @@
     <Compile Include="Controls\ITextBox.cs" />
     <Compile Include="Controls\IPasswordTextBox.cs" />
     <Compile Include="Controls\Layouts\IGrid.cs" />
-    <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="IPage.cs" />

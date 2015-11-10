@@ -8,24 +8,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class PasswordTextBox : System.Web.UI.WebControls.TextBox, UI.Controls.IPasswordTextBox
 	{
-        public PasswordTextBox()
-        {
-            base.TextMode = System.Web.UI.WebControls.TextBoxMode.Password;
-        }
+		public PasswordTextBox()
+		{
+			base.TextMode = System.Web.UI.WebControls.TextBoxMode.Password;
+		}
 
-        public bool Multiline
-        {
-            get
-            {
-                return false;
-            }
-            set
-            {
-                //do nothing, fun!
-            }
-        }
+		public bool Multiline
+		{
+			get
+			{
+				return false;
+			}
+			set
+			{
+				//do nothing, fun!
+			}
+		}
 
-        public string Name
+		public string Name
 		{
 			get
 			{

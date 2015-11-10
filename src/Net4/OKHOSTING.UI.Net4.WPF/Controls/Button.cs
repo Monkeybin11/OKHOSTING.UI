@@ -54,11 +54,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		public new event EventHandler Click;
 
-        public void Dispose()
-        {
-        }
+		public void Dispose()
+		{
+		}
 
-        protected override void OnClick()
+		protected override void OnClick()
 		{
 			base.OnClick();
 

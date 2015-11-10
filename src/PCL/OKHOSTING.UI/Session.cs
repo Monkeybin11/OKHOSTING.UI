@@ -135,7 +135,10 @@ namespace OKHOSTING.UI
 					Session current = new Session(id);
 
 					//Storing the Session Object in Sessions collection
-					Sessions.Add(id, current);
+					lock(Sessions)
+					{
+						Sessions.Add(id, current);
+					}
 
 					//call OnSession_Start to raise Session_Start event
 					current.OnSessionStart();

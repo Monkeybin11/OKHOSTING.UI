@@ -8,47 +8,47 @@ using OKHOSTING.UI.Controls;
 namespace OKHOSTING.UI.UWP.Controls
 {
 	public class PasswordTextBox : Windows.UI.Xaml.Controls.StackPanel, IPasswordTextBox
-    {
-        public readonly Windows.UI.Xaml.Controls.PasswordBox NativeTextBox;
+	{
+		public readonly Windows.UI.Xaml.Controls.PasswordBox NativeTextBox;
 
-        public PasswordTextBox()
-        {
-            NativeTextBox = new Windows.UI.Xaml.Controls.PasswordBox();
-            base.Children.Add(NativeTextBox);
-        }
+		public PasswordTextBox()
+		{
+			NativeTextBox = new Windows.UI.Xaml.Controls.PasswordBox();
+			base.Children.Add(NativeTextBox);
+		}
 
-        public bool Multiline
-        {
-            get
-            {
-                return false;
-            }
-            set
-            {
-            }
-        }
-
-        public IPage Page
+		public bool Multiline
 		{
 			get
 			{
-                throw new NotImplementedException();
+				return false;
+			}
+			set
+			{
 			}
 		}
 
-        public string Text
-        {
-            get
-            {
-                return NativeTextBox.Password;
-            }
-            set
-            {
-                NativeTextBox.Password = value;
-            }
-        }
+		public IPage Page
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
 
-        public bool Visible
+		public string Text
+		{
+			get
+			{
+				return NativeTextBox.Password;
+			}
+			set
+			{
+				NativeTextBox.Password = value;
+			}
+		}
+
+		public bool Visible
 		{
 			get
 			{
@@ -67,8 +67,8 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-        public void Dispose()
-        {
-        }
-    }
+		public void Dispose()
+		{
+		}
+	}
 }

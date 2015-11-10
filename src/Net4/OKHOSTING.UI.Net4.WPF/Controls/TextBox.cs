@@ -8,7 +8,7 @@ using OKHOSTING.UI.Controls;
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class TextBox : System.Windows.Controls.TextBox, ITextBox
-    {
+	{
 		public bool Multiline
 		{
 			get
@@ -57,8 +57,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        public void Dispose()
-        {
-        }
-    }
+		public void Dispose()
+		{
+		}
+	}
 }

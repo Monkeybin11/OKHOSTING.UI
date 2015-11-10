@@ -55,7 +55,6 @@
     </ApplicationDefinition>
     <Compile Include="Controls\Layouts\Grid.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
-    <Compile Include="Platform.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

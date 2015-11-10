@@ -18,5 +18,14 @@ namespace OKHOSTING.UI
 		/// Each window only contains one main view, which can optionally be a container and contain more views
 		/// </summary>
 		Controls.IControl Content { get; set; }
+
+		/// <summary>
+		/// Create a platform-specific UI control
+		/// </summary>
+		/// <typeparam name="T">Type of the control. Control must implement IControl</typeparam>
+		/// <returns>
+		/// An instance of T
+		/// </returns>
+		T Create<T>() where T : class, Controls.IControl;
 	}
 }

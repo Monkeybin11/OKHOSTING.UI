@@ -1,12 +1,11 @@
 ﻿using System;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.UWP.Controls;
 
-namespace OKHOSTING.UI.UWP
+namespace OKHOSTING.UI.XamarinForms
 {
-	public class Platform : UI.Platform
+	public class Platform: OKHOSTING.UI.Platform
 	{
-		public Platform(IPage page) : base(page)
+		public Platform (IPage page): base(page)
 		{
 		}
 
@@ -14,7 +13,7 @@ namespace OKHOSTING.UI.UWP
 		{
 			if (typeof(T) == typeof(IButton))
 			{
-				return new Button() as T;
+				return new Button(global::Android.Content.conte) as T;
 			}
 
 			if (typeof(T) == typeof(ILabel))

@@ -49,8 +49,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        public void Dispose()
-        {
-        }
-    }
+		public void Dispose()
+		{
+		}
+	}
 }

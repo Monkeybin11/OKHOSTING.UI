@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-    public class PasswordTextBox : System.Windows.Forms.TextBox, UI.Controls.IPasswordTextBox
-    {
-        public PasswordTextBox()
-        {
-            base.UseSystemPasswordChar = true;
-        }
+	public class PasswordTextBox : System.Windows.Forms.TextBox, UI.Controls.IPasswordTextBox
+	{
+		public PasswordTextBox()
+		{
+			base.UseSystemPasswordChar = true;
+		}
 
-        public IPage Page
-        {
-            get
-            {
-                return (Page) base.FindForm();
-            }
-        }
-    }
+		public IPage Page
+		{
+			get
+			{
+				return (Page) base.FindForm();
+			}
+		}
+	}
 }

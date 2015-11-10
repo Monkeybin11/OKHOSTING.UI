@@ -14,8 +14,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//no longer rely on ASP.NET Session since it's not available on HttpContext.BeginRequest event, rely on cookies instead
 			//if (HttpContext.Current != null && HttpContext.Current.Session != null && HttpContext.Current.Session.SessionID != null)
 			//{
-			//    //Web Application; Using the SessionID of Session Object
-			//    id = HttpContext.Current.Session.SessionID;
+			//	//Web Application; Using the SessionID of Session Object
+			//	id = HttpContext.Current.Session.SessionID;
 			//}
 
 			HttpCookie sessionCookie = HttpContext.Current.Request.Cookies["OKHOSTING.UI.Session.Id"];

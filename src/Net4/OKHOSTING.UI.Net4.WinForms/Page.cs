@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layouts;
+using OKHOSTING.UI.Net4.WinForms.Controls;
+using OKHOSTING.UI.Net4.WinForms.Controls.Layouts;
 
 namespace OKHOSTING.UI.Net4.WinForms
 {
-	public partial class Page : Form, IPage
+	public partial class Page : System.Windows.Forms.Form, IPage
 	{
 		public Page()
 		{
@@ -21,20 +16,20 @@ namespace OKHOSTING.UI.Net4.WinForms
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
-			Platform.Current = new Platform(this);
-			Platform.Current.Controller.Start();
+			Controller.CurrentPage = this;
+			Controller.CurrentController.Start();
 		}
 
 		public IControl Content
 		{
 			get
 			{
-                if (base.Controls.Count == 0)
-                {
-                    return null;
-                }
+				if (base.Controls.Count == 0)
+				{
+					return null;
+				}
 
-                return (IControl) Controls[0];
+				return (IControl) Controls[0];
 			}
 
 			set
@@ -43,7 +38,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 				if (value != null)
 				{
-					Controls.Add((Control) value);
+					Controls.Add((System.Windows.Forms.Control) value);
 				}
 			}
 		}
@@ -59,6 +54,36 @@ namespace OKHOSTING.UI.Net4.WinForms
 			{
 				base.Text = value;
 			}
+		}
+
+		T IPage.Create<T>()
+		{
+			if (typeof(T) == typeof(IButton))
+			{
+				return new Button() as T;
+			}
+
+			if (typeof(T) == typeof(ILabel))
+			{
+				return new Label() as T;
+			}
+
+			if (typeof(T) == typeof(ITextBox))
+			{
+				return new TextBox() as T;
+			}
+
+			if (typeof(T) == typeof(IPasswordTextBox))
+			{
+				return new PasswordTextBox() as T;
+			}
+
+			if (typeof(T) == typeof(IGrid))
+			{
+				return new Grid() as T;
+			}
+
+			throw new NotSupportedException();
 		}
 	}
 }
