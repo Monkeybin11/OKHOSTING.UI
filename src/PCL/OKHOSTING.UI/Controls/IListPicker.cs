@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Controls
 {
-	class Image
+	public interface IListPicker: IControl
 	{
-	}
+		IEnumerable<string> DataSource { get; set; }
+    }
 }

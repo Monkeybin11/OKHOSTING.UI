@@ -39,6 +39,8 @@
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Label.cs" />
     <Compile Include="Controls\Layouts\Grid.cs" />
+    <Compile Include="Controls\Image.cs" />
+    <Compile Include="Controls\ListPicker.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
     <Compile Include="Controls\TextBox.cs" />
     <Compile Include="Page.cs" />
