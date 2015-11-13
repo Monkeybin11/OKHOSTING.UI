@@ -53,7 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ControlList.cs" />
     <Compile Include="Controls\Layouts\Grid.cs" />
+    <Compile Include="Controls\Layouts\Stack.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

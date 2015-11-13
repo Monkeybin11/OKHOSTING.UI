@@ -1,32 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layouts;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class Label : System.Windows.Controls.Label, UI.Controls.ILabel
+	public class Stack : System.Windows.Controls.StackPanel, IStack
 	{
+		public Stack()
+		{
+			_Children = new ControlList(base.Children);
+		}
+
 		public IPage Page
 		{
 			get
 			{
 				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
-		public string Text
-		{
-			get
-			{
-				return (string) base.Content;
-			}
-
-			set
-			{
-				base.Content = value;
 			}
 		}
 
@@ -51,6 +41,16 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		public void Dispose()
 		{
+		}
+
+		protected readonly ControlList _Children;
+
+		IList<IControl> IStack.Children
+		{
+			get
+			{
+				return _Children;
+			}
 		}
 	}
 }

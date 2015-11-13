@@ -100,6 +100,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\ControlList.cs" />
+    <Compile Include="Controls\Layouts\Stack.cs" />
     <Compile Include="Controls\ListPicker.cs" />
     <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\Label.cs" />

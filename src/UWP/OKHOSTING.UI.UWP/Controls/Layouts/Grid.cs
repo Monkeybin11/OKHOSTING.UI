@@ -1,4 +1,5 @@
 ﻿using OKHOSTING.UI.Controls;
+using System;
 
 namespace OKHOSTING.UI.UWP.Controls.Layouts
 {
@@ -32,7 +33,7 @@ namespace OKHOSTING.UI.UWP.Controls.Layouts
 		{
 			get
 			{
-				return (Page) System.Windows.Window.GetWindow(this);
+				throw new NotImplementedException();
 			}
 		}
 
