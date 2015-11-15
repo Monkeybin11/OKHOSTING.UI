@@ -5,6 +5,14 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class BooleanPicker : Windows.UI.Xaml.Controls.CheckBox, IBooleanPicker
 	{
+		public IPage Page
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		public bool SelectedValue
 		{
 			get
@@ -15,6 +23,29 @@ namespace OKHOSTING.UI.UWP.Controls
 			{
 				base.IsChecked = value;
 			}
+		}
+
+		public bool Visible
+		{
+			get
+			{
+				return base.Visibility == Windows.UI.Xaml.Visibility.Visible;
+			}
+			set
+			{
+				if (value)
+				{
+					base.Visibility = Windows.UI.Xaml.Visibility.Visible;
+				}
+				else
+				{
+					base.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+				}
+			}
+		}
+
+		public void Dispose()
+		{
 		}
 	}
 }

@@ -18,14 +18,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		IPage IControl.Page
-		{
-			get
-			{
-				return (Page) Page;
-			}
-		}
-
 		public void LoadFromFile(string filePath)
 		{
 			if (!File.Exists(filePath))

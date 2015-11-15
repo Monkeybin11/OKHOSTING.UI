@@ -50,6 +50,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ControlList.cs" />
+    <Compile Include="Controls\HyperLink.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Image.cs">
       <SubType>Component</SubType>
     </Compile>

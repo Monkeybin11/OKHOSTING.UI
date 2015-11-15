@@ -68,14 +68,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 			}
 		}
 
-		IPage IControl.Page
-		{
-			get
-			{
-				return (Page) Page;
-			}
-		}
-
 		public IControl GetContent(int row, int column)
 		{
 			if (Rows[row].Cells[column].Controls.Count == 0)

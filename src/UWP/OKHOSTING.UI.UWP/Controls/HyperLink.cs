@@ -1,17 +1,10 @@
-﻿using OKHOSTING.UI.Controls;
-using System;
+﻿using System;
+using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.UWP.Controls
 {
-	public class Label : Windows.UI.Xaml.Controls.RelativePanel, ILabel
+	public class HyperLink : Windows.UI.Xaml.Controls.HyperlinkButton, IHyperLink
 	{
-		protected readonly Windows.UI.Xaml.Controls.TextBlock InnerLabel = new Windows.UI.Xaml.Controls.TextBlock();
-
-		public Label()
-		{
-			base.Children.Add(InnerLabel);
-		}
-
 		public IPage Page
 		{
 			get
@@ -20,15 +13,15 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public string Text
+		public Uri Uri
 		{
 			get
 			{
-				return InnerLabel.Text;
+				return base.NavigateUri;
 			}
 			set
 			{
-				InnerLabel.Text = value;
+				base.NavigateUri = value;
 			}
 		}
 

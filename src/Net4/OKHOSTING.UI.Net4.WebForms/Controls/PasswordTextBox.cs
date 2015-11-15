@@ -24,13 +24,5 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				base.ID = value;
 			}
 		}
-
-		IPage IControl.Page
-		{
-			get
-			{
-				return (Page) Page;
-			}
-		}
 	}
 }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layouts;
+using OKHOSTING.UI.UWP.Controls;
+using OKHOSTING.UI.UWP.Controls.Layouts;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -31,7 +28,7 @@ namespace OKHOSTING.UI.UWP
 			}
 			set
 			{
-				base.Content = value as Windows.UI.Xaml.UIElement;
+				base.Content = (Windows.UI.Xaml.UIElement) value;
 			}
 		}
 

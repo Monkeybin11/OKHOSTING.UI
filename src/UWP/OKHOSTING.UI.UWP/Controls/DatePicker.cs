@@ -47,5 +47,9 @@ namespace OKHOSTING.UI.UWP.Controls
 				}
 			}
 		}
+
+		public void Dispose()
+		{
+		}
 	}
 }

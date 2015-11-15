@@ -110,6 +110,7 @@
     <Compile Include="Controls\Layouts\Grid.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
     <Compile Include="Controls\TextArea.cs" />
+    <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\TextBox.cs" />
     <Compile Include="Page.xaml.cs">
       <DependentUpon>Page.xaml</DependentUpon>

@@ -1,6 +1,5 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
-using System.IO;
 using System.Collections.Generic;
 
 namespace OKHOSTING.UI.UWP.Controls
@@ -26,6 +25,30 @@ namespace OKHOSTING.UI.UWP.Controls
 			get
 			{
 				throw new NotImplementedException();
+			}
+		}
+
+		public int SelectedIndex
+		{
+			get
+			{
+				return InnerListPicker.SelectedIndex;
+			}
+			set
+			{
+				InnerListPicker.SelectedIndex = value;
+			}
+		}
+
+		public string SelectedItem
+		{
+			get
+			{
+				return (string) InnerListPicker.SelectedItem;
+			}
+			set
+			{
+				InnerListPicker.SelectedItem = value;
 			}
 		}
 

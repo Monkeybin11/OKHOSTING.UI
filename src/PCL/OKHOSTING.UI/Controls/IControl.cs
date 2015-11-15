@@ -7,11 +7,6 @@ namespace OKHOSTING.UI.Controls
 	{
 		string Name { get; set; }
 
-		/// <summary>
-		/// Page that contains this control (directly or as a through another container)
-		/// </summary>
-		IPage Page { get; }
-
 		bool Visible { get; set; }
 	}
 }

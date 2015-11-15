@@ -46,12 +46,16 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		public void LoadFromStream(Stream stream)
 		{
-			InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.str
+			//var image = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+			//image.SetSource(Windows.Storage.Streams.RandomAccessStream.);
+			//InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+
+			throw new NotImplementedException();
 		}
 
 		public void LoadFromUrl(string url)
 		{
-			throw new NotImplementedException();
+			InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(url));
 		}
 	}
 }

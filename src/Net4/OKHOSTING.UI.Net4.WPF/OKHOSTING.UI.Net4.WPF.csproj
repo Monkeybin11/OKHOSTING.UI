@@ -55,6 +55,7 @@
     </ApplicationDefinition>
     <Compile Include="Controls\BooleanPicker.cs" />
     <Compile Include="Controls\ControlList.cs" />
+    <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\Layouts\Grid.cs" />
     <Compile Include="Controls\Layouts\Stack.cs" />

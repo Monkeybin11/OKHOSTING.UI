@@ -35,14 +35,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 			}
 		}
 
-		IPage IControl.Page
-		{
-			get
-			{
-				return (Page) Page;
-			}
-		}
-
 		IList<IControl> IStack.Children
 		{
 			get

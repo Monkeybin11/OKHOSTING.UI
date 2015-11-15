@@ -3,7 +3,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class BooleanPicker : System.Web.UI.WebControls.CheckBox, IBooleanPicker
+	public class HyperLink : System.Web.UI.WebControls.HyperLink, IHyperLink
 	{
 		public string Name
 		{
@@ -11,24 +11,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				return base.ID;
 			}
-
 			set
 			{
 				base.ID = value;
 			}
 		}
 
-		public bool SelectedValue
+		public Uri Uri
 		{
 			get
 			{
-				return base.Checked;
+				return new Uri(base.NavigateUrl);
 			}
 			set
 			{
-				base.Checked = value;
+				base.NavigateUrl = value.ToString();
 			}
 		}
-
 	}
 }

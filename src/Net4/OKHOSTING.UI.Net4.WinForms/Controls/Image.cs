@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OKHOSTING.UI.Controls;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Image : System.Windows.Forms.PictureBox, UI.Controls.IImage
+	public class Image : System.Windows.Forms.PictureBox, IImage
 	{
 		public IPage Page
 		{

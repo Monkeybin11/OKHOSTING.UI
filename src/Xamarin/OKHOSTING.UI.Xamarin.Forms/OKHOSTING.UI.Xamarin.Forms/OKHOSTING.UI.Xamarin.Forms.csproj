@@ -47,6 +47,7 @@
     <Compile Include="Controls\ListPicker.cs" />
     <Compile Include="Controls\TextArea.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
+    <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\TextBox.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
