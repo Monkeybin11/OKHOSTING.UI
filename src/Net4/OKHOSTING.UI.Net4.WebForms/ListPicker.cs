@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
-	public class ListPicker : System.Web.UI.WebControls.DropDownList, UI.Controls.IListPicker
+	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker
 	{
 		public string Name
 		{
@@ -25,7 +22,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				return (Page)Page;
+				return (Page) Page;
 			}
 		}
 
@@ -38,6 +35,18 @@ namespace OKHOSTING.UI.Net4.WebForms
 			set
 			{
 				base.DataSource = value;
+			}
+		}
+
+		string IListPicker.SelectedItem
+		{
+			get
+			{
+				return base.SelectedItem.Value;
+			}
+			set
+			{
+				base.SelectedValue = value;
 			}
 		}
 	}

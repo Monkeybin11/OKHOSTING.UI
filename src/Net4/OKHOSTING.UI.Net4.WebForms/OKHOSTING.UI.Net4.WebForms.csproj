@@ -77,8 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Image.cs" />
-    <Compile Include="Controls\Layouts\Stack.cs" />
     <Compile Include="Controls\Layouts\Grid.cs" />
+    <Compile Include="Controls\Layouts\Stack.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

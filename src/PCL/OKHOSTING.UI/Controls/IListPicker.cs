@@ -9,5 +9,7 @@ namespace OKHOSTING.UI.Controls
 	public interface IListPicker: IControl
 	{
 		IEnumerable<string> DataSource { get; set; }
-    }
+		string SelectedItem { get; set; }
+		int SelectedIndex { get; set; }
+	}
 }

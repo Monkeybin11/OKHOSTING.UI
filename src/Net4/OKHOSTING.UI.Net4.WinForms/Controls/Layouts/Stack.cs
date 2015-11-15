@@ -5,31 +5,20 @@ using OKHOSTING.UI.Controls.Layouts;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls.Layouts
 {
-	public class Stack : System.Windows.Forms.Panel, IStack
+	public class Stack : System.Windows.Forms.FlowLayoutPanel, IStack
 	{
-		protected readonly Grid InnerGrid = new Grid();
-
 		public Stack()
 		{
-			InnerGrid.ColumnCount = 1;
-			base.Controls.Add(InnerGrid);
 
-			_Children.Adding += _Children_Adding;
-			_Children.Removing += _Children_Removing;
+			AutoScroll = true;
+			FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+			WrapContents = false;
+
+			_Children = new ControlList(base.Controls);
 		}
 
-		private void _Children_Removing(object sender, IControl e)
-		{
-			int index = _Children.IndexOf(e);
-			InnerGrid.setc
-		}
 
-		private void _Children_Adding(object sender, IControl e)
-		{
-			throw new NotImplementedException();
-		}
-
-		protected readonly ControlList _Children = new ControlList(new List<System.Windows.Forms.Control>());
+		protected readonly ControlList _Children;
 
         public IList<IControl> Children
 		{

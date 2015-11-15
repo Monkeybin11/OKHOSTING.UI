@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class ListPicker : System.Windows.Forms.ListBox, UI.Controls.IListPicker
+	public class ListPicker : System.Windows.Forms.ListBox, IListPicker
 	{
 		public IPage Page
 		{
 			get
 			{
-				return (Page)base.FindForm();
+				return (Page) base.FindForm();
 			}
 		}
 
@@ -26,6 +23,18 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			set
 			{
 				base.DataSource = value;
+			}
+		}
+
+		string IListPicker.SelectedItem
+		{
+			get
+			{
+				return (string) base.SelectedValue;
+			}
+			set
+			{
+				base.SelectedValue = value;
 			}
 		}
 	}

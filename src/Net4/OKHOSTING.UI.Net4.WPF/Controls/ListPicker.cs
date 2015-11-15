@@ -1,28 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class Label : System.Windows.Controls.Label, ILabel
+	public class ListPicker : System.Windows.Controls.ComboBox, IListPicker
 	{
+		public IEnumerable<string> DataSource
+		{
+			get
+			{
+				return (IEnumerable<string>) base.ItemsSource;
+			}
+			set
+			{
+				base.ItemsSource = value;
+			}
+		}
+
 		public IPage Page
 		{
 			get
 			{
 				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
-		public string Text
-		{
-			get
-			{
-				return (string) base.Content;
-			}
-
-			set
-			{
-				base.Content = value;
 			}
 		}
 
@@ -42,6 +42,19 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				{
 					base.Visibility = System.Windows.Visibility.Hidden;
 				}
+			}
+		}
+
+		string IListPicker.SelectedItem
+		{
+			get
+			{
+				return (string) base.SelectedItem;
+			}
+
+			set
+			{
+				base.SelectedItem = value;
 			}
 		}
 

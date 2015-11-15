@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 
@@ -40,6 +41,19 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			get
 			{
 				return (IPage)App.Current.MainPage;
+			}
+		}
+
+		public string SelectedItem
+		{
+			get
+			{
+				return DataSource.ToArray()[base.SelectedIndex];
+			}
+			set
+			{
+				int index = DataSource.ToList().IndexOf(value);
+				base.SelectedIndex = index;
 			}
 		}
 

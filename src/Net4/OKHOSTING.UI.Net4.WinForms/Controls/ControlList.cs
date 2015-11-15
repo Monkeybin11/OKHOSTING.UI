@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class ControlList : IList<IControl>
 	{
-		public ControlList(IList<Native.Control> innerList)
+		public ControlList(Native.Control.ControlCollection innerList)
 		{
 			if (innerList == null)
 			{
@@ -19,7 +19,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			InnerList = innerList;
 		}
 
-		protected readonly IList<Native.Control> InnerList;
+		protected readonly Native.Control.ControlCollection InnerList;
 
 		public IControl this[int index]
 		{
@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				InnerList[index] = (Native.Control) value;
+				((IList) InnerList)[index] = (Native.Control) value;
 			}
 		}
 
@@ -51,17 +51,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		public void Add(IControl item)
 		{
-			OnAdding(item);
 			InnerList.Add((Native.Control) item);
 		}
 
 		public void Clear()
 		{
-			foreach (IControl control in InnerList)
-			{
-				OnRemoving(control);
-			}
-
 			InnerList.Clear();
 
 		}
@@ -91,13 +85,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		public void Insert(int index, IControl item)
 		{
-			OnAdding((IControl) item);
-			InnerList.Insert(index, (Native.Control) item);
+			((IList) InnerList).Insert(index, (Native.Control) item);
 		}
 
 		public bool Remove(IControl item)
 		{
-			OnRemoving((IControl) item);
 			InnerList.Remove((Native.Control) item);
 
 			return true;
@@ -105,32 +97,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		public void RemoveAt(int index)
 		{
-			OnRemoving((IControl)InnerList[index]);
 			InnerList.RemoveAt(index);
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
-		}
-
-		public event EventHandler<IControl> Adding;
-		public event EventHandler<IControl> Removing;
-
-		protected void OnAdding(IControl control)
-		{
-			if (Adding != null)
-			{
-				Adding(this, control);
-			}
-		}
-
-		protected void OnRemoving(IControl control)
-		{
-			if (Removing != null)
-			{
-				Removing(this, control);
-			}
 		}
 	}
 }

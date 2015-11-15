@@ -1,36 +1,27 @@
 ﻿using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layouts;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 {
-	public class Stack : System.Web.UI.WebControls.Panel, UI.Controls.Layouts.IGrid
+	public class Stack : System.Web.UI.WebControls.Panel, IStack
 	{
-		protected int _ColumnCount = 0;
-
-		public int ColumnCount
+		public Stack()
 		{
-			get
-			{
-				return _ColumnCount;
-			}
-			set
-			{
-				_ColumnCount = value;
+			Children = new ControlList(this);
+			InnerGrid = new Grid();
+			base.Controls.Add(InnerGrid);
+        }
 
-				foreach (System.Web.UI.WebControls.TableRow row in Rows)
-				{
-					while (row.Cells.Count < value)
-					{
-						row.Cells.Add(new System.Web.UI.WebControls.TableCell());
-					}
+		/// <summary>
+		/// The actual grid that contains all controls in a "stacky" way
+		/// </summary>
+		protected readonly Grid InnerGrid;
 
-					while (row.Cells.Count > value)
-					{
-						row.Cells.RemoveAt(row.Cells.Count - 1);
-					}
-				}
-			}
-		}
+		public readonly ControlList Children;
 
 		public string Name
 		{
@@ -38,33 +29,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 			{
 				return base.ID;
 			}
-
 			set
 			{
 				base.ID = value;
-			}
-		}
-
-		public int RowCount
-		{
-			get
-			{
-				return Rows.Count;
-			}
-			set
-			{
-				while (Rows.Count < value)
-				{
-					Rows.Add(new System.Web.UI.WebControls.TableRow());
-				}
-
-				while (Rows.Count > value)
-				{
-					Rows.RemoveAt(Rows.Count - 1);
-				}
-
-				//re-set columns
-				ColumnCount = _ColumnCount;
 			}
 		}
 
@@ -72,24 +39,147 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return (Page) Page;
 			}
 		}
 
-		public IControl GetContent(int row, int column)
+		IList<IControl> IStack.Children
 		{
-			if (Rows[row].Cells[column].Controls.Count == 0)
+			get
 			{
-				return null;
+				return Children;
 			}
-
-			return (IControl) Rows[row].Cells[column].Controls[0];
 		}
 
-		public void SetContent(int row, int column, IControl content)
+		public class ControlList : IList<IControl>
 		{
-			Rows[row].Cells[column].Controls.Clear();
-			Rows[row].Cells[column].Controls.Add((System.Web.UI.Control) content);
+			private readonly Stack ContainerStack;
+
+			public ControlList(Stack containerStack)
+			{
+				ContainerStack = containerStack;
+			}
+
+			public IControl this[int index]
+			{
+				get
+				{
+					return (IControl) ContainerStack.InnerGrid.Rows[index].Cells[0].Controls[0];
+				}
+				set
+				{
+					ContainerStack.InnerGrid.Rows[index].Cells[0].Controls.Clear();
+					ContainerStack.InnerGrid.Rows[index].Cells[0].Controls.Add((System.Web.UI.Control) value);
+                }
+			}
+
+			public int Count
+			{
+				get
+				{
+					return ContainerStack.InnerGrid.Rows.Count;
+				}
+			}
+
+			public bool IsReadOnly
+			{
+				get
+				{
+					return false;
+				}
+			}
+
+			public void Add(IControl item)
+			{
+				int last = ContainerStack.InnerGrid.Rows.Count - 1;
+				ContainerStack.InnerGrid.RowCount = last + 1;
+				ContainerStack.InnerGrid.SetContent(last + 2, 0, item);
+			}
+
+			public void Clear()
+			{
+				ContainerStack.InnerGrid.Rows.Clear();
+			}
+
+			public bool Contains(IControl item)
+			{
+				foreach (System.Web.UI.WebControls.TableRow row in ContainerStack.InnerGrid.Rows)
+				{
+					if (row.Cells[0].Controls.Count > 0 && row.Cells[0].Controls[0] == item)
+					{
+						return true;
+					}
+				}
+
+				return false;
+			}
+
+			public void CopyTo(IControl[] array, int arrayIndex)
+			{
+				for (int i = 0; i < ContainerStack.InnerGrid.Rows.Count; i++)
+				{
+					System.Web.UI.WebControls.TableRow row = ContainerStack.InnerGrid.Rows[i];
+
+					if (row.Cells[0].Controls.Count > 0)
+					{
+						array[i] = (IControl) row.Cells[0].Controls[0];
+					}
+				}
+			}
+
+			public IEnumerator<IControl> GetEnumerator()
+			{
+				foreach (System.Web.UI.WebControls.TableRow row in ContainerStack.InnerGrid.Rows)
+				{
+					yield return (IControl) row.Controls[0];
+				}
+			}
+
+			public int IndexOf(IControl item)
+			{
+				for (int i = 0; i < ContainerStack.InnerGrid.Rows.Count; i++)
+				{
+					System.Web.UI.WebControls.TableRow row = ContainerStack.InnerGrid.Rows[i];
+
+					if (row.Cells[0].Controls.Count > 0 && row.Cells[0].Controls[0] == item)
+					{
+						return i;
+					}
+				}
+				return -1;
+			}
+
+			public void Insert(int index, IControl item)
+			{
+				var row = new System.Web.UI.WebControls.TableRow();
+				row.Controls.Add((System.Web.UI.Control) item);
+
+				ContainerStack.InnerGrid.Rows.AddAt(index, row);
+			}
+
+			public bool Remove(IControl item)
+			{
+				foreach (System.Web.UI.WebControls.TableRow row in ContainerStack.InnerGrid.Rows)
+				{
+					if (row.Cells[0].Controls.Contains((System.Web.UI.Control) item))
+					{
+						row.Cells[0].Controls.Clear();
+						return true;
+                    }
+				}
+
+				return false;
+			}
+
+			public void RemoveAt(int index)
+			{
+				ContainerStack.InnerGrid.Rows.RemoveAt(index);
+			}
+
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
 		}
 	}
 }

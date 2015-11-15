@@ -72,7 +72,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return (Page) Page;
 			}
 		}
 
