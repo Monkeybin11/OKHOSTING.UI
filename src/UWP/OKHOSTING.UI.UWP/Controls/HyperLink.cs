@@ -5,6 +5,18 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class HyperLink : Windows.UI.Xaml.Controls.HyperlinkButton, IHyperLink
 	{
+		public string Text
+		{
+			get
+			{
+				return (string) base.Content;
+			}
+			set
+			{
+				base.Content = value;
+			}
+		}
+
 		public Uri Uri
 		{
 			get

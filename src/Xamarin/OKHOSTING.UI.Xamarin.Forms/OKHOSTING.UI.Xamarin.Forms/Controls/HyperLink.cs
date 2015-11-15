@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		private void HyperLink_Clicked(object sender, EventArgs e)
 		{
-			
+			global::Xamarin.Forms.Device.OpenUri(Uri);
 		}
 
 		public string Name
@@ -31,12 +31,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return new Uri(base.Text);
 			}
-
 			set
 			{
-				throw new NotImplementedException();
+				base.Text = value.ToString();
 			}
 		}
 

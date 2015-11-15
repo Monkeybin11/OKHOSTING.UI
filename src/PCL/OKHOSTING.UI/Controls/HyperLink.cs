@@ -5,6 +5,7 @@
 	/// </summary>
 	public interface IHyperLink: IControl
 	{
+		string Text { get; set; }
 		System.Uri Uri { get; set; }
 	}
 }
