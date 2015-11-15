@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Button : System.Windows.Forms.Button, UI.Controls.IButton
+	public class Button : System.Windows.Forms.Button, IButton
 	{
 		public IPage Page
 		{

@@ -1,37 +1,32 @@
-﻿using OKHOSTING.UI.Controls;
-using System;
+﻿using System;
+using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	public class PasswordTextBox : global::Xamarin.Forms.Entry, IPasswordTextBox
+	public class DatePicker : global::Xamarin.Forms.DatePicker, IDatePicker
 	{
-		public PasswordTextBox()
-		{
-			base.IsPassword = true;
-		}
-
-		public bool Multiline
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public string Name
 		{
 			get
 			{
 				throw new NotImplementedException();
 			}
+
 			set
 			{
 				throw new NotImplementedException();
+			}
+		}
+
+		public DateTime SelectedDate
+		{
+			get
+			{
+				return base.Date;
+			}
+			set
+			{
+				base.Date = value;
 			}
 		}
 
@@ -39,7 +34,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return (IPage) App.Current.MainPage;
+				return (IPage)App.Current.MainPage;
 			}
 		}
 

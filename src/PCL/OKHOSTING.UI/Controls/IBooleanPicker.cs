@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Controls
 {
-	class DatePicker
+	public interface IBooleanPicker: IControl
 	{
-		public DateTime SelectedDate { get; set; }
+		bool SelectedValue { get; set; }
 	}
 }

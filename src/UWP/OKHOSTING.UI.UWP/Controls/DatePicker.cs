@@ -3,25 +3,8 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.UWP.Controls
 {
-	public class Button : Windows.UI.Xaml.Controls.Button, IButton
+	public class DatePicker : Windows.UI.Xaml.Controls.DatePicker, IDatePicker
 	{
-		public Button()
-		{
-			base.Click += Button_Click;
-		}
-
-		private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-		{
-			if (Click != null)
-			{
-				Click(sender, new EventArgs());
-			}
-		}
-
-		public void Dispose()
-		{
-		}
-
 		public IPage Page
 		{
 			get
@@ -34,16 +17,15 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public string Text
+		public DateTime SelectedDate
 		{
 			get
 			{
-				return (string) base.Content;
+				return base.Date.DateTime;
 			}
-
 			set
 			{
-				base.Content = value;
+				base.Date = value;
 			}
 		}
 
@@ -65,7 +47,5 @@ namespace OKHOSTING.UI.UWP.Controls
 				}
 			}
 		}
-
-		public new event EventHandler Click;
 	}
 }

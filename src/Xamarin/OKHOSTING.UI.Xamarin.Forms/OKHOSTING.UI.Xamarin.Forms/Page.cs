@@ -26,31 +26,31 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 		}
 
-		T IPage.Create<T>()
+		public T Create<T>() where T : class, IControl
 		{
 			if (typeof(T) == typeof(IButton))
 			{
-				return new Button() as T;
+				return (T)(IButton) new Button();
 			}
 
 			if (typeof(T) == typeof(ILabel))
 			{
-				return new Label() as T;
+				return (T)(ILabel) new Label();
 			}
 
 			if (typeof(T) == typeof(ITextBox))
 			{
-				return new TextBox() as T;
+				return (T)(ITextBox) new TextBox();
 			}
 
 			if (typeof(T) == typeof(IPasswordTextBox))
 			{
-				return new PasswordTextBox() as T;
+				return (T)(IPasswordTextBox) new PasswordTextBox();
 			}
 
 			if (typeof(T) == typeof(IGrid))
 			{
-				return new Grid() as T;
+				return (T)(IGrid) new Grid();
 			}
 
 			throw new NotSupportedException();

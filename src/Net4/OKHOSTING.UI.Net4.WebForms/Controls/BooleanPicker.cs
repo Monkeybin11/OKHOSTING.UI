@@ -3,7 +3,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class Button : System.Web.UI.WebControls.Button, IButton
+	public class BooleanPicker : System.Web.UI.WebControls.CheckBox, IBooleanPicker
 	{
 		public string Name
 		{
@@ -18,12 +18,25 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		public bool SelectedValue
+		{
+			get
+			{
+				return base.Checked;
+			}
+			set
+			{
+				base.Checked = value;
+			}
+		}
+
 		IPage IControl.Page
 		{
 			get
 			{
-				return (Page) Page;
+				return (Page)Page;
 			}
 		}
+
 	}
 }

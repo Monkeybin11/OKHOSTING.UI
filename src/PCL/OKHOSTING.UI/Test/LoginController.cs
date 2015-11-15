@@ -27,12 +27,18 @@ namespace OKHOSTING.UI.Test
 			txtUserName = CurrentPage.Create<ITextBox>();
 			grid.SetContent(0, 1, txtUserName);
 
-			lblPassword = CurrentPage.Create<ILabel>();
-			lblPassword.Text = "Password";
-			grid.SetContent(1, 0, lblPassword);
+			try
+			{
+				lblPassword = CurrentPage.Create<ILabel>();
+				lblPassword.Text = "Password";
+				grid.SetContent(1, 0, lblPassword);
 
-			txtPassword = CurrentPage.Create<IPasswordTextBox>();
-			grid.SetContent(1, 1, txtPassword);
+				txtPassword = CurrentPage.Create<IPasswordTextBox>();
+				grid.SetContent(1, 1, txtPassword);
+			}
+			catch (Exception e)
+			{
+			}
 
 			cmdLogin = CurrentPage.Create<IButton>();
 			cmdLogin.Text = "Login";

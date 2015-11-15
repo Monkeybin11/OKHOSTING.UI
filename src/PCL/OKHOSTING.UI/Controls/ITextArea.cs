@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace OKHOSTING.UI.Controls
 {
 	/// <summary>
-	/// A single line textbox
+	/// A multiline textbox
 	/// </summary>
-	public interface ITextBox: IControl
+	public interface ITextArea : IControl
 	{ 
 		string Text { get; set; }
 	}

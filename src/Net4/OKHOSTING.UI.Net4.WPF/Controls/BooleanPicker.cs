@@ -3,29 +3,30 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class Button : System.Windows.Controls.Button, IButton
+	public class BooleanPicker : System.Windows.Controls.CheckBox, IBooleanPicker
 	{
-		public Button()
-		{
-		}
-
 		public IPage Page
 		{
 			get
 			{
-				return (Page) System.Windows.Window.GetWindow(this);
+				return (Page)System.Windows.Window.GetWindow(this);
 			}
 		}
 
-		public string Text
+		public bool SelectedValue
 		{
 			get
 			{
-				return (string) base.Content;
+				if (!base.IsChecked.HasValue)
+				{
+					return false;
+				}
+
+				return base.IsChecked.Value;
 			}
 			set
 			{
-				base.Content = value;
+				base.IsChecked = value;
 			}
 		}
 
@@ -48,20 +49,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		public new event EventHandler Click;
-
 		public void Dispose()
 		{
-		}
-
-		protected override void OnClick()
-		{
-			base.OnClick();
-
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
 		}
 	}
 }

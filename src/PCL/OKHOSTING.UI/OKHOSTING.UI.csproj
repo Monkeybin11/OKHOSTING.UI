@@ -46,10 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="Controls\IBooleanPicker.cs" />
+    <Compile Include="Controls\IDatePicker.cs" />
     <Compile Include="Controls\IButton.cs" />
     <Compile Include="Controls\IControl.cs" />
     <Compile Include="Controls\ILabel.cs" />
     <Compile Include="Controls\IImage.cs" />
+    <Compile Include="Controls\ITextArea.cs" />
     <Compile Include="Controls\ITextBox.cs" />
     <Compile Include="Controls\IPasswordTextBox.cs" />
     <Compile Include="Controls\Layouts\IGrid.cs" />

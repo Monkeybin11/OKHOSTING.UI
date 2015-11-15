@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Controls
 {
-	class CheckBox
+	public interface IDatePicker: IControl
 	{
+		DateTime SelectedDate { get; set; }
 	}
 }

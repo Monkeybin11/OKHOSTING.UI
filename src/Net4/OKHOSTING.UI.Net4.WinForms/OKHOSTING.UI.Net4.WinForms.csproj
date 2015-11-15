@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BooleanPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ControlList.cs" />
     <Compile Include="Controls\Image.cs">
       <SubType>Component</SubType>

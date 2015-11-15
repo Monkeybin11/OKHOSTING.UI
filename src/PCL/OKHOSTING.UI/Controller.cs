@@ -32,6 +32,11 @@ namespace OKHOSTING.UI
 
 		#region Static
 
+		static Controller()
+		{
+			Stack.Push(new Test.LoginController());
+		}
+
 		protected static readonly string SessionName = typeof(Controller).FullName + ".Stack";
 
 		protected static Stack<Controller> Stack
