@@ -8,14 +8,6 @@ namespace OKHOSTING.UI.UWP.Controls
 	{
 		protected Windows.UI.Xaml.Controls.Image InnerImage = new Windows.UI.Xaml.Controls.Image();
 
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public bool Visible
 		{
 			get

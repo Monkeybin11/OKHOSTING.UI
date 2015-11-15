@@ -12,14 +12,6 @@ namespace OKHOSTING.UI.UWP.Controls.Layouts
 			_Children = new ControlList(base.Children);
 		}
 
-		public IPage Page
-        {
-            get
-            {
-				throw new NotImplementedException();
-            }
-        }
-
 		public bool Visible
 		{
 			get

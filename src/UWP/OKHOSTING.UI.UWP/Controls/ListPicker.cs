@@ -20,14 +20,6 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public int SelectedIndex
 		{
 			get

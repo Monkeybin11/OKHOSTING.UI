@@ -12,14 +12,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			_Children = new ControlList(base.Children);
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
 		public bool Visible
 		{
 			get

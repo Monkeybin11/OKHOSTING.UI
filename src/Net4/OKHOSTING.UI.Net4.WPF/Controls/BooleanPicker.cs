@@ -5,14 +5,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class BooleanPicker : System.Windows.Controls.CheckBox, IBooleanPicker
 	{
-		public IPage Page
-		{
-			get
-			{
-				return (Page)System.Windows.Window.GetWindow(this);
-			}
-		}
-
 		public bool SelectedValue
 		{
 			get

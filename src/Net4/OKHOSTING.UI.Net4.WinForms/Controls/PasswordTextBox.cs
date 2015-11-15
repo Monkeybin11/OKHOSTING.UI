@@ -12,13 +12,5 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			base.UseSystemPasswordChar = true;
 		}
-
-		public IPage Page
-		{
-			get
-			{
-				return (Page) base.FindForm();
-			}
-		}
 	}
 }

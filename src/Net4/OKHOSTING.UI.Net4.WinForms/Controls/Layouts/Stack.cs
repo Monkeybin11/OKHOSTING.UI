@@ -27,13 +27,5 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layouts
 				return _Children;
 			}
 		}
-
-		public IPage Page
-		{
-			get
-			{
-				return (Page) base.FindForm();
-			}
-		}
 	}
 }

@@ -6,14 +6,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class ListPicker : System.Windows.Forms.ListBox, IListPicker
 	{
-		public IPage Page
-		{
-			get
-			{
-				return (Page) base.FindForm();
-			}
-		}
-
 		IEnumerable<string> IListPicker.DataSource
 		{
 			get

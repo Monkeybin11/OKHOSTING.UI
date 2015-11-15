@@ -11,14 +11,6 @@ namespace OKHOSTING.UI.UWP.Controls
 			base.AcceptsReturn = true;
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public bool Visible
 		{
 			get

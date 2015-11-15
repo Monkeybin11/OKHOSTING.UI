@@ -9,14 +9,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
 		public string Text
 		{
 			get

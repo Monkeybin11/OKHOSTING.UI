@@ -5,14 +5,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Image : System.Windows.Forms.PictureBox, IImage
 	{
-		public IPage Page
-		{
-			get
-			{
-				return (Page)base.FindForm();
-			}
-		}
-
 		public void LoadFromFile(string filePath)
 		{
 			base.Image = System.Drawing.Image.FromFile(filePath);

@@ -29,14 +29,6 @@ namespace OKHOSTING.UI.UWP.Controls.Layouts
 			}
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public int RowCount
 		{
 			get

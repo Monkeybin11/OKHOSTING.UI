@@ -9,13 +9,5 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			base.Multiline = true;
 		}
-
-		public IPage Page
-		{
-			get
-			{
-				return (Page) base.FindForm();
-			}
-		}
 	}
 }

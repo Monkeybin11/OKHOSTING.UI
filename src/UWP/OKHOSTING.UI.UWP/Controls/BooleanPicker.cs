@@ -5,14 +5,6 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class BooleanPicker : Windows.UI.Xaml.Controls.CheckBox, IBooleanPicker
 	{
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public bool SelectedValue
 		{
 			get

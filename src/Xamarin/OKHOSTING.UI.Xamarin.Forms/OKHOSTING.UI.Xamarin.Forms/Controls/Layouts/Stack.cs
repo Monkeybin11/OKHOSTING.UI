@@ -24,14 +24,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 			}
 		}
 
-		public IPage Page
-        {
-            get
-            {
-                return (IPage) App.Current.MainPage;
-            }
-        }
-
 		public bool Visible
 		{
 			get

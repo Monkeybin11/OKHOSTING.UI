@@ -32,14 +32,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			}
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
 		public int RowCount
 		{
 			get

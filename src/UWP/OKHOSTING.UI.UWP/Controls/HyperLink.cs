@@ -5,14 +5,6 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class HyperLink : Windows.UI.Xaml.Controls.HyperlinkButton, IHyperLink
 	{
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public Uri Uri
 		{
 			get

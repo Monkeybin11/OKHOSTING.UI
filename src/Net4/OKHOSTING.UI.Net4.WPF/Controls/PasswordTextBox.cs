@@ -17,14 +17,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			base.Children.Add(NativeTextBox);
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
 		public string Text
 		{
 			get

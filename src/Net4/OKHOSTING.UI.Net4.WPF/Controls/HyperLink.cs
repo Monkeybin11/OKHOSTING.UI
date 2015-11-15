@@ -9,14 +9,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class HyperLink : System.Windows.Documents.Hyperlink, IHyperLink
 	{
-		public IPage Page
-		{
-			get
-			{
-				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
 		public Uri Uri
 		{
 			get

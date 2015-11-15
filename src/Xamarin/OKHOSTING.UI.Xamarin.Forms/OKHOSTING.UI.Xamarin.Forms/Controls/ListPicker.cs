@@ -36,14 +36,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				return (IPage)App.Current.MainPage;
-			}
-		}
-
 		public string SelectedItem
 		{
 			get

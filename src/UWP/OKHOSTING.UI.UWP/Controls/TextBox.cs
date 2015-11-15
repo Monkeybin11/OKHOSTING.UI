@@ -5,14 +5,6 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class TextBox : Windows.UI.Xaml.Controls.TextBox, ITextBox
 	{
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public bool Visible
 		{
 			get

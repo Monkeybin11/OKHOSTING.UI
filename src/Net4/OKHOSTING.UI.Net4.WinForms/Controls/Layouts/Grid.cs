@@ -9,14 +9,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layouts
 {
 	public class Grid : System.Windows.Forms.TableLayoutPanel, OKHOSTING.UI.Controls.Layouts.IGrid
 	{
-		public IPage Page
-		{
-			get
-			{
-				return (Page) base.FindForm();
-			}
-		}
-
 		public IControl GetContent(int row, int column)
 		{
 			foreach (System.Windows.Forms.Control control in Controls)

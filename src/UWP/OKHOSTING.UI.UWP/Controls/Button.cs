@@ -22,18 +22,6 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public string Text
 		{
 			get

@@ -12,14 +12,6 @@ namespace OKHOSTING.UI.UWP.Controls
 			base.Children.Add(InnerLabel);
 		}
 
-		public IPage Page
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public string Text
 		{
 			get

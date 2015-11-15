@@ -6,14 +6,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class Image : System.Windows.Controls.Image, IImage
 	{
-		public IPage Page
-		{
-			get
-			{
-				return (Page) System.Windows.Window.GetWindow(this);
-			}
-		}
-
 		public bool Visible
 		{
 			get
