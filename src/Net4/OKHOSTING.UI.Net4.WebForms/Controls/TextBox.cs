@@ -8,25 +8,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class TextBox : System.Web.UI.WebControls.TextBox, UI.Controls.ITextBox
 	{
-		public bool Multiline
-		{
-			get
-			{
-				return base.TextMode == System.Web.UI.WebControls.TextBoxMode.MultiLine;
-			}
-			set
-			{
-				if (value)
-				{
-					base.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
-				}
-				else
-				{
-					base.TextMode = System.Web.UI.WebControls.TextBoxMode.SingleLine;
-				}
-			}
-		}
-
 		public string Name
 		{
 			get

@@ -9,27 +9,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class TextBox : System.Windows.Controls.TextBox, ITextBox
 	{
-		public bool Multiline
-		{
-			get
-			{
-				return base.TextWrapping == System.Windows.TextWrapping.Wrap;
-			}
-			set
-			{
-				if (value)
-				{
-					base.TextWrapping = System.Windows.TextWrapping.Wrap;
-					base.AcceptsReturn = true;
-				}
-				else
-				{
-					base.TextWrapping = System.Windows.TextWrapping.NoWrap;
-					base.AcceptsReturn = false;
-				}
-			}
-		}
-
 		public IPage Page
 		{
 			get

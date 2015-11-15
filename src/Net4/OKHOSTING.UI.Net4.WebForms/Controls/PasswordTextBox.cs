@@ -13,18 +13,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			base.TextMode = System.Web.UI.WebControls.TextBoxMode.Password;
 		}
 
-		public bool Multiline
-		{
-			get
-			{
-				return false;
-			}
-			set
-			{
-				//do nothing, fun!
-			}
-		}
-
 		public string Name
 		{
 			get

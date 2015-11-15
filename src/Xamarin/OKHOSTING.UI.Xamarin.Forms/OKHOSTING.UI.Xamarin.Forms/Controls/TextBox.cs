@@ -5,19 +5,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class TextBox : global::Xamarin.Forms.Entry, ITextBox
 	{
-		public bool Multiline
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public string Name
 		{
 			get

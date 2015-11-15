@@ -7,29 +7,8 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.UWP.Controls
 {
-	public class TextBox : Windows.UI.Xaml.Controls.TextBox, UI.Controls.ITextBox
+	public class TextBox : Windows.UI.Xaml.Controls.TextBox, ITextBox
 	{
-		public bool Multiline
-		{
-			get
-			{
-				return base.TextWrapping == Windows.UI.Xaml.TextWrapping.Wrap;
-			}
-			set
-			{
-				if (value)
-				{
-					base.TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap;
-					base.AcceptsReturn = true;
-				}
-				else
-				{
-					base.TextWrapping = Windows.UI.Xaml.TextWrapping.NoWrap;
-					base.AcceptsReturn = false;
-				}
-			}
-		}
-
 		public IPage Page
 		{
 			get
@@ -55,6 +34,10 @@ namespace OKHOSTING.UI.UWP.Controls
 					base.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
 				}
 			}
+		}
+
+		public void Dispose()
+		{
 		}
 	}
 }
