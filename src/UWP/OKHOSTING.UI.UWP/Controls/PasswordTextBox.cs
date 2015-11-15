@@ -17,17 +17,6 @@ namespace OKHOSTING.UI.UWP.Controls
 			base.Children.Add(NativeTextBox);
 		}
 
-		public bool Multiline
-		{
-			get
-			{
-				return false;
-			}
-			set
-			{
-			}
-		}
-
 		public IPage Page
 		{
 			get

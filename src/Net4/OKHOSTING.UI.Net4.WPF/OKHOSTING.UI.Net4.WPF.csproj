@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\Label.cs" />
+    <Compile Include="Controls\TextArea.cs" />
     <Compile Include="Controls\TextBox.cs" />
     <Compile Include="Controls\Button.cs" />
   </ItemGroup>

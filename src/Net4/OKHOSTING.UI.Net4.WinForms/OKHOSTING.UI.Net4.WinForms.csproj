@@ -71,6 +71,9 @@
     <Compile Include="Controls\Label.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TextArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>

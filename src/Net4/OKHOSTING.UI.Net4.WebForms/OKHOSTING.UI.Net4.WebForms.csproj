@@ -82,6 +82,7 @@
     <Compile Include="Controls\Layouts\Stack.cs" />
     <Compile Include="Controls\ListPicker.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
+    <Compile Include="Controls\TextArea.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Controls
 {
@@ -11,6 +7,9 @@ namespace OKHOSTING.UI.Controls
 	/// </summary>
 	public interface ITextBox: IControl
 	{ 
+		/// <summary>
+		/// Gets or sets the text that is contained in the textbox
+		/// </summary>
 		string Text { get; set; }
 	}
 }

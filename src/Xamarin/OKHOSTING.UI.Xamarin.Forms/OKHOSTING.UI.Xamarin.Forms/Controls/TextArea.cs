@@ -3,11 +3,10 @@ using System;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	public class PasswordTextBox : global::Xamarin.Forms.Entry, IPasswordTextBox
+	public class TextArea : global::Xamarin.Forms.Editor, ITextArea
 	{
-		public PasswordTextBox()
+		public TextArea()
 		{
-			base.IsPassword = true;
 		}
 
 		public string Name
