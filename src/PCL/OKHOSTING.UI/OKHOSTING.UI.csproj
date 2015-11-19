@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="Controls\HyperLink.cs" />
+    <Compile Include="Controls\IAutocomplete.cs" />
     <Compile Include="Controls\IBooleanPicker.cs" />
     <Compile Include="Controls\IDatePicker.cs" />
     <Compile Include="Controls\IButton.cs" />

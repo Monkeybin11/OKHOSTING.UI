@@ -14,7 +14,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			Controller.CurrentController.Start();
 		}
 
-		IControl IPage.Content
+		public new IControl Content
 		{
 			get
 			{

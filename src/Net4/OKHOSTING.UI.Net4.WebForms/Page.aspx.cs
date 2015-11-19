@@ -15,7 +15,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			Controller.CurrentController.Start();
 		}
 
-		T IPage.Create<T>()
+		public T Create<T>() where T : class, IControl
 		{
 			if (typeof(T) == typeof(IButton))
 			{

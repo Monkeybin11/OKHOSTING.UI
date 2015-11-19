@@ -18,7 +18,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			Controller.CurrentController.Start();
 		}
 
-		IControl IPage.Content
+		public new IControl Content
 		{
 			get
 			{
@@ -30,7 +30,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 		}
 
-		T IPage.Create<T>()
+		public T Create<T>() where T : class, IControl
 		{
 			if (typeof(T) == typeof(IButton))
 			{

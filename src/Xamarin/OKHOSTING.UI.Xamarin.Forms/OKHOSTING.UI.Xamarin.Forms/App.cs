@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		public App()
 		{
 			// The root page of your application
-			MainPage = new Page();
+			MainPage = new NavigationPage(new Page());
 		}
 
 		protected override void OnStart()
