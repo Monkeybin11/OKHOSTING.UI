@@ -45,6 +45,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Distance.cs" />
+    <Compile Include="DistanceUnit.cs" />
+    <Compile Include="Color.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\IAutocomplete.cs" />
