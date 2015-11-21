@@ -40,6 +40,7 @@
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\ControlList.cs" />
     <Compile Include="Controls\DatePicker.cs" />
+    <Compile Include="Controls\LabelButton.cs" />
     <Compile Include="Controls\Label.cs" />
     <Compile Include="Controls\Layouts\Stack.cs" />
     <Compile Include="Controls\Layouts\Grid.cs" />

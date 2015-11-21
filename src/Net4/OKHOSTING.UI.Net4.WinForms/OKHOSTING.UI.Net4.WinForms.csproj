@@ -56,6 +56,9 @@
     <Compile Include="Controls\Image.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\LabelButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Layouts\Grid.cs">
       <SubType>Component</SubType>
     </Compile>

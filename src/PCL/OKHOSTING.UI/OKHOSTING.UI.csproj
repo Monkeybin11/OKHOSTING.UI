@@ -57,6 +57,7 @@
     <Compile Include="Controls\ITextArea.cs" />
     <Compile Include="Controls\ITextBox.cs" />
     <Compile Include="Controls\IPasswordTextBox.cs" />
+    <Compile Include="Controls\ILabelButton.cs" />
     <Compile Include="Controls\Layouts\IGrid.cs" />
     <Compile Include="Controls\IListPicker.cs" />
     <Compile Include="Controls\Layouts\IStack.cs" />
