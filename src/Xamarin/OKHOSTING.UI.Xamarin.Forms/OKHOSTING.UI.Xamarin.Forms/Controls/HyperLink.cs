@@ -17,14 +17,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		public string Name
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
+			get; set;
 		}
 
 		public Uri Uri

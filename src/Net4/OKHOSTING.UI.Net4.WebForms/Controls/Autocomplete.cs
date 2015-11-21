@@ -23,8 +23,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			InnerAutoCompleteExtender.UseContextKey = true;
 			InnerAutoCompleteExtender.ServiceMethod = "Search";
 			InnerAutoCompleteExtender.ServicePath = "/Services/AutoCompleteService.asmx";
-			InnerAutoCompleteExtender.CompletionListCssClass = "AutoComplete_List";
-			InnerAutoCompleteExtender.CompletionListItemCssClass = "AutoComplete_ListItem";
+			//InnerAutoCompleteExtender.CompletionListCssClass = "AutoComplete_List";
+			//InnerAutoCompleteExtender.CompletionListItemCssClass = "AutoComplete_ListItem";
 			InnerAutoCompleteExtender.EnableCaching = false;
 			base.Controls.Add(InnerAutoCompleteExtender);
 
@@ -33,7 +33,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			InnerWatermarkExtender.WatermarkText = "Search";
 			InnerWatermarkExtender.ID = base.UniqueID + "_TextBoxWatermarkExtender";
 			InnerWatermarkExtender.TargetControlID = InnerTextBox.ID;
-			InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
+			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
 			base.Controls.Add(InnerWatermarkExtender);
 
 			Name = "Autocomplete_" + new Random().Next();

@@ -28,15 +28,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 
 		public string Name
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
+			get; set;
 		}
 
 		public int RowCount
