@@ -43,7 +43,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
-			OnSearching();
+			OnSearching(SearchText.Text);
 		}
 
 		public string Text
@@ -87,19 +87,13 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 		}
 
-		public void OnSearching()
+		public AutocompleteSearchEventArgs OnSearching(string text)
 		{
-			if (Searching == null)
-			{
-				return;
-			}
+			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
 
-			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(SearchText.Text);
-			Searching(this, e);
-
-			if (e.SearchResult == null)
+			if (Searching != null)
 			{
-				return;
+				Searching(this, e);
 			}
 
 			ResultView = new global::Xamarin.Forms.ListView();
@@ -110,6 +104,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			ResultPage.Content = ResultView;
 
 			((Page) Controller.CurrentPage).Navigation.PushAsync(ResultPage);
+
+			return e;
 		}
 
 		private void ListView_ItemSelected(object sender, global::Xamarin.Forms.SelectedItemChangedEventArgs e)

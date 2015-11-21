@@ -10,9 +10,18 @@ namespace OKHOSTING.UI.Net4.WebForms
 	{
 		protected override void OnLoad(EventArgs e)
 		{
+            Controller.CurrentPage = this;
+
+			if (Controller.CurrentController == null)
+			{
+				new Test.LoginController().Start();
+			}
+			else
+			{
+				Controller.CurrentController.Start();
+			}
+
 			base.OnLoad(e);
-			Controller.CurrentPage = this;
-			Controller.CurrentController.Start();
 		}
 
 		public T Create<T>() where T : class, IControl
@@ -32,9 +41,49 @@ namespace OKHOSTING.UI.Net4.WebForms
 				return new TextBox() as T;
 			}
 
+			if (typeof(T) == typeof(IAutocomplete))
+			{
+				var auto = new Autocomplete();
+
+				//add to session so we can invoke OnSearching from a ashx page
+				OKHOSTING.UI.Session.Current[auto.Name] = auto;
+
+                return auto as T;
+			}
+
+			if (typeof(T) == typeof(IListPicker))
+			{
+				return new ListPicker() as T;
+			}
+
+			if (typeof(T) == typeof(IHyperLink))
+			{
+				return new HyperLink() as T;
+			}
+
+			if (typeof(T) == typeof(ITextArea))
+			{
+				return new TextArea() as T;
+			}
+
+			if (typeof(T) == typeof(IBooleanPicker))
+			{
+				return new BooleanPicker() as T;
+			}
+
+			if (typeof(T) == typeof(IImage))
+			{
+				return new Image() as T;
+			}
+
 			if (typeof(T) == typeof(IPasswordTextBox))
 			{
 				return new PasswordTextBox() as T;
+			}
+
+			if (typeof(T) == typeof(IStack))
+			{
+				return new Stack() as T;
 			}
 
 			if (typeof(T) == typeof(IGrid))
@@ -49,20 +98,20 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (base.Form.Controls.Count == 0)
+				if (phContent.Controls.Count == 0)
 				{
 					return null;
 				}
 
-				return (IControl) base.Form.Controls[0];
+				return (IControl) phContent.Controls[0];
 			}
 			set
 			{
-				Form.Controls.Clear();
+				phContent.Controls.Clear();
 
 				if (value != null)
 				{
-					Form.Controls.Add((System.Web.UI.Control) value);
+					phContent.Controls.Add((System.Web.UI.Control) value);
 				}
 			}
 		}

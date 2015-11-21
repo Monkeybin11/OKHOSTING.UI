@@ -15,6 +15,8 @@ namespace OKHOSTING.UI.Test
 
 		public override void Start()
 		{
+			base.Start();
+
 			//IGrid grid = CurrentPage.Create<IGrid>();
 			IGrid grid = CurrentPage.Create<IGrid>();
 			grid.ColumnCount = 2;

@@ -13,6 +13,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 		{
 			Children = new ControlList(this);
 			InnerGrid = new Grid();
+			InnerGrid.ColumnCount = 1;
+
 			base.Controls.Add(InnerGrid);
         }
 
@@ -83,9 +85,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
 
 			public void Add(IControl item)
 			{
-				int last = ContainerStack.InnerGrid.Rows.Count - 1;
+				int last = ContainerStack.InnerGrid.Rows.Count;
 				ContainerStack.InnerGrid.RowCount = last + 1;
-				ContainerStack.InnerGrid.SetContent(last + 2, 0, item);
+				ContainerStack.InnerGrid.SetContent(last, 0, item);
 			}
 
 			public void Clear()

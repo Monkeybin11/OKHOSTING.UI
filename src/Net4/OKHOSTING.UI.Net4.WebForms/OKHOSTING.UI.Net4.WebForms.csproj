@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=15.1.4.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AjaxControlToolkit.15.1.4.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -73,9 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Page.aspx" />
+    <Content Include="Services\AutocompleteService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\BooleanPicker.cs" />
     <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\Image.cs" />
@@ -99,6 +105,10 @@
     <Compile Include="Controls\Label.cs" />
     <Compile Include="Controls\TextBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AutocompleteService.asmx.cs">
+      <DependentUpon>AutocompleteService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SessionIdProvider.cs" />
   </ItemGroup>
   <ItemGroup>

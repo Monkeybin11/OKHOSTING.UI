@@ -15,7 +15,11 @@ namespace OKHOSTING.UI
 		public virtual void Start()
 		{
 			CurrentPage.Content = null;
-			Stack.Push(this);
+
+			if (CurrentController != this)
+			{
+				Stack.Push(this);
+			}
 		}
 
 		public virtual void Finish()
@@ -34,7 +38,6 @@ namespace OKHOSTING.UI
 
 		static Controller()
 		{
-			Stack.Push(new Test.LoginController());
 		}
 
 		protected static readonly string SessionName = typeof(Controller).FullName + ".Stack";
@@ -59,6 +62,11 @@ namespace OKHOSTING.UI
 		{
 			get
 			{
+				if (Stack.Count == 0)
+				{
+					return null;
+				}
+
 				return Stack.Peek();
 			}
 		}
