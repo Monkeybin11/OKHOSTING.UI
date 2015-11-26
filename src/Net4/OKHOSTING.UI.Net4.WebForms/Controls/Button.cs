@@ -41,22 +41,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		Distance IControl.Height
+		Measure IControl.Height
 		{
 			get
 			{
 				if (base.Height.Type == System.Web.UI.WebControls.UnitType.Percentage)
 				{
-					return new Distance((decimal)base.Height.Value, DistanceUnit.Percentage);
+					return new Measure((decimal)base.Height.Value, MeasureUnit.Percentage);
 				}
 				else
 				{
-					return new Distance((decimal)base.Height.Value, DistanceUnit.Pixels);
+					return new Measure((decimal)base.Height.Value, MeasureUnit.Pixels);
 				}
 			}
 			set
 			{
-				if (value.Unit == DistanceUnit.Percentage)
+				if (value.Unit == MeasureUnit.Percentage)
 				{
 					base.Height = new System.Web.UI.WebControls.Unit((double) value.Value, System.Web.UI.WebControls.UnitType.Percentage);
 				}
@@ -67,22 +67,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		Distance IControl.Width
+		Measure IControl.Width
 		{
 			get
 			{
 				if (base.Width.Type == System.Web.UI.WebControls.UnitType.Percentage)
 				{
-					return new Distance((decimal) base.Width.Value, DistanceUnit.Percentage);
+					return new Measure((decimal) base.Width.Value, MeasureUnit.Percentage);
 				}
 				else
 				{
-					return new Distance((decimal) base.Width.Value, DistanceUnit.Pixels);
+					return new Measure((decimal) base.Width.Value, MeasureUnit.Pixels);
 				}
 			}
 			set
 			{
-				if (value.Unit == DistanceUnit.Percentage)
+				if (value.Unit == MeasureUnit.Percentage)
 				{
 					base.Width = new System.Web.UI.WebControls.Unit((double) value.Value, System.Web.UI.WebControls.UnitType.Percentage);
 				}

@@ -26,6 +26,22 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 		}
 
+		double IPage.Height
+		{
+			get
+			{
+				return Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight;
+            }
+		}
+
+		double IPage.Width
+		{
+			get
+			{
+				return Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
+			}
+		}
+
 		public T Create<T>() where T : class, IControl
 		{
 			if (typeof(T) == typeof(IButton))

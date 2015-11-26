@@ -1,6 +1,6 @@
 ﻿namespace OKHOSTING.UI
 {
-	public enum DistanceUnit
+	public enum MeasureUnit
 	{
 		Pixels,
 		Percentage,

@@ -27,5 +27,15 @@ namespace OKHOSTING.UI
 		/// An instance of T
 		/// </returns>
 		T Create<T>() where T : class, Controls.IControl;
+
+		/// <summary>
+		/// Width of the screen, in density independent pixels
+		/// </summary>
+		double Width { get; }
+
+		/// <summary>
+		/// Height of the screen, in density independent pixels
+		/// </summary>
+		double Height { get; }
 	}
 }

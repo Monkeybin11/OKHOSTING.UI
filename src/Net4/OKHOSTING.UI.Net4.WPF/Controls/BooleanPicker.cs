@@ -79,11 +79,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		Distance IControl.Height
+		Measure IControl.Height
 		{
 			get
 			{
-				return new Distance((decimal) base.Height, DistanceUnit.Pixels);
+				return new Measure((decimal) base.Height, MeasureUnit.Pixels);
 			}
 			set
 			{
@@ -91,7 +91,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		Distance IControl.Width
+		Measure IControl.Width
 		{
 			get
 			{

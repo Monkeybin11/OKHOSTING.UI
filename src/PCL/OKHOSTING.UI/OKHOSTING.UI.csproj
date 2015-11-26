@@ -45,8 +45,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Distance.cs" />
-    <Compile Include="DistanceUnit.cs" />
+    <Compile Include="Measure.cs" />
+    <Compile Include="MeasureUnit.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Controls\HyperLink.cs" />

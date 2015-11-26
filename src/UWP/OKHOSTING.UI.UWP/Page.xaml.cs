@@ -32,6 +32,14 @@ namespace OKHOSTING.UI.UWP
 			}
 		}
 
+		public new double Height
+		{
+			get
+			{
+				return Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().VisibleBounds.Height;
+            }
+		}
+
 		public string Title
 		{
 			get
@@ -42,6 +50,14 @@ namespace OKHOSTING.UI.UWP
 			set
 			{
 				//throw new NotImplementedException();
+			}
+		}
+
+		public new double Width
+		{
+			get
+			{
+				return Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().VisibleBounds.Width;
 			}
 		}
 

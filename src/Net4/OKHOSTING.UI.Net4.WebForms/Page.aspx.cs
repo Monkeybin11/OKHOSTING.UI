@@ -43,12 +43,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 			if (typeof(T) == typeof(IAutocomplete))
 			{
-				var auto = new Autocomplete();
-
-				//add to session so we can invoke OnSearching from a ashx page
-				OKHOSTING.UI.Session.Current[auto.Name] = auto;
-
-                return auto as T;
+				return new Autocomplete() as T;
 			}
 
 			if (typeof(T) == typeof(IListPicker))
@@ -113,6 +108,22 @@ namespace OKHOSTING.UI.Net4.WebForms
 				{
 					phContent.Controls.Add((System.Web.UI.Control) value);
 				}
+			}
+		}
+
+		public double Width
+		{
+			get
+			{
+				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Width"];
+			}
+		}
+
+		public double Height
+		{
+			get
+			{
+				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"];
 			}
 		}
 	}

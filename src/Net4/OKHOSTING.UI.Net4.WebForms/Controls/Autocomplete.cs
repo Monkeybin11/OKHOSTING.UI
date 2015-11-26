@@ -36,9 +36,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
 			base.Controls.Add(InnerWatermarkExtender);
 
-			Name = "Autocomplete_" + new Random().Next();
-			InnerAutoCompleteExtender.ContextKey = Name;
+			//add a unique id to session so we can invoke OnSearching from a ashx page
+			SessionId = "Autocomplete_" + new Random().Next();
+			OKHOSTING.UI.Session.Current[SessionId] = this;
+			InnerAutoCompleteExtender.ContextKey = SessionId;
 		}
+
+		protected readonly string SessionId;
 
 		public string Name
 		{
@@ -64,6 +68,96 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		Measure IControl.Width
+		{
+			get
+			{
+				return base.Width.Type == System.Web.UI.WebControls.UnitType.
+			}
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		Measure IControl.Height
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public Color BackgroundColor
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public Color FontColor
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public Measure FontSize
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public Measure BorderSize
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
 
 		public AutocompleteSearchEventArgs OnSearching(string text)
@@ -77,5 +171,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 			return e;
         }
+
+		public override void Dispose()
+		{
+			OKHOSTING.UI.Session.Current[SessionId] = null;
+			base.Dispose();
+		}
 	}
 }
