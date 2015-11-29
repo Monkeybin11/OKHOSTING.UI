@@ -9,24 +9,24 @@ namespace OKHOSTING.UI.Controls
 
 		bool Visible { get; set; }
 		bool Enabled { get; set; }
-		
+
 		/// <summary>
 		/// Width of the control, in density independent pixels
 		/// </summary>
-		int Width { get; set; }
+		double Width { get; set; }
 
 		/// <summary>
 		/// Height of the control, in density independent pixels
 		/// </summary>
-		int Height { get; set; }
+		double Height { get; set; }
 
 		Color BackgroundColor { get; set; }
 
 		string FontFamily { get; set; }
 		Color FontColor { get; set; }
-		int FontSize { get; set; }
+		double FontSize { get; set; }
 
 		Color BorderColor { get; set; }
-		Measure BorderSize { get; set; }
+		double BorderWidth { get; set; }
 	}
 }

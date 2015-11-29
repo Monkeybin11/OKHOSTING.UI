@@ -56,6 +56,22 @@ namespace OKHOSTING.UI.Net4.WinForms
 			}
 		}
 
+		double IPage.Width
+		{
+			get
+			{
+				return base.Width;
+			}
+		}
+
+		double IPage.Height
+		{
+			get
+			{
+				return base.Height;
+			}
+		}
+
 		public T Create<T>() where T : class, IControl
 		{
 			if (typeof(T) == typeof(IButton))
@@ -84,6 +100,16 @@ namespace OKHOSTING.UI.Net4.WinForms
 			}
 
 			throw new NotSupportedException();
+		}
+
+		public static Color Parse(System.Drawing.Color color)
+		{
+			return new Color(color.A, color.R, color.G, color.B);
+		}
+
+		public static System.Drawing.Color Parse(Color color)
+		{
+			return System.Drawing.Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
 		}
 	}
 }
