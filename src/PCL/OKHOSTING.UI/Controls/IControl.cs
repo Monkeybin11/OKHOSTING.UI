@@ -22,10 +22,6 @@ namespace OKHOSTING.UI.Controls
 
 		Color BackgroundColor { get; set; }
 
-		string FontFamily { get; set; }
-		Color FontColor { get; set; }
-		double FontSize { get; set; }
-
 		Color BorderColor { get; set; }
 		double BorderWidth { get; set; }
 	}

@@ -30,6 +30,78 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		public Color BackgroundColor
+		{
+			get
+			{
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		public Color BorderColor
+		{
+			get
+			{
+				return Page.Parse(((System.Windows.Media.SolidColorBrush) NativeTextBox.BorderBrush).Color);
+			}
+			set
+			{
+				NativeTextBox.BorderBrush = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		public double BorderWidth
+		{
+			get
+			{
+				return NativeTextBox.BorderThickness.Bottom;
+			}
+			set
+			{
+				NativeTextBox.BorderThickness = new System.Windows.Thickness(value);
+			}
+		}
+
+		public bool Enabled
+		{
+			get
+			{
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
+			}
+		}
+
+		public Color FontColor
+		{
+			get
+			{
+				return Page.Parse(((System.Windows.Media.SolidColorBrush) NativeTextBox.Foreground).Color);
+			}
+			set
+			{
+				NativeTextBox.Foreground = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		string ITextControl.FontFamily
+		{
+			get
+			{
+				return NativeTextBox.FontFamily.Source;
+			}
+			set
+			{
+				NativeTextBox.FontFamily = new System.Windows.Media.FontFamily(value);
+			}
+		}
+
 		public bool Visible
 		{
 			get
@@ -46,6 +118,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				{
 					base.Visibility = System.Windows.Visibility.Hidden;
 				}
+			}
+		}
+
+		public double FontSize
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+			set
+			{
+				throw new NotImplementedException();
 			}
 		}
 

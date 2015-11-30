@@ -5,7 +5,7 @@ namespace OKHOSTING.UI.Controls
 	/// <summary>
 	/// A single line textbox
 	/// </summary>
-	public interface ITextBox: IControl
+	public interface ITextBox: ITextControl
 	{ 
 		/// <summary>
 		/// Gets or sets the text that is contained in the textbox

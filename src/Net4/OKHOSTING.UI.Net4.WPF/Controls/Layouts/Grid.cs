@@ -52,6 +52,75 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			}
 		}
 
+		public IControl GetContent(int row, int column)
+		{
+			foreach(System.Windows.UIElement children in base.Children)
+			{
+				if (Grid.GetRow(children) == row && Grid.GetColumn(children) == column)
+				{
+					return (IControl) children;
+				}
+			}
+
+			return null;
+		}
+
+		public void SetContent(int row, int column, IControl content)
+		{
+			Grid.SetRow((System.Windows.UIElement) content, row);
+			Grid.SetColumn((System.Windows.UIElement) content, column);
+
+			base.Children.Add((System.Windows.UIElement) content);
+		}
+
+		public Color BackgroundColor
+		{
+			get
+			{
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		public Color BorderColor
+		{
+			get
+			{
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
+			}
+			set
+			{
+				base.BorderBrush = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		public double BorderWidth
+		{
+			get
+			{
+				return base.BorderThickness.Bottom;
+			}
+			set
+			{
+				base.BorderThickness = new System.Windows.Thickness(value);
+			}
+		}
+
+		public bool Enabled
+		{
+			get
+			{
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
+			}
+		}
+
 		public bool Visible
 		{
 			get
@@ -73,27 +142,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 
 		public void Dispose()
 		{
-		}
-
-		public IControl GetContent(int row, int column)
-		{
-			foreach(System.Windows.UIElement children in base.Children)
-			{
-				if (Grid.GetRow(children) == row && Grid.GetColumn(children) == column)
-				{
-					return (IControl) children;
-				}
-			}
-
-			return null;
-		}
-
-		public void SetContent(int row, int column, IControl content)
-		{
-			Grid.SetRow((System.Windows.UIElement) content, row);
-			Grid.SetColumn((System.Windows.UIElement) content, column);
-
-			base.Children.Add((System.Windows.UIElement) content);
 		}
 	}
 }

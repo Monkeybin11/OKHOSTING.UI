@@ -3,7 +3,7 @@
 	/// <summary>
 	/// A multiline textbox
 	/// </summary>
-	public interface ITextArea : IControl
+	public interface ITextArea : ITextControl
 	{ 
 		string Text { get; set; }
 	}

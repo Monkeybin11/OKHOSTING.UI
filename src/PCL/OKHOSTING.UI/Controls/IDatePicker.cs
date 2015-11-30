@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Controls
 {
-	public interface IDatePicker: IControl
+	public interface IDatePicker: ITextControl
 	{
 		DateTime SelectedDate { get; set; }
 	}

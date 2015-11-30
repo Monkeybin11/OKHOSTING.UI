@@ -5,16 +5,56 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class BooleanPicker : System.Windows.Controls.CheckBox, IBooleanPicker
 	{
+		public bool SelectedValue
+		{
+			get
+			{
+				if (!base.IsChecked.HasValue)
+				{
+					return false;
+				}
+
+				return base.IsChecked.Value;
+			}
+			set
+			{
+				base.IsChecked = value;
+			}
+		}
+
 		public Color BackgroundColor
 		{
 			get
 			{
-				var color = ((System.Windows.Media.SolidColorBrush) base.Background).Color;
-				return new Color(color.A, color.R, color.G, color.B);
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb((byte) value.Alpha, (byte) value.Red, (byte) value.Green, (byte) value.Blue));
+				base.Background = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		public Color BorderColor
+		{
+			get
+			{
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
+			}
+			set
+			{
+				base.BorderBrush = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		public double BorderWidth
+		{
+			get
+			{
+				return base.BorderThickness.Bottom;
+			}
+			set
+			{
+				base.BorderThickness = new System.Windows.Thickness(value);
 			}
 		}
 
@@ -30,33 +70,27 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		public Color ForegroundColor
+		public Color FontColor
 		{
 			get
 			{
-				var color = ((System.Windows.Media.SolidColorBrush) base.Foreground).Color;
-				return new Color(color.A, color.R, color.G, color.B);
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Foreground).Color);
 			}
 			set
 			{
-				base.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb((byte)value.Alpha, (byte)value.Red, (byte)value.Green, (byte)value.Blue));
+				base.Foreground = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
 			}
 		}
 
-		public bool SelectedValue
+		string ITextControl.FontFamily
 		{
 			get
 			{
-				if (!base.IsChecked.HasValue)
-				{
-					return false;
-				}
-
-				return base.IsChecked.Value;
+				return base.FontFamily.Source;
 			}
 			set
 			{
-				base.IsChecked = value;
+				base.FontFamily = new System.Windows.Media.FontFamily(value);
 			}
 		}
 
@@ -76,31 +110,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				{
 					base.Visibility = System.Windows.Visibility.Hidden;
 				}
-			}
-		}
-
-		Measure IControl.Height
-		{
-			get
-			{
-				return new Measure((decimal) base.Height, MeasureUnit.Pixels);
-			}
-			set
-			{
-				base.Height = value.Value;
-			}
-		}
-
-		Measure IControl.Width
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
 			}
 		}
 

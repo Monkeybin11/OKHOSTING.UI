@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Controls
 {
-	public interface IBooleanPicker: IControl
+	public interface IBooleanPicker: ITextControl
 	{
 		bool SelectedValue { get; set; }
 	}

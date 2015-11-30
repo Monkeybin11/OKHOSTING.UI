@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Controls
 {
-	public interface IListPicker: IControl
+	public interface IListPicker: ITextControl
 	{
 		IEnumerable<string> DataSource { get; set; }
 		string SelectedItem { get; set; }

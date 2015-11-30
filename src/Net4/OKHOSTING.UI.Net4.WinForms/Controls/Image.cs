@@ -35,42 +35,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		public Color FontColor
-		{
-			get
-			{
-				return Page.Parse(base.ForeColor);
-			}
-			set
-			{
-				base.ForeColor = Page.Parse(value);
-			}
-		}
-
-		public string FontFamily
-		{
-			get
-			{
-				return base.Font.FontFamily.Name;
-			}
-			set
-			{
-				base.Font = new System.Drawing.Font(value, (float)FontSize);
-			}
-		}
-
-		public double FontSize
-		{
-			get
-			{
-				return base.FontHeight;
-			}
-			set
-			{
-				base.FontHeight = (int)value;
-			}
-		}
-
 		double IControl.Width
 		{
 			get

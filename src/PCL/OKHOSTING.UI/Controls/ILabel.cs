@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OKHOSTING.UI.Controls
+﻿namespace OKHOSTING.UI.Controls
 {
-	public interface ILabel: IControl
+	public interface ILabel: ITextControl
 	{
 		string Text { get; set; }
 	}

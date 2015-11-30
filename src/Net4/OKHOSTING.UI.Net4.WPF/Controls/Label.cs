@@ -5,16 +5,28 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class Label : System.Windows.Controls.Label, ILabel
 	{
+		public string Text
+		{
+			get
+			{
+				return (string) base.Content;
+			}
+
+			set
+			{
+				base.Content = value;
+			}
+		}
+
 		public Color BackgroundColor
 		{
 			get
 			{
-				var bgColor = ((System.Windows.Media.SolidColorBrush) base.Background).Color;
-				return new Color(bgColor.A, bgColor.R, bgColor.G, bgColor.B);
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(new System.Windows.Media.Color() { A = (byte) value.Alpha, R = (byte) value.Red, G = (byte) value.Green, B = (byte) value.Blue });
+				base.Background = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
 			}
 		}
 
@@ -22,12 +34,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				var bgColor = ((System.Windows.Media.SolidColorBrush) base.BorderBrush).Color;
-				return new Color(bgColor.A, bgColor.R, bgColor.G, bgColor.B);
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
 			}
 			set
 			{
-				base.BorderBrush = new System.Windows.Media.SolidColorBrush(new System.Windows.Media.Color() { A = (byte)value.Alpha, R = (byte)value.Red, G = (byte)value.Green, B = (byte)value.Blue });
+				base.BorderBrush = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+			}
+		}
+
+		public double BorderWidth
+		{
+			get
+			{
+				return base.BorderThickness.Bottom;
+			}
+			set
+			{
+				base.BorderThickness = new System.Windows.Thickness(value);
 			}
 		}
 
@@ -47,24 +70,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Foreground).Color);
 			}
 			set
 			{
-				throw new NotImplementedException();
+				base.Foreground = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
 			}
 		}
 
-		public string Text
+		string ITextControl.FontFamily
 		{
 			get
 			{
-				return (string) base.Content;
+				return base.FontFamily.Source;
 			}
-
 			set
 			{
-				base.Content = value;
+				base.FontFamily = new System.Windows.Media.FontFamily(value);
 			}
 		}
 
@@ -84,18 +106,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				{
 					base.Visibility = System.Windows.Visibility.Hidden;
 				}
-			}
-		}
-
-		string IControl.FontFamily
-		{
-			get
-			{
-				return base.FontFamily.Source;
-			}
-			set
-			{
-				base.FontFamily = new System.Windows.Media.FontFamily(value);
 			}
 		}
 

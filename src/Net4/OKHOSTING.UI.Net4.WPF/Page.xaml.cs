@@ -59,5 +59,15 @@ namespace OKHOSTING.UI.Net4.WPF
 
 			throw new NotSupportedException();
 		}
+
+		public static Color Parse(System.Windows.Media.Color color)
+		{
+			return new Color(color.A, color.R, color.G, color.B);
+		}
+
+		public static System.Windows.Media.Color Parse(Color color)
+		{
+			return System.Windows.Media.Color.FromArgb((byte) color.Alpha, (byte) color.Red, (byte) color.Green, (byte) color.Blue);
+		}
 	}
 }
