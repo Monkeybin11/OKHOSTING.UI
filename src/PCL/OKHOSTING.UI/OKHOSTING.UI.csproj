@@ -46,9 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ITextControl.cs" />
-    <Compile Include="FontAlignment.cs" />
-    <Compile Include="Measure.cs" />
-    <Compile Include="MeasureUnit.cs" />
+    <Compile Include="VerticalAlignment.cs" />
+    <Compile Include="HorizontalAlignment.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Controls\IHyperLink.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="IPage.cs" />
     <Compile Include="Test\DashboardController.cs" />
     <Compile Include="Test\LoginController.cs" />
+    <Compile Include="Thickness.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7">

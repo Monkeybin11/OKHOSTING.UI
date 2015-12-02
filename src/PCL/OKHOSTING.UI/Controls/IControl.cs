@@ -51,5 +51,15 @@ namespace OKHOSTING.UI.Controls
 		/// Border width, in density independent pixels (DIP)
 		/// </summary>
 		Thickness BorderWidth { get; set; }
+
+		/// <summary>
+		/// Horizontal alignment of the control with respect to it's container
+		/// </summary>
+		HorizontalAlignment HorizontalAlignment { get; set; }
+
+		/// <summary>
+		/// Vertical alignment of the control with respect to it's container
+		/// </summary>
+		VerticalAlignment VerticalAlignment { get; set; }
 	}
 }

@@ -68,31 +68,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		Measure IControl.Width
-		{
-			get
-			{
-				return base.Width.Type == System.Web.UI.WebControls.UnitType.
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		Measure IControl.Height
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public Color BackgroundColor
 		{
 			get
@@ -119,19 +94,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		public Measure FontSize
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		Color IControl.BorderColor
 		{
 			get
@@ -145,7 +107,81 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		public Measure BorderSize
+		public string FontFamily
+		{
+			get
+			{
+				return InnerTextBox.Font.Name;
+			}
+			set
+			{
+				InnerTextBox.Font.Name = value;
+            }
+		}
+
+		public double FontSize
+		{
+			get
+			{
+				return InnerTextBox.Font.Size.Unit.Value;
+			}
+			set
+			{
+				InnerTextBox.Font.Size = new System.Web.UI.WebControls.FontUnit(value, System.Web.UI.WebControls.UnitType.Pixel);
+			}
+		}
+
+		public HorizontalAlignment Alignment
+		{
+			get
+			{
+			}
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		double IControl.Width
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		double IControl.Height
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public Thickness Margin
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		Thickness IControl.BorderWidth
 		{
 			get
 			{

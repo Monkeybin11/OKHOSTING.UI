@@ -1,10 +1,10 @@
 ﻿namespace OKHOSTING.UI
 {
-	public enum FontAlignment
+	public enum HorizontalAlignment
 	{
 		Left,
 		Right,
 		Center,
-		Justify,
+		Fill,
 	}
 }
