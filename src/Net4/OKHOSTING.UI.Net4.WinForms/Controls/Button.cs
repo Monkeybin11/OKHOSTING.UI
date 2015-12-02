@@ -89,5 +89,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 			base.OnPaint(pevent);
 		}
+
+		protected override void OnResize(EventArgs e)
+		{
+			Invalidate();
+			base.OnResize(e);
+		}
 	}
 }

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ITextControl.cs" />
+    <Compile Include="FontAlignment.cs" />
     <Compile Include="Measure.cs" />
     <Compile Include="MeasureUnit.cs" />
     <Compile Include="Color.cs" />

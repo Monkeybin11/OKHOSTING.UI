@@ -11,5 +11,6 @@ namespace OKHOSTING.UI.Controls
 		string FontFamily { get; set; }
 		Color FontColor { get; set; }
 		double FontSize { get; set; }
+		FontAlignment Alignment { get; set; }
 	}
 }

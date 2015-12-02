@@ -27,7 +27,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Page.Parse(((System.Windows.Media.SolidColorBrush) base.Background).Color);
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
@@ -39,7 +39,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Page.Parse(((System.Windows.Media.SolidColorBrush) base.BorderBrush).Color);
+				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
 			}
 			set
 			{
@@ -114,9 +114,34 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		public double Width
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public double Height
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		public void Dispose()
 		{
 		}
-
 	}
 }
