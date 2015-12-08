@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
@@ -142,6 +143,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 
 		public void Dispose()
 		{
+		}
+
+		protected override Size ArrangeOverride(Size arrangeSize)
+		{
+			//apply paddings here? http://stackoverflow.com/questions/1319974/wpf-grid-with-column-row-margin-padding
+			return base.ArrangeOverride(arrangeSize);
 		}
 	}
 }

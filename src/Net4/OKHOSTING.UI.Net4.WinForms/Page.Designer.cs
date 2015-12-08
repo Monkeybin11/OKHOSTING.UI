@@ -1,4 +1,7 @@
-﻿namespace OKHOSTING.UI.Net4.WinForms
+﻿using System;
+using System.Drawing;
+
+namespace OKHOSTING.UI.Net4.WinForms
 {
 	partial class Page
 	{
@@ -40,7 +43,7 @@
 			this.ResumeLayout(false);
 
 		}
-
+		
 		#endregion
 	}
 }

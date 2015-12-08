@@ -1,0 +1,52 @@
+﻿body 
+{
+}
+
+
+/*** horizontal alignment ***/
+
+.horizontal-alignment-center
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.horizontal-alignment-left
+{
+	position: absolute;
+    left: 0;
+}
+
+.horizontal-alignment-right
+{
+	position: absolute;
+    right: 0;
+}
+
+.horizontal-alignment-fill
+{
+	width: 100%;
+}
+
+
+/*** vertical alignment ***/
+
+.vertical-alignment-center
+{
+	vertical-align: middle;
+}
+
+.vertical-alignment-top
+{
+	vertical-align: top;
+}
+
+.vertical-alignment-bottom
+{
+	vertical-align: bottom;
+}
+
+.vertical-alignment-fill
+{
+	height: 100%;
+}

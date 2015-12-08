@@ -111,5 +111,76 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			return System.Drawing.Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
 		}
+
+		public static HorizontalAlignment GetHorizontalAlignment(System.Drawing.ContentAlignment alignment)
+		{
+			switch (alignment)
+			{
+				case System.Drawing.ContentAlignment.BottomCenter:
+				case System.Drawing.ContentAlignment.MiddleCenter:
+				case System.Drawing.ContentAlignment.TopCenter:
+					return HorizontalAlignment.Center;
+
+				case System.Drawing.ContentAlignment.BottomLeft:
+				case System.Drawing.ContentAlignment.MiddleLeft:
+				case System.Drawing.ContentAlignment.TopLeft:
+					return HorizontalAlignment.Left;
+
+				case System.Drawing.ContentAlignment.BottomRight:
+				case System.Drawing.ContentAlignment.MiddleRight:
+				case System.Drawing.ContentAlignment.TopRight:
+					return HorizontalAlignment.Right;
+			}
+
+			throw new ArgumentOutOfRangeException("alignment");
+		}
+
+		public static VerticalAlignment GetVerticalAlignment(System.Drawing.ContentAlignment alignment)
+		{
+			switch (alignment)
+			{
+				case System.Drawing.ContentAlignment.BottomCenter:
+				case System.Drawing.ContentAlignment.BottomLeft:
+				case System.Drawing.ContentAlignment.BottomRight:
+					return VerticalAlignment.Bottom;
+
+				case System.Drawing.ContentAlignment.MiddleCenter:
+				case System.Drawing.ContentAlignment.MiddleLeft:
+				case System.Drawing.ContentAlignment.MiddleRight:
+					return VerticalAlignment.Center;
+
+				case System.Drawing.ContentAlignment.TopLeft:
+				case System.Drawing.ContentAlignment.TopCenter:
+				case System.Drawing.ContentAlignment.TopRight:
+					return VerticalAlignment.Top;
+			}
+
+			throw new ArgumentOutOfRangeException("alignment");
+		}
+
+		public static System.Drawing.ContentAlignment GetContentAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
+		{
+			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Fill) return System.Drawing.ContentAlignment.BottomCenter;
+			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Center) return System.Drawing.ContentAlignment.BottomCenter;
+			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Left) return System.Drawing.ContentAlignment.BottomLeft;
+			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Right) return System.Drawing.ContentAlignment.BottomRight;
+
+			if (verticalAlignment == VerticalAlignment.Center && horizontalAlignment == HorizontalAlignment.Fill) return System.Drawing.ContentAlignment.MiddleCenter;
+			if (verticalAlignment == VerticalAlignment.Center && horizontalAlignment == HorizontalAlignment.Center) return System.Drawing.ContentAlignment.MiddleCenter;
+			if (verticalAlignment == VerticalAlignment.Center && horizontalAlignment == HorizontalAlignment.Left) return System.Drawing.ContentAlignment.MiddleLeft;
+			if (verticalAlignment == VerticalAlignment.Center && horizontalAlignment == HorizontalAlignment.Right) return System.Drawing.ContentAlignment.MiddleRight;
+
+			if (verticalAlignment == VerticalAlignment.Top && horizontalAlignment == HorizontalAlignment.Fill) return System.Drawing.ContentAlignment.TopCenter;
+			if (verticalAlignment == VerticalAlignment.Top && horizontalAlignment == HorizontalAlignment.Center) return System.Drawing.ContentAlignment.TopCenter;
+			if (verticalAlignment == VerticalAlignment.Top && horizontalAlignment == HorizontalAlignment.Left) return System.Drawing.ContentAlignment.TopLeft;
+			if (verticalAlignment == VerticalAlignment.Top && horizontalAlignment == HorizontalAlignment.Right) return System.Drawing.ContentAlignment.TopRight;
+
+			if (verticalAlignment == VerticalAlignment.Fill && horizontalAlignment == HorizontalAlignment.Fill) return System.Drawing.ContentAlignment.MiddleCenter;
+			if (verticalAlignment == VerticalAlignment.Fill && horizontalAlignment == HorizontalAlignment.Center) return System.Drawing.ContentAlignment.MiddleCenter;
+			if (verticalAlignment == VerticalAlignment.Fill && horizontalAlignment == HorizontalAlignment.Left) return System.Drawing.ContentAlignment.MiddleLeft;
+			if (verticalAlignment == VerticalAlignment.Fill && horizontalAlignment == HorizontalAlignment.Right) return System.Drawing.ContentAlignment.MiddleRight;
+
+			throw new ArgumentOutOfRangeException("horizontalAlignment");
+		}
 	}
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OKHOSTING.UI.Controls.Layouts
+﻿namespace OKHOSTING.UI.Controls.Layouts
 {
 	public interface IGrid : IControl
 	{
@@ -13,5 +7,15 @@ namespace OKHOSTING.UI.Controls.Layouts
 
 		IControl GetContent(int row, int column);
 		void SetContent(int row, int column, IControl content);
+
+		/// <summary>
+		/// Space that this grid will set between one cell and another
+		/// </summary>
+		Thickness CellMargin { get; set; }
+
+		/// <summary>
+		/// Space that this grid will set between a cell's border and that cell's content
+		/// </summary>
+		Thickness CellPadding { get; set; }
 	}
 }

@@ -57,18 +57,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		public double BorderWidth
-		{
-			get
-			{
-				return base.BorderThickness.Bottom;
-			}
-			set
-			{
-				base.BorderThickness = new System.Windows.Thickness(value);
-			}
-		}
-
 		public bool Enabled
 		{
 			get
@@ -121,6 +109,119 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				{
 					base.Visibility = System.Windows.Visibility.Hidden;
 				}
+			}
+		}
+
+		public bool Bold
+		{
+			get
+			{
+				return base.FontWeight.ToOpenTypeWeight() == 2;
+			}
+
+			set
+			{
+				base.FontWeight = System.Windows.FontWeight.FromOpenTypeWeight(value ? 2 : 1);
+			}
+		}
+
+		public bool Italic
+		{
+			get
+			{
+				return base.FontStyle.
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public bool Underline
+		{
+			get
+			{
+			}
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public HorizontalAlignment TextHorizontalAlignment
+		{
+			get
+			{
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public VerticalAlignment TextVerticalAlignment
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				base.Margin;
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
 			}
 		}
 

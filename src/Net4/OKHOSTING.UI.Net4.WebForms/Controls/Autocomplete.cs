@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
@@ -8,6 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		protected readonly System.Web.UI.WebControls.TextBox InnerTextBox;
 		protected readonly AjaxControlToolkit.AutoCompleteExtender InnerAutoCompleteExtender;
 		protected readonly AjaxControlToolkit.TextBoxWatermarkExtender InnerWatermarkExtender;
+		protected readonly string SessionId;
 
 		public Autocomplete()
 		{
@@ -42,55 +44,29 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			InnerAutoCompleteExtender.ContextKey = SessionId;
 		}
 
-		protected readonly string SessionId;
+		#region IControl
 
-		public string Name
+		string IControl.Name
 		{
 			get
 			{
-				return base.ID;
+				return InnerTextBox.ID;
 			}
 			set
 			{
-				base.ID = value;
+				InnerTextBox.ID = value;
 			}
 		}
 
-		public string Text
+		Color IControl.BackgroundColor
 		{
 			get
 			{
-				return InnerTextBox.Text;
+				return WebForms.Page.Parse(InnerTextBox.BackColor);
 			}
 			set
 			{
-				InnerTextBox.Text = value;
-			}
-		}
-
-		public Color BackgroundColor
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public Color FontColor
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
+				InnerTextBox.BackColor = WebForms.Page.Parse(value);
 			}
 		}
 
@@ -98,16 +74,185 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return WebForms.Page.Parse(InnerTextBox.BorderColor);
 			}
-
 			set
 			{
-				throw new NotImplementedException();
+				InnerTextBox.BorderColor = WebForms.Page.Parse(value);
 			}
 		}
 
-		public string FontFamily
+		double IControl.Width
+		{
+			get
+			{
+				return InnerTextBox.Width.Value;
+			}
+			set
+			{
+				InnerTextBox.Width = new System.Web.UI.WebControls.Unit(value, System.Web.UI.WebControls.UnitType.Pixel);
+			}
+		}
+
+		double IControl.Height
+		{
+			get
+			{
+				return InnerTextBox.Height.Value;
+			}
+			set
+			{
+				InnerTextBox.Height = new System.Web.UI.WebControls.Unit(value, System.Web.UI.WebControls.UnitType.Pixel);
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				Thickness value = new Thickness();
+
+				try
+				{
+					value.Top = double.Parse(InnerTextBox.Style["margin-top"]);
+					value.Right = double.Parse(InnerTextBox.Style["margin-right"]);
+					value.Bottom = double.Parse(InnerTextBox.Style["margin-bottom"]);
+					value.Left = double.Parse(InnerTextBox.Style["margin-left"]);
+				}
+				catch { }
+
+				return value;
+			}
+			set
+			{
+				InnerTextBox.Style["margin-top"] = string.Format("{0}px", value.Top);
+				InnerTextBox.Style["margin-right"] = string.Format("{0}px", value.Right);
+				InnerTextBox.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
+				InnerTextBox.Style["margin-left"] = string.Format("{0}px", value.Left);
+			}
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get
+			{
+				Thickness value = new Thickness();
+
+				try
+				{
+					value.Top = double.Parse(InnerTextBox.Style["border-top-width"]);
+					value.Right = double.Parse(InnerTextBox.Style["border-right-width"]);
+					value.Bottom = double.Parse(InnerTextBox.Style["border-bottom-width"]);
+					value.Left = double.Parse(InnerTextBox.Style["border-left-width"]);
+				}
+				catch { }
+
+				return value;
+			}
+			set
+			{
+				InnerTextBox.Style["border-top-width"] = string.Format("{0}px", value.Top);
+				InnerTextBox.Style["border-right-width"] = string.Format("{0}px", value.Right);
+				InnerTextBox.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
+				InnerTextBox.Style["border-left-width"] = string.Format("{0}px", value.Left);
+			}
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
+
+				if (string.IsNullOrWhiteSpace(cssClass))
+				{
+					return HorizontalAlignment.Left;
+				}
+
+				if (cssClass.EndsWith("left"))
+				{
+					return HorizontalAlignment.Left;
+				}
+				else if (cssClass.EndsWith("right"))
+				{
+					return HorizontalAlignment.Right;
+				}
+				else if (cssClass.EndsWith("center"))
+				{
+					return HorizontalAlignment.Center;
+				}
+				else if (cssClass.EndsWith("fill"))
+				{
+					return HorizontalAlignment.Fill;
+				}
+				else
+				{
+					return HorizontalAlignment.Left;
+				}
+			}
+			set
+			{
+				WebForms.Page.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				WebForms.Page.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
+
+				if (string.IsNullOrWhiteSpace(cssClass))
+				{
+					return VerticalAlignment.Top;
+				}
+
+				if (cssClass.EndsWith("top"))
+				{
+					return VerticalAlignment.Top;
+				}
+				else if (cssClass.EndsWith("bottom"))
+				{
+					return VerticalAlignment.Bottom;
+				}
+				else if (cssClass.EndsWith("center"))
+				{
+					return VerticalAlignment.Center;
+				}
+				else if (cssClass.EndsWith("fill"))
+				{
+					return VerticalAlignment.Fill;
+				}
+				else
+				{
+					return VerticalAlignment.Top;
+				}
+			}
+			set
+			{
+				WebForms.Page.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				WebForms.Page.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+			}
+		}
+
+		#endregion
+
+		#region ITextControl
+
+		Color ITextControl.FontColor
+		{
+			get
+			{
+				return WebForms.Page.Parse(InnerTextBox.ForeColor);
+			}
+			set
+			{
+				InnerTextBox.ForeColor = WebForms.Page.Parse(value);
+			}
+		}
+
+		string ITextControl.FontFamily
 		{
 			get
 			{
@@ -116,10 +261,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			set
 			{
 				InnerTextBox.Font.Name = value;
-            }
+			}
 		}
 
-		public double FontSize
+		double ITextControl.FontSize
 		{
 			get
 			{
@@ -131,72 +276,138 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		public HorizontalAlignment Alignment
+		bool ITextControl.Bold
 		{
 			get
 			{
+				return InnerTextBox.Font.Bold;
 			}
 			set
 			{
-				throw new NotImplementedException();
+				InnerTextBox.Font.Bold = value;
 			}
 		}
 
-		double IControl.Width
+		bool ITextControl.Italic
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return InnerTextBox.Font.Italic;
 			}
-
 			set
 			{
-				throw new NotImplementedException();
+				InnerTextBox.Font.Italic = value;
 			}
 		}
 
-		double IControl.Height
+		bool ITextControl.Underline
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return InnerTextBox.Font.Underline;
 			}
-
 			set
 			{
-				throw new NotImplementedException();
+				InnerTextBox.Font.Underline = value;
 			}
 		}
 
-		public Thickness Margin
+		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
+
 			get
 			{
-				throw new NotImplementedException();
-			}
+				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
 
+				if (string.IsNullOrWhiteSpace(cssClass))
+				{
+					return HorizontalAlignment.Left;
+				}
+
+				if (cssClass.EndsWith("left"))
+				{
+					return HorizontalAlignment.Left;
+				}
+				else if (cssClass.EndsWith("right"))
+				{
+					return HorizontalAlignment.Right;
+				}
+				else if (cssClass.EndsWith("center"))
+				{
+					return HorizontalAlignment.Center;
+				}
+				else if (cssClass.EndsWith("fill"))
+				{
+					return HorizontalAlignment.Fill;
+				}
+				else
+				{
+					return HorizontalAlignment.Left;
+				}
+			}
 			set
 			{
-				throw new NotImplementedException();
+				WebForms.Page.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
+				WebForms.Page.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
-		Thickness IControl.BorderWidth
+		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
 			get
 			{
-				throw new NotImplementedException();
-			}
+				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
 
+				if (string.IsNullOrWhiteSpace(cssClass))
+				{
+					return VerticalAlignment.Top;
+				}
+
+				if (cssClass.EndsWith("top"))
+				{
+					return VerticalAlignment.Top;
+				}
+				else if (cssClass.EndsWith("bottom"))
+				{
+					return VerticalAlignment.Bottom;
+				}
+				else if (cssClass.EndsWith("center"))
+				{
+					return VerticalAlignment.Center;
+				}
+				else if (cssClass.EndsWith("fill"))
+				{
+					return VerticalAlignment.Fill;
+				}
+				else
+				{
+					return VerticalAlignment.Top;
+				}
+			}
 			set
 			{
-				throw new NotImplementedException();
+				WebForms.Page.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
+				WebForms.Page.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
+			}
+		}
+
+		#endregion
+
+		string ITextBox.Text
+		{
+			get
+			{
+				return InnerTextBox.Text;
+			}
+			set
+			{
+				InnerTextBox.Text = value;
 			}
 		}
 
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
 
-		public AutocompleteSearchEventArgs OnSearching(string text)
+		AutocompleteSearchEventArgs IAutocomplete.OnSearching(string text)
 		{
 			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
 
@@ -207,11 +418,5 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 			return e;
         }
-
-		public override void Dispose()
-		{
-			OKHOSTING.UI.Session.Current[SessionId] = null;
-			base.Dispose();
-		}
 	}
 }

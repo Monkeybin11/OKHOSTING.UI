@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\Default.css" />
     <Content Include="Global.asax" />
     <Content Include="js\PageSize.js" />
     <Content Include="packages.config" />

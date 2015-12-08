@@ -34,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			if (count == 0) count = 20;
 
 			Autocomplete autocomplete = (Autocomplete) OKHOSTING.UI.Session.Current[contextKey];
-			var e = autocomplete.OnSearching(prefixText);
+			var e = ((UI.Controls.IAutocomplete) autocomplete).OnSearching(prefixText);
 
 			return e.SearchResult.ToArray();
         }

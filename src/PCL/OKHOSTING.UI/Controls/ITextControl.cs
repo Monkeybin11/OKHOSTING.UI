@@ -9,11 +9,6 @@ namespace OKHOSTING.UI.Controls
 	public interface ITextControl: IControl
 	{
 		/// <summary>
-		/// Actual text that will be displayed and/or captured in the control
-		/// </summary>
-		string Text { get; set; }
-
-		/// <summary>
 		/// Name of the font
 		/// </summary>
 		string FontFamily { get; set; }
@@ -27,6 +22,21 @@ namespace OKHOSTING.UI.Controls
 		/// Size of the font, in DIP
 		/// </summary>
 		double FontSize { get; set; }
+
+		/// <summary>
+		/// Wether the font is bold or not
+		/// </summary>
+		bool Bold { get; set; }
+
+		/// <summary>
+		/// Wether the font is italic or not
+		/// </summary>
+		bool Italic { get; set; }
+
+		/// <summary>
+		/// Wether the font is underscored or not
+		/// </summary>
+		bool Underline { get; set; }
 
 		/// <summary>
 		/// Horizontal alignment of the text with respect to the control
