@@ -6,53 +6,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Button : System.Windows.Forms.Button, IButton
 	{
-		Color IControl.BackgroundColor
-		{
-			get
-			{
-				return Page.Parse(base.BackColor);
-			}
-			set
-			{
-				base.BackColor = Page.Parse(value);
-			}
-		}
-
-		Color ITextControl.FontColor
-		{
-			get
-			{
-				return Page.Parse(base.ForeColor);
-			}
-			set
-			{
-				base.ForeColor = Page.Parse(value);
-			}
-		}
-
-		string ITextControl.FontFamily
-		{
-			get
-			{
-				return base.Font.FontFamily.Name;
-			}
-			set
-			{
-				base.Font = new System.Drawing.Font(value, (float) base.FontHeight);
-			}
-		}
-
-		double ITextControl.FontSize
-		{
-			get
-			{
-				return base.FontHeight;
-			}
-			set
-			{
-				base.FontHeight = (int) value;
-			}
-		}
+		#region ITextControl
 
 		double IControl.Width
 		{
@@ -78,9 +32,104 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return Page.Parse(base.BackColor);
+			}
+			set
+			{
+				base.BackColor = Page.Parse(value);
+			}
+		}
+
 		Color IControl.BorderColor { get; set; }
 
 		Thickness IControl.BorderWidth { get; set; }
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return new Thickness(base.Left, base.Top, base.Right, base.Bottom);
+			}
+			set
+			{
+				base.Left = (int)value.Left;
+				base.Top = (int)value.Top;
+				base.Right = (int)value.Right;
+				base.Bottom = (int)value.Bottom;
+			}
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				if (base.Left == 0) return HorizontalAlignment.Left;
+				if (base.Top == 0) return HorizontalAlignment.t;
+				if (base.Left == 0) return HorizontalAlignment.Left;
+				if (base.Left == 0) return HorizontalAlignment.Left;
+			}
+			set
+			{
+				base.TextAlign = Page.GetContentAlignment(value, ((ITextControl)this).VerticalAlignment);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		#endregion
+
+		#region ITextControl
+
+		Color ITextControl.FontColor
+		{
+			get
+			{
+				return Page.Parse(base.ForeColor);
+			}
+			set
+			{
+				base.ForeColor = Page.Parse(value);
+			}
+		}
+
+		string ITextControl.FontFamily
+		{
+			get
+			{
+				return base.Font.FontFamily.Name;
+			}
+			set
+			{
+				base.Font = new System.Drawing.Font(value, (float)base.FontHeight);
+			}
+		}
+
+		double ITextControl.FontSize
+		{
+			get
+			{
+				return base.FontHeight;
+			}
+			set
+			{
+				base.FontHeight = (int)value;
+			}
+		}
 
 		bool ITextControl.Bold
 		{
@@ -143,48 +192,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		Thickness IControl.Margin
-		{
-			get
-			{
-				return new Thickness(base.Left, base.Top, base.Right, base.Bottom);
-			}
-			set
-			{
-				base.Left = (int) value.Left;
-				base.Top = (int) value.Top;
-				base.Right = (int) value.Right;
-				base.Bottom = (int) value.Bottom;
-			}
-		}
-
-		HorizontalAlignment IControl.HorizontalAlignment
-		{
-			get
-			{
-				if (base.Left == 0) return HorizontalAlignment.Left;
-				if (base.Top== 0) return HorizontalAlignment.t;
-				if (base.Left == 0) return HorizontalAlignment.Left;
-				if (base.Left == 0) return HorizontalAlignment.Left;
-			}
-			set
-			{
-				base.TextAlign = Page.GetContentAlignment(value, ((ITextControl)this).VerticalAlignment);
-			}
-		}
-
-		VerticalAlignment IControl.VerticalAlignment
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
+		#endregion
 
 		event EventHandler IButton.Click
 		{

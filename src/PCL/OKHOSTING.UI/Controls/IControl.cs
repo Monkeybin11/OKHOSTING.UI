@@ -25,12 +25,12 @@ namespace OKHOSTING.UI.Controls
 		/// <summary>
 		/// Width of the control, in density independent pixels
 		/// </summary>
-		double Width { get; set; }
+		double? Width { get; set; }
 
 		/// <summary>
 		/// Height of the control, in density independent pixels
 		/// </summary>
-		double Height { get; set; }
+		double? Height { get; set; }
 
 		/// <summary>
 		/// Space that this control will set between itself and it's container

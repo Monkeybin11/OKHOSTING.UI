@@ -82,27 +82,51 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		double IControl.Width
+		double? IControl.Width
 		{
 			get
 			{
+				if (InnerTextBox.Width.IsEmpty)
+				{
+					return null;
+				}
+
 				return InnerTextBox.Width.Value;
 			}
 			set
 			{
-				InnerTextBox.Width = new System.Web.UI.WebControls.Unit(value, System.Web.UI.WebControls.UnitType.Pixel);
+				if (value.HasValue)
+				{
+					InnerTextBox.Width = new System.Web.UI.WebControls.Unit(value.Value, System.Web.UI.WebControls.UnitType.Pixel);
+				}
+				else
+				{
+					InnerTextBox.Width = new System.Web.UI.WebControls.Unit();
+				}
 			}
 		}
 
-		double IControl.Height
+		double? IControl.Height
 		{
 			get
 			{
+				if (InnerTextBox.Height.IsEmpty)
+				{
+					return null;
+				}
+
 				return InnerTextBox.Height.Value;
 			}
 			set
 			{
-				InnerTextBox.Height = new System.Web.UI.WebControls.Unit(value, System.Web.UI.WebControls.UnitType.Pixel);
+				if (value.HasValue)
+				{
+					InnerTextBox.Height = new System.Web.UI.WebControls.Unit(value.Value, System.Web.UI.WebControls.UnitType.Pixel);
+				}
+				else
+				{
+					InnerTextBox.Height = new System.Web.UI.WebControls.Unit();
+				}
 			}
 		}
 
@@ -110,25 +134,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				Thickness value = new Thickness();
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
 
-				try
-				{
-					value.Top = double.Parse(InnerTextBox.Style["margin-top"]);
-					value.Right = double.Parse(InnerTextBox.Style["margin-right"]);
-					value.Bottom = double.Parse(InnerTextBox.Style["margin-bottom"]);
-					value.Left = double.Parse(InnerTextBox.Style["margin-left"]);
-				}
-				catch { }
+				if (double.TryParse(InnerTextBox.Style["margin-left"], out left)) thickness.Left = left;
+				if (double.TryParse(InnerTextBox.Style["margin-top"], out top)) thickness.Top = top;
+				if (double.TryParse(InnerTextBox.Style["margin-right"], out right)) thickness.Right = right;
+				if (double.TryParse(InnerTextBox.Style["margin-bottom"], out bottom)) thickness.Bottom = bottom;
 
-				return value;
+				return new Thickness(left, top, right, bottom);
 			}
 			set
 			{
-				InnerTextBox.Style["margin-top"] = string.Format("{0}px", value.Top);
-				InnerTextBox.Style["margin-right"] = string.Format("{0}px", value.Right);
-				InnerTextBox.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
-				InnerTextBox.Style["margin-left"] = string.Format("{0}px", value.Left);
+				if (value.Left.HasValue) InnerTextBox.Style["margin-left"] = string.Format("{0}px", value.Left);
+				if (value.Top.HasValue) InnerTextBox.Style["margin-top"] = string.Format("{0}px", value.Top);
+				if (value.Right.HasValue) InnerTextBox.Style["margin-right"] = string.Format("{0}px", value.Right);
+				if (value.Bottom.HasValue) InnerTextBox.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
@@ -136,25 +157,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				Thickness value = new Thickness();
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
 
-				try
-				{
-					value.Top = double.Parse(InnerTextBox.Style["border-top-width"]);
-					value.Right = double.Parse(InnerTextBox.Style["border-right-width"]);
-					value.Bottom = double.Parse(InnerTextBox.Style["border-bottom-width"]);
-					value.Left = double.Parse(InnerTextBox.Style["border-left-width"]);
-				}
-				catch { }
+				if (double.TryParse(InnerTextBox.Style["border-left-width"], out left)) thickness.Left = left;
+				if (double.TryParse(InnerTextBox.Style["border-top-width"], out top)) thickness.Top = top;
+				if (double.TryParse(InnerTextBox.Style["border-right-width"], out right)) thickness.Right = right;
+				if (double.TryParse(InnerTextBox.Style["border-bottom-width"], out bottom)) thickness.Bottom = bottom;
 
-				return value;
+				return new Thickness(left, top, right, bottom);
 			}
 			set
 			{
-				InnerTextBox.Style["border-top-width"] = string.Format("{0}px", value.Top);
-				InnerTextBox.Style["border-right-width"] = string.Format("{0}px", value.Right);
-				InnerTextBox.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
-				InnerTextBox.Style["border-left-width"] = string.Format("{0}px", value.Left);
+				if (value.Left.HasValue) InnerTextBox.Style["border-left-width"] = string.Format("{0}px", value.Left);
+				if (value.Top.HasValue) InnerTextBox.Style["border-top-width"] = string.Format("{0}px", value.Top);
+				if (value.Right.HasValue) InnerTextBox.Style["border-right-width"] = string.Format("{0}px", value.Right);
+				if (value.Bottom.HasValue) InnerTextBox.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 

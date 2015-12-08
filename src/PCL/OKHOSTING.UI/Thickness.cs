@@ -3,14 +3,14 @@
 	/// <summary>
 	/// Represents a top, bottom, left right value. Can be used for margins, paddings, borders, etc.
 	/// </summary>
-	public class Thickness
+	public struct Thickness
 	{
 		public Thickness(double uniformLength)
 		{
 			Left = Right = Top = Bottom = uniformLength;
 		}
 
-		public Thickness(double left = 0, double top = 0, double right = 0, double bottom = 0)
+		public Thickness(double? left = null, double? top = null, double? right = null, double? bottom = null)
 		{
 			Left = left;
 			Right = right;
@@ -18,9 +18,9 @@
 			Bottom = bottom;
 		}
 
-		public double Bottom { get; set; }
-		public double Left { get; set; }
-		public double Right { get; set; }
-		public double Top { get; set; }
+		public double? Bottom { get; set; }
+		public double? Left { get; set; }
+		public double? Right { get; set; }
+		public double? Top { get; set; }
 	}
 }

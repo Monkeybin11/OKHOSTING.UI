@@ -1,6 +1,6 @@
 ﻿namespace OKHOSTING.UI
 {
-	public class Color
+	public struct Color
 	{
 		public Color(int alpha, int red, int green, int blue)
 		{

@@ -44,27 +44,51 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		double IControl.Width
+		double? IControl.Width
 		{
 			get
 			{
+				if (base.Width.IsEmpty)
+				{
+					return null;
+				}
+
 				return base.Width.Value;
 			}
 			set
 			{
-				base.Width = new System.Web.UI.WebControls.Unit(value, System.Web.UI.WebControls.UnitType.Pixel);
+				if (value.HasValue)
+				{
+					base.Width = new System.Web.UI.WebControls.Unit(value.Value, System.Web.UI.WebControls.UnitType.Pixel);
+				}
+				else
+				{
+					base.Width = new System.Web.UI.WebControls.Unit();
+				}
 			}
 		}
 
-		double IControl.Height
+		double? IControl.Height
 		{
 			get
 			{
+				if (base.Height.IsEmpty)
+				{
+					return null;
+				}
+
 				return base.Height.Value;
 			}
 			set
 			{
-				base.Height = new System.Web.UI.WebControls.Unit(value, System.Web.UI.WebControls.UnitType.Pixel);
+				if (value.HasValue)
+				{
+					base.Height = new System.Web.UI.WebControls.Unit(value.Value, System.Web.UI.WebControls.UnitType.Pixel);
+				}
+				else
+				{
+					base.Height = new System.Web.UI.WebControls.Unit();
+				}
 			}
 		}
 
@@ -72,25 +96,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				Thickness value = new Thickness();
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
 
-				try
-				{
-					value.Top = double.Parse(base.Style["margin-top"]);
-					value.Right = double.Parse(base.Style["margin-right"]);
-					value.Bottom = double.Parse(base.Style["margin-bottom"]);
-					value.Left = double.Parse(base.Style["margin-left"]);
-				}
-				catch { }
+				if (double.TryParse(base.Style["margin-left"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["margin-top"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["margin-right"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["margin-bottom"], out bottom)) thickness.Bottom = bottom;
 
-				return value;
+				return new Thickness(left, top, right, bottom);
 			}
 			set
 			{
-				base.Style["margin-top"] = string.Format("{0}px", value.Top);
-				base.Style["margin-right"] = string.Format("{0}px", value.Right);
-				base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
-				base.Style["margin-left"] = string.Format("{0}px", value.Left);
+				if (value.Left.HasValue) base.Style["margin-left"] = string.Format("{0}px", value.Left);
+				if (value.Top.HasValue) base.Style["margin-top"] = string.Format("{0}px", value.Top);
+				if (value.Right.HasValue) base.Style["margin-right"] = string.Format("{0}px", value.Right);
+				if (value.Bottom.HasValue) base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
@@ -98,25 +119,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				Thickness value = new Thickness();
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
 
-				try
-				{
-					value.Top = double.Parse(base.Style["border-top-width"]);
-					value.Right = double.Parse(base.Style["border-right-width"]);
-					value.Bottom = double.Parse(base.Style["border-bottom-width"]);
-					value.Left = double.Parse(base.Style["border-left-width"]);
-				}
-				catch { }
+				if (double.TryParse(base.Style["border-left-width"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["border-top-width"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["border-right-width"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["border-bottom-width"], out bottom)) thickness.Bottom = bottom;
 
-				return value;
+				return new Thickness(left, top, right, bottom);
 			}
 			set
 			{
-				base.Style["border-top-width"] = string.Format("{0}px", value.Top);
-				base.Style["border-right-width"] = string.Format("{0}px", value.Right);
-				base.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
-				base.Style["border-left-width"] = string.Format("{0}px", value.Left);
+				if (value.Left.HasValue) base.Style["border-left-width"] = string.Format("{0}px", value.Left);
+				if (value.Top.HasValue) base.Style["border-top-width"] = string.Format("{0}px", value.Top);
+				if (value.Right.HasValue) base.Style["border-right-width"] = string.Format("{0}px", value.Right);
+				if (value.Bottom.HasValue) base.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
