@@ -102,6 +102,15 @@ namespace OKHOSTING.UI.Net4.WinForms
 			throw new NotSupportedException();
 		}
 
+		protected override void OnResize(EventArgs e)
+		{
+			//Controller.CurrentPage = this;
+			//make responsive
+			Controller.CurrentController.Start();
+
+			base.OnResize(e);
+		}
+
 		#region Static 
 
 		public static Color Parse(System.Drawing.Color color)

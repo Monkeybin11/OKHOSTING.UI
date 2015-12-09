@@ -16,6 +16,14 @@ namespace OKHOSTING.UI.Net4.WPF
 			InitializeComponent();
 			Controller.CurrentPage = this;
 			Controller.CurrentController.Start();
+
+			System.Windows.Application.Current.MainWindow.SizeChanged += MainWindow_SizeChanged;
+        }
+
+		private void MainWindow_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+		{
+			//todo:resise and make responsive here??
+			Controller.CurrentController.Start();
 		}
 
 		public new IControl Content
@@ -59,7 +67,7 @@ namespace OKHOSTING.UI.Net4.WPF
 
 			throw new NotSupportedException();
 		}
-
+		
 		public static Color Parse(System.Windows.Media.Color color)
 		{
 			return new Color(color.A, color.R, color.G, color.B);

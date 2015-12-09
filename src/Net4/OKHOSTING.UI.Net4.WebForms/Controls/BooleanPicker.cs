@@ -371,6 +371,29 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		Thickness ITextControl.TextPadding
+		{
+			get
+			{
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
+
+				if (double.TryParse(base.Style["padding-left"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["padding-top"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["padding-right"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["padding-bottom"], out bottom)) thickness.Bottom = bottom;
+
+				return new Thickness(left, top, right, bottom);
+			}
+			set
+			{
+				if (value.Left.HasValue) base.Style["padding-left"] = string.Format("{0}px", value.Left);
+				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
+				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
+				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+			}
+		}
+
 		#endregion
 
 		public bool SelectedValue

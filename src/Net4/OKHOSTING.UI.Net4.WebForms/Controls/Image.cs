@@ -241,7 +241,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 			//we finally get the "relative" path of the file and load it as a url
 			string url = filePath.Replace(this.Page.MapPath("/"), string.Empty);
-			LoadFromUrl(url);
+			LoadFromUrl(new System.Uri(url));
 		}
 
 		public void LoadFromStream(Stream stream)
@@ -261,9 +261,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		public void LoadFromUrl(string url)
+		public void LoadFromUrl(System.Uri url)
 		{
-			base.ImageUrl = url;
+			base.ImageUrl = url.ToString();
 		}
 	}
 }
