@@ -47,5 +47,10 @@ namespace OKHOSTING.UI.Controls
 		/// Vertical alignment of the text with respect to the control
 		/// </summary>
 		VerticalAlignment TextVerticalAlignment { get; set; }
+
+		/// <summary>
+		/// Space that this control will set between a it's border and it's text
+		/// </summary>
+		Thickness TextPadding { get; set; }
 	}
 }

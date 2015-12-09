@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using OKHOSTING.UI.Controls;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
@@ -8,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		#region ITextControl
 
-		double IControl.Width
+		double? IControl.Width
 		{
 			get
 			{
@@ -16,11 +17,14 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Width = (int)value;
+				if (value.HasValue)
+				{
+					base.Width = (int) value;
+				}
 			}
 		}
 
-		double IControl.Height
+		double? IControl.Height
 		{
 			get
 			{
@@ -28,7 +32,22 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Height = (int) value;
+				if (value.HasValue)
+				{
+					base.Height = (int) value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return Page.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = Page.Parse(value);
 			}
 		}
 
@@ -48,47 +67,14 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		Thickness IControl.BorderWidth { get; set; }
 
-		Thickness IControl.Margin
-		{
-			get
-			{
-				return new Thickness(base.Left, base.Top, base.Right, base.Bottom);
-			}
-			set
-			{
-				base.Left = (int)value.Left;
-				base.Top = (int)value.Top;
-				base.Right = (int)value.Right;
-				base.Bottom = (int)value.Bottom;
-			}
-		}
-
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
-			get
-			{
-				if (base.Left == 0) return HorizontalAlignment.Left;
-				if (base.Top == 0) return HorizontalAlignment.t;
-				if (base.Left == 0) return HorizontalAlignment.Left;
-				if (base.Left == 0) return HorizontalAlignment.Left;
-			}
-			set
-			{
-				base.TextAlign = Page.GetContentAlignment(value, ((ITextControl)this).VerticalAlignment);
-			}
+			get; set;
 		}
 
 		VerticalAlignment IControl.VerticalAlignment
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
+			get; set;
 		}
 
 		#endregion
@@ -115,7 +101,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Font = new System.Drawing.Font(value, (float)base.FontHeight);
+				base.Font = new System.Drawing.Font(value, (float) base.FontHeight);
 			}
 		}
 
@@ -194,31 +180,49 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		event EventHandler IButton.Click
-		{
-			add
-			{
-				throw new NotImplementedException();
-			}
-
-			remove
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
+			var control = (IControl) this;
+
+			//calculate position and size, based on margin and alignment
+			switch (control.HorizontalAlignment)
+			{
+				case HorizontalAlignment.Left:
+					base.Location = new Point((int) (base.Location.X + control.Margin.Left.Value), (int) (base.Location.Y + control.Margin.Top));
+					break;
+
+				case HorizontalAlignment.Center:
+					base.Location = new Point(this.ClientSize.Width / 2 - base.Width / 2, base.Location.Y);
+					break;
+
+				case HorizontalAlignment.Right:
+					base.Location = new Point(this.ClientSize.Width / 2 - base.Width / 2, base.Location.Y);
+					break;
+
+				case HorizontalAlignment.Fill:
+					break;
+			}
+
+			//calculate the 4 points or coordinates of the border
+			System.Drawing.Point p1 = base.Bounds.Location; //top left
+
+			System.Drawing.Point p2 = base.Bounds.Location;
+			p2.Offset(base.Width, 0); //top right
+
+			System.Drawing.Point p3 = base.Bounds.Location; //bottom left
+			p2.Offset(0, base.Height * - 1); //top right
+
+			System.Drawing.Point p4 = base.Bounds.Location; //bottom right
+			p2.Offset(base.Width, base.Height * -1); //top right
+
 			//draw custom border here
-			pevent.Graphics.DrawRectangle(new System.Drawing.Pen(Page.Parse(BorderColor), (int)BorderWidth), base.Bounds);
+
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p4, p1); //left
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p1, p2); //top
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p2, p3); //right
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p3, p4); //bottom
 
 			base.OnPaint(pevent);
-		}
-
-		protected override void OnResize(EventArgs e)
-		{
-			Invalidate();
-			base.OnResize(e);
 		}
 	}
 }

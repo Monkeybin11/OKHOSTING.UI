@@ -15,12 +15,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		public void LoadFromFile(string filePath)
 		{
-			var bitmap = new System.Windows.Media.Imaging.BitmapImage();
-			bitmap.BeginInit();
-			bitmap.UriSource = new Uri(filePath);
-			bitmap.EndInit();
-
-			InnerImage.Source = bitmap;
+			LoadFromUrl(filePath);
 		}
 
 		public void LoadFromStream(Stream stream)

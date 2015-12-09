@@ -102,6 +102,8 @@ namespace OKHOSTING.UI.Net4.WinForms
 			throw new NotSupportedException();
 		}
 
+		#region Static 
+
 		public static Color Parse(System.Drawing.Color color)
 		{
 			return new Color(color.A, color.R, color.G, color.B);
@@ -110,6 +112,23 @@ namespace OKHOSTING.UI.Net4.WinForms
 		public static System.Drawing.Color Parse(Color color)
 		{
 			return System.Drawing.Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
+		}
+
+		public static System.Windows.Forms.Padding Parse(Thickness thickness)
+		{
+			System.Windows.Forms.Padding padding = new System.Windows.Forms.Padding();
+
+			if (thickness.Left.HasValue) padding.Left = (int) thickness.Left;
+			if (thickness.Top.HasValue) padding.Top = (int) thickness.Top;
+			if (thickness.Right.HasValue) padding.Right = (int) thickness.Right;
+			if (thickness.Bottom.HasValue) padding.Bottom = (int) thickness.Bottom;
+
+			return padding;
+        }
+
+		public static Thickness Parse(System.Windows.Forms.Padding margin)
+		{
+			return new Thickness(margin.Left, margin.Top, margin.Right, margin.Bottom);
 		}
 
 		public static HorizontalAlignment GetHorizontalAlignment(System.Drawing.ContentAlignment alignment)
@@ -182,5 +201,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 			throw new ArgumentOutOfRangeException("horizontalAlignment");
 		}
+
+		#endregion
 	}
 }

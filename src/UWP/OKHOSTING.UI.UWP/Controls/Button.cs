@@ -20,6 +20,7 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		public void Dispose()
 		{
+			base.Background = new Windows.UI.Xaml.Media.ImageBrush().ImageSource = new Windows.UI.Xaml.Media.ImageSource()
 		}
 
 		public string Text
