@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="Controls\BooleanPicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -78,6 +79,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\TextArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\TextBox.cs">

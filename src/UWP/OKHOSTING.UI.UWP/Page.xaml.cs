@@ -16,8 +16,6 @@ namespace OKHOSTING.UI.UWP
 		public Page()
 		{
 			this.InitializeComponent();
-			Controller.CurrentPage = this;
-			Controller.CurrentController.Start();
 		}
 
 		public new IControl Content
@@ -59,36 +57,6 @@ namespace OKHOSTING.UI.UWP
 			{
 				return Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().VisibleBounds.Width;
 			}
-		}
-
-		public T Create<T>() where T : class, IControl
-		{
-			if (typeof(T) == typeof(IButton))
-			{
-				return new Button() as T;
-			}
-
-			if (typeof(T) == typeof(ILabel))
-			{
-				return new Label() as T;
-			}
-
-			if (typeof(T) == typeof(ITextBox))
-			{
-				return new TextBox() as T;
-			}
-
-			if (typeof(T) == typeof(IPasswordTextBox))
-			{
-				return new PasswordTextBox() as T;
-			}
-
-			if (typeof(T) == typeof(IGrid))
-			{
-				return new Grid() as T;
-			}
-
-			throw new NotSupportedException();
 		}
 	}
 }

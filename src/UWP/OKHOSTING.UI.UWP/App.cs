@@ -1,10 +1,10 @@
 ﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
-using OKHOSTING.UI.Xamarin.Forms.Controls;
-using OKHOSTING.UI.Xamarin.Forms.Controls.Layouts;
+using OKHOSTING.UI.UWP.Controls;
+using OKHOSTING.UI.UWP.Controls.Layouts;
 using System;
 
-namespace OKHOSTING.UI.Xamarin.Forms
+namespace OKHOSTING.UI.UWP
 {
 	public class App : UI.App
 	{
