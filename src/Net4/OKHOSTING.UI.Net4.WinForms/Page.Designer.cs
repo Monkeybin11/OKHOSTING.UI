@@ -52,14 +52,13 @@ namespace OKHOSTING.UI.Net4.WinForms
 			// 
 			// button1
 			// 
-			this.button1.AutoSize = true;
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
 			this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.button1.Location = new System.Drawing.Point(299, 122);
-			this.button1.Margin = new System.Windows.Forms.Padding(10);
+			this.button1.Location = new System.Drawing.Point(485, 175);
 			this.button1.Name = "button1";
 			this.button1.Padding = new System.Windows.Forms.Padding(10);
-			this.button1.Size = new System.Drawing.Size(81, 43);
+			this.button1.Size = new System.Drawing.Size(81, 47);
 			this.button1.TabIndex = 1;
 			this.button1.Text = "button1";
 			this.button1.UseVisualStyleBackColor = true;
@@ -70,9 +69,9 @@ namespace OKHOSTING.UI.Net4.WinForms
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.Controls.Add(this.button3, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.button1, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.button2, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.button1, 1, 1);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 50);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -109,7 +108,6 @@ namespace OKHOSTING.UI.Net4.WinForms
 			this.Name = "Page";
 			this.Text = "Page";
 			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}

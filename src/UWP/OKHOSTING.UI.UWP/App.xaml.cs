@@ -33,7 +33,7 @@ namespace OKHOSTING.UI.UWP
 				Microsoft.ApplicationInsights.WindowsCollectors.Session);
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
-		}
+        }
 
 		/// <summary>
 		/// Invoked when the application is launched normally by the end user.  Other entry points
@@ -43,12 +43,10 @@ namespace OKHOSTING.UI.UWP
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
 
-#if DEBUG
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
 				this.DebugSettings.EnableFrameRateCounter = true;
 			}
-#endif
 
 			Frame rootFrame = Window.Current.Content as Frame;
 
@@ -68,7 +66,8 @@ namespace OKHOSTING.UI.UWP
 
 				// Place the frame in the current Window
 				Window.Current.Content = rootFrame;
-			}
+				Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().
+            }
 
 			if (rootFrame.Content == null)
 			{
@@ -77,6 +76,7 @@ namespace OKHOSTING.UI.UWP
 				// parameter
 				rootFrame.Navigate(typeof(Page), e.Arguments);
 			}
+
 			// Ensure the current window is active
 			Window.Current.Activate();
 		}

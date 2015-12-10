@@ -18,42 +18,36 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			//IGrid grid = CurrentPage.Create<IGrid>();
-			IGrid grid = CurrentPage.Create<IGrid>();
+			IGrid grid = App.Current.Create<IGrid>();
 			grid.ColumnCount = 2;
 			grid.RowCount = 3;
 
-			lblUserName = CurrentPage.Create<ILabel>();
+			lblUserName = App.Current.Create<ILabel>();
 			lblUserName.Text = "Username";
 			grid.SetContent(0, 0, lblUserName);
 
-			txtUserName = CurrentPage.Create<ITextBox>();
+			txtUserName = App.Current.Create<ITextBox>();
 			grid.SetContent(0, 1, txtUserName);
 
-			try
-			{
-				lblPassword = CurrentPage.Create<ILabel>();
-				lblPassword.Text = "Password";
-				grid.SetContent(1, 0, lblPassword);
+			lblPassword = App.Current.Create<ILabel>();
+			lblPassword.Text = "Password";
+			grid.SetContent(1, 0, lblPassword);
 
-				txtPassword = CurrentPage.Create<IPasswordTextBox>();
-				grid.SetContent(1, 1, txtPassword);
-			}
-			catch (Exception e)
-			{
-			}
+			txtPassword = App.Current.Create<IPasswordTextBox>();
+			grid.SetContent(1, 1, txtPassword);
 
-			cmdLogin = CurrentPage.Create<IButton>();
+			cmdLogin = App.Current.Create<IButton>();
 			cmdLogin.Text = "Login";
 			cmdLogin.Click += CmdLogin_Click;
 			grid.SetContent(2, 0, cmdLogin);
 
-			lblMessage = CurrentPage.Create<ILabel>();
+			lblMessage = App.Current.Create<ILabel>();
 			lblMessage.Text = "Wrong data";
 			lblMessage.Visible = false;
 			grid.SetContent(2, 1, lblMessage);
 
-			CurrentPage.Title = "Please login";
-			CurrentPage.Content = grid;
+			App.Current.Page.Title = "Please login";
+			App.Current.Page.Content = grid;
 		}
 
 		private void CmdLogin_Click(object sender, EventArgs e)

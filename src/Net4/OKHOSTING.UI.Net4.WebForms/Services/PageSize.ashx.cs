@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
@@ -24,7 +21,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 			Session.Current[typeof(Page) + ".Width"] = double.Parse(context.Request.QueryString["Width"]);
 			Session.Current[typeof(Page) + ".Height"] = double.Parse(context.Request.QueryString["Height"]);
-
 		}
 
 		public bool IsReusable

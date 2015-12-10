@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 					return null;
 				}
 
-				return (IControl) Controls[0];
+				return (IControl)Controls[0];
 			}
 
 			set
@@ -38,7 +38,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 				if (value != null)
 				{
-					Controls.Add((System.Windows.Forms.Control) value);
+					Controls.Add((System.Windows.Forms.Control)value);
 				}
 			}
 		}
@@ -104,9 +104,8 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		protected override void OnResize(EventArgs e)
 		{
-			//Controller.CurrentPage = this;
 			//make responsive
-			Controller.CurrentController.Start();
+			Controller.CurrentController.Resize();
 
 			base.OnResize(e);
 		}
@@ -127,66 +126,53 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			System.Windows.Forms.Padding padding = new System.Windows.Forms.Padding();
 
-			if (thickness.Left.HasValue) padding.Left = (int) thickness.Left;
-			if (thickness.Top.HasValue) padding.Top = (int) thickness.Top;
-			if (thickness.Right.HasValue) padding.Right = (int) thickness.Right;
-			if (thickness.Bottom.HasValue) padding.Bottom = (int) thickness.Bottom;
+			if (thickness.Left.HasValue) padding.Left = (int)thickness.Left;
+			if (thickness.Top.HasValue) padding.Top = (int)thickness.Top;
+			if (thickness.Right.HasValue) padding.Right = (int)thickness.Right;
+			if (thickness.Bottom.HasValue) padding.Bottom = (int)thickness.Bottom;
 
 			return padding;
-        }
+		}
 
 		public static Thickness Parse(System.Windows.Forms.Padding margin)
 		{
 			return new Thickness(margin.Left, margin.Top, margin.Right, margin.Bottom);
 		}
 
-		public static HorizontalAlignment GetHorizontalAlignment(System.Drawing.ContentAlignment alignment)
+		public static Tuple<HorizontalAlignment, VerticalAlignment> Parse(System.Drawing.ContentAlignment alignment)
 		{
 			switch (alignment)
 			{
 				case System.Drawing.ContentAlignment.BottomCenter:
-				case System.Drawing.ContentAlignment.MiddleCenter:
-				case System.Drawing.ContentAlignment.TopCenter:
-					return HorizontalAlignment.Center;
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 
 				case System.Drawing.ContentAlignment.BottomLeft:
-				case System.Drawing.ContentAlignment.MiddleLeft:
-				case System.Drawing.ContentAlignment.TopLeft:
-					return HorizontalAlignment.Left;
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
+				case
+				System.Drawing.ContentAlignment.BottomRight:
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 
-				case System.Drawing.ContentAlignment.BottomRight:
+				case System.Drawing.ContentAlignment.MiddleCenter:
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
+
+				case System.Drawing.ContentAlignment.MiddleLeft:
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
+
 				case System.Drawing.ContentAlignment.MiddleRight:
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
+
+				case System.Drawing.ContentAlignment.TopLeft:
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
+				case System.Drawing.ContentAlignment.TopCenter:
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 				case System.Drawing.ContentAlignment.TopRight:
-					return HorizontalAlignment.Right;
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 			}
 
 			throw new ArgumentOutOfRangeException("alignment");
 		}
 
-		public static VerticalAlignment GetVerticalAlignment(System.Drawing.ContentAlignment alignment)
-		{
-			switch (alignment)
-			{
-				case System.Drawing.ContentAlignment.BottomCenter:
-				case System.Drawing.ContentAlignment.BottomLeft:
-				case System.Drawing.ContentAlignment.BottomRight:
-					return VerticalAlignment.Bottom;
-
-				case System.Drawing.ContentAlignment.MiddleCenter:
-				case System.Drawing.ContentAlignment.MiddleLeft:
-				case System.Drawing.ContentAlignment.MiddleRight:
-					return VerticalAlignment.Center;
-
-				case System.Drawing.ContentAlignment.TopLeft:
-				case System.Drawing.ContentAlignment.TopCenter:
-				case System.Drawing.ContentAlignment.TopRight:
-					return VerticalAlignment.Top;
-			}
-
-			throw new ArgumentOutOfRangeException("alignment");
-		}
-
-		public static System.Drawing.ContentAlignment GetContentAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
+		public static System.Drawing.ContentAlignment ParseContentAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
 		{
 			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Fill) return System.Drawing.ContentAlignment.BottomCenter;
 			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Center) return System.Drawing.ContentAlignment.BottomCenter;
@@ -209,6 +195,56 @@ namespace OKHOSTING.UI.Net4.WinForms
 			if (verticalAlignment == VerticalAlignment.Fill && horizontalAlignment == HorizontalAlignment.Right) return System.Drawing.ContentAlignment.MiddleRight;
 
 			throw new ArgumentOutOfRangeException("horizontalAlignment");
+		}
+
+		public static Tuple<HorizontalAlignment, VerticalAlignment> Parse(System.Windows.Forms.AnchorStyles anchor)
+		{
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Top);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Bottom);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.None)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Center);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Fill);
+
+			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Top) new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Top);
+			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
+			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.None)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Center);
+			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Fill);
+
+			if (anchor == (System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Right, VerticalAlignment.Top);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Right, VerticalAlignment.Bottom);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.None)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Right, VerticalAlignment.Center);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Right, VerticalAlignment.Fill);
+
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Fill, VerticalAlignment.Top);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Fill, VerticalAlignment.Bottom);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.None)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Fill, VerticalAlignment.Center);
+			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Fill, VerticalAlignment.Fill);
+
+			return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Top);
+		}
+
+		public static System.Windows.Forms.AnchorStyles ParseAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical)
+		{
+			if (horizontal == HorizontalAlignment.Left && vertical == VerticalAlignment.Top) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top;
+			if (horizontal == HorizontalAlignment.Left && vertical == VerticalAlignment.Bottom) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Bottom;
+			if (horizontal == HorizontalAlignment.Left && vertical == VerticalAlignment.Center) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.None;
+			if (horizontal == HorizontalAlignment.Left && vertical == VerticalAlignment.Fill) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+
+			if (horizontal == HorizontalAlignment.Center && vertical == VerticalAlignment.Top) return System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Top;
+			if (horizontal == HorizontalAlignment.Center && vertical == VerticalAlignment.Bottom) return System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Bottom;
+			if (horizontal == HorizontalAlignment.Center && vertical == VerticalAlignment.Center) return System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.None;
+			if (horizontal == HorizontalAlignment.Center && vertical == VerticalAlignment.Fill) return System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+
+			if (horizontal == HorizontalAlignment.Right && vertical == VerticalAlignment.Top) return System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
+			if (horizontal == HorizontalAlignment.Right && vertical == VerticalAlignment.Bottom) return System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
+			if (horizontal == HorizontalAlignment.Right && vertical == VerticalAlignment.Center) return System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.None;
+			if (horizontal == HorizontalAlignment.Right && vertical == VerticalAlignment.Fill) return System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+
+			if (horizontal == HorizontalAlignment.Fill && vertical == VerticalAlignment.Top) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
+			if (horizontal == HorizontalAlignment.Fill && vertical == VerticalAlignment.Bottom) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
+			if (horizontal == HorizontalAlignment.Fill && vertical == VerticalAlignment.Center) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.None;
+			if (horizontal == HorizontalAlignment.Fill && vertical == VerticalAlignment.Fill) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+
+			return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top;
 		}
 
 		#endregion

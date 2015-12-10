@@ -149,25 +149,6 @@ namespace OKHOSTING.UI
 			}
 		}
 
-		public static IPage CurrentPage
-		{
-			get
-			{
-				if (Current.ContainsKey("Page"))
-				{
-					return (IPage) Current["Page"];
-				}
-				else
-				{
-					return null;
-				}
-			}
-			set
-			{
-				Current["Page"] = value;
-			}
-		}
-
 		/// <summary>
 		/// Raised when a new session is started
 		/// </summary>

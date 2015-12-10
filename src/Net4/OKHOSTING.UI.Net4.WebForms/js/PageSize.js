@@ -1,9 +1,4 @@
-﻿window.onresize = function (event)
-{
-	SetPageSize();
-}
-
-function SetPageSize()
+﻿function SetPageSize()
 {
 	var height = $(window).height();
 	var width = $(window).width();
@@ -31,7 +26,16 @@ function SetPageSize()
 
 }
 
-$(function ()
-{
-	SetPageSize();
-});
+$(document).ready
+(
+	function()
+	{
+		SetPageSize();
+
+		window.onresize = function()
+		{
+			SetPageSize();
+		}
+	}
+);
+

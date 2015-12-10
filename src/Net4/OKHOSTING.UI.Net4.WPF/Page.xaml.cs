@@ -14,16 +14,15 @@ namespace OKHOSTING.UI.Net4.WPF
 		public Page()
 		{
 			InitializeComponent();
+			base.SizeChanged += Page_SizeChanged;
+
 			Controller.CurrentPage = this;
 			Controller.CurrentController.Start();
-
-			System.Windows.Application.Current.MainWindow.SizeChanged += MainWindow_SizeChanged;
         }
 
-		private void MainWindow_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
-			//todo:resise and make responsive here??
-			Controller.CurrentController.Start();
+			Controller.CurrentController.Resize();
 		}
 
 		public new IControl Content

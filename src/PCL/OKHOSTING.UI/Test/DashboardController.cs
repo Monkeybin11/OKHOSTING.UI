@@ -12,19 +12,19 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			CurrentPage.Title = "Escritorio";
+			App.Current.Page.Title = "Escritorio";
 
-			IAutocomplete automcomplete = CurrentPage.Create<IAutocomplete>();
+			IAutocomplete automcomplete = App.Current.Create<IAutocomplete>();
 			automcomplete.Searching += Automcomplete_Searching;
 
-			ILabel label = CurrentPage.Create<ILabel>();
+			ILabel label = App.Current.Create<ILabel>();
 			label.Text = "hola amigo!";
 
-			IStack stack = CurrentPage.Create<IStack>();
+			IStack stack = App.Current.Create<IStack>();
 			stack.Children.Add(label);
 			stack.Children.Add(automcomplete);
 
-			CurrentPage.Content = stack;
+			App.Current.Page.Content = stack;
 		}
 
 		private void Automcomplete_Searching(object sender, AutocompleteSearchEventArgs e)

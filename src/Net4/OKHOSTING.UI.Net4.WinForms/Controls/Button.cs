@@ -7,7 +7,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Button : System.Windows.Forms.Button, IButton
 	{
-		#region ITextControl
+		#region IControl
 
 		double? IControl.Width
 		{
@@ -69,12 +69,26 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
-			get; set;
+			get
+			{
+				return Page.Parse(base.Anchor).Item1;
+			}
+			set
+			{
+				base.Anchor = Page.ParseAnchor(value, ((IControl) this).VerticalAlignment);
+			}
 		}
 
 		VerticalAlignment IControl.VerticalAlignment
 		{
-			get; set;
+			get
+			{
+				return Page.Parse(base.Anchor).Item2;
+			}
+			set
+			{
+				base.Anchor = Page.ParseAnchor(((IControl) this).HorizontalAlignment, value);
+			}
 		}
 
 		#endregion
@@ -162,7 +176,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.TextAlign = Page.GetContentAlignment(value, ((ITextControl) this).VerticalAlignment);
+				base.TextAlign = Page.GetAlignment(value, ((ITextControl) this).VerticalAlignment);
 			}
 		}
 
@@ -174,7 +188,19 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.TextAlign = Page.GetContentAlignment(((ITextControl) this).HorizontalAlignment, value);
+				base.TextAlign = Page.GetAlignment(((ITextControl) this).HorizontalAlignment, value);
+			}
+		}
+
+		Thickness ITextControl.TextPadding
+		{
+			get
+			{
+				return Page.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Page.Parse(value);
 			}
 		}
 
@@ -183,25 +209,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
 			var control = (IControl) this;
-
-			//calculate position and size, based on margin and alignment
-			switch (control.HorizontalAlignment)
-			{
-				case HorizontalAlignment.Left:
-					base.Location = new Point((int) (base.Location.X + control.Margin.Left.Value), (int) (base.Location.Y + control.Margin.Top));
-					break;
-
-				case HorizontalAlignment.Center:
-					base.Location = new Point(this.ClientSize.Width / 2 - base.Width / 2, base.Location.Y);
-					break;
-
-				case HorizontalAlignment.Right:
-					base.Location = new Point(this.ClientSize.Width / 2 - base.Width / 2, base.Location.Y);
-					break;
-
-				case HorizontalAlignment.Fill:
-					break;
-			}
 
 			//calculate the 4 points or coordinates of the border
 			System.Drawing.Point p1 = base.Bounds.Location; //top left

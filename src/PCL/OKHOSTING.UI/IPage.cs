@@ -20,15 +20,6 @@ namespace OKHOSTING.UI
 		Controls.IControl Content { get; set; }
 
 		/// <summary>
-		/// Create a platform-specific UI control
-		/// </summary>
-		/// <typeparam name="T">Type of the control. Control must implement IControl</typeparam>
-		/// <returns>
-		/// An instance of T
-		/// </returns>
-		T Create<T>() where T : class, Controls.IControl;
-
-		/// <summary>
 		/// Width of the screen, in density independent pixels
 		/// </summary>
 		double Width { get; }

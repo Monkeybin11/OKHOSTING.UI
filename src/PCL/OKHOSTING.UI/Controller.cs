@@ -12,80 +12,39 @@ namespace OKHOSTING.UI
 	/// </summary>
 	public abstract class Controller
 	{
+		/// <summary>
+		/// Will be executed when this controller "executes" at first
+		/// </summary>
 		public virtual void Start()
 		{
-			CurrentPage.Content = null;
+			App.Current.Page.Content = null;
 
-			if (CurrentController != this)
+			if (App.Current.Controller != this)
 			{
-				Stack.Push(this);
+				App.Current.ControllerStack.Push(this);
 			}
 		}
 
+		/// <summary>
+		/// Will be  executed when the window is resized, allowing the controller to re-arrange the page, therefore making it "responsive"
+		/// </summary>
+		public virtual void Resize()
+		{
+		}
+
+		/// <summary>
+		/// Will be execeuted once the controller has done it's workd. Use this to dispose objects and release memory
+		/// </summary>
 		public virtual void Finish()
 		{
-			Stack.Pop();
+			App.Current.ControllerStack.Pop();
 
-			if (CurrentPage.Content != null)
+			if (App.Current.Page.Content != null)
 			{
-				CurrentPage.Content.Dispose();
+				App.Current.Page.Content.Dispose();
 			}
 
-			CurrentPage.Content = null;
+			App.Current.Page.Content = null;
 		}
-
-		#region Static
-
-		static Controller()
-		{
-		}
-
-		protected static readonly string SessionName = typeof(Controller).FullName + ".Stack";
-
-		protected static Stack<Controller> Stack
-		{
-			get
-			{
-				if (!Session.Current.ContainsKey(SessionName))
-				{
-					Session.Current.Add(SessionName, new Stack<Controller>());
-				}
-
-				return (Stack<Controller>) Session.Current[SessionName];
-			}
-		}
-		
-		/// <summary>
-		/// Gets the controller currently at the top of the stack (meaning it currently has control)
-		/// </summary>
-		public static Controller CurrentController
-		{
-			get
-			{
-				if (Stack.Count == 0)
-				{
-					return null;
-				}
-
-				return Stack.Peek();
-			}
-		}
-
-		/// <summary>
-		/// Gets the Page that is currently being displayed to the user
-		/// </summary>
-		public static IPage CurrentPage
-		{
-			get
-			{
-				return (IPage) Session.Current[typeof(IPage).FullName];
-			}
-			set
-			{
-				Session.Current[typeof(IPage).FullName] = value;
-            }
-		}
-
-		#endregion
 	}
 }
