@@ -2,9 +2,9 @@
 
 namespace OKHOSTING.UI.Xamarin.Forms
 {
-	public class XamarinApp : Application
+	public class NativeApp : Application
 	{
-		public XamarinApp()
+		public NativeApp()
 		{
 			// The root page of your application
 			MainPage = new NavigationPage((Page) App.Current.Page);

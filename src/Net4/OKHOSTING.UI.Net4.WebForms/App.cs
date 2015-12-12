@@ -3,6 +3,7 @@ using OKHOSTING.UI.Controls.Layouts;
 using OKHOSTING.UI.Net4.WebForms.Controls;
 using OKHOSTING.UI.Net4.WebForms.Controls.Layouts;
 using System;
+using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
@@ -74,6 +75,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 		}
 
 		#region Virtual
+
+		internal virtual void SetPage(Page page)
+		{
+			this.Page = page;
+		}
 
 		public virtual Color Parse(System.Drawing.Color color)
 		{
@@ -155,5 +161,21 @@ namespace OKHOSTING.UI.Net4.WebForms
 		}
 
 		#endregion
+
+		public static new App Current
+		{
+			get
+			{
+				var app = (App) UI.App.Current;
+
+				if (app == null)
+				{
+					app = new App();
+					UI.App.Current = app;
+				}
+
+				return app;
+			}
+		}
 	}
 }

@@ -7,6 +7,16 @@
 		mc:Ignorable="d"
 		Title="Page" Height="300" Width="300">
 	<Grid>
-		
+		<Label x:Name="label" Content="Label" Margin="40,96,0,0" RenderTransformOrigin="0.5,0.5" Width="136" Height="56" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+			<Label.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform Angle="1.329"/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Label.RenderTransform>
+		</Label>
+
 	</Grid>
 </Window>

@@ -11,16 +11,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 	{
 		protected override void OnLoad(EventArgs e)
 		{
-            Controller.CurrentPage = this;
-
-			if (Controller.CurrentController == null)
-			{
-				new Test.LoginController().Start();
-			}
-			else
-			{
-				Controller.CurrentController.Start();
-			}
+			App.Current.SetPage(this);
+			App.Current.Controller.Start();
 
 			base.OnLoad(e);
 		}

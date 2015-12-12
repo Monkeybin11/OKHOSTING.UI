@@ -211,5 +211,21 @@ namespace OKHOSTING.UI.Net4.WinForms
 		}
 
 		#endregion
+
+		public static new App Current
+		{
+			get
+			{
+				var app = (App) UI.App.Current;
+
+				if (app == null)
+				{
+					app = new App();
+					UI.App.Current = app;
+				}
+
+				return app;
+			}
+		}
 	}
 }

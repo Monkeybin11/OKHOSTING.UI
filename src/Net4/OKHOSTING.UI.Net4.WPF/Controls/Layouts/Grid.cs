@@ -13,7 +13,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 		{
 		}
 
-		public int ColumnCount
+		int IGrid.ColumnCount
 		{
 			get
 			{
@@ -33,7 +33,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			}
 		}
 
-		public int RowCount
+		int IGrid.RowCount
 		{
 			get
 			{
@@ -53,7 +53,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			}
 		}
 
-		public IControl GetContent(int row, int column)
+		IControl IGrid.GetContent(int row, int column)
 		{
 			foreach(System.Windows.UIElement children in base.Children)
 			{
@@ -66,7 +66,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			return null;
 		}
 
-		public void SetContent(int row, int column, IControl content)
+		void IGrid.SetContent(int row, int column, IControl content)
 		{
 			Grid.SetRow((System.Windows.UIElement) content, row);
 			Grid.SetColumn((System.Windows.UIElement) content, column);
@@ -74,55 +74,32 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			base.Children.Add((System.Windows.UIElement) content);
 		}
 
-		public Color BackgroundColor
+		protected override Size ArrangeOverride(Size arrangeSize)
+		{
+			//apply paddings here? http://stackoverflow.com/questions/1319974/wpf-grid-with-column-row-margin-padding
+			return base.ArrangeOverride(arrangeSize);
+		}
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		string IControl.Name
 		{
 			get
 			{
-				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				throw new NotImplementedException();
 			}
+
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+				throw new NotImplementedException();
 			}
 		}
 
-		public Color BorderColor
-		{
-			get
-			{
-				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
-			}
-			set
-			{
-				base.BorderBrush = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
-			}
-		}
-
-		public double BorderWidth
-		{
-			get
-			{
-				return base.BorderThickness.Bottom;
-			}
-			set
-			{
-				base.BorderThickness = new System.Windows.Thickness(value);
-			}
-		}
-
-		public bool Enabled
-		{
-			get
-			{
-				return base.IsEnabled;
-			}
-			set
-			{
-				base.IsEnabled = value;
-			}
-		}
-
-		public bool Visible
+		bool IControl.Visible
 		{
 			get
 			{
@@ -141,14 +118,146 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			}
 		}
 
-		public void Dispose()
+		bool IControl.Enabled
 		{
+			get
+			{
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
+			}
 		}
 
-		protected override Size ArrangeOverride(Size arrangeSize)
+		double? IControl.Width
 		{
-			//apply paddings here? http://stackoverflow.com/questions/1319974/wpf-grid-with-column-row-margin-padding
-			return base.ArrangeOverride(arrangeSize);
+			get
+			{
+				return base.Width;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Width = value.Value;
+				}
+			}
 		}
+
+		double? IControl.Height
+		{
+			get
+			{
+				return base.Height;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Height = value.Value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return App.Current.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get
+			{
+				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
+			}
+			set
+			{
+				base.BorderBrush = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get
+			{
+				return App.Current.Parse(base.BorderThickness);
+			}
+			set
+			{
+				base.BorderThickness = App.Current.Parse(value);
+			}
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalAlignment);
+			}
+			set
+			{
+				base.HorizontalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.VerticalAlignment);
+			}
+			set
+			{
+				base.VerticalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		Thickness IGrid.CellMargin
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		Thickness IGrid.CellPadding
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		#endregion
 	}
 }

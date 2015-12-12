@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="XamarinApp.cs" />
+    <Compile Include="NativeApp.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Controls\BooleanPicker.cs" />
     <Compile Include="Controls\Button.cs" />

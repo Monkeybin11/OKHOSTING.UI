@@ -59,7 +59,21 @@ namespace OKHOSTING.UI
 		internal readonly Stack<Controller> ControllerStack = new Stack<Controller>();
 
 		/// <summary>
-		/// Gets the currently executing App
+		/// Will be executed when this App "executes" at first
+		/// </summary>
+		public virtual void Start()
+		{
+		}
+
+		/// <summary>
+		/// Will be execeuted once the controller has done it's workd. Use this to dispose objects and release memory
+		/// </summary>
+		public virtual void Finish()
+		{
+		}
+
+		/// <summary>
+		/// Gets the currently executing App. In a web environment, an App instance is created for each user
 		/// </summary>
 		public static App Current
 		{

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
@@ -17,11 +12,17 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		protected void Session_Start(object sender, EventArgs e)
 		{
+
 		}
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
 		{
 
+		}
+
+		void Application_PreRequestHandlerExecute(object sender, EventArgs e)
+		{
+			//var page = (Context.Handler as System.Web.UI.Page);
 		}
 
 		protected void Application_AuthenticateRequest(object sender, EventArgs e)

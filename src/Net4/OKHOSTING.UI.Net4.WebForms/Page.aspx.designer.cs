@@ -7,11 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
-namespace OKHOSTING.UI.Net4.WebForms {
-    
-    
+namespace OKHOSTING.UI.Net4.WebForms
+{
     public partial class Page {
         
         /// <summary>
@@ -31,5 +28,5 @@ namespace OKHOSTING.UI.Net4.WebForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phContent;
-	}
+    }
 }

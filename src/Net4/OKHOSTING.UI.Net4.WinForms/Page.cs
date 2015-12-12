@@ -75,8 +75,6 @@ namespace OKHOSTING.UI.Net4.WinForms
 		protected override void OnResize(EventArgs e)
 		{
 			//make responsive
-			Controller.CurrentController.Resize();
-
 			base.OnResize(e);
 		}
 	}

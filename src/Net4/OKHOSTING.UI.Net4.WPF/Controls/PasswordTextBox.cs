@@ -30,79 +30,27 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		public Color BackgroundColor
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		string IControl.Name
 		{
 			get
 			{
-				return Page.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				throw new NotImplementedException();
 			}
+
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
+				throw new NotImplementedException();
 			}
 		}
 
-		public Color BorderColor
-		{
-			get
-			{
-				return Page.Parse(((System.Windows.Media.SolidColorBrush) NativeTextBox.BorderBrush).Color);
-			}
-			set
-			{
-				NativeTextBox.BorderBrush = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
-			}
-		}
-
-		public double BorderWidth
-		{
-			get
-			{
-				return NativeTextBox.BorderThickness.Bottom;
-			}
-			set
-			{
-				NativeTextBox.BorderThickness = new System.Windows.Thickness(value);
-			}
-		}
-
-		public bool Enabled
-		{
-			get
-			{
-				return base.IsEnabled;
-			}
-			set
-			{
-				base.IsEnabled = value;
-			}
-		}
-
-		public Color FontColor
-		{
-			get
-			{
-				return Page.Parse(((System.Windows.Media.SolidColorBrush) NativeTextBox.Foreground).Color);
-			}
-			set
-			{
-				NativeTextBox.Foreground = new System.Windows.Media.SolidColorBrush(Page.Parse(value));
-			}
-		}
-
-		string ITextControl.FontFamily
-		{
-			get
-			{
-				return NativeTextBox.FontFamily.Source;
-			}
-			set
-			{
-				NativeTextBox.FontFamily = new System.Windows.Media.FontFamily(value);
-			}
-		}
-
-		public bool Visible
+		bool IControl.Visible
 		{
 			get
 			{
@@ -121,20 +69,120 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		public double FontSize
+		bool IControl.Enabled
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return base.IsEnabled;
 			}
 			set
 			{
-				throw new NotImplementedException();
+				base.IsEnabled = value;
 			}
 		}
 
-		public void Dispose()
+		double? IControl.Width
 		{
+			get
+			{
+				return base.Width;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Width = value.Value;
+				}
+			}
 		}
+
+		double? IControl.Height
+		{
+			get
+			{
+				return base.Height;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Height = value.Value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return App.Current.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get
+			{
+				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
+			}
+			set
+			{
+				base.BorderBrush = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get
+			{
+				return App.Current.Parse(base.BorderThickness);
+			}
+			set
+			{
+				base.BorderThickness = App.Current.Parse(value);
+			}
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalAlignment);
+			}
+			set
+			{
+				base.HorizontalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.VerticalAlignment);
+			}
+			set
+			{
+				base.VerticalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		#endregion
 	}
 }

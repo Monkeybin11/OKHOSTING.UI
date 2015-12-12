@@ -1,8 +1,9 @@
-﻿<Application x:Class="OKHOSTING.UI.Net4.WPF.App"
+﻿<Application x:Class="OKHOSTING.UI.Net4.WPF.NativeApp"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:local="clr-namespace:OKHOSTING.UI.Net4.WPF"
-			 StartupUri="Page.xaml">
+			 StartupUri="Page.xaml"
+			 Startup="Application_Startup">
 	<Application.Resources>
 		 
 	</Application.Resources>
