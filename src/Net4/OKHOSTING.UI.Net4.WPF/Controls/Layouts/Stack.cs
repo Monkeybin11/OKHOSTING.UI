@@ -129,26 +129,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		Color IControl.BorderColor
 		{
-			get
-			{
-				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
-			}
-			set
-			{
-				base.BorderBrush = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
-			}
+			get; set;
 		}
 
 		Thickness IControl.BorderWidth
 		{
-			get
-			{
-				return App.Current.Parse(base.BorderThickness);
-			}
-			set
-			{
-				base.BorderThickness = App.Current.Parse(value);
-			}
+			get; set;
 		}
 
 		HorizontalAlignment IControl.HorizontalAlignment

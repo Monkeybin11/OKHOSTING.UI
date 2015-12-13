@@ -192,6 +192,46 @@ namespace OKHOSTING.UI.Net4.WPF
 			throw new ArgumentOutOfRangeException("verticalAlignment");
 		}
 
+		public HorizontalAlignment Parse(TextAlignment textAlignment)
+		{
+			switch (textAlignment)
+			{
+				case TextAlignment.Left:
+					return HorizontalAlignment.Left;
+
+				case TextAlignment.Center:
+					return HorizontalAlignment.Center;
+
+				case TextAlignment.Right:
+					return HorizontalAlignment.Right;
+
+				case TextAlignment.Justify:
+					return HorizontalAlignment.Fill;
+			}
+
+			return HorizontalAlignment.Left;
+		}
+
+		public TextAlignment ParseTextAlignment(HorizontalAlignment alignment)
+		{
+			switch (alignment)
+			{
+				case HorizontalAlignment.Left:
+					return TextAlignment.Left;
+
+				case HorizontalAlignment.Center:
+					return TextAlignment.Center;
+
+				case HorizontalAlignment.Right:
+					return TextAlignment.Right;
+
+				case HorizontalAlignment.Fill:
+					return TextAlignment.Justify;
+			}
+
+			return TextAlignment.Left;
+		}
+
 		public static new App Current
 		{
 			get
