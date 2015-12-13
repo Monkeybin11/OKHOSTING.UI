@@ -7,13 +7,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Autocomplete()
 		{
-			var allowedTypes = new System.Windows.Forms.AutoCompleteStringCollection();
-			allowedTypes.AddRange(yourArrayOfSuggestions);
-			AutoCompleteCustomSource = allowedTypes;
-			AutoCompleteMode = AutoCompleteMode.Suggest;
-			AutoCompleteSource = AutoCompleteSource.CustomSource;
+			//var allowedTypes = new System.Windows.Forms.AutoCompleteStringCollection();
+			//allowedTypes.AddRange(yourArrayOfSuggestions);
+			//AutoCompleteCustomSource = allowedTypes;
+			//AutoCompleteMode = AutoCompleteMode.Suggest;
+			//AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-			Searching+=
+			//Searching+=
 		}
 
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;

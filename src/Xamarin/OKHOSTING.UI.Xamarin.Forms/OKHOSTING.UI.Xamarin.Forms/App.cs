@@ -18,6 +18,12 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			Page = new Page();
 		}
 
+		public override void Finish()
+		{
+			base.Finish();
+			global::Xamarin.Forms.Application.Current.
+		}
+
 		public override T Create<T>()
 		{
 			if (typeof(T) == typeof(IButton))

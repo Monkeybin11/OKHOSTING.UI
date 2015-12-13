@@ -74,6 +74,12 @@ namespace OKHOSTING.UI.Net4.WPF
 			throw new NotSupportedException();
 		}
 
+		public override void Finish()
+		{
+			base.Finish();
+			System.Windows.Application.Current.Shutdown();
+		}
+
 		internal virtual void SetPage(Page page)
 		{
 			this.Page = page;

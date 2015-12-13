@@ -14,9 +14,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 		[STAThread]
 		static void Main()
 		{
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Page());
+			App.Current.Start();
 		}
 	}
 }

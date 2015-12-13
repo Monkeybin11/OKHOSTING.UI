@@ -43,11 +43,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Page.Parse(base.Margin);
+				return App.Current.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Page.Parse(value);
+				base.Margin = App.Current.Parse(value);
 			}
 		}
 
@@ -55,11 +55,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Page.Parse(base.BackColor);
+				return App.Current.Parse(base.BackColor);
 			}
 			set
 			{
-				base.BackColor = Page.Parse(value);
+				base.BackColor = App.Current.Parse(value);
 			}
 		}
 
@@ -71,11 +71,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Page.Parse(base.Anchor).Item1;
+				return App.Current.Parse(base.Anchor).Item1;
 			}
 			set
 			{
-				base.Anchor = Page.ParseAnchor(value, ((IControl) this).VerticalAlignment);
+				base.Anchor = App.Current.ParseAnchor(value, ((IControl) this).VerticalAlignment);
 			}
 		}
 
@@ -83,11 +83,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Page.Parse(base.Anchor).Item2;
+				return App.Current.Parse(base.Anchor).Item2;
 			}
 			set
 			{
-				base.Anchor = Page.ParseAnchor(((IControl) this).HorizontalAlignment, value);
+				base.Anchor = App.Current.ParseAnchor(((IControl) this).HorizontalAlignment, value);
 			}
 		}
 
@@ -99,11 +99,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Page.Parse(base.ForeColor);
+				return App.Current.Parse(base.ForeColor);
 			}
 			set
 			{
-				base.ForeColor = Page.Parse(value);
+				base.ForeColor = App.Current.Parse(value);
 			}
 		}
 
@@ -172,11 +172,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return WinForms.Page.GetHorizontalAlignment(base.TextAlign);
+				return App.Current.Parse(base.TextAlign).Item1;
 			}
 			set
 			{
-				base.TextAlign = Page.GetAlignment(value, ((ITextControl) this).VerticalAlignment);
+				base.TextAlign = App.Current.ParseContentAlignment(value, ((ITextControl) this).VerticalAlignment);
 			}
 		}
 
@@ -184,11 +184,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return WinForms.Page.GetVerticalAlignment(base.TextAlign);
+				return App.Current.Parse(base.TextAlign).Item2;
 			}
 			set
 			{
-				base.TextAlign = Page.GetAlignment(((ITextControl) this).HorizontalAlignment, value);
+				base.TextAlign = App.Current.ParseContentAlignment(((ITextControl) this).HorizontalAlignment, value);
 			}
 		}
 
@@ -196,11 +196,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Page.Parse(base.Padding);
+				return App.Current.Parse(base.Padding);
 			}
 			set
 			{
-				base.Padding = Page.Parse(value);
+				base.Padding = App.Current.Parse(value);
 			}
 		}
 
@@ -224,10 +224,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 			//draw custom border here
 
-			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p4, p1); //left
-			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p1, p2); //top
-			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p2, p3); //right
-			pevent.Graphics.DrawLine(new System.Drawing.Pen(Page.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p3, p4); //bottom
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(App.Current.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p4, p1); //left
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(App.Current.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p1, p2); //top
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(App.Current.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p2, p3); //right
+			pevent.Graphics.DrawLine(new System.Drawing.Pen(App.Current.Parse(((IButton) this).BorderColor), (float) ((IButton) this).BorderWidth.Left), p3, p4); //bottom
 
 			base.OnPaint(pevent);
 		}

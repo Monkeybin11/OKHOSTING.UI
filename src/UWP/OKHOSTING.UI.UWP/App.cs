@@ -18,6 +18,12 @@ namespace OKHOSTING.UI.UWP
 			Page = new Page();
 		}
 
+		public override void Finish()
+		{
+			base.Finish();
+			Windows.UI.Xaml.Application.Current.Exit();
+		}
+
 		public override T Create<T>()
 		{
 			if (typeof(T) == typeof(IButton))

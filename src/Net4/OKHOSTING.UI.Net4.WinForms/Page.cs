@@ -16,8 +16,8 @@ namespace OKHOSTING.UI.Net4.WinForms
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
-			Controller.CurrentPage = this;
-			Controller.CurrentController.Start();
+
+			App.Current.Controller.Start();
 		}
 
 		public IControl Content
@@ -74,7 +74,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		protected override void OnResize(EventArgs e)
 		{
-			//make responsive
+			App.Current.Controller.Resize();
 			base.OnResize(e);
 		}
 	}

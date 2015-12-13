@@ -63,6 +63,7 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual void Start()
 		{
+			//set the first current controller and start it here
 		}
 
 		/// <summary>
@@ -70,6 +71,7 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual void Finish()
 		{
+			Controller.Finish();
 		}
 
 		/// <summary>

@@ -73,6 +73,23 @@ namespace OKHOSTING.UI.Net4.WinForms
 			throw new NotSupportedException();
 		}
 
+		public override void Start()
+		{
+			base.Start();
+
+			Page = new Page();
+
+            System.Windows.Forms.Application.EnableVisualStyles();
+			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+			System.Windows.Forms.Application.Run((System.Windows.Forms.Form) Page);
+		}
+
+		public override void Finish()
+		{
+			base.Finish();
+			System.Windows.Forms.Application.Exit();
+		}
+
 		#region Virtual
 
 		public virtual Color Parse(System.Drawing.Color color)
@@ -167,7 +184,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.None)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Center);
 			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Fill);
 
-			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Top) new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Top);
+			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Top)) new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Top);
 			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.None)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Center);
 			if (anchor == (System.Windows.Forms.AnchorStyles.None | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Fill);
@@ -208,6 +225,43 @@ namespace OKHOSTING.UI.Net4.WinForms
 			if (horizontal == HorizontalAlignment.Fill && vertical == VerticalAlignment.Fill) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
 
 			return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top;
+		}
+
+		public virtual HorizontalAlignment Parse(System.Windows.Forms.HorizontalAlignment textAlign)
+		{
+			switch (textAlign)
+			{
+				case System.Windows.Forms.HorizontalAlignment.Center:
+					return HorizontalAlignment.Center;
+
+				case System.Windows.Forms.HorizontalAlignment.Left:
+					return HorizontalAlignment.Left;
+
+				case System.Windows.Forms.HorizontalAlignment.Right:
+					return HorizontalAlignment.Right;
+			}
+
+			return HorizontalAlignment.Left;
+		}
+
+		public virtual System.Windows.Forms.HorizontalAlignment Parse(HorizontalAlignment horizontalAlign)
+		{
+			switch (horizontalAlign)
+			{
+				case HorizontalAlignment.Center:
+					return System.Windows.Forms.HorizontalAlignment.Center;
+
+				case HorizontalAlignment.Left:
+					return System.Windows.Forms.HorizontalAlignment.Left;
+
+				case HorizontalAlignment.Right:
+					return System.Windows.Forms.HorizontalAlignment.Right;
+
+				case HorizontalAlignment.Fill:
+					return System.Windows.Forms.HorizontalAlignment.Left;
+			}
+
+			return System.Windows.Forms.HorizontalAlignment.Left;
 		}
 
 		#endregion
