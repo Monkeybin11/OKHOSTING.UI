@@ -12,12 +12,28 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 			_Children = new ControlList(base.Children);
 		}
 
-		public string Name
+		protected readonly ControlList _Children;
+
+		IList<IControl> IStack.Children
+		{
+			get
+			{
+				return _Children;
+			}
+		}
+		
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		string IControl.Name
 		{
 			get; set;
 		}
 
-		public bool Visible
+		bool IControl.Visible
 		{
 			get
 			{
@@ -29,18 +45,101 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 			}
 		}
 
-		protected readonly ControlList _Children;
-
-		IList<IControl> IStack.Children
+		bool IControl.Enabled
 		{
 			get
 			{
-				return _Children;
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
 			}
 		}
 
-		public void Dispose()
+		double? IControl.Width
 		{
+			get
+			{
+				return base.WidthRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.WidthRequest = value.Value;
+				}
+			}
 		}
+
+		double? IControl.Height
+		{
+			get
+			{
+				return base.HeightRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.HeightRequest = value.Value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get; set;
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(base.BackgroundColor);
+			}
+			set
+			{
+				base.BackgroundColor = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get;
+			set;
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get;
+			set;
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalOptions.Alignment);
+			}
+			set
+			{
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+			}
+			set
+			{
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		#endregion
 	}
 }

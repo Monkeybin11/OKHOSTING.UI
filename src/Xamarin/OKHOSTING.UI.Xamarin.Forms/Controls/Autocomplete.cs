@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
@@ -10,8 +8,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	{
 		public Autocomplete()
 		{
-			GoSearchButton = Controller.CurrentPage.Create<IButton>();
+			GoSearchButton = App.Current.Create<IButton>();
 			GoSearchButton.Click += GoSearchButton_Click;
+		}
+
+		event EventHandler<AutocompleteSearchEventArgs> IAutocomplete.Searching
+		{
+			add
+			{
+				throw new NotImplementedException();
+			}
+
+			remove
+			{
+				throw new NotImplementedException();
+			}
 		}
 
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
@@ -27,18 +38,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		private void GoSearchButton_Click(object sender, EventArgs e)
 		{
-			SearchText = Controller.CurrentPage.Create<ITextBox>();
-			SearchButton = Controller.CurrentPage.Create<IButton>();
+			SearchText = App.Current.Create<ITextBox>();
+			SearchButton = App.Current.Create<IButton>();
 			SearchButton.Text = "Search";
 			SearchButton.Click += SearchButton_Click;
-			SearchStack = Controller.CurrentPage.Create<IStack>();
+			SearchStack = App.Current.Create<IStack>();
 			SearchStack.Children.Add(SearchText);
 			SearchStack.Children.Add(SearchButton);
 
 			SearchPage = new Page();
 			SearchPage.Content = SearchStack;
 
-			((Page) Controller.CurrentPage).Navigation.PushAsync(SearchPage);
+			((Page) App.Current.Page).Navigation.PushAsync(SearchPage);
 		}
 
 		private void SearchButton_Click(object sender, EventArgs e)
@@ -46,7 +57,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			OnSearching(SearchText.Text);
 		}
 
-		public string Text
+		string ITextBox.Text
 		{
 			get
 			{
@@ -56,35 +67,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			{
 				GoSearchButton.Text = value;
 			}
-		}
-
-		public string Name
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public bool Visible
-
-		{
-			get
-			{
-				return base.IsVisible;
-			}
-			set
-			{
-				base.IsVisible = value;
-			}
-		}
-
-		public void Dispose()
-		{
 		}
 
 		public AutocompleteSearchEventArgs OnSearching(string text)
@@ -103,7 +85,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			ResultPage = new global::Xamarin.Forms.ContentPage();
 			ResultPage.Content = ResultView;
 
-			((Page) Controller.CurrentPage).Navigation.PushAsync(ResultPage);
+			((Page) App.Current.Page).Navigation.PushAsync(ResultPage);
 
 			return e;
 		}
@@ -113,10 +95,189 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			SearchText.Text = e.SelectedItem.ToString();
 
 			//close result page
-			((Page) Controller.CurrentPage).Navigation.PopAsync();
+			((Page) App.Current.Page).Navigation.PopAsync();
 
 			//close search page and get back to original page
-			((Page) Controller.CurrentPage).Navigation.PopAsync();
+			((Page) App.Current.Page).Navigation.PopAsync();
 		}
+
+
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		AutocompleteSearchEventArgs IAutocomplete.OnSearching(string text)
+		{
+			throw new NotImplementedException();
+		}
+
+		#region IControl
+
+		string IControl.Name
+		{
+			get; set;
+		}
+
+		bool IControl.Visible
+		{
+			get
+			{
+				return base.IsVisible;
+			}
+			set
+			{
+				base.IsVisible = value;
+			}
+		}
+
+		bool IControl.Enabled
+		{
+			get
+			{
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
+			}
+		}
+
+		double? IControl.Width
+		{
+			get
+			{
+				return base.WidthRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.WidthRequest = value.Value;
+				}
+			}
+		}
+
+		double? IControl.Height
+		{
+			get
+			{
+				return base.HeightRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.HeightRequest = value.Value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get; set;
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(base.BackgroundColor);
+			}
+			set
+			{
+				base.BackgroundColor = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get; set;
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get; set;
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalOptions.Alignment);
+			}
+			set
+			{
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+			}
+			set
+			{
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		#endregion
+
+		#region ITextControl
+
+		string ITextControl.FontFamily
+		{
+			get; set;
+		}
+
+		Color ITextControl.FontColor
+		{
+			get; set;
+		}
+
+		bool ITextControl.Bold
+		{
+			get; set;
+		}
+
+		bool ITextControl.Italic
+		{
+			get; set;
+		}
+
+		bool ITextControl.Underline
+		{
+			get;
+			set;
+		}
+
+		HorizontalAlignment ITextControl.TextHorizontalAlignment
+		{
+			get;
+			set;
+		}
+
+		VerticalAlignment ITextControl.TextVerticalAlignment
+		{
+			get;
+			set;
+		}
+
+		Thickness ITextControl.TextPadding
+		{
+			get;
+			set;
+		}
+
+		double ITextControl.FontSize
+		{
+			get;
+			set;
+		}
+
+		#endregion
 	}
 }

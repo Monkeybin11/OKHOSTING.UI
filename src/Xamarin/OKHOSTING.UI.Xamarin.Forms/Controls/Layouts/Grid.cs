@@ -6,7 +6,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 {
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
-		public int ColumnCount
+		int IGrid.ColumnCount
 		{
 			get
 			{
@@ -26,12 +26,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 			}
 		}
 
-		public string Name
-		{
-			get; set;
-		}
-
-		public int RowCount
+		int IGrid.RowCount
 		{
 			get
 			{
@@ -51,23 +46,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 			}
 		}
 
-		public bool Visible
-		{
-			get
-			{
-				return base.IsVisible;
-			}
-			set
-			{
-				base.IsVisible = value;
-			}
-		}
-
-		public void Dispose()
-		{
-		}
-
-		public IControl GetContent(int row, int column)
+		IControl IGrid.GetContent(int row, int column)
 		{
 			foreach (global::Xamarin.Forms.View children in base.Children)
 			{
@@ -80,12 +59,141 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 			return null;
 		}
 
-		public void SetContent(int row, int column, IControl content)
+		void IGrid.SetContent(int row, int column, IControl content)
 		{
 			global::Xamarin.Forms.Grid.SetRow((global::Xamarin.Forms.View) content, row);
 			global::Xamarin.Forms.Grid.SetColumn((global::Xamarin.Forms.View) content, column);
 
 			base.Children.Add((global::Xamarin.Forms.View) content);
 		}
+
+
+		Thickness IGrid.CellMargin
+		{
+			get; set;
+		}
+
+		Thickness IGrid.CellPadding
+		{
+			get; set;
+		}
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		string IControl.Name
+		{
+			get; set;
+		}
+
+		bool IControl.Visible
+		{
+			get
+			{
+				return base.IsVisible;
+			}
+			set
+			{
+				base.IsVisible = value;
+			}
+		}
+
+		bool IControl.Enabled
+		{
+			get
+			{
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
+			}
+		}
+
+		double? IControl.Width
+		{
+			get
+			{
+				return base.WidthRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.WidthRequest = value.Value;
+				}
+			}
+		}
+
+		double? IControl.Height
+		{
+			get
+			{
+				return base.HeightRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.HeightRequest = value.Value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get; set;
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(base.BackgroundColor);
+			}
+			set
+			{
+				base.BackgroundColor = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get; set;
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get; set;
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalOptions.Alignment);
+			}
+			set
+			{
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+			}
+			set
+			{
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		#endregion
 	}
 }

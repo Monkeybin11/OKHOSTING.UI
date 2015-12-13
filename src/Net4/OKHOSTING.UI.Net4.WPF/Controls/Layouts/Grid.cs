@@ -86,19 +86,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 
 		#region IControl
 
-		string IControl.Name
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		bool IControl.Visible
 		{
 			get

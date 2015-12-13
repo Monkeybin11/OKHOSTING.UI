@@ -6,12 +6,34 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class Image : global::Xamarin.Forms.Image, IImage
 	{
-		public string Name
+		void IImage.LoadFromUrl(Uri url)
+		{
+			base.Source = global::Xamarin.Forms.ImageSource.FromUri(url);
+		}
+
+		void IImage.LoadFromFile(string filePath)
+		{
+			base.Source = global::Xamarin.Forms.ImageSource.FromFile(filePath);
+		}
+
+		void IImage.LoadFromStream(Stream stream)
+		{
+			base.Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
+		}
+
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		string IControl.Name
 		{
 			get; set;
 		}
 
-		public bool Visible
+		bool IControl.Visible
 		{
 			get
 			{
@@ -23,23 +45,101 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-		public void Dispose()
+		bool IControl.Enabled
 		{
+			get
+			{
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
+			}
 		}
 
-		public void LoadFromUrl(string url)
+		double? IControl.Width
 		{
-			base.Source = global::Xamarin.Forms.ImageSource.FromUri(new Uri(url));
+			get
+			{
+				return base.WidthRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.WidthRequest = value.Value;
+				}
+			}
 		}
 
-		public void LoadFromFile(string filePath)
+		double? IControl.Height
 		{
-			base.Source = global::Xamarin.Forms.ImageSource.FromFile(filePath);
+			get
+			{
+				return base.HeightRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.HeightRequest = value.Value;
+				}
+			}
 		}
 
-		public void LoadFromStream(Stream stream)
+		Thickness IControl.Margin
 		{
-			base.Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
+			get; set;
 		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(base.BackgroundColor);
+			}
+			set
+			{
+				base.BackgroundColor = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get;
+			set;
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get;
+			set;
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalOptions.Alignment);
+			}
+			set
+			{
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+			}
+			set
+			{
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+			}
+		}
+
+		#endregion
 	}
 }
