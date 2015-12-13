@@ -29,7 +29,14 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public bool Visible
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		bool IControl.Visible
 		{
 			get
 			{
@@ -48,8 +55,120 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public void Dispose()
+		bool IControl.Enabled
 		{
+			get
+			{
+				return true;
+			}
+			set
+			{
+				//do nothing
+			}
 		}
+
+		double? IControl.Width
+		{
+			get
+			{
+				return base.Width;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Width = value.Value;
+				}
+			}
+		}
+
+		double? IControl.Height
+		{
+			get
+			{
+				return base.Height;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Height = value.Value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return App.Current.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get
+			{
+				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.BorderBrush).Color);
+			}
+			set
+			{
+				base.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get
+			{
+				return App.Current.Parse(base.BorderThickness);
+			}
+			set
+			{
+				base.BorderThickness = App.Current.Parse(value);
+			}
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalAlignment);
+			}
+			set
+			{
+				base.HorizontalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.VerticalAlignment);
+			}
+			set
+			{
+				base.VerticalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		#endregion
 	}
 }

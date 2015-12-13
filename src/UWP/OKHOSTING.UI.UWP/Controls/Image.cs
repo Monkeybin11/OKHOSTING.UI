@@ -8,7 +8,32 @@ namespace OKHOSTING.UI.UWP.Controls
 	{
 		protected Windows.UI.Xaml.Controls.Image InnerImage = new Windows.UI.Xaml.Controls.Image();
 
-		public bool Visible
+		void IImage.LoadFromFile(string filePath)
+		{
+			InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(filePath));
+        }
+
+		void IImage.LoadFromStream(Stream stream)
+		{
+			//var image = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+			//image.SetSource(Windows.Storage.Streams.RandomAccessStream.);
+			//InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+
+			throw new NotImplementedException();
+		}
+
+		void IImage.LoadFromUrl(Uri url)
+		{
+			InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(url);
+		}
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		bool IControl.Visible
 		{
 			get
 			{
@@ -27,27 +52,103 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public void Dispose()
+		bool IControl.Enabled
 		{
+			get
+			{
+				return true;
+			}
+			set
+			{
+				//do nothing
+			}
 		}
 
-		public void LoadFromFile(string filePath)
+		double? IControl.Width
 		{
-			InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(filePath));
-        }
-
-		public void LoadFromStream(Stream stream)
-		{
-			//var image = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-			//image.SetSource(Windows.Storage.Streams.RandomAccessStream.);
-			//InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-
-			throw new NotImplementedException();
+			get
+			{
+				return base.Width;
+			}
+			set
+			{
+				//do nothing
+			}
 		}
 
-		public void LoadFromUrl(string url)
+		double? IControl.Height
 		{
-			InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(url));
+			get
+			{
+				return base.Height;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Height = value.Value;
+				}
+			}
 		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return App.Current.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get; set;
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get; set;
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalAlignment);
+			}
+			set
+			{
+				base.HorizontalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.VerticalAlignment);
+			}
+			set
+			{
+				base.VerticalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		#endregion
 	}
 }

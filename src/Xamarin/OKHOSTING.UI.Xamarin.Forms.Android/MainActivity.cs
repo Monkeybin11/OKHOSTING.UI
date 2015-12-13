@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Droid
+namespace OKHOSTING.UI.Xamarin.Forms.Android
 {
 	[Activity(Label = "OKHOSTING.UI.Xamarin.Forms", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity

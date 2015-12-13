@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("OKHOSTING.UI.Xamarin.Forms.Droid.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("OKHOSTING.UI.Xamarin.Forms.Android.Resource", IsApplication=true)]
 
-namespace OKHOSTING.UI.Xamarin.Forms.Droid
+namespace OKHOSTING.UI.Xamarin.Forms.Android
 {
 	
 	

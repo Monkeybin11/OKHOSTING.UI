@@ -6,11 +6,11 @@ using Android.App;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OKHOSTING.UI.Xamarin.Forms.Droid")]
+[assembly: AssemblyTitle("OKHOSTING.UI.Xamarin.Forms.Android")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OKHOSTING.UI.Xamarin.Forms.Droid")]
+[assembly: AssemblyProduct("OKHOSTING.UI.Xamarin.Forms.Android")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

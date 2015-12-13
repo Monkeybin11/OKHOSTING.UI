@@ -1,15 +1,16 @@
 ﻿using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layouts;
 using System;
 
 namespace OKHOSTING.UI.UWP.Controls.Layouts
 {
-	public class Grid : Windows.UI.Xaml.Controls.Grid, UI.Controls.Layouts.IGrid
+	public class Grid : Windows.UI.Xaml.Controls.Grid, IGrid
 	{
 		public Grid()
 		{
 		}
 
-		public int ColumnCount
+		int IGrid.ColumnCount
 		{
 			get
 			{
@@ -29,7 +30,7 @@ namespace OKHOSTING.UI.UWP.Controls.Layouts
 			}
 		}
 
-		public int RowCount
+		int IGrid.RowCount
 		{
 			get
 			{
@@ -49,7 +50,59 @@ namespace OKHOSTING.UI.UWP.Controls.Layouts
 			}
 		}
 
-		public bool Visible
+		IControl IGrid.GetContent(int row, int column)
+		{
+			foreach (Windows.UI.Xaml.FrameworkElement children in base.Children)
+			{
+				if (Windows.UI.Xaml.Controls.Grid.GetRow(children) == row && Windows.UI.Xaml.Controls.Grid.GetColumn(children) == column)
+				{
+					return (IControl) children;
+				}
+			}
+
+			return null;
+		}
+
+		void IGrid.SetContent(int row, int column, IControl content)
+		{
+			Grid.SetRow((Windows.UI.Xaml.FrameworkElement) content, row);
+			Grid.SetColumn((Windows.UI.Xaml.FrameworkElement) content, column);
+
+			base.Children.Add((Windows.UI.Xaml.FrameworkElement) content);
+		}
+
+
+		Thickness IGrid.CellMargin
+		{
+			get
+			{
+				return new Thickness(0);
+			}
+			set
+			{
+				//do nothing
+			}
+		}
+
+		Thickness IGrid.CellPadding
+		{
+			get
+			{
+				return App.Current.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = App.Current.Parse(value);
+			}
+		}
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IControl
+
+		bool IControl.Visible
 		{
 			get
 			{
@@ -68,29 +121,123 @@ namespace OKHOSTING.UI.UWP.Controls.Layouts
 			}
 		}
 
-		public void Dispose()
+		bool IControl.Enabled
 		{
-		}
-
-		public IControl GetContent(int row, int column)
-		{
-			foreach (Windows.UI.Xaml.FrameworkElement children in base.Children)
+			get
 			{
-				if (Windows.UI.Xaml.Controls.Grid.GetRow(children) == row && Windows.UI.Xaml.Controls.Grid.GetColumn(children) == column)
+				return true;
+			}
+			set
+			{
+				if (!value)
 				{
-					return (IControl) children;
+					throw new NotImplementedException();
 				}
 			}
-
-			return null;
 		}
 
-		public void SetContent(int row, int column, IControl content)
+		double? IControl.Width
 		{
-			Grid.SetRow((Windows.UI.Xaml.FrameworkElement) content, row);
-			Grid.SetColumn((Windows.UI.Xaml.FrameworkElement) content, column);
-
-			base.Children.Add((Windows.UI.Xaml.FrameworkElement) content);
+			get
+			{
+				return base.Width;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Width = value.Value;
+				}
+			}
 		}
+
+		double? IControl.Height
+		{
+			get
+			{
+				return base.Height;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Height = value.Value;
+				}
+			}
+		}
+
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return App.Current.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = App.Current.Parse(value);
+			}
+		}
+
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Color IControl.BorderColor
+		{
+			get
+			{
+				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.BorderBrush).Color);
+			}
+			set
+			{
+				base.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+			}
+		}
+
+		Thickness IControl.BorderWidth
+		{
+			get
+			{
+				return App.Current.Parse(base.BorderThickness);
+			}
+			set
+			{
+				base.BorderThickness = App.Current.Parse(value);
+			}
+		}
+
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.HorizontalAlignment);
+			}
+			set
+			{
+				base.HorizontalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return App.Current.Parse(base.VerticalAlignment);
+			}
+			set
+			{
+				base.VerticalAlignment = App.Current.Parse(value);
+			}
+		}
+
+		#endregion
 	}
 }

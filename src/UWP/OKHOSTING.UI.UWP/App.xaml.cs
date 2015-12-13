@@ -56,7 +56,6 @@ namespace OKHOSTING.UI.UWP
 
 				// Place the frame in the current Window
 				Window.Current.Content = rootFrame;
-				Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().
             }
 
 			if (rootFrame.Content == null)
