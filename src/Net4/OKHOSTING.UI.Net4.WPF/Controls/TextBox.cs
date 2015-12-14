@@ -251,5 +251,91 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		#endregion
 
-	}
+		ITextBoxInputType ITextBox.InputType
+		{
+			get
+			{
+				if (base.InputScope == null || base.InputScope.Names.Count == 0)
+				{
+					return ITextBoxInputType.Text;
+				}
+
+				System.Windows.Input.InputScopeName scopeName = (System.Windows.Input.InputScopeName)base.InputScope.Names[0];
+
+				switch (scopeName.NameValue)
+				{
+					case System.Windows.Input.InputScopeNameValue.Date:
+						//return ITextBoxInputType.Date;
+						return ITextBoxInputType.DateTime;
+
+					case System.Windows.Input.InputScopeNameValue.EmailSmtpAddress:
+						return ITextBoxInputType.Email;
+
+					case System.Windows.Input.InputScopeNameValue.Number:
+						return ITextBoxInputType.Number;
+
+					case System.Windows.Input.InputScopeNameValue.TelephoneNumber:
+						return ITextBoxInputType.Telephone;
+
+					case System.Windows.Input.InputScopeNameValue.Default:
+						return ITextBoxInputType.Text;
+
+					case System.Windows.Input.InputScopeNameValue.Time:
+						return ITextBoxInputType.Time;
+
+					case System.Windows.Input.InputScopeNameValue.Url:
+						return ITextBoxInputType.Url;
+
+					default:
+						return ITextBoxInputType.Text;
+				}
+			}
+			set
+			{
+				System.Windows.Input.InputScopeName scopeName = new System.Windows.Input.InputScopeName();
+
+				switch (value)
+				{
+					case ITextBoxInputType.Date:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.Date;
+						break;
+
+					case ITextBoxInputType.DateTime:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.Date;
+						break;
+
+					case ITextBoxInputType.Email:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.EmailSmtpAddress;
+						break;
+
+					case ITextBoxInputType.Number:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.Number;
+						break;
+
+					case ITextBoxInputType.Telephone:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.TelephoneNumber;
+						break;
+
+					case ITextBoxInputType.Text:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.Default;
+						break;
+
+					case ITextBoxInputType.Time:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.Time;
+						break;
+
+					case ITextBoxInputType.Url:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.Url;
+						break;
+
+					default:
+						scopeName.NameValue = System.Windows.Input.InputScopeNameValue.Default;
+						break;
+				}
+
+				base.InputScope = new System.Windows.Input.InputScope();
+				base.InputScope.Names.Add(scopeName);
+			}
+		}
+    }
 }

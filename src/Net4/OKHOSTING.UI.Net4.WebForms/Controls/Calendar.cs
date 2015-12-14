@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class BooleanPicker : System.Web.UI.WebControls.CheckBox, IBooleanPicker
+	public class Calendar : System.Web.UI.WebControls.Calendar, ICalendar
 	{
 		#region IControl
 
@@ -396,17 +396,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		public bool SelectedValue
+		DateTime? ICalendar.SelectedDate
 		{
 			get
 			{
-				return base.Checked;
+				return base.SelectedDate;
 			}
 			set
 			{
-				base.Checked = value;
+				if (value.HasValue)
+				{
+					base.SelectedDate = value.Value;
+				}
 			}
 		}
-
 	}
 }

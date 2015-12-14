@@ -11,5 +11,10 @@ namespace OKHOSTING.UI.Controls
 		/// Gets or sets the text that is contained in the textbox
 		/// </summary>
 		string Text { get; set; }
+
+		/// <summary>
+		/// The type of input that will be allowed for this TextBox
+		/// </summary>
+		ITextBoxInputType InputType { get; set; }
 	}
 }

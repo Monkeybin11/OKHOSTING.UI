@@ -55,7 +55,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 				return new TextArea() as T;
 			}
 
-			if (typeof(T) == typeof(IBooleanPicker))
+			if (typeof(T) == typeof(ICheckBox))
 			{
 				return new BooleanPicker() as T;
 			}

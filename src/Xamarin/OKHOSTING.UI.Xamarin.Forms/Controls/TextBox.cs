@@ -5,7 +5,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class TextBox : global::Xamarin.Forms.Entry, ITextBox
 	{
-
 		void IDisposable.Dispose()
 		{
 		}
@@ -199,5 +198,57 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		#endregion
+
+		ITextBoxInputType ITextBox.InputType
+		{
+			get
+			{
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Email) return ITextBoxInputType.Email;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Numeric) return ITextBoxInputType.Number;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Telephone) return ITextBoxInputType.Telephone;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Text) return ITextBoxInputType.Text;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Url) return ITextBoxInputType.Url;
+
+				return ITextBoxInputType.Text;
+            }
+			set
+			{
+				switch (value)
+				{
+					case ITextBoxInputType.Date:
+					case ITextBoxInputType.DateTime:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						break;
+
+					case ITextBoxInputType.Email:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Email;
+						break;
+
+					case ITextBoxInputType.Number:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Numeric;
+						break;
+
+					case ITextBoxInputType.Telephone:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Telephone;
+						break;
+
+					case ITextBoxInputType.Text:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Text;
+						break;
+
+					case ITextBoxInputType.Time:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						break;
+
+					case ITextBoxInputType.Url:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Url;
+						break;
+
+					default:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						break;
+				}
+			}
+		}
 	}
 }

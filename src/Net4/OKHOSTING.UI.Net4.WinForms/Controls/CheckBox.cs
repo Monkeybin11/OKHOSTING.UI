@@ -3,8 +3,20 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class TextBox : System.Windows.Forms.TextBox, ITextBox
+	public class CheckBox : System.Windows.Forms.CheckBox, ICheckBox
 	{
+		public bool SelectedValue
+		{
+			get
+			{
+				return base.Checked;
+			}
+			set
+			{
+				base.Checked = true;
+			}
+		}
+
 		#region IControl
 
 		double? IControl.Width
@@ -170,11 +182,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.TextAlign);
+				return App.Current.Parse(base.TextAlign).Item1;
 			}
 			set
 			{
-				base.TextAlign = App.Current.Parse(value);
+				base.TextAlign = App.Current.ParseContentAlignment(value, ((ITextControl)this).VerticalAlignment);
 			}
 		}
 
@@ -182,11 +194,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return VerticalAlignment.Top;
+				return App.Current.Parse(base.TextAlign).Item2;
 			}
 			set
 			{
-				//not supported
+				base.TextAlign = App.Current.ParseContentAlignment(((ITextControl)this).HorizontalAlignment, value);
 			}
 		}
 
@@ -202,13 +214,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-
 		#endregion
-
-		ITextBoxInputType ITextBox.InputType
-		{
-			get; set;
-		}
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{

@@ -3,9 +3,9 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	public class DatePicker : global::Xamarin.Forms.DatePicker, IDatePicker
+	public class Calendar : global::Xamarin.Forms.DatePicker, ICalendar
 	{
-		DateTime IDatePicker.SelectedDate
+		DateTime? ICalendar.SelectedDate
 		{
 			get
 			{
@@ -13,7 +13,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 			set
 			{
-				base.Date = value;
+				if (value.HasValue)
+				{
+					base.Date = value.Value;
+				}
 			}
 		}
 

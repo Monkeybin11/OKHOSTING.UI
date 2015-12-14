@@ -86,7 +86,8 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
-    <Compile Include="Controls\BooleanPicker.cs" />
+    <Compile Include="Controls\Calendar.cs" />
+    <Compile Include="Controls\CheckBox.cs" />
     <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\LabelButton.cs" />

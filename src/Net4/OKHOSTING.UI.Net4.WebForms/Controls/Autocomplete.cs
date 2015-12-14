@@ -434,7 +434,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		string ITextBox.Text
+		string IAutocomplete.Text
 		{
 			get
 			{

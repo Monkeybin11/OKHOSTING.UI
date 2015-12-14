@@ -3,9 +3,9 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	public class BooleanPicker : global::Xamarin.Forms.Switch, IBooleanPicker
+	public class BooleanPicker : global::Xamarin.Forms.Switch, ICheckBox
 	{
-		bool IBooleanPicker.SelectedValue
+		bool ICheckBox.SelectedValue
 		{
 			get
 			{

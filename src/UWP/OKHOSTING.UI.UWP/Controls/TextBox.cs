@@ -5,7 +5,6 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class TextBox : Windows.UI.Xaml.Controls.TextBox, ITextBox
 	{
-
 		void IDisposable.Dispose()
 		{
 		}
@@ -260,5 +259,92 @@ namespace OKHOSTING.UI.UWP.Controls
 		}
 
 		#endregion
+
+		ITextBoxInputType ITextBox.InputType
+		{
+			get
+			{
+				if (base.InputScope == null || base.InputScope.Names.Count == 0)
+				{
+					return ITextBoxInputType.Text;
+				}
+
+				Windows.UI.Xaml.Input.InputScopeName scopeName = base.InputScope.Names[0];
+
+				switch (scopeName.NameValue)
+				{
+					case Windows.UI.Xaml.Input.InputScopeNameValue.DateYear:
+						//return ITextBoxInputType.Date;
+						return ITextBoxInputType.DateTime;
+
+					case Windows.UI.Xaml.Input.InputScopeNameValue.EmailSmtpAddress:
+						return ITextBoxInputType.Email;
+
+					case Windows.UI.Xaml.Input.InputScopeNameValue.Number:
+						return ITextBoxInputType.Number;
+
+					case Windows.UI.Xaml.Input.InputScopeNameValue.TelephoneNumber:
+						return ITextBoxInputType.Telephone;
+
+					case Windows.UI.Xaml.Input.InputScopeNameValue.Default:
+						return ITextBoxInputType.Text;
+
+					case Windows.UI.Xaml.Input.InputScopeNameValue.TimeHour:
+						return ITextBoxInputType.Time;
+
+					case Windows.UI.Xaml.Input.InputScopeNameValue.Url:
+						return ITextBoxInputType.Url;
+
+					default:
+						return ITextBoxInputType.Text;
+				}
+			}
+			set
+			{
+				Windows.UI.Xaml.Input.InputScopeName scopeName = new Windows.UI.Xaml.Input.InputScopeName();
+
+				switch (value)
+				{
+					case ITextBoxInputType.Date:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.DateYear;
+						break;
+
+					case ITextBoxInputType.DateTime:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.DateYear;
+						break;
+
+					case ITextBoxInputType.Email:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.EmailSmtpAddress;
+						break;
+
+					case ITextBoxInputType.Number:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.Number;
+						break;
+
+					case ITextBoxInputType.Telephone:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.TelephoneNumber;
+						break;
+
+					case ITextBoxInputType.Text:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.Default;
+						break;
+
+					case ITextBoxInputType.Time:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.TimeHour;
+						break;
+
+					case ITextBoxInputType.Url:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.Url;
+						break;
+
+					default:
+						scopeName.NameValue = Windows.UI.Xaml.Input.InputScopeNameValue.Default;
+						break;
+				}
+
+				base.InputScope = new Windows.UI.Xaml.Input.InputScope();
+				base.InputScope.Names.Add(scopeName);
+			}
+		}
 	}
-	}
+}

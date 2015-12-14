@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Controls\ITextBoxInputType.cs" />
     <Compile Include="Controls\ITextControl.cs" />
     <Compile Include="VerticalAlignment.cs" />
     <Compile Include="HorizontalAlignment.cs" />
@@ -53,8 +54,8 @@
     <Compile Include="Controller.cs" />
     <Compile Include="Controls\IHyperLink.cs" />
     <Compile Include="Controls\IAutocomplete.cs" />
-    <Compile Include="Controls\IBooleanPicker.cs" />
-    <Compile Include="Controls\IDatePicker.cs" />
+    <Compile Include="Controls\ICheckBox.cs" />
+    <Compile Include="Controls\ICalendar.cs" />
     <Compile Include="Controls\IButton.cs" />
     <Compile Include="Controls\IControl.cs" />
     <Compile Include="Controls\ILabel.cs" />

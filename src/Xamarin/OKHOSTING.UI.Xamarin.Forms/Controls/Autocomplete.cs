@@ -57,7 +57,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			OnSearching(SearchText.Text);
 		}
 
-		string ITextBox.Text
+		string IAutocomplete.Text
 		{
 			get
 			{

@@ -3,20 +3,8 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class BooleanPicker : System.Windows.Forms.CheckBox, IBooleanPicker
+	public class Calendar : System.Windows.Forms.DateTimePicker, ICalendar
 	{
-		public bool SelectedValue
-		{
-			get
-			{
-				return base.Checked;
-			}
-			set
-			{
-				base.Checked = true;
-			}
-		}
-
 		#region IControl
 
 		double? IControl.Width
@@ -180,26 +168,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get
-			{
-				return App.Current.Parse(base.TextAlign).Item1;
-			}
-			set
-			{
-				base.TextAlign = App.Current.ParseContentAlignment(value, ((ITextControl)this).VerticalAlignment);
-			}
+			get; set;
 		}
 
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get
-			{
-				return App.Current.Parse(base.TextAlign).Item2;
-			}
-			set
-			{
-				base.TextAlign = App.Current.ParseContentAlignment(((ITextControl)this).HorizontalAlignment, value);
-			}
+			get; set;
 		}
 
 		Thickness ITextControl.TextPadding
@@ -215,6 +189,21 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		}
 
 		#endregion
+
+		DateTime? ICalendar.SelectedDate
+		{
+			get
+			{
+				return base.Value;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Value = value.Value;
+				}
+			}
+		}
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{

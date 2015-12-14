@@ -1,23 +1,10 @@
 ﻿using System;
 using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.UWP.Controls
+namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class DatePicker : Windows.UI.Xaml.Controls.DatePicker, IDatePicker
+	public class Calendar : System.Windows.Controls.Calendar, ICalendar
 	{
-		public DateTime SelectedDate
-		{
-			get
-			{
-				return base.Date.DateTime;
-			}
-			set
-			{
-				base.Date = value;
-			}
-		}
-
-
 		void IDisposable.Dispose()
 		{
 		}
@@ -28,17 +15,17 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return base.Visibility == Windows.UI.Xaml.Visibility.Visible;
+				return base.Visibility == System.Windows.Visibility.Visible;
 			}
 			set
 			{
 				if (value)
 				{
-					base.Visibility = Windows.UI.Xaml.Visibility.Visible;
+					base.Visibility = System.Windows.Visibility.Visible;
 				}
 				else
 				{
-					base.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+					base.Visibility = System.Windows.Visibility.Hidden;
 				}
 			}
 		}
@@ -101,11 +88,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Background).Color);
+				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+				base.Background = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
 			}
 		}
 
@@ -113,11 +100,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.BorderBrush).Color);
+				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
 			}
 			set
 			{
-				base.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+				base.BorderBrush = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
 			}
 		}
 
@@ -169,7 +156,7 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 			set
 			{
-				base.FontFamily = new Windows.UI.Xaml.Media.FontFamily(value);
+				base.FontFamily = new System.Windows.Media.FontFamily(value);
 			}
 		}
 
@@ -177,11 +164,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Foreground).Color);
+				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Foreground).Color);
 			}
 			set
 			{
-				base.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+				base.Foreground = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
 			}
 		}
 
@@ -189,18 +176,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return base.FontWeight.Weight == Windows.UI.Text.FontWeights.Bold.Weight;
+				return base.FontWeight == System.Windows.FontWeights.Bold;
 			}
 			set
 			{
-				if (value)
-				{
-					base.FontWeight = Windows.UI.Text.FontWeights.Bold;
-				}
-				else
-				{
-					base.FontWeight = Windows.UI.Text.FontWeights.Normal;
-				}
+				base.FontWeight = System.Windows.FontWeights.Bold;
 			}
 		}
 
@@ -208,18 +188,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return base.FontStyle == Windows.UI.Text.FontStyle.Italic;
+				return base.FontStyle == System.Windows.FontStyles.Italic;
 			}
 			set
 			{
-				if (value)
-				{
-					base.FontStyle = Windows.UI.Text.FontStyle.Italic;
-				}
-				else
-				{
-					base.FontStyle = Windows.UI.Text.FontStyle.Normal;
-				}
+				base.FontStyle = System.Windows.FontStyles.Italic;
 			}
 		}
 
@@ -231,7 +204,7 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 			set
 			{
-				//do nothing
+				throw new NotImplementedException();
 			}
 		}
 

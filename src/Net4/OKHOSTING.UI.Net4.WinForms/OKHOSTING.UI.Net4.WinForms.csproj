@@ -47,7 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Controls\BooleanPicker.cs">
+    <Compile Include="Controls\Calendar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ControlList.cs" />

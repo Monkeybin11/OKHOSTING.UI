@@ -45,9 +45,9 @@ namespace OKHOSTING.UI.Net4.WinForms
 				return new TextArea() as T;
 			}
 
-			if (typeof(T) == typeof(IBooleanPicker))
+			if (typeof(T) == typeof(ICheckBox))
 			{
-				return new BooleanPicker() as T;
+				return new CheckBox() as T;
 			}
 
 			if (typeof(T) == typeof(IImage))

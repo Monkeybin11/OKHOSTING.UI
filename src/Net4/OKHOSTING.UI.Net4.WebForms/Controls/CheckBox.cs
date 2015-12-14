@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class TextBox : System.Web.UI.WebControls.TextBox, ITextBox
+	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox
 	{
 		#region IControl
 
@@ -394,88 +394,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		ITextBoxInputType ITextBox.InputType
+		#endregion
+
+		public bool SelectedValue
 		{
 			get
 			{
-				if (base.Attributes["type"] == null)
-				{
-					return ITextBoxInputType.Text;
-				}
-
-				switch (base.Attributes["type"])
-				{
-					case "date":
-						return ITextBoxInputType.Date;
-
-					case "datetime":
-						return ITextBoxInputType.DateTime;
-
-					case "email":
-						return ITextBoxInputType.Email;
-
-					case "number":
-						return ITextBoxInputType.Number;
-
-					case "tel":
-						return ITextBoxInputType.Telephone;
-
-					case "text":
-						return ITextBoxInputType.Text;
-
-					case "time":
-						return ITextBoxInputType.Time;
-
-					case "url":
-						return ITextBoxInputType.Url;
-
-					default:
-						return ITextBoxInputType.Text;
-				}
+				return base.Checked;
 			}
 			set
 			{
-				switch (value)
-				{
-					case ITextBoxInputType.Date:
-						base.Attributes["type"] = "date";
-						break;
-
-					case ITextBoxInputType.DateTime:
-						base.Attributes["type"] = "datetime";
-						break;
-
-					case ITextBoxInputType.Email:
-						base.Attributes["type"] = "email";
-						break;
-
-					case ITextBoxInputType.Number:
-						base.Attributes["type"] = "number";
-						break;
-
-					case ITextBoxInputType.Telephone:
-						base.Attributes["type"] = "tel";
-						break;
-
-					case ITextBoxInputType.Text:
-						base.Attributes["type"] = "text";
-						break;
-
-					case ITextBoxInputType.Time:
-						base.Attributes["type"] = "time";
-						break;
-
-					case ITextBoxInputType.Url:
-						base.Attributes["type"] = "url";
-						break;
-
-					default:
-						base.Attributes["type"] = "text";
-						break;
-				}
+				base.Checked = value;
 			}
 		}
 
-		#endregion
 	}
 }
