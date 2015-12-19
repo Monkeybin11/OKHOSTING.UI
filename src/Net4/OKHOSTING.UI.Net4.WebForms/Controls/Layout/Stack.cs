@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls.Layouts
+namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 {
 	public class Stack : System.Web.UI.WebControls.Panel, IStack
 	{

@@ -3,7 +3,7 @@ using System.Linq;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 using OKHOSTING.UI.Net4.WebForms.Controls;
-using OKHOSTING.UI.Net4.WebForms.Controls.Layouts;
+using OKHOSTING.UI.Net4.WebForms.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {

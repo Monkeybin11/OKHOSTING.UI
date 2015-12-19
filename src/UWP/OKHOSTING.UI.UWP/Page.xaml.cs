@@ -2,7 +2,7 @@
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 using OKHOSTING.UI.UWP.Controls;
-using OKHOSTING.UI.UWP.Controls.Layouts;
+using OKHOSTING.UI.UWP.Controls.Layout;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 

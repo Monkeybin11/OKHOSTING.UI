@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
-namespace OKHOSTING.UI.Net4.WinForms.Controls.Layouts
+namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Grid : System.Windows.Forms.TableLayoutPanel, OKHOSTING.UI.Controls.Layouts.IGrid
 	{

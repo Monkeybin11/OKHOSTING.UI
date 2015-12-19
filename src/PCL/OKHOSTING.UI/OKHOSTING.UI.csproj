@@ -46,10 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Controls\Styles\TextControlStyle.cs" />
     <Compile Include="Controls\ITextBoxInputType.cs" />
     <Compile Include="Controls\ITextControl.cs" />
-    <Compile Include="Controls\Styles\ControlStyle.cs" />
     <Compile Include="VerticalAlignment.cs" />
     <Compile Include="HorizontalAlignment.cs" />
     <Compile Include="Color.cs" />
@@ -66,14 +64,12 @@
     <Compile Include="Controls\ITextBox.cs" />
     <Compile Include="Controls\IPasswordTextBox.cs" />
     <Compile Include="Controls\ILabelButton.cs" />
-    <Compile Include="Controls\Layouts\IGrid.cs" />
+    <Compile Include="Controls\Layout\IGrid.cs" />
     <Compile Include="Controls\IListPicker.cs" />
-    <Compile Include="Controls\Layouts\IStack.cs" />
+    <Compile Include="Controls\Layout\IStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="IPage.cs" />
-    <Compile Include="Test\DashboardController.cs" />
-    <Compile Include="Test\LoginController.cs" />
     <Compile Include="Thickness.cs" />
   </ItemGroup>
   <ItemGroup>

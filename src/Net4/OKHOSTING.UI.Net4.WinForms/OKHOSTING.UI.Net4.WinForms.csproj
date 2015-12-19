@@ -63,10 +63,10 @@
     <Compile Include="Controls\LabelButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Layouts\Grid.cs">
+    <Compile Include="Controls\Layout\Grid.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Layouts\Stack.cs">
+    <Compile Include="Controls\Layout\Stack.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ListPicker.cs">

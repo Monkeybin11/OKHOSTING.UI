@@ -2,7 +2,7 @@
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 using OKHOSTING.UI.Net4.WPF.Controls;
-using OKHOSTING.UI.Net4.WPF.Controls.Layouts;
+using OKHOSTING.UI.Net4.WPF.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WPF
 {

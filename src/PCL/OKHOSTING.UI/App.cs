@@ -30,16 +30,14 @@ namespace OKHOSTING.UI
 		/// <returns>
 		/// An instance of control T
 		/// </returns>
-		public abstract T CreateControl<T>() where T : class, Controls.IControl;
+		public abstract T Create<T>() where T : class, Controls.IControl;
 
-		public event System.EventHandler<Controls.IControl> ControlCreated;
-
-		protected virtual void OnControlCreated(Controls.IControl created)
+		/// <summary>
+		/// Initializes a control after it was created. Usefull to apply styles 
+		/// </summary>
+		public virtual void Init<T>(T control) where T : class, Controls.IControl
 		{
-			if (ControlCreated != null)
-			{
-				ControlCreated(this, created);
-			}
+			//apply style (or any other initialization) here
 		}
 
 		/// <summary>
@@ -74,6 +72,8 @@ namespace OKHOSTING.UI
 		public virtual void Start()
 		{
 			//set the first current controller and start it here
+			//Controller = TODO: Put something here!!
+			Controller.Start();
 		}
 
 		/// <summary>
@@ -84,6 +84,7 @@ namespace OKHOSTING.UI
 			Controller.Finish();
 		}
 
+		//static
 
 		/// <summary>
 		/// Gets the currently executing App. In a web environment, an App instance is created for each user

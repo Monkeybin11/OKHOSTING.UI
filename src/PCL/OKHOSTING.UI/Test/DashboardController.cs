@@ -14,13 +14,13 @@ namespace OKHOSTING.UI.Test
 
 			App.Current.Page.Title = "Escritorio";
 
-			IAutocomplete automcomplete = App.Current.CreateControl<IAutocomplete>();
+			IAutocomplete automcomplete = App.Current.Create<IAutocomplete>();
 			automcomplete.Searching += Automcomplete_Searching;
 
-			ILabel label = App.Current.CreateControl<ILabel>();
+			ILabel label = App.Current.Create<ILabel>();
 			label.Text = "hola amigo!";
 
-			IStack stack = App.Current.CreateControl<IStack>();
+			IStack stack = App.Current.Create<IStack>();
 			stack.Children.Add(label);
 			stack.Children.Add(automcomplete);
 

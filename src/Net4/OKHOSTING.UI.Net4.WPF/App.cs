@@ -1,7 +1,7 @@
 ﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 using OKHOSTING.UI.Net4.WPF.Controls;
-using OKHOSTING.UI.Net4.WPF.Controls.Layouts;
+using OKHOSTING.UI.Net4.WPF.Controls.Layout;
 using System;
 using System.Windows;
 
@@ -9,9 +9,9 @@ namespace OKHOSTING.UI.Net4.WPF
 {
 	public class App : UI.App
 	{
-		public override T CreateControl<T>()
+		public override T Create<T>()
 		{
-			T result = null;
+			T control = null;
 
 			if (typeof(T) == typeof(IAutocomplete))
 			{
@@ -19,60 +19,60 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 			else if (typeof(T) == typeof(IButton))
 			{
-				result = new Button() as T;
+				control = new Button() as T;
 			}
 			else if (typeof(T) == typeof(ICalendar))
 			{
-				result = new Calendar() as T;
+				control = new Calendar() as T;
 			}
 			else if (typeof(T) == typeof(ICheckBox))
 			{
-				result = new CheckBox() as T;
+				control = new CheckBox() as T;
 			}
 			else if (typeof(T) == typeof(IHyperLink))
 			{
-				result = new HyperLink() as T;
+				control = new HyperLink() as T;
 			}
 			else if (typeof(T) == typeof(IImage))
 			{
-				result = new Image() as T;
+				control = new Image() as T;
 			}
 			else if (typeof(T) == typeof(ILabel))
 			{
-				result = new Label() as T;
+				control = new Label() as T;
 			}
 			else if (typeof(T) == typeof(ILabelButton))
 			{
-				result = new LabelButton() as T;
+				control = new LabelButton() as T;
 			}
 			else if (typeof(T) == typeof(IListPicker))
 			{
-				result = new ListPicker() as T;
+				control = new ListPicker() as T;
 			}
 			else if (typeof(T) == typeof(IPasswordTextBox))
 			{
-				result = new PasswordTextBox() as T;
+				control = new PasswordTextBox() as T;
 			}
 			else if (typeof(T) == typeof(ITextArea))
 			{
-				result = new TextArea() as T;
+				control = new TextArea() as T;
 			}
 			else if (typeof(T) == typeof(ITextBox))
 			{
-				result = new TextBox() as T;
+				control = new TextBox() as T;
 			}
 			else if (typeof(T) == typeof(IGrid))
 			{
-				result = new Grid() as T;
+				control = new Grid() as T;
 			}
 			else if (typeof(T) == typeof(IStack))
 			{
-				result = new Stack() as T;
+				control = new Stack() as T;
 			}
 
-			OnControlCreated(result);
+			Init(control);
 
-			return result;
+			return control;
 		}
 
 		public override void Finish()

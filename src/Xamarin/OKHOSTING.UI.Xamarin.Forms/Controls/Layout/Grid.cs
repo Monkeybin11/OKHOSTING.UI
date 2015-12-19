@@ -1,27 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
+namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
-	public class Stack : global::Xamarin.Forms.StackLayout, IStack
+	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
-		public Stack()
-		{
-			_Children = new ControlList(base.Children);
-		}
-
-		protected readonly ControlList _Children;
-
-		IList<IControl> IStack.Children
+		int IGrid.ColumnCount
 		{
 			get
 			{
-				return _Children;
+				return base.ColumnDefinitions.Count;
+			}
+			set
+			{
+				while (base.ColumnDefinitions.Count < value)
+				{
+					base.ColumnDefinitions.Add(new global::Xamarin.Forms.ColumnDefinition());
+				}
+
+				while (base.ColumnDefinitions.Count > value)
+				{
+					base.ColumnDefinitions.RemoveAt(base.ColumnDefinitions.Count - 1);
+				}
 			}
 		}
-		
+
+		int IGrid.RowCount
+		{
+			get
+			{
+				return base.RowDefinitions.Count;
+			}
+			set
+			{
+				while (base.RowDefinitions.Count < value)
+				{
+					base.RowDefinitions.Add(new global::Xamarin.Forms.RowDefinition());
+				}
+
+				while (base.RowDefinitions.Count > value)
+				{
+					base.RowDefinitions.RemoveAt(base.RowDefinitions.Count - 1);
+				}
+			}
+		}
+
+		IControl IGrid.GetContent(int row, int column)
+		{
+			foreach (global::Xamarin.Forms.View children in base.Children)
+			{
+				if (global::Xamarin.Forms.Grid.GetRow(children) == row && global::Xamarin.Forms.Grid.GetColumn(children) == column)
+				{
+					return (IControl) children;
+				}
+			}
+
+			return null;
+		}
+
+		void IGrid.SetContent(int row, int column, IControl content)
+		{
+			global::Xamarin.Forms.Grid.SetRow((global::Xamarin.Forms.View) content, row);
+			global::Xamarin.Forms.Grid.SetColumn((global::Xamarin.Forms.View) content, column);
+
+			base.Children.Add((global::Xamarin.Forms.View) content);
+		}
+
+
+		Thickness IGrid.CellMargin
+		{
+			get; set;
+		}
+
+		Thickness IGrid.CellPadding
+		{
+			get; set;
+		}
+
 		void IDisposable.Dispose()
 		{
 		}
@@ -106,14 +162,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layouts
 
 		Color IControl.BorderColor
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		Thickness IControl.BorderWidth
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		HorizontalAlignment IControl.HorizontalAlignment

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
-namespace OKHOSTING.UI.UWP.Controls.Layouts
+namespace OKHOSTING.UI.UWP.Controls.Layout
 {
 	public class Stack : Windows.UI.Xaml.Controls.StackPanel, IStack
 	{

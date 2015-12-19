@@ -43,8 +43,8 @@
     <Compile Include="Controls\Calendar.cs" />
     <Compile Include="Controls\LabelButton.cs" />
     <Compile Include="Controls\Label.cs" />
-    <Compile Include="Controls\Layouts\Stack.cs" />
-    <Compile Include="Controls\Layouts\Grid.cs" />
+    <Compile Include="Controls\Layout\Stack.cs" />
+    <Compile Include="Controls\Layout\Grid.cs" />
     <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\ListPicker.cs" />

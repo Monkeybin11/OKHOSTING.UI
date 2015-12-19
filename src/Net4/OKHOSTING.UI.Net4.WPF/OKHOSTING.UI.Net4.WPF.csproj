@@ -60,8 +60,8 @@
     <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\Image.cs" />
     <Compile Include="Controls\LabelButton.cs" />
-    <Compile Include="Controls\Layouts\Grid.cs" />
-    <Compile Include="Controls\Layouts\Stack.cs" />
+    <Compile Include="Controls\Layout\Grid.cs" />
+    <Compile Include="Controls\Layout\Stack.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	{
 		public Autocomplete()
 		{
-			GoSearchButton = App.Current.CreateControl<IButton>();
+			GoSearchButton = App.Current.Create<IButton>();
 			GoSearchButton.Click += GoSearchButton_Click;
 		}
 
@@ -38,11 +38,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		private void GoSearchButton_Click(object sender, EventArgs e)
 		{
-			SearchText = App.Current.CreateControl<ITextBox>();
-			SearchButton = App.Current.CreateControl<IButton>();
+			SearchText = App.Current.Create<ITextBox>();
+			SearchButton = App.Current.Create<IButton>();
 			SearchButton.Text = "Search";
 			SearchButton.Click += SearchButton_Click;
-			SearchStack = App.Current.CreateControl<IStack>();
+			SearchStack = App.Current.Create<IStack>();
 			SearchStack.Children.Add(SearchText);
 			SearchStack.Children.Add(SearchButton);
 

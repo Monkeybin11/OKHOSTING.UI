@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using OKHOSTING.UI.Controls;
+﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
+using System;
 
-namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
+namespace OKHOSTING.UI.UWP.Controls.Layout
 {
-	public class Grid : System.Windows.Controls.Grid, IGrid
+	public class Grid : Windows.UI.Xaml.Controls.Grid, IGrid
 	{
 		public Grid()
 		{
@@ -23,7 +20,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			{
 				while (base.ColumnDefinitions.Count < value)
 				{
-					base.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition());
+					base.ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition());
 				}
 
 				while (base.ColumnDefinitions.Count > value)
@@ -43,7 +40,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			{
 				while (base.RowDefinitions.Count < value)
 				{
-					base.RowDefinitions.Add(new System.Windows.Controls.RowDefinition());
+					base.RowDefinitions.Add(new Windows.UI.Xaml.Controls.RowDefinition());
 				}
 
 				while (base.RowDefinitions.Count > value)
@@ -55,9 +52,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 
 		IControl IGrid.GetContent(int row, int column)
 		{
-			foreach(System.Windows.UIElement children in base.Children)
+			foreach (Windows.UI.Xaml.FrameworkElement children in base.Children)
 			{
-				if (Grid.GetRow(children) == row && Grid.GetColumn(children) == column)
+				if (Windows.UI.Xaml.Controls.Grid.GetRow(children) == row && Windows.UI.Xaml.Controls.Grid.GetColumn(children) == column)
 				{
 					return (IControl) children;
 				}
@@ -68,16 +65,35 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
-			Grid.SetRow((System.Windows.UIElement) content, row);
-			Grid.SetColumn((System.Windows.UIElement) content, column);
+			Grid.SetRow((Windows.UI.Xaml.FrameworkElement) content, row);
+			Grid.SetColumn((Windows.UI.Xaml.FrameworkElement) content, column);
 
-			base.Children.Add((System.Windows.UIElement) content);
+			base.Children.Add((Windows.UI.Xaml.FrameworkElement) content);
 		}
 
-		protected override Size ArrangeOverride(Size arrangeSize)
+
+		Thickness IGrid.CellMargin
 		{
-			//apply paddings here? http://stackoverflow.com/questions/1319974/wpf-grid-with-column-row-margin-padding
-			return base.ArrangeOverride(arrangeSize);
+			get
+			{
+				return new Thickness(0);
+			}
+			set
+			{
+				//do nothing
+			}
+		}
+
+		Thickness IGrid.CellPadding
+		{
+			get
+			{
+				return App.Current.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = App.Current.Parse(value);
+			}
 		}
 
 		void IDisposable.Dispose()
@@ -90,17 +106,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 		{
 			get
 			{
-				return base.Visibility == System.Windows.Visibility.Visible;
+				return base.Visibility == Windows.UI.Xaml.Visibility.Visible;
 			}
 			set
 			{
 				if (value)
 				{
-					base.Visibility = System.Windows.Visibility.Visible;
+					base.Visibility = Windows.UI.Xaml.Visibility.Visible;
 				}
 				else
 				{
-					base.Visibility = System.Windows.Visibility.Hidden;
+					base.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
 				}
 			}
 		}
@@ -109,11 +125,14 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 		{
 			get
 			{
-				return base.IsEnabled;
+				return true;
 			}
 			set
 			{
-				base.IsEnabled = value;
+				if (!value)
+				{
+					throw new NotImplementedException();
+				}
 			}
 		}
 
@@ -163,22 +182,36 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 		{
 			get
 			{
-				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+				base.Background = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
 			}
 		}
 
 		Color IControl.BorderColor
 		{
-			get; set;
+			get
+			{
+				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.BorderBrush).Color);
+			}
+			set
+			{
+				base.BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+			}
 		}
 
 		Thickness IControl.BorderWidth
 		{
-			get; set;
+			get
+			{
+				return App.Current.Parse(base.BorderThickness);
+			}
+			set
+			{
+				base.BorderThickness = App.Current.Parse(value);
+			}
 		}
 
 		HorizontalAlignment IControl.HorizontalAlignment
@@ -203,16 +236,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layouts
 			{
 				base.VerticalAlignment = App.Current.Parse(value);
 			}
-		}
-
-		Thickness IGrid.CellMargin
-		{
-			get; set;
-		}
-
-		Thickness IGrid.CellPadding
-		{
-			get; set;
 		}
 
 		#endregion
