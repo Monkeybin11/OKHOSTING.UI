@@ -3,7 +3,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	public class BooleanPicker : global::Xamarin.Forms.Switch, ICheckBox
+	public class CheckBox : global::Xamarin.Forms.Switch, ICheckBox
 	{
 		bool ICheckBox.SelectedValue
 		{

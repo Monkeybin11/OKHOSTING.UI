@@ -37,7 +37,7 @@
   <ItemGroup>
     <Compile Include="NativeApp.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="Controls\BooleanPicker.cs" />
+    <Compile Include="Controls\CheckBox.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\ControlList.cs" />
     <Compile Include="Controls\Calendar.cs" />

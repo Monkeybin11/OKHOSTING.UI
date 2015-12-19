@@ -11,67 +11,68 @@ namespace OKHOSTING.UI.Net4.WPF
 	{
 		public override T CreateControl<T>()
 		{
-			if (typeof(T) == typeof(IButton))
-			{
-				return new Button() as T;
-			}
-
-			if (typeof(T) == typeof(ILabel))
-			{
-				return new Label() as T;
-			}
-
-			if (typeof(T) == typeof(ITextBox))
-			{
-				return new TextBox() as T;
-			}
+			T result = null;
 
 			if (typeof(T) == typeof(IAutocomplete))
 			{
-				//return new Autocomplete() as T;
+				//result = new Autocomplete() as T;
 			}
-
-			if (typeof(T) == typeof(IListPicker))
+			else if (typeof(T) == typeof(IButton))
 			{
-				return new ListPicker() as T;
+				result = new Button() as T;
 			}
-
-			if (typeof(T) == typeof(IHyperLink))
+			else if (typeof(T) == typeof(ICalendar))
 			{
-				return new HyperLink() as T;
+				result = new Calendar() as T;
 			}
-
-			if (typeof(T) == typeof(ITextArea))
+			else if (typeof(T) == typeof(ICheckBox))
 			{
-				return new TextArea() as T;
+				result = new CheckBox() as T;
 			}
-
-			if (typeof(T) == typeof(ICheckBox))
+			else if (typeof(T) == typeof(IHyperLink))
 			{
-				return new CheckBox() as T;
+				result = new HyperLink() as T;
 			}
-
-			if (typeof(T) == typeof(IImage))
+			else if (typeof(T) == typeof(IImage))
 			{
-				return new Image() as T;
+				result = new Image() as T;
 			}
-
-			if (typeof(T) == typeof(IPasswordTextBox))
+			else if (typeof(T) == typeof(ILabel))
 			{
-				return new PasswordTextBox() as T;
+				result = new Label() as T;
 			}
-
-			if (typeof(T) == typeof(IStack))
+			else if (typeof(T) == typeof(ILabelButton))
 			{
-				return new Stack() as T;
+				result = new LabelButton() as T;
 			}
-
-			if (typeof(T) == typeof(IGrid))
+			else if (typeof(T) == typeof(IListPicker))
 			{
-				return new Grid() as T;
+				result = new ListPicker() as T;
+			}
+			else if (typeof(T) == typeof(IPasswordTextBox))
+			{
+				result = new PasswordTextBox() as T;
+			}
+			else if (typeof(T) == typeof(ITextArea))
+			{
+				result = new TextArea() as T;
+			}
+			else if (typeof(T) == typeof(ITextBox))
+			{
+				result = new TextBox() as T;
+			}
+			else if (typeof(T) == typeof(IGrid))
+			{
+				result = new Grid() as T;
+			}
+			else if (typeof(T) == typeof(IStack))
+			{
+				result = new Stack() as T;
 			}
 
-			throw new NotSupportedException();
+			OnControlCreated(result);
+
+			return result;
 		}
 
 		public override void Finish()

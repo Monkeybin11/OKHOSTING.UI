@@ -3,7 +3,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.UWP.Controls
 {
-	public class BooleanPicker : Windows.UI.Xaml.Controls.CheckBox, ICheckBox
+	public class CheckBox : Windows.UI.Xaml.Controls.CheckBox, ICheckBox
 	{
 		public bool SelectedValue
 		{
