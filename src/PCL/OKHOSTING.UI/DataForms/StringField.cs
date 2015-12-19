@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OKHOSTING.UI.Controls
+namespace OKHOSTING.UI.DataForms
 {
-	class Calendar
+	public class StringField : DataField<string>
 	{
+		public string RegexValidation { get; set; }
 	}
 }

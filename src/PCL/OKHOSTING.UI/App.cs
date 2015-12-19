@@ -81,7 +81,14 @@ namespace OKHOSTING.UI
 		{
 			get
 			{
-				return (App) Session.Current[typeof(App).FullName];
+				if (Session.Current.ContainsKey(typeof(App).FullName))
+				{
+					return (App) Session.Current[typeof(App).FullName];
+				}
+				else
+				{
+					return null;
+				}
 			}
 			protected set
 			{

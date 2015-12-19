@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F9D654B5-6B7A-4573-B8C8-FD09B96C021B}</ProjectGuid>
+    <ProjectGuid>{001C0060-E4A6-47C2-BBDF-D20F06CC8613}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OKHOSTING.UI</RootNamespace>
-    <AssemblyName>OKHOSTING.UI</AssemblyName>
+    <RootNamespace>OKHOSTING.UI.CSS</RootNamespace>
+    <AssemblyName>OKHOSTING.UI.CSS</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,59 +36,26 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{3F4502FA-51EA-4CB9-8E50-46F828D240A1}</Project>
+      <Project>{3f4502fa-51ea-4cb9-8e50-46f828d240a1}</Project>
       <Name>OKHOSTING.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{5BA0CBAC-63E5-4E01-AECA-67AE3B63503B}</Project>
+      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
       <Name>OKHOSTING.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OKHOSTING.UI\OKHOSTING.UI.csproj">
+      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+      <Name>OKHOSTING.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.cs" />
-    <Compile Include="Controls\Styles\TextControlStyle.cs" />
-    <Compile Include="Controls\ITextBoxInputType.cs" />
-    <Compile Include="Controls\ITextControl.cs" />
-    <Compile Include="DataForms\DataField.cs" />
-    <Compile Include="DataForms\DataForm.cs" />
-    <Compile Include="DataForms\DateTimeField.cs" />
-    <Compile Include="DataForms\DecimalField.cs" />
-    <Compile Include="DataForms\IntegerField.cs" />
-    <Compile Include="DataForms\StringField.cs" />
-    <Compile Include="Controls\Styles\ControlStyle.cs" />
-    <Compile Include="VerticalAlignment.cs" />
-    <Compile Include="HorizontalAlignment.cs" />
-    <Compile Include="Color.cs" />
-    <Compile Include="Controller.cs" />
-    <Compile Include="Controls\IHyperLink.cs" />
-    <Compile Include="Controls\IAutocomplete.cs" />
-    <Compile Include="Controls\ICheckBox.cs" />
-    <Compile Include="Controls\ICalendar.cs" />
-    <Compile Include="Controls\IButton.cs" />
-    <Compile Include="Controls\IControl.cs" />
-    <Compile Include="Controls\ILabel.cs" />
-    <Compile Include="Controls\IImage.cs" />
-    <Compile Include="Controls\ITextArea.cs" />
-    <Compile Include="Controls\ITextBox.cs" />
-    <Compile Include="Controls\IPasswordTextBox.cs" />
-    <Compile Include="Controls\ILabelButton.cs" />
-    <Compile Include="Controls\Layouts\IGrid.cs" />
-    <Compile Include="Controls\IListPicker.cs" />
-    <Compile Include="Controls\Layouts\IStack.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs" />
-    <Compile Include="IPage.cs" />
-    <Compile Include="Test\DashboardController.cs" />
-    <Compile Include="Test\LoginController.cs" />
-    <Compile Include="Thickness.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.3.41352, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AngleSharp.0.9.3\lib\portable-windows8+net45+windowsphone8+wpa\AngleSharp.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7">
-      <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\portable-net4+sl5+wp8+win8+wpa81+monotouch+monoandroid+Xamarin.iOS\Ninject.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
