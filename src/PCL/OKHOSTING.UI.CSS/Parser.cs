@@ -36,8 +36,8 @@ namespace OKHOSTING.UI.CSS
 				//analize rule by rule
 				foreach (ICssStyleRule r in rules)
 				{
-					var style = Parser.ParseTextControl(r.Style);
 					Type controlType = null;
+					Controls.Styles.TextControlStyle style = Parser.ParseTextControl(r.Style);
 
 					switch (r.SelectorText)
 					{
@@ -81,12 +81,12 @@ namespace OKHOSTING.UI.CSS
 							continue;
 
 					}
-				}
 
-				//we will apply this style to the controls that are of this type
-				foreach (IControl control in toControls.Where(c => c.GetType().GetTypeInfo().ImplementedInterfaces.Contains(controlType)))
-				{
-					style.ApplyTo(control);
+					//we will apply this style to the controls that are of this type
+					foreach (IControl control in toControls.Where(c => c.GetType().GetTypeInfo().ImplementedInterfaces.Contains(controlType)))
+					{
+						style.ApplyTo(control);
+					}
 				}
 			}
 
