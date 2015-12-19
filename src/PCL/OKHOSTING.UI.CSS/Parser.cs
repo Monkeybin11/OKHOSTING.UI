@@ -15,69 +15,76 @@ namespace OKHOSTING.UI.CSS
 	/// </summary>
 	public class Parser
 	{
+		protected static readonly Dictionary<string, ICssStyleSheet> ParsedStyles = new Dictionary<string, ICssStyleSheet>();
+
 		/// <summary>
 		/// Applies a CSS stylesheet to a list of controls
 		/// </summary>
 		/// <param name="styleSheet">A list of css rules</param>
-		/// <param name="controls">List of controls to wich the corresponding rules will be applied</param>
-		public static void Apply(string styleSheet, IEnumerable<IControl> controls)
+		/// <param name="toControls">List of controls to wich the corresponding rules will be applied</param>
+		public static void Apply(string styleSheet, IEnumerable<IControl> toControls)
 		{
-			CssParser parser = new CssParser();
-			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
+			ICssStyleSheet cssStylesSheet = null;
 
-			var rules = cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style);
-
-			//analize rule by rule
-			foreach (ICssStyleRule r in rules)
+			if (!ParsedStyles.ContainsKey(styleSheet))
 			{
-				var style = Parser.ParseTextControl(r.Style);
-				Type controlType = null;
+				CssParser parser = new CssParser();
+				cssStylesSheet = parser.ParseStylesheet(styleSheet);
 
-				switch (r.SelectorText)
+				var rules = cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style);
+
+				//analize rule by rule
+				foreach (ICssStyleRule r in rules)
 				{
-					case "input[type=text]":
-						controlType = typeof(ITextBox);
-						break;
+					var style = Parser.ParseTextControl(r.Style);
+					Type controlType = null;
 
-					case "input[type=checkbox]":
-						controlType = typeof(ICheckBox);
-						break;
+					switch (r.SelectorText)
+					{
+						case "input[type=text]":
+							controlType = typeof(ITextBox);
+							break;
 
-					case "input[type=password]":
-						controlType = typeof(IPasswordTextBox);
-						break;
+						case "input[type=checkbox]":
+							controlType = typeof(ICheckBox);
+							break;
 
-					case "textarea":
-						controlType = typeof(ITextArea);
-						break;
+						case "input[type=password]":
+							controlType = typeof(IPasswordTextBox);
+							break;
 
-					case "select":
-						controlType = typeof(IListPicker);
-						break;
+						case "textarea":
+							controlType = typeof(ITextArea);
+							break;
 
-					case "table":
-						controlType = typeof(IGrid);
-						break;
+						case "select":
+							controlType = typeof(IListPicker);
+							break;
 
-					case "span":
-						controlType = typeof(ILabel);
-						break;
+						case "table":
+							controlType = typeof(IGrid);
+							break;
 
-					case "a":
-						controlType = typeof(IHyperLink);
-						break;
+						case "span":
+							controlType = typeof(ILabel);
+							break;
 
-					case "img":
-						controlType = typeof(IImage);
-						break;
+						case "a":
+							controlType = typeof(IHyperLink);
+							break;
 
-					default:
-						continue;
+						case "img":
+							controlType = typeof(IImage);
+							break;
 
+						default:
+							continue;
+
+					}
 				}
 
 				//we will apply this style to the controls that are of this type
-				foreach (IControl control in controls.Where(c => c.GetType().GetTypeInfo().ImplementedInterfaces.Contains(controlType)))
+				foreach (IControl control in toControls.Where(c => c.GetType().GetTypeInfo().ImplementedInterfaces.Contains(controlType)))
 				{
 					style.ApplyTo(control);
 				}
