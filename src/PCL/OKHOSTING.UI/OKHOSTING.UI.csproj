@@ -49,12 +49,6 @@
     <Compile Include="Controls\Styles\TextControlStyle.cs" />
     <Compile Include="Controls\ITextBoxInputType.cs" />
     <Compile Include="Controls\ITextControl.cs" />
-    <Compile Include="DataForms\DataField.cs" />
-    <Compile Include="DataForms\DataForm.cs" />
-    <Compile Include="DataForms\DateTimeField.cs" />
-    <Compile Include="DataForms\DecimalField.cs" />
-    <Compile Include="DataForms\IntegerField.cs" />
-    <Compile Include="DataForms\StringField.cs" />
     <Compile Include="Controls\Styles\ControlStyle.cs" />
     <Compile Include="VerticalAlignment.cs" />
     <Compile Include="HorizontalAlignment.cs" />

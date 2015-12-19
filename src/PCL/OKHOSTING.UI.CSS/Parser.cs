@@ -176,11 +176,6 @@ namespace OKHOSTING.UI.CSS
 				case "bottom":
 					style.VerticalAlignment = VerticalAlignment.Bottom;
 					break;
-
-				case "left":
-					style.VerticalAlignment = VerticalAlignment.Left;
-					break;
-
 			}
 
 
