@@ -18,7 +18,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			base.Finish();
 		}
 
-		public override T Create<T>()
+		public override T CreateControl<T>()
 		{
 			if (typeof(T) == typeof(IButton))
 			{

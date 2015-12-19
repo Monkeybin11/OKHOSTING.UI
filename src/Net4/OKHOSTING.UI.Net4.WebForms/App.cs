@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 {
 	public class App : UI.App
 	{
-		public override T Create<T>()
+		public override T CreateControl<T>()
 		{
 			if (typeof(T) == typeof(IButton))
 			{

@@ -30,7 +30,17 @@ namespace OKHOSTING.UI
 		/// <returns>
 		/// An instance of control T
 		/// </returns>
-		public abstract T Create<T>() where T : class, Controls.IControl;
+		public abstract T CreateControl<T>() where T : class, Controls.IControl;
+
+		public event System.EventHandler<Controls.IControl> ControlCreated;
+
+		protected virtual void OnControlCreated(Controls.IControl created)
+		{
+			if (ControlCreated != null)
+			{
+				ControlCreated(this, created);
+			}
+		}
 
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
@@ -73,6 +83,7 @@ namespace OKHOSTING.UI
 		{
 			Controller.Finish();
 		}
+
 
 		/// <summary>
 		/// Gets the currently executing App. In a web environment, an App instance is created for each user

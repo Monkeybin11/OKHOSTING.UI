@@ -20,7 +20,7 @@ namespace OKHOSTING.UI.UWP
 			Windows.UI.Xaml.Application.Current.Exit();
 		}
 
-		public override T Create<T>()
+		public override T CreateControl<T>()
 		{
 			if (typeof(T) == typeof(IButton))
 			{
