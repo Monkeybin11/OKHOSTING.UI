@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Represents a top, bottom, left right value. Can be used for margins, paddings, borders, etc.
 	/// </summary>
-	public struct Thickness
+	public class Thickness
 	{
 		public Thickness(double uniformLength)
 		{
