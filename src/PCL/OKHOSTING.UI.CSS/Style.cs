@@ -30,8 +30,6 @@ namespace OKHOSTING.UI.CSS
 			}
 		}
 
-		//protected
-
 		/// <summary>
 		/// A cache of parsed styles for better performance
 		/// </summary>
@@ -40,50 +38,9 @@ namespace OKHOSTING.UI.CSS
 		/// <summary>
 		/// Applies the corresponding styles to a recently created control
 		/// </summary>
-		public static void App_ControlCreated(object sender, IControl e)
+		public static void Apply(IControl e)
 		{
-			string selector = null;
-
-			if (e is IButton)
-			{
-				selector = "input[type=submit]";
-			}
-			else if (e is ICheckBox)
-			{
-				selector = "input[type=checkbox]";
-			}
-			else if (e is IHyperLink)
-			{
-				selector = "a";
-			}
-			else if (e is IImage)
-			{
-				selector = "img";
-			}
-			else if (e is ILabel)
-			{
-				selector = "span";
-			}
-			else if (e is IListPicker)
-			{
-				selector = "select";
-			}
-			else if (e is IPasswordTextBox)
-			{
-				selector = "input[type=password]";
-			}
-			else if (e is ITextArea)
-			{
-				selector = "textarea";
-			}
-			else if (e is ITextBox)
-			{
-				selector = "input[type=text]";
-			}
-			else if (e is IGrid || e is IStack)
-			{
-				selector = "table";
-			}
+			string selector = "." + e.GetType().Name;
 
 			//select the correct styles using the selector, and apply
 			foreach (ICssStyleDeclaration style in ParsedStyleRules.Where(s => s.SelectorText == selector))
