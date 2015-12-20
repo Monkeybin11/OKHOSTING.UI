@@ -6,11 +6,10 @@ using OKHOSTING.UI.Net4.WinForms.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms
 {
-	public partial class Page : System.Windows.Forms.Form, IPage
+	public class Page : System.Windows.Forms.Form, IPage
 	{
 		public Page()
 		{
-			InitializeComponent();
 		}
 
 		protected override void OnLoad(EventArgs e)

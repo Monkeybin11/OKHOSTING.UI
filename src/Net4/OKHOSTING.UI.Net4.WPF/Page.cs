@@ -1,8 +1,5 @@
 ﻿using System;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layouts;
-using OKHOSTING.UI.Net4.WPF.Controls;
-using OKHOSTING.UI.Net4.WPF.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WPF
 {
@@ -13,7 +10,6 @@ namespace OKHOSTING.UI.Net4.WPF
 	{
 		public Page()
 		{
-			InitializeComponent();
 			base.SizeChanged += Page_SizeChanged;
 
 			App.Current.SetPage(this);

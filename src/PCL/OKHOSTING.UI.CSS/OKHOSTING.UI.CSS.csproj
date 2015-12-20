@@ -53,8 +53,9 @@
     <Compile Include="Style.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AngleSharp, Version=0.9.3.41352, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea">
+    <Reference Include="AngleSharp, Version=0.9.3.41352, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AngleSharp.0.9.3\lib\portable-windows8+net45+windowsphone8+wpa\AngleSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
