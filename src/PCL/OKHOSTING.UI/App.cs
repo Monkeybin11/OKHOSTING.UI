@@ -44,6 +44,10 @@ namespace OKHOSTING.UI
 			//and there
 		}
 
+		public void testBase1()
+		{
+		}
+
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
 		/// </summary>
