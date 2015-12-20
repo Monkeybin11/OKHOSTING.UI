@@ -37,7 +37,11 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual void Init<T>(T control) where T : class, Controls.IControl
 		{
-			//apply style (or any other initialization) here, there, and averywhere
+			//apply style (or any other initialization) here, there, and averywhere, by the beatles!!!!
+
+			//anmd there some more here
+
+			//and there
 		}
 
 		/// <summary>
