@@ -6,7 +6,7 @@ using System;
 
 namespace OKHOSTING.UI.Net4.WinForms
 {
-	public class App : UI.App
+	public class Platform : UI.Platform
 	{
 		public override T Create<T>()
 		{
@@ -69,20 +69,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 				control = new Stack() as T;
 			}
 
-			Init(control);
-
 			return control;
-		}
-
-		public override void Start()
-		{
-			base.Start();
-
-			Page = new Page();
-
-            System.Windows.Forms.Application.EnableVisualStyles();
-			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-			System.Windows.Forms.Application.Run((System.Windows.Forms.Form) Page);
 		}
 
 		public override void Finish()
@@ -267,16 +254,16 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		//static
 
-		public static new App Current
+		public static new Platform Current
 		{
 			get
 			{
-				var app = (App) UI.App.Current;
+				var app = (Platform) UI.Platform.Current;
 
 				if (app == null)
 				{
-					app = new App();
-					UI.App.Current = app;
+					app = new Platform();
+					UI.Platform.Current = app;
 				}
 
 				return app;

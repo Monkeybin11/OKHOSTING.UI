@@ -28,11 +28,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.BackColor);
+				return Platform.Current.Parse(base.BackColor);
 			}
 			set
 			{
-				base.BackColor = App.Current.Parse(value);
+				base.BackColor = Platform.Current.Parse(value);
 			}
 		}
 
@@ -40,11 +40,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.BorderColor);
+				return Platform.Current.Parse(base.BorderColor);
 			}
 			set
 			{
-				base.BorderColor = App.Current.Parse(value);
+				base.BorderColor = Platform.Current.Parse(value);
 			}
 		}
 
@@ -176,8 +176,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				App.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -215,8 +215,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				App.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -228,11 +228,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.ForeColor);
+				return Platform.Current.Parse(base.ForeColor);
 			}
 			set
 			{
-				base.ForeColor = App.Current.Parse(value);
+				base.ForeColor = Platform.Current.Parse(value);
 			}
 		}
 
@@ -331,8 +331,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.Current.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
-				App.Current.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
+				Platform.Current.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
+				Platform.Current.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -370,8 +370,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.Current.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
-				App.Current.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
+				Platform.Current.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
+				Platform.Current.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 

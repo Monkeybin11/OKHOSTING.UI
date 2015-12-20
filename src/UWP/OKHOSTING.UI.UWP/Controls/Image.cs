@@ -95,11 +95,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.Margin);
+				return Platform.Current.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = App.Current.Parse(value);
+				base.Margin = Platform.Current.Parse(value);
 			}
 		}
 
@@ -107,11 +107,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return App.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new Windows.UI.Xaml.Media.SolidColorBrush(App.Current.Parse(value));
+				base.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Platform.Current.Parse(value));
 			}
 		}
 
@@ -129,11 +129,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.HorizontalAlignment);
+				return Platform.Current.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = App.Current.Parse(value);
+				base.HorizontalAlignment = Platform.Current.Parse(value);
 			}
 		}
 
@@ -141,11 +141,11 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.VerticalAlignment);
+				return Platform.Current.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = App.Current.Parse(value);
+				base.VerticalAlignment = Platform.Current.Parse(value);
 			}
 		}
 

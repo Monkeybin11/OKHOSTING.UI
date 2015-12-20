@@ -6,23 +6,8 @@ namespace OKHOSTING.UI
 	/// <summary>
 	/// Base class for platform independet apps, this is where it all begins
 	/// </summary>
-	public abstract class App
+	public abstract class Platform
 	{
-		/// <summary>
-		/// Name of the App
-		/// </summary>
-		public readonly string Name;
-
-		/// <summary>
-		/// Version of the App
-		/// </summary>
-		public readonly string Version;
-
-		/// <summary>
-		/// Copyright of the App
-		/// </summary>
-		public readonly string Copyright;
-
 		/// <summary>
 		/// Create a platform-specific UI control
 		/// </summary>
@@ -31,22 +16,6 @@ namespace OKHOSTING.UI
 		/// An instance of control T
 		/// </returns>
 		public abstract T Create<T>() where T : class, Controls.IControl;
-
-		/// <summary>
-		/// Initializes a control after it was created. Usefull to apply styles 
-		/// </summary>
-		public virtual void Init<T>(T control) where T : class, Controls.IControl
-		{
-			//apply style (or any other initialization) here, there, and averywhere, by the beatles!!!!
-
-			//anmd there some more here
-
-			//and there
-		}
-
-		public void testBase1()
-		{
-		}
 
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
@@ -75,17 +44,7 @@ namespace OKHOSTING.UI
 		internal readonly Stack<Controller> ControllerStack = new Stack<Controller>();
 
 		/// <summary>
-		/// Will be executed when this App "executes" at first
-		/// </summary>
-		public virtual void Start()
-		{
-			//set the first current controller and start it here
-			//Controller = TODO: Put something here!!
-			Controller.Start();
-		}
-
-		/// <summary>
-		/// Will be execeuted once the controller has done it's workd. Use this to dispose objects and release memory
+		/// Exits and closes the current app. Use this to dispose objects and release memory
 		/// </summary>
 		public virtual void Finish()
 		{
@@ -97,13 +56,13 @@ namespace OKHOSTING.UI
 		/// <summary>
 		/// Gets the currently executing App. In a web environment, an App instance is created for each user
 		/// </summary>
-		public static App Current
+		public static Platform Current
 		{
 			get
 			{
-				if (Session.Current.ContainsKey(typeof(App).FullName))
+				if (Session.Current.ContainsKey(typeof(Platform).FullName))
 				{
-					return (App) Session.Current[typeof(App).FullName];
+					return (Platform) Session.Current[typeof(Platform).FullName];
 				}
 				else
 				{
@@ -112,7 +71,7 @@ namespace OKHOSTING.UI
 			}
 			protected set
 			{
-				Session.Current[typeof(App).FullName] = value;
+				Session.Current[typeof(Platform).FullName] = value;
 			}
 		}
 	}

@@ -17,11 +17,11 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual void Start()
 		{
-			App.Current.Page.Content = null;
+			Platform.Current.Page.Content = null;
 
-			if (App.Current.Controller != this)
+			if (Platform.Current.Controller != this)
 			{
-				App.Current.ControllerStack.Push(this);
+				Platform.Current.ControllerStack.Push(this);
 			}
 		}
 
@@ -37,14 +37,14 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual void Finish()
 		{
-			App.Current.ControllerStack.Pop();
+			Platform.Current.ControllerStack.Pop();
 
-			if (App.Current.Page.Content != null)
+			if (Platform.Current.Page.Content != null)
 			{
-				App.Current.Page.Content.Dispose();
+				Platform.Current.Page.Content.Dispose();
 			}
 
-			App.Current.Page.Content = null;
+			Platform.Current.Page.Content = null;
 		}
 	}
 }

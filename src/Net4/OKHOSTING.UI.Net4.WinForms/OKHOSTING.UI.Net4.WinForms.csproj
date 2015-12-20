@@ -37,7 +37,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -94,11 +94,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return App.Current.Parse(base.Margin);
+				return Platform.Current.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = App.Current.Parse(value);
+				base.Margin = Platform.Current.Parse(value);
 			}
 		}
 
@@ -106,11 +106,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
 			}
 		}
 
@@ -128,11 +128,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return App.Current.Parse(base.HorizontalAlignment);
+				return Platform.Current.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = App.Current.Parse(value);
+				base.HorizontalAlignment = Platform.Current.Parse(value);
 			}
 		}
 
@@ -140,11 +140,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return App.Current.Parse(base.VerticalAlignment);
+				return Platform.Current.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = App.Current.Parse(value);
+				base.VerticalAlignment = Platform.Current.Parse(value);
 			}
 		}
 

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
-	public class App : UI.App
+	public class Platform : UI.Platform
 	{
 		public override T Create<T>()
 		{
@@ -69,8 +69,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				control = new Stack() as T;
 			}
-
-			Init(control);
 
 			return control;
 		}
@@ -163,16 +161,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		//static
 
-		public static new App Current
+		public static new Platform Current
 		{
 			get
 			{
-				var app = (App) UI.App.Current;
+				var app = (Platform) UI.Platform.Current;
 
 				if (app == null)
 				{
-					app = new App();
-					UI.App.Current = app;
+					app = new Platform();
+					UI.Platform.Current = app;
 				}
 
 				return app;

@@ -96,11 +96,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.BackgroundColor);
+				return Platform.Current.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = App.Current.Parse(value);
+				base.BackgroundColor = Platform.Current.Parse(value);
 			}
 		}
 
@@ -120,11 +120,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Current.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
 			}
 		}
 
@@ -132,11 +132,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return App.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
 			}
 		}
 

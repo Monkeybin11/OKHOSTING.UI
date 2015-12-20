@@ -119,11 +119,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.Margin);
+				return Platform.Current.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = App.Current.Parse(value);
+				base.Margin = Platform.Current.Parse(value);
 			}
 		}
 
@@ -131,11 +131,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
 			}
 		}
 
@@ -153,11 +153,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.HorizontalAlignment);
+				return Platform.Current.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = App.Current.Parse(value);
+				base.HorizontalAlignment = Platform.Current.Parse(value);
 			}
 		}
 
@@ -165,11 +165,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.VerticalAlignment);
+				return Platform.Current.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = App.Current.Parse(value);
+				base.VerticalAlignment = Platform.Current.Parse(value);
 			}
 		}
 
@@ -193,11 +193,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return App.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Foreground).Color);
+				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Foreground).Color);
 			}
 			set
 			{
-				base.Foreground = new System.Windows.Media.SolidColorBrush(App.Current.Parse(value));
+				base.Foreground = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
 			}
 		}
 
@@ -241,11 +241,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.TextAlignment);
+				return Platform.Current.Parse(base.TextAlignment);
 			}
 			set
 			{
-				base.TextAlignment = App.Current.ParseTextAlignment(value);
+				base.TextAlignment = Platform.Current.ParseTextAlignment(value);
 			}
 		}
 
@@ -265,11 +265,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.Padding);
+				return Platform.Current.Parse(base.Padding);
 			}
 			set
 			{
-				base.Padding = App.Current.Parse(value);
+				base.Padding = Platform.Current.Parse(value);
 			}
 		}
 

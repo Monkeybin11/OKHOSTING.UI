@@ -6,9 +6,9 @@ using System;
 
 namespace OKHOSTING.UI.Xamarin.Forms
 {
-	public class App : UI.App
+	public class Platform : UI.Platform
 	{
-		public App()
+		public Platform()
 		{
 			Page = new Page();
 		}
@@ -78,8 +78,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			{
 				control = new Stack() as T;
 			}
-
-			Init(control);
 
 			return control;
 		}
@@ -215,16 +213,16 @@ namespace OKHOSTING.UI.Xamarin.Forms
 
 		//static
 
-		public static new App Current
+		public static new Platform Current
 		{
 			get
 			{
-				var app = (App) UI.App.Current;
+				var app = (Platform) UI.Platform.Current;
 
 				if (app == null)
 				{
-					app = new App();
-					UI.App.Current = app;
+					app = new Platform();
+					UI.Platform.Current = app;
 				}
 
 				return app;

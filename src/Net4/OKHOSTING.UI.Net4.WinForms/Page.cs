@@ -16,7 +16,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			base.OnLoad(e);
 
-			App.Current.Controller.Start();
+			Platform.Current.Controller.Start();
 		}
 
 		public IControl Content
@@ -73,7 +73,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		protected override void OnResize(EventArgs e)
 		{
-			App.Current.Controller.Resize();
+			Platform.Current.Controller.Resize();
 			base.OnResize(e);
 		}
 	}

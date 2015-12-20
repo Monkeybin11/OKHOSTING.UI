@@ -12,13 +12,13 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			base.SizeChanged += Page_SizeChanged;
 
-			App.Current.SetPage(this);
-			App.Current.Controller.Start();
+			Platform.Current.SetPage(this);
+			Platform.Current.Controller.Start();
         }
 
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
-			App.Current.Controller.Resize();
+			Platform.Current.Controller.Resize();
 		}
 
 		public new IControl Content

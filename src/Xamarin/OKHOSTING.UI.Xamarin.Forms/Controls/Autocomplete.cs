@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	{
 		public Autocomplete()
 		{
-			GoSearchButton = App.Current.Create<IButton>();
+			GoSearchButton = Platform.Current.Create<IButton>();
 			GoSearchButton.Click += GoSearchButton_Click;
 		}
 
@@ -38,18 +38,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		private void GoSearchButton_Click(object sender, EventArgs e)
 		{
-			SearchText = App.Current.Create<ITextBox>();
-			SearchButton = App.Current.Create<IButton>();
+			SearchText = Platform.Current.Create<ITextBox>();
+			SearchButton = Platform.Current.Create<IButton>();
 			SearchButton.Text = "Search";
 			SearchButton.Click += SearchButton_Click;
-			SearchStack = App.Current.Create<IStack>();
+			SearchStack = Platform.Current.Create<IStack>();
 			SearchStack.Children.Add(SearchText);
 			SearchStack.Children.Add(SearchButton);
 
 			SearchPage = new Page();
 			SearchPage.Content = SearchStack;
 
-			((Page) App.Current.Page).Navigation.PushAsync(SearchPage);
+			((Page) Platform.Current.Page).Navigation.PushAsync(SearchPage);
 		}
 
 		private void SearchButton_Click(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			ResultPage = new global::Xamarin.Forms.ContentPage();
 			ResultPage.Content = ResultView;
 
-			((Page) App.Current.Page).Navigation.PushAsync(ResultPage);
+			((Page) Platform.Current.Page).Navigation.PushAsync(ResultPage);
 
 			return e;
 		}
@@ -95,10 +95,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			SearchText.Text = e.SelectedItem.ToString();
 
 			//close result page
-			((Page) App.Current.Page).Navigation.PopAsync();
+			((Page) Platform.Current.Page).Navigation.PopAsync();
 
 			//close search page and get back to original page
-			((Page) App.Current.Page).Navigation.PopAsync();
+			((Page) Platform.Current.Page).Navigation.PopAsync();
 		}
 
 
@@ -182,11 +182,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.BackgroundColor);
+				return Platform.Current.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = App.Current.Parse(value);
+				base.BackgroundColor = Platform.Current.Parse(value);
 			}
 		}
 
@@ -204,11 +204,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return App.Current.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Current.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
 			}
 		}
 
@@ -216,11 +216,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return App.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(App.Current.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
 			}
 		}
 
