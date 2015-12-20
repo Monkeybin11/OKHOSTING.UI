@@ -37,7 +37,7 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual void Init<T>(T control) where T : class, Controls.IControl
 		{
-			//apply style (or any other initialization) here
+			//apply style (or any other initialization) here, or there
 		}
 
 		/// <summary>
