@@ -75,7 +75,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			return control;
 		}
 
-		#region Virtual
+		//virtual
 
 		internal virtual void SetPage(Page page)
 		{
@@ -161,7 +161,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			control.CssClass = control.CssClass.Replace(className, string.Empty).Trim();
 		}
 
-		#endregion
+		//static
 
 		public static new App Current
 		{

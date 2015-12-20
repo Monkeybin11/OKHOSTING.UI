@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
 using AngleSharp.Css.Values;
@@ -7,7 +6,6 @@ using AngleSharp.Dom.Css;
 using AngleSharp.Parser.Css;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
-using OKHOSTING.UI.Controls.Styles;
 
 namespace OKHOSTING.UI.CSS
 {
@@ -20,25 +18,16 @@ namespace OKHOSTING.UI.CSS
 		/// Applies a CSS stylesheet to the current App
 		/// </summary>
 		/// <param name="styleSheet">A list of css rules to be applied to the current running App</param>
-		public static void Apply(string styleSheet)
+		public static IEnumerable<ICssStyleRule> ParseStyleRules(string styleSheet)
 		{
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
 
 			//get only the rules that are actually styles
-			var rules = cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style);
-
-			//parse each rule, name it with the selector and add it to the list
-			foreach (ICssStyleRule r in rules)
+			foreach (ICssStyleRule rule in cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style))
 			{
-				TextControlStyle style = ParseTextControl(r.Style);
-				style.Name = r.SelectorText;
-
-				ParsedStyles.Add(style);
+				yield return rule;
 			}
-
-			//subscribe
-			App.Current.ControlCreated += App_ControlCreated;
 		}
 
 		//protected
@@ -46,12 +35,12 @@ namespace OKHOSTING.UI.CSS
 		/// <summary>
 		/// A cache of parsed styles for better performance
 		/// </summary>
-		protected static readonly List<ControlStyle> ParsedStyles = new List<ControlStyle>();
+		public static readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
 
 		/// <summary>
 		/// Applies the corresponding styles to a recently created control
 		/// </summary>
-		protected static void App_ControlCreated(object sender, IControl e)
+		public static void App_ControlCreated(object sender, IControl e)
 		{
 			string selector = null;
 
@@ -97,18 +86,18 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//select the correct styles using the selector, and apply
-			foreach (TextControlStyle style in ParsedStyles.Where(s => s.Name == selector))
+			foreach (ICssStyleDeclaration style in ParsedStyleRules.Where(s => s.SelectorText == selector))
 			{
-				style.ApplyTo(e);
+				Apply(style, e);
 			}
 		}
 
-		protected static Controls.Styles.ControlStyle Parse(ICssStyleDeclaration styleDeclaration)
-		{
-			return Parse(styleDeclaration, new Controls.Styles.ControlStyle());
-		}
 
-		protected static Controls.Styles.ControlStyle Parse(ICssStyleDeclaration styleDeclaration, Controls.Styles.ControlStyle style)
+
+		/// <summary>
+		/// Applies a CSS style to a IControl
+		/// </summary>
+		public static void Apply(ICssStyleDeclaration style, IControl control)
 		{
 
 			AngleSharp.Css.Values.Color color;
@@ -117,171 +106,168 @@ namespace OKHOSTING.UI.CSS
 
 			//background and border colors
 
-			color = AngleSharp.Css.Values.Color.FromHex(styleDeclaration.BackgroundColor);
-			style.BackgroundColor = new Color(color.A, color.R, color.G, color.B);
+			color = AngleSharp.Css.Values.Color.FromHex(style.BackgroundColor);
+			control.BackgroundColor = new Color(color.A, color.R, color.G, color.B);
 
-			color = AngleSharp.Css.Values.Color.FromHex(styleDeclaration.BorderColor);
-			style.BorderColor = new Color(color.A, color.R, color.G, color.B);
+			color = AngleSharp.Css.Values.Color.FromHex(style.BorderColor);
+			control.BorderColor = new Color(color.A, color.R, color.G, color.B);
 
 			//horizontal alignment http://www.w3schools.com/css/css_align.asp
 
 			//horizontal alignment using float
-			switch (styleDeclaration.Float)
+			switch (style.Float)
 			{
 				case "left":
-					style.HorizontalAlignment = HorizontalAlignment.Left;
+					control.HorizontalAlignment = HorizontalAlignment.Left;
 					break;
 
 				case "right":
-					style.HorizontalAlignment = HorizontalAlignment.Right;
+					control.HorizontalAlignment = HorizontalAlignment.Right;
 					break;
 			}
 
 			//horizontal alignment using position
-			parsed = Length.TryParse(styleDeclaration.Left, out lenght);
-			if (parsed && styleDeclaration.Position == "absolute" && lenght.ToPixel() == 0)
+			parsed = Length.TryParse(style.Left, out lenght);
+			if (parsed && style.Position == "absolute" && lenght.ToPixel() == 0)
 			{
-				style.HorizontalAlignment = HorizontalAlignment.Left;
+				control.HorizontalAlignment = HorizontalAlignment.Left;
 			}
 
-			parsed = Length.TryParse(styleDeclaration.Right, out lenght);
-			if (parsed && styleDeclaration.Position == "absolute" && lenght.ToPixel() == 0)
+			parsed = Length.TryParse(style.Right, out lenght);
+			if (parsed && style.Position == "absolute" && lenght.ToPixel() == 0)
 			{
-				style.HorizontalAlignment = HorizontalAlignment.Right;
+				control.HorizontalAlignment = HorizontalAlignment.Right;
 			}
 
 			//horizontal alignment using margin
-			if (styleDeclaration.Margin == "auto" || (styleDeclaration.MarginLeft == "auto" && styleDeclaration.MarginRight == "auto"))
+			if (style.Margin == "auto" || (style.MarginLeft == "auto" && style.MarginRight == "auto"))
 			{
-				style.HorizontalAlignment = HorizontalAlignment.Center;
+				control.HorizontalAlignment = HorizontalAlignment.Center;
 			}
 
 			//horizontal alignment using text align, online for inline elements
-			if (styleDeclaration.Display == "inline")
+			if (style.Display == "inline")
 			{
-				switch (styleDeclaration.TextAlign)
+				switch (style.TextAlign)
 				{
 					case "left":
-						style.HorizontalAlignment = HorizontalAlignment.Left;
+						control.HorizontalAlignment = HorizontalAlignment.Left;
 						break;
 
 					case "center":
-						style.HorizontalAlignment = HorizontalAlignment.Center;
+						control.HorizontalAlignment = HorizontalAlignment.Center;
 						break;
 
 					case "right":
-						style.HorizontalAlignment = HorizontalAlignment.Right;
+						control.HorizontalAlignment = HorizontalAlignment.Right;
 						break;
 
 					case "justify":
-						style.HorizontalAlignment = HorizontalAlignment.Fill;
+						control.HorizontalAlignment = HorizontalAlignment.Fill;
 						break;
 				}
 			}
 
 			//vertical alignment
 
-			switch (styleDeclaration.VerticalAlign)
+			switch (style.VerticalAlign)
 			{
 				case "top":
-					style.VerticalAlignment = VerticalAlignment.Top;
+					control.VerticalAlignment = VerticalAlignment.Top;
 					break;
 
 				case "middle":
-					style.VerticalAlignment = VerticalAlignment.Center;
+					control.VerticalAlignment = VerticalAlignment.Center;
 					break;
 
 				case "bottom":
-					style.VerticalAlignment = VerticalAlignment.Bottom;
+					control.VerticalAlignment = VerticalAlignment.Bottom;
 					break;
 			}
 
 
 			//height and width
 
-            if (Length.TryParse(styleDeclaration.Height, out lenght)) style.Height = lenght.ToPixel();
-			if (Length.TryParse(styleDeclaration.Width, out lenght)) style.Width = lenght.ToPixel();
+            if (Length.TryParse(style.Height, out lenght)) control.Height = lenght.ToPixel();
+			if (Length.TryParse(style.Width, out lenght)) control.Width = lenght.ToPixel();
 
 			//border
 
 			Thickness borderWidth = new Thickness();
-			Length.TryParse(styleDeclaration.BorderTopWidth, out lenght);
+			Length.TryParse(style.BorderTopWidth, out lenght);
 			borderWidth.Top = lenght.ToPixel();
-			Length.TryParse(styleDeclaration.BorderRightWidth, out lenght);
+			Length.TryParse(style.BorderRightWidth, out lenght);
 			borderWidth.Right = lenght.ToPixel();
-			Length.TryParse(styleDeclaration.BorderBottomWidth, out lenght);
+			Length.TryParse(style.BorderBottomWidth, out lenght);
 			borderWidth.Bottom = lenght.ToPixel();
-			Length.TryParse(styleDeclaration.BorderLeftWidth, out lenght);
+			Length.TryParse(style.BorderLeftWidth, out lenght);
 			borderWidth.Left = lenght.ToPixel();
-			style.BorderWidth = borderWidth;
+			control.BorderWidth = borderWidth;
 
 			//margin
 
 			Thickness margin = new Thickness();
-			Length.TryParse(styleDeclaration.MarginTop, out lenght);
+			Length.TryParse(style.MarginTop, out lenght);
 			margin.Top = lenght.ToPixel();
-			Length.TryParse(styleDeclaration.MarginRight, out lenght);
+			Length.TryParse(style.MarginRight, out lenght);
 			margin.Right = lenght.ToPixel();
-			Length.TryParse(styleDeclaration.MarginBottom, out lenght);
+			Length.TryParse(style.MarginBottom, out lenght);
 			margin.Bottom = lenght.ToPixel();
-			Length.TryParse(styleDeclaration.MarginLeft, out lenght);
+			Length.TryParse(style.MarginLeft, out lenght);
 			margin.Left = lenght.ToPixel();
-			style.Margin = margin;
+			control.Margin = margin;
 
 			//visibility
 
-			style.Visible = styleDeclaration.Visibility != "none" && styleDeclaration.Visibility != "hidden";
-
-			return style;
+			control.Visible = style.Visibility != "none" && style.Visibility != "hidden";
         }
 
-		protected static Controls.Styles.TextControlStyle ParseTextControl(ICssStyleDeclaration styleDeclaration)
-		{ 
-			var style = new Controls.Styles.TextControlStyle();
-
+		/// <summary>
+		/// Applies a CSS style ato a ITextControl including font style
+		/// </summary>
+		public static void Apply(ICssStyleDeclaration styleDeclaration, ITextControl control)
+		{
 			//first parse as IControl
-			Parse(styleDeclaration, style);
+			Apply(styleDeclaration, (IControl) control);
 
 			//now for ITextControl properties
 
-			style.Bold = styleDeclaration.FontWeight == "bold";
-			style.Italic = styleDeclaration.FontStyle == "italic";
-			style.Underline = styleDeclaration.TextDecoration == "underline";
+			control.Bold = styleDeclaration.FontWeight == "bold";
+			control.Italic = styleDeclaration.FontStyle == "italic";
+			control.Underline = styleDeclaration.TextDecoration == "underline";
 
 			AngleSharp.Css.Values.Color color = AngleSharp.Css.Values.Color.FromHex(styleDeclaration.Color);
-			style.FontColor = new Color(color.A, color.R, color.G, color.B);
+			control.FontColor = new Color(color.A, color.R, color.G, color.B);
 
-			style.FontFamily = styleDeclaration.FontFamily;
+			control.FontFamily = styleDeclaration.FontFamily;
 
 			Length lenght;
 			if (Length.TryParse(styleDeclaration.FontSize, out lenght))
 			{
-				style.FontSize = lenght.ToPixel();
+				control.FontSize = lenght.ToPixel();
 			}
 
 			switch (styleDeclaration.TextAlign)
 			{
 				case "left":
-					style.TextHorizontalAlignment = HorizontalAlignment.Left;
+					control.TextHorizontalAlignment = HorizontalAlignment.Left;
 					break;
 
 				case "center":
-					style.TextHorizontalAlignment = HorizontalAlignment.Center;
+					control.TextHorizontalAlignment = HorizontalAlignment.Center;
 					break;
 
 				case "right":
-					style.TextHorizontalAlignment = HorizontalAlignment.Right;
+					control.TextHorizontalAlignment = HorizontalAlignment.Right;
 					break;
 
 				case "justify":
-					style.TextHorizontalAlignment = HorizontalAlignment.Fill;
+					control.TextHorizontalAlignment = HorizontalAlignment.Fill;
 					break;
 			}
 
 			//just grab the sabe vertical aligned parsed form the other mnethod
-			style.TextVerticalAlignment = style.VerticalAlignment;
-
-			return style;
+			control.TextVerticalAlignment = control.VerticalAlignment;
 		}
 	}
 }

@@ -84,6 +84,8 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			return control;
 		}
 
+		//virtual
+
 		public virtual Color Parse(global::Xamarin.Forms.Color color)
 		{
 			return new Color((int) color.A, (int) color.R, (int) color.G, (int) color.B);
@@ -210,6 +212,8 @@ namespace OKHOSTING.UI.Xamarin.Forms
 
 			return global::Xamarin.Forms.TextAlignment.Start;
 		}
+
+		//static
 
 		public static new App Current
 		{

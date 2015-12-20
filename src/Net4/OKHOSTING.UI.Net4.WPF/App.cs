@@ -81,6 +81,8 @@ namespace OKHOSTING.UI.Net4.WPF
 			System.Windows.Application.Current.Shutdown();
 		}
 
+		//virtual
+
 		internal virtual void SetPage(Page page)
 		{
 			this.Page = page;
@@ -232,6 +234,8 @@ namespace OKHOSTING.UI.Net4.WPF
 
 			return TextAlignment.Left;
 		}
+
+		//static
 
 		public static new App Current
 		{

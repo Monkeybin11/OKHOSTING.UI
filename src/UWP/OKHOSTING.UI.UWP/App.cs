@@ -86,6 +86,8 @@ namespace OKHOSTING.UI.UWP
 			return control;
 		}
 
+		//virtual
+
 		public virtual Color Parse(Windows.UI.Color color)
 		{
 			return new Color(color.A, color.R, color.G, color.B);
@@ -233,6 +235,8 @@ namespace OKHOSTING.UI.UWP
 
 			return TextAlignment.Left;
 		}
+
+		//static
 
 		public static new App Current
 		{

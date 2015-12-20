@@ -91,7 +91,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			System.Windows.Forms.Application.Exit();
 		}
 
-		#region Virtual
+		//virtual
 
 		public virtual Color Parse(System.Drawing.Color color)
 		{
@@ -265,7 +265,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return System.Windows.Forms.HorizontalAlignment.Left;
 		}
 
-		#endregion
+		//static
 
 		public static new App Current
 		{
