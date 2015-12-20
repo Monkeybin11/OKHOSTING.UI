@@ -18,7 +18,7 @@ namespace OKHOSTING.UI.CSS
 		/// Applies a CSS stylesheet to the current App
 		/// </summary>
 		/// <param name="styleSheet">A list of css rules to be applied to the current running App</param>
-		public static IEnumerable<ICssStyleRule> ParseStyleRules(string styleSheet)
+		public static void ParseStyleRules(string styleSheet)
 		{
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
@@ -26,7 +26,7 @@ namespace OKHOSTING.UI.CSS
 			//get only the rules that are actually styles
 			foreach (ICssStyleRule rule in cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style))
 			{
-				yield return rule;
+				ParsedStyleRules.Add(rule);
 			}
 		}
 
