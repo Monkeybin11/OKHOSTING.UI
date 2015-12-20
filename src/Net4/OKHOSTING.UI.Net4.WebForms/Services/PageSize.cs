@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace OKHOSTING.UI.Net4.WebForms
+namespace OKHOSTING.UI.Net4.WebForms.Services
 {
 	/// <summary>
 	/// Summary description for PageSize

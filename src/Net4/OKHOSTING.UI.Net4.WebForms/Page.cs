@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Linq;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layouts;
-using OKHOSTING.UI.Net4.WebForms.Controls;
-using OKHOSTING.UI.Net4.WebForms.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
 	public partial class Page : System.Web.UI.Page, IPage
 	{
+        protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
+
 		protected override void OnLoad(EventArgs e)
 		{
+			if (ContentHolder == null)
+			{
+				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
+				base.Controls.Clear();
+				base.Controls.Add(ContentHolder);
+			}
+
 			App.Current.SetPage(this);
 			App.Current.Controller.Start();
 
@@ -21,20 +26,20 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (phContent.Controls.Count == 0)
+				if (ContentHolder.Controls.Count == 0)
 				{
 					return null;
 				}
 
-				return (IControl) phContent.Controls[0];
+				return (IControl) ContentHolder.Controls[0];
 			}
 			set
 			{
-				phContent.Controls.Clear();
+				ContentHolder.Controls.Clear();
 
 				if (value != null)
 				{
-					phContent.Controls.Add((System.Web.UI.Control) value);
+					ContentHolder.Controls.Add((System.Web.UI.Control) value);
 				}
 			}
 		}
