@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Class2 - Copy.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="Controls\ITextBoxInputType.cs" />
     <Compile Include="Controls\ITextControl.cs" />
