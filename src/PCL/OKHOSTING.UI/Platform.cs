@@ -8,6 +8,37 @@ namespace OKHOSTING.UI
 	/// </summary>
 	public abstract class Platform
 	{
+		//protected & internal
+
+		/// <summary>
+		/// The stack where we will keep and organization of which controller is currently executing (at top) and which are in the background
+		/// </summary>
+		protected readonly Stack<Controller> ControllerStack = new Stack<Controller>();
+
+		protected internal virtual void StartController(Controller controller)
+		{
+			Page.Content = null;
+
+			if (Controller != controller)
+			{
+				ControllerStack.Push(controller);
+			}
+		}
+
+		protected internal virtual void FinishController()
+		{
+			ControllerStack.Pop();
+
+			if (Page.Content != null)
+			{
+				Page.Content.Dispose();
+			}
+
+			Page.Content = null;
+		}
+
+		//public
+
 		/// <summary>
 		/// Create a platform-specific UI control
 		/// </summary>
@@ -20,12 +51,12 @@ namespace OKHOSTING.UI
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
 		/// </summary>
-		public IPage Page { get; set; }
+		public virtual IPage Page { get; set; }
 
 		/// <summary>
 		/// Gets the Controller that is currently controlling the view, the "currently executing" controller wich is at the top of the stack
 		/// </summary>
-		public Controller Controller
+		public virtual Controller Controller
 		{
 			get
 			{
@@ -37,33 +68,6 @@ namespace OKHOSTING.UI
 				return ControllerStack.Peek();
 			}
 		}
-
-		internal void StartController(Controller controller)
-		{
-			Page.Content = null;
-
-			if (Controller != controller)
-			{
-				ControllerStack.Push(controller);
-			}
-		}
-
-		internal void FinishController()
-		{
-			ControllerStack.Pop();
-
-			if (Page.Content != null)
-			{
-				Page.Content.Dispose();
-			}
-
-			Page.Content = null;
-		}
-
-		/// <summary>
-		/// The stack where we will keep and organization of which controller is currently executing (at top) and which are in the background
-		/// </summary>
-		protected readonly Stack<Controller> ControllerStack = new Stack<Controller>();
 
 		/// <summary>
 		/// Exits and closes the current app. Use this to dispose objects and release memory

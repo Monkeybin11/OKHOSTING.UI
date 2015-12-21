@@ -8,11 +8,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 {
 	public class Platform : UI.Platform
 	{
-		public override void Finish()
-		{
-			base.Finish();
-		}
-
 		public override T Create<T>()
 		{
 			T control = null;
@@ -75,6 +70,11 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 
 			return control;
+		}
+
+		public override void Finish()
+		{
+			base.Finish();
 		}
 
 		//virtual

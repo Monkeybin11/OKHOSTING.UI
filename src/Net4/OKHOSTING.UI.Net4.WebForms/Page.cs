@@ -15,8 +15,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 				base.Controls.Add(ContentHolder);
 			}
 
-			Platform.Current.SetPage(this);
-
 			base.OnLoad(e);
 		}
 

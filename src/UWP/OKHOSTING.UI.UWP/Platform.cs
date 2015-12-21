@@ -9,12 +9,6 @@ namespace OKHOSTING.UI.UWP
 {
 	public class Platform : UI.Platform
 	{
-		public override void Finish()
-		{
-			base.Finish();
-			Windows.UI.Xaml.Application.Current.Exit();
-		}
-
 		public override T Create<T>()
 		{
 			T control = null;
@@ -77,6 +71,12 @@ namespace OKHOSTING.UI.UWP
 			}
 
 			return control;
+		}
+
+		public override void Finish()
+		{
+			base.Finish();
+			Windows.UI.Xaml.Application.Current.Exit();
 		}
 
 		//virtual

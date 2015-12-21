@@ -81,11 +81,6 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		//virtual
 
-		internal virtual void SetPage(Page page)
-		{
-			this.Page = page;
-		}
-
 		public virtual Color Parse(System.Windows.Media.Color color)
 		{
 			return new Color(color.A, color.R, color.G, color.B);

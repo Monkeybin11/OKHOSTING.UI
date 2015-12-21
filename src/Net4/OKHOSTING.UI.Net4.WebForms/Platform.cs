@@ -73,12 +73,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			return control;
 		}
 
-		//virtual
-
-		internal virtual void SetPage(Page page)
+		public override void Finish()
 		{
-			this.Page = page;
+			base.Finish();
+			System.Web.Security.FormsAuthentication.SignOut();
 		}
+
+		//virtual
 
 		public virtual Color Parse(System.Drawing.Color color)
 		{
