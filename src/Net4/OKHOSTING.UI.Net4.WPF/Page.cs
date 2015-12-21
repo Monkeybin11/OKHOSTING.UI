@@ -11,9 +11,6 @@ namespace OKHOSTING.UI.Net4.WPF
 		public Page()
 		{
 			base.SizeChanged += Page_SizeChanged;
-
-			Platform.Current.SetPage(this);
-			Platform.Current.Controller.Start();
         }
 
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)

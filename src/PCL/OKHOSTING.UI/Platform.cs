@@ -20,7 +20,7 @@ namespace OKHOSTING.UI
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
 		/// </summary>
-		public IPage Page { get; protected set; }
+		public IPage Page { get; set; }
 
 		/// <summary>
 		/// Gets the Controller that is currently controlling the view, the "currently executing" controller wich is at the top of the stack
@@ -38,10 +38,32 @@ namespace OKHOSTING.UI
 			}
 		}
 
+		internal void StartController(Controller controller)
+		{
+			Page.Content = null;
+
+			if (Controller != controller)
+			{
+				ControllerStack.Push(controller);
+			}
+		}
+
+		internal void FinishController()
+		{
+			ControllerStack.Pop();
+
+			if (Page.Content != null)
+			{
+				Page.Content.Dispose();
+			}
+
+			Page.Content = null;
+		}
+
 		/// <summary>
 		/// The stack where we will keep and organization of which controller is currently executing (at top) and which are in the background
 		/// </summary>
-		internal readonly Stack<Controller> ControllerStack = new Stack<Controller>();
+		protected readonly Stack<Controller> ControllerStack = new Stack<Controller>();
 
 		/// <summary>
 		/// Exits and closes the current app. Use this to dispose objects and release memory

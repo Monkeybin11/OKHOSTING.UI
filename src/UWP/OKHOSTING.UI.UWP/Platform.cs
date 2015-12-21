@@ -9,11 +9,6 @@ namespace OKHOSTING.UI.UWP
 {
 	public class Platform : UI.Platform
 	{
-		public Platform()
-		{
-			Page = new Page();
-		}
-
 		public override void Finish()
 		{
 			base.Finish();

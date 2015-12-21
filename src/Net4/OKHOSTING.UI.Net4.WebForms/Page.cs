@@ -12,12 +12,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			if (ContentHolder == null)
 			{
 				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				base.Controls.Clear();
 				base.Controls.Add(ContentHolder);
 			}
 
 			Platform.Current.SetPage(this);
-			Platform.Current.Controller.Start();
 
 			base.OnLoad(e);
 		}

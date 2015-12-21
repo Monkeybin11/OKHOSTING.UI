@@ -8,11 +8,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 {
 	public class Platform : UI.Platform
 	{
-		public Platform()
-		{
-			Page = new Page();
-		}
-
 		public override void Finish()
 		{
 			base.Finish();

@@ -1,8 +1,5 @@
 ﻿using System;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Net4.WinForms.Controls;
-using OKHOSTING.UI.Net4.WinForms.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms
 {
@@ -10,13 +7,6 @@ namespace OKHOSTING.UI.Net4.WinForms
 	{
 		public Page()
 		{
-		}
-
-		protected override void OnLoad(EventArgs e)
-		{
-			base.OnLoad(e);
-
-			Platform.Current.Controller.Start();
 		}
 
 		public IControl Content
@@ -48,7 +38,6 @@ namespace OKHOSTING.UI.Net4.WinForms
 			{
 				return base.Text;
 			}
-
 			set
 			{
 				base.Text = value;
