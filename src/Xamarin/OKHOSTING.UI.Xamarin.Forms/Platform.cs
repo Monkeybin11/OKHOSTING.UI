@@ -217,15 +217,15 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		{
 			get
 			{
-				var app = (Platform) UI.Platform.Current;
+				var platform = (Platform)UI.Platform.Current;
 
-				if (app == null)
+				if (platform == null)
 				{
-					app = new Platform();
-					UI.Platform.Current = app;
+					platform = new Platform();
+					UI.Platform.Current = platform;
 				}
 
-				return app;
+				return platform;
 			}
 		}
 	}
