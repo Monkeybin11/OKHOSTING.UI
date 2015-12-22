@@ -7,7 +7,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker
 	{
-		IEnumerable<string> IListPicker.DataSource
+        public ListPicker()
+        {
+            base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
+        }
+
+        private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SelectedItemChanged != null)
+            {
+                SelectedItemChanged(sender, e);
+            }
+        }
+
+        IEnumerable<string> IListPicker.DataSource
 		{
 			get
 			{
@@ -31,9 +44,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		#region IControl
+        public event EventHandler SelectedItemChanged;
 
-		string IControl.Name
+        protected void OnSelectedItemChanged()
+        {
+            if (SelectedItemChanged != null)
+            {
+                SelectedItemChanged(this, new EventArgs());
+            }
+        }
+
+        #region IControl
+
+        string IControl.Name
 		{
 			get
 			{
@@ -419,6 +442,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }

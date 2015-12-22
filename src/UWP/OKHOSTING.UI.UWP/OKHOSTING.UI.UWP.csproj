@@ -110,7 +110,7 @@
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Calendar.cs" />
-    <Compile Include="Controls\CHeckBox.cs" />
+    <Compile Include="Controls\CheckBox.cs" />
     <Compile Include="Controls\ControlList.cs" />
     <Compile Include="Controls\HyperLink.cs" />
     <Compile Include="Controls\Image.cs" />

@@ -20,7 +20,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//restore state
 			if (IsPostBack)
 			{
-				Content =
+                Content = (IControl) Session["Content"];
 			}
 
 			base.OnInit(e);

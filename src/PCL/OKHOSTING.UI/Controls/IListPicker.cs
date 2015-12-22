@@ -11,5 +11,7 @@ namespace OKHOSTING.UI.Controls
 		IEnumerable<string> DataSource { get; set; }
 		string SelectedItem { get; set; }
 		int SelectedIndex { get; set; }
-	}
+
+        event EventHandler SelectedItemChanged;
+    }
 }

@@ -6,7 +6,20 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class ListPicker : Windows.UI.Xaml.Controls.ListBox, IListPicker
 	{
-		IEnumerable<string> IListPicker.DataSource
+        public ListPicker()
+        {
+            base.SelectionChanged += ListPicker_SelectionChanged;
+        }
+
+        private void ListPicker_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
+        {
+            if (SelectedItemChanged != null)
+            {
+                SelectedItemChanged(sender, e);
+            }
+        }
+
+        IEnumerable<string> IListPicker.DataSource
 		{
 			get
 			{
@@ -42,7 +55,9 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		void IDisposable.Dispose()
+        public event EventHandler SelectedItemChanged;
+
+        void IDisposable.Dispose()
 		{
 		}
 

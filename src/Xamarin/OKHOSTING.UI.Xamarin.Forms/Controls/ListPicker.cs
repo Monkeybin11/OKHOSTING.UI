@@ -7,7 +7,20 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class ListPicker : global::Xamarin.Forms.Picker, IListPicker
 	{
-		IEnumerable<string> IListPicker.DataSource
+        public ListPicker()
+        {
+            base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
+        }
+
+        private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SelectedItemChanged != null)
+            {
+                SelectedItemChanged(sender, e);
+            }
+        }
+
+        IEnumerable<string> IListPicker.DataSource
 		{
 			get
 			{
@@ -37,8 +50,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+        public event EventHandler SelectedItemChanged;
 
-		void IDisposable.Dispose()
+        void IDisposable.Dispose()
 		{
 		}
 

@@ -6,7 +6,20 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class ListPicker : System.Windows.Forms.ComboBox, IListPicker
 	{
-		IEnumerable<string> IListPicker.DataSource
+        public ListPicker()
+        {
+            base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
+        }
+
+        private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SelectedItemChanged != null)
+            {
+                SelectedItemChanged(sender, e);
+            }
+        }
+
+        IEnumerable<string> IListPicker.DataSource
 		{
 			get
 			{
@@ -30,9 +43,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		#region IControl
+        public event EventHandler SelectedItemChanged;
 
-		double? IControl.Width
+        #region IControl
+
+        double? IControl.Width
 		{
 			get
 			{
@@ -227,9 +242,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		#endregion
+        #endregion
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+        protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
 			Platform.Current.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
