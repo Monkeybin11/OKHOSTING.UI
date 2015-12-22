@@ -11,7 +11,7 @@ namespace OKHOSTING.UI.UWP.Controls
 		void IImage.LoadFromFile(string filePath)
 		{
 			InnerImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(filePath));
-        }
+		}
 
 		void IImage.LoadFromStream(Stream stream)
 		{

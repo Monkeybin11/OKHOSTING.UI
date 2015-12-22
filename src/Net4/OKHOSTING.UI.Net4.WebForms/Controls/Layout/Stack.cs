@@ -16,7 +16,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			((IGrid) InnerGrid).ColumnCount = 1;
 
 			base.Controls.Add(InnerGrid);
-        }
+		}
 
 		#region IControl
 
@@ -264,7 +264,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 				{
 					ContainerStack.InnerGrid.Rows[index].Cells[0].Controls.Clear();
 					ContainerStack.InnerGrid.Rows[index].Cells[0].Controls.Add((System.Web.UI.Control) value);
-                }
+				}
 			}
 
 			public int Count
@@ -359,7 +359,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 					{
 						row.Cells[0].Controls.Clear();
 						return true;
-                    }
+					}
 				}
 
 				return false;

@@ -337,5 +337,5 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				base.InputScope.Names.Add(scopeName);
 			}
 		}
-    }
+	}
 }

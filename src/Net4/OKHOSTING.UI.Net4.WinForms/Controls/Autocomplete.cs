@@ -24,7 +24,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 			if (Searching != null)
 			{
-                Searching(this, e);
+				Searching(this, e);
 			}
 
 			return e;

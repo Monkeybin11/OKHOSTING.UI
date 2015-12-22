@@ -16,7 +16,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 
 			//refresh when this is the first load (session width is null) orwhen size has changed, so we can rearrange layout if we want
 			var refresh = Session.Current[typeof(Page) + ".Width"] == null || ((double)Session.Current[typeof(Page) + ".Width"]) != double.Parse(context.Request.QueryString["Width"]);
-            var output = json.Serialize(new { Refresh = refresh });
+			var output = json.Serialize(new { Refresh = refresh });
 			context.Response.Write(output);
 
 			Session.Current[typeof(Page) + ".Width"] = double.Parse(context.Request.QueryString["Width"]);

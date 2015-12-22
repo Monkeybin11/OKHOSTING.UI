@@ -35,6 +35,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			var e = ((UI.Controls.IAutocomplete) autocomplete).OnSearching(prefixText);
 
 			return e.SearchResult.ToArray();
-        }
+		}
 	}
 }

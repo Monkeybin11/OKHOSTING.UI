@@ -68,6 +68,13 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
+			var currentControl = ((IGrid)this).GetContent(row, column);
+
+			if (currentControl != null)
+			{
+				base.Children.Remove((System.Windows.UIElement) currentControl);
+			}
+
 			Grid.SetRow((System.Windows.UIElement) content, row);
 			Grid.SetColumn((System.Windows.UIElement) content, column);
 

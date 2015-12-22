@@ -5,17 +5,25 @@ namespace OKHOSTING.UI.Net4.WebForms
 {
 	public partial class Page : System.Web.UI.Page, IPage
 	{
-        protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
+		protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
 
-		protected override void OnLoad(EventArgs e)
+		protected override void OnInit(EventArgs e)
 		{
 			if (ContentHolder == null)
 			{
 				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				base.Controls.Add(ContentHolder);
+				ContentHolder.ID = "pcContent";
+				base.Form.Controls.Clear();
+				base.Form.Controls.Add(ContentHolder);
 			}
 
-			base.OnLoad(e);
+			//restore state
+			if (IsPostBack)
+			{
+				Content =
+			}
+
+			base.OnInit(e);
 		}
 
 		public IControl Content
@@ -54,6 +62,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"];
 			}
+		}
+
+		protected override void OnPreRenderComplete(EventArgs e)
+		{
+			base.OnPreRenderComplete(e);
+
+			//save state
+			Session["Content"] = Content;
 		}
 	}
 }

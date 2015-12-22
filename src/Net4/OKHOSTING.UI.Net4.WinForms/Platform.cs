@@ -87,11 +87,21 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		public virtual System.Drawing.Color Parse(Color color)
 		{
+			if (color == null)
+			{
+				return default(System.Drawing.Color);
+			}
+
 			return System.Drawing.Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
 		}
 
 		public virtual System.Windows.Forms.Padding Parse(Thickness thickness)
 		{
+			if (thickness == null)
+			{
+				return default(System.Windows.Forms.Padding);
+			}
+
 			System.Windows.Forms.Padding padding = new System.Windows.Forms.Padding();
 
 			if (thickness.Left.HasValue) padding.Left = (int)thickness.Left;
@@ -267,6 +277,30 @@ namespace OKHOSTING.UI.Net4.WinForms
 				}
 
 				return platform;
+			}
+		}
+
+		public virtual void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
+		{
+			//calculate the 4 points or coordinates of the border
+			System.Drawing.Point p1 = control.Bounds.Location; //top left
+
+			System.Drawing.Point p2 = control.Bounds.Location;
+			p2.Offset(control.Width, 0); //top right
+
+			System.Drawing.Point p3 = control.Bounds.Location; //bottom left
+			p2.Offset(0, control.Height * -1); //top right
+
+			System.Drawing.Point p4 = control.Bounds.Location; //bottom right
+			p2.Offset(control.Width, control.Height * -1); //top right
+
+			//draw custom border here
+			if (((IControl) control).BorderColor != null && ((IControl) control).BorderWidth != null)
+			{
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p4, p1); //left
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p1, p2); //top
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p2, p3); //right
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p3, p4); //bottom
 			}
 		}
 	}

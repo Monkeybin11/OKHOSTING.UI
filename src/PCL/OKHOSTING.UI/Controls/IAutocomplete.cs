@@ -13,7 +13,7 @@ namespace OKHOSTING.UI.Controls
 		event EventHandler<AutocompleteSearchEventArgs> Searching;
 
 		AutocompleteSearchEventArgs OnSearching(string text);
-    }
+	}
 
 	public class AutocompleteSearchEventArgs
 	{

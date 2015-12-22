@@ -20,14 +20,14 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 				return (IControl)Controls[0];
 			}
-
 			set
 			{
 				Controls.Clear();
 
 				if (value != null)
 				{
-					Controls.Add((System.Windows.Forms.Control)value);
+					((System.Windows.Forms.Control) value).Dock = System.Windows.Forms.DockStyle.Fill;
+					Controls.Add((System.Windows.Forms.Control) value);
 				}
 			}
 		}

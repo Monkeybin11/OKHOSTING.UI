@@ -210,7 +210,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Url) return ITextBoxInputType.Url;
 
 				return ITextBoxInputType.Text;
-            }
+			}
 			set
 			{
 				switch (value)

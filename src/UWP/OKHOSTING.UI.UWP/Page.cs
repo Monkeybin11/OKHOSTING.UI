@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.UWP
 			get
 			{
 				return Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().VisibleBounds.Height;
-            }
+			}
 		}
 
 		public string Title

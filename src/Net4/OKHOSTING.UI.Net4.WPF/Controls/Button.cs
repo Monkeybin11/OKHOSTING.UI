@@ -221,7 +221,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			set
 			{
 				base.FontStyle = System.Windows.FontStyles.Italic;
-            }
+			}
 		}
 
 		bool ITextControl.Underline

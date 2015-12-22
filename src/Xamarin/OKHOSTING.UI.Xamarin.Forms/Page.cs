@@ -26,7 +26,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			get
 			{
 				return Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight;
-            }
+			}
 		}
 
 		double IPage.Width
