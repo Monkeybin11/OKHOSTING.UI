@@ -6,20 +6,20 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class ListPicker : System.Windows.Controls.ComboBox, IListPicker
 	{
-        public ListPicker()
-        {
-            base.SelectionChanged += ListPicker_SelectionChanged;
-        }
+		public ListPicker()
+		{
+			base.SelectionChanged += ListPicker_SelectionChanged;
+		}
 
-        private void ListPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (SelectedItemChanged != null)
-            {
-                SelectedItemChanged(sender, e);
-            }
-        }
+		private void ListPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			if (SelectedItemChanged != null)
+			{
+				SelectedItemChanged(sender, e);
+			}
+		}
 
-        public IEnumerable<string> DataSource
+		public IEnumerable<string> DataSource
 		{
 			get
 			{
@@ -44,9 +44,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        public event EventHandler SelectedItemChanged;
+		public event EventHandler SelectedItemChanged;
 
-        void IDisposable.Dispose()
+		void IDisposable.Dispose()
 		{
 		}
 

@@ -12,6 +12,6 @@ namespace OKHOSTING.UI.Controls
 		string SelectedItem { get; set; }
 		int SelectedIndex { get; set; }
 
-        event EventHandler SelectedItemChanged;
-    }
+		event EventHandler SelectedItemChanged;
+	}
 }

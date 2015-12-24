@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Net4.WebForms.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
@@ -17,10 +19,73 @@ namespace OKHOSTING.UI.Net4.WebForms
 				base.Form.Controls.Add(ContentHolder);
 			}
 
-			//restore state
+			//restore state and launch events
 			if (IsPostBack)
 			{
-                Content = (IControl) Session["Content"];
+				//get last set of controls from session
+				Content = (IControl) Session["Content"];
+
+				string eventTarget = Request.Form["__EVENTTARGET"];
+				string eventArgument = Request.Form["__EVENTARGUMENT"];
+
+				foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+				{
+					string postedValue = Request.Form[postedValueName];
+
+					IControl control = (IControl) ContentHolder.FindControl(postedValueName);
+
+					//get posted values and update controls
+
+					if (control is TextBox)
+					{
+						((TextBox) control).Text = postedValue;
+					}
+
+					if (control is ListPicker)
+					{
+						((ListPicker) control).SelectedValue = postedValue;
+					}
+
+					if (control is CheckBox)
+					{
+						((CheckBox) control).Checked = postedValue == "checked";
+					}
+
+					if (control is TextArea)
+					{
+						((TextArea)control).Text = postedValue;
+					}
+
+					if (control is PasswordTextBox)
+					{
+						((PasswordTextBox)control).Text = postedValue;
+					}
+
+					if (control is Autocomplete)
+					{
+						((IAutocomplete) control).Text = postedValue;
+					}
+
+					//LabelButton was clicked
+					if (control is LabelButton && eventTarget == control.Name)
+					{
+						((LabelButton) control).Button_Click(control, new EventArgs());
+					}
+
+					//Button was clicked
+					if (control is Button && postedValue == postedValueName)
+					{
+						((Button) control).Button_Click(control, new EventArgs());
+					}
+
+					//handle other events like ILabelButton.Click  or IListPicker.SelectedValueChanged
+					if (!string.IsNullOrWhiteSpace(eventTarget))
+					{
+						if (postedValueName == eventTarget)
+						{
+						}
+					}
+				}
 			}
 
 			base.OnInit(e);

@@ -7,20 +7,21 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker
 	{
-        public ListPicker()
-        {
-            base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
-        }
+		public ListPicker()
+		{
+			base.AutoPostBack = true;
+			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
+		}
 
-        private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (SelectedItemChanged != null)
-            {
-                SelectedItemChanged(sender, e);
-            }
-        }
+		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (SelectedItemChanged != null)
+			{
+				SelectedItemChanged(sender, e);
+			}
+		}
 
-        IEnumerable<string> IListPicker.DataSource
+		IEnumerable<string> IListPicker.DataSource
 		{
 			get
 			{
@@ -44,19 +45,21 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-        public event EventHandler SelectedItemChanged;
+		public event EventHandler SelectedItemChanged;
 
-        protected void OnSelectedItemChanged()
-        {
-            if (SelectedItemChanged != null)
-            {
-                SelectedItemChanged(this, new EventArgs());
-            }
-        }
+		protected override void OnPreRender(EventArgs e)
+		{
+			if (base.DataSource != null)
+			{
+				base.DataBind();
+			}
 
-        #region IControl
+			base.OnPreRender(e);
+		}
 
-        string IControl.Name
+		#region IControl
+
+		string IControl.Name
 		{
 			get
 			{
@@ -442,6 +445,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

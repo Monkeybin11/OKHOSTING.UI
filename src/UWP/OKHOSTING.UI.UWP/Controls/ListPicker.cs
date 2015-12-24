@@ -6,20 +6,20 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class ListPicker : Windows.UI.Xaml.Controls.ListBox, IListPicker
 	{
-        public ListPicker()
-        {
-            base.SelectionChanged += ListPicker_SelectionChanged;
-        }
+		public ListPicker()
+		{
+			base.SelectionChanged += ListPicker_SelectionChanged;
+		}
 
-        private void ListPicker_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
-        {
-            if (SelectedItemChanged != null)
-            {
-                SelectedItemChanged(sender, e);
-            }
-        }
+		private void ListPicker_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
+		{
+			if (SelectedItemChanged != null)
+			{
+				SelectedItemChanged(sender, e);
+			}
+		}
 
-        IEnumerable<string> IListPicker.DataSource
+		IEnumerable<string> IListPicker.DataSource
 		{
 			get
 			{
@@ -55,9 +55,9 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-        public event EventHandler SelectedItemChanged;
+		public event EventHandler SelectedItemChanged;
 
-        void IDisposable.Dispose()
+		void IDisposable.Dispose()
 		{
 		}
 

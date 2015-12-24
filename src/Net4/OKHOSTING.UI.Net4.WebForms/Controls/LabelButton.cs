@@ -6,6 +6,21 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class LabelButton : System.Web.UI.WebControls.LinkButton, ILabelButton
 	{
+		public LabelButton()
+		{
+			base.Click += Button_Click;
+		}
+
+		public new event EventHandler Click;
+
+		public void Button_Click(object sender, EventArgs e)
+		{
+			if (Click != null)
+			{
+				Click(this, e);
+			}
+		}
+
 		#region IControl
 
 		string IControl.Name
