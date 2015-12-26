@@ -69,13 +69,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 					//LabelButton was clicked
 					if (control is LabelButton && eventTarget == control.Name)
 					{
-						((LabelButton) control).Button_Click(control, new EventArgs());
+						((LabelButton) control).Raise_Click();
 					}
 
 					//Button was clicked
 					if (control is Button && postedValue == postedValueName)
 					{
-						((Button) control).Button_Click(control, new EventArgs());
+						((Button) control).Raise_Click();
 					}
 
 					//handle other events like ILabelButton.Click  or IListPicker.SelectedValueChanged

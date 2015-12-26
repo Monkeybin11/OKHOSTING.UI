@@ -10,14 +10,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public ListPicker()
 		{
 			base.AutoPostBack = true;
-			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
 		}
 
-		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+		public event EventHandler SelectedItemChanged;
+
+		protected internal virtual void Raise_SelectedItemChanged()
 		{
 			if (SelectedItemChanged != null)
 			{
-				SelectedItemChanged(sender, e);
+				SelectedItemChanged(this, new EventArgs());
 			}
 		}
 
@@ -44,8 +45,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				base.SelectedValue = value;
 			}
 		}
-
-		public event EventHandler SelectedItemChanged;
 
 		protected override void OnPreRender(EventArgs e)
 		{

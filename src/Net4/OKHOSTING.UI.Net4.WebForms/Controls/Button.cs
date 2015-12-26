@@ -6,18 +6,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class Button : System.Web.UI.WebControls.Button, IButton
 	{
-		public Button()
-		{
-			base.Click += Button_Click;
-		}
-
 		public new event EventHandler Click;
 
-		public void Button_Click(object sender, EventArgs e)
+		protected internal virtual void Raise_Click()
 		{
 			if (Click != null)
 			{
-				Click(this, e);
+				Click(this, new EventArgs());
 			}
 		}
 
