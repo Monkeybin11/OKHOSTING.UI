@@ -16,6 +16,8 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
+[Aa]pp.config
+[Ww]eb.config
 
 # Roslyn cache directories
 *.ide/
