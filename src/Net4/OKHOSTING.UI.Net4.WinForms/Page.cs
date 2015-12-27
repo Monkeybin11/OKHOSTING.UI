@@ -62,7 +62,11 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		protected override void OnResize(EventArgs e)
 		{
-			Platform.Current.Controller.Resize();
+			if (Platform.Current.Controller != null) 
+			{
+				Platform.Current.Controller.Resize ();
+			}
+
 			base.OnResize(e);
 		}
 	}

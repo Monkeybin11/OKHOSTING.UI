@@ -78,7 +78,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 					}
 
 					//Button was clicked
-					if (control is Button && postedValue == postedValueName)
+					if (control is Button && postedValue == ((Button) control).Text)
 					{
 						((Button) control).Raise_Click();
 					}
