@@ -44,6 +44,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 					if (control is ListPicker)
 					{
 						((ListPicker) control).SelectedValue = postedValue;
+
+						if (postedValueName == eventTarget)
+						{
+							((ListPicker) control).Raise_SelectedItemChanged();
+						}
 					}
 
 					if (control is CheckBox)
@@ -81,9 +86,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 					//handle other events like ILabelButton.Click  or IListPicker.SelectedValueChanged
 					if (!string.IsNullOrWhiteSpace(eventTarget))
 					{
-						if (postedValueName == eventTarget)
-						{
-						}
+						
 					}
 				}
 			}

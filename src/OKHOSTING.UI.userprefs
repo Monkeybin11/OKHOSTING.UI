@@ -1,13 +1,25 @@
-﻿<Properties StartupItem="UWP\OKHOSTING.UI.UWP\OKHOSTING.UI.UWP.csproj">
+﻿<Properties StartupItem="Xamarin/OKHOSTING.UI.Xamarin.Mac/OKHOSTING.UI.Xamarin.Mac.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Xamarin\OKHOSTING.UI.Xamarin.Gtk\Page.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Xamarin\OKHOSTING.UI.Xamarin.Gtk\Program.cs" Line="1" Column="1" />
-      <File FileName="Xamarin\OKHOSTING.UI.Xamarin.Gtk\App.cs" Line="1" Column="1" />
-      <File FileName="Xamarin\OKHOSTING.UI.Xamarin.Gtk\Page.cs" Line="36" Column="30" />
-      <File FileName="PCL\OKHOSTING.UI\Color.cs" Line="1" Column="1" />
-      <File FileName="Xamarin\OKHOSTING.UI.Xamarin.Forms\Page.cs" Line="1" Column="1" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Platform.cs" Line="169" Column="19" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Mac/Controls/Button.cs" Line="6" Column="30" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="OKHOSTING.UI" expanded="True">
+            <Node name="Xamarin" expanded="True">
+              <Node name="OKHOSTING.UI.Xamarin.Forms" expanded="True">
+                <Node name="Controls" expanded="True">
+                  <Node name="Layout" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

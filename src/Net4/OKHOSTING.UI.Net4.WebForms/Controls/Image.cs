@@ -236,7 +236,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 					Directory.CreateDirectory(tempDirectoryPath);
 				}
 
-				string tempFilePath = Path.Combine(tempDirectoryPath, Path.GetFileName(filePath));
+				filePath = Path.Combine(tempDirectoryPath, Path.GetFileName(filePath));
 			}
 
 			//we finally get the "relative" path of the file and load it as a url
