@@ -45,6 +45,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\ITextBoxInputType.cs" />
     <Compile Include="Controls\ITextControl.cs" />

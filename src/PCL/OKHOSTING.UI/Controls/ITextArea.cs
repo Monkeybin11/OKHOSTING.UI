@@ -1,4 +1,6 @@
-﻿namespace OKHOSTING.UI.Controls
+﻿using System;
+
+namespace OKHOSTING.UI.Controls
 {
 	/// <summary>
 	/// A multiline textbox
@@ -6,5 +8,7 @@
 	public interface ITextArea : ITextControl
 	{ 
 		string Text { get; set; }
+
+		event EventHandler ValueChanged;
 	}
 }

@@ -25,9 +25,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 				//get last set of controls from session
 				Content = (IControl) Session["Content"];
 
-				string eventTarget = Request.Form["__EVENTTARGET"];
-				string eventArgument = Request.Form["__EVENTARGUMENT"];
-
+				//restore state
 				foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
 				{
 					string postedValue = Request.Form[postedValueName];
@@ -36,54 +34,113 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 					//get posted values and update controls
 
-					if (control is TextBox)
-					{
-						((TextBox) control).Text = postedValue;
-					}
-
-					if (control is ListPicker)
-					{
-						((ListPicker) control).SelectedValue = postedValue;
-					}
-
-					if (control is CheckBox)
-					{
-						((CheckBox) control).Checked = postedValue == "checked";
-					}
-
-					if (control is TextArea)
-					{
-						((TextArea)control).Text = postedValue;
-					}
-
-					if (control is PasswordTextBox)
-					{
-						((PasswordTextBox)control).Text = postedValue;
-					}
-
 					if (control is Autocomplete)
 					{
 						((IAutocomplete) control).Text = postedValue;
 					}
 
-					//LabelButton was clicked
-					if (control is LabelButton && eventTarget == control.Name)
+					if (control is Calendar)
 					{
-						((LabelButton) control).Raise_Click();
+						((ICalendar) control).SelectedDate = DateTime.Parse(postedValue);
 					}
 
-					//Button was clicked
-					if (control is Button && postedValue == postedValueName)
+					if (control is CheckBox)
 					{
-						((Button) control).Raise_Click();
+						((ICheckBox)control).SelectedValue = postedValue == "checked";
 					}
 
-					//handle other events like ILabelButton.Click  or IListPicker.SelectedValueChanged
-					if (!string.IsNullOrWhiteSpace(eventTarget))
+					if (control is ListPicker)
 					{
-						if (postedValueName == eventTarget)
-						{
-						}
+						((IListPicker) control).SelectedItem = postedValue;
+					}
+
+					if (control is PasswordTextBox)
+					{
+						((IPasswordTextBox) control).Text = postedValue;
+					}
+
+					if (control is TextArea)
+					{
+						((ITextArea) control).Text = postedValue;
+					}
+
+					if (control is TextBox)
+					{
+						((ITextBox)control).Text = postedValue;
+					}
+				}
+			}
+
+			//raise events
+
+			string eventTarget = Request.Form["__EVENTTARGET"];
+			string eventArgument = Request.Form["__EVENTARGUMENT"];
+
+			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			{
+				string postedValue = Request.Form[postedValueName];
+
+				IControl control = (IControl)ContentHolder.FindControl(postedValueName);
+
+				//get posted values and update controls
+
+				if (control is Autocomplete)
+				{
+					((IAutocomplete)control).Text = postedValue;
+				}
+
+				//Button was clicked
+				if (control is Button && postedValue == postedValueName)
+				{
+					((Button)control).Raise_Click();
+				}
+
+				if (control is Calendar)
+				{
+					((ICalendar)control).SelectedDate = DateTime.Parse(postedValue);
+				}
+
+				if (control is CheckBox)
+				{
+					((ICheckBox)control).SelectedValue = postedValue == "checked";
+				}
+
+				//LabelButton was clicked
+				if (control is LabelButton && eventTarget == control.Name)
+				{
+					((LabelButton)control).Raise_Click();
+				}
+
+				if (control is ListPicker)
+				{
+					((IListPicker)control).SelectedItem = postedValue;
+				}
+
+				if (control is PasswordTextBox)
+				{
+					((IPasswordTextBox)control).Text = postedValue;
+				}
+
+				if (control is TextArea)
+				{
+					((ITextArea)control).Text = postedValue;
+				}
+
+				if (control is TextBox)
+				{
+					((ITextBox)control).Text = postedValue;
+				}
+
+
+
+
+				
+				
+				//handle other events like ILabelButton.Click  or IListPicker.SelectedValueChanged
+				if (!string.IsNullOrWhiteSpace(eventTarget))
+				{
+					if (postedValueName == eventTarget)
+					{
 					}
 				}
 			}
