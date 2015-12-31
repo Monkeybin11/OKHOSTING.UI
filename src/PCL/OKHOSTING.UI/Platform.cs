@@ -35,6 +35,11 @@ namespace OKHOSTING.UI
 			}
 
 			Page.Content = null;
+
+			if (ControllerStack.Count > 0) 
+			{
+				Controller.Start ();
+			}
 		}
 
 		//public

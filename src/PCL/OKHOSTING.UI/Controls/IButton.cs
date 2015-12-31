@@ -9,6 +9,9 @@ namespace OKHOSTING.UI.Controls
 			get; set;
 		}
 
+		/// <summary>
+		/// Raises after the user clicked on the button
+		/// </summary>
 		event EventHandler Click;
 	}
 }
