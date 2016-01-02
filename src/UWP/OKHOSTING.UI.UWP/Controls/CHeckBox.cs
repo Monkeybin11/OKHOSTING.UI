@@ -5,7 +5,28 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class CheckBox : Windows.UI.Xaml.Controls.CheckBox, ICheckBox
 	{
-		public bool SelectedValue
+		public CheckBox()
+		{
+			base.Checked += CheckBox_Checked;
+		}
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IInputControl
+
+		private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<bool>) this).Value);
+			}
+		}
+
+		public event EventHandler<bool> ValueChanged;
+
+		bool IInputControl<bool>.Value
 		{
 			get
 			{
@@ -17,9 +38,7 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		void IDisposable.Dispose()
-		{
-		}
+		#endregion
 
 		#region IControl
 

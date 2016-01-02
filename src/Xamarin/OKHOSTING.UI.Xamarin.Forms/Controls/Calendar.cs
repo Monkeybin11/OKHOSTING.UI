@@ -5,7 +5,28 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class Calendar : global::Xamarin.Forms.DatePicker, ICalendar
 	{
-		DateTime? ICalendar.SelectedDate
+		public Calendar()
+		{
+			base.DateSelected += Calendar_DateSelected;
+		}
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IInputControl
+
+		private void Calendar_DateSelected(object sender, global::Xamarin.Forms.DateChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
+			}
+		}
+
+		public event EventHandler<DateTime?> ValueChanged;
+
+		DateTime? IInputControl<DateTime?>.Value
 		{
 			get
 			{
@@ -20,9 +41,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-		void IDisposable.Dispose()
-		{
-		}
+		#endregion
 
 		#region IControl
 

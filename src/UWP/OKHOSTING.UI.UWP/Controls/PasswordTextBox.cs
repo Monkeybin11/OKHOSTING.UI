@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.UWP.Controls
@@ -14,10 +10,27 @@ namespace OKHOSTING.UI.UWP.Controls
 		public PasswordTextBox()
 		{
 			NativeTextBox = new Windows.UI.Xaml.Controls.PasswordBox();
+			NativeTextBox.PasswordChanged += NativeTextBox_PasswordChanged;
 			base.Children.Add(NativeTextBox);
 		}
 
-		public string Text
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IInputControl
+
+		private void NativeTextBox_PasswordChanged(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
 		{
 			get
 			{
@@ -29,10 +42,7 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-
-		void IDisposable.Dispose()
-		{
-		}
+		#endregion
 
 		#region IControl
 

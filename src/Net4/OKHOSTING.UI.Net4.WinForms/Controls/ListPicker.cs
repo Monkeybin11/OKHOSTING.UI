@@ -11,27 +11,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
 		}
 
+		#region IInputControl
+
 		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (ValueChanged != null)
 			{
-				ValueChanged(sender, e);
+				ValueChanged(this, ((IInputControl<string>) this).Value);
 			}
 		}
 
-		IEnumerable<string> IListPicker.DataSource
-		{
-			get
-			{
-				return (IEnumerable<string>) base.DataSource;
-			}
-			set
-			{
-				base.DataSource = value;
-			}
-		}
-
-		string IListPicker.SelectedItem
+		string IInputControl<string>.Value
 		{
 			get
 			{
@@ -43,7 +33,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		public event EventHandler ValueChanged;
+		public event EventHandler<string> ValueChanged;
+		
+		#endregion
 
 		#region IControl
 
@@ -243,6 +235,18 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		}
 
 		#endregion
+
+		IEnumerable<string> IListPicker.DataSource
+		{
+			get
+			{
+				return (IEnumerable<string>)base.DataSource;
+			}
+			set
+			{
+				base.DataSource = value;
+			}
+		}
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{

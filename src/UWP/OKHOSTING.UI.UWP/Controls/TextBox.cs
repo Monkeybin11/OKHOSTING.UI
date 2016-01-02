@@ -5,9 +5,40 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class TextBox : Windows.UI.Xaml.Controls.TextBox, ITextBox
 	{
+		public TextBox()
+		{
+			base.TextChanged += TextBox_TextChanged;
+		}
+
 		void IDisposable.Dispose()
 		{
 		}
+
+		#region IInputControl
+
+		private void TextBox_TextChanged(object sender, Windows.UI.Xaml.Controls.TextChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>)this).Value);
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		#endregion
 
 		#region IControl
 

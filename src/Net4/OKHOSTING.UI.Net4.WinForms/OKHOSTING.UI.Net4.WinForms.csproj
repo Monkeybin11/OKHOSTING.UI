@@ -37,6 +37,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>

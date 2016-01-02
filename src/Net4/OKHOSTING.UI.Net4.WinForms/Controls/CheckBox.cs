@@ -5,6 +5,21 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class CheckBox : System.Windows.Forms.CheckBox, ICheckBox
 	{
+		public CheckBox()
+		{
+			base.CheckedChanged += CheckBox_CheckedChanged;
+		}
+
+		#region IInputControl
+
+		private void CheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<bool>) this).Value);
+			}
+		}
+
 		public bool SelectedValue
 		{
 			get
@@ -16,6 +31,22 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 				base.Checked = true;
 			}
 		}
+
+		bool IInputControl<bool>.Value
+		{
+			get
+			{
+				return base.Checked;
+			}
+			set
+			{
+				base.Checked = value;
+			}
+		}
+
+		public event EventHandler<bool> ValueChanged;
+
+		#endregion
 
 		#region IControl
 
@@ -215,7 +246,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		}
 
 		#endregion
-
+		
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
 			Platform.Current.DrawBorders(this, pevent);

@@ -5,7 +5,28 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class CheckBox : global::Xamarin.Forms.Switch, ICheckBox
 	{
-		bool ICheckBox.SelectedValue
+		public CheckBox()
+		{
+			base.Toggled += CheckBox_Toggled;
+		}
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IInputControl
+
+		private void CheckBox_Toggled(object sender, global::Xamarin.Forms.ToggledEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<bool>) this).Value);
+			}
+		}
+
+		public event EventHandler<bool> ValueChanged;
+
+		bool IInputControl<bool>.Value
 		{
 			get
 			{
@@ -17,9 +38,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-		void IDisposable.Dispose()
-		{
-		}
+		#endregion
 
 		#region IControl
 

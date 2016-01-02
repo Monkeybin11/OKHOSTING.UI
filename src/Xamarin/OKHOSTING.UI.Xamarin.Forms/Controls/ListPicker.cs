@@ -12,14 +12,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
 		}
 
-		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(sender, e);
-			}
-		}
-
 		IEnumerable<string> IListPicker.DataSource
 		{
 			get
@@ -37,24 +29,36 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-		string IListPicker.SelectedItem
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IInputControl
+
+		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
 		{
 			get
 			{
-				return ((IListPicker) this).DataSource.ToArray()[base.SelectedIndex];
+				return ((IListPicker)this).DataSource.ToArray()[base.SelectedIndex];
 			}
 			set
 			{
-				int index = ((IListPicker) this).DataSource.ToList().IndexOf(value);
+				int index = ((IListPicker)this).DataSource.ToList().IndexOf(value);
 				base.SelectedIndex = index;
 			}
 		}
 
-		public event EventHandler ValueChanged;
-
-		void IDisposable.Dispose()
-		{
-		}
+		#endregion
 
 		#region IControl
 

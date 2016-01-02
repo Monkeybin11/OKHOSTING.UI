@@ -9,12 +9,38 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			base.TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap;
 			base.AcceptsReturn = true;
+			base.TextChanged += TextArea_TextChanged;
 		}
-
 
 		void IDisposable.Dispose()
 		{
 		}
+
+		#region IInputControl
+
+		private void TextArea_TextChanged(object sender, Windows.UI.Xaml.Controls.TextChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		#endregion
 
 		#region IControl
 

@@ -5,6 +5,40 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Calendar : System.Windows.Forms.DateTimePicker, ICalendar
 	{
+		public Calendar()
+		{
+			base.ValueChanged += Calendar_ValueChanged;
+		}
+
+		#region IInputControl
+
+		private void Calendar_ValueChanged(object sender, EventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
+			}
+		}
+
+		DateTime? IInputControl<DateTime?>.Value
+		{
+			get
+			{
+				return base.Value;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Value = value.Value;
+				}
+			}
+		}
+
+		public new event EventHandler<DateTime?> ValueChanged;
+
+		#endregion
+	
 		#region IControl
 
 		double? IControl.Width
@@ -189,21 +223,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		}
 
 		#endregion
-
-		DateTime? ICalendar.SelectedDate
-		{
-			get
-			{
-				return base.Value;
-			}
-			set
-			{
-				if (value.HasValue)
-				{
-					base.Value = value.Value;
-				}
-			}
-		}
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{

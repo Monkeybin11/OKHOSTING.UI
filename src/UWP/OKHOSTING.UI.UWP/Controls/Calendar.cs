@@ -5,7 +5,24 @@ namespace OKHOSTING.UI.UWP.Controls
 {
 	public class Calendar : Windows.UI.Xaml.Controls.DatePicker, ICalendar
 	{
-		public DateTime? SelectedDate
+		public Calendar()
+		{
+			base.DateChanged += Calendar_DateChanged;
+		}
+
+		#region IInputControl
+
+		private void Calendar_DateChanged(object sender, Windows.UI.Xaml.Controls.DatePickerValueChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
+			}
+		}
+
+		public event EventHandler<DateTime?> ValueChanged;
+
+		DateTime? IInputControl<DateTime?>.Value
 		{
 			get
 			{
@@ -20,7 +37,8 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-
+		#endregion
+		
 		void IDisposable.Dispose()
 		{
 		}

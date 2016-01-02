@@ -3,7 +3,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Autocomplete : TextBox, UI.Controls.IAutocomplete
+	public class Autocomplete : TextBox, IAutocomplete
 	{
 		public Autocomplete()
 		{
@@ -17,16 +17,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			//Searching+=
 		}
 
-		private void Autocomplete_TextChanged(object sender, EventArgs e)
-		{
-			if(ValueChanged != null)
-			{
-				ValueChanged(this, new EventArgs());
-			}
-		}
-
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
-		public event EventHandler ValueChanged;
 
 		public AutocompleteSearchEventArgs OnSearching(string text)
 		{
@@ -39,5 +30,31 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 			return e;
 		}
+
+		#region IInputControl
+
+		private void Autocomplete_TextChanged(object sender, EventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>)this).Value);
+			}
+		}
+
+		public new event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		#endregion
 	}
 }

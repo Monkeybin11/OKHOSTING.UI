@@ -5,9 +5,40 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class TextBox : global::Xamarin.Forms.Entry, ITextBox
 	{
+		public TextBox()
+		{
+			base.TextChanged += TextBox_TextChanged;
+		}
+
 		void IDisposable.Dispose()
 		{
 		}
+
+		#region IInputControl
+
+		private void TextBox_TextChanged(object sender, global::Xamarin.Forms.TextChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>)this).Value);
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		#endregion
 
 		#region IControl
 

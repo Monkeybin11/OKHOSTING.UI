@@ -11,20 +11,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			GoSearchButton = Platform.Current.Create<IButton>();
 			GoSearchButton.Click += GoSearchButton_Click;
 		}
-
-		event EventHandler<AutocompleteSearchEventArgs> IAutocomplete.Searching
-		{
-			add
-			{
-				throw new NotImplementedException();
-			}
-
-			remove
-			{
-				throw new NotImplementedException();
-			}
-		}
-
+		
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
 
 		protected IButton GoSearchButton;
@@ -54,19 +41,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
-			OnSearching(SearchText.Text);
-		}
-
-		string IAutocomplete.Text
-		{
-			get
-			{
-				return GoSearchButton.Text;
-			}
-			set
-			{
-				GoSearchButton.Text = value;
-			}
+			OnSearching(SearchText.Value);
 		}
 
 		public AutocompleteSearchEventArgs OnSearching(string text)
@@ -80,7 +55,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 			ResultView = new global::Xamarin.Forms.ListView();
 			ResultView.ItemsSource = e.SearchResult;
-			ResultView.ItemSelected += ListView_ItemSelected;
+			ResultView.ItemSelected += ResultView_ItemSelected;
 
 			ResultPage = new global::Xamarin.Forms.ContentPage();
 			ResultPage.Content = ResultView;
@@ -90,9 +65,15 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			return e;
 		}
 
-		private void ListView_ItemSelected(object sender, global::Xamarin.Forms.SelectedItemChangedEventArgs e)
+		private void ResultView_ItemSelected(object sender, global::Xamarin.Forms.SelectedItemChangedEventArgs e)
 		{
-			SearchText.Text = e.SelectedItem.ToString();
+			SearchText.Value = e.SelectedItem.ToString();
+
+			if (SearchText.Value != GoSearchButton.Text)
+			{
+				GoSearchButton.Text = e.SelectedItem.ToString();
+				OnValueChanged();
+			}
 
 			//close result page
 			((Page) Platform.Current.Page).Navigation.PopAsync();
@@ -101,16 +82,31 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			((Page) Platform.Current.Page).Navigation.PopAsync();
 		}
 
+		#region IInputControl
 
-
-		void IDisposable.Dispose()
+		private void OnValueChanged()
 		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
 		}
 
-		AutocompleteSearchEventArgs IAutocomplete.OnSearching(string text)
+		public event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
 		{
-			throw new NotImplementedException();
+			get
+			{
+				return GoSearchButton.Text;
+			}
+			set
+			{
+				GoSearchButton.Text = value;
+			}
 		}
+
+		#endregion
 
 		#region IControl
 
@@ -279,5 +275,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		#endregion
+
+		void IDisposable.Dispose()
+		{
+		}
 	}
 }

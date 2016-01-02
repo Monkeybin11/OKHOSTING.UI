@@ -5,6 +5,38 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class TextBox : System.Windows.Forms.TextBox, ITextBox
 	{
+		public TextBox()
+		{
+			base.TextChanged += PasswordTextBox_TextChanged;
+		}
+
+		#region IInputControl
+
+		private void PasswordTextBox_TextChanged(object sender, System.EventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>)this).Value);
+			}
+
+		}
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		#endregion
+
 		#region IControl
 
 		double? IControl.Width
