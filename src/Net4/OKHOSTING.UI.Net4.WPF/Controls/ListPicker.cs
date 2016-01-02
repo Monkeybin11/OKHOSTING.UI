@@ -11,14 +11,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			base.SelectionChanged += ListPicker_SelectionChanged;
 		}
 
-		private void ListPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-		{
-			if (SelectedItemChanged != null)
-			{
-				SelectedItemChanged(sender, e);
-			}
-		}
-
 		public IEnumerable<string> DataSource
 		{
 			get
@@ -30,25 +22,38 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				base.ItemsSource = value;
 			}
 		}
+		
 
-		string IListPicker.SelectedItem
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IInputControl
+
+		private void ListPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+		}
+
+		string IInputControl<string>.Value
 		{
 			get
 			{
 				return (string) base.SelectedItem;
 			}
-
 			set
 			{
 				base.SelectedItem = value;
 			}
 		}
 
-		public event EventHandler SelectedItemChanged;
+		public event EventHandler<string> ValueChanged;
 
-		void IDisposable.Dispose()
-		{
-		}
+		#endregion
+
 
 		#region IControl
 

@@ -37,6 +37,10 @@ namespace OKHOSTING.UI.Net4.WPF
 			{
 				control = new Image() as T;
 			}
+			else if (typeof(T) == typeof(IImageButton))
+			{
+				control = new ImageButton() as T;
+			}
 			else if (typeof(T) == typeof(ILabel))
 			{
 				control = new Label() as T;

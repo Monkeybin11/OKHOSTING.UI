@@ -1,18 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class TextBox : System.Windows.Controls.TextBox, ITextBox
 	{
+		public TextBox()
+		{
+			base.TextChanged += TextBox_TextChanged;
+		}
 
 		void IDisposable.Dispose()
 		{
 		}
+
+		#region IInputControl
+
+		private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+
+		}
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		#endregion
 
 		#region IControl
 

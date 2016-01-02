@@ -19,7 +19,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				ValueChanged(this, ((IInputControl<string>)this).Value);
 			}
-
 		}
 
 		string IInputControl<string>.Value

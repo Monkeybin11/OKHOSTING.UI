@@ -5,9 +5,43 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class Calendar : System.Windows.Controls.Calendar, ICalendar
 	{
+		public Calendar()
+		{
+			base.SelectedDatesChanged += Calendar_SelectedDatesChanged;
+		}
+
 		void IDisposable.Dispose()
 		{
 		}
+
+		#region IInputControl
+
+		private void Calendar_SelectedDatesChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
+			}
+		}
+
+		DateTime? IInputControl<DateTime?>.Value
+		{
+			get
+			{
+				return base.SelectedDate;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.SelectedDate = value.Value;
+				}
+			}
+		}
+
+		public event EventHandler<DateTime?> ValueChanged;
+
+		#endregion
 
 		#region IControl
 
