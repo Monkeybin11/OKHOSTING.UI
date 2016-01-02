@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class PasswordTextBox : System.Web.UI.WebControls.TextBox, UI.Controls.IPasswordTextBox
+	public class PasswordTextBox : System.Web.UI.WebControls.TextBox, IPasswordTextBox
 	{
 		public PasswordTextBox()
 		{
@@ -220,6 +220,25 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
+
+		#region IInputControl
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		#endregion
+
 
 		#endregion
 	}

@@ -36,37 +36,31 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 					if (control is Autocomplete)
 					{
-						((IAutocomplete) control).Text = postedValue;
+						((IAutocomplete) control).Value = postedValue;
 					}
-
-					if (control is Calendar)
+					else if (control is Calendar)
 					{
-						((ICalendar) control).SelectedDate = DateTime.Parse(postedValue);
+						((ICalendar) control).Value = DateTime.Parse(postedValue);
 					}
-
-					if (control is CheckBox)
+					else if (control is CheckBox)
 					{
-						((ICheckBox)control).SelectedValue = postedValue == "checked";
+						((ICheckBox)control).Value = postedValue == "checked";
 					}
-
-					if (control is ListPicker)
+					else if (control is ListPicker)
 					{
-						((IListPicker) control).SelectedItem = postedValue;
+						((IListPicker) control).Value = postedValue;
 					}
-
-					if (control is PasswordTextBox)
+					else if (control is PasswordTextBox)
 					{
-						((IPasswordTextBox) control).Text = postedValue;
+						((IPasswordTextBox) control).Value = postedValue;
 					}
-
-					if (control is TextArea)
+					else if (control is TextArea)
 					{
-						((ITextArea) control).Text = postedValue;
+						((ITextArea) control).Value = postedValue;
 					}
-
-					if (control is TextBox)
+					else if (control is TextBox)
 					{
-						((ITextBox)control).Text = postedValue;
+						((ITextBox)control).Value = postedValue;
 					}
 				}
 			}
@@ -86,49 +80,39 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 				if (control is Autocomplete)
 				{
-					((IAutocomplete)control).Text = postedValue;
+					((IAutocomplete)control).Value = postedValue;
 				}
-
-				//Button was clicked
-				if (control is Button && postedValue == postedValueName)
+				else if (control is Button && postedValue == postedValueName)
 				{
 					((Button)control).Raise_Click();
 				}
-
-				if (control is Calendar)
+				else if (control is Calendar)
 				{
-					((ICalendar)control).SelectedDate = DateTime.Parse(postedValue);
+					((ICalendar)control).Value = DateTime.Parse(postedValue);
 				}
-
-				if (control is CheckBox)
+				else if (control is CheckBox)
 				{
-					((ICheckBox)control).SelectedValue = postedValue == "checked";
+					((ICheckBox)control).Value = postedValue == "checked";
 				}
-
-				//LabelButton was clicked
-				if (control is LabelButton && eventTarget == control.Name)
+				else if (control is LabelButton && eventTarget == control.Name)
 				{
 					((LabelButton)control).Raise_Click();
 				}
-
-				if (control is ListPicker)
+				else if (control is ListPicker)
 				{
-					((IListPicker)control).SelectedItem = postedValue;
+					((IListPicker)control).Value = postedValue;
 				}
-
-				if (control is PasswordTextBox)
+				else if (control is PasswordTextBox)
 				{
-					((IPasswordTextBox)control).Text = postedValue;
+					((IPasswordTextBox)control).Value = postedValue;
 				}
-
-				if (control is TextArea)
+				else if (control is TextArea)
 				{
-					((ITextArea)control).Text = postedValue;
+					((ITextArea)control).Value = postedValue;
 				}
-
-				if (control is TextBox)
+				else if (control is TextBox)
 				{
-					((ITextBox)control).Text = postedValue;
+					((ITextBox)control).Value = postedValue;
 				}
 
 

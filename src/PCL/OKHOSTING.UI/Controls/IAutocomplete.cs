@@ -3,22 +3,12 @@ using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Controls
 {
-	public interface IAutocomplete: ITextControl
+	public interface IAutocomplete: ITextControl, IInputControl<string>
 	{
-		/// <summary>
-		/// Gets or sets the text that is contained in the textbox
-		/// </summary>
-		string Text { get; set; }
-
 		/// <summary>
 		/// Raises after the user writes something and triggers a search
 		/// </summary>
 		event EventHandler<AutocompleteSearchEventArgs> Searching;
-
-		/// <summary>
-		/// Raises after the value has changed by the user. Chages made in code will not raise this event.
-		/// </summary>
-		event EventHandler ValueChanged;
 
 		AutocompleteSearchEventArgs OnSearching(string text);
 	}

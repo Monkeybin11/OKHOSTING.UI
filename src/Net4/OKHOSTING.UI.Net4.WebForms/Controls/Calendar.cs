@@ -396,7 +396,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		DateTime? ICalendar.SelectedDate
+		#region IInputControl
+
+		DateTime? IInputControl<DateTime?>.Value
 		{
 			get
 			{
@@ -410,5 +412,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				}
 			}
 		}
+
+		public event EventHandler<DateTime?> ValueChanged;
+
+		#endregion
 	}
 }

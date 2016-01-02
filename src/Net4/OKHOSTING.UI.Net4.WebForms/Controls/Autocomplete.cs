@@ -43,6 +43,38 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			OKHOSTING.UI.Session.Current[SessionId] = this;
 			InnerAutoCompleteExtender.ContextKey = SessionId;
 		}
+		
+		public event EventHandler<AutocompleteSearchEventArgs> Searching;
+
+		AutocompleteSearchEventArgs IAutocomplete.OnSearching(string text)
+		{
+			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
+
+			if (Searching != null)
+			{
+				Searching(this, e);
+			}
+
+			return e;
+		}
+
+		#region IInputControl
+
+		public event EventHandler<string> ValueChanged;
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return InnerTextBox.Text;
+			}
+			set
+			{
+				InnerTextBox.Text = value;
+			}
+		}
+
+		#endregion
 
 		#region IControl
 
@@ -433,31 +465,5 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		#endregion
-
-		string IAutocomplete.Text
-		{
-			get
-			{
-				return InnerTextBox.Text;
-			}
-			set
-			{
-				InnerTextBox.Text = value;
-			}
-		}
-
-		public event EventHandler<AutocompleteSearchEventArgs> Searching;
-
-		AutocompleteSearchEventArgs IAutocomplete.OnSearching(string text)
-		{
-			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
-
-			if (Searching != null)
-			{
-				Searching(this, e);
-			}
-
-			return e;
-		}
 	}
 }

@@ -12,13 +12,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			base.AutoPostBack = true;
 		}
 
-		public event EventHandler SelectedItemChanged;
-
 		protected internal virtual void Raise_SelectedItemChanged()
 		{
-			if (SelectedItemChanged != null)
+			if (ValueChanged != null)
 			{
-				SelectedItemChanged(this, new EventArgs());
+				ValueChanged(this, new EventArgs());
 			}
 		}
 
@@ -34,7 +32,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		string IListPicker.SelectedItem
+		#region IInputControl
+
+		string IInputControl<string>.Value
 		{
 			get
 			{
@@ -45,6 +45,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				base.SelectedValue = value;
 			}
 		}
+
+		public event EventHandler<string> ValueChanged;
+
+		#endregion
 
 		protected override void OnPreRender(EventArgs e)
 		{
@@ -441,6 +445,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
 				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
 				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+			}
+		}
+
+		public string Value
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
 			}
 		}
 

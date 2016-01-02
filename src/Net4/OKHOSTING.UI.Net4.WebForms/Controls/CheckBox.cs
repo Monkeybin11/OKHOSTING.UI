@@ -396,7 +396,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		public bool SelectedValue
+		bool IInputControl<bool>.Value
 		{
 			get
 			{
@@ -408,5 +408,45 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		bool IControl.Visible
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		bool IControl.Enabled
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public event EventHandler<bool> ValueChanged;
+
+		event EventHandler<bool> IInputControl<bool>.ValueChanged
+		{
+			add
+			{
+				throw new NotImplementedException();
+			}
+
+			remove
+			{
+				throw new NotImplementedException();
+			}
+		}
 	}
 }

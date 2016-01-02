@@ -13,9 +13,9 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		private void ListPicker_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
 		{
-			if (SelectedItemChanged != null)
+			if (ValueChanged != null)
 			{
-				SelectedItemChanged(sender, e);
+				ValueChanged(sender, e);
 			}
 		}
 
@@ -55,7 +55,7 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
-		public event EventHandler SelectedItemChanged;
+		public event EventHandler ValueChanged;
 
 		void IDisposable.Dispose()
 		{

@@ -13,9 +13,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (SelectedItemChanged != null)
+			if (ValueChanged != null)
 			{
-				SelectedItemChanged(sender, e);
+				ValueChanged(sender, e);
 			}
 		}
 
@@ -43,7 +43,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		public event EventHandler SelectedItemChanged;
+		public event EventHandler ValueChanged;
 
 		#region IControl
 

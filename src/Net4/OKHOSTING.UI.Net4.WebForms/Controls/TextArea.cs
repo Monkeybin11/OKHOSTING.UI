@@ -10,6 +10,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			base.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
 		}
 
+		#region IInputControl
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		#endregion
+
 		#region IControl
 
 		string IControl.Name
