@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.IO;
 using OKHOSTING.UI.Controls;
+using System.Web.UI;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class Calendar : System.Web.UI.WebControls.Calendar, ICalendar
+	public class ImageButton : System.Web.UI.WebControls.ImageButton, UI.Controls.IImageButton
 	{
 		#region IControl
 
@@ -216,213 +218,89 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		#endregion
-
-		#region ITextControl
-
-		Color ITextControl.FontColor
+		bool IControl.Visible
 		{
 			get
 			{
-				return Platform.Current.Parse(base.ForeColor);
+				throw new NotImplementedException();
 			}
+
 			set
 			{
-				base.ForeColor = Platform.Current.Parse(value);
+				throw new NotImplementedException();
 			}
 		}
 
-		string ITextControl.FontFamily
+		bool IControl.Enabled
 		{
 			get
 			{
-				return base.Font.Name;
+				throw new NotImplementedException();
 			}
+
 			set
 			{
-				base.Font.Name = value;
-			}
-		}
-
-		double ITextControl.FontSize
-		{
-			get
-			{
-				return base.Font.Size.Unit.Value;
-			}
-			set
-			{
-				base.Font.Size = new System.Web.UI.WebControls.FontUnit(value, System.Web.UI.WebControls.UnitType.Pixel);
-			}
-		}
-
-		bool ITextControl.Bold
-		{
-			get
-			{
-				return base.Font.Bold;
-			}
-			set
-			{
-				base.Font.Bold = value;
-			}
-		}
-
-		bool ITextControl.Italic
-		{
-			get
-			{
-				return base.Font.Italic;
-			}
-			set
-			{
-				base.Font.Italic = value;
-			}
-		}
-
-		bool ITextControl.Underline
-		{
-			get
-			{
-				return base.Font.Underline;
-			}
-			set
-			{
-				base.Font.Underline = value;
-			}
-		}
-
-		HorizontalAlignment ITextControl.TextHorizontalAlignment
-		{
-
-			get
-			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
-
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return HorizontalAlignment.Left;
-				}
-
-				if (cssClass.EndsWith("left"))
-				{
-					return HorizontalAlignment.Left;
-				}
-				else if (cssClass.EndsWith("right"))
-				{
-					return HorizontalAlignment.Right;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return HorizontalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return HorizontalAlignment.Fill;
-				}
-				else
-				{
-					return HorizontalAlignment.Left;
-				}
-			}
-			set
-			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
-				Platform.Current.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
-			}
-		}
-
-		VerticalAlignment ITextControl.TextVerticalAlignment
-		{
-			get
-			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
-
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return VerticalAlignment.Top;
-				}
-
-				if (cssClass.EndsWith("top"))
-				{
-					return VerticalAlignment.Top;
-				}
-				else if (cssClass.EndsWith("bottom"))
-				{
-					return VerticalAlignment.Bottom;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return VerticalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return VerticalAlignment.Fill;
-				}
-				else
-				{
-					return VerticalAlignment.Top;
-				}
-			}
-			set
-			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
-				Platform.Current.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
-			}
-		}
-
-		Thickness ITextControl.TextPadding
-		{
-			get
-			{
-				double left, top, right, bottom;
-				Thickness thickness = new Thickness();
-
-				if (double.TryParse(base.Style["padding-left"], out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["padding-top"], out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["padding-right"], out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["padding-bottom"], out bottom)) thickness.Bottom = bottom;
-
-				return new Thickness(left, top, right, bottom);
-			}
-			set
-			{
-				if (value.Left.HasValue) base.Style["padding-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+				throw new NotImplementedException();
 			}
 		}
 
 		#endregion
 
-		#region IInputControl
+		public new event EventHandler Click;
 
-		DateTime? IInputControl<DateTime?>.Value
+		protected internal virtual void Raise_Click()
 		{
-			get
+			if (Click != null)
 			{
-				return base.SelectedDate;
+				Click(this, new EventArgs());
 			}
-			set
+		}
+
+		public void LoadFromFile(string filePath)
+		{
+			if (!File.Exists(filePath))
 			{
-				if (value.HasValue)
+				throw new ArgumentOutOfRangeException("filePath", "The file does not exist");
+			}
+
+			//file is not located inside the web app, so we create a copy in a temp directory			
+			if (!filePath.StartsWith(this.Page.MapPath("/")))
+			{
+				string tempDirectoryPath = Path.Combine(OKHOSTING.Core.Net4.DefaultPaths.Custom, "Temp");
+
+				if (!Directory.Exists(tempDirectoryPath))
 				{
-					base.SelectedDate = value.Value;
+					Directory.CreateDirectory(tempDirectoryPath);
 				}
+
+				string tempFilePath = Path.Combine(tempDirectoryPath, Path.GetFileName(filePath));
 			}
+
+			//we finally get the "relative" path of the file and load it as a url
+			string url = filePath.Replace(this.Page.MapPath("/"), string.Empty);
+			LoadFromUrl(new System.Uri(url));
 		}
 
-		public event EventHandler<DateTime?> ValueChanged;
-
-		protected internal void RaiseValueChanged()
+		public void LoadFromStream(Stream stream)
 		{
-			if (ValueChanged != null)
+			//save the sream to a temp file, and load as file from there
+			string tempDirectoryPath = Path.Combine(OKHOSTING.Core.Net4.DefaultPaths.Custom, "Temp");
+
+			if (!Directory.Exists(tempDirectoryPath))
 			{
-				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
+				Directory.CreateDirectory(tempDirectoryPath);
+			}
+
+			string tempFilePath = Path.Combine(tempDirectoryPath, new Random().Next().ToString());
+			using (var fileStream = File.OpenWrite(tempFilePath))
+			{
+				stream.CopyTo(fileStream);
 			}
 		}
 
-		#endregion
+		public void LoadFromUrl(System.Uri url)
+		{
+			base.ImageUrl = url.ToString();
+		}
 	}
 }

@@ -74,6 +74,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		protected internal void RaiseValueChanged()
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+		}
+
 		#endregion
 
 		#region IControl
@@ -461,6 +469,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
 				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
 				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+			}
+		}
+
+		private class EventArgs<T>
+		{
+			public EventArgs()
+			{
 			}
 		}
 

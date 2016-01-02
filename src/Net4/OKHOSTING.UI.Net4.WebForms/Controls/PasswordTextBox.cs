@@ -237,6 +237,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		public event EventHandler<string> ValueChanged;
 
+		protected internal void RaiseValueChanged()
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>)this).Value);
+			}
+		}
+
 		#endregion
 
 

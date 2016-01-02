@@ -408,44 +408,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		bool IControl.Visible
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		bool IControl.Enabled
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public event EventHandler<bool> ValueChanged;
 
-		event EventHandler<bool> IInputControl<bool>.ValueChanged
+		protected internal void RaiseValueChanged()
 		{
-			add
+			if (ValueChanged != null)
 			{
-				throw new NotImplementedException();
-			}
-
-			remove
-			{
-				throw new NotImplementedException();
+				ValueChanged(this, ((IInputControl<bool>) this).Value);
 			}
 		}
 	}

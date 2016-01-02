@@ -6,6 +6,32 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class TextBox : System.Web.UI.WebControls.TextBox, ITextBox
 	{
+		#region IInputControl
+
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				return base.Text;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
+		public event EventHandler<string> ValueChanged;
+
+		protected internal void RaiseValueChanged()
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+		}
+
+		#endregion
+
 		#region IControl
 
 		string IControl.Name

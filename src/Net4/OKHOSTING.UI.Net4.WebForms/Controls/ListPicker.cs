@@ -12,14 +12,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			base.AutoPostBack = true;
 		}
 
-		protected internal virtual void Raise_SelectedItemChanged()
-		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, new EventArgs());
-			}
-		}
-
 		IEnumerable<string> IListPicker.DataSource
 		{
 			get
@@ -47,6 +39,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		public event EventHandler<string> ValueChanged;
+
+		protected internal void RaiseValueChanged()
+		{
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, ((IInputControl<string>) this).Value);
+			}
+		}
 
 		#endregion
 

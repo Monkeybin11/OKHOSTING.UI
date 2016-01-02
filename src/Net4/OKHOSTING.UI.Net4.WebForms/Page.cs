@@ -2,6 +2,7 @@
 using System.Linq;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Net4.WebForms.Controls;
+using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
@@ -19,49 +20,91 @@ namespace OKHOSTING.UI.Net4.WebForms
 				base.Form.Controls.Add(ContentHolder);
 			}
 
-			//restore state and launch events
-			if (IsPostBack)
+			if (!IsPostBack)
 			{
-				//get last set of controls from session
-				Content = (IControl) Session["Content"];
+				return;
+			}
 
-				//restore state
-				foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			//restore state and launch events
+			
+			//get last set of controls from session
+			Content = (IControl)Session["Content"];
+
+			//keep track of wich IInputControls had ther value updated so we can reaise IInputControl.OnValueChanged
+			List<IControl> updatedInputControls = new List<IControl>();
+
+			//restore state
+			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			{
+				//get posted value by user
+				string postedValue = Request.Form[postedValueName];
+
+				//get control that corresponds to this input
+				IControl control = (IControl) ContentHolder.FindControl(postedValueName);
+
+				//update control's value
+				if (control is Autocomplete)
 				{
-					string postedValue = Request.Form[postedValueName];
+					if (((IAutocomplete) control).Value != postedValue)
+					{
+						updatedInputControls.Add(control);
+					}
 
-					IControl control = (IControl) ContentHolder.FindControl(postedValueName);
+					((IAutocomplete) control).Value = postedValue;
+				}
+				else if (control is Calendar)
+				{
+					if (((ICalendar) control).Value != DateTime.Parse(postedValue))
+					{
+						updatedInputControls.Add(control);
+					}
 
-					//get posted values and update controls
+					((ICalendar) control).Value = DateTime.Parse(postedValue);
+				}
+				else if (control is CheckBox)
+				{
+					if (((ICheckBox)control).Value != (postedValue == "checked"))
+					{
+						updatedInputControls.Add(control);
+					}
 
-					if (control is Autocomplete)
+					((ICheckBox) control).Value = postedValue == "checked";
+				}
+				else if (control is ListPicker)
+				{
+					if (((IListPicker) control).Value != postedValue)
 					{
-						((IAutocomplete) control).Value = postedValue;
+						updatedInputControls.Add(control);
 					}
-					else if (control is Calendar)
+
+					((IListPicker) control).Value = postedValue;
+				}
+				else if (control is PasswordTextBox)
+				{
+					if (((IPasswordTextBox) control).Value != postedValue)
 					{
-						((ICalendar) control).Value = DateTime.Parse(postedValue);
+						updatedInputControls.Add(control);
 					}
-					else if (control is CheckBox)
+
+					((IPasswordTextBox) control).Value = postedValue;
+				}
+				else if (control is TextArea)
+				{
+					if (((ITextArea) control).Value != postedValue)
 					{
-						((ICheckBox)control).Value = postedValue == "checked";
+						updatedInputControls.Add(control);
 					}
-					else if (control is ListPicker)
+
+					((ITextArea) control).Value = postedValue;
+				}
+				else if (control is TextBox)
+				{
+					if (((ITextBox) control).Value != postedValue)
 					{
-						((IListPicker) control).Value = postedValue;
+						updatedInputControls.Add(control);
 					}
-					else if (control is PasswordTextBox)
-					{
-						((IPasswordTextBox) control).Value = postedValue;
-					}
-					else if (control is TextArea)
-					{
-						((ITextArea) control).Value = postedValue;
-					}
-					else if (control is TextBox)
-					{
-						((ITextBox)control).Value = postedValue;
-					}
+
+					((ITextBox) control).Value = postedValue;
 				}
 			}
 
@@ -70,62 +113,58 @@ namespace OKHOSTING.UI.Net4.WebForms
 			string eventTarget = Request.Form["__EVENTTARGET"];
 			string eventArgument = Request.Form["__EVENTARGUMENT"];
 
-			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			//raise IInputControl.OnValueChanged events
+			foreach (IControl control in updatedInputControls)
 			{
-				string postedValue = Request.Form[postedValueName];
-
-				IControl control = (IControl)ContentHolder.FindControl(postedValueName);
-
-				//get posted values and update controls
-
 				if (control is Autocomplete)
 				{
-					((IAutocomplete)control).Value = postedValue;
-				}
-				else if (control is Button && postedValue == postedValueName)
-				{
-					((Button)control).Raise_Click();
+					((Autocomplete) control).RaiseValueChanged();
 				}
 				else if (control is Calendar)
 				{
-					((ICalendar)control).Value = DateTime.Parse(postedValue);
+					((Calendar) control).RaiseValueChanged();
 				}
 				else if (control is CheckBox)
 				{
-					((ICheckBox)control).Value = postedValue == "checked";
-				}
-				else if (control is LabelButton && eventTarget == control.Name)
-				{
-					((LabelButton)control).Raise_Click();
+					((CheckBox) control).RaiseValueChanged();
 				}
 				else if (control is ListPicker)
 				{
-					((IListPicker)control).Value = postedValue;
+					((ListPicker) control).RaiseValueChanged();
 				}
 				else if (control is PasswordTextBox)
 				{
-					((IPasswordTextBox)control).Value = postedValue;
+					((PasswordTextBox) control).RaiseValueChanged();
 				}
 				else if (control is TextArea)
 				{
-					((ITextArea)control).Value = postedValue;
+					((TextArea) control).RaiseValueChanged();
 				}
 				else if (control is TextBox)
 				{
-					((ITextBox)control).Value = postedValue;
+					((TextBox) control).RaiseValueChanged();
 				}
+			}
 
+			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			{
+				//get posted value by user
+				string postedValue = Request.Form[postedValueName];
 
+				//get control that corresponds to this input
+				IControl control = (IControl) ContentHolder.FindControl(postedValueName);
 
-
-				
-				
-				//handle other events like ILabelButton.Click  or IListPicker.SelectedValueChanged
-				if (!string.IsNullOrWhiteSpace(eventTarget))
+				if (control is Button && postedValue == postedValueName)
 				{
-					if (postedValueName == eventTarget)
-					{
-					}
+					((Button) control).Raise_Click();
+				}
+				else if (control is LabelButton && eventTarget == control.Name)
+				{
+					((LabelButton) control).Raise_Click();
+				}
+				else if (control is IImageButton && eventTarget == control.Name)
+				{
+					((ImageButton) control).Raise_Click();
 				}
 			}
 
