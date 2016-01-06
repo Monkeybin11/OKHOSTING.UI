@@ -82,6 +82,20 @@ namespace OKHOSTING.UI.Net4.WinForms
 			System.Windows.Forms.Application.Exit();
 		}
 
+		protected override void StartController(Controller controller)
+		{
+			controller.Page = new Page();
+			base.StartController(controller);
+
+			((Page) controller.Page).ShowDialog();
+		}
+
+		protected override void FinishController()
+		{
+			((Page) Controller.Page).Close();
+			base.FinishController();
+		}
+
 		//virtual
 
 		public virtual Color Parse(System.Drawing.Color color)

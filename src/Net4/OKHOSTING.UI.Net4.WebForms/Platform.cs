@@ -83,6 +83,48 @@ namespace OKHOSTING.UI.Net4.WebForms
 			System.Web.Security.FormsAuthentication.SignOut();
 		}
 
+		protected override void StartController(Controller controller)
+		{
+			//we create a copy of the current page so that we save "state" in the previous controller
+			if (Current.Controller != null)
+			{
+				Page oldPage = new Page();
+				oldPage.Title = Current.Controller.Page.Title;
+				oldPage.ContentCache = ((Page) Current.Controller.Page).ContentCache;
+
+				Current.Controller.Page = oldPage;
+			}
+
+			//reset page title and content
+			controller.Page = (Page) System.Web.HttpContext.Current.Handler;
+			controller.Page.Title = null;
+			controller.Page.Content = null;
+
+			base.StartController(controller);
+		}
+
+		protected override void FinishController()
+		{
+			//finish the current controller and remove it from the stack
+			base.FinishController();
+
+			//if there are no controllers left, exit app
+			if (Current.Controller == null)
+			{
+				Finish();
+				return;
+			}
+
+			Page currentPage = (Page) System.Web.HttpContext.Current.Handler;
+
+			//get title and content from the current controller
+			currentPage.Title = Platform.Current.Controller.Page.Title;
+			currentPage.Content = ((Page) Platform.Current.Controller.Page).ContentCache;
+
+			//finally assign this new page to the controller
+			Current.Controller.Page = currentPage;
+		}
+
 		//virtual
 
 		public virtual Color Parse(System.Drawing.Color color)

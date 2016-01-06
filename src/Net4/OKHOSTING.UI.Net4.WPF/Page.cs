@@ -29,5 +29,10 @@ namespace OKHOSTING.UI.Net4.WPF
 				base.Content = value;
 			}
 		}
+
+		//void IDisposable.Dispose()
+		//{
+		//	Content.Dispose();
+		//}
 	}
 }

@@ -17,8 +17,6 @@ namespace OKHOSTING.UI
 
 		protected internal virtual void StartController(Controller controller)
 		{
-			Page.Content = null;
-
 			if (Controller != controller)
 			{
 				ControllerStack.Push(controller);
@@ -27,18 +25,11 @@ namespace OKHOSTING.UI
 
 		protected internal virtual void FinishController()
 		{
-			ControllerStack.Pop();
+			Controller current = ControllerStack.Pop();
 
-			if (Page.Content != null)
+			if (current.Page != null)
 			{
-				Page.Content.Dispose();
-			}
-
-			Page.Content = null;
-
-			if (ControllerStack.Count > 0) 
-			{
-				Controller.Start ();
+				//current.Page.Dispose();
 			}
 		}
 
@@ -52,11 +43,6 @@ namespace OKHOSTING.UI
 		/// An instance of control T
 		/// </returns>
 		public abstract T Create<T>() where T : class, Controls.IControl;
-
-		/// <summary>
-		/// Gets the Page that is currently being displayed to the user
-		/// </summary>
-		public virtual IPage Page { get; set; }
 
 		/// <summary>
 		/// Gets the Controller that is currently controlling the view, the "currently executing" controller wich is at the top of the stack

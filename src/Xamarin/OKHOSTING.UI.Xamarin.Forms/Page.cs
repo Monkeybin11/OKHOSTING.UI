@@ -21,20 +21,9 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 		}
 
-		double IPage.Height
-		{
-			get
-			{
-				return Acr.DeviceInfo.DeviceInfo.Hardware.ScreenHeight;
-			}
-		}
-
-		double IPage.Width
-		{
-			get
-			{
-				return Acr.DeviceInfo.DeviceInfo.Hardware.ScreenWidth;
-			}
-		}
+		//void IDisposable.Dispose()
+		//{
+		//	Content.Dispose();
+		//}
 	}
 }

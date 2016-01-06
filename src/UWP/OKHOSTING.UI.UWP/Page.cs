@@ -12,6 +12,19 @@ namespace OKHOSTING.UI.UWP
 		{
 		}
 
+		public string Title
+		{
+			get
+			{
+				//Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar
+				return null;
+			}
+			set
+			{
+				//throw new NotImplementedException();
+			}
+		}
+
 		public new IControl Content
 		{
 			get
@@ -32,19 +45,6 @@ namespace OKHOSTING.UI.UWP
 			}
 		}
 
-		public string Title
-		{
-			get
-			{
-				//Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar
-				return null;
-			}
-			set
-			{
-				//throw new NotImplementedException();
-			}
-		}
-
 		public new double Width
 		{
 			get
@@ -52,5 +52,10 @@ namespace OKHOSTING.UI.UWP
 				return Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().VisibleBounds.Width;
 			}
 		}
+
+		//void IDisposable.Dispose()
+		//{
+		//	Content.Dispose();
+		//}
 	}
 }

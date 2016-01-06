@@ -10,25 +10,37 @@ namespace OKHOSTING.UI.Net4.WebForms
 	{
 		protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
 
+		/// <summary>
+		/// Restores Page state (content & title) and launch events
+		/// </summary>
 		protected override void OnInit(EventArgs e)
 		{
 			if (ContentHolder == null)
 			{
 				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				ContentHolder.ID = "pcContent";
+				ContentHolder.ID = "phContent";
 				base.Form.Controls.Clear();
 				base.Form.Controls.Add(ContentHolder);
 			}
 
-			if (!IsPostBack)
+			//there is no controller assigned, exit
+			if (Platform.Current.Controller == null)
 			{
 				return;
 			}
 
-			//restore state and launch events
-			
-			//get last set of controls from session
-			Content = (IControl) Session["Content"];
+			//get title and content from the current controller, in case it has a different Page instance
+			if (Platform.Current.Controller.Page != this)
+			{
+				Title = Platform.Current.Controller.Page.Title;
+				Content = ((Page)Platform.Current.Controller.Page).ContentCache;
+			}
+
+			//if there is no postback, exit now and skip recovering state and launching events
+			if (!IsPostBack)
+			{
+				return;
+			}
 
 			//keep track of wich IInputControls had ther value updated so we can reaise IInputControl.OnValueChanged
 			List<IControl> updatedInputControls = new List<IControl>();
@@ -47,37 +59,37 @@ namespace OKHOSTING.UI.Net4.WebForms
 				{
 					updatedInputControls.Add(control);
 					((IAutocomplete) control).Value = postedValue;
-                }
+				}
 				else if (control is Calendar && ((ICalendar) control).Value != DateTime.Parse(postedValue))
 				{
 					updatedInputControls.Add(control);
 					((ICalendar) control).Value = DateTime.Parse(postedValue);
-                }
+				}
 				else if (control is CheckBox && ((ICheckBox)control).Value != (postedValue == "checked"))
 				{
 					updatedInputControls.Add(control);
 					((ICheckBox) control).Value = postedValue == "checked";
-                }
+				}
 				else if (control is ListPicker && ((IListPicker) control).Value != postedValue)
 				{
 					updatedInputControls.Add(control);
 					((IListPicker) control).Value = postedValue;
-                }
+				}
 				else if (control is PasswordTextBox && ((IPasswordTextBox) control).Value != postedValue)
 				{
 					updatedInputControls.Add(control);
 					((IPasswordTextBox) control).Value = postedValue;
-                }
+				}
 				else if (control is TextArea && ((ITextArea) control).Value != postedValue)
 				{
 					updatedInputControls.Add(control);
 					((ITextArea) control).Value = postedValue;
-                }
+				}
 				else if (control is TextBox && ((ITextBox) control).Value != postedValue)
-                { 
+				{ 
 					updatedInputControls.Add(control);
 					((ITextBox) control).Value = postedValue;
-                }
+				}
 			}
 
 			//raise IInputControl.OnValueChanged events
@@ -113,40 +125,47 @@ namespace OKHOSTING.UI.Net4.WebForms
 				}
 			}
 
-            //raise button click events
-            foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
-            {
-                //get posted value by user
-                string postedValue = Request.Form[postedValueName];
+			//raise button click events
+			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			{
+				//get posted value by user
+				string postedValue = Request.Form[postedValueName];
 
-                //get control that corresponds to this input
-                IControl control = (IControl) ContentHolder.FindControl(postedValueName);
+				//get control that corresponds to this input
+				IControl control = (IControl) ContentHolder.FindControl(postedValueName);
 
-                if (control is Button && postedValue == ((Button) control).Text)
-                {
-                    ((Button) control).Raise_Click();
-                }
-            }
+				if (control is Button && postedValue == ((Button) control).Text)
+				{
+					((Button) control).Raise_Click();
+				}
+			}
 
-            //raise label & image click events
+			//raise label & image click events
 
-            string eventTarget = Request.Form["__EVENTTARGET"];
-            string eventArgument = Request.Form["__EVENTARGUMENT"];
+			string eventTarget = Request.Form["__EVENTTARGET"];
+			string eventArgument = Request.Form["__EVENTARGUMENT"];
 
-            //get control that corresponds to this input
-            if (!string.IsNullOrWhiteSpace(eventTarget))
-            {
-                IControl control = (IControl) ContentHolder.FindControl(eventTarget);
+			//get control that corresponds to this input
+			if (!string.IsNullOrWhiteSpace(eventTarget))
+			{
+				IControl control = (IControl) ContentHolder.FindControl(eventTarget);
 
-                if (control is LabelButton && eventTarget == control.Name)
-                {
-                    ((LabelButton) control).Raise_Click();
-                }
-                else if (control is IImageButton && eventTarget == control.Name)
-                {
-                    ((ImageButton) control).Raise_Click();
-                }
-            }
+				if (control is LabelButton && eventTarget == control.Name)
+				{
+					((LabelButton) control).Raise_Click();
+				}
+				else if (control is IImageButton && eventTarget == control.Name)
+				{
+					((ImageButton) control).Raise_Click();
+				}
+			}
+
+			//get title and content from the current controller, in case it has a different Page instance
+			if (Platform.Current.Controller.Page != this)
+			{
+				Title = Platform.Current.Controller.Page.Title;
+				Content = ((Page) Platform.Current.Controller.Page).ContentCache;
+			}
 
 			base.OnInit(e);
 		}
@@ -165,6 +184,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			set
 			{
 				ContentHolder.Controls.Clear();
+				ContentCache = value;
 
 				if (value != null)
 				{
@@ -189,12 +209,15 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
-		protected override void OnPreRenderComplete(EventArgs e)
-		{
-			base.OnPreRenderComplete(e);
+		/// <summary>
+		/// Content will not be persistent among postbacks, but this one will
+		/// </summary>
+		protected internal IControl ContentCache { get; set; }
 
-			//save state
-			Session["Content"] = Content;
+		protected override void OnPreRender(EventArgs e)
+		{
+			ContentCache = Content;
+			base.OnPreRender(e);
 		}
 	}
 }

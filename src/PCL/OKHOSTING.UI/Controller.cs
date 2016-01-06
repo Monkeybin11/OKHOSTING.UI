@@ -13,6 +13,16 @@ namespace OKHOSTING.UI
 	public abstract class Controller
 	{
 		/// <summary>
+		/// Page that the current controller will have available to manipulate
+		/// The Page that is currently being displayed to the user.
+		/// </summary>
+		public IPage Page
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Will be executed when this controller "executes" at first
 		/// </summary>
 		public virtual void Start()

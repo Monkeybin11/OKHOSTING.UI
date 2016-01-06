@@ -448,19 +448,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		public string Value
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		#endregion
 	}
 }
