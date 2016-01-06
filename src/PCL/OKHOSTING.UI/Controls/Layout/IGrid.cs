@@ -18,4 +18,18 @@
 		/// </summary>
 		Thickness CellPadding { get; set; }
 	}
+
+    public static class IGridExtensions
+    {
+        public static System.Collections.Generic.IEnumerable<IControl> GetAllControlls(this IGrid grid)
+        {
+            for (int row = 0; row < ((IGrid) grid).RowCount; row++)
+            {
+                for (int column = 0; column < ((IGrid) grid).ColumnCount; column++)
+                {
+                    yield return ((IGrid) grid).GetContent(row, column);
+                }
+            }
+        }
+    }
 }

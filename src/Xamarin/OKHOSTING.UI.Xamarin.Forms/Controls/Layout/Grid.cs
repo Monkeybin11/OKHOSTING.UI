@@ -1,6 +1,7 @@
 ﻿using System;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
+using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
@@ -78,7 +79,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			get; set;
 		}
 
-		void IDisposable.Dispose()
+        void IDisposable.Dispose()
 		{
 		}
 
