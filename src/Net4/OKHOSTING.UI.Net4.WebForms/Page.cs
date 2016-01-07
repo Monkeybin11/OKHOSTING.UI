@@ -30,11 +30,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//get title and content from the current controller, in case it has a different Page instance
-			if (Platform.Current.Controller.Page != this)
-			{
-				Title = Platform.Current.Controller.Page.Title;
-				Content = ((Page)Platform.Current.Controller.Page).ContentCache;
-			}
+			//if (Platform.Current.Controller.Page != this)
+			//{
+			//	Title = Platform.Current.Controller.Page.Title;
+			//	Content = ((Page)Platform.Current.Controller.Page).ContentCache;
+			//}
 
 			//if there is no postback, exit now and skip recovering state and launching events
 			if (!IsPostBack)
@@ -160,12 +160,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 				}
 			}
 
-			//get title and content from the current controller, in case it has a different Page instance
-			if (Platform.Current.Controller.Page != this)
-			{
-				Title = Platform.Current.Controller.Page.Title;
-				Content = ((Page) Platform.Current.Controller.Page).ContentCache;
-			}
+			////get title and content from the current controller, in case it has a different Page instance
+			//if (Platform.Current.Controller.Page != this)
+			//{
+			//	Title = Platform.Current.Controller.Page.Title;
+			//	Content = ((Page) Platform.Current.Controller.Page).ContentCache;
+			//}
 
 			base.OnInit(e);
 		}

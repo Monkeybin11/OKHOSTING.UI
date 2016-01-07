@@ -83,23 +83,6 @@ namespace OKHOSTING.UI.UWP
 			Windows.UI.Xaml.Application.Current.Exit();
 		}
 
-		protected override void StartController(Controller controller)
-		{
-			var rootFrame = Window.Current.Content as Windows.UI.Xaml.Controls.Frame;
-			rootFrame.Navigate(typeof(Page));
-			controller.Page = (Page) rootFrame.Content;
-
-			base.StartController(controller);
-		}
-
-		protected override void FinishController()
-		{
-			base.FinishController();
-
-			var rootFrame = Window.Current.Content as Windows.UI.Xaml.Controls.Frame;
-			rootFrame.GoBack();
-		}
-
 		//virtual
 
 		public virtual Color Parse(Windows.UI.Color color)

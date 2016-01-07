@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace OKHOSTING.UI
 {
 	/// <summary>
-	/// Base class for platform independet apps, this is where it all begins
+	/// Base class for platform independet apps, child classes should implement native platforms like WinForms, WebForms, XamarinForms, etc
 	/// </summary>
 	public abstract class Platform
 	{
@@ -26,11 +26,6 @@ namespace OKHOSTING.UI
 		protected internal virtual void FinishController()
 		{
 			Controller current = ControllerStack.Pop();
-
-			if (current.Page != null)
-			{
-				//current.Page.Dispose();
-			}
 		}
 
 		//public
@@ -45,7 +40,15 @@ namespace OKHOSTING.UI
 		public abstract T Create<T>() where T : class, Controls.IControl;
 
 		/// <summary>
-		/// Gets the Controller that is currently controlling the view, the "currently executing" controller wich is at the top of the stack
+		/// Gets the Page that is currently being displayed to the user
+		/// </summary>
+		public virtual IPage Page
+		{
+			get; set;
+		}
+
+		/// <summary>
+		/// Gets the Controller that is currently controlling the Page, the "currently executing" controller wich is at the top of the stack
 		/// </summary>
 		public virtual Controller Controller
 		{

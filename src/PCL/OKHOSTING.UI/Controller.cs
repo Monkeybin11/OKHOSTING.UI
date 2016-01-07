@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OKHOSTING.UI
+﻿namespace OKHOSTING.UI
 {
 	/// <summary>
 	/// This is the class that controlls all the UI. Inherit from Controller and create your app specific controllers.
@@ -12,16 +6,6 @@ namespace OKHOSTING.UI
 	/// </summary>
 	public abstract class Controller
 	{
-		/// <summary>
-		/// Page that the current controller will have available to manipulate
-		/// The Page that is currently being displayed to the user.
-		/// </summary>
-		public IPage Page
-		{
-			get;
-			set;
-		}
-
 		/// <summary>
 		/// Will be executed when this controller "executes" at first
 		/// </summary>

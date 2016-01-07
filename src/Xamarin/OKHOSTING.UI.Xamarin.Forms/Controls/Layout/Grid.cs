@@ -79,7 +79,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			get; set;
 		}
 
-        void IDisposable.Dispose()
+		void IDisposable.Dispose()
 		{
 		}
 

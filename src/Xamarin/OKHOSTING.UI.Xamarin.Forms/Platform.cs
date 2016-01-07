@@ -81,26 +81,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			base.Finish();
 		}
 
-		protected override void StartController(Controller controller)
-		{
-			Page newPage = new Page();
-			controller.Page = new Page();
-			base.StartController(controller);
-
-			global::Xamarin.Forms.Application.Current.MainPage = newPage;
-		}
-
-		protected override void FinishController()
-		{
-			base.FinishController();
-
-			if (Current.Controller != null)
-			{
-				//show last's controllers page
-				global::Xamarin.Forms.Application.Current.MainPage = (Page) Current.Controller.Page;
-			}
-		}
-
 		//virtual
 
 		public virtual Color Parse(global::Xamarin.Forms.Color color)

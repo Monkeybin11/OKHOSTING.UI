@@ -145,7 +145,7 @@ namespace OKHOSTING.UI.CSS
 
 			//height and width
 
-            if (Length.TryParse(style.Height, out lenght)) control.Height = lenght.ToPixel();
+			if (Length.TryParse(style.Height, out lenght)) control.Height = lenght.ToPixel();
 			if (Length.TryParse(style.Width, out lenght)) control.Width = lenght.ToPixel();
 
 			//border
@@ -177,7 +177,7 @@ namespace OKHOSTING.UI.CSS
 			//visibility
 
 			control.Visible = style.Visibility != "none" && style.Visibility != "hidden";
-        }
+		}
 
 		/// <summary>
 		/// Applies a CSS style ato a ITextControl including font style
