@@ -15,6 +15,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// </summary>
 		protected override void OnInit(EventArgs e)
 		{
+			//assign as current page
+			Platform.Current.Page = this;
+
+			//create placeholder for content
 			if (ContentHolder == null)
 			{
 				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
@@ -29,12 +33,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 				return;
 			}
 
-			//get title and content from the current controller, in case it has a different Page instance
-			//if (Platform.Current.Controller.Page != this)
-			//{
-			//	Title = Platform.Current.Controller.Page.Title;
-			//	Content = ((Page)Platform.Current.Controller.Page).ContentCache;
-			//}
+			//get title and content from the state, in case it has a different Page instance
+			if (Platform.Current.PageState != null)
+			{
+				Title = Platform.Current.PageState.Title;
+				Content = Platform.Current.PageState.Content;
+			}
 
 			//if there is no postback, exit now and skip recovering state and launching events
 			if (!IsPostBack)
@@ -160,14 +164,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 				}
 			}
 
-			////get title and content from the current controller, in case it has a different Page instance
-			//if (Platform.Current.Controller.Page != this)
-			//{
-			//	Title = Platform.Current.Controller.Page.Title;
-			//	Content = ((Page) Platform.Current.Controller.Page).ContentCache;
-			//}
+            //save page state
+            Platform.Current.PageState.Title = Title;
+            Platform.Current.PageState.Content = Content;
 
-			base.OnInit(e);
+            base.OnInit(e);
 		}
 
 		public IControl Content

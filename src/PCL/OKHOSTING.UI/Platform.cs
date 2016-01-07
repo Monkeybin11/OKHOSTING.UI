@@ -15,17 +15,42 @@ namespace OKHOSTING.UI
 		/// </summary>
 		protected readonly Stack<Controller> ControllerStack = new Stack<Controller>();
 
+		/// <summary>
+		/// Stores that state of a page between postbacks or between controller starts and finish
+		/// </summary>
+		protected readonly Stack<PageState> PageStateStack = new Stack<PageState>();
+
 		protected internal virtual void StartController(Controller controller)
 		{
-			if (Controller != controller)
-			{
-				ControllerStack.Push(controller);
-			}
-		}
+            //save page state, if any
+            if (PageState != null)
+            {
+                PageState.Title = Page.Title;
+                PageState.Content = Page.Content;
+            }
 
-		protected internal virtual void FinishController()
+            //push controller and an empty state to stack
+            PageStateStack.Push(new PageState());
+            ControllerStack.Push(controller);
+
+            Page.Title = null;
+            Page.Content = null;
+        }
+
+        /// <summary>
+        /// Remoes the current controller from the stack and recreates the previous controler state, if any
+        /// </summary>
+        protected internal virtual void FinishController()
 		{
-			Controller current = ControllerStack.Pop();
+			ControllerStack.Pop();
+
+            //is there still a controller and a page state? recreate that state
+            if (PageState != null)
+			{
+				var state = PageStateStack.Pop();
+				Page.Title = state.Title;
+				Page.Content = state.Content;
+			}
 		}
 
 		//public
@@ -60,6 +85,19 @@ namespace OKHOSTING.UI
 				}
 
 				return ControllerStack.Peek();
+			}
+		}
+
+		public virtual PageState PageState
+		{
+			get
+			{
+				if (PageStateStack.Count == 0)
+				{
+					return null;
+				}
+
+				return PageStateStack.Peek();
 			}
 		}
 
