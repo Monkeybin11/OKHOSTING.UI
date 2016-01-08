@@ -249,5 +249,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 
 		#endregion
+
+		/// <summary>
+		/// Does nothing since we manage state ourselves
+		/// </summary>
+		protected override bool LoadPostData(string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
+		{
+			return true;
+		}
 	}
 }

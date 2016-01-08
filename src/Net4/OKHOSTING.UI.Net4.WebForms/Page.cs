@@ -13,8 +13,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// <summary>
 		/// Restores Page state (content & title) and launch events
 		/// </summary>
-		protected override void OnInit(EventArgs e)
+		protected override void OnLoad(EventArgs e)
 		{
+			base.OnLoad(e);
+
 			//assign as current page
 			Platform.Current.Page = this;
 
@@ -163,12 +165,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 					((ImageButton) control).Raise_Click();
 				}
 			}
-
-            //save page state
-            Platform.Current.PageState.Title = Title;
-            Platform.Current.PageState.Content = Content;
-
-            base.OnInit(e);
 		}
 
 		public IControl Content
@@ -185,7 +181,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			set
 			{
 				ContentHolder.Controls.Clear();
-				ContentCache = value;
 
 				if (value != null)
 				{
@@ -210,14 +205,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
-		/// <summary>
-		/// Content will not be persistent among postbacks, but this one will
-		/// </summary>
-		protected internal IControl ContentCache { get; set; }
-
 		protected override void OnPreRender(EventArgs e)
 		{
-			ContentCache = Content;
+
+			//save page state
+			Platform.Current.PageState.Title = Title;
+			Platform.Current.PageState.Content = Content;
+
 			base.OnPreRender(e);
 		}
 	}

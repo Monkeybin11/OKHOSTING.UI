@@ -33,6 +33,7 @@ namespace OKHOSTING.UI
             PageStateStack.Push(new PageState());
             ControllerStack.Push(controller);
 
+			//reset page
             Page.Title = null;
             Page.Content = null;
         }
@@ -42,14 +43,15 @@ namespace OKHOSTING.UI
         /// </summary>
         protected internal virtual void FinishController()
 		{
+			//remove controller and state from stacks
 			ControllerStack.Pop();
+			PageStateStack.Pop();
 
-            //is there still a controller and a page state? recreate that state
-            if (PageState != null)
+			//is there still a controller and a page state? recreate that state
+			if (PageState != null)
 			{
-				var state = PageStateStack.Pop();
-				Page.Title = state.Title;
-				Page.Content = state.Content;
+				Page.Title = PageState.Title;
+				Page.Content = PageState.Content;
 			}
 		}
 

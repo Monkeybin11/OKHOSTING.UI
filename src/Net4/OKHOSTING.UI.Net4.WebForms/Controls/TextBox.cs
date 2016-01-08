@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Linq;
 using OKHOSTING.UI.Controls;
 
@@ -18,6 +19,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				base.Text = value;
 			}
+		}
+
+		protected override void OnTextChanged(EventArgs e)
+		{
+			base.OnTextChanged(e);
 		}
 
 		public event EventHandler<string> ValueChanged;
@@ -503,5 +509,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		#endregion
+
+		/// <summary>
+		/// Does nothing since we manage state ourselves
+		/// </summary>
+		protected override bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+		{
+			return true;
+		}
 	}
 }

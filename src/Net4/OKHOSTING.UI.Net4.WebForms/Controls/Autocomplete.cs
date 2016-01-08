@@ -6,7 +6,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class Autocomplete : System.Web.UI.WebControls.Panel, IAutocomplete
 	{
-		protected readonly System.Web.UI.WebControls.TextBox InnerTextBox;
+		protected readonly TextBox InnerTextBox;
 		protected readonly AjaxControlToolkit.AutoCompleteExtender InnerAutoCompleteExtender;
 		protected readonly AjaxControlToolkit.TextBoxWatermarkExtender InnerWatermarkExtender;
 		protected readonly string SessionId;
@@ -14,7 +14,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			InnerTextBox = new System.Web.UI.WebControls.TextBox();
+			InnerTextBox = (TextBox) Platform.Current.Create<ITextBox>();
 			InnerTextBox.ID = "Autocomplete_InnerTextBox_" + new Random().Next();
 			base.Controls.Add(InnerTextBox);
 

@@ -52,12 +52,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		protected override void OnPreRender(EventArgs e)
 		{
-			if (base.DataSource != null)
+			if (base.DataSource != null && !Page.IsPostBack)
 			{
 				base.DataBind();
 			}
 
 			base.OnPreRender(e);
+		}
+
+		/// <summary>
+		/// Does nothing since we manage state ourselves
+		/// </summary>
+		protected override bool LoadPostData(string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
+		{
+			return true;
 		}
 
 		#region IControl

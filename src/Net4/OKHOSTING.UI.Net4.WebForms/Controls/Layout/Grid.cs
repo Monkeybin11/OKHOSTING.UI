@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 {
-	public class Grid : System.Web.UI.WebControls.Table, UI.Controls.Layouts.IGrid
+	public class Grid : System.Web.UI.WebControls.Table, IGrid
 	{
 		protected int _ColumnCount = 0;
 
@@ -307,6 +308,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			Rows[row].Cells[column].Controls.Clear();
 			Rows[row].Cells[column].Controls.Add((System.Web.UI.Control)content);
+		}
+
+		public List<IControl> GetAllControls()
+		{
+			return IGridExtensions.GetAllControlls(this).ToList();
 		}
 	}
 }
