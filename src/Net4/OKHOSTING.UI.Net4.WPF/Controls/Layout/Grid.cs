@@ -21,6 +21,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 			set
 			{
+				//remove all controls from rows to be removed
+				for (int i = 0; i < base.Children.Count; i++)
+				{
+					UIElement element = base.Children[i];
+
+					if (Grid.GetColumn(element) > value)
+					{
+						base.Children.Remove(element);
+					}
+				}
+
 				while (base.ColumnDefinitions.Count < value)
 				{
 					base.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition());
@@ -41,6 +52,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 			set
 			{
+				//remove all controls from rows to be removed
+				for (int i = 0; i < base.Children.Count; i++)
+				{
+					UIElement element = base.Children[i];
+
+					if (Grid.GetRow(element) > value)
+					{
+						base.Children.Remove(element);
+					}
+				}
+
 				while (base.RowDefinitions.Count < value)
 				{
 					base.RowDefinitions.Add(new System.Windows.Controls.RowDefinition());
@@ -55,7 +77,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 		IControl IGrid.GetContent(int row, int column)
 		{
-			foreach(System.Windows.UIElement children in base.Children)
+			foreach (UIElement children in base.Children)
 			{
 				if (Grid.GetRow(children) == row && Grid.GetColumn(children) == column)
 				{

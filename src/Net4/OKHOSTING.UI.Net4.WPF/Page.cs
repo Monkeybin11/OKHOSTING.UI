@@ -8,9 +8,15 @@ namespace OKHOSTING.UI.Net4.WPF
 	/// </summary>
 	public partial class Page : System.Windows.Window, IPage
 	{
+		protected readonly System.Windows.Controls.ScrollViewer Scroller;
+
 		public Page()
 		{
 			base.SizeChanged += Page_SizeChanged;
+
+			//allows for automatic vertical scrolling
+			Scroller = new System.Windows.Controls.ScrollViewer();
+			base.Content = Scroller;
 		}
 
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
@@ -22,11 +28,11 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				return (IControl) base.Content;
+				return (IControl) Scroller.Content;
 			}
 			set
 			{
-				base.Content = value;
+				Scroller.Content = value;
 			}
 		}
 

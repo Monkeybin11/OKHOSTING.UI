@@ -22,26 +22,26 @@ namespace OKHOSTING.UI
 
 		protected internal virtual void StartController(Controller controller)
 		{
-            //save page state, if any
-            if (PageState != null)
-            {
-                PageState.Title = Page.Title;
-                PageState.Content = Page.Content;
-            }
+			//save page state, if any
+			if (PageState != null)
+			{
+				PageState.Title = Page.Title;
+				PageState.Content = Page.Content;
+			}
 
-            //push controller and an empty state to stack
-            PageStateStack.Push(new PageState());
-            ControllerStack.Push(controller);
+			//push controller and an empty state to stack
+			PageStateStack.Push(new PageState());
+			ControllerStack.Push(controller);
 
 			//reset page
-            Page.Title = null;
-            Page.Content = null;
-        }
+			Page.Title = string.Empty;
+			Page.Content = null;
+		}
 
-        /// <summary>
-        /// Remoes the current controller from the stack and recreates the previous controler state, if any
-        /// </summary>
-        protected internal virtual void FinishController()
+		/// <summary>
+		/// Remoes the current controller from the stack and recreates the previous controler state, if any
+		/// </summary>
+		protected internal virtual void FinishController()
 		{
 			//remove controller and state from stacks
 			ControllerStack.Pop();

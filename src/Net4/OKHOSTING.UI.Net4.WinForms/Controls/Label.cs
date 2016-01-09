@@ -9,6 +9,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Label : System.Windows.Forms.Label, UI.Controls.ILabel
 	{
+		public Label()
+		{
+			base.AutoSize = true;
+		}
+
 		#region IControl
 
 		double? IControl.Width
