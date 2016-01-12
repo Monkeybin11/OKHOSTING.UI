@@ -1,10 +1,11 @@
-﻿<Properties StartupItem="UWP/OKHOSTING.UI.UWP/OKHOSTING.UI.UWP.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Xamarin/OKHOSTING.UI.Xamarin.Forms.Test/Tests.cs">
+﻿<Properties StartupItem="../test/Xamarin/Droid/OKHOSTING.UI.Xamarin.Forms.Test.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.testdevice1" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Image.cs">
     <Files>
       <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Mac/Controls/Autocomplete.cs" Line="1" Column="1" />
-      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms.Test/Tests.cs" Line="4" Column="7" />
-      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms.Test/AppInitializer.cs" Line="5" Column="15" />
+      <File FileName="PCL/OKHOSTING.UI.Test/LoginController.cs" Line="41" Column="36" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/ImageButton.cs" Line="274" Column="6" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Image.cs" Line="237" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
