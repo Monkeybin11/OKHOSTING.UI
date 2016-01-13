@@ -1,28 +1,19 @@
-﻿<Properties StartupItem="Xamarin/OKHOSTING.UI.Xamarin.Mac/OKHOSTING.UI.Xamarin.Mac.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+﻿<Properties StartupItem="../test/Xamarin/Droid/OKHOSTING.UI.Xamarin.Forms.Test.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.testdevice1" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Image.cs">
     <Files>
-      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Platform.cs" Line="169" Column="19" />
-      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Mac/Controls/Button.cs" Line="6" Column="30" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Mac/Controls/Autocomplete.cs" Line="1" Column="1" />
+      <File FileName="PCL/OKHOSTING.UI.Test/LoginController.cs" Line="41" Column="36" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/ImageButton.cs" Line="274" Column="6" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Image.cs" Line="237" Column="6" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="OKHOSTING.UI" expanded="True">
-            <Node name="Xamarin" expanded="True">
-              <Node name="OKHOSTING.UI.Xamarin.Forms" expanded="True">
-                <Node name="Controls" expanded="True">
-                  <Node name="Layout" expanded="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>Net4/OKHOSTING.UI.Net4.WPF/OKHOSTING.UI.Net4.WPF.csproj</String>
+    <String>Xamarin/OKHOSTING.UI.Xamarin.Mac/OKHOSTING.UI.Xamarin.Mac.csproj</String>
+  </DisabledProjects>
 </Properties>

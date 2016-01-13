@@ -18,41 +18,41 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			//IGrid grid = CurrentPage.Create<IGrid>();
-			IGrid grid = App.Current.Create<IGrid>();
+			IGrid grid = Platform.Current.Create<IGrid>();
 			grid.ColumnCount = 2;
 			grid.RowCount = 3;
 
-			lblUserName = App.Current.Create<ILabel>();
+			lblUserName = Platform.Current.Create<ILabel>();
 			lblUserName.Text = "Username";
 			grid.SetContent(0, 0, lblUserName);
 
-			txtUserName = App.Current.Create<ITextBox>();
+			txtUserName = Platform.Current.Create<ITextBox>();
 			grid.SetContent(0, 1, txtUserName);
 
-			lblPassword = App.Current.Create<ILabel>();
+			lblPassword = Platform.Current.Create<ILabel>();
 			lblPassword.Text = "Password";
 			grid.SetContent(1, 0, lblPassword);
 
-			txtPassword = App.Current.Create<IPasswordTextBox>();
+			txtPassword = Platform.Current.Create<IPasswordTextBox>();
 			grid.SetContent(1, 1, txtPassword);
 
-			cmdLogin = App.Current.Create<IButton>();
+			cmdLogin = Platform.Current.Create<IButton>();
 			cmdLogin.Text = "Login";
-			cmdLogin.Click += CmdLogin_Click;
+			cmdLogin.Click += cmdLogin_Click;
 			grid.SetContent(2, 0, cmdLogin);
 
-			lblMessage = App.Current.Create<ILabel>();
+			lblMessage = Platform.Current.Create<ILabel>();
 			lblMessage.Text = "Wrong data";
 			lblMessage.Visible = false;
 			grid.SetContent(2, 1, lblMessage);
 
-			App.Current.Page.Title = "Please login";
-			App.Current.Page.Content = grid;
+			Platform.Current.Page.Title = "Please login";
+			Platform.Current.Page.Content = grid;
 		}
 
-		private void CmdLogin_Click(object sender, EventArgs e)
+		private void cmdLogin_Click(object sender, EventArgs e)
 		{
-			if (txtUserName.Text == "yo" && txtPassword.Text == "mero")
+			if (txtUserName.Value == "yo" && txtPassword.Value == "mero")
 			{
 				lblMessage.Visible = false;
 				Finish();
