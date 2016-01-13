@@ -83,6 +83,16 @@ namespace OKHOSTING.UI.Xamarin.Forms
 
 		//virtual
 
+		public virtual Thickness Parse(global::Xamarin.Forms.Thickness thickness)
+		{
+			return new Thickness(thickness.Left, thickness.Top, thickness.Right, thickness.Bottom);
+		}
+
+		public virtual global::Xamarin.Forms.Thickness Parse(Thickness thickness)
+		{
+			return new global::Xamarin.Forms.Thickness(thickness.Left.Value, thickness.Top.Value, thickness.Right.Value, thickness.Bottom.Value);
+		}
+
 		public virtual Color Parse(global::Xamarin.Forms.Color color)
 		{
 			return new Color((int) color.A, (int) color.R, (int) color.G, (int) color.B);

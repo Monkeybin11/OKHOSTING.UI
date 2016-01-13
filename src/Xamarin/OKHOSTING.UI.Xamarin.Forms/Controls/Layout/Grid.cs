@@ -76,7 +76,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 		Thickness IGrid.CellPadding
 		{
-			get; set;
+			get
+			{
+				return Platform.Current.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Platform.Current.Parse(value);
+			}
 		}
 
 		void IDisposable.Dispose()
