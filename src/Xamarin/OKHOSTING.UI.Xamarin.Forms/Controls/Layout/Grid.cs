@@ -89,6 +89,25 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		void IDisposable.Dispose()
 		{
 		}
+		void IGrid.SetColumnSpan(int columnSpan, IControl content)
+		{
+			SetColumnSpan((global::Xamarin.Forms.BindableObject) content, columnSpan);
+		}
+
+		int IGrid.GetColumnSpan(IControl content)
+		{
+			return GetColumnSpan((global::Xamarin.Forms.BindableObject) content);
+		}
+
+		void IGrid.SetRowSpan(int rowSpan, IControl content)
+		{
+			SetColumnSpan((global::Xamarin.Forms.BindableObject) content, rowSpan);
+		}
+
+		int IGrid.GetRowSpan(IControl content)
+		{
+			return GetRowSpan((global::Xamarin.Forms.BindableObject) content);
+		}
 
 		#region IControl
 

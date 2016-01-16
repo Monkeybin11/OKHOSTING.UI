@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
 
@@ -173,6 +169,26 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			base.ColumnCount--;
 		}
 
+		void IGrid.SetColumnSpan(int columnSpan, IControl content)
+		{
+			base.SetColumnSpan((System.Windows.Forms.Control) content, columnSpan);
+		}
+
+		int IGrid.GetColumnSpan(IControl content)
+		{
+			return base.GetColumnSpan((System.Windows.Forms.Control) content);
+		}
+
+		void IGrid.SetRowSpan(int rowSpan, IControl content)
+		{
+			base.SetRowSpan((System.Windows.Forms.Control) content, rowSpan);
+		}
+
+		int IGrid.GetRowSpan(IControl content)
+		{
+			return base.GetRowSpan((System.Windows.Forms.Control) content);
+		}
+
 		#region IControl
 
 		double? IControl.Width
@@ -254,6 +270,45 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			set
 			{
 				base.Anchor = Platform.Current.ParseAnchor(((IControl)this).HorizontalAlignment, value);
+			}
+		}
+
+		string IControl.Name
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		bool IControl.Visible
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		bool IControl.Enabled
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
 			}
 		}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layouts;
+using System;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 {
@@ -313,6 +314,30 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		public List<IControl> GetAllControls()
 		{
 			return IGridExtensions.GetAllControlls(this).ToList();
+		}
+
+		void IGrid.SetColumnSpan(int columnSpan, IControl content)
+		{
+			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell) ((System.Web.UI.WebControls.WebControl) content).Parent;
+			cell.ColumnSpan = columnSpan;
+		}
+
+		int IGrid.GetColumnSpan(IControl content)
+		{
+			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
+			return cell.ColumnSpan;
+		}
+
+		void IGrid.SetRowSpan(int rowSpan, IControl content)
+		{
+			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
+			cell.RowSpan = rowSpan;
+		}
+
+		int IGrid.GetRowSpan(IControl content)
+		{
+			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
+			return cell.RowSpan;
 		}
 	}
 }

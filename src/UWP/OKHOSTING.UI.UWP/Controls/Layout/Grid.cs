@@ -100,6 +100,26 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 		{
 		}
 
+		void IGrid.SetColumnSpan(int columnSpan, IControl content)
+		{
+			SetColumnSpan((Windows.UI.Xaml.FrameworkElement) content, columnSpan);
+		}
+
+		int IGrid.GetColumnSpan(IControl content)
+		{
+			return GetColumnSpan((Windows.UI.Xaml.FrameworkElement) content);
+		}
+
+		void IGrid.SetRowSpan(int rowSpan, IControl content)
+		{
+			SetColumnSpan((Windows.UI.Xaml.FrameworkElement) content, rowSpan);
+		}
+
+		int IGrid.GetRowSpan(IControl content)
+		{
+			return GetRowSpan((Windows.UI.Xaml.FrameworkElement) content);
+		}
+
 		#region IControl
 
 		bool IControl.Visible

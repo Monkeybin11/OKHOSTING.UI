@@ -113,6 +113,26 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 		}
 
+		void IGrid.SetColumnSpan(int columnSpan, IControl content)
+		{
+			SetColumnSpan((UIElement) content, columnSpan);
+		}
+
+		int IGrid.GetColumnSpan(IControl content)
+		{
+			return GetColumnSpan((UIElement) content);
+		}
+
+		void IGrid.SetRowSpan(int rowSpan, IControl content)
+		{
+			SetRowSpan((UIElement) content, rowSpan);
+		}
+
+		int IGrid.GetRowSpan(IControl content)
+		{
+			return GetRowSpan((UIElement) content);
+		}
+
 		#region IControl
 
 		bool IControl.Visible
@@ -242,6 +262,19 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		Thickness IGrid.CellPadding
 		{
 			get; set;
+		}
+
+		string IControl.Name
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
 		}
 
 		#endregion

@@ -8,6 +8,12 @@
 		IControl GetContent(int row, int column);
 		void SetContent(int row, int column, IControl content);
 
+		void SetColumnSpan(int columnSpan, IControl content);
+		int GetColumnSpan(IControl content);
+
+		void SetRowSpan(int rowSpan, IControl content);
+		int GetRowSpan(IControl content);
+
 		/// <summary>
 		/// Space that this grid will set between one cell and another
 		/// </summary>

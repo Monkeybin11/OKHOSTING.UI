@@ -1,15 +1,11 @@
-﻿using System;
-
-using Xamarin.Forms;
-
-namespace OKHOSTING.UI.Xamarin.Forms.Test
+﻿namespace OKHOSTING.UI.Xamarin.Forms.Test
 {
-	public class App : Application
+	public class App : global::Xamarin.Forms.Application
 	{
 		public App ()
 		{
-			OKHOSTING.UI.Xamarin.Forms.Platform.Current.Page = new OKHOSTING.UI.Xamarin.Forms.Page();
-			MainPage = (global::Xamarin.Forms.Page) OKHOSTING.UI.Xamarin.Forms.Platform.Current.Page;
+			Platform.Current.Page = new Page();
+			MainPage = (global::Xamarin.Forms.Page) Platform.Current.Page;
 			new OKHOSTING.UI.Test.IndexController().Start();
 		}
 
