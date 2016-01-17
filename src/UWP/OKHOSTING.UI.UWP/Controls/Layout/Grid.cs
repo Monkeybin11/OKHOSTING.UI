@@ -120,6 +120,26 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			return GetRowSpan((Windows.UI.Xaml.FrameworkElement) content);
 		}
 
+		void IGrid.SetWidth(int column, double width)
+		{
+			base.ColumnDefinitions[column].Width = new Windows.UI.Xaml.GridLength(width, Windows.UI.Xaml.GridUnitType.Pixel);
+		}
+
+		double IGrid.GetWidth(int column)
+		{
+			return base.ColumnDefinitions[column].Width.Value;
+		}
+
+		void IGrid.SetHeight(int row, double height)
+		{
+			base.RowDefinitions[row].Height = new Windows.UI.Xaml.GridLength(height, Windows.UI.Xaml.GridUnitType.Pixel);
+		}
+
+		double IGrid.GetHeight(int row)
+		{
+			return base.RowDefinitions[row].Height.Value;
+		}
+
 		#region IControl
 
 		bool IControl.Visible

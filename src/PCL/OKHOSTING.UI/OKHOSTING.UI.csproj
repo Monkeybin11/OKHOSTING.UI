@@ -39,8 +39,15 @@
       <Project>{3F4502FA-51EA-4CB9-8E50-46F828D240A1}</Project>
       <Name>OKHOSTING.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
+      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
+      <Name>OKHOSTING.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Forms\Form.cs" />
+    <Compile Include="Controls\Forms\FormField.cs" />
+    <Compile Include="Controls\Forms\CaptionPosition.cs" />
     <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Controls\IInputControl.cs" />
     <Compile Include="PageState.cs" />

@@ -189,6 +189,26 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			return base.GetRowSpan((System.Windows.Forms.Control) content);
 		}
 
+		void IGrid.SetWidth(int column, double width)
+		{
+			base.ColumnStyles[column].Width = (float) width;
+		}
+
+		double IGrid.GetWidth(int column)
+		{
+			return base.ColumnStyles[column].Width;
+		}
+
+		void IGrid.SetHeight(int row, double height)
+		{
+			base.RowStyles[row].Height = (float) height;
+		}
+
+		double IGrid.GetHeight(int row)
+		{
+			return base.RowStyles[row].Height;
+		}
+
 		#region IControl
 
 		double? IControl.Width

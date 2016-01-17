@@ -14,6 +14,12 @@
 		void SetRowSpan(int rowSpan, IControl content);
 		int GetRowSpan(IControl content);
 
+		void SetWidth(int column, double width);
+		double GetWidth(int column);
+
+		void SetHeight(int row, double height);
+		double GetHeight(int row);
+
 		/// <summary>
 		/// Space that this grid will set between one cell and another
 		/// </summary>

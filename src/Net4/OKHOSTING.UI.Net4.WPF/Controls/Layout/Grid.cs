@@ -133,6 +133,26 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			return GetRowSpan((UIElement) content);
 		}
 
+		void IGrid.SetWidth(int column, double width)
+		{
+			base.ColumnDefinitions[column].Width = new GridLength(width, GridUnitType.Pixel);
+		}
+
+		double IGrid.GetWidth(int column)
+		{
+			return base.ColumnDefinitions[column].Width.Value;
+		}
+
+		void IGrid.SetHeight(int row, double height)
+		{
+			base.RowDefinitions[row].Height = new GridLength(height, GridUnitType.Pixel);
+		}
+
+		double IGrid.GetHeight(int row)
+		{
+			return base.RowDefinitions[row].Height.Value;
+		}
+
 		#region IControl
 
 		bool IControl.Visible

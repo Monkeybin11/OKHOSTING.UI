@@ -109,6 +109,26 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			return GetRowSpan((global::Xamarin.Forms.BindableObject) content);
 		}
 
+		void IGrid.SetWidth(int column, double width)
+		{
+			base.ColumnDefinitions[column].Width = new global::Xamarin.Forms.GridLength(width, global::Xamarin.Forms.GridUnitType.Star);
+		}
+
+		double IGrid.GetWidth(int column)
+		{
+			return base.ColumnDefinitions[column].Width.Value;
+		}
+
+		void IGrid.SetHeight(int row, double height)
+		{
+			base.RowDefinitions[row].Height = new global::Xamarin.Forms.GridLength(height, global::Xamarin.Forms.GridUnitType.Star);
+		}
+
+		double IGrid.GetHeight(int row)
+		{
+			return base.RowDefinitions[row].Height.Value;
+		}
+
 		#region IControl
 
 		string IControl.Name

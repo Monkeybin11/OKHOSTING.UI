@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Controls
 	public interface IControl: IDisposable
 	{
 		/// <summary>
-		/// Friendly name (or id) of the control. A simple view should not contain 2 controls with the same name.
+		/// Friendly programming name (or id) of the control. A simple view should not contain 2 controls with the same name.
 		/// </summary>
 		string Name { get; set; }
 

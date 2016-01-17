@@ -339,5 +339,33 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
 			return cell.RowSpan;
 		}
+
+		void IGrid.SetWidth(int column, double width)
+		{
+			foreach (System.Web.UI.WebControls.TableRow row in base.Rows)
+			{
+				row.Cells[column].Width = new System.Web.UI.WebControls.Unit(width, System.Web.UI.WebControls.UnitType.Pixel);
+			}
+		}
+
+		double IGrid.GetWidth(int column)
+		{
+			if (base.Rows.Count == 0)
+			{
+				return 0;
+			}
+
+			return base.Rows[0].Cells[column].Width.Value;
+		}
+
+		void IGrid.SetHeight(int row, double height)
+		{
+			base.Rows[row].Height = new System.Web.UI.WebControls.Unit(height, System.Web.UI.WebControls.UnitType.Pixel);
+		}
+
+		double IGrid.GetHeight(int row)
+		{
+			return base.Rows[row].Height.Value;
+		}
 	}
 }
