@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
 		}
 
-		IEnumerable<string> IListPicker.DataSource
+		IEnumerable<string> IListPicker.Items
 		{
 			get
 			{
@@ -49,11 +49,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return ((IListPicker)this).DataSource.ToArray()[base.SelectedIndex];
+				return ((IListPicker)this).Items.ToArray()[base.SelectedIndex];
 			}
 			set
 			{
-				int index = ((IListPicker)this).DataSource.ToList().IndexOf(value);
+				int index = ((IListPicker)this).Items.ToList().IndexOf(value);
 				base.SelectedIndex = index;
 			}
 		}

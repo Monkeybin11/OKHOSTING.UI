@@ -45,9 +45,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Forms\BoolField.cs" />
     <Compile Include="Controls\Forms\Form.cs" />
     <Compile Include="Controls\Forms\FormField.cs" />
     <Compile Include="Controls\Forms\CaptionPosition.cs" />
+    <Compile Include="Controls\Forms\LabelPosition.cs" />
     <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Controls\IInputControl.cs" />
     <Compile Include="PageState.cs" />

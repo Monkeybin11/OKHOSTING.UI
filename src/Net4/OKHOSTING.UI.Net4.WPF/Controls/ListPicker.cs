@@ -11,7 +11,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			base.SelectionChanged += ListPicker_SelectionChanged;
 		}
 
-		public IEnumerable<string> DataSource
+		public IEnumerable<string> Items
 		{
 			get
 			{

@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			base.AutoPostBack = true;
 		}
 
-		IEnumerable<string> IListPicker.DataSource
+		IEnumerable<string> IListPicker.Items
 		{
 			get
 			{

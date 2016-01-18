@@ -7,28 +7,22 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	public class Form
 	{
-		public Form()
-		{
-			LabelPosition = CaptionPosition.Left;
-			RepeatColumns = 1;
-		}
-
 		#region Fields and properties
 
 		/// <summary>
 		/// Collection of fields that will be displayed in the current form
 		/// </summary>
-		public List<FormField> Fields = new List<FormField>();
+		public readonly List<FormField> Fields = new List<FormField>();
 
 		/// <summary>
 		/// Determines wether the labels will be shown at the right or the top of each value
 		/// </summary>
-		public CaptionPosition LabelPosition { get; set; }
+		public CaptionPosition LabelPosition { get; set; } = CaptionPosition.Left;
 
 		/// <summary>
 		/// Gets or sets the number of columns to display horizontally
 		/// </summary>
-		public int RepeatColumns { get; set; }
+		public int RepeatColumns { get; set; } = 1;
 
 		#endregion
 
@@ -64,8 +58,8 @@ namespace OKHOSTING.UI.Controls.Forms
 					//set a "Category.SortOrder.Name" string comparission
 					string val1, val2;
 
-					val1 = f1.Category + "." + (f1.ValueControl.Enabled ? "1" : "0") + "." + (f1.TableWide ? "1" : "0") + f1.SortOrder.ToString("0:000000000000000") + f1.Name;
-					val2 = f2.Category + "." + (f2.ValueControl.Enabled ? "1" : "0") + "." + (f2.TableWide ? "1" : "0") + f2.SortOrder.ToString("0:000000000000000") + f2.Name;
+					val1 = f1.Category + "." + (f1.ValueControl.Enabled ? "1" : "0") + "." + (f1.Required ? "0" : "1") + (f1.TableWide ? "1" : "0") + f1.SortOrder.ToString("0:000000000000000") + f1.Name;
+					val2 = f2.Category + "." + (f2.ValueControl.Enabled ? "1" : "0") + "." + (f2.Required ? "0" : "1") + (f2.TableWide ? "1" : "0") + f2.SortOrder.ToString("0:000000000000000") + f2.Name;
 
 					//compare categories
 					return val1.CompareTo(val2);
@@ -247,6 +241,24 @@ namespace OKHOSTING.UI.Controls.Forms
 				return null;
 			}
 		}
+
+		/// <summary>
+		/// Returns the value entered by the user for a specified field
+		/// </summary>
+		/// <param name="fieldId">Id of the field which value is to be retrieved</param>
+		/// <returns>Value entered by the user in the specified field</returns>
+		public object GetValue(string fieldName)
+		{
+			//search fields collection by id
+			foreach (FormField f in Fields)
+			{
+				if (f.Name == fieldName) return f.Value;
+			}
+
+			//if no matching fielod was found, return null
+			return null;
+		}
+
 
 		#endregion
 	}
