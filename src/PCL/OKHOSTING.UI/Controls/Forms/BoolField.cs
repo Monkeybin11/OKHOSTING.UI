@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
@@ -35,12 +33,20 @@ namespace OKHOSTING.UI.Controls.Forms
 			{
 				if (value == null && !Required)
 				{
-					((IListPicker) ValueControl).Value = "-";
+					((IListPicker) ValueControl).Value = Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue;
 				}
 				else
 				{
 					((IListPicker) ValueControl).Value = value.ToString();
 				}
+			}
+		}
+
+		public override Type ValueType
+		{
+			get
+			{
+				return typeof(bool);
 			}
 		}
 
@@ -51,20 +57,15 @@ namespace OKHOSTING.UI.Controls.Forms
 		{
 			if (Required)
 			{
-				ValueControl = Platform.Current.Create<ICheckBox>();
+				ValueControl = Platform.Current.Create<IListPicker>();
+				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue);
+				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_BoolField_True);
+				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_BoolField_False);
 			}
 			else
 			{
 				ValueControl = Platform.Current.Create<ICheckBox>();
 			}
-		}
-
-		/// <summary>
-		/// Creates a new instance 
-		/// </summary>
-		public BoolField(): base()
-		{
-			ValueType = typeof(bool);
 		}
 	}
 }

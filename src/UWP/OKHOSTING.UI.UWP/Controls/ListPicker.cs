@@ -11,11 +11,11 @@ namespace OKHOSTING.UI.UWP.Controls
 			base.SelectionChanged += ListPicker_SelectionChanged;
 		}
 
-		IEnumerable<string> IListPicker.Items
+		List<string> IListPicker.Items
 		{
 			get
 			{
-				return (IEnumerable<string>) base.ItemsSource;
+				return (List<string>) base.ItemsSource;
 			}
 			set
 			{

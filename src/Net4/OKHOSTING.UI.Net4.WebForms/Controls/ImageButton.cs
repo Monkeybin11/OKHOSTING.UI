@@ -2,7 +2,6 @@
 using System.Linq;
 using System.IO;
 using OKHOSTING.UI.Controls;
-using System.Web.UI;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
@@ -215,32 +214,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
 				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
-			}
-		}
-
-		bool IControl.Visible
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		bool IControl.Enabled
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
 			}
 		}
 

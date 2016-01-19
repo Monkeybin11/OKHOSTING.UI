@@ -236,11 +236,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		IEnumerable<string> IListPicker.Items
+		List<string> IListPicker.Items
 		{
 			get
 			{
-				return (IEnumerable<string>) base.DataSource;
+				return (List<string>) base.DataSource;
 			}
 			set
 			{

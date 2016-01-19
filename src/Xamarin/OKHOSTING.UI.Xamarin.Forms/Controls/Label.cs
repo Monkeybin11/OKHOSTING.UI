@@ -5,7 +5,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	public class Label : global::Xamarin.Forms.Label, ILabel
 	{
-
 		void IDisposable.Dispose()
 		{
 		}

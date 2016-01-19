@@ -11,11 +11,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			base.SelectionChanged += ListPicker_SelectionChanged;
 		}
 
-		public IEnumerable<string> Items
+		List<string> IListPicker.Items
 		{
 			get
 			{
-				return (IEnumerable<string>) base.ItemsSource;
+				return (List<string>) base.ItemsSource;
 			}
 			set
 			{
@@ -53,7 +53,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		public event EventHandler<string> ValueChanged;
 
 		#endregion
-
 
 		#region IControl
 
@@ -291,6 +290,5 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		#endregion
-
 	}
 }

@@ -18,6 +18,16 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		private void TextBox_TextChanged(object sender, global::Xamarin.Forms.TextChangedEventArgs e)
 		{
+			//apply maxlenght
+			if (!string.IsNullOrEmpty(e.NewTextValue))
+			{
+				if (((ITextBox) this).MaxLength > 0 && e.NewTextValue.Length > ((ITextBox) this).MaxLength)
+				{
+					base.Text = e.NewTextValue.Substring(0, ((ITextBox) this).MaxLength);
+					return; //exit and do not raise ValueChanged event
+				}
+			}
+
 			if (ValueChanged != null)
 			{
 				ValueChanged(this, ((IInputControl<string>)this).Value);
@@ -280,6 +290,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 						break;
 				}
 			}
+		}
+
+		int ITextBox.MaxLength
+		{
+			get;
+			set;
 		}
 	}
 }

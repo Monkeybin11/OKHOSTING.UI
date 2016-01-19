@@ -1,60 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WebDropDownList = System.Web.UI.WebControls.DropDownList;
-using System.Web.UI.WebControls;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// Field for enum values
 	/// </summary>
-	[Serializable]
-	public class EnumField : DropDownListField
+	public class EnumField : ListPickerField
 	{
+		public EnumField(Type enumType)
+		{
+			EnumType = enumType;
+		}
+
+		public override object Value
+		{
+			get
+			{
+				if (ValueControl.Value == Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue)
+				{
+					return null;
+				}
+				else
+				{
+					return Enum.Parse(EnumType, ValueControl.Value);
+				}
+			}
+			set
+			{
+				if (value == null && !Required)
+				{
+					ValueControl.Value = Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue;
+				}
+				else
+				{
+					ValueControl.Value = value.ToString();
+				}
+			}
+		}
+
+		protected readonly Type EnumType;
+
+		public override Type ValueType
+		{
+			get
+			{
+				return EnumType;
+			}
+		}
+
 		/// <summary>
 		/// Creates the controls for displaying the field
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			ListItem item;
-			System.Array array;
-			string typeName;
-
-			//create and init dropdownlist
+			//create listpicker and add empty value if not required
 			base.CreateValueControl();
 
-			typeName = ValueType.FullName;
-			array = System.Enum.GetValues(ValueType);
+			var resources = new System.Resources.ResourceManager(ValueType);
 
 			//add every enum value
-			foreach (System.Enum e in array)
+			foreach (System.Enum e in System.Enum.GetValues(ValueType))
 			{
-				item = new ListItem
-					(
-					OKHOSTING.Softosis.Core.Globalization.Translator.Current[e],
-					e.ToString()
-					);
-
 				//add item
-				ValueControl.Items.Add(item);
+				ValueControl.Items.Add(resources.GetString(string.Format("{0}_{1}", ValueType.FullName.Replace('.', '_'), e.ToString())));
 			}
-		}
-
-		/// <summary>
-		/// Creates a new instance
-		/// </summary>
-		public EnumField()
-		{
-		}
-	
-		/// <summary>
-		/// Creates a new instance based on serialization info
-		/// </summary>
-		public EnumField(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext ctxt)
-			: base(info, ctxt)
-		{
 		}
 	}
 }

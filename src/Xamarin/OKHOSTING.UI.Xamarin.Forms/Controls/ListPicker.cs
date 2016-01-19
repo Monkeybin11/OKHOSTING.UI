@@ -12,17 +12,17 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
 		}
 
-		IEnumerable<string> IListPicker.Items
+		List<string> IListPicker.Items
 		{
 			get
 			{
-				return base.Items;
+				return (List<string>) base.Items;
 			}
 			set
 			{
 				base.Items.Clear();
 				
-				foreach(string item in value)
+				foreach (string item in value)
 				{
 					base.Items.Add(item);
 				}

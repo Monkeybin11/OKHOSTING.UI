@@ -11,5 +11,10 @@ namespace OKHOSTING.UI.Controls
 		/// The type of input that will be allowed for this TextBox
 		/// </summary>
 		ITextBoxInputType InputType { get; set; }
+
+		/// <summary>
+		/// Maximum length allowed for the string Value. Zero means no limit
+		/// </summary>
+		int MaxLength { get; set; }
 	}
 }
