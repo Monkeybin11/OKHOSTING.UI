@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Forms\BoolField.cs" />
+    <Compile Include="Controls\Forms\MethodForm.cs" />
     <Compile Include="Controls\Forms\ListPickerField.cs" />
+    <Compile Include="Controls\Forms\StringSerializableField.cs" />
     <Compile Include="Controls\Forms\TextBoxField.cs" />
     <Compile Include="Controls\Forms\TypeField.cs" />
     <Compile Include="Controls\Forms\DateField.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Controls\Forms\LabelPosition.cs" />
     <Compile Include="Controls\Forms\ReadOnlyField.cs" />
     <Compile Include="Controls\Forms\StringField.cs" />
+    <Compile Include="Controls\Forms\XmlSerializableField.cs" />
     <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Controls\IInputControl.cs" />
     <Compile Include="PageState.cs" />

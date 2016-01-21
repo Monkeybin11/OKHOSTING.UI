@@ -1,7 +1,6 @@
-﻿using System;
+﻿using OKHOSTING.Core;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace OKHOSTING.UI.Controls.Forms
@@ -9,19 +8,31 @@ namespace OKHOSTING.UI.Controls.Forms
 	/// <summary>
 	/// A form used to retrieve all parameters necessary for executing a DataMethod
 	/// </summary>
-	public class DataMethodForm: DataForm
+	public class MethodForm: Form
 	{
+		public readonly MethodInfo Method;
+
+		public MethodForm(MethodInfo method)
+		{
+			if (method == null)
+			{
+				throw new ArgumentNullException("method");
+			}
+
+			Method = method;
+		}
+
 		/// <summary>
 		/// Adds a field for every argument that the DataMethos needs in order to be invoked
 		/// </summary>
-		/// <param name="dmethod">DataMethod which parameters will be used as fields</param>
-		public void AddFieldsFrom(DataMethod dmethod)
+		/// <param name="method">DataMethod which parameters will be used as fields</param>
+		public void AddFieldsFrom(MethodInfo method)
 		{
+			if (method == null) throw new ArgumentNullException("dmethod");
 			uint order = 0;
-			if (dmethod == null) throw new ArgumentNullException("dmethod");
 
 			//add a field for each parameter
-			foreach (ParameterInfo param in dmethod.InnerMember.GetParameters())
+			foreach (ParameterInfo param in method.GetParameters())
 			{
 				FormField field;
 
@@ -29,10 +40,11 @@ namespace OKHOSTING.UI.Controls.Forms
 				
 				//set common values
 				field.Container = this;
-				field.Id = param.Name;
-				field.Required = true;
-				field.Text = OKHOSTING.Softosis.Core.Globalization.Translator.Current[dmethod.FullName + "." + param.Name];
+				field.Name = param.Name;
+				field.Required = !param.IsOptional && !param.IsOut;
+				field.CaptionControl.Text = new System.Resources.ResourceManager(method.DeclaringType).GetString(method.GetFriendlyFullName().Replace('.', '_') + '_' + param.Name);
 				field.SortOrder = order++;
+
 				Fields.Add(field);
 			}
 		}
@@ -41,17 +53,12 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// Copies all field values to a list of objects that will be used as parameters to invoke a DataMethod
 		/// </summary>
 		/// <param name="parameters">List of objects that will be used as parameters to invoke a DataMethod</param>
-		public void CopyParametersTo(List<object> parameters)
+		public IEnumerable<object> GetParameters()
 		{
-			//validate arguments
-			if (parameters == null) throw new ArgumentNullException("dvalues");
-
 			//search corresponding field for this DataValueInstance
 			foreach (FormField f in Fields)
 			{
-				f.RetrieveUserInput();
-				f.ControlToValue();
-				parameters.Add(f.Value);
+				yield return f.Value;
 			}
 		}
 	}

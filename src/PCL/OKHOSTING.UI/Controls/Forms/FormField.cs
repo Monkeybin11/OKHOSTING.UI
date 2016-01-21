@@ -1,7 +1,8 @@
-﻿using OKHOSTING.Data.Validation;
+﻿using OKHOSTING.Core;
+using OKHOSTING.Data.Validation;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
@@ -112,6 +113,86 @@ namespace OKHOSTING.UI.Controls.Forms
 			{
 				return CaptionControl.Text;
 			}
+		}
+
+		#endregion
+
+		#region Static
+
+		/// <summary>
+		/// Creates a field that will contain a value of a specific type
+		/// </summary>
+		public static FormField CreateFieldFrom(Type type)
+		{
+			//validate arguments
+			if (type == null) throw new ArgumentNullException("type");
+
+			//field
+			FormField field;
+
+			//Enum
+			if (type.GetTypeInfo().IsEnum)
+			{
+				field = new EnumField(type);
+			}
+
+			//Type, ignore this since we can't know if type means Person (as in a serializable object) or typeof(Person) as a type which child types you would choose from
+			//else if (type.Equals(typeof(Type)))
+			//{
+			//	field = new TypeField();
+			//}
+
+			//Bool
+			else if (type.Equals(typeof(bool)))
+			{
+				field = new BoolField();
+			}
+
+			//DateTime
+			else if (type.Equals(typeof(DateTime)))
+			{
+				field = new DateTimeField();
+			}
+
+			//Numeric
+			else if (type.IsNumeric())
+			{
+				if (type.IsIntegral())
+				{
+					field = new IntegerField();
+				}
+				else
+				{
+					field = new DecimalField();
+				}
+			}
+
+			//String serializable
+			else if (type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(Data.IStringSerializable)))
+			{
+				field = new StringSerializableField(type);
+			}
+
+			//XML
+			else if (type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(System.Xml.Serialization.IXmlSerializable)))
+			{
+				field = new XmlSerializableField(type);
+			}
+
+			//String
+			else if (type.Equals(typeof(string)))
+			{
+				field = new StringField();
+			}
+
+			//otherwise just create a textbox
+			else
+			{
+				field = new StringField();
+			}
+
+			//return
+			return field;
 		}
 
 		#endregion

@@ -1,51 +1,67 @@
-﻿using System;
+﻿using OKHOSTING.Data;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// A field for IStringSerialized values
 	/// </summary>
-	[Serializable]
-	public class StringSerializableField : TextBoxField
+	public class StringSerializableField : StringField
 	{
-		/// <summary>
-		/// Creates a new instance
-		/// </summary>
-		public StringSerializableField()
+		public readonly Type StringSerializableType;
+
+		public StringSerializableField(Type stringSerializableType)
 		{
-			this.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
-			this.TableWide = true;
-			ValueType = typeof(string);
+			if (stringSerializableType == null)
+			{
+				throw new ArgumentNullException("stringSerializableType");
+			}
+
+			if (!stringSerializableType.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IStringSerializable)))
+			{
+				throw new ArgumentOutOfRangeException("stringSerializableType", "Type does not implement IStringSerializable interface");
+			}
+
+			StringSerializableType = stringSerializableType;
 		}
 
-		/// <summary>
-		/// Creates a new instance based on serialization info
-		/// </summary>
-		public StringSerializableField(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext ctxt)
-			: base(info, ctxt)
+		public override object Value
 		{
+			get
+			{
+				return Data.Convert.ToIStringSerializable(ValueControl.Value, StringSerializableType);
+			}
+			set
+			{
+				ValueControl.Value = Data.Convert.ToString((IStringSerializable) value);
+			}
 		}
 
-		/// <summary>
-		/// Assings the Value to the valuecontrol input
-		/// </summary>
-		internal override void ValueToControl()
+		public override Type ValueType
 		{
-			if (Value == null)
+			get
 			{
-				ValueControl.Text = null;
+				return StringSerializableType;
 			}
-			else if (Value is IStringSerializable)
-			{
-				ValueControl.Text = TypeConverter.SerializeToString((IStringSerializable)Value);
-			}
-			else
-			{
-				ValueControl.Text = TypeConverter.SerializeToString(Value);
-			}
+		}
 
-			//set textmode again, just in case
-			ValueControl.TextMode = this.TextMode;
+		public override bool IsValid
+		{
+			get
+			{
+				try
+				{
+					IStringSerializable instance = (IStringSerializable) Value;
+				}
+				catch
+				{
+					return false;
+				}
+
+				return base.IsValid;
+			}
 		}
 	}
 }
