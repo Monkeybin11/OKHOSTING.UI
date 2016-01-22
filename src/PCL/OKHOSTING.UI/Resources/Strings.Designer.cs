@@ -23,7 +23,7 @@ namespace OKHOSTING.UI.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -37,7 +37,7 @@ namespace OKHOSTING.UI.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OKHOSTING.UI.Resources.Strings", typeof(Strings).GetTypeInfo().Assembly);
@@ -52,7 +52,7 @@ namespace OKHOSTING.UI.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace OKHOSTING.UI.Resources {
         /// <summary>
         ///   Looks up a localized string similar to False.
         /// </summary>
-        internal static string OKHOSTING_UI_Controls_Forms_BoolField_False {
+        public static string OKHOSTING_UI_Controls_Forms_BoolField_False {
             get {
                 return ResourceManager.GetString("OKHOSTING_UI_Controls_Forms_BoolField_False", resourceCulture);
             }
@@ -73,7 +73,7 @@ namespace OKHOSTING.UI.Resources {
         /// <summary>
         ///   Looks up a localized string similar to True.
         /// </summary>
-        internal static string OKHOSTING_UI_Controls_Forms_BoolField_True {
+        public static string OKHOSTING_UI_Controls_Forms_BoolField_True {
             get {
                 return ResourceManager.GetString("OKHOSTING_UI_Controls_Forms_BoolField_True", resourceCulture);
             }
@@ -82,7 +82,7 @@ namespace OKHOSTING.UI.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Left.
         /// </summary>
-        internal static string OKHOSTING_UI_Controls_Forms_CaptionPosition_Left {
+        public static string OKHOSTING_UI_Controls_Forms_CaptionPosition_Left {
             get {
                 return ResourceManager.GetString("OKHOSTING_UI_Controls_Forms_CaptionPosition_Left", resourceCulture);
             }
@@ -91,7 +91,7 @@ namespace OKHOSTING.UI.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Top.
         /// </summary>
-        internal static string OKHOSTING_UI_Controls_Forms_CaptionPosition_Top {
+        public static string OKHOSTING_UI_Controls_Forms_CaptionPosition_Top {
             get {
                 return ResourceManager.GetString("OKHOSTING_UI_Controls_Forms_CaptionPosition_Top", resourceCulture);
             }
@@ -100,7 +100,7 @@ namespace OKHOSTING.UI.Resources {
         /// <summary>
         ///   Looks up a localized string similar to -.
         /// </summary>
-        internal static string OKHOSTING_UI_Controls_Forms_EmptyValue {
+        public static string OKHOSTING_UI_Controls_Forms_EmptyValue {
             get {
                 return ResourceManager.GetString("OKHOSTING_UI_Controls_Forms_EmptyValue", resourceCulture);
             }

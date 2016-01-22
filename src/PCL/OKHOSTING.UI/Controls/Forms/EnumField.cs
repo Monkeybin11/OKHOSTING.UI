@@ -56,13 +56,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			//create listpicker and add empty value if not required
 			base.CreateValueControl();
 
-			var resources = new System.Resources.ResourceManager(ValueType);
-
 			//add every enum value
 			foreach (System.Enum e in System.Enum.GetValues(ValueType))
 			{
 				//add item
-				ValueControl.Items.Add(resources.GetString(string.Format("{0}_{1}", ValueType.FullName.Replace('.', '_'), e.ToString())));
+				ValueControl.Items.Add(Translator.Translate(e));
 			}
 		}
 	}

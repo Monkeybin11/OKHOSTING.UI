@@ -26,7 +26,7 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// Adds a field for every argument that the DataMethos needs in order to be invoked
 		/// </summary>
 		/// <param name="method">DataMethod which parameters will be used as fields</param>
-		public void AddFieldsFrom(MethodInfo method)
+		public virtual void AddFields(MethodInfo method)
 		{
 			if (method == null) throw new ArgumentNullException("dmethod");
 			uint order = 0;
@@ -53,7 +53,7 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// Copies all field values to a list of objects that will be used as parameters to invoke a DataMethod
 		/// </summary>
 		/// <param name="parameters">List of objects that will be used as parameters to invoke a DataMethod</param>
-		public IEnumerable<object> GetParameters()
+		public virtual IEnumerable<object> GetParameters()
 		{
 			//search corresponding field for this DataValueInstance
 			foreach (FormField f in Fields)

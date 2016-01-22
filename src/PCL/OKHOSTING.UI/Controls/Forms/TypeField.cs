@@ -49,7 +49,7 @@ namespace OKHOSTING.UI.Controls.Forms
 				}
 				else
 				{
-					ValueControl.Value = value.ToString();
+					ValueControl.Value = ((Type) value).FullName;
 				}
 			}
 		}
@@ -68,13 +68,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			//create listpicker and add empty value if not required
 			base.CreateValueControl();
 
-			//get Parent and it's subclasses
-			List<Type> types = new List<Type>();
-			types.Add(Parent);
-			types.AddRange(Parent.GetTypeInfo().Assembly.DefinedTypes.Where(t => t.IsSubclassOf(Parent)).Select(t=> t.AsType()));
+			//add Parent first
+			ValueControl.Items.Add(Parent.FullName);
 
-			//Create an item for each loaded DataType
-			foreach (Type type in types)
+			//add all Parent subclasses
+			foreach (Type type in Parent.GetTypeInfo().Assembly.DefinedTypes.Where(t => t.IsSubclassOf(Parent)).Select(t => t.AsType()))
 			{
 				ValueControl.Items.Add(type.FullName);
 			}
