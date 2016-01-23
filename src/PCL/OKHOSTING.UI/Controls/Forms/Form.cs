@@ -10,6 +10,16 @@ namespace OKHOSTING.UI.Controls.Forms
 		#region Fields and properties
 
 		/// <summary>
+		/// The grid that will be populated with all the fields. 
+		/// Add this content to your page after calling DataBind()
+		/// </summary>
+		public IGrid Content
+		{
+			get;
+			protected set;
+		}
+
+		/// <summary>
 		/// Collection of fields that will be displayed in the current form
 		/// </summary>
 		public readonly List<FormField> Fields = new List<FormField>();
@@ -24,6 +34,14 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// </summary>
 		public int RepeatColumns { get; set; } = 1;
 
+		public bool IsValid
+		{
+			get
+			{
+				return Fields.Where(f => f.IsValid).Count() == 0;
+			}
+		}
+
 		#endregion
 
 		#region Methods
@@ -31,10 +49,10 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// <summary>
 		/// Creates all cells and controls based on the Fields collection
 		/// </summary>
-		public IGrid CreateGrid()
+		public void DataBind()
 		{
 			//the grid that will actually be displayed to the user and contain all the fields
-			IGrid grid = Platform.Current.Create<IGrid>();
+			Content = Platform.Current.Create<IGrid>();
 
 			//column counter
 			int currentColumn = 0;
@@ -95,7 +113,7 @@ namespace OKHOSTING.UI.Controls.Forms
 					if (currentCategory != field.Category && categorize)
 					{
 						//create new category row
-						CreateCategoryRow(field.Category, grid);
+						CreateCategoryRow(field.Category, Content);
 
 						currentColumn = 0;
 						currentCategory = field.Category;
@@ -105,7 +123,7 @@ namespace OKHOSTING.UI.Controls.Forms
 					if (field.TableWide)
 					{
 						//create new rows for this field
-						CreateTableWideRow(field, grid);
+						CreateTableWideRow(field, Content);
 						
 						//reset counter
 						currentColumn = 0;
@@ -115,18 +133,18 @@ namespace OKHOSTING.UI.Controls.Forms
 					}
 
 					//create new row if this is the first row or if RepeatColumns has been reached 
-					if (grid.RowCount == 0 || currentColumn >= RepeatColumns)
+					if (Content.RowCount == 0 || currentColumn >= RepeatColumns)
 					{
-						grid.RowCount++;
+						Content.RowCount++;
 						currentColumn = 0;
 					}
 
 					//Add name cell
-					grid.SetContent(grid.RowCount - 1, currentColumn, field.CaptionControl);
+					Content.SetContent(Content.RowCount - 1, currentColumn, field.CaptionControl);
 					currentColumn++;
 
 					//Add value cell
-					grid.SetContent(grid.RowCount - 1, currentColumn, field.ValueControl);
+					Content.SetContent(Content.RowCount - 1, currentColumn, field.ValueControl);
 					currentColumn++;
 				}
 			}
@@ -145,7 +163,7 @@ namespace OKHOSTING.UI.Controls.Forms
 					if (currentCategory != field.Category && categorize)
 					{
 						//create new category row
-						CreateCategoryRow(field.Category, grid);
+						CreateCategoryRow(field.Category, Content);
 
 						//reset counter
 						currentColumn = 0;
@@ -158,7 +176,7 @@ namespace OKHOSTING.UI.Controls.Forms
 					if (field.TableWide)
 					{
 						//create new rows for this field
-						CreateTableWideRow(field, grid);
+						CreateTableWideRow(field, Content);
 
 						//reset counter
 						currentColumn = 0;
@@ -168,10 +186,10 @@ namespace OKHOSTING.UI.Controls.Forms
 					}
 
 					//Add name cells to the almost last row
-					grid.SetContent(grid.RowCount - 2, currentColumn, field.CaptionControl);
+					Content.SetContent(Content.RowCount - 2, currentColumn, field.CaptionControl);
 
 					//Add value cell to the last row
-					grid.SetContent(grid.RowCount - 1, currentColumn, field.ValueControl);
+					Content.SetContent(Content.RowCount - 1, currentColumn, field.ValueControl);
 
 					//increment column counter
 					currentColumn++;
@@ -182,46 +200,13 @@ namespace OKHOSTING.UI.Controls.Forms
 						currentColumn = 0;
 
 						//add one row for captions and another for values
-						grid.RowCount++;
-						grid.RowCount++;
+						Content.RowCount++;
+						Content.RowCount++;
 					}
 				}
 			}
 
 			#endregion
-
-			return grid;
-		}
-
-		/// <summary>
-		/// Creates a division row with a category name
-		/// </summary>
-		/// <param name="category">Name of the category</param>
-		protected void CreateCategoryRow(string category, IGrid grid)
-		{
-			ILabel caption = Platform.Current.Create<ILabel>();
-			caption.Text = category;
-
-			grid.RowCount++;
-			grid.SetContent(grid.RowCount - 1, 0, caption);
-			grid.SetColumnSpan(grid.ColumnCount, caption);
-		}
-
-		/// <summary>
-		/// Creates a row that includes a label and another row for the value of a TableWide field
-		/// </summary>
-		/// <param name="field">FormField that will be included in these rows</param>
-		protected void CreateTableWideRow(FormField field, IGrid grid)
-		{
-			//add a full row for the caption
-			grid.RowCount++;
-			grid.SetContent(grid.RowCount - 1, 0, field.CaptionControl);
-			grid.SetColumnSpan(grid.ColumnCount, field.CaptionControl);
-
-			//and another full row for the value
-			grid.RowCount++;
-			grid.SetContent(grid.RowCount - 1, 0, field.ValueControl);
-			grid.SetColumnSpan(grid.ColumnCount, field.ValueControl);
 		}
 
 		/// <summary>
@@ -259,6 +244,38 @@ namespace OKHOSTING.UI.Controls.Forms
 			return null;
 		}
 
+		//protected
+
+		/// <summary>
+		/// Creates a division row with a category name
+		/// </summary>
+		/// <param name="category">Name of the category</param>
+		protected void CreateCategoryRow(string category, IGrid grid)
+		{
+			ILabel caption = Platform.Current.Create<ILabel>();
+			caption.Text = category;
+
+			grid.RowCount++;
+			grid.SetContent(grid.RowCount - 1, 0, caption);
+			grid.SetColumnSpan(grid.ColumnCount, caption);
+		}
+
+		/// <summary>
+		/// Creates a row that includes a label and another row for the value of a TableWide field
+		/// </summary>
+		/// <param name="field">FormField that will be included in these rows</param>
+		protected void CreateTableWideRow(FormField field, IGrid grid)
+		{
+			//add a full row for the caption
+			grid.RowCount++;
+			grid.SetContent(grid.RowCount - 1, 0, field.CaptionControl);
+			grid.SetColumnSpan(grid.ColumnCount, field.CaptionControl);
+
+			//and another full row for the value
+			grid.RowCount++;
+			grid.SetContent(grid.RowCount - 1, 0, field.ValueControl);
+			grid.SetColumnSpan(grid.ColumnCount, field.ValueControl);
+		}
 
 		#endregion
 	}
