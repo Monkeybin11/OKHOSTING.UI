@@ -7,6 +7,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		public Application ()
 		{
 			Platform.Current.Page = new Page();
+			MainPage = (global::Xamarin.Forms.Page) Platform.Current.Page;
 		}
 
 		protected override void OnStart ()

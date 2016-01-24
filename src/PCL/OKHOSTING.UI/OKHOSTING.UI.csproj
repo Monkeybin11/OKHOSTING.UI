@@ -44,7 +44,7 @@
       <Name>OKHOSTING.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
+      <Project>{5BA0CBAC-63E5-4E01-AECA-67AE3B63503B}</Project>
       <Name>OKHOSTING.Data</Name>
     </ProjectReference>
   </ItemGroup>
