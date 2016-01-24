@@ -9,6 +9,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 {
 	public class Platform : UI.Platform
 	{
+		protected readonly Random Random = new Random();
+
 		public override T Create<T>()
 		{
 			T control = null;
@@ -73,6 +75,9 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				control = new Stack() as T;
 			}
+
+			//give a default name to all controls to allow events to be correclty triggered
+			control.Name = "ctr_" + Random.Next();
 
 			return control;
 		}

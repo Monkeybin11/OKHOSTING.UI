@@ -106,6 +106,8 @@ namespace OKHOSTING.UI.Controls.Forms
 			//If label position is left
 			if (this.LabelPosition == CaptionPosition.Left)
 			{
+				Content.ColumnCount = RepeatColumns < 2 ? 2 : (int) Math.Max(RepeatColumns, Math.Ceiling((decimal) RepeatColumns / 2) * 2);
+
 				//add every field
 				foreach (FormField field in Fields)
 				{
@@ -156,6 +158,8 @@ namespace OKHOSTING.UI.Controls.Forms
 			//If label position is top
 			else
 			{
+				Content.ColumnCount = RepeatColumns;
+
 				//add every field
 				foreach (FormField field in Fields)
 				{

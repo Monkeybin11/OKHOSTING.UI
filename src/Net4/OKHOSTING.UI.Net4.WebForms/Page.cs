@@ -207,7 +207,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		protected override void OnPreRender(EventArgs e)
 		{
-
 			//save page state
 			Platform.Current.PageState.Title = Title;
 			Platform.Current.PageState.Content = Content;

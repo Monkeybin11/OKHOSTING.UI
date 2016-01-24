@@ -305,8 +305,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		}
 
 		void IGrid.SetContent(int row, int column, IControl content)
-
 		{
+			if (row > Rows.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(row));
+			}
+
+			if (column > _ColumnCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(column));
+			}
+
+			while (Rows[row].Cells.Count < _ColumnCount)
+			{
+				Rows[row].Cells.Add(new System.Web.UI.WebControls.TableCell());
+			}
+
 			Rows[row].Cells[column].Controls.Clear();
 			Rows[row].Cells[column].Controls.Add((System.Web.UI.Control)content);
 		}

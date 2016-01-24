@@ -11,6 +11,12 @@ namespace OKHOSTING.UI.Controls.Forms
 	/// </summary>
 	public abstract class FormField
 	{
+		public FormField()
+		{
+			CaptionControl = Platform.Current.Create<ILabel>();
+			CreateValueControl();
+		}
+
 		#region Public properties
 
 		//abstract

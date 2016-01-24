@@ -21,7 +21,14 @@ namespace OKHOSTING.UI
 
 		public static string GetString(Type type, string name)
 		{
-			return GetManager(type).GetString(name);
+			try
+			{
+				return GetManager(type).GetString(name);
+			}
+			catch
+			{
+				return string.Format("{0}.{1}", type.Name, name);
+			}
 		}
 
 		public static string Translate(Type type)
