@@ -12,11 +12,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
 		}
 
-		List<string> IListPicker.Items
+		IList<string> IListPicker.Items
 		{
 			get
 			{
-				return (List<string>) base.Items;
+				return base.Items;
 			}
 			set
 			{
