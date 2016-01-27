@@ -7,7 +7,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
-		int IGrid.ColumnCount
+        #region IGrid
+
+        int IGrid.ColumnCount
 		{
 			get
 			{
@@ -67,8 +69,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 			base.Children.Add((global::Xamarin.Forms.View) content);
 		}
-
-
+        
 		Thickness IGrid.CellMargin
 		{
 			get; set;
@@ -86,9 +87,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
-		void IDisposable.Dispose()
-		{
-		}
 		void IGrid.SetColumnSpan(int columnSpan, IControl content)
 		{
 			SetColumnSpan((global::Xamarin.Forms.BindableObject) content, columnSpan);
@@ -129,9 +127,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			return base.RowDefinitions[row].Height.Value;
 		}
 
-		#region IControl
+        #endregion
 
-		string IControl.Name
+        #region IControl
+
+        string IControl.Name
 		{
 			get; set;
 		}
@@ -253,5 +253,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
         }
 
         #endregion
+
+        void IDisposable.Dispose()
+        {
+        }
     }
 }
