@@ -52,9 +52,6 @@ namespace OKHOSTING.UI
 			{
 				Page.Title = PageState.Title;
 				Page.Content = PageState.Content;
-
-				//refresh controller
-				Controller.Refresh();
 			}
 		}
 

@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Controls.Forms
 	/// <summary>
 	/// An item that will be displayed in the dataform
 	/// </summary>
-	public abstract class FormField
+	public abstract class FormField: IDisposable();
 	{
 		public FormField()
 		{
@@ -118,6 +118,19 @@ namespace OKHOSTING.UI.Controls.Forms
 			else
 			{
 				return CaptionControl.Text;
+			}
+		}
+
+		public void Dispose()
+		{
+			if (CaptionControl != null)
+			{
+				CaptionControl.Dispose();
+			}
+
+			if (ValueControl != null)
+			{
+				ValueControl.Dispose();
 			}
 		}
 

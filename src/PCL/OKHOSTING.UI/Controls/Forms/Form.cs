@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
-	public class Form
+	public class Form: IDisposable
 	{
 		#region Fields and properties
 
@@ -257,6 +257,14 @@ namespace OKHOSTING.UI.Controls.Forms
 			grid.RowCount++;
 			grid.SetContent(grid.RowCount - 1, 0, field.ValueControl);
 			grid.SetColumnSpan(grid.ColumnCount, field.ValueControl);
+		}
+
+		public void Dispose()
+		{
+			foreach (FormField field in Fields)
+			{
+				field.Dispose();
+			}
 		}
 
 		#endregion
