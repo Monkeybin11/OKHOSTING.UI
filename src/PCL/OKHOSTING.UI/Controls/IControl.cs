@@ -61,5 +61,13 @@ namespace OKHOSTING.UI.Controls
 		/// Vertical alignment of the control with respect to it's container
 		/// </summary>
 		VerticalAlignment VerticalAlignment { get; set; }
-	}
+
+        /// <summary>
+        /// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+        /// </summary>
+        /// <remarks>
+        /// Returns the intended value. This property has no default value.
+        /// </remmarks>
+        object Tag { get; set; }
+    }
 }

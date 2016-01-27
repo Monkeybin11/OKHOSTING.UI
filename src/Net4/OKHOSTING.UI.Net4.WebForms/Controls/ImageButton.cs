@@ -217,9 +217,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		#endregion
+        /// <summary>
+        /// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+        /// </summary>
+        /// <remarks>
+        /// Returns the intended value. This property has no default value.
+        /// </remmarks>
+        object IControl.Tag
+        {
+            get; set;
+        }
 
-		public new event EventHandler Click;
+        #endregion
+
+        public new event EventHandler Click;
 
 		protected internal virtual void Raise_Click()
 		{

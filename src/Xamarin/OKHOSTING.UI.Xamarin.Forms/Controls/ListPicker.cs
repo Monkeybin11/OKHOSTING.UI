@@ -174,11 +174,22 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-		#endregion
+        /// <summary>
+        /// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+        /// </summary>
+        /// <remarks>
+        /// Returns the intended value. This property has no default value.
+        /// </remmarks>
+        object IControl.Tag
+        {
+            get; set;
+        }
 
-		#region ITextControl
+        #endregion
 
-		string ITextControl.FontFamily
+        #region ITextControl
+
+        string ITextControl.FontFamily
 		{
 			get;
 			set;

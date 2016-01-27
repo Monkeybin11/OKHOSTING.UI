@@ -294,11 +294,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		#endregion
+        /// <summary>
+        /// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+        /// </summary>
+        /// <remarks>
+        /// Returns the intended value. This property has no default value.
+        /// </remmarks>
+        object IControl.Tag
+        {
+            get; set;
+        }
 
-		#region ITextControl
+        #endregion
 
-		Color ITextControl.FontColor
+        #region ITextControl
+
+        Color ITextControl.FontColor
 		{
 			get
 			{
