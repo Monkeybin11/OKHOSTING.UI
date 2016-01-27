@@ -228,23 +228,23 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
-        /// </summary>
-        /// <remarks>
-        /// Returns the intended value. This property has no default value.
-        /// </remmarks>
-        object IControl.Tag
-        {
-            get; set;
-        }
+		/// <summary>
+		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// </summary>
+		/// <remarks>
+		/// Returns the intended value. This property has no default value.
+		/// </remmarks>
+		object IControl.Tag
+		{
+			get; set;
+		}
 
-        #endregion
+		#endregion
 
-        /// <summary>
-        /// The actual grid that contains all controls in a "stacky" way
-        /// </summary>
-        protected readonly Grid InnerGrid;
+		/// <summary>
+		/// The actual grid that contains all controls in a "stacky" way
+		/// </summary>
+		protected readonly Grid InnerGrid;
 
 		public readonly ControlList Children;
 

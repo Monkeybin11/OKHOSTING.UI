@@ -22,6 +22,13 @@
 		}
 
 		/// <summary>
+		/// Will be executed when the controller gets the focus once again, after gibing focus to another control
+		/// </summary>
+		public virtual void Refresh()
+		{
+		}
+
+		/// <summary>
 		/// Will be execeuted once the controller has done it's workd. Use this to dispose objects and release memory
 		/// </summary>
 		public virtual void Finish()

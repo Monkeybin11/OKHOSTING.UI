@@ -7,9 +7,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
-        #region IGrid
+		#region IGrid
 
-        int IGrid.ColumnCount
+		int IGrid.ColumnCount
 		{
 			get
 			{
@@ -69,7 +69,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 			base.Children.Add((global::Xamarin.Forms.View) content);
 		}
-        
+		
 		Thickness IGrid.CellMargin
 		{
 			get; set;
@@ -127,11 +127,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			return base.RowDefinitions[row].Height.Value;
 		}
 
-        #endregion
+		#endregion
 
-        #region IControl
+		#region IControl
 
-        string IControl.Name
+		string IControl.Name
 		{
 			get; set;
 		}
@@ -241,21 +241,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
-        /// </summary>
-        /// <remarks>
-        /// Returns the intended value. This property has no default value.
-        /// </remmarks>
-        object IControl.Tag
-        {
-            get; set;
-        }
+		/// <summary>
+		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// </summary>
+		/// <remarks>
+		/// Returns the intended value. This property has no default value.
+		/// </remmarks>
+		object IControl.Tag
+		{
+			get; set;
+		}
 
-        #endregion
+		#endregion
 
-        void IDisposable.Dispose()
-        {
-        }
-    }
+		void IDisposable.Dispose()
+		{
+		}
+	}
 }

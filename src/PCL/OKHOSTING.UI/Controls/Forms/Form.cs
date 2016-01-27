@@ -222,30 +222,8 @@ namespace OKHOSTING.UI.Controls.Forms
 		{
 			get
 			{
-				foreach (FormField f in Fields)
-				{
-					if (f.Name == fieldName) return f;
-				}
-
-				return null;
+				return Fields.Where(f => f.Name == fieldName).SingleOrDefault();
 			}
-		}
-
-		/// <summary>
-		/// Returns the value entered by the user for a specified field
-		/// </summary>
-		/// <param name="fieldId">Id of the field which value is to be retrieved</param>
-		/// <returns>Value entered by the user in the specified field</returns>
-		public object GetValue(string fieldName)
-		{
-			//search fields collection by id
-			foreach (FormField f in Fields)
-			{
-				if (f.Name == fieldName) return f.Value;
-			}
-
-			//if no matching fielod was found, return null
-			return null;
 		}
 
 		//protected
