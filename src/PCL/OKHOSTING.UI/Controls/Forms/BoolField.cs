@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
@@ -31,13 +32,20 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			set
 			{
-				if (value == null && !Required)
+				if (!Required)
 				{
-					((IListPicker) ValueControl).Value = Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue;
+					if (value == null)
+					{
+						((IListPicker)ValueControl).Value = Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue;
+					}
+					else
+					{
+						((IListPicker) ValueControl).Value = ((bool) value).ToString();
+					}
 				}
 				else
 				{
-					((IListPicker) ValueControl).Value = value.ToString();
+					((ICheckBox) ValueControl).Value = (bool) value;
 				}
 			}
 		}
@@ -55,9 +63,10 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			if (Required)
+			if (!Required)
 			{
 				ValueControl = Platform.Current.Create<IListPicker>();
+				((IListPicker) ValueControl).Items = new List<string>();
 				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue);
 				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_BoolField_True);
 				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_BoolField_False);

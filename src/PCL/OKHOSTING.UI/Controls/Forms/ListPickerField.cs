@@ -1,4 +1,6 @@
-﻿namespace OKHOSTING.UI.Controls.Forms
+﻿using System.Collections.Generic;
+
+namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// Base class for all fields that uses a single TextBox as ValueControl
@@ -26,7 +28,8 @@
 		protected override void CreateValueControl()
 		{
 			ValueControl = Platform.Current.Create<IListPicker>();
-			
+			ValueControl.Items = new List<string>();
+
 			//Add null value to DropDwonList if not required
 			if (!Required)
 			{

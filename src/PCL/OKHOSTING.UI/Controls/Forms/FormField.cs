@@ -9,13 +9,14 @@ namespace OKHOSTING.UI.Controls.Forms
 	/// <summary>
 	/// An item that will be displayed in the dataform
 	/// </summary>
-	public abstract class FormField: IDisposable();
+	public abstract class FormField: IDisposable
 	{
 		public FormField()
 		{
 			CaptionControl = Platform.Current.Create<ILabel>();
-			CreateValueControl();
 		}
+
+		private IControl _ValueControl;
 
 		#region Public properties
 
@@ -47,7 +48,22 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// <summary>
 		/// Control that parses the value to web
 		/// </summary>
-		public virtual IControl ValueControl { get; protected set; }
+		public virtual IControl ValueControl
+		{
+			get
+			{
+				if (_ValueControl == null)
+				{
+					CreateValueControl();
+				}
+
+				return _ValueControl;
+			}
+			protected set
+			{
+				_ValueControl = value;
+			}
+		}
 
 		/// <summary>
 		/// If set to true, this field must be set to 100% of the form's width and use a complete row for itself
