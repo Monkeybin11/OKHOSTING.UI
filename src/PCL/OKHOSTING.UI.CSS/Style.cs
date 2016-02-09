@@ -49,8 +49,6 @@ namespace OKHOSTING.UI.CSS
 			}
 		}
 
-
-
 		/// <summary>
 		/// Applies a CSS style to a IControl
 		/// </summary>
@@ -182,29 +180,29 @@ namespace OKHOSTING.UI.CSS
 		/// <summary>
 		/// Applies a CSS style ato a ITextControl including font style
 		/// </summary>
-		public static void Apply(ICssStyleDeclaration styleDeclaration, ITextControl control)
+		public static void Apply(ICssStyleDeclaration style, ITextControl control)
 		{
 			//first parse as IControl
-			Apply(styleDeclaration, (IControl) control);
+			Apply(style, (IControl) control);
 
 			//now for ITextControl properties
+			control.Bold = style.FontWeight == "bold";
+			control.Italic = style.FontStyle == "italic";
+			control.Underline = style.TextDecoration == "underline";
 
-			control.Bold = styleDeclaration.FontWeight == "bold";
-			control.Italic = styleDeclaration.FontStyle == "italic";
-			control.Underline = styleDeclaration.TextDecoration == "underline";
-
-			AngleSharp.Css.Values.Color color = AngleSharp.Css.Values.Color.FromHex(styleDeclaration.Color);
+			AngleSharp.Css.Values.Color color = AngleSharp.Css.Values.Color.FromHex(style.Color);
 			control.FontColor = new Color(color.A, color.R, color.G, color.B);
 
-			control.FontFamily = styleDeclaration.FontFamily;
+			control.FontFamily = style.FontFamily;
 
 			Length lenght;
-			if (Length.TryParse(styleDeclaration.FontSize, out lenght))
+
+			if (Length.TryParse(style.FontSize, out lenght))
 			{
 				control.FontSize = lenght.ToPixel();
 			}
 
-			switch (styleDeclaration.TextAlign)
+			switch (style.TextAlign)
 			{
 				case "left":
 					control.TextHorizontalAlignment = HorizontalAlignment.Left;

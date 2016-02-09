@@ -52,7 +52,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		protected override void OnPreRender(EventArgs e)
 		{
-			if (base.DataSource != null && !Page.IsPostBack)
+			if (base.DataSource != null && base.Items.Count == 0)
 			{
 				base.DataBind();
 			}
