@@ -1,15 +1,10 @@
 ﻿using OKHOSTING.UI.Test;
 using System;
 
-namespace OKHOSTING.UI.Net4.WinForms.Test
+namespace OKHOSTING.UI.Net4.WebForms.Test
 {
-	public partial class Form1 : OKHOSTING.UI.Net4.WinForms.Page
+	public partial class Default : OKHOSTING.UI.Net4.WebForms.Page
 	{
-		public Form1()
-		{
-			InitializeComponent();
-		}
-
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);

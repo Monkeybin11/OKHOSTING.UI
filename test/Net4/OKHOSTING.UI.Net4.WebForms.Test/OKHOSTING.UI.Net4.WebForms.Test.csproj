@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Default.aspx" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -78,7 +79,28 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Net4\OKHOSTING.UI.Net4.WebForms\OKHOSTING.UI.Net4.WebForms.csproj">
+      <Project>{734c6a3d-406e-421f-878b-64425dd137df}</Project>
+      <Name>OKHOSTING.UI.Net4.WebForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
+      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+      <Name>OKHOSTING.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PCL\OKHOSTING.UI.Test\OKHOSTING.UI.Test.csproj">
+      <Project>{15245b1f-7c2e-4553-b6c8-24c946f433da}</Project>
+      <Name>OKHOSTING.UI.Test</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

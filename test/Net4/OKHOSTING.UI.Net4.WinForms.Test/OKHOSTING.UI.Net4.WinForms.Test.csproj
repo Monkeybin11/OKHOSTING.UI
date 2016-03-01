@@ -76,6 +76,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Net4\OKHOSTING.UI.Net4.WinForms\OKHOSTING.UI.Net4.WinForms.csproj">
+      <Project>{3d1e7e01-f74a-4a00-8037-36f9d51a5860}</Project>
+      <Name>OKHOSTING.UI.Net4.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
+      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+      <Name>OKHOSTING.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PCL\OKHOSTING.UI.Test\OKHOSTING.UI.Test.csproj">
+      <Project>{15245b1f-7c2e-4553-b6c8-24c946f433da}</Project>
+      <Name>OKHOSTING.UI.Test</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

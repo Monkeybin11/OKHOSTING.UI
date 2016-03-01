@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using OKHOSTING.UI.Test;
 using System.Windows;
 
 namespace OKHOSTING.UI.Net4.WPF.Test
@@ -13,5 +8,15 @@ namespace OKHOSTING.UI.Net4.WPF.Test
 	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			base.OnStartup(e);
+
+			Platform.Current.Page = new Page();
+
+			new IndexController().Start();
+
+			((Page)Platform.Current.Page).Show();
+		}
 	}
 }

@@ -38,10 +38,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{3F4502FA-51EA-4CB9-8E50-46F828D240A1}</Project>
-      <Name>OKHOSTING.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\src\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
       <Project>{F9D654B5-6B7A-4573-B8C8-FD09B96C021B}</Project>
       <Name>OKHOSTING.UI</Name>
