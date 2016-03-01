@@ -23,7 +23,7 @@ namespace OKHOSTING.UI.Test
 			grid.Children.Add(txtText);
 
 			IListPicker lstFont = Platform.Current.Create<IListPicker>();
-			lstFont.Items.AddRange(new string[] { "Arial", "Verdana", "Times new roman", "Helvetica" });
+			lstFont.Items = new string[] { "Arial", "Verdana", "Times new roman", "Helvetica" };
 			lstFont.ValueChanged += (object sender, string e) => lblLabel.FontFamily = lstFont.Value;
 			grid.Children.Add(lstFont);
 
