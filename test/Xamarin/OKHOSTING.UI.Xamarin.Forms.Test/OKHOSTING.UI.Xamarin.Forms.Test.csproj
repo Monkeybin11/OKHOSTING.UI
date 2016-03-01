@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -51,10 +51,6 @@
       <Project>{3F4502FA-51EA-4CB9-8E50-46F828D240A1}</Project>
       <Name>OKHOSTING.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{5BA0CBAC-63E5-4E01-AECA-67AE3B63503B}</Project>
-      <Name>OKHOSTING.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\src\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
       <Project>{F9D654B5-6B7A-4573-B8C8-FD09B96C021B}</Project>
       <Name>OKHOSTING.UI</Name>
@@ -62,10 +58,6 @@
     <ProjectReference Include="..\..\..\src\Xamarin\OKHOSTING.UI.Xamarin.Forms\OKHOSTING.UI.Xamarin.Forms.csproj">
       <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
       <Name>OKHOSTING.UI.Xamarin.Forms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\PCL\OKHOSTING.UI.Test\OKHOSTING.UI.Test.csproj">
-      <Project>{15245B1F-7C2E-4553-B6C8-24C946F433DA}</Project>
-      <Name>OKHOSTING.UI.Test</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
