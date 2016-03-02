@@ -26,9 +26,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 		}
 
-		#region IControl
+        public void LoadFromStream(string v)
+        {
+            throw new NotImplementedException();
+        }
 
-		string IControl.Name
+        #region IControl
+
+        string IControl.Name
 		{
 			get; set;
 		}

@@ -5,7 +5,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class Image : System.Web.UI.WebControls.Image, UI.Controls.IImage
+	public class Image : System.Web.UI.WebControls.Image, IImage
 	{
 		#region IControl
 
@@ -274,5 +274,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			base.ImageUrl = url.ToString();
 		}
-	}
+
+        public void LoadFromStream(string v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

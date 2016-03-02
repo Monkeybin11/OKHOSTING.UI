@@ -128,10 +128,6 @@
     <EmbeddedResource Include="Properties\OKHOSTING.UI.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{3f4502fa-51ea-4cb9-8e50-46f828d240a1}</Project>
-      <Name>OKHOSTING.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
       <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
       <Name>OKHOSTING.UI</Name>

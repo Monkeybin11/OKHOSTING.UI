@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class Image : System.Windows.Controls.Panel, IImage
+	public class Image : System.Windows.Controls.Panel, IControl
 	{
 		protected readonly System.Windows.Controls.Image InnerImage;
 
@@ -38,13 +38,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			InnerImage.Source = bitmap;
 		}
 
-		void IDisposable.Dispose()
-		{
-		}
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
 
-		#region IControl
+        //void IDisposable.Dispose()
+        //{
+        //}
 
-		bool IControl.Visible
+        #region IControl
+
+        bool IControl.Visible
 		{
 			get
 			{

@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Test
 
 			IGrid grid = Platform.Current.Create<IGrid>();
 			grid.ColumnCount = 1;
-			grid.RowCount = 3;
+			grid.RowCount = 20;
 
 			ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
 			lblAutocomplete.Text = "Autocomplete";
@@ -29,7 +29,33 @@ namespace OKHOSTING.UI.Test
 			lblLabelButton.Click += (object sender, EventArgs e) => new LabelButtonController().Start();
 			grid.SetContent(2, 0, lblLabelButton);
 
-			Platform.Current.Page.Title = "Choose one control to test";
+            ILabelButton lblButton = Platform.Current.Create<ILabelButton>();
+            lblButton.Text = "Button";
+            lblButton.Click += (object sender, EventArgs e) => new ButtonController().Start();
+            grid.SetContent(3, 0, lblButton);
+
+            ILabelButton lblHyperLink = Platform.Current.Create<ILabelButton>();
+            lblHyperLink.Text = "HyperLink";
+            //lblHyperLink.Click += (object sender, EventArgs e) => new HyperLinkController().Start();
+            grid.SetContent(4, 0, lblHyperLink);
+            
+
+            ILabelButton lblCheckbox = Platform.Current.Create<ILabelButton>();
+            lblCheckbox.Text = "Checkbox";
+            lblCheckbox.Click += (object sender, EventArgs e) => new CheckboxController().Start();
+            grid.SetContent(5, 0, lblCheckbox);
+
+            ILabelButton lblImage = Platform.Current.Create<ILabelButton>();
+            lblImage.Text = "Image";
+            lblImage.Click += (object sender, EventArgs e) => new ImageController().Start();
+            grid.SetContent(6, 0, lblImage);
+
+            ILabelButton lblImageButton = Platform.Current.Create<ILabelButton>();
+            lblImageButton.Text = "ImageButton";
+            lblImageButton.Click += (object sender, EventArgs e) => new ImageButtonController().Start();
+            grid.SetContent(7, 0, lblImageButton);
+
+            Platform.Current.Page.Title = "Choose one control to test";
 			Platform.Current.Page.Content = grid;
 		}
 	}

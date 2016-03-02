@@ -31,9 +31,14 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 		}
 
-		#region IControl
+        public void LoadFromStream(string v)
+        {
+            throw new NotImplementedException();
+        }
 
-		bool IControl.Visible
+        #region IControl
+
+        bool IControl.Visible
 		{
 			get
 			{

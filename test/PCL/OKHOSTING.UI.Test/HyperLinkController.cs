@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls.Layouts;
 
 namespace OKHOSTING.UI.Test
 {
-	public class LabelController: Controller
+	public class HyperLinkController: Controller
 	{
 		public override void Start()
 		{
@@ -13,19 +13,15 @@ namespace OKHOSTING.UI.Test
 			IStack stack = Platform.Current.Create<IStack>();
 
 			ILabel lblLabel = Platform.Current.Create<ILabel>();
-			lblLabel.Text = "This is a label";
+			lblLabel.Text = "Visit";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-			ITextBox txtText = Platform.Current.Create<ITextBox>();
-			txtText.Value = "Update label text here";
-			txtText.ValueChanged += (object sender, string e) => lblLabel.Text = txtText.Value;
-			stack.Children.Add(txtText);
-
-			IListPicker lstFont = Platform.Current.Create<IListPicker>();
-			lstFont.Items = new string[] { "Arial", "Verdana", "Times new roman", "Helvetica" };
-			lstFont.ValueChanged += (object sender, string e) => lblLabel.FontFamily = lstFont.Value;
-			stack.Children.Add(lstFont);
+            IHyperLink hplUrl = Platform.Current.Create<IHyperLink>();
+            hplUrl.Text = "http://www.okhosting.com";
+            hplUrl.Uri = new Uri("http://www.okhosting.com");
+            hplUrl.Name = "okhosting.com";
+            stack.Children.Add(hplUrl);
 
             IButton cmdClose = Platform.Current.Create<IButton>();
             cmdClose.Text = "Close";

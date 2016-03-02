@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System.IO;
+using System;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
@@ -114,5 +115,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			Platform.Current.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
-	}
+
+        public void LoadFromStream(string v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

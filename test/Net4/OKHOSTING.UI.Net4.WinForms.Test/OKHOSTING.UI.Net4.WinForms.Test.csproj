@@ -74,9 +74,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\src\Net4\OKHOSTING.UI.Net4.WinForms\OKHOSTING.UI.Net4.WinForms.csproj">
       <Project>{3d1e7e01-f74a-4a00-8037-36f9d51a5860}</Project>
       <Name>OKHOSTING.UI.Net4.WinForms</Name>

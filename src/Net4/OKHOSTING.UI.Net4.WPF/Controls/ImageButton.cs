@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class ImageButton : Image, IImageButton
+	public class ImageButton : Image
 	{
 		public ImageButton()
 		{

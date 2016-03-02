@@ -93,9 +93,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\src\Net4\OKHOSTING.UI.Net4.WPF\OKHOSTING.UI.Net4.WPF.csproj">
       <Project>{cf41703f-18fb-44c2-9dce-99d1801950c2}</Project>
       <Name>OKHOSTING.UI.Net4.WPF</Name>
