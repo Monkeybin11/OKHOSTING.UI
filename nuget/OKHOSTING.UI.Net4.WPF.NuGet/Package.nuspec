@@ -1,36 +1,61 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>OKHOSTING.UI.Net4.WPF.NuGet</id>
-    <version>1.0.0</version>
-    <title>OKHOSTING.UI.Net4.WPF.NuGet</title>
-    <authors>one</authors>
-    <owners>Microsoft</owners>
-    <description>
-      A long description of the package. This shows up in the right pane of the Add Package Dialog as well as in the Package Manager Console when listing packages using the Get-Package command.
-    </description>
-    <releaseNotes>
-    </releaseNotes>
-    <summary>
-      A short description of the package. If specified, this shows up in the middle pane of the Add Package Dialog. If not specified, a truncated version of the description is used instead.
-    </summary>
-    <language>en-US</language>
-    <projectUrl>https://nuget.org/packages/OKHOSTING.UI.Net4.WPF.NuGet</projectUrl>
-    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
-    <copyright>Copyright Microsoft 2016</copyright>
-    <dependencies>
-        <group targetFramework="net40">
-          <dependency id="log4net" version="1.2.10" />
-        </group>
-    </dependencies>
-    <references></references>
-    <tags>Microsoft</tags>
+	<id>OKHOSTING.UI.Net4.WPF</id>
+	<version>1.0.0</version>
+	<title>OKHOSTING.UI.Net4.WPF</title>
+	<authors>OK HOSTING SC</authors>
+	<owners>OK HOSTING SC</owners>
+	<description>
+	  This project implements UI generation for Windows Presentation Foundation for the OKHOSTING.UI framework
+
+	  Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
+
+	  ## Features
+
+	  * Create your apps in PCL and run them everywhere, truly multi-platform (web included)
+	  * The UI is defined from code (XAML designer on the way)
+	  * 100% native controls are used in all platforms
+	  * You have only the "common" UI api surface among all platforms
+	  * Supports click, doble click and, for user input controls, value changed events
+	  * Using OKHOSTING.UI.CSS you can use CSS files to define the styles of your controls on all platforms (thanks to AngleSharp)
+
+	  ## Supported controls
+
+	  * Autocomplete
+	  * Button
+	  * Calendar
+	  * CheckBox
+	  * HyperLink
+	  * Image
+	  * Label
+	  * ListPicker (equivalent to a DropDownList)
+	  * PasswordTextBox
+	  * TextArea
+	  * TextBox
+
+	  Please visit: https://github.com/okhosting/OKHOSTING.UI
+	</description>
+	<releaseNotes>
+	</releaseNotes>
+	<summary>
+	  Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
+	</summary>
+	<language>en-US</language>
+	<projectUrl>http://okhosting.com/</projectUrl>
+	<iconUrl>http://okhosting.com/wp-content/uploads/2016/02/okhosting-150x150.png</iconUrl>
+	<requireLicenseAcceptance>true</requireLicenseAcceptance>
+	<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
+	<copyright>Copyright OK HOSTING SC 2015</copyright>
+	<dependencies>
+	  <dependency id="OKHOSTING.UI" version="1.0.1" />
+	</dependencies>
+	<references></references>
+	<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>
   </metadata>
   <files>
-    <file src="lib\" target="lib" />
-    <file src="tools\" target="tools" />
-    <file src="content\" target="content" />
+	<file src="lib\" target="lib" />
+	<file src="tools\" target="tools" />
+	<file src="content\" target="content" />
   </files>
 </package>

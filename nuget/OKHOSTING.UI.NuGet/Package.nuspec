@@ -2,13 +2,13 @@
 <package >
   <metadata>
 	<id>OKHOSTING.UI</id>
-	<version>1.0.0</version>
+	<version>1.0.2</version>
 	<title>OKHOSTING.UI</title>
 	<authors>OK HOSTING SC</authors>
 	<owners>OK HOSTING</owners>
 	<description>
-	  A true multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (WinForms), Mac OS (WinForms and Xamarin.Mac), iOS, Android, Windows Phone and Windows Store (all mobile via Xamarin Forms)
-
+	  Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
+	  
 	  ## Features
 
 	  * Create your apps in PCL and run them everywhere, truly multi-platform (web included)
@@ -16,15 +16,36 @@
 	  * 100% native controls are used in all platforms
 	  * You have only the "common" UI api surface among all platforms
 	  * Supports click, doble click and, for user input controls, value changed events
-	  * Using OKHOSTING.UI.CSS you can use CSS files to define the styles of your controls (thanks to AngleSharp)
+	  * Using OKHOSTING.UI.CSS you can use CSS files to define the styles of your controls on all platforms (thanks to AngleSharp)
 
+	  ## Supported controls
+
+	  ### Regular controls
+
+	  * Autocomplete
+	  * Button
+	  * Calendar
+	  * CheckBox
+	  * HyperLink
+	  * Image
+	  * Label
+	  * ListPicker (equivalent to a DropDownList)
+	  * PasswordTextBox
+	  * TextArea
+	  * TextBox
+
+	  ### Forms
+
+	  * Create forms for user data input/output
+	  * Create form fields for string, int, decimal, date, enum, bool, xml or any custom type you need
+	  * Create forms to execute a method
 
 	  Please visit: https://github.com/okhosting/OKHOSTING.UI
 	</description>
 	<releaseNotes>
 	</releaseNotes>
 	<summary>
-	  Data acces library with a focus on portability, SQL generation and schema management
+	  Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
 	</summary>
 	<language>en-US</language>
 	<projectUrl>http://okhosting.com/</projectUrl>
@@ -33,10 +54,10 @@
 	<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
 	<copyright>Copyright OK HOSTING SC 2015</copyright>
 	<dependencies>
-	  <dependency id="OKHOSTING.Data" />
+	  <dependency id="OKHOSTING.Data" version="1.0.3" />
 	</dependencies>
 	<references></references>
-	<tags>okhosting, data, sql, sql generation, mysql, sql server, postgres, sqlite, orm</tags>
+	<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>
   </metadata>
   <files>
 	<file src="lib\" target="lib" />
