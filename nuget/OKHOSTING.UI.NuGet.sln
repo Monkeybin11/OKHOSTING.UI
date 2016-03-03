@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OKHOSTING.UI.Net4.WPF.NuGet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OKHOSTING.UI.Xamarin.Forms.NuGet", "OKHOSTING.UI.Xamarin.Forms.NuGet\OKHOSTING.UI.Xamarin.Forms.NuGet.csproj", "{553F7A6D-7DDC-481B-BD9B-26E9BE47EE25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OKHOSTING.UI.UWP.NuGet", "OKHOSTING.UI.UWP.NuGet\OKHOSTING.UI.UWP.NuGet.csproj", "{1C7E5BDB-3487-4CE2-9805-80C8DA344C87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{553F7A6D-7DDC-481B-BD9B-26E9BE47EE25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{553F7A6D-7DDC-481B-BD9B-26E9BE47EE25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{553F7A6D-7DDC-481B-BD9B-26E9BE47EE25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C7E5BDB-3487-4CE2-9805-80C8DA344C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C7E5BDB-3487-4CE2-9805-80C8DA344C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C7E5BDB-3487-4CE2-9805-80C8DA344C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C7E5BDB-3487-4CE2-9805-80C8DA344C87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

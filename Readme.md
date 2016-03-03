@@ -14,6 +14,7 @@ PM> Install-Package OKHOSTING.UI.CSS
 PM> Install-Package OKHOSTING.UI.Net4.WebForms
 PM> Install-Package OKHOSTING.UI.Net4.WinForms
 PM> Install-Package OKHOSTING.UI.Net4.WPF
+PM> Install-Package OKHOSTING.UI.UWP
 PM> Install-Package OKHOSTING.UI.Xamarin.Forms
 ```
 
@@ -22,6 +23,7 @@ PM> Install-Package OKHOSTING.UI.Xamarin.Forms
 * [Download OKHOSTING.UI.Net4.WebForms on NuGet](https://www.nuget.org/packages/OKHOSTING.UI.Net4.WebForms/)
 * [Download OKHOSTING.UI.Net4.WinForms on NuGet](https://www.nuget.org/packages/OKHOSTING.UI.Net4.WinForms/)
 * [Download OKHOSTING.UI.Net4.WPF on NuGet](https://www.nuget.org/packages/OKHOSTING.UI.Net4.WPF/)
+* [Download OKHOSTING.UI.UWP on NuGet](https://www.nuget.org/packages/OKHOSTING.UI.UWP/)
 * [Download OKHOSTING.UI.Xamarin.Forms on NuGet](https://www.nuget.org/packages/OKHOSTING.UI.Xamarin.Forms/)
 
 ## Features
