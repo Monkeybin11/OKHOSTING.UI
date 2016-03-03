@@ -1,6 +1,6 @@
 # OKHOSTING.UI
 
-Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone and Windows Store (all mobile via Xamarin.Forms)
+Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/re4416t7tjld2d5g?svg=true)](https://ci.appveyor.com/project/okhosting/okhosting-ui)
 
