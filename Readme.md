@@ -352,12 +352,12 @@ So far tested on ASP.NET Web Forms, Windows Forms, WPF, Mac OS X, iOS and Androi
 
 Published under the very permissive MIT License
 
-## Add ORM for even more pleasure
+## Add ORM for your pleasure
 
 Checkout 
 
-https://github.com/okhosting/OKHOSTING.ORM 
-https://github.com/okhosting/OKHOSTING.ORM/tree/master/src/PCL/OKHOSTING.ORM.UI
+* https://github.com/okhosting/OKHOSTING.ORM 
+* https://github.com/okhosting/OKHOSTING.ORM/tree/master/src/PCL/OKHOSTING.ORM.UI
 
 To integrate a fully working and also multi platform ORM and integrated CRUD UI generation on top of OKHOSTING.UI.
 
