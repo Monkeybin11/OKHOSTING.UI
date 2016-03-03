@@ -361,4 +361,4 @@ Checkout
 
 To integrate a fully working and also multi platform ORM and integrated CRUD UI generation on top of OKHOSTING.UI.
 
-So you could create full multiplatform apps for CRUD operations very fast. And them add some customization, all in the PCLs.
+So you could create full multiplatform apps for CRUD operations very fast. And them add some customization, all from one code base in PCL libraries.
