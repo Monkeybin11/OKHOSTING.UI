@@ -1,6 +1,6 @@
 # OKHOSTING.UI
 
-A true multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (WinForms), Mac OS (WinForms and Xamarin.Mac), iOS, Android, Windows Phone and Windows Store (all mobile via Xamarin Forms)
+A true multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone and Windows Store (all mobile via Xamarin.Forms)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/re4416t7tjld2d5g?svg=true)](https://ci.appveyor.com/project/okhosting/okhosting-ui)
 
@@ -29,7 +29,7 @@ PM> Install-Package OKHOSTING.UI.Xamarin.Forms
 * Create your apps in PCL and run them everywhere, truly multi-platform (web included)
 * The UI is defined from code (XAML designer on the way)
 * 100% native controls are used in all platforms
-* You have only the "common" UI api surface among all platforms
+* You have the "common" UI api surface among all platforms by default, ands it's easily extendible 
 * Supports click, doble click and, for user input controls, value changed events
 * Using OKHOSTING.UI.CSS you can use CSS files to define the styles of your controls (thanks to AngleSharp)
 
@@ -340,6 +340,25 @@ public class ImageController: Controller
 }
 ```
 
+## Status
+
+The proyect is in beta state, feel free to try it and run it for test projects for now. 
+All platforms are running now, some controls dont have all features fully supported (design stuff mostly) in some platforms.
+All the core logic on the framework is running very well and generally stable.
+
+So far tested on ASP.NET Web Forms, Windows Forms, WPF, Mac OS X, iOS and Android.
+
 ## License
 
 Published under the very permissive MIT License
+
+## Add ORM for even more pleasure
+
+Checkout 
+
+https://github.com/okhosting/OKHOSTING.ORM 
+https://github.com/okhosting/OKHOSTING.ORM/tree/master/src/PCL/OKHOSTING.ORM.UI
+
+To integrate a fully working and also multi platform ORM and integrated CRUD UI generation on top of OKHOSTING.UI.
+
+So you could create full multiplatform apps for CRUD operations very fast. And them add some customization, all in the PCLs.

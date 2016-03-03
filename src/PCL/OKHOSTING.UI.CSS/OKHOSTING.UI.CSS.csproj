@@ -45,8 +45,9 @@
     <Compile Include="Style.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AngleSharp, Version=0.9.3.41352, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea">
-      <HintPath>..\..\packages\AngleSharp.0.9.3\lib\portable-windows8+net45+windowsphone8+wpa\AngleSharp.dll</HintPath>
+    <Reference Include="AngleSharp, Version=0.9.4.42449, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AngleSharp.0.9.4\lib\portable-windows8+net45+windowsphone8+wpa\AngleSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OKHOSTING.Core.1.0.10\lib\OKHOSTING.Core.dll</HintPath>
@@ -56,12 +57,13 @@
       <HintPath>..\..\packages\PCLCrypto.1.0.86\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Validation.2.0.6.15003\lib\portable-net40+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Validation.dll</HintPath>
+    <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Validation.2.2.8\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Validation.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
