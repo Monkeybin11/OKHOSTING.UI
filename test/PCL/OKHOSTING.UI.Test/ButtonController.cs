@@ -11,8 +11,6 @@ namespace OKHOSTING.UI.Test
 
         public override void Start()
 		{
-            
-
             base.Start();
 
 			IStack stack = Platform.Current.Create<IStack>();

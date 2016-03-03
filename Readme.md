@@ -1,6 +1,6 @@
 # OKHOSTING.UI
 
-A multi-platform UI framework. Create your apps once and deploye them on Windows, Linux, Mac OS X, iOS, Android, Windows Phone and Windows Store
+A true multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (WinForms), Mac OS (WinForms and Xamarin.Mac), iOS, Android, Windows Phone and Windows Store (all mobile via Xamarin Forms)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/re4416t7tjld2d5g?svg=true)](https://ci.appveyor.com/project/okhosting/okhosting-ui)
 
@@ -26,11 +26,11 @@ PM> Install-Package OKHOSTING.UI.Xamarin.Forms
 
 ## Features
 
-* Create your apps in PCL and run them everywhere
+* Create your apps in PCL and run them everywhere, truly multi-platform (web included)
 * The UI is defined from code (XAML designer on the way)
 * 100% native controls are used in all platforms
 * You have only the "common" UI api surface among all platforms
-* Supports click and doble click events
+* Supports click, doble click and, for user input controls, value changed events
 
 ## Supported controls
 
@@ -56,144 +56,289 @@ PM> Install-Package OKHOSTING.UI.Xamarin.Forms
 
 ## Examples
 
-This examples are taken from https://github.com/okhosting/OKHOSTING.Sql/tree/master/test/OKHOSTING.Sql.Tests
+This examples are taken from https://github.com/okhosting/OKHOSTING.UI/tree/master/test
 
-### Create the schema (tables, indexes and foreign keys) from code
+### Native controls
 
-```csharp
-var db = new Net4.MySql.DataBase() { ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["mysql"].ConnectionString };
+The platform uses native controls in all platforms, therefore all apps work with great performance and compatibility
 
-var generator = new OKHOSTING.Sql.MySql.SqlGenerator();
+### Page
 
-// create customer table
-Table customer = new Table("customer");
-customer.Columns.Add(new Column() { Name = "Id", DbType = DbType.Int32, IsPrimaryKey = true, IsAutoNumber = true, Table = customer });
-customer.Columns.Add(new Column() { Name = "Name", DbType = DbType.AnsiString, Length = 100, IsNullable = false, Table = customer });
-customer.Columns.Add(new Column() { Name = "Country", DbType = DbType.Int32, IsNullable = false, Table = customer });
-			
-// create country table
-Table country = new Table("country");
-country.Columns.Add(new Column() { Name = "Id", DbType = DbType.Int32, IsPrimaryKey = true, IsAutoNumber = true, Table = country });
-country.Columns.Add(new Column() { Name = "Name", DbType = DbType.AnsiString, Length = 100, IsNullable = false, Table = country });
+A Page is an interface that is implemented as:
 
-// create a foreign key
-ForeignKey countryFK = new ForeignKey();
-countryFK.Table = customer;
-countryFK.RemoteTable = country;
-countryFK.Name = "FK_customer_country";
-countryFK.Columns.Add(new Tuple<Column, Column>(customer["Country"], country["id"]));
-countryFK.DeleteAction = countryFK.UpdateAction = ConstraintAction.Restrict;
+* A System.Web.UI.Page in ASP.NET
+* A System.Windows.Window in Windows Forms
+* A System.Windows.Window in WPF
+* A Windows.UI.Xaml.Controls.Page in UWP
+* A Xamarin.Forms.ContentPage in Xamarin Forms
 
-// get SQL code for creating customer table
-var sql = generator.Create(customer);
-
-// execute that code and actually create table in DB
-db.Execute(sql);
-
-// same for country
-sql = generator.Create(country);
-db.Execute(sql);
-
-// same for foreigk key
-sql = generator.Create(countryFK);
-db.Execute(sql);
-```
-### Reade the schema from the DataBase (Net4 only, thanks to DatabaseSchemaReader)
+You can set page properties like this:
 
 ```csharp
-//this way you can just read the existing tables from DB and then perform Insert, Select, Update or Delete operations
-//on the tables without the need to manually creating schema like in the previous sample
-Net4.MySql.DataBase db = new Net4.MySql.DataBase() { ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["mysql"].ConnectionString };
-db.LoadSchema();
-DataBaseSchema schema = db.Schema;
-Table customerTable = schema["cuctomer"];
+Platform.Current.Page.Title = "Choose one control to test";
+Platform.Current.Page.Content = grid;
 ```
 
-### Insert
+### Controllers
+
+The framework uses classes called "Controllers", which work very much like an MVC controller. 
+To work with the framework, you need to inherit from Controller class and override (at least) the Start() method.
+For example take a look a this IndexController:
 
 ```csharp
-Insert insert2 = new Insert();
-insert2.Table = country;
-insert2.Values.Add(new ColumnValue(country["Id"], 1));
-insert2.Values.Add(new ColumnValue(country["Name"], "Mexico"));
-
-sql = generator.Insert(insert2);
-int affectedRows2 = db.Execute(sql);
-Assert.AreEqual(affectedRows2, 1);
-
-Insert insert = new Insert();
-insert.Table = customer;
-insert.Values.Add(new ColumnValue(customer["Id"], 1));
-insert.Values.Add(new ColumnValue(customer["Name"], "Angel"));
-insert.Values.Add(new ColumnValue(customer["Country"], 1));
-
-sql = generator.Insert(insert);
-int affectedRows = db.Execute(sql);
-Assert.AreEqual(affectedRows, 1);
-```
-
-### Select
-
-```csharp
-Select select = new Select();
-select.Table = customer;
-select.Columns.Add(new SelectColumn(customer["id"]));
-select.Columns.Add(new SelectColumn(customer["Name"]));
-
-// create a join between customer and country
-SelectJoin join = new SelectJoin();
-join.Table = country;
-join.On.Add(new ColumnCompareFilter() { Column = customer["country"], ColumnToCompare = country["id"], Operator = Data.CompareOperator.Equal });
-join.Columns.Add(new SelectColumn(country["name"], "countryName"));
-join.JoinType = SelectJoinType.Inner;
-
-select.Joins.Add(join);
-
-sql = generator.Select(select);
-var result = db.GetDataTable(sql);
-
-// get results
-foreach (IDataRow row in result)
+public class IndexController: Controller
 {
-	foreach (object obj in row)
+	public override void Start()
 	{
-		Console.Write(obj);
+		base.Start();
+
+		IGrid grid = Platform.Current.Create<IGrid>();
+		grid.ColumnCount = 1;
+		grid.RowCount = 20;
+
+		ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
+		lblAutocomplete.Text = "Autocomplete";
+		lblAutocomplete.Click += (object sender, EventArgs e) => new AutocompleteController().Start();
+		grid.SetContent(0, 0, lblAutocomplete);
+
+		ILabelButton lblLabel = Platform.Current.Create<ILabelButton>();
+		lblLabel.Text = "Label";
+		lblLabel.Click += (object sender, EventArgs e) => new LabelController().Start();
+		grid.SetContent(1, 0, lblLabel);
+
+		ILabelButton lblLabelButton = Platform.Current.Create<ILabelButton>();
+		lblLabelButton.Text = "Label Button";
+		lblLabelButton.Click += (object sender, EventArgs e) => new LabelButtonController().Start();
+		grid.SetContent(2, 0, lblLabelButton);
+
+        ILabelButton lblButton = Platform.Current.Create<ILabelButton>();
+        lblButton.Text = "Button";
+        lblButton.Click += (object sender, EventArgs e) => new ButtonController().Start();
+        grid.SetContent(3, 0, lblButton);
+
+        ILabelButton lblHyperLink = Platform.Current.Create<ILabelButton>();
+        lblHyperLink.Text = "HyperLink";
+        //lblHyperLink.Click += (object sender, EventArgs e) => new HyperLinkController().Start();
+        grid.SetContent(4, 0, lblHyperLink);
+            
+
+        ILabelButton lblCheckbox = Platform.Current.Create<ILabelButton>();
+        lblCheckbox.Text = "Checkbox";
+        lblCheckbox.Click += (object sender, EventArgs e) => new CheckboxController().Start();
+        grid.SetContent(5, 0, lblCheckbox);
+
+        ILabelButton lblImage = Platform.Current.Create<ILabelButton>();
+        lblImage.Text = "Image";
+        lblImage.Click += (object sender, EventArgs e) => new ImageController().Start();
+        grid.SetContent(6, 0, lblImage);
+
+        ILabelButton lblImageButton = Platform.Current.Create<ILabelButton>();
+        lblImageButton.Text = "ImageButton";
+        lblImageButton.Click += (object sender, EventArgs e) => new ImageButtonController().Start();
+        grid.SetContent(7, 0, lblImageButton);
+
+        Platform.Current.Page.Title = "Choose one control to test";
+		Platform.Current.Page.Content = grid;
 	}
 }
 ```
 
-### Select Max (or any aggregation function)
+As you can see, the IndexController creates a grid, and then populates the grid with many LabelButtons. Each button has a different Text and click events,
+and when you click on the LableButton with text "Button", that triggers an event that leads you to another controller named ButonController.
+
+Also you can set the Title of the Page, and of course, the actual content of the Page.
+
+When you dont finish a controller, and call another controller to Start(), the new controller will "take control" of the app (more acuratelly, your Page)
+and will manipulate the UI. When you finish a controller, the app returns control to the previous controller in the stack, and all UI state is maitained in this cycle.
+
+### Button
 
 ```csharp
+public class ButtonController: Controller
+{
+    IButton cmdShow;
+    ILabel lbltext;
 
-SelectAggregate selectMax = new SelectAggregate();
-selectMax.Table = customer;
-selectMax.AggregateColumns.Add(new SelectAggregateColumn(customer["Id"], SelectAggregateFunction.Maximum));
+    public override void Start()
+	{
+        base.Start();
 
-sql = generator.Select(selectMax);
-int max = (int) db.GetScalar(sql);
+		IStack stack = Platform.Current.Create<IStack>();
+
+        cmdShow = Platform.Current.Create<IButton>();
+        cmdShow.Text = "Show/Hide";
+        cmdShow.Click += CmdShow_Click;
+        cmdShow.BackgroundColor = new Color(1, 255, 0, 0);
+        cmdShow.FontColor = new Color(1, 255, 255, 255);
+        stack.Children.Add(cmdShow);
+
+        lbltext = Platform.Current.Create<ILabel>();
+        lbltext.Text = "I'm visible, i want an ice-cream";
+        lbltext.Visible = false;
+			
+		stack.Children.Add(lbltext);
+
+        IButton cmdClose = Platform.Current.Create<IButton>();
+        cmdClose.Text = "Close";
+        cmdClose.Click += CmdClose_Click;
+        stack.Children.Add(cmdClose);
+
+        Platform.Current.Page.Title = "Test label";
+		Platform.Current.Page.Content = stack;
+	}
+
+    private void CmdShow_Click(object sender, EventArgs e)
+    {
+        if (lbltext.Visible == true)
+        {
+            lbltext.Visible = false;
+        }
+        else
+        {
+            lbltext.Visible = true;
+        }
+    }
+
+    private void CmdClose_Click(object sender, EventArgs e)
+    {
+        this.Finish();
+    }
+}
 ```
 
-
-### Update
+### CheckBox
 
 ```csharp
-Update update = new Update();
-update.Table = customer;
-update.Set.Add(new ColumnValue(customer["Name"], "New company name"));
-update.Where.Add(new ValueCompareFilter() { Column = customer["id"], ValueToCompare = 1 });
+public class CheckboxController: Controller
+{
+    ICheckBox cbxColor;
+    ILabel lblLabel;
 
-sql = generator.Update(update);
-affectedRows = db.Execute(sql);
+    public override void Start()
+	{
+		base.Start();
+
+		IStack stack = Platform.Current.Create<IStack>();
+
+		lblLabel = Platform.Current.Create<ILabel>();
+		lblLabel.Text = "This is a label";
+		lblLabel.Height = 30;
+		stack.Children.Add(lblLabel);
+
+        cbxColor = Platform.Current.Create<ICheckBox>();
+        cbxColor.Name = "color";
+        cbxColor.Value = true;
+        stack.Children.Add(cbxColor);
+
+        IButton cmdChange = Platform.Current.Create<IButton>();
+        cmdChange.Text = "Change";
+        cmdChange.Click += CmdChange_Click;
+        stack.Children.Add(cmdChange);
+
+        IButton cmdClose = Platform.Current.Create<IButton>();
+        cmdClose.Text = "Close";
+        cmdClose.Click += CmdClose_Click;
+        stack.Children.Add(cmdClose);
+
+        Platform.Current.Page.Title = "Test label";
+		Platform.Current.Page.Content = stack;
+	}
+
+    private void CmdChange_Click(object sender, EventArgs e)
+    {
+        if(cbxColor.Value == true)
+        {
+            lblLabel.FontColor = new Color(1, 255, 0, 0);
+        }
+        else
+        {
+            lblLabel.FontColor = new Color(1, 0, 0, 0);
+        }
+    }
+
+    private void CmdClose_Click(object sender, EventArgs e)
+    {
+        this.Finish();
+    }
+}
 ```
 
-### Delete
+### HyperLink
 
 ```csharp
-Delete delete = new Delete();
-delete.Table = table;
-delete.Where.Add(new ValueCompareFilter() { Column = table["Company"], ValueToCompare = "Monsters Inc. Corporate", Operator = Data.CompareOperator.Equal });
+public class HyperLinkController: Controller
+{
+	public override void Start()
+	{
+		base.Start();
 
-sql = generator.Delete(delete);
-affectedRows = db.Execute(sql);
+		IStack stack = Platform.Current.Create<IStack>();
+
+		ILabel lblLabel = Platform.Current.Create<ILabel>();
+		lblLabel.Text = "Visit";
+		lblLabel.Height = 30;
+		stack.Children.Add(lblLabel);
+
+        IHyperLink hplUrl = Platform.Current.Create<IHyperLink>();
+        hplUrl.Text = "http://www.okhosting.com";
+        hplUrl.Uri = new Uri("http://www.okhosting.com");
+        hplUrl.Name = "okhosting.com";
+        stack.Children.Add(hplUrl);
+
+        IButton cmdClose = Platform.Current.Create<IButton>();
+        cmdClose.Text = "Close";
+        cmdClose.Click += CmdClose_Click;
+        stack.Children.Add(cmdClose);
+
+        Platform.Current.Page.Title = "Test label";
+		Platform.Current.Page.Content = stack;
+	}
+
+    private void CmdClose_Click(object sender, EventArgs e)
+    {
+        this.Finish();
+    }
+}
 ```
+
+### Image
+
+```csharp
+public class ImageController: Controller
+{
+    public override void Start()
+    {
+        base.Start();
+
+        IStack stack = Platform.Current.Create<IStack>();
+
+        ILabel lblLabel = Platform.Current.Create<ILabel>();
+        lblLabel.Text = "View an image from Url";
+        lblLabel.Height = 30;
+        stack.Children.Add(lblLabel);
+
+        IImage imgPicture = Platform.Current.Create<IImage>();
+        imgPicture.LoadFromUrl(new Uri("http://www.patycantu.com/wp-content/uploads/2014/07/91.jpg"));
+        imgPicture.Height = 250;
+        imgPicture.Width = 600;
+        stack.Children.Add(imgPicture);
+
+        IButton cmdClose = Platform.Current.Create<IButton>();
+        cmdClose.Text = "Close";
+        cmdClose.Click += CmdClose_Click;
+        stack.Children.Add(cmdClose);
+
+        Platform.Current.Page.Title = "Test label";
+		Platform.Current.Page.Content = stack;
+	}
+
+    private void CmdClose_Click(object sender, EventArgs e)
+    {
+        this.Finish();
+    }
+}
+```
+
+## License
+
+Published under the very permissive MIT License
