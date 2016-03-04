@@ -21,10 +21,11 @@ namespace OKHOSTING.UI.Test
 
             IPasswordTextBox txtBox = Platform.Current.Create<IPasswordTextBox>();
             txtBox.Name = "Password";
-            //txtBox.BackgroundColor = new Color(1, 230, 200, 135);
+            txtBox.BackgroundColor = new Color(1, 230, 200, 135);
             txtBox.BorderColor = new Color(1, 229, 238, 125);
             txtBox.Width = 100;
-            txtBox.BorderWidth = new Thickness(8, 5, 8, 5);
+            txtBox.BorderWidth = new Thickness(5);
+            txtBox.VerticalAlignment = VerticalAlignment.Center;
             stack.Children.Add(txtBox);
 
             IButton cmdClose = Platform.Current.Create<IButton>();

@@ -11,7 +11,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Label()
 		{
-			base.AutoSize = true;
+			base.AutoSize = false;
 		}
 
 		#region IControl

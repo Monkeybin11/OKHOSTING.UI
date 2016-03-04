@@ -14,7 +14,8 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblLabel = Platform.Current.Create<ILabel>();
             lblLabel.Text = "Tis is my team";
-            lblLabel.Height = 30;
+            lblLabel.Height = 50;
+            lblLabel.FontSize = 20;
             Stack.Children.Add(lblLabel);
 
             IAutocomplete txtBox = Platform.Current.Create<IAutocomplete>();
@@ -22,8 +23,10 @@ namespace OKHOSTING.UI.Test
             //txtBox.BackgroundColor = new Color(1, 222, 184, 135);
             txtBox.FontColor = new Color(1, 36, 24, 130);
             txtBox.BorderColor = new Color(1, 229, 238, 0);
-            txtBox.Width = 80;
+            txtBox.Width = 100;
+            txtBox.Height = 80;
             txtBox.FontFamily = "Times new roman";
+            txtBox.FontSize = 20;
             Stack.Children.Add(txtBox);
 
             IButton cmdClose = Platform.Current.Create<IButton>();
