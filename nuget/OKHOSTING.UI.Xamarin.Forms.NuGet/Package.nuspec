@@ -2,14 +2,14 @@
 <package >
   <metadata>
 	<id>OKHOSTING.UI.Xamarin.Forms</id>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<title>OKHOSTING.UI.Xamarin.Forms</title>
 	<authors>OK HOSTING SC</authors>
 	<owners>OK HOSTING SC</owners>
 	<description>
 	  This project implements UI generation for Xamarin Forms (Android and iOS) for the OKHOSTING.UI framework
 
-	  Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
+	  Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
 
 	  ## Features
 
@@ -39,7 +39,7 @@
 	<releaseNotes>
 	</releaseNotes>
 	<summary>
-	  Motherfucking cool multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
+	  Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
 	</summary>
 	<language>en-US</language>
 	<projectUrl>http://okhosting.com/</projectUrl>
