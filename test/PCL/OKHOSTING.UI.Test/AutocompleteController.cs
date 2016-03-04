@@ -17,9 +17,9 @@ namespace OKHOSTING.UI.Test
             lblLabel.Height = 30;
             Stack.Children.Add(lblLabel);
 
-            ITextBox txtBox = Platform.Current.Create<ITextBox>();
+            IAutocomplete txtBox = Platform.Current.Create<IAutocomplete>();
             txtBox.Name = "Team";
-            txtBox.BackgroundColor = new Color(1, 222, 184, 135);
+            //txtBox.BackgroundColor = new Color(1, 222, 184, 135);
             txtBox.FontColor = new Color(1, 36, 24, 130);
             txtBox.BorderColor = new Color(1, 229, 238, 0);
             txtBox.Width = 80;
