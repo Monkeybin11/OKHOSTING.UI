@@ -45,7 +45,6 @@
     <Compile Include="IndexController.cs" />
     <Compile Include="LabelButtonController.cs" />
     <Compile Include="AutocompleteController.cs" />
-    <Compile Include="UDG.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

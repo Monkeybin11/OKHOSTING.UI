@@ -14,12 +14,6 @@ namespace OKHOSTING.UI.Test
             grid.ColumnCount = 1;
             grid.RowCount = 20;
 
-            ILabelButton lblLabel = Platform.Current.Create<ILabelButton>();
-            lblLabel.Text = "Label";
-            lblLabel.Height = 100;
-            lblLabel.Click += (object sender, EventArgs e) => new UDG().Start();
-            grid.SetContent(1, 0, lblLabel);
-            /*
             ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
             lblAutocomplete.Text = "Autocomplete";
             lblAutocomplete.Height = 100;
@@ -92,7 +86,6 @@ namespace OKHOSTING.UI.Test
             lblpkr.Height = 100;
             lblpkr.Click += (object sender, EventArgs e) => new ListPickerController().Start();
             grid.SetContent(11, 0, lblpkr);
-            */
 
             Platform.Current.Page.Title = "Choose one control to test";
 			Platform.Current.Page.Content = grid;
