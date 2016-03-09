@@ -20,7 +20,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 				base.Content = (global::Xamarin.Forms.View) value;
 			}
 		}
-
+		
 		//void IDisposable.Dispose()
 		//{
 		//	Content.Dispose();

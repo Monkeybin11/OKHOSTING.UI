@@ -40,12 +40,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
-
-        //void IDisposable.Dispose()
-        //{
-        //}
 
         #region IControl
 

@@ -21,15 +21,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			base.Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
 		}
 
-
 		void IDisposable.Dispose()
 		{
 		}
-
-        public void LoadFromStream(string v)
-        {
-            throw new NotImplementedException();
-        }
 
         #region IControl
 

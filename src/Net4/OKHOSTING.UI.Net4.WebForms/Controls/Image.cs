@@ -274,10 +274,5 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			base.ImageUrl = url.ToString();
 		}
-
-        public void LoadFromStream(string v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
