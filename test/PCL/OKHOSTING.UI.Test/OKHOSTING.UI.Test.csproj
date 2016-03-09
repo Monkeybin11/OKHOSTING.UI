@@ -36,6 +36,7 @@
     <Compile Include="CheckboxController.cs" />
     <Compile Include="ImageButtonController.cs" />
     <Compile Include="ImageController.cs" />
+    <Compile Include="RelativePanelController.cs" />
     <Compile Include="ListPickerController.cs" />
     <Compile Include="PasswordTextBoxControler.cs" />
     <Compile Include="TextAreaController.cs" />
