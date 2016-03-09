@@ -166,90 +166,6 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			}
 		}
 
-		//getters
-
-		IControl IRelativePanel.GetAbove(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetAbove((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetBelow(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetBelow((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetLeftOf(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetLeftOf((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetRightOf(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetRightOf((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetAlignBottomWith(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetAlignBottomWith((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetAlignHorizontalCenterWith(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetAlignHorizontalCenterWith((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetAlignLeftWith(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetAlignLeftWith((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetAlignRightWith(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetAlignRightWith((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetAlignTopWith(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetAlignTopWith((UIElement) control);
-		}
-
-		IControl IRelativePanel.GetAlignVerticalCenterWith(IControl control)
-		{
-			return (IControl) NativeRelativePanel.GetAlignVerticalCenterWith((UIElement) control);
-		}
-
-		bool IRelativePanel.GetAlignBottomWithPanel(IControl control)
-		{
-			return NativeRelativePanel.GetAlignBottomWithPanel((UIElement) control);
-		}
-
-		bool IRelativePanel.GetAlignHorizontalCenterWithPanel(IControl control)
-		{
-			return NativeRelativePanel.GetAlignHorizontalCenterWithPanel((UIElement) control);
-		}
-
-		bool IRelativePanel.GetAlignLeftWithPanel(IControl control)
-		{
-			return NativeRelativePanel.GetAlignLeftWithPanel((UIElement) control);
-		}
-
-		bool IRelativePanel.GetAlignRightWithPanel(IControl control)
-		{
-			return NativeRelativePanel.GetAlignRightWithPanel((UIElement) control);
-		}
-
-		bool IRelativePanel.GetAlignTopWithPanel(IControl control)
-		{
-			return NativeRelativePanel.GetAlignTopWithPanel((UIElement) control);
-		}
-
-		bool IRelativePanel.GetAlignVerticalCenterWithPanel(IControl control)
-		{
-			return NativeRelativePanel.GetAlignVerticalCenterWithPanel((UIElement) control);
-		}
-
-		//setters
-
 		void IRelativePanel.SetAbove(IControl control, IControl value)
 		{
 			NativeRelativePanel.SetAbove((UIElement) control, value);
@@ -275,9 +191,9 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			NativeRelativePanel.SetAlignBottomWith((UIElement) control, value);
 		}
 
-		void IRelativePanel.SetAlignBottomWithPanel(IControl control, bool value)
+		void IRelativePanel.SetAlignBottomWithPanel(IControl control)
 		{
-			NativeRelativePanel.SetAlignBottomWithPanel((UIElement) control, value);
+			NativeRelativePanel.SetAlignBottomWithPanel((UIElement) control, true);
 		}
 
 		void IRelativePanel.SetAlignHorizontalCenterWith(IControl control, IControl value)
@@ -285,9 +201,9 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			NativeRelativePanel.SetAlignHorizontalCenterWith((UIElement) control, value);
 		}
 
-		void IRelativePanel.SetAlignHorizontalCenterWithPanel(IControl control, bool value)
+		void IRelativePanel.SetAlignHorizontalCenterWithPanel(IControl control)
 		{
-			NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement) control, value);
+			NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement) control, true);
 		}
 
 		void IRelativePanel.SetAlignLeftWith(IControl control, IControl value)
@@ -295,9 +211,9 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			NativeRelativePanel.SetAlignLeftWith((UIElement) control, value);
 		}
 
-		void IRelativePanel.SetAlignLeftWithPanel(IControl control, bool value)
+		void IRelativePanel.SetAlignLeftWithPanel(IControl control)
 		{
-			NativeRelativePanel.SetAlignLeftWithPanel((UIElement) control, value);
+			NativeRelativePanel.SetAlignLeftWithPanel((UIElement) control, true);
 		}
 
 		void IRelativePanel.SetAlignRightWith(IControl control, IControl value)
@@ -305,9 +221,9 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			NativeRelativePanel.SetAlignRightWith((UIElement) control, value);
 		}
 
-		void IRelativePanel.SetAlignRightWithPanel(IControl control, bool value)
+		void IRelativePanel.SetAlignRightWithPanel(IControl control)
 		{
-			NativeRelativePanel.SetAlignRightWithPanel((UIElement) control, value);
+			NativeRelativePanel.SetAlignRightWithPanel((UIElement) control, true);
 		}
 
 		void IRelativePanel.SetAlignTopWith(IControl control, IControl value)
@@ -315,9 +231,9 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			NativeRelativePanel.SetAlignTopWith((UIElement) control, value);
 		}
 
-		void IRelativePanel.SetAlignTopWithPanel(IControl control, bool value)
+		void IRelativePanel.SetAlignTopWithPanel(IControl control)
 		{
-			NativeRelativePanel.SetAlignTopWithPanel((UIElement) control, value);
+			NativeRelativePanel.SetAlignTopWithPanel((UIElement) control, true);
 		}
 
 		void IRelativePanel.SetAlignVerticalCenterWith(IControl control, IControl value)
@@ -325,9 +241,9 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			NativeRelativePanel.SetAlignVerticalCenterWith((UIElement) control, value);
 		}
 
-		void IRelativePanel.SetAlignVerticalCenterWithPanel(IControl control, bool value)
+		void IRelativePanel.SetAlignVerticalCenterWithPanel(IControl control)
 		{
-			NativeRelativePanel.SetAlignVerticalCenterWithPanel((UIElement) control, value);
+			NativeRelativePanel.SetAlignVerticalCenterWithPanel((UIElement) control, true);
 		}
 
 		#endregion

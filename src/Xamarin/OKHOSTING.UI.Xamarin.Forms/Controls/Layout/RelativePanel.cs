@@ -2,6 +2,9 @@
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System.Collections.Generic;
+using View = global::Xamarin.Forms.View;
+using Constraint = global::Xamarin.Forms.Constraint;
+using Xamarin.Forms;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
@@ -13,6 +16,25 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		protected readonly ControlList _Children;
+		protected readonly Dictionary<IControl, ControlConstraints> _ChildrenConstraints = new Dictionary<IControl, ControlConstraints>();
+
+		protected override void OnAdded(View view)
+		{
+			base.OnAdded(view);
+
+			if(!_ChildrenConstraints.ContainsKey((IControl) view))
+			{ 
+				_ChildrenConstraints.Add((IControl) view, new ControlConstraints());
+			}
+		}
+
+		protected override void OnRemoved(View view)
+		{
+			base.OnRemoved(view);
+
+			_ChildrenConstraints[(IControl) view].X = null;
+			_ChildrenConstraints[(IControl) view].Y = null;
+		}
 
 		#region IControl
 
@@ -157,7 +179,134 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
-		
+		void IRelativePanel.SetAbove(IControl control, IControl relative)
+		{
+			_ChildrenConstraints[control].Y = Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y - ((IControl) view).Margin.Top.Value - control.Height.Value - control.Margin.Bottom.Value; });
+		}
+
+		void IRelativePanel.SetBelow(IControl control, IControl relative)
+		{
+			_ChildrenConstraints[control].Y = Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y + view.Height + ((IControl) view).Margin.Bottom.Value + control.Margin.Top.Value; });
+		}
+
+		void IRelativePanel.SetLeftOf(IControl control, IControl relative)
+		{
+			_ChildrenConstraints[control].X = Constraint.RelativeToView((View) relative, (parent, view) => { return view.X - ((IControl) view).Margin.Left.Value - control.Width.Value - control.Margin.Right.Value; });
+		}
+
+		void IRelativePanel.SetRightOf(IControl control, IControl relative)
+		{
+			_ChildrenConstraints[control].X = Constraint.RelativeToView((View) relative, (parent, view) => { return view.X + view.Width + ((IControl) view).Margin.Right.Value + control.Margin.Left.Value; });
+		}
+
+		void IRelativePanel.SetAlignBottomWith(IControl control, IControl relative)
+		{
+			_ChildrenConstraints[control].Y = Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y + view.Width + control.Margin.Top.Value; });
+		}
+
+		void IRelativePanel.SetAlignBottomWithPanel(IControl control)
+		{
+			_ChildrenConstraints[control].Y = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height - control.Margin.Bottom.Value; });
+		}
+
+		void IRelativePanel.SetAlignHorizontalCenterWith(IControl control, IControl relative)
+		{
+			_ChildrenConstraints[control].X = Constraint.RelativeToView((View) relative, (parent, view) => { return view.X + (view.Width / 2); });
+		}
+
+		void IRelativePanel.SetAlignHorizontalCenterWithPanel(IControl control)
+		{
+			base.Children.Add
+			(
+				(View) control,
+				null,
+				Constraint.RelativeToParent((parent) => { return parent.X + (parent.Width / 2); }),
+				null,
+				null
+			);
+		}
+
+		void IRelativePanel.SetAlignLeftWith(IControl control, IControl relative)
+		{
+			base.Children.Add
+			(
+				(View) control,
+				Constraint.RelativeToView((View) relative, (parent, view) => { return view.X; }),
+				null,
+				null,
+				null
+			);
+		}
+
+		void IRelativePanel.SetAlignLeftWithPanel(IControl control)
+		{
+			base.Children.Add
+			(
+				(View) control,
+				Constraint.RelativeToParent((parent) => { return parent.X; }),
+				null,
+				null,
+				null
+			);
+		}
+
+		void IRelativePanel.SetAlignRightWith(IControl control, IControl relative)
+		{
+			base.Children.Add
+			(
+				(View) control,
+				Constraint.RelativeToView((View) relative, (parent, view) => { return view.X + view.Width - control.Width.Value; }),
+				null,
+				null,
+				null
+			);
+		}
+
+		void IRelativePanel.SetAlignRightWithPanel(IControl control)
+		{
+			base.Children.Add
+			(
+				(View) control,
+				Constraint.RelativeToParent((parent) => { return parent.X + parent.Width - control.Width.Value; }),
+				null,
+				null,
+				null
+			);
+		}
+
+		void IRelativePanel.SetAlignTopWith(IControl control, IControl relative)
+		{
+			base.Children.Add
+			(
+				(View) control,
+				null,
+				Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y + control.Margin.Top.Value; }),
+				null,
+				null
+			);
+		}
+
+		void IRelativePanel.SetAlignTopWithPanel(IControl control)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IRelativePanel.SetAlignVerticalCenterWith(IControl control, IControl relative)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IRelativePanel.SetAlignVerticalCenterWithPanel(IControl control)
+		{
+			throw new NotImplementedException();
+		}
+
+		protected class ControlConstraints
+		{
+			public Constraint X { get; set; }
+			public Constraint Y { get; set; }
+		}
+
 		#endregion
 	}
 }

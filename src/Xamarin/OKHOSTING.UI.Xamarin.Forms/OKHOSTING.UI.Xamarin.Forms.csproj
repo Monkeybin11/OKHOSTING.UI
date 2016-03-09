@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="Controls\ImageButton.cs" />
+    <Compile Include="Controls\Layout\RelativePanel.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />
