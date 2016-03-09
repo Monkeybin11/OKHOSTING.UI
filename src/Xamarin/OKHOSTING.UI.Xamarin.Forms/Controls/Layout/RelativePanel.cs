@@ -16,25 +16,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		protected readonly ControlList _Children;
-		protected readonly Dictionary<IControl, ControlConstraints> _ChildrenConstraints = new Dictionary<IControl, ControlConstraints>();
-
-		protected override void OnAdded(View view)
-		{
-			base.OnAdded(view);
-
-			if(!_ChildrenConstraints.ContainsKey((IControl) view))
-			{ 
-				_ChildrenConstraints.Add((IControl) view, new ControlConstraints());
-			}
-		}
-
-		protected override void OnRemoved(View view)
-		{
-			base.OnRemoved(view);
-
-			_ChildrenConstraints[(IControl) view].X = null;
-			_ChildrenConstraints[(IControl) view].Y = null;
-		}
 
 		#region IControl
 
@@ -178,133 +159,125 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				return _Children;
 			}
 		}
-
-		void IRelativePanel.SetAbove(IControl control, IControl relative)
+		
+		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, IControl horizontalReference, RelativePanelVerticalContraint verticalContraint, IControl verticalReference)
 		{
-			_ChildrenConstraints[control].Y = Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y - ((IControl) view).Margin.Top.Value - control.Height.Value - control.Margin.Bottom.Value; });
-		}
+			if (control == null)
+			{
+				throw new ArgumentNullException(nameof(control));
+			}
 
-		void IRelativePanel.SetBelow(IControl control, IControl relative)
-		{
-			_ChildrenConstraints[control].Y = Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y + view.Height + ((IControl) view).Margin.Bottom.Value + control.Margin.Top.Value; });
-		}
+			Constraint horizontalXamarinConstraint = null;
+			Constraint verticalXamarinConstraint = null;
 
-		void IRelativePanel.SetLeftOf(IControl control, IControl relative)
-		{
-			_ChildrenConstraints[control].X = Constraint.RelativeToView((View) relative, (parent, view) => { return view.X - ((IControl) view).Margin.Left.Value - control.Width.Value - control.Margin.Right.Value; });
-		}
+			//horizontal constraint
 
-		void IRelativePanel.SetRightOf(IControl control, IControl relative)
-		{
-			_ChildrenConstraints[control].X = Constraint.RelativeToView((View) relative, (parent, view) => { return view.X + view.Width + ((IControl) view).Margin.Right.Value + control.Margin.Left.Value; });
-		}
+			if (horizontalReference == null)
+			{
+				switch (horizontalContraint)
+				{
+					case RelativePanelHorizontalContraint.CenterWith:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + (parent.Width / 2) - (control.Width.Value / 2); });
+						break;
 
-		void IRelativePanel.SetAlignBottomWith(IControl control, IControl relative)
-		{
-			_ChildrenConstraints[control].Y = Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y + view.Width + control.Margin.Top.Value; });
-		}
+					case RelativePanelHorizontalContraint.LeftOf:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X - control.Width.Value; });
+						break;
 
-		void IRelativePanel.SetAlignBottomWithPanel(IControl control)
-		{
-			_ChildrenConstraints[control].Y = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height - control.Margin.Bottom.Value; });
-		}
+					case RelativePanelHorizontalContraint.LeftWith:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X; });
+						break;
 
-		void IRelativePanel.SetAlignHorizontalCenterWith(IControl control, IControl relative)
-		{
-			_ChildrenConstraints[control].X = Constraint.RelativeToView((View) relative, (parent, view) => { return view.X + (view.Width / 2); });
-		}
+					case RelativePanelHorizontalContraint.RightOf:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + control.Width.Value; });
+						break;
 
-		void IRelativePanel.SetAlignHorizontalCenterWithPanel(IControl control)
-		{
-			base.Children.Add
-			(
-				(View) control,
-				null,
-				Constraint.RelativeToParent((parent) => { return parent.X + (parent.Width / 2); }),
-				null,
-				null
-			);
-		}
+					case RelativePanelHorizontalContraint.RightWith:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + parent.Width - control.Width.Value; });
+						break;
+				}
+			}
+			else
+			{
+				switch (horizontalContraint)
+				{
+					case RelativePanelHorizontalContraint.CenterWith:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) horizontalReference, (parent, reference) => { return reference.X + (reference.Width / 2) - (control.Width.Value / 2); });
+						break;
 
-		void IRelativePanel.SetAlignLeftWith(IControl control, IControl relative)
-		{
-			base.Children.Add
-			(
-				(View) control,
-				Constraint.RelativeToView((View) relative, (parent, view) => { return view.X; }),
-				null,
-				null,
-				null
-			);
-		}
+					case RelativePanelHorizontalContraint.LeftOf:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) horizontalReference, (parent, reference) => { return reference.X - ((IControl) reference).Margin.Left.Value - control.Width.Value - control.Margin.Right.Value; });
+						break;
+						
+					case RelativePanelHorizontalContraint.LeftWith:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) horizontalReference, (parent, reference) => { return reference.X; });
+						break;
 
-		void IRelativePanel.SetAlignLeftWithPanel(IControl control)
-		{
-			base.Children.Add
-			(
-				(View) control,
-				Constraint.RelativeToParent((parent) => { return parent.X; }),
-				null,
-				null,
-				null
-			);
-		}
+					case RelativePanelHorizontalContraint.RightOf:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) horizontalReference, (parent, reference) => { return reference.X + reference.Width + ((IControl) reference).Margin.Right.Value + control.Margin.Left.Value; });
+						break;
 
-		void IRelativePanel.SetAlignRightWith(IControl control, IControl relative)
-		{
-			base.Children.Add
-			(
-				(View) control,
-				Constraint.RelativeToView((View) relative, (parent, view) => { return view.X + view.Width - control.Width.Value; }),
-				null,
-				null,
-				null
-			);
-		}
+					case RelativePanelHorizontalContraint.RightWith:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) horizontalReference, (parent, reference) => { return reference.X + reference.Width - control.Width.Value; });
+						break;
+				}
+			}
 
-		void IRelativePanel.SetAlignRightWithPanel(IControl control)
-		{
-			base.Children.Add
-			(
-				(View) control,
-				Constraint.RelativeToParent((parent) => { return parent.X + parent.Width - control.Width.Value; }),
-				null,
-				null,
-				null
-			);
-		}
+			//vertical constraint
 
-		void IRelativePanel.SetAlignTopWith(IControl control, IControl relative)
-		{
-			base.Children.Add
-			(
-				(View) control,
-				null,
-				Constraint.RelativeToView((View) relative, (parent, view) => { return view.Y + control.Margin.Top.Value; }),
-				null,
-				null
-			);
-		}
+			if (verticalReference == null)
+			{
+				switch (verticalContraint)
+				{
+					case RelativePanelVerticalContraint.AboveOf:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y - control.Height.Value; });
+						break;
 
-		void IRelativePanel.SetAlignTopWithPanel(IControl control)
-		{
-			throw new NotImplementedException();
-		}
+					case RelativePanelVerticalContraint.BelowOf:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height; });
+						break;
 
-		void IRelativePanel.SetAlignVerticalCenterWith(IControl control, IControl relative)
-		{
-			throw new NotImplementedException();
-		}
+					case RelativePanelVerticalContraint.BottomWith:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height - control.Height.Value; });
+						break;
 
-		void IRelativePanel.SetAlignVerticalCenterWithPanel(IControl control)
-		{
-			throw new NotImplementedException();
-		}
+					case RelativePanelVerticalContraint.CenterWith:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + (parent.Height / 2) - (control.Height.Value / 2); });
+						break;
 
-		protected class ControlConstraints
-		{
-			public Constraint X { get; set; }
-			public Constraint Y { get; set; }
+					case RelativePanelVerticalContraint.TopWith:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y; });
+						break;
+				}
+			}
+			else
+			{
+				switch (verticalContraint)
+				{
+					case RelativePanelVerticalContraint.AboveOf:
+						verticalXamarinConstraint = Constraint.RelativeToView((View) verticalReference, (parent, reference) => { return reference.Y - ((IControl) reference).Margin.Top.Value - control.Height.Value - control.Margin.Bottom.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.BelowOf:
+						verticalXamarinConstraint = Constraint.RelativeToView((View) verticalReference, (parent, reference) => { return reference.Y + reference.Height + ((IControl) reference).Margin.Bottom.Value + control.Margin.Top.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.BottomWith:
+						verticalXamarinConstraint = Constraint.RelativeToView((View) verticalReference, (parent, reference) => { return reference.Y + reference.Height + ((IControl) reference).Margin.Bottom.Value + control.Margin.Top.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.CenterWith:
+						verticalXamarinConstraint = Constraint.RelativeToView((View) verticalReference, (parent, reference) => { return reference.Y + (reference.Height / 2) - (control.Height.Value / 2); });
+						break;
+
+					case RelativePanelVerticalContraint.TopWith:
+						verticalXamarinConstraint = Constraint.RelativeToView((View) verticalReference, (parent, reference) => { return reference.Y + control.Margin.Top.Value; });
+						break;
+				}
+			}
+
+			//finally add to children using the constraints
+			base.Children.Add((View) control, horizontalXamarinConstraint, verticalXamarinConstraint, null, null);
 		}
 
 		#endregion

@@ -166,84 +166,117 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			}
 		}
 
-		void IRelativePanel.SetAbove(IControl control, IControl value)
+		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, IControl horizontalReference, RelativePanelVerticalContraint verticalContraint, IControl verticalReference)
 		{
-			NativeRelativePanel.SetAbove((UIElement) control, value);
-		}
+			if (control == null)
+			{
+				throw new ArgumentNullException(nameof(control));
+			}
 
-		void IRelativePanel.SetBelow(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetBelow((UIElement) control, value);
-		}
+			//horizontal constraint
 
-		void IRelativePanel.SetLeftOf(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetLeftOf((UIElement) control, value);
-		}
+			if (horizontalReference == null)
+			{
+				switch (horizontalContraint)
+				{
+					case RelativePanelHorizontalContraint.CenterWith:
+						NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement)control, true);
+						break;
 
-		void IRelativePanel.SetRightOf(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetRightOf((UIElement) control, value);
-		}
+					case RelativePanelHorizontalContraint.LeftOf:
+						throw new NotImplementedException();
 
-		void IRelativePanel.SetAlignBottomWith(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetAlignBottomWith((UIElement) control, value);
-		}
+					case RelativePanelHorizontalContraint.LeftWith:
+						NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement)control, true);
+						break;
 
-		void IRelativePanel.SetAlignBottomWithPanel(IControl control)
-		{
-			NativeRelativePanel.SetAlignBottomWithPanel((UIElement) control, true);
-		}
+					case RelativePanelHorizontalContraint.RightOf:
+						throw new NotImplementedException();
 
-		void IRelativePanel.SetAlignHorizontalCenterWith(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetAlignHorizontalCenterWith((UIElement) control, value);
-		}
+					case RelativePanelHorizontalContraint.RightWith:
+						NativeRelativePanel.SetAlignRightWithPanel((UIElement)control, true);
+						break;
+				}
+			}
+			else
+			{
+				switch (horizontalContraint)
+				{
+					case RelativePanelHorizontalContraint.CenterWith:
+						NativeRelativePanel.SetAlignHorizontalCenterWith((UIElement) control, horizontalReference);
+						break;
 
-		void IRelativePanel.SetAlignHorizontalCenterWithPanel(IControl control)
-		{
-			NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement) control, true);
-		}
+					case RelativePanelHorizontalContraint.LeftOf:
+						NativeRelativePanel.SetLeftOf((UIElement) control, horizontalReference);
+						break;
 
-		void IRelativePanel.SetAlignLeftWith(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetAlignLeftWith((UIElement) control, value);
-		}
+					case RelativePanelHorizontalContraint.LeftWith:
+						NativeRelativePanel.SetAlignLeftWith((UIElement) control, horizontalReference);
+						break;
 
-		void IRelativePanel.SetAlignLeftWithPanel(IControl control)
-		{
-			NativeRelativePanel.SetAlignLeftWithPanel((UIElement) control, true);
-		}
+					case RelativePanelHorizontalContraint.RightOf:
+						NativeRelativePanel.SetRightOf((UIElement) control, horizontalReference);
+						break;
 
-		void IRelativePanel.SetAlignRightWith(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetAlignRightWith((UIElement) control, value);
-		}
+					case RelativePanelHorizontalContraint.RightWith:
+						NativeRelativePanel.SetAlignRightWith((UIElement) control, horizontalReference);
+						break;
+				}
+			}
 
-		void IRelativePanel.SetAlignRightWithPanel(IControl control)
-		{
-			NativeRelativePanel.SetAlignRightWithPanel((UIElement) control, true);
-		}
+			//vertical constraint
 
-		void IRelativePanel.SetAlignTopWith(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetAlignTopWith((UIElement) control, value);
-		}
+			if (verticalReference == null)
+			{
+				switch (verticalContraint)
+				{
+					case RelativePanelVerticalContraint.AboveOf:
+						throw new NotImplementedException();
 
-		void IRelativePanel.SetAlignTopWithPanel(IControl control)
-		{
-			NativeRelativePanel.SetAlignTopWithPanel((UIElement) control, true);
-		}
+					case RelativePanelVerticalContraint.BelowOf:
+						throw new NotImplementedException();
 
-		void IRelativePanel.SetAlignVerticalCenterWith(IControl control, IControl value)
-		{
-			NativeRelativePanel.SetAlignVerticalCenterWith((UIElement) control, value);
-		}
+					case RelativePanelVerticalContraint.BottomWith:
+						NativeRelativePanel.SetAlignBottomWithPanel((UIElement) control, true);
+						break;
 
-		void IRelativePanel.SetAlignVerticalCenterWithPanel(IControl control)
-		{
-			NativeRelativePanel.SetAlignVerticalCenterWithPanel((UIElement) control, true);
+					case RelativePanelVerticalContraint.CenterWith:
+						NativeRelativePanel.SetAlignVerticalCenterWithPanel((UIElement) control, true);
+						break;
+
+					case RelativePanelVerticalContraint.TopWith:
+						NativeRelativePanel.SetAlignTopWithPanel((UIElement) control, true);
+						break;
+				}
+			}
+			else
+			{
+				switch (verticalContraint)
+				{
+					case RelativePanelVerticalContraint.AboveOf:
+						NativeRelativePanel.SetAbove((UIElement) control, verticalReference);
+						break;
+
+					case RelativePanelVerticalContraint.BelowOf:
+						NativeRelativePanel.SetBelow((UIElement) control, verticalReference);
+						break;
+
+					case RelativePanelVerticalContraint.BottomWith:
+						NativeRelativePanel.SetAlignBottomWith((UIElement) control, verticalReference);
+						break;
+
+					case RelativePanelVerticalContraint.CenterWith:
+						NativeRelativePanel.SetAlignVerticalCenterWith((UIElement) control, verticalReference);
+						break;
+
+					case RelativePanelVerticalContraint.TopWith:
+						NativeRelativePanel.SetAlignTopWith((UIElement) control, verticalReference);
+						break;
+				}
+			}
+
+			//finally add to children
+			base.Children.Add((UIElement) control);
 		}
 
 		#endregion

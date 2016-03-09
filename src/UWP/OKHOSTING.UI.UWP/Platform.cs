@@ -69,6 +69,10 @@ namespace OKHOSTING.UI.UWP
 			{
 				control = new Grid() as T;
 			}
+			else if (typeof(T) == typeof(IRelativePanel))
+			{
+				control = new RelativePanel() as T;
+			}
 			else if (typeof(T) == typeof(IStack))
 			{
 				control = new Stack() as T;
