@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layouts;
+using OKHOSTING.UI.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 {

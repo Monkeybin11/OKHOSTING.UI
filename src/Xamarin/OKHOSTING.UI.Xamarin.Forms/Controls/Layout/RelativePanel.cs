@@ -1,30 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
+using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
-	public class Stack : global::Xamarin.Forms.StackLayout, IStack
+	public class RelativePanel : global::Xamarin.Forms.RelativeLayout, IRelativePanel
 	{
-		protected readonly ControlList _Children;
-
-		public Stack()
+		public RelativePanel()
 		{
 			_Children = new ControlList(base.Children);
 		}
 
-		IList<IControl> IStack.Children
-		{
-			get
-			{
-				return _Children;
-			}
-		}
-		
-		void IDisposable.Dispose()
-		{
-		}
+		protected readonly ControlList _Children;
 
 		#region IControl
 
@@ -106,14 +94,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 		Color IControl.BorderColor
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		Thickness IControl.BorderWidth
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		HorizontalAlignment IControl.HorizontalAlignment
@@ -151,6 +137,27 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			get; set;
 		}
 
+		#endregion
+
+		#region IDisposable
+
+		void IDisposable.Dispose()
+		{
+		}
+
+		#endregion
+
+		#region IRelativePanel
+
+		IList<IControl> IRelativePanel.Children
+		{
+			get
+			{
+				return _Children;
+			}
+		}
+
+		
 		#endregion
 	}
 }

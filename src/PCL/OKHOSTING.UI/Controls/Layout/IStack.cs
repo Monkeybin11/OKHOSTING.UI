@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OKHOSTING.UI.Controls.Layouts
+namespace OKHOSTING.UI.Controls.Layout
 {
 	public interface IStack: IControl
 	{

@@ -1,5 +1,5 @@
 ﻿using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layouts;
+using OKHOSTING.UI.Controls.Layout;
 using OKHOSTING.UI.Xamarin.Forms.Controls;
 using OKHOSTING.UI.Xamarin.Forms.Controls.Layout;
 using System;

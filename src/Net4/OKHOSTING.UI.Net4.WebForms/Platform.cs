@@ -1,5 +1,5 @@
 ﻿using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layouts;
+using OKHOSTING.UI.Controls.Layout;
 using OKHOSTING.UI.Net4.WebForms.Controls;
 using OKHOSTING.UI.Net4.WebForms.Controls.Layout;
 using System;

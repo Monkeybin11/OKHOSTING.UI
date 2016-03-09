@@ -1,6 +1,6 @@
 ﻿using System;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layouts;
+using OKHOSTING.UI.Controls.Layout;
 using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
