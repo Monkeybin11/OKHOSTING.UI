@@ -47,8 +47,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				//register javascripts
 				Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/js/PageSize.js"));
-				Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
-				Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/js/jquery-ui.js"));
 
 				return;
 			}

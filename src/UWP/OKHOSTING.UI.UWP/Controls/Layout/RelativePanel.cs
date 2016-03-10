@@ -166,68 +166,37 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 			}
 		}
 
-		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, IControl horizontalReference, RelativePanelVerticalContraint verticalContraint, IControl verticalReference)
+		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
 		{
 			if (control == null)
 			{
 				throw new ArgumentNullException(nameof(control));
 			}
 
-			//horizontal constraint
-
-			if (horizontalReference == null)
+			//no reference is given, so we position the control relative to the this panel
+			if (referenceControl == null)
 			{
 				switch (horizontalContraint)
 				{
 					case RelativePanelHorizontalContraint.CenterWith:
-						NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement)control, true);
+						NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement) control, true);
 						break;
 
 					case RelativePanelHorizontalContraint.LeftOf:
 						throw new NotImplementedException();
 
 					case RelativePanelHorizontalContraint.LeftWith:
-						NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement)control, true);
+						NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement) control, true);
 						break;
 
 					case RelativePanelHorizontalContraint.RightOf:
 						throw new NotImplementedException();
 
 					case RelativePanelHorizontalContraint.RightWith:
-						NativeRelativePanel.SetAlignRightWithPanel((UIElement)control, true);
+						NativeRelativePanel.SetAlignRightWithPanel((UIElement) control, true);
 						break;
 				}
-			}
-			else
-			{
-				switch (horizontalContraint)
-				{
-					case RelativePanelHorizontalContraint.CenterWith:
-						NativeRelativePanel.SetAlignHorizontalCenterWith((UIElement) control, horizontalReference);
-						break;
 
-					case RelativePanelHorizontalContraint.LeftOf:
-						NativeRelativePanel.SetLeftOf((UIElement) control, horizontalReference);
-						break;
-
-					case RelativePanelHorizontalContraint.LeftWith:
-						NativeRelativePanel.SetAlignLeftWith((UIElement) control, horizontalReference);
-						break;
-
-					case RelativePanelHorizontalContraint.RightOf:
-						NativeRelativePanel.SetRightOf((UIElement) control, horizontalReference);
-						break;
-
-					case RelativePanelHorizontalContraint.RightWith:
-						NativeRelativePanel.SetAlignRightWith((UIElement) control, horizontalReference);
-						break;
-				}
-			}
-
-			//vertical constraint
-
-			if (verticalReference == null)
-			{
 				switch (verticalContraint)
 				{
 					case RelativePanelVerticalContraint.AboveOf:
@@ -249,28 +218,52 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 						break;
 				}
 			}
+			//a reference control is given, so we position the control relative to referenceControl
 			else
 			{
+				switch (horizontalContraint)
+				{
+					case RelativePanelHorizontalContraint.CenterWith:
+						NativeRelativePanel.SetAlignHorizontalCenterWith((UIElement) control, referenceControl);
+						break;
+
+					case RelativePanelHorizontalContraint.LeftOf:
+						NativeRelativePanel.SetLeftOf((UIElement) control, referenceControl);
+						break;
+
+					case RelativePanelHorizontalContraint.LeftWith:
+						NativeRelativePanel.SetAlignLeftWith((UIElement) control, referenceControl);
+						break;
+
+					case RelativePanelHorizontalContraint.RightOf:
+						NativeRelativePanel.SetRightOf((UIElement) control, referenceControl);
+						break;
+
+					case RelativePanelHorizontalContraint.RightWith:
+						NativeRelativePanel.SetAlignRightWith((UIElement) control, referenceControl);
+						break;
+				}
+
 				switch (verticalContraint)
 				{
 					case RelativePanelVerticalContraint.AboveOf:
-						NativeRelativePanel.SetAbove((UIElement) control, verticalReference);
+						NativeRelativePanel.SetAbove((UIElement) control, referenceControl);
 						break;
 
 					case RelativePanelVerticalContraint.BelowOf:
-						NativeRelativePanel.SetBelow((UIElement) control, verticalReference);
+						NativeRelativePanel.SetBelow((UIElement) control, referenceControl);
 						break;
 
 					case RelativePanelVerticalContraint.BottomWith:
-						NativeRelativePanel.SetAlignBottomWith((UIElement) control, verticalReference);
+						NativeRelativePanel.SetAlignBottomWith((UIElement) control, referenceControl);
 						break;
 
 					case RelativePanelVerticalContraint.CenterWith:
-						NativeRelativePanel.SetAlignVerticalCenterWith((UIElement) control, verticalReference);
+						NativeRelativePanel.SetAlignVerticalCenterWith((UIElement) control, referenceControl);
 						break;
 
 					case RelativePanelVerticalContraint.TopWith:
-						NativeRelativePanel.SetAlignTopWith((UIElement) control, verticalReference);
+						NativeRelativePanel.SetAlignTopWith((UIElement) control, referenceControl);
 						break;
 				}
 			}

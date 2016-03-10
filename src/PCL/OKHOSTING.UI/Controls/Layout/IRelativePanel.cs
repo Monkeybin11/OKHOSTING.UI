@@ -18,18 +18,34 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <param name="horizontalContraint">
 		/// Horizontal constraint to use
 		/// </param>
-		/// <param name="horizontalReference">
-		/// Control that will be used as a reference for the horizontal constriant. 
+		/// <param name="verticalContraint">
+		/// Vertical constraint to use
+		/// </param>
+		/// <param name="referenceControl">
+		/// Control that will be used as a reference for the vertical and horizontal constriant. 
 		/// If value is NULL, then the reference will be the panel itself
+		/// </param>
+		void Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl);
+	}
+
+	public static class IRelativePanelExtensions
+	{
+		/// <summary>
+		/// Adds a control to the panel and positions it using the constraints, relative to the container panel
+		/// </summary>
+		/// <param name="control">
+		/// Control to add and position to the panel
+		/// </param>
+		/// <param name="horizontalContraint">
+		/// Horizontal constraint to use
 		/// </param>
 		/// <param name="verticalContraint">
 		/// Vertical constraint to use
 		/// </param>
-		/// <param name="verticalReference">
-		/// Control that will be used as a reference for the vertical constriant. 
-		/// If value is NULL, then the reference will be the panel itself
-		/// </param>
-		void Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, IControl horizontalReference, RelativePanelVerticalContraint verticalContraint, IControl verticalReference);
+		public static void Add(this IRelativePanel panel, IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint)
+		{
+			panel.Add(control, horizontalContraint, verticalContraint, null);
+		}
 	}
 
 	public enum RelativePanelHorizontalContraint

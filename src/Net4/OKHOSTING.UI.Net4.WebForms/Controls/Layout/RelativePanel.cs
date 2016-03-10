@@ -248,11 +248,146 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 		}
 
-		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, IControl horizontalReference, RelativePanelVerticalContraint verticalContraint, IControl verticalReference)
+		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
 		{
+			if (control == null)
+			{
+				throw new ArgumentNullException(nameof(control));
+			}
+
 			base.Controls.Add((NativeControl) control);
+
+			//use jquery ui position() method
+			/*
+			//the anchors at the current control
+			string myHorizontalAnchor = "center";
+			string myVerticalAnchor = "center";
+
+			//the anchors at the reference control (or panel if reference is null)
+			string atHorizontalAnchor = "center";
+			string atVerticalAnchor = "center";
+
+			//the reference control client id (the panel by default)
+			string of = this.ClientID;
+
+			//horizontal constraint
+
+			if (horizontalReference == null)
+			{
+				switch (horizontalContraint)
+				{
+					case RelativePanelHorizontalContraint.CenterWith:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + (parent.Width / 2) - (control.Width.Value / 2); });
+						break;
+
+					case RelativePanelHorizontalContraint.LeftOf:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X - control.Width.Value; });
+						break;
+
+					case RelativePanelHorizontalContraint.LeftWith:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X; });
+						break;
+
+					case RelativePanelHorizontalContraint.RightOf:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + control.Width.Value; });
+						break;
+
+					case RelativePanelHorizontalContraint.RightWith:
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + parent.Width - control.Width.Value; });
+						break;
+				}
+			}
+			else
+			{
+				switch (horizontalContraint)
+				{
+					case RelativePanelHorizontalContraint.CenterWith:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X + (reference.Width / 2) - (control.Width.Value / 2); });
+						break;
+
+					case RelativePanelHorizontalContraint.LeftOf:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X - ((IControl)reference).Margin.Left.Value - control.Width.Value - control.Margin.Right.Value; });
+						break;
+
+					case RelativePanelHorizontalContraint.LeftWith:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X; });
+						break;
+
+					case RelativePanelHorizontalContraint.RightOf:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X + reference.Width + ((IControl)reference).Margin.Right.Value + control.Margin.Left.Value; });
+						break;
+
+					case RelativePanelHorizontalContraint.RightWith:
+						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X + reference.Width - control.Width.Value; });
+						break;
+				}
+			}
+
+			//vertical constraint
+
+			if (verticalReference == null)
+			{
+				switch (verticalContraint)
+				{
+					case RelativePanelVerticalContraint.AboveOf:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y - control.Height.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.BelowOf:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height; });
+						break;
+
+					case RelativePanelVerticalContraint.BottomWith:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height - control.Height.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.CenterWith:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + (parent.Height / 2) - (control.Height.Value / 2); });
+						break;
+
+					case RelativePanelVerticalContraint.TopWith:
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y; });
+						break;
+				}
+			}
+			else
+			{
+				switch (verticalContraint)
+				{
+					case RelativePanelVerticalContraint.AboveOf:
+						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y - ((IControl)reference).Margin.Top.Value - control.Height.Value - control.Margin.Bottom.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.BelowOf:
+						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + reference.Height + ((IControl)reference).Margin.Bottom.Value + control.Margin.Top.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.BottomWith:
+						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + reference.Height + ((IControl)reference).Margin.Bottom.Value + control.Margin.Top.Value; });
+						break;
+
+					case RelativePanelVerticalContraint.CenterWith:
+						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + (reference.Height / 2) - (control.Height.Value / 2); });
+						break;
+
+					case RelativePanelVerticalContraint.TopWith:
+						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + control.Margin.Top.Value; });
+						break;
+				}
+			}
+			*/
 		}
 
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+
+			if (!Page.IsPostBack)
+			{
+				Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
+				Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/js/jquery-ui.js"));
+			}
+		}
 		public class ControlList : IList<IControl>
 		{
 			private readonly RelativePanel ContainerPanel;
