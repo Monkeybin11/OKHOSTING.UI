@@ -15,7 +15,7 @@ namespace OKHOSTING.UI.Test
             grid.RowCount = 20;
 
             ILabelButton lblLabel = Platform.Current.Create<ILabelButton>();
-            lblLabel.Text = "Label";
+            lblLabel.Text = "Radio UDG";
             lblLabel.Height = 100;
             lblLabel.Click += (object sender, EventArgs e) => new UDG().Start();
             grid.SetContent(1, 0, lblLabel);
