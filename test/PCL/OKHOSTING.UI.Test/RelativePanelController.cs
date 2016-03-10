@@ -12,13 +12,6 @@ namespace OKHOSTING.UI.Test
 
 			IRelativePanel panel = Platform.Current.Create<IRelativePanel>();
 
-			//should be a background image
-			IImage image = Platform.Current.Create<IImage>();
-			image.LoadFromUrl(new Uri("http://okhosting.com/resources/uploads/2015/09/diseno-de-paginas-responsivas.png"));
-			image.Height = Platform.Current.Page.Height;
-			image.Width = Platform.Current.Page.Width;
-			panel.Add(image, RelativePanelHorizontalContraint.LeftWith, null, RelativePanelVerticalContraint.TopWith, null);
-
 			ILabel lblLabel = Platform.Current.Create<ILabel>();
 			lblLabel.Text = "This label is centered";
 			lblLabel.Height = 30;
@@ -28,9 +21,13 @@ namespace OKHOSTING.UI.Test
 			ILabel lblLabel2 = Platform.Current.Create<ILabel>();
 			lblLabel2.Text = "This label is below the centered one";
 			lblLabel2.Height = 50;
-			lblLabel2.FontColor = new Color(255, 255, 255, 255);
 			lblLabel2.BackgroundColor = new Color(255, 0, 255, 0);
 			panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, lblLabel, RelativePanelVerticalContraint.BelowOf, lblLabel);
+
+			//should be a background image
+			IImage image = Platform.Current.Create<IImage>();
+			image.LoadFromUrl(new Uri("http://okhosting.com/resources/uploads/2015/09/diseno-de-paginas-responsivas.png"));
+			panel.Add(image, RelativePanelHorizontalContraint.LeftWith, null, RelativePanelVerticalContraint.TopWith, null);
 
 			IButton cmdClose = Platform.Current.Create<IButton>();
             cmdClose.Text = "Close";
