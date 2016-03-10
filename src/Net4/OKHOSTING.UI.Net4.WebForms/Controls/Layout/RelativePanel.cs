@@ -251,6 +251,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, IControl horizontalReference, RelativePanelVerticalContraint verticalContraint, IControl verticalReference)
 		{
 			base.Controls.Add((NativeControl) control);
+
+			string positionScript = @"
+$( '#position3' ).position({
+  my: 'right center',
+  at: 'right bottom',
+  of: '#targetElement'
+});
+";
+
+			Page.ClientScript.RegisterStartupScript(this.GetType(), )
 		}
 
 		public class ControlList : IList<IControl>
