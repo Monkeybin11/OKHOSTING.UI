@@ -20,6 +20,31 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//assign as current page
 			Platform.Current.Page = this;
 
+			//load javascript dependencies
+			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
+			Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/js/jquery-ui.js"));
+			Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/js/PageSize.js"));
+
+			//if this is the first request, get page size
+			if (!IsPostBack && Width == 0 && Height == 0)
+			{
+				string pageSizeJS = @"
+				<script type='text/javascript'>
+					$(document).ready
+					(
+						function()
+						{
+							SetPageSize();
+						}
+					);
+				</script>";
+
+				//register javascripts
+				Page.ClientScript.RegisterStartupScript(this.GetType(), "SetPageSize", pageSizeJS);
+
+				return;
+			}
+
 			//create placeholder for content
 			if (ContentHolder == null)
 			{
@@ -45,9 +70,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//if there is no postback, exit now and skip recovering state and launching events
 			if (!IsPostBack)
 			{
-				//register javascripts
-				Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/js/PageSize.js"));
-
 				return;
 			}
 
@@ -196,6 +218,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
+				if (!OKHOSTING.UI.Session.Current.ContainsKey(typeof(Page) + ".Width"))
+				{
+					OKHOSTING.UI.Session.Current[typeof(Page) + ".Width"] = (double) 0;
+				}
+
 				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Width"];
 			}
 		}
@@ -204,6 +231,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
+				if (!OKHOSTING.UI.Session.Current.ContainsKey(typeof(Page) + ".Height"))
+				{
+					OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"] = (double) 0;
+				}
+
 				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"];
 			}
 		}
@@ -211,8 +243,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected override void OnPreRender(EventArgs e)
 		{
 			//save page state
-			Platform.Current.PageState.Title = Title;
-			Platform.Current.PageState.Content = Content;
+			if (Platform.Current.PageState != null)
+			{
+				Platform.Current.PageState.Title = Title;
+				Platform.Current.PageState.Content = Content;
+			}
 
 			base.OnPreRender(e);
 		}

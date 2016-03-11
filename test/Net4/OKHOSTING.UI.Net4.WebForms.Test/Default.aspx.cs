@@ -9,6 +9,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 		{
 			base.OnLoad(e);
 
+			//page size is yet to be determined, since this is the first load
+			if (!IsPostBack && Width == 0 && Height == 0)
+			{
+				return;
+			}
+
 			if (Platform.Current.Controller == null)
 			{
 				new IndexController().Start();

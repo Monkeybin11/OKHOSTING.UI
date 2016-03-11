@@ -87,10 +87,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AutocompleteService.cs">
+    <Compile Include="Services\AutocompleteService.asmx.cs">
+      <DependentUpon>AutocompleteService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Services\PageSize.cs" />
+    <Compile Include="Services\PageSize.ashx.cs">
+      <DependentUpon>PageSize.ashx</DependentUpon>
+    </Compile>
     <Compile Include="SessionIdProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Services\AutocompleteService.asmx" />
+    <Content Include="Services\PageSize.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\jquery-ui.js" />

@@ -71,9 +71,17 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				control = new Grid() as T;
 			}
+			else if (typeof(T) == typeof(IRelativePanel))
+			{
+				control = new RelativePanel() as T;
+			}
 			else if (typeof(T) == typeof(IStack))
 			{
 				control = new Stack() as T;
+			}
+			else
+			{
+				throw new NotImplementedException();
 			}
 
 			//give a default name to all controls to allow events to be correclty triggered

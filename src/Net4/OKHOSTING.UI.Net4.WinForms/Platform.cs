@@ -72,6 +72,10 @@ namespace OKHOSTING.UI.Net4.WinForms
 			{
 				control = new Stack() as T;
 			}
+			else
+			{
+				throw new NotImplementedException();
+			}
 
 			return control;
 		}

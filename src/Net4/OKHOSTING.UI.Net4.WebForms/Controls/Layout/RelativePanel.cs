@@ -10,6 +10,147 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 {
 	public class RelativePanel: System.Web.UI.WebControls.Panel, IRelativePanel
 	{
+		protected readonly ControlList _Children;
+		protected readonly List<string> ClientScripts = new List<string>();
+
+		public RelativePanel()
+		{
+			_Children = new ControlList(this);
+		}
+
+		IList<IControl> IRelativePanel.Children
+		{
+			get
+			{
+				return _Children;
+			}
+		}
+
+		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
+		{
+			if (control == null)
+			{
+				throw new ArgumentNullException(nameof(control));
+			}
+
+			//if no reference control is provided, then use this panel as reference
+			if (referenceControl == null)
+			{
+				referenceControl = this;
+			}
+
+			base.Controls.Add((NativeControl) control);
+
+			//the anchors at the current control
+			string myHorizontalAnchor = "center";
+			string myVerticalAnchor = "center";
+
+			//the anchors at the reference control
+			string atHorizontalAnchor = "center";
+			string atVerticalAnchor = "center";
+
+			//the reference control's id
+			string of = ((NativeControl)referenceControl).ClientID;
+
+			//horizontal constraint
+
+			switch (horizontalContraint)
+			{
+				case RelativePanelHorizontalContraint.CenterWith:
+					myHorizontalAnchor = "center";
+					atHorizontalAnchor = "center";
+					break;
+
+				case RelativePanelHorizontalContraint.LeftOf:
+					myHorizontalAnchor = "right";
+					atHorizontalAnchor = "left";
+					break;
+
+				case RelativePanelHorizontalContraint.LeftWith:
+					myHorizontalAnchor = "left";
+					atHorizontalAnchor = "left";
+					break;
+
+				case RelativePanelHorizontalContraint.RightOf:
+					myHorizontalAnchor = "left";
+					atHorizontalAnchor = "right";
+					break;
+
+				case RelativePanelHorizontalContraint.RightWith:
+					myHorizontalAnchor = "right";
+					atHorizontalAnchor = "right";
+					break;
+			}
+
+			//vertical constraint
+
+			switch (verticalContraint)
+			{
+				case RelativePanelVerticalContraint.AboveOf:
+					myVerticalAnchor = "bottom";
+					atVerticalAnchor = "top";
+					break;
+
+				case RelativePanelVerticalContraint.BelowOf:
+					myVerticalAnchor = "top";
+					atVerticalAnchor = "bottom";
+					break;
+
+				case RelativePanelVerticalContraint.BottomWith:
+					myVerticalAnchor = "bottom";
+					atVerticalAnchor = "bottom";
+					break;
+
+				case RelativePanelVerticalContraint.CenterWith:
+					myVerticalAnchor = "center";
+					atVerticalAnchor = "center";
+					break;
+
+				case RelativePanelVerticalContraint.TopWith:
+					myVerticalAnchor = "top";
+					atVerticalAnchor = "top";
+					break;
+			}
+
+			string positionJS = string.Format
+			(
+				@"
+				$('#{0}').position
+				(
+					{{
+						my: '{1} {2}',
+						at: '{3} {4}',
+						of: '#{5}'
+					}}
+				);", 
+				((NativeControl) control).ClientID, myHorizontalAnchor, myVerticalAnchor, atHorizontalAnchor, atVerticalAnchor, ((NativeControl) referenceControl).ClientID
+			);
+
+			ClientScripts.Add(positionJS);
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			base.OnPreRender(e);
+
+			string positionJS = string.Format
+			(
+				@"
+				<script type='text/javascript'>
+					$(document).ready
+					(
+						function()
+						{{
+							{0}
+						}}
+					);
+				</script>"
+			, string.Join(Environment.NewLine, ClientScripts)
+			);
+
+			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(this.GetType(), "position_" + base.ClientID, positionJS);
+		}
+
 		#region IControl
 
 		string IControl.Name
@@ -233,161 +374,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 
 		#endregion
 
-		public RelativePanel()
-		{
-			_Children = new ControlList(this);
-		}
-
-		protected readonly ControlList _Children;
-
-		IList<IControl> IRelativePanel.Children
-		{
-			get
-			{
-				return _Children;
-			}
-		}
-
-		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
-		{
-			if (control == null)
-			{
-				throw new ArgumentNullException(nameof(control));
-			}
-
-			base.Controls.Add((NativeControl) control);
-
-			//use jquery ui position() method
-			/*
-			//the anchors at the current control
-			string myHorizontalAnchor = "center";
-			string myVerticalAnchor = "center";
-
-			//the anchors at the reference control (or panel if reference is null)
-			string atHorizontalAnchor = "center";
-			string atVerticalAnchor = "center";
-
-			//the reference control client id (the panel by default)
-			string of = this.ClientID;
-
-			//horizontal constraint
-
-			if (horizontalReference == null)
-			{
-				switch (horizontalContraint)
-				{
-					case RelativePanelHorizontalContraint.CenterWith:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + (parent.Width / 2) - (control.Width.Value / 2); });
-						break;
-
-					case RelativePanelHorizontalContraint.LeftOf:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X - control.Width.Value; });
-						break;
-
-					case RelativePanelHorizontalContraint.LeftWith:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X; });
-						break;
-
-					case RelativePanelHorizontalContraint.RightOf:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + control.Width.Value; });
-						break;
-
-					case RelativePanelHorizontalContraint.RightWith:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + parent.Width - control.Width.Value; });
-						break;
-				}
-			}
-			else
-			{
-				switch (horizontalContraint)
-				{
-					case RelativePanelHorizontalContraint.CenterWith:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X + (reference.Width / 2) - (control.Width.Value / 2); });
-						break;
-
-					case RelativePanelHorizontalContraint.LeftOf:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X - ((IControl)reference).Margin.Left.Value - control.Width.Value - control.Margin.Right.Value; });
-						break;
-
-					case RelativePanelHorizontalContraint.LeftWith:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X; });
-						break;
-
-					case RelativePanelHorizontalContraint.RightOf:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X + reference.Width + ((IControl)reference).Margin.Right.Value + control.Margin.Left.Value; });
-						break;
-
-					case RelativePanelHorizontalContraint.RightWith:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View)horizontalReference, (parent, reference) => { return reference.X + reference.Width - control.Width.Value; });
-						break;
-				}
-			}
-
-			//vertical constraint
-
-			if (verticalReference == null)
-			{
-				switch (verticalContraint)
-				{
-					case RelativePanelVerticalContraint.AboveOf:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y - control.Height.Value; });
-						break;
-
-					case RelativePanelVerticalContraint.BelowOf:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height; });
-						break;
-
-					case RelativePanelVerticalContraint.BottomWith:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height - control.Height.Value; });
-						break;
-
-					case RelativePanelVerticalContraint.CenterWith:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + (parent.Height / 2) - (control.Height.Value / 2); });
-						break;
-
-					case RelativePanelVerticalContraint.TopWith:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y; });
-						break;
-				}
-			}
-			else
-			{
-				switch (verticalContraint)
-				{
-					case RelativePanelVerticalContraint.AboveOf:
-						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y - ((IControl)reference).Margin.Top.Value - control.Height.Value - control.Margin.Bottom.Value; });
-						break;
-
-					case RelativePanelVerticalContraint.BelowOf:
-						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + reference.Height + ((IControl)reference).Margin.Bottom.Value + control.Margin.Top.Value; });
-						break;
-
-					case RelativePanelVerticalContraint.BottomWith:
-						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + reference.Height + ((IControl)reference).Margin.Bottom.Value + control.Margin.Top.Value; });
-						break;
-
-					case RelativePanelVerticalContraint.CenterWith:
-						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + (reference.Height / 2) - (control.Height.Value / 2); });
-						break;
-
-					case RelativePanelVerticalContraint.TopWith:
-						verticalXamarinConstraint = Constraint.RelativeToView((View)verticalReference, (parent, reference) => { return reference.Y + control.Margin.Top.Value; });
-						break;
-				}
-			}
-			*/
-		}
-
-		protected override void OnLoad(EventArgs e)
-		{
-			base.OnLoad(e);
-
-			if (!Page.IsPostBack)
-			{
-				Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
-				Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/js/jquery-ui.js"));
-			}
-		}
 		public class ControlList : IList<IControl>
 		{
 			private readonly RelativePanel ContainerPanel;

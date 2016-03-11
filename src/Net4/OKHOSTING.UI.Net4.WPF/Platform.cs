@@ -73,6 +73,10 @@ namespace OKHOSTING.UI.Net4.WPF
 			{
 				control = new Stack() as T;
 			}
+			else
+			{
+				throw new NotImplementedException();
+			}
 
 			return control;
 		}
