@@ -14,6 +14,9 @@ namespace OKHOSTING.UI.Test
             grid.ColumnCount = 1;
             grid.RowCount = 20;
 
+
+
+            /*
 			ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
             lblAutocomplete.Text = "Autocomplete";
             lblAutocomplete.Click += (object sender, EventArgs e) => new AutocompleteController().Start();
@@ -74,13 +77,20 @@ namespace OKHOSTING.UI.Test
             lblpkr.Text = "List_Picker";
             lblpkr.Click += (object sender, EventArgs e) => new ListPickerController().Start();
             grid.SetContent(11, 0, lblpkr);
-
+            */
 			ILabelButton lblRelativePanel = Platform.Current.Create<ILabelButton>();
 			lblRelativePanel.Text = "RelativePanel";
 			lblRelativePanel.Click += (object sender, EventArgs e) => new RelativePanelController().Start();
 			grid.SetContent(12, 0, lblRelativePanel);
+           
 
-			Platform.Current.Page.Title = "Choose one control to test";
+            ILabelButton lblUdg = Platform.Current.Create<ILabelButton>();
+            lblUdg.Text = "Radio UDG";
+            lblUdg.Height = 100;
+            lblUdg.Click += (object sender, EventArgs e) => new UDG().Start();
+            grid.SetContent(1, 0, lblUdg);
+
+            Platform.Current.Page.Title = "Choose one control to test";
 			Platform.Current.Page.Content = grid;
 		}
 	}
