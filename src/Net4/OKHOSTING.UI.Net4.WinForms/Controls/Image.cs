@@ -6,6 +6,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Image : System.Windows.Forms.PictureBox, IImage
 	{
+		public Image()
+		{
+			base.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+		}
+
 		public void LoadFromFile(string filePath)
 		{
 			base.Image = System.Drawing.Image.FromFile(filePath);

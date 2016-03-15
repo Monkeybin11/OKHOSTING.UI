@@ -17,7 +17,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			_Children = new ControlList(base.Controls);
 		}
 
-	protected readonly ControlList _Children;
+		protected readonly ControlList _Children;
 
 		public IList<IControl> Children
 		{

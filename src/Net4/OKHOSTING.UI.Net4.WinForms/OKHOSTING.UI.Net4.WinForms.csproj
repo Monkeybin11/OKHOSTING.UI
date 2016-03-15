@@ -60,6 +60,9 @@
     <Compile Include="Controls\ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Layout\RelativePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>

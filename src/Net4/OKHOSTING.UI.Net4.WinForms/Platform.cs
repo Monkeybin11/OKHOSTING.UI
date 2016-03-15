@@ -68,6 +68,10 @@ namespace OKHOSTING.UI.Net4.WinForms
 			{
 				control = new Grid() as T;
 			}
+			else if (typeof(T) == typeof(IRelativePanel))
+			{
+				control = new RelativePanel() as T;
+			}
 			else if (typeof(T) == typeof(IStack))
 			{
 				control = new Stack() as T;

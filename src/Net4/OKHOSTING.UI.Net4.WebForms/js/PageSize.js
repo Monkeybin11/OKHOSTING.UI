@@ -1,4 +1,4 @@
-﻿function SetPageSize() 
+﻿function SetPageSize()
 {
 	var width = $(window).width();
 	var height = $(window).height();
