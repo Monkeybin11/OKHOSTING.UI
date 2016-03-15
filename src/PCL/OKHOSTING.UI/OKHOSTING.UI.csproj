@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.pt.resx</DependentUpon>
     </Compile>
+    <Compile Include="StreamingBackgroundService.cs" />
     <Compile Include="Translator.cs" />
     <Compile Include="VerticalAlignment.cs" />
     <Compile Include="HorizontalAlignment.cs" />
@@ -122,6 +123,9 @@
     <XliffResource Include="MultilingualResources\OKHOSTING.UI.pt.xlf" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
+    </Reference>
     <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OKHOSTING.Core.1.0.10\lib\OKHOSTING.Core.dll</HintPath>
       <Private>True</Private>

@@ -7,6 +7,7 @@ namespace OKHOSTING.UI.Test
     public class UDG : Controller
     {
         protected IImage BackgroundImage;
+        ITextArea txtArea;
 
         public override void Start()
         {
@@ -24,46 +25,56 @@ namespace OKHOSTING.UI.Test
             lblLabel.Text = "Radio Universidad De Guadalajara";
             lblLabel.Width = 230;
             lblLabel.Height = 30;
-			lblLabel.FontColor = new Color(1, 0, 0, 255);
+            lblLabel.FontColor = new Color(1, 0, 0, 255);
             lblLabel.BackgroundColor = new Color(1, 255, 0, 255);
-            panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.TopWith);
+            panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.AboveOf);
+
+            IGrid grid = Platform.Current.Create<IGrid>();
+            grid.ColumnCount = 1;
+            grid.RowCount = 20;
+            panel.Add(grid, RelativePanelHorizontalContraint.LeftWith, RelativePanelVerticalContraint.CenterWith);
 
             IImageButton cmdOpen = Platform.Current.Create<IImageButton>();
             cmdOpen.LoadFromUrl(new Uri("http://okhosting.com/resources/uploads/2015/09/diseno-de-paginas-responsivas.png"));
-            cmdOpen.Width = 100;
             cmdOpen.Height = 50;
-            cmdOpen.Click += CmdClose_Click;
-            panel.Add(cmdOpen, RelativePanelHorizontalContraint.LeftOf, RelativePanelVerticalContraint.BottomWith);
+            cmdOpen.Click += CmdViewImage_Click;
+            grid.SetContent(0, 0, cmdOpen);
+            //panel.Add(cmdOpen, RelativePanelHorizontalContraint.LeftOf, RelativePanelVerticalContraint.BottomWith);
 
             ILabel lblLabel2 = Platform.Current.Create<ILabel>();
             lblLabel2.Text = "NOTAS DE EL ACORDEON";
             lblLabel2.Width = 230;
-            lblLabel2.Height = 30;
+            lblLabel2.Height = 50;
             lblLabel2.FontColor = new Color(1, 255, 0, 255);
             lblLabel2.BackgroundColor = new Color(1, 10, 0, 255);
-            panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel);
+            grid.SetContent(1, 0, lblLabel2);
+            //panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
 
-            ITextArea txtArea = Platform.Current.Create<ITextArea>();
+            txtArea = Platform.Current.Create<ITextArea>();
             txtArea.Value = "Hoy estamos hablando de las palabras que usamos que provienen del árabe. Llama a cabina y dinos cules conoces. Entras a la rifa de boletos de Radaid";
             txtArea.BorderColor = new Color(1, 255, 255, 255);
             txtArea.Width = 230;
             txtArea.Height = 150;
-            panel.Add(txtArea, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel2);
+            txtArea.Visible = false;
+            grid.SetContent(3, 0, txtArea);
+            //panel.Add(txtArea, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
 
             ILabel lblLabel3 = Platform.Current.Create<ILabel>();
             lblLabel3.Text = "ENVIA UN MENSAJE A EL ACORDEÓN";
             lblLabel3.Width = 230;
-            lblLabel3.Height = 30;
+            lblLabel3.Height = 50;
             lblLabel3.FontColor = new Color(1, 255, 0, 255);
             lblLabel3.BackgroundColor = new Color(1, 10, 0, 255);
-            panel.Add(lblLabel3, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtArea);
+            grid.SetContent(6, 0, lblLabel3);
+            //panel.Add(lblLabel3, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
 
             ITextArea txtAreaComentario = Platform.Current.Create<ITextArea>();
             txtAreaComentario.Value = "";
             txtAreaComentario.BackgroundColor = new Color(1, 255, 255, 255);
             txtAreaComentario.Width = 230;
-            txtAreaComentario.Height = 150;
-            panel.Add(txtAreaComentario, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel3);
+            txtAreaComentario.Height = 50;
+            grid.SetContent(8, 0, txtArea);
+            //panel.Add(txtAreaComentario, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
 
             IButton cmdClose = Platform.Current.Create<IButton>();
             cmdClose.Text = "Enviar";
@@ -87,6 +98,10 @@ namespace OKHOSTING.UI.Test
         private void CmdClose_Click(object sender, EventArgs e)
         {
             this.Finish();
+        }
+        private void CmdViewImage_Click(object sender, EventArgs e)
+        {
+            txtArea.Visible = true;
         }
     }
 }

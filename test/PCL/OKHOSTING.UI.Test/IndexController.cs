@@ -1,4 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -10,11 +19,17 @@ namespace OKHOSTING.UI.Test
         {
             base.Start();
 
+            
             IGrid grid = Platform.Current.Create<IGrid>();
             grid.ColumnCount = 1;
             grid.RowCount = 20;
+            //grid.SetHeight();
 
-
+            ILabelButton lblUdg = Platform.Current.Create<ILabelButton>();
+            lblUdg.Text = "Radio UDG";
+            lblUdg.Height = 100;
+            lblUdg.Click += (object sender, EventArgs e) => new UDG().Start();
+            grid.SetContent(1, 0, lblUdg);
 
             /*
 			ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
@@ -77,21 +92,17 @@ namespace OKHOSTING.UI.Test
             lblpkr.Text = "List_Picker";
             lblpkr.Click += (object sender, EventArgs e) => new ListPickerController().Start();
             grid.SetContent(11, 0, lblpkr);
-            */
+            
 			ILabelButton lblRelativePanel = Platform.Current.Create<ILabelButton>();
 			lblRelativePanel.Text = "RelativePanel";
 			lblRelativePanel.Click += (object sender, EventArgs e) => new RelativePanelController().Start();
 			grid.SetContent(12, 0, lblRelativePanel);
-           
-
-            ILabelButton lblUdg = Platform.Current.Create<ILabelButton>();
-            lblUdg.Text = "Radio UDG";
-            lblUdg.Height = 100;
-            lblUdg.Click += (object sender, EventArgs e) => new UDG().Start();
-            grid.SetContent(1, 0, lblUdg);
+           */
 
             Platform.Current.Page.Title = "Choose one control to test";
 			Platform.Current.Page.Content = grid;
-		}
-	}
+            
+
+        }
+     }
 }
