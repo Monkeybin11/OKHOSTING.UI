@@ -57,15 +57,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Test.Droid
         {
             switch (intent.Action)
 			{
-                case ActionPlay:
-					System.Threading.Tasks.Task.Factory.StartNew(
-					() =>
-					{
-						Play();
-					});
-					break;
-
-                case ActionStop: Stop(); break;
+                case ActionPlay: Play(); break;
+			    case ActionStop: Stop(); break;
                 case ActionPause: Pause(); break;
             }
 
