@@ -14,7 +14,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			InnerTextBox = (TextBox) Platform.Current.Create<ITextBox>();
+			InnerTextBox = (TextBox) Platform.Current.CreateControl<ITextBox>();
 			InnerTextBox.ID = "Autocomplete_InnerTextBox_" + new Random().Next();
 			base.Controls.Add(InnerTextBox);
 

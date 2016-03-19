@@ -13,24 +13,24 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Current.CreateControl<IStack>();
 
-			lblLabel = Platform.Current.Create<ILabel>();
+			lblLabel = Platform.Current.CreateControl<ILabel>();
 			lblLabel.Text = "This is a label";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-            cbxColor = Platform.Current.Create<ICheckBox>();
+            cbxColor = Platform.Current.CreateControl<ICheckBox>();
             cbxColor.Name = "color";
             cbxColor.Value = true;
             stack.Children.Add(cbxColor);
 
-            IButton cmdChange = Platform.Current.Create<IButton>();
+            IButton cmdChange = Platform.Current.CreateControl<IButton>();
             cmdChange.Text = "Change";
             cmdChange.Click += CmdChange_Click;
             stack.Children.Add(cmdChange);
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
+            IButton cmdClose = Platform.Current.CreateControl<IButton>();
             cmdClose.Text = "Close";
             cmdClose.Click += CmdClose_Click;
             stack.Children.Add(cmdClose);

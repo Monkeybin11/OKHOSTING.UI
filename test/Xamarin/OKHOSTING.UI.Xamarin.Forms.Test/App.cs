@@ -6,12 +6,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Test
 	{
 		public App ()
 		{
-			// init BASS using the default output device 
-			
-
-			//Platform.Current.Page = new Page();
-			//MainPage = (global::Xamarin.Forms.Page) Platform.Current.Page;
-			//new OKHOSTING.UI.Test.IndexController().Start();
+			Platform.Current.Page = new Page();
+			MainPage = (global::Xamarin.Forms.Page)Platform.Current.Page;
+			new OKHOSTING.UI.Test.IndexController().Start();
 		}
 
 		protected override void OnStart ()

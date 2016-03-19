@@ -65,7 +65,7 @@ namespace OKHOSTING.UI.Controls.Forms
 		{
 			if (!Required)
 			{
-				ValueControl = Platform.Current.Create<IListPicker>();
+				ValueControl = Platform.Current.CreateControl<IListPicker>();
 				((IListPicker) ValueControl).Items = new List<string>();
 				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue);
 				((IListPicker) ValueControl).Items.Add(Resources.Strings.OKHOSTING_UI_Controls_Forms_BoolField_True);
@@ -73,7 +73,7 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			else
 			{
-				ValueControl = Platform.Current.Create<ICheckBox>();
+				ValueControl = Platform.Current.CreateControl<ICheckBox>();
 			}
 		}
 	}

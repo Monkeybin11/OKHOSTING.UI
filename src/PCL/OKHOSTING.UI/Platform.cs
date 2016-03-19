@@ -70,7 +70,22 @@ namespace OKHOSTING.UI
 		/// <returns>
 		/// An instance of control T
 		/// </returns>
-		public abstract T Create<T>() where T : class, Controls.IControl;
+		public abstract T CreateControl<T>() where T : class, Controls.IControl;
+
+		/// <summary>
+		/// Create a platform-specific object, for any feature you need to be platform-specific
+		/// </summary>
+		/// <typeparam name="T">Type of the object. Can be any type of object</typeparam>
+		/// <returns>
+		/// An instance of type T
+		/// </returns>
+		/// <remarks>
+		/// Use this for platform specific features like storage, streaming, settings or whatever you need
+		/// </remarks>
+		public virtual T CreateObject<T>() where T : class
+		{
+			throw new NotImplementedException();
+		}
 
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user

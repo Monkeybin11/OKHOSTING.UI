@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 {
 	public class Platform : UI.Platform
 	{
-		public override T Create<T>()
+		public override T CreateControl<T>()
 		{
 			T control = null;
 

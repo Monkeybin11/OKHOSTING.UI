@@ -11,7 +11,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 	{
 		protected readonly Random Random = new Random();
 
-		public override T Create<T>()
+		public override T CreateControl<T>()
 		{
 			T control = null;
 

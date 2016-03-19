@@ -12,20 +12,20 @@ namespace OKHOSTING.UI.Test
         {
             base.Start();
 
-            IStack stack = Platform.Current.Create<IStack>();
+            IStack stack = Platform.Current.CreateControl<IStack>();
 
-            ILabel lblLabel = Platform.Current.Create<ILabel>();
+            ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
             lblLabel.Text = "View an image from Url";
             lblLabel.Height = 30;
             stack.Children.Add(lblLabel);
 
-            IImage imgPicture = Platform.Current.Create<IImage>();
+            IImage imgPicture = Platform.Current.CreateControl<IImage>();
             imgPicture.LoadFromUrl(new Uri("http://www.patycantu.com/wp-content/uploads/2014/07/91.jpg"));
             imgPicture.Height = 250;
             imgPicture.Width = 600;
             stack.Children.Add(imgPicture);
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
+            IButton cmdClose = Platform.Current.CreateControl<IButton>();
             cmdClose.Text = "Close";
             cmdClose.Click += CmdClose_Click;
             stack.Children.Add(cmdClose);

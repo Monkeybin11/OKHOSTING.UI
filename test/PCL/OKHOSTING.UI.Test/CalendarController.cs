@@ -13,25 +13,25 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Current.CreateControl<IStack>();
 
-			lblLabel = Platform.Current.Create<ILabel>();
+			lblLabel = Platform.Current.CreateControl<ILabel>();
 			lblLabel.Text = "Select 1 day";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-            calendar = Platform.Current.Create<ICalendar>();
+            calendar = Platform.Current.CreateControl<ICalendar>();
             calendar.Name = "calendar";
             //calendar.BackgroundColor = new Color(1,0,0,255);
             calendar.Bold = true;
             stack.Children.Add(calendar);
 
-            IButton cmdChange = Platform.Current.Create<IButton>();
+            IButton cmdChange = Platform.Current.CreateControl<IButton>();
             cmdChange.Text = "Change";
             cmdChange.Click += CmdChange_Click;
             stack.Children.Add(cmdChange);
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
+            IButton cmdClose = Platform.Current.CreateControl<IButton>();
             cmdClose.Text = "Close";
             cmdClose.Click += CmdClose_Click;
             stack.Children.Add(cmdClose);

@@ -78,7 +78,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.pt.resx</DependentUpon>
     </Compile>
-    <Compile Include="StreamingBackgroundService.cs" />
     <Compile Include="Translator.cs" />
     <Compile Include="VerticalAlignment.cs" />
     <Compile Include="HorizontalAlignment.cs" />

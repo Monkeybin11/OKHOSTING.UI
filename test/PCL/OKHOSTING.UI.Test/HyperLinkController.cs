@@ -10,20 +10,20 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Current.CreateControl<IStack>();
 
-			ILabel lblLabel = Platform.Current.Create<ILabel>();
+			ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
 			lblLabel.Text = "Visit";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-            IHyperLink hplUrl = Platform.Current.Create<IHyperLink>();
+            IHyperLink hplUrl = Platform.Current.CreateControl<IHyperLink>();
             hplUrl.Text = "http://www.okhosting.com";
             hplUrl.Uri = new Uri("http://www.okhosting.com");
             hplUrl.Name = "okhosting.com";
             stack.Children.Add(hplUrl);
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
+            IButton cmdClose = Platform.Current.CreateControl<IButton>();
             cmdClose.Text = "Close";
             cmdClose.Click += CmdClose_Click;
             stack.Children.Add(cmdClose);

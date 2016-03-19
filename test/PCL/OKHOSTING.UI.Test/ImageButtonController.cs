@@ -14,28 +14,28 @@ namespace OKHOSTING.UI.Test
         {
             base.Start();
 
-            IStack stack = Platform.Current.Create<IStack>();
+            IStack stack = Platform.Current.CreateControl<IStack>();
 
-            ILabel lblLabel = Platform.Current.Create<ILabel>();
+            ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
             lblLabel.Text = "View an image from Url";
             lblLabel.Height = 30;
             stack.Children.Add(lblLabel);
 
-            IImageButton imgbtn = Platform.Current.Create<IImageButton>();
+            IImageButton imgbtn = Platform.Current.CreateControl<IImageButton>();
             imgbtn.LoadFromUrl(new Uri("http://okhosting.com/wp-content/uploads/2016/02/okhosting-150x150.png"));
             imgbtn.Height = 100;
             imgbtn.Width = 100;
             imgbtn.Click += CmdViewImage_Click;
             stack.Children.Add(imgbtn);
 
-            imgPicture = Platform.Current.Create<IImage>();
+            imgPicture = Platform.Current.CreateControl<IImage>();
             imgPicture.LoadFromUrl(new Uri("http://www.patycantu.com/wp-content/uploads/2014/07/91.jpg"));
             imgPicture.Height = 250;
             imgPicture.Width = 600;
             imgPicture.Visible = false;
             stack.Children.Add(imgPicture);
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
+            IButton cmdClose = Platform.Current.CreateControl<IButton>();
             cmdClose.Text = "Close";
             cmdClose.Click += CmdClose_Click;
             stack.Children.Add(cmdClose);

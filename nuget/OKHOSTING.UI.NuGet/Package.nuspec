@@ -2,7 +2,7 @@
 <package >
   <metadata>
 	<id>OKHOSTING.UI</id>
-	<version>1.0.3</version>
+	<version>1.0.5</version>
 	<title>OKHOSTING.UI</title>
 	<authors>OK HOSTING SC</authors>
 	<owners>OK HOSTING</owners>
@@ -43,6 +43,7 @@
 	  Please visit: https://github.com/okhosting/OKHOSTING.UI
 	</description>
 	<releaseNotes>
+	  * Renamed Platform.Create to Platform.CreateControl and dded Platform.CreateObject
 	</releaseNotes>
 	<summary>
 	  Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
@@ -54,7 +55,7 @@
 	<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
 	<copyright>Copyright OK HOSTING SC 2015</copyright>
 	<dependencies>
-	  <dependency id="OKHOSTING.Data" version="1.0.3" />
+	  <dependency id="OKHOSTING.Data" version="1.0.4" />
 	</dependencies>
 	<references></references>
 	<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>

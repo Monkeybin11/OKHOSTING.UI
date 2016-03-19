@@ -13,30 +13,30 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Current.CreateControl<IStack>();
 
-			ILabel lblLabel = Platform.Current.Create<ILabel>();
+			ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
 			lblLabel.Text = "Enter your comment";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-			txtTextarea = Platform.Current.Create<ITextArea>();
+			txtTextarea = Platform.Current.CreateControl<ITextArea>();
             txtTextarea.Value = "";
             txtTextarea.Width = 200;
             txtTextarea.Height = 100;
 			stack.Children.Add(txtTextarea);
 
-            IButton cmdPrint = Platform.Current.Create<IButton>();
+            IButton cmdPrint = Platform.Current.CreateControl<IButton>();
             cmdPrint.Text = "Print your coment";
             cmdPrint.Click += CmdOpen_Click;
             stack.Children.Add(cmdPrint);
 
-            lblcoment = Platform.Current.Create<ILabel>();
+            lblcoment = Platform.Current.CreateControl<ILabel>();
             lblcoment.Visible = false;
             lblcoment.Width = 200;
             stack.Children.Add(lblcoment);
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
+            IButton cmdClose = Platform.Current.CreateControl<IButton>();
             cmdClose.Text = "Close";
             cmdClose.Click += CmdClose_Click;
             stack.Children.Add(cmdClose);
