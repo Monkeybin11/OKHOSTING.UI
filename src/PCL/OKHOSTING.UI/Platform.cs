@@ -65,7 +65,7 @@ namespace OKHOSTING.UI
 
 		public virtual T Create<T>() where T : class, Controls.IControl
 		{
-			return Core.BaitAndSwitch.Create<T>();
+			return Core.BaitAndSwitch.Create<T>(KnownPlatforms, null);
 		}
 
 		/// <summary>
@@ -115,6 +115,8 @@ namespace OKHOSTING.UI
 
 		//static
 
+		protected static readonly string[] KnownPlatforms = new string[] { "Net4.WinForms", "Net4.WebForms", "Net4.WPF", "UWP", "Xamarin.Forms", "Xamarin.Android", "Xamarin.iOS", "Xamarin.Windows" };
+
 		/// <summary>
 		/// Gets the currently executing App. In a web environment, an App instance is created for each user
 		/// </summary>
@@ -124,7 +126,7 @@ namespace OKHOSTING.UI
 			{
 				if (!Session.Current.ContainsKey(typeof(Platform).FullName))
 				{
-					Session.Current[typeof(Platform).FullName] = Core.BaitAndSwitch.Create<Platform>((IEnumerable<string>) new string[] { "Net4.WinForms", "Net4.WebForms", "Net4.WPF", "UWP", "Xamarin.Forms", "Xamarin.Android", "Xamarin.iOS", "Xamarin.Windows" });
+					Session.Current[typeof(Platform).FullName] = Core.BaitAndSwitch.Create<Platform>((IEnumerable<string>) KnownPlatforms);
 				}
 
 				return (Platform) Session.Current[typeof(Platform).FullName];
