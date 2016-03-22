@@ -63,7 +63,7 @@ namespace OKHOSTING.UI
 
 		//public
 
-		public T CreateControl<T>() where T : Controls.IControl
+		public virtual T Create<T>() where T : class, Controls.IControl
 		{
 			return Core.BaitAndSwitch.Create<T>();
 		}

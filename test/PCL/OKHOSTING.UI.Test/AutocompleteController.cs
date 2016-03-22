@@ -10,15 +10,15 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack Stack = Platform.Current.CreateControl<IStack>();
+			IStack Stack = Platform.Current.Create<IStack>();
 
-			ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
+			ILabel lblLabel = Platform.Current.Create<ILabel>();
 			lblLabel.Text = "Tis is my team";
 			lblLabel.Height = 50;
 			lblLabel.FontSize = 20;
 			Stack.Children.Add(lblLabel);
 
-			IAutocomplete txtBox = Platform.Current.CreateControl<IAutocomplete>();
+			IAutocomplete txtBox = Platform.Current.Create<IAutocomplete>();
 			txtBox.Name = "Team";
 			//txtBox.BackgroundColor = new Color(1, 222, 184, 135);
 			txtBox.FontColor = new Color(1, 36, 24, 130);
@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Test
 			txtBox.FontSize = 20;
 			Stack.Children.Add(txtBox);
 
-			IButton cmdClose = Platform.Current.CreateControl<IButton>();
+			IButton cmdClose = Platform.Current.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			Stack.Children.Add(cmdClose);

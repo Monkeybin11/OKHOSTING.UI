@@ -38,7 +38,7 @@
 		protected override void CreateValueControl()
 		{
 			//create a sinple TextBox
-			ValueControl = Platform.Current.CreateControl<ITextBox>();
+			ValueControl = Platform.Current.Create<ITextBox>();
 		}
 	}
 }

@@ -20,12 +20,12 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			
-			IGrid grid = Platform.Current.CreateControl<IGrid>();
+			IGrid grid = Platform.Current.Create<IGrid>();
 			grid.ColumnCount = 1;
 			grid.RowCount = 20;
 			//grid.SetHeight();
 
-			ILabelButton lblUdg = Platform.Current.CreateControl<ILabelButton>();
+			ILabelButton lblUdg = Platform.Current.Create<ILabelButton>();
 			lblUdg.Text = "Radio UDG";
 			lblUdg.Height = 100;
 			lblUdg.Click += (object sender, EventArgs e) => new UDG().Start();

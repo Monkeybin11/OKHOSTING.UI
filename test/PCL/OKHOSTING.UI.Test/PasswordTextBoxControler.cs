@@ -11,15 +11,15 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.CreateControl<IStack>();
+			IStack stack = Platform.Current.Create<IStack>();
 
-			ILabel lblPasword = Platform.Current.CreateControl<ILabel>();
+			ILabel lblPasword = Platform.Current.Create<ILabel>();
 			lblPasword.VerticalAlignment = VerticalAlignment.Bottom;
 			lblPasword.Text = "Enter your password";
 			lblPasword.Height = 30;
 			stack.Children.Add(lblPasword);
 
-			IPasswordTextBox txtBox = Platform.Current.CreateControl<IPasswordTextBox>();
+			IPasswordTextBox txtBox = Platform.Current.Create<IPasswordTextBox>();
 			txtBox.Name = "Password";
 			txtBox.BackgroundColor = new Color(1, 230, 200, 135);
 			txtBox.BorderColor = new Color(1, 229, 238, 125);
@@ -28,7 +28,7 @@ namespace OKHOSTING.UI.Test
 			txtBox.VerticalAlignment = VerticalAlignment.Center;
 			stack.Children.Add(txtBox);
 
-			IButton cmdClose = Platform.Current.CreateControl<IButton>();
+			IButton cmdClose = Platform.Current.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);

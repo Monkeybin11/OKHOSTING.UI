@@ -11,78 +11,9 @@ namespace OKHOSTING.UI.Net4.WebForms
 	{
 		protected readonly Random Random = new Random();
 
-		public override T CreateControl<T>()
+		public override T Create<T>()
 		{
-			T control = null;
-
-			if (typeof(T) == typeof(IAutocomplete))
-			{
-				control = new Autocomplete() as T;
-			}
-			else if (typeof(T) == typeof(IButton))
-			{
-				control = new Button() as T;
-			}
-			else if (typeof(T) == typeof(ICalendar))
-			{
-				control = new Calendar() as T;
-			}
-			else if (typeof(T) == typeof(ICheckBox))
-			{
-				control = new CheckBox() as T;
-			}
-			else if (typeof(T) == typeof(IHyperLink))
-			{
-				control = new HyperLink() as T;
-			}
-			else if (typeof(T) == typeof(IImage))
-			{
-				control = new Image() as T;
-			}
-			else if (typeof(T) == typeof(IImageButton))
-			{
-				control = new ImageButton() as T;
-			}
-			else if (typeof(T) == typeof(ILabel))
-			{
-				control = new Label() as T;
-			}
-			else if (typeof(T) == typeof(ILabelButton))
-			{
-				control = new LabelButton() as T;
-			}
-			else if (typeof(T) == typeof(IListPicker))
-			{
-				control = new ListPicker() as T;
-			}
-			else if (typeof(T) == typeof(IPasswordTextBox))
-			{
-				control = new PasswordTextBox() as T;
-			}
-			else if (typeof(T) == typeof(ITextArea))
-			{
-				control = new TextArea() as T;
-			}
-			else if (typeof(T) == typeof(ITextBox))
-			{
-				control = new TextBox() as T;
-			}
-			else if (typeof(T) == typeof(IGrid))
-			{
-				control = new Grid() as T;
-			}
-			else if (typeof(T) == typeof(IRelativePanel))
-			{
-				control = new RelativePanel() as T;
-			}
-			else if (typeof(T) == typeof(IStack))
-			{
-				control = new Stack() as T;
-			}
-			else
-			{
-				throw new NotImplementedException();
-			}
+			T control = base.Create<T>();
 
 			//give a default name to all controls to allow events to be correclty triggered
 			control.Name = "ctr_" + Random.Next();

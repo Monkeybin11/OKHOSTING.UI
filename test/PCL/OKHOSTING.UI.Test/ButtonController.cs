@@ -13,22 +13,22 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.CreateControl<IStack>();
+			IStack stack = Platform.Current.Create<IStack>();
 
-			cmdShow = Platform.Current.CreateControl<IButton>();
+			cmdShow = Platform.Current.Create<IButton>();
 			cmdShow.Text = "Show/Hide";
 			cmdShow.Click += CmdShow_Click;
 			cmdShow.BackgroundColor = new Color(1, 255, 0, 0);
 			cmdShow.FontColor = new Color(1, 255, 255, 255);
 			stack.Children.Add(cmdShow);
 
-			lbltext = Platform.Current.CreateControl<ILabel>();
+			lbltext = Platform.Current.Create<ILabel>();
 			lbltext.Text = "I'm visible, i want an ice-cream";
 			lbltext.Visible = false;
 			
 			stack.Children.Add(lbltext);
 
-			IButton cmdClose = Platform.Current.CreateControl<IButton>();
+			IButton cmdClose = Platform.Current.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);

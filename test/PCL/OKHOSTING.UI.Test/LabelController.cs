@@ -10,24 +10,24 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.CreateControl<IStack>();
+			IStack stack = Platform.Current.Create<IStack>();
 
-			ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
+			ILabel lblLabel = Platform.Current.Create<ILabel>();
 			lblLabel.Text = "This is a label";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-			ITextBox txtText = Platform.Current.CreateControl<ITextBox>();
+			ITextBox txtText = Platform.Current.Create<ITextBox>();
 			txtText.Value = "Update label text here";
 			txtText.ValueChanged += (object sender, string e) => lblLabel.Text = txtText.Value;
 			stack.Children.Add(txtText);
 
-			IListPicker lstFont = Platform.Current.CreateControl<IListPicker>();
+			IListPicker lstFont = Platform.Current.Create<IListPicker>();
 			lstFont.Items = new string[] { "Arial", "Verdana", "Times new roman", "Helvetica" };
 			lstFont.ValueChanged += (object sender, string e) => lblLabel.FontFamily = lstFont.Value;
 			stack.Children.Add(lstFont);
 
-			IButton cmdClose = Platform.Current.CreateControl<IButton>();
+			IButton cmdClose = Platform.Current.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);

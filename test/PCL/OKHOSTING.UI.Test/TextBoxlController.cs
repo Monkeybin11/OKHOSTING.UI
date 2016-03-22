@@ -10,20 +10,20 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-			IStack stack = Platform.Current.CreateControl<IStack>();
+			IStack stack = Platform.Current.Create<IStack>();
 
-			ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
+			ILabel lblLabel = Platform.Current.Create<ILabel>();
 			lblLabel.Text = "Enter your name";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-			ITextBox txtText = Platform.Current.CreateControl<ITextBox>();
+			ITextBox txtText = Platform.Current.Create<ITextBox>();
 			txtText.Value = "";
 			stack.Children.Add(txtText);
 
-			IButton cmdPrint = Platform.Current.CreateControl<IButton>();
+			IButton cmdPrint = Platform.Current.Create<IButton>();
 
-			IButton cmdClose = Platform.Current.CreateControl<IButton>();
+			IButton cmdClose = Platform.Current.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
