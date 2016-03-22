@@ -21,20 +21,20 @@ namespace OKHOSTING.UI.Test
 			txtText.Value = "";
 			stack.Children.Add(txtText);
 
-            IButton cmdPrint = Platform.Current.Create<IButton>();
+			IButton cmdPrint = Platform.Current.Create<IButton>();
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
-            cmdClose.Text = "Close";
-            cmdClose.Click += CmdClose_Click;
-            stack.Children.Add(cmdClose);
+			IButton cmdClose = Platform.Current.Create<IButton>();
+			cmdClose.Text = "Close";
+			cmdClose.Click += CmdClose_Click;
+			stack.Children.Add(cmdClose);
 
-            Platform.Current.Page.Title = "Test label";
+			Platform.Current.Page.Title = "Test label";
 			Platform.Current.Page.Content = stack;
 		}
 
-        private void CmdClose_Click(object sender, EventArgs e)
-        {
-            this.Finish();
-        }
-    }
+		private void CmdClose_Click(object sender, EventArgs e)
+		{
+			this.Finish();
+		}
+	}
 }

@@ -63,28 +63,9 @@ namespace OKHOSTING.UI
 
 		//public
 
-		/// <summary>
-		/// Create a platform-specific UI control
-		/// </summary>
-		/// <typeparam name="T">Type of the control. Control must implement IControl</typeparam>
-		/// <returns>
-		/// An instance of control T
-		/// </returns>
-		public abstract T CreateControl<T>() where T : class, Controls.IControl;
-
-		/// <summary>
-		/// Create a platform-specific object, for any feature you need to be platform-specific
-		/// </summary>
-		/// <typeparam name="T">Type of the object. Can be any type of object</typeparam>
-		/// <returns>
-		/// An instance of type T
-		/// </returns>
-		/// <remarks>
-		/// Use this for platform specific features like storage, streaming, settings or whatever you need
-		/// </remarks>
-		public virtual T CreateObject<T>() where T : class
+		public T CreateControl<T>() where T : Controls.IControl
 		{
-			throw new NotImplementedException();
+			return Core.BaitAndSwitch.Create<T>();
 		}
 
 		/// <summary>
@@ -141,16 +122,14 @@ namespace OKHOSTING.UI
 		{
 			get
 			{
-				if (Session.Current.ContainsKey(typeof(Platform).FullName))
+				if (!Session.Current.ContainsKey(typeof(Platform).FullName))
 				{
-					return (Platform) Session.Current[typeof(Platform).FullName];
+					Session.Current[typeof(Platform).FullName] = Core.BaitAndSwitch.Create<Platform>((IEnumerable<string>) new string[] { "Net4.WinForms", "Net4.WebForms", "Net4.WPF", "UWP", "Xamarin.Forms", "Xamarin.Android", "Xamarin.iOS", "Xamarin.Windows" });
 				}
-				else
-				{
-					return null;
-				}
+
+				return (Platform) Session.Current[typeof(Platform).FullName];
 			}
-			protected set
+			set
 			{
 				Session.Current[typeof(Platform).FullName] = value;
 			}

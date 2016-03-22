@@ -10,5 +10,5 @@
 		void LoadFromFile(string filePath);
 
 		void LoadFromStream(System.IO.Stream stream);
-    }
+	}
 }

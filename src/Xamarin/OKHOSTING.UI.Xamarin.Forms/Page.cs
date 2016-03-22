@@ -5,12 +5,12 @@ namespace OKHOSTING.UI.Xamarin.Forms
 {
 	public class Page : global::Xamarin.Forms.ContentPage, IPage
 	{
-        private readonly global::Xamarin.Forms.ScrollView Scroll;
+		private readonly global::Xamarin.Forms.ScrollView Scroll;
 
-        public Page()
+		public Page()
 		{
-            Scroll = new global::Xamarin.Forms.ScrollView();
-            base.Content = Scroll;
+			Scroll = new global::Xamarin.Forms.ScrollView();
+			base.Content = Scroll;
 		}
 
 		public new IControl Content
@@ -21,7 +21,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 			set
 			{
-                Scroll.Content = (global::Xamarin.Forms.View) value;
+				Scroll.Content = (global::Xamarin.Forms.View) value;
 			}
 		}
 		

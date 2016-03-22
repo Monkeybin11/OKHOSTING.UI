@@ -6,52 +6,52 @@ namespace OKHOSTING.UI.Test
 {
 	public class ButtonController: Controller
 	{
-        IButton cmdShow;
-        ILabel lbltext;
+		IButton cmdShow;
+		ILabel lbltext;
 
-        public override void Start()
+		public override void Start()
 		{
-            base.Start();
+			base.Start();
 
 			IStack stack = Platform.Current.Create<IStack>();
 
-            cmdShow = Platform.Current.Create<IButton>();
-            cmdShow.Text = "Show/Hide";
-            cmdShow.Click += CmdShow_Click;
-            cmdShow.BackgroundColor = new Color(1, 255, 0, 0);
-            cmdShow.FontColor = new Color(1, 255, 255, 255);
-            stack.Children.Add(cmdShow);
+			cmdShow = Platform.Current.Create<IButton>();
+			cmdShow.Text = "Show/Hide";
+			cmdShow.Click += CmdShow_Click;
+			cmdShow.BackgroundColor = new Color(1, 255, 0, 0);
+			cmdShow.FontColor = new Color(1, 255, 255, 255);
+			stack.Children.Add(cmdShow);
 
-            lbltext = Platform.Current.Create<ILabel>();
-            lbltext.Text = "I'm visible, i want an ice-cream";
-            lbltext.Visible = false;
+			lbltext = Platform.Current.Create<ILabel>();
+			lbltext.Text = "I'm visible, i want an ice-cream";
+			lbltext.Visible = false;
 			
 			stack.Children.Add(lbltext);
 
-            IButton cmdClose = Platform.Current.Create<IButton>();
-            cmdClose.Text = "Close";
-            cmdClose.Click += CmdClose_Click;
-            stack.Children.Add(cmdClose);
+			IButton cmdClose = Platform.Current.Create<IButton>();
+			cmdClose.Text = "Close";
+			cmdClose.Click += CmdClose_Click;
+			stack.Children.Add(cmdClose);
 
-            Platform.Current.Page.Title = "Test label";
+			Platform.Current.Page.Title = "Test label";
 			Platform.Current.Page.Content = stack;
 		}
 
-        private void CmdShow_Click(object sender, EventArgs e)
-        {
-            if (lbltext.Visible == true)
-            {
-                lbltext.Visible = false;
-            }
-            else
-            {
-                lbltext.Visible = true;
-            }
-        }
+		private void CmdShow_Click(object sender, EventArgs e)
+		{
+			if (lbltext.Visible == true)
+			{
+				lbltext.Visible = false;
+			}
+			else
+			{
+				lbltext.Visible = true;
+			}
+		}
 
-        private void CmdClose_Click(object sender, EventArgs e)
-        {
-            this.Finish();
-        }
-    }
+		private void CmdClose_Click(object sender, EventArgs e)
+		{
+			this.Finish();
+		}
+	}
 }

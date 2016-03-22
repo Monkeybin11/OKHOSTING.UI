@@ -38,13 +38,13 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			InnerImage.Source = bitmap;
 		}
 
-        public void Dispose()
-        {
-        }
+		public void Dispose()
+		{
+		}
 
-        #region IControl
+		#region IControl
 
-        bool IControl.Visible
+		bool IControl.Visible
 		{
 			get
 			{

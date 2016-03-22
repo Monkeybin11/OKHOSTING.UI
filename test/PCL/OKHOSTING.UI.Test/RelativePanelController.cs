@@ -34,13 +34,13 @@ namespace OKHOSTING.UI.Test
 			panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel);
 
 			IButton cmdClose = Platform.Current.CreateControl<IButton>();
-            cmdClose.Text = "Close";
-            cmdClose.Click += CmdClose_Click;
+			cmdClose.Text = "Close";
+			cmdClose.Click += CmdClose_Click;
 			lblLabel.FontColor = new Color(255, 0, 0, 0);
 			lblLabel2.BackgroundColor = new Color(255, 0, 255, 255);
 			panel.Add(cmdClose, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.AboveOf, lblLabel);
 
-            Platform.Current.Page.Title = "Test RelativePanel";
+			Platform.Current.Page.Title = "Test RelativePanel";
 			Platform.Current.Page.Content = panel;
 		}
 
@@ -53,8 +53,8 @@ namespace OKHOSTING.UI.Test
 		}
 
 		private void CmdClose_Click(object sender, EventArgs e)
-        {
-            this.Finish();
-        }
-    }
+		{
+			this.Finish();
+		}
+	}
 }

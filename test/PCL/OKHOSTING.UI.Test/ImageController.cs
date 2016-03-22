@@ -8,35 +8,35 @@ namespace OKHOSTING.UI.Test
 {
 	public class ImageController: Controller
 	{
-        public override void Start()
-        {
-            base.Start();
+		public override void Start()
+		{
+			base.Start();
 
-            IStack stack = Platform.Current.CreateControl<IStack>();
+			IStack stack = Platform.Current.CreateControl<IStack>();
 
-            ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
-            lblLabel.Text = "View an image from Url";
-            lblLabel.Height = 30;
-            stack.Children.Add(lblLabel);
+			ILabel lblLabel = Platform.Current.CreateControl<ILabel>();
+			lblLabel.Text = "View an image from Url";
+			lblLabel.Height = 30;
+			stack.Children.Add(lblLabel);
 
-            IImage imgPicture = Platform.Current.CreateControl<IImage>();
-            imgPicture.LoadFromUrl(new Uri("http://www.patycantu.com/wp-content/uploads/2014/07/91.jpg"));
-            imgPicture.Height = 250;
-            imgPicture.Width = 600;
-            stack.Children.Add(imgPicture);
+			IImage imgPicture = Platform.Current.CreateControl<IImage>();
+			imgPicture.LoadFromUrl(new Uri("http://www.patycantu.com/wp-content/uploads/2014/07/91.jpg"));
+			imgPicture.Height = 250;
+			imgPicture.Width = 600;
+			stack.Children.Add(imgPicture);
 
-            IButton cmdClose = Platform.Current.CreateControl<IButton>();
-            cmdClose.Text = "Close";
-            cmdClose.Click += CmdClose_Click;
-            stack.Children.Add(cmdClose);
+			IButton cmdClose = Platform.Current.CreateControl<IButton>();
+			cmdClose.Text = "Close";
+			cmdClose.Click += CmdClose_Click;
+			stack.Children.Add(cmdClose);
 
-            Platform.Current.Page.Title = "Test label";
+			Platform.Current.Page.Title = "Test label";
 			Platform.Current.Page.Content = stack;
 		}
 
-        private void CmdClose_Click(object sender, EventArgs e)
-        {
-            this.Finish();
-        }
-    }
+		private void CmdClose_Click(object sender, EventArgs e)
+		{
+			this.Finish();
+		}
+	}
 }

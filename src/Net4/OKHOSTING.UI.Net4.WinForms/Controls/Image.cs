@@ -120,5 +120,5 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			Platform.Current.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
-    }
+	}
 }

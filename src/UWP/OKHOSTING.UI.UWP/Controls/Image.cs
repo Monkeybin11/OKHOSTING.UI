@@ -31,9 +31,9 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 		}
 
-        #region IControl
+		#region IControl
 
-        bool IControl.Visible
+		bool IControl.Visible
 		{
 			get
 			{

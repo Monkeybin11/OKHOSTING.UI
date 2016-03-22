@@ -103,6 +103,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <Content Include="Services\AutocompleteService.asmx" />
     <Content Include="Services\PageSize.ashx" />

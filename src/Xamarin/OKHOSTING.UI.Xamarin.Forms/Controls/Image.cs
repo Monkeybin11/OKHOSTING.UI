@@ -25,9 +25,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 		}
 
-        #region IControl
+		#region IControl
 
-        string IControl.Name
+		string IControl.Name
 		{
 			get; set;
 		}
