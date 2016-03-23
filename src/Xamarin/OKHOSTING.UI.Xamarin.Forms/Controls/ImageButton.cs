@@ -19,6 +19,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				}),
 				NumberOfTapsRequired = 1
 			};
+
+			base.GestureRecognizers.Add(profileTapRecognizer);
 		}
 
 		public event EventHandler Click;
