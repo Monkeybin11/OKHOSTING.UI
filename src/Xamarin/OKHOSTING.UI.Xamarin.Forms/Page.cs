@@ -21,7 +21,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 			set
 			{
-				Scroll.Content = (global::Xamarin.Forms.View) value;
+                Scroll.Content = (global::Xamarin.Forms.View) value;
 			}
 		}
 		
