@@ -167,7 +167,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				throw new ArgumentNullException(nameof(control));
 			}
 
-			Constraint horizontalXamarinConstraint = null;
+            if (control.Margin == null)
+            {
+                control.Margin = new Thickness(0);
+            }
+
+            if (((IRelativePanel) this).Margin == null)
+            {
+                ((IRelativePanel) this).Margin = new Thickness(0);
+            }
+
+            Thickness myMargin = ((IRelativePanel) this).Margin;
+            Constraint horizontalXamarinConstraint = null;
 			Constraint verticalXamarinConstraint = null;
 
 			//no reference is given, so we position the control relative to the this panel
@@ -181,34 +192,34 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 						break;
 
 					case RelativePanelHorizontalContraint.LeftOf:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X - control.Width.Value; });
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X - control.Width.Value - control.Margin.Right.Value - myMargin.Left.Value; });
 						break;
 
 					case RelativePanelHorizontalContraint.LeftWith:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X; });
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + control.Margin.Left.Value; });
 						break;
 
 					case RelativePanelHorizontalContraint.RightOf:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + control.Width.Value; });
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + parent.Width + control.Margin.Left.Value + myMargin.Right.Value; });
 						break;
 
 					case RelativePanelHorizontalContraint.RightWith:
-						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + parent.Width - control.Width.Value; });
+						horizontalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.X + parent.Width - control.Width.Value - control.Margin.Right.Value; });
 						break;
 				}
 
 				switch (verticalContraint)
 				{
 					case RelativePanelVerticalContraint.AboveOf:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y - control.Height.Value; });
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y - control.Height.Value - control.Margin.Bottom.Value - myMargin.Top.Value; });
 						break;
 
 					case RelativePanelVerticalContraint.BelowOf:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height; });
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height + control.Margin.Top.Value + myMargin.Bottom.Value; });
 						break;
 
 					case RelativePanelVerticalContraint.BottomWith:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height - control.Height.Value; });
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + parent.Height - control.Height.Value - control.Margin.Bottom.Value; });
 						break;
 
 					case RelativePanelVerticalContraint.CenterWith:
@@ -216,7 +227,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 						break;
 
 					case RelativePanelVerticalContraint.TopWith:
-						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y; });
+						verticalXamarinConstraint = Constraint.RelativeToParent((parent) => { return parent.Y + control.Margin.Top.Value; });
 						break;
 				}
 			}
@@ -230,34 +241,34 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 						break;
 
 					case RelativePanelHorizontalContraint.LeftOf:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X - ((IControl) reference).Margin.Left.Value - control.Width.Value - control.Margin.Right.Value; });
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X - control.Width.Value - control.Margin.Right.Value - ((IControl) reference).Margin.Left.Value; });
 						break;
 						
 					case RelativePanelHorizontalContraint.LeftWith:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X; });
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X + control.Margin.Left.Value; });
 						break;
 
 					case RelativePanelHorizontalContraint.RightOf:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X + reference.Width + ((IControl) reference).Margin.Right.Value + control.Margin.Left.Value; });
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X + reference.Width + control.Margin.Left.Value + ((IControl) reference).Margin.Right.Value; });
 						break;
 
 					case RelativePanelHorizontalContraint.RightWith:
-						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X + reference.Width - control.Width.Value; });
+						horizontalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.X + reference.Width - control.Width.Value - control.Margin.Right.Value; });
 						break;
 				}
 
 				switch (verticalContraint)
 				{
 					case RelativePanelVerticalContraint.AboveOf:
-						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y; });
+						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y - control.Height.Value - control.Margin.Bottom.Value - ((IControl) reference).Margin.Top.Value; });
 						break;
 
 					case RelativePanelVerticalContraint.BelowOf:
-						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y + reference.Height; });
+						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y + reference.Height + control.Margin.Top.Value + ((IControl) reference).Margin.Bottom.Value; });
 						break;
 
 					case RelativePanelVerticalContraint.BottomWith:
-						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y + reference.Height; });
+						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y + reference.Height - control.Margin.Bottom.Value; });
 						break;
 
 					case RelativePanelVerticalContraint.CenterWith:
@@ -265,7 +276,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 						break;
 
 					case RelativePanelVerticalContraint.TopWith:
-						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y; });
+						verticalXamarinConstraint = Constraint.RelativeToView((View) referenceControl, (parent, reference) => { return reference.Y + control.Margin.Top.Value; });
 						break;
 				}
 			}

@@ -25,20 +25,23 @@ namespace OKHOSTING.UI.Test
 			lblLabel.Text = "This label is centered";
 			lblLabel.FontColor = new Color(255, 0, 0, 255);
 			lblLabel.BackgroundColor = new Color(255, 255, 0, 0);
-			panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
+            lblLabel.Margin = new Thickness(20);
+            panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
 
 			ILabel lblLabel2 = Platform.Current.Create<ILabel>();
 			lblLabel2.Text = "This label is centered and below the first one";
-			lblLabel.FontColor = new Color(255, 0, 0, 255);
+			lblLabel2.FontColor = new Color(255, 0, 0, 255);
 			lblLabel2.BackgroundColor = new Color(255, 0, 255, 0);
-			panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel);
+            lblLabel2.Margin = new Thickness(10);
+            panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel);
 
 			IButton cmdClose = Platform.Current.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
-			lblLabel.FontColor = new Color(255, 0, 0, 0);
-			lblLabel2.BackgroundColor = new Color(255, 0, 255, 255);
-			panel.Add(cmdClose, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.AboveOf, lblLabel);
+            cmdClose.FontColor = new Color(255, 0, 0, 0);
+            cmdClose.BackgroundColor = new Color(255, 0, 255, 255);
+            cmdClose.Margin = new Thickness(10);
+            panel.Add(cmdClose, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.AboveOf, lblLabel);
 
 			Platform.Current.Page.Title = "Test RelativePanel";
 			Platform.Current.Page.Content = panel;
