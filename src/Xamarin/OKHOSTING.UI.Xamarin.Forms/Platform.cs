@@ -32,7 +32,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 
 		public virtual global::Xamarin.Forms.Color Parse(Color color)
 		{
-			return global::Xamarin.Forms.Color.FromRgba(color.Alpha, color.Red, color.Green, color.Blue);
+			return global::Xamarin.Forms.Color.FromRgba(color.Red, color.Green, color.Blue, color.Alpha);
 		}
 
 		public virtual HorizontalAlignment Parse(global::Xamarin.Forms.LayoutAlignment horizontalAlignment)
