@@ -192,15 +192,27 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get;
-			set;
+			get
+            {
+                return Platform.Current.Parse(base.HorizontalTextAlignment);
+            }
+			set
+            {
+                base.HorizontalTextAlignment = Platform.Current.ParseTextAlignment(value);
+            }
 		}
 
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get;
-			set;
-		}
+            get
+            {
+                return Platform.Current.ParseVerticalTextAlignment(base.VerticalTextAlignment);
+            }
+            set
+            {
+                base.VerticalTextAlignment = Platform.Current.ParseTextAlignment(value);
+            }
+        }
 
 		Thickness ITextControl.TextPadding
 		{

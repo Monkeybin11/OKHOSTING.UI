@@ -115,6 +115,23 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			return global::Xamarin.Forms.LayoutAlignment.Start;
 		}
 
+		public VerticalAlignment ParseVerticalTextAlignment(global::Xamarin.Forms.TextAlignment textAlignment)
+		{
+			switch (textAlignment)
+			{
+				case global::Xamarin.Forms.TextAlignment.Start:
+					return VerticalAlignment.Top;
+
+				case global::Xamarin.Forms.TextAlignment.Center:
+					return VerticalAlignment.Center;
+
+                case global::Xamarin.Forms.TextAlignment.End:
+                    return VerticalAlignment.Bottom;
+            }
+
+			return VerticalAlignment.Top;
+		}
+
 		public HorizontalAlignment Parse(global::Xamarin.Forms.TextAlignment textAlignment)
 		{
 			switch (textAlignment)
@@ -150,6 +167,26 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 
 			return global::Xamarin.Forms.TextAlignment.Start;
+		}
+
+        public global::Xamarin.Forms.TextAlignment ParseTextAlignment(VerticalAlignment alignment)
+		{
+            switch (alignment)
+            {
+                case VerticalAlignment.Center:
+                    return global::Xamarin.Forms.TextAlignment.Center;
+
+                case VerticalAlignment.Bottom:
+                    return global::Xamarin.Forms.TextAlignment.End;
+
+                case VerticalAlignment.Fill:
+                    return global::Xamarin.Forms.TextAlignment.Center;
+
+                case VerticalAlignment.Top:
+                    return global::Xamarin.Forms.TextAlignment.Start;
+            }
+
+            return global::Xamarin.Forms.TextAlignment.Start;
 		}
 
 		//static
