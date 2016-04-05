@@ -35,6 +35,7 @@
     <Compile Include="HyperLinkController.cs" />
     <Compile Include="CheckboxController.cs" />
     <Compile Include="ImageButtonController.cs" />
+    <Compile Include="FormController.cs" />
     <Compile Include="ImageController.cs" />
     <Compile Include="RelativePanelController.cs" />
     <Compile Include="ListPickerController.cs" />

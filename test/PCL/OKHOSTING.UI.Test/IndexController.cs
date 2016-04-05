@@ -91,7 +91,12 @@ namespace OKHOSTING.UI.Test
 			lblRelativePanel.Click += (object sender, EventArgs e) => new RelativePanelController().Start();
 			grid.SetContent(12, 0, lblRelativePanel);
 
-			Platform.Current.Page.Title = "Choose one control to test";
+            ILabelButton lblForm = Platform.Current.Create<ILabelButton>();
+            lblForm.Text = "Form";
+            lblForm.Click += (object sender, EventArgs e) => new FormController().Start();
+            grid.SetContent(13, 0, lblForm);
+
+            Platform.Current.Page.Title = "Choose one control to test";
 			Platform.Current.Page.Content = grid;
 			
 
