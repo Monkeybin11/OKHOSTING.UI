@@ -24,10 +24,15 @@ namespace OKHOSTING.UI.Xamarin.Forms
                 Scroll.Content = (global::Xamarin.Forms.View) value;
 			}
 		}
-		
-		//void IDisposable.Dispose()
-		//{
-		//	Content.Dispose();
-		//}
-	}
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (Platform.Current.Controller != null)
+            {
+                Platform.Current.Controller.Resize();
+            }
+        }
+    }
 }
