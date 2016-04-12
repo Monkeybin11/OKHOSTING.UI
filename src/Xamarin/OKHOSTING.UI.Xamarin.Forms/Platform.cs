@@ -8,11 +8,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 {
 	public class Platform : UI.Platform
 	{
-		public override void Finish()
-		{
-			base.Finish();
-		}
-
 		//virtual
 
 		public virtual Thickness Parse(global::Xamarin.Forms.Thickness thickness)
@@ -125,9 +120,9 @@ namespace OKHOSTING.UI.Xamarin.Forms
 				case global::Xamarin.Forms.TextAlignment.Center:
 					return VerticalAlignment.Center;
 
-                case global::Xamarin.Forms.TextAlignment.End:
-                    return VerticalAlignment.Bottom;
-            }
+				case global::Xamarin.Forms.TextAlignment.End:
+					return VerticalAlignment.Bottom;
+			}
 
 			return VerticalAlignment.Top;
 		}
@@ -169,24 +164,24 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			return global::Xamarin.Forms.TextAlignment.Start;
 		}
 
-        public global::Xamarin.Forms.TextAlignment ParseTextAlignment(VerticalAlignment alignment)
+		public global::Xamarin.Forms.TextAlignment ParseTextAlignment(VerticalAlignment alignment)
 		{
-            switch (alignment)
-            {
-                case VerticalAlignment.Center:
-                    return global::Xamarin.Forms.TextAlignment.Center;
+			switch (alignment)
+			{
+				case VerticalAlignment.Center:
+					return global::Xamarin.Forms.TextAlignment.Center;
 
-                case VerticalAlignment.Bottom:
-                    return global::Xamarin.Forms.TextAlignment.End;
+				case VerticalAlignment.Bottom:
+					return global::Xamarin.Forms.TextAlignment.End;
 
-                case VerticalAlignment.Fill:
-                    return global::Xamarin.Forms.TextAlignment.Center;
+				case VerticalAlignment.Fill:
+					return global::Xamarin.Forms.TextAlignment.Center;
 
-                case VerticalAlignment.Top:
-                    return global::Xamarin.Forms.TextAlignment.Start;
-            }
+				case VerticalAlignment.Top:
+					return global::Xamarin.Forms.TextAlignment.Start;
+			}
 
-            return global::Xamarin.Forms.TextAlignment.Start;
+			return global::Xamarin.Forms.TextAlignment.Start;
 		}
 
 		//static

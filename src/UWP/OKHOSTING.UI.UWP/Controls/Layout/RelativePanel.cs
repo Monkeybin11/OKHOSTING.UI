@@ -187,14 +187,14 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 
 					case RelativePanelHorizontalContraint.LeftWith:
 						NativeRelativePanel.SetAlignHorizontalCenterWithPanel((UIElement) control, true);
-                        break;
+						break;
 
 					case RelativePanelHorizontalContraint.RightOf:
 						throw new NotImplementedException();
 
 					case RelativePanelHorizontalContraint.RightWith:
 						NativeRelativePanel.SetAlignRightWithPanel((UIElement) control, true);
-                        break;
+						break;
 				}
 
 				switch (verticalContraint)

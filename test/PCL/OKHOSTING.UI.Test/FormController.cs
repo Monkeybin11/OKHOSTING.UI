@@ -8,55 +8,55 @@ namespace OKHOSTING.UI.Test
 {
 	public class FormController : Controller
 	{
-        Form Form;
+		Form Form;
 
-        public override void Start()
+		public override void Start()
 		{
 			base.Start();
 
-            Form = new Form();
+			Form = new Form();
 
-            IntegerField intField = new IntegerField();
-            intField.Name = "id";
-            intField.Value = 5;
-            intField.CaptionControl.Text = "id";
-            intField.Required = true;
-            intField.Container = Form;
+			IntegerField intField = new IntegerField();
+			intField.Name = "id";
+			intField.Value = 5;
+			intField.CaptionControl.Text = "id";
+			intField.Required = true;
+			intField.Container = Form;
 
-            Form.Fields.Add(intField);
+			Form.Fields.Add(intField);
 
-            StringField stringField = new StringField();
-            stringField.Name = "name";
-            stringField.Value = "";
-            stringField.CaptionControl.Text = "name";
-            stringField.Required = true;
-            stringField.Container = Form;
+			StringField stringField = new StringField();
+			stringField.Name = "name";
+			stringField.Value = "";
+			stringField.CaptionControl.Text = "name";
+			stringField.Required = true;
+			stringField.Container = Form;
 
-            Form.Fields.Add(stringField);
+			Form.Fields.Add(stringField);
 
-            Form.RepeatColumns = 4;
-            Form.LabelPosition = CaptionPosition.Left;
-            Form.DataBind();
+			Form.RepeatColumns = 4;
+			Form.LabelPosition = CaptionPosition.Left;
+			Form.DataBind();
 
-            IButton cmdSave = Platform.Current.Create<IButton>();
-            cmdSave.Text = "Save";
-            cmdSave.Click += CmdSave_Click;
+			IButton cmdSave = Platform.Current.Create<IButton>();
+			cmdSave.Text = "Save";
+			cmdSave.Click += CmdSave_Click;
 
-            IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Current.Create<IStack>();
 
-            stack.Children.Add(Form.Content);
-            stack.Children.Add(cmdSave);
+			stack.Children.Add(Form.Content);
+			stack.Children.Add(cmdSave);
 
-            Platform.Current.Page.Title = "Form";
+			Platform.Current.Page.Title = "Form";
 			Platform.Current.Page.Content = stack;
 		}
 
-        private void CmdSave_Click(object sender, EventArgs e)
-        {
-            var id = Form["id"].Value;
-            var name = Form["name"].Value;
+		private void CmdSave_Click(object sender, EventArgs e)
+		{
+			var id = Form["id"].Value;
+			var name = Form["name"].Value;
 
-            Finish();
-        }
-    }
+			Finish();
+		}
+	}
 }

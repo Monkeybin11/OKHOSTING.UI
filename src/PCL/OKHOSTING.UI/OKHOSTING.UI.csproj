@@ -127,11 +127,11 @@
       <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
     </Reference>
     <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Core.1.0.14\lib\OKHOSTING.Core.dll</HintPath>
+      <HintPath>..\..\..\..\OKHOSTING.UDG.Radio\src\packages\OKHOSTING.Core.1.0.17\lib\OKHOSTING.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Data.1.0.5\lib\OKHOSTING.Data.dll</HintPath>
+      <HintPath>..\..\..\..\OKHOSTING.UDG.Radio\src\packages\OKHOSTING.Data.1.0.7\lib\OKHOSTING.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">

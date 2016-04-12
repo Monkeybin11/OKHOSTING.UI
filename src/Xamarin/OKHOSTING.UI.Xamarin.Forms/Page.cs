@@ -21,18 +21,18 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 			set
 			{
-                Scroll.Content = (global::Xamarin.Forms.View) value;
+				Scroll.Content = (global::Xamarin.Forms.View) value;
 			}
 		}
 
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			base.OnSizeAllocated(width, height);
 
-            if (Platform.Current.Controller != null)
-            {
-                Platform.Current.Controller.Resize();
-            }
-        }
-    }
+			if (Platform.Current.Controller != null)
+			{
+				Platform.Current.Controller.Resize();
+			}
+		}
+	}
 }

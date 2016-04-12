@@ -167,18 +167,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				throw new ArgumentNullException(nameof(control));
 			}
 
-            if (control.Margin == null)
-            {
-                control.Margin = new Thickness(0);
-            }
+			if (control.Margin == null)
+			{
+				control.Margin = new Thickness(0);
+			}
 
-            if (((IRelativePanel) this).Margin == null)
-            {
-                ((IRelativePanel) this).Margin = new Thickness(0);
-            }
+			if (((IRelativePanel) this).Margin == null)
+			{
+				((IRelativePanel) this).Margin = new Thickness(0);
+			}
 
-            Thickness myMargin = ((IRelativePanel) this).Margin;
-            Constraint horizontalXamarinConstraint = null;
+			Thickness myMargin = ((IRelativePanel) this).Margin;
+			Constraint horizontalXamarinConstraint = null;
 			Constraint verticalXamarinConstraint = null;
 
 			//no reference is given, so we position the control relative to the this panel
