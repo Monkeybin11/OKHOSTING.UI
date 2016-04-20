@@ -28,7 +28,14 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			set
 			{
-				ValueControl.Value = (string) value;
+				if (value == null)
+				{
+					ValueControl.Value = null;
+				}
+				else
+				{
+					ValueControl.Value = value.ToString();
+				}
 			}
 		}
 

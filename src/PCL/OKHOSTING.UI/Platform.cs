@@ -110,10 +110,10 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual void Finish()
 		{
-            while (Controller != null)
-            {
-                Controller.Finish();
-            }
+			while (Controller != null)
+			{
+				Controller.Finish();
+			}
 		}
 
 		//static
