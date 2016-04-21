@@ -49,7 +49,7 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// <summary>
 		/// Creates all cells and controls based on the Fields collection
 		/// </summary>
-		public void DataBind()
+		public virtual void DataBind()
 		{
 			//the grid that will actually be displayed to the user and contain all the fields
 			Content = Platform.Current.Create<IGrid>();

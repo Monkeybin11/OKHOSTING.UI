@@ -1,68 +1,70 @@
 <?xml version="1.0"?>
 <package >
-  <metadata>
-	<id>OKHOSTING.UI</id>
-	<version>1.0.7</version>
-	<title>OKHOSTING.UI</title>
-	<authors>OK HOSTING</authors>
-	<owners>OK HOSTING</owners>
-	<description>
-	  Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
-	  
-	  ## Features
+	<metadata>
+		<id>OKHOSTING.UI</id>
+		<version>1.0.10</version>
+		<title>OKHOSTING.UI</title>
+		<authors>OK HOSTING</authors>
+		<owners>OK HOSTING</owners>
+		<description>
+			Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
 
-	  * Create your apps in PCL and run them everywhere, truly multi-platform (web included)
-	  * The UI is defined from code (XAML designer on the way)
-	  * 100% native controls are used in all platforms
-	  * You have only the "common" UI api surface among all platforms
-	  * Supports click, doble click and, for user input controls, value changed events
-	  * Using OKHOSTING.UI.CSS you can use CSS files to define the styles of your controls on all platforms (thanks to AngleSharp)
+			## Features
 
-	  ## Supported controls
+			* Create your apps in PCL and run them everywhere, truly multi-platform (web included)
+			* The UI is defined from code (XAML designer on the way)
+			* 100% native controls are used in all platforms
+			* You have only the "common" UI api surface among all platforms
+			* Supports click, doble click and, for user input controls, value changed events
+			* Using OKHOSTING.UI.CSS you can use CSS files to define the styles of your controls on all platforms (thanks to AngleSharp)
 
-	  ### Regular controls
+			## Supported controls
 
-	  * Autocomplete
-	  * Button
-	  * Calendar
-	  * CheckBox
-	  * HyperLink
-	  * Image
-	  * Label
-	  * ListPicker (equivalent to a DropDownList)
-	  * PasswordTextBox
-	  * TextArea
-	  * TextBox
+			### Regular controls
 
-	  ### Forms
+			* Autocomplete
+			* Button
+			* Calendar
+			* CheckBox
+			* HyperLink
+			* Image
+			* Label
+			* ListPicker (equivalent to a DropDownList)
+			* PasswordTextBox
+			* TextArea
+			* TextBox
 
-	  * Create forms for user data input/output
-	  * Create form fields for string, int, decimal, date, enum, bool, xml or any custom type you need
-	  * Create forms to execute a method
+			### Forms
 
-	  Please visit: https://github.com/okhosting/OKHOSTING.UI
-	</description>
-	<releaseNotes>
-	  * Renamed Platform.Create to Platform.CreateControl and dded Platform.CreateObject
-	</releaseNotes>
-	<summary>
-	  Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
-	</summary>
-	<language>en-US</language>
-	<projectUrl>http://okhosting.com/</projectUrl>
-	<iconUrl>http://okhosting.com/resources/uploads/2016/02/okhosting-150x150.png</iconUrl>
-	<requireLicenseAcceptance>true</requireLicenseAcceptance>
-	<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
-	<copyright>Copyright OK HOSTING SC 2015</copyright>
-	<dependencies>
-	  <dependency id="OKHOSTING.Data" version="1.0.4" />
-	</dependencies>
-	<references></references>
-	<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>
-  </metadata>
-  <files>
-	<file src="lib\" target="lib" />
-	<file src="tools\" target="tools" />
-	<file src="content\" target="content" />
-  </files>
+			* Create forms for user data input/output
+			* Create form fields for string, int, decimal, date, enum, bool, xml or any custom type you need
+			* Create forms to execute a method
+
+			Please visit: https://github.com/okhosting/OKHOSTING.UI
+		</description>
+		<releaseNotes>
+			* Added Forms.BinaryField for binary data
+		</releaseNotes>
+		<summary>
+			Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
+		</summary>
+		<language>en-US</language>
+		<projectUrl>http://okhosting.com/</projectUrl>
+		<iconUrl>http://okhosting.com/resources/uploads/2016/02/okhosting-150x150.png</iconUrl>
+		<requireLicenseAcceptance>true</requireLicenseAcceptance>
+		<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
+		<copyright>Copyright OK HOSTING SC 2015</copyright>
+		<dependencies>
+			<dependency id="OKHOSTING.Data" version="1.0.4" />
+		</dependencies>
+		<references></references>
+		<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>
+	</metadata>
+	<files>
+		<file src="..\..\src\PCL\OKHOSTING.UI\bin\Release\OKHOSTING.UI.dll" target="lib" />
+		<file src="..\..\src\PCL\OKHOSTING.UI\bin\Release\OKHOSTING.UI.pdb" target="lib" />
+		<file src="lib\" target="lib" />
+		<file src="tools\" target="tools" />
+		<file src="content\" target="content" />
+	</files>
 </package>

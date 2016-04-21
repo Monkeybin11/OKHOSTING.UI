@@ -26,27 +26,28 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// Adds a field for every argument that the DataMethos needs in order to be invoked
 		/// </summary>
 		/// <param name="method">DataMethod which parameters will be used as fields</param>
-		public virtual void AddFields(MethodInfo method)
+		public override void DataBind()
 		{
-			if (method == null) throw new ArgumentNullException("dmethod");
 			uint order = 0;
 
 			//add a field for each parameter
-			foreach (ParameterInfo param in method.GetParameters())
+			foreach (ParameterInfo param in Method.GetParameters())
 			{
 				FormField field;
 
-				field = FormField.CreateFieldFrom(param.ParameterType);
+				field = CreateFieldFrom(param.ParameterType);
 				
 				//set common values
 				field.Container = this;
 				field.Name = param.Name;
 				field.Required = !param.IsOptional && !param.IsOut;
-				field.CaptionControl.Text = new System.Resources.ResourceManager(method.DeclaringType).GetString(method.GetFriendlyFullName().Replace('.', '_') + '_' + param.Name);
+				field.CaptionControl.Text = new System.Resources.ResourceManager(Method.DeclaringType).GetString(Method.GetFriendlyFullName().Replace('.', '_') + '_' + param.Name);
 				field.SortOrder = order++;
 
 				Fields.Add(field);
 			}
+
+			base.DataBind();
 		}
 
 		/// <summary>
@@ -60,6 +61,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			{
 				yield return f.Value;
 			}
+		}
+
+		protected virtual FormField CreateFieldFrom(Type type)
+		{
+			return FormField.CreateFieldFrom(type);
 		}
 	}
 }

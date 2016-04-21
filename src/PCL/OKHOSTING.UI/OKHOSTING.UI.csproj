@@ -38,6 +38,7 @@
     <MultilingualFallbackLanguage>en</MultilingualFallbackLanguage>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controls\Forms\BinaryField.cs" />
     <Compile Include="Controls\Forms\BoolField.cs" />
     <Compile Include="Controls\Forms\MethodForm.cs" />
     <Compile Include="Controls\Forms\ListPickerField.cs" />

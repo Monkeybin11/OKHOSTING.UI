@@ -220,6 +220,12 @@ namespace OKHOSTING.UI.Controls.Forms
 				field = new StringField();
 			}
 
+			//byte[]
+			else if (type.Equals(typeof(byte[])))
+			{
+				field = new BinaryField();
+			}
+
 			//otherwise just create a textbox
 			else
 			{
