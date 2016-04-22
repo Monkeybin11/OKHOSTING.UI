@@ -60,7 +60,8 @@ namespace OKHOSTING.UI.Controls.Forms
 			foreach (System.Enum e in System.Enum.GetValues(ValueType))
 			{
 				//add item
-				ValueControl.Items.Add(Translator.Translate(e));
+				//ValueControl.Items.Add(Translator.Translate(e));
+				ValueControl.Items.Add(e.ToString());
 			}
 		}
 	}

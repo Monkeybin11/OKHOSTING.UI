@@ -22,7 +22,7 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			set
 			{
-				ValueControl.Value = ((int) value).ToString();
+				ValueControl.Value = value.ToString();
 			}
 		}
 

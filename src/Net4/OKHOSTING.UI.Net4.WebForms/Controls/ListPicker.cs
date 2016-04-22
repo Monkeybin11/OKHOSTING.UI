@@ -9,7 +9,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	{
 		public ListPicker()
 		{
-			base.AutoPostBack = true;
 		}
 
 		IList<string> IListPicker.Items
@@ -52,6 +51,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		protected override void OnPreRender(EventArgs e)
 		{
+			base.AutoPostBack = ValueChanged != null;
+
 			if (base.DataSource != null && base.Items.Count == 0)
 			{
 				base.DataBind();

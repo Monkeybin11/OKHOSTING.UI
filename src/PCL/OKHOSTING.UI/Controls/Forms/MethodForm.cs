@@ -41,7 +41,8 @@ namespace OKHOSTING.UI.Controls.Forms
 				field.Container = this;
 				field.Name = param.Name;
 				field.Required = !param.IsOptional && !param.IsOut;
-				field.CaptionControl.Text = new System.Resources.ResourceManager(Method.DeclaringType).GetString(Method.GetFriendlyFullName().Replace('.', '_') + '_' + param.Name);
+				//field.CaptionControl.Text = new System.Resources.ResourceManager(Method.DeclaringType).GetString(Method.GetFriendlyFullName().Replace('.', '_') + '_' + param.Name);
+				field.CaptionControl.Text = param.Name;
 				field.SortOrder = order++;
 
 				Fields.Add(field);
