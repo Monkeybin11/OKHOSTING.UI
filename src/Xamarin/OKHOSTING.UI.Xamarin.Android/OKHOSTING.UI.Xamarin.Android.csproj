@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0B4C160A-6164-4667-A34A-20D267E512B3}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
@@ -54,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
-      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+      <Project>{F9D654B5-6B7A-4573-B8C8-FD09B96C021B}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
   </ItemGroup>

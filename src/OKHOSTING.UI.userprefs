@@ -1,8 +1,22 @@
-﻿<Properties StartupItem="..\test\Xamarin\OKHOSTING.UI.Xamarin.Forms.Test.Droid\OKHOSTING.UI.Xamarin.Forms.Test.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_21" />
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupItem="../test/Xamarin/OKHOSTING.UI.Xamarin.Forms.Test/OKHOSTING.UI.Xamarin.Forms.Test.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Xamarin/OKHOSTING.UI.Xamarin.Mac/Platform.cs">
+    <Files>
+      <File FileName="../test/PCL/OKHOSTING.UI.Test/IndexController.cs" Line="5" Column="1" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WPF/Controls/CheckBox.cs" Line="4" Column="41" />
+      <File FileName="../test/Net4/OKHOSTING.UI.Net4.WebForms.Test/Properties/AssemblyInfo.cs" Line="2" Column="13" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Mac/Platform.cs" Line="5" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>Net4/OKHOSTING.UI.Net4.WPF/OKHOSTING.UI.Net4.WPF.csproj</String>
+    <String>../test/Net4/OKHOSTING.UI.Net4.WebForms.Test/OKHOSTING.UI.Net4.WebForms.Test.csproj</String>
+    <String>../test/Net4/OKHOSTING.UI.Net4.WinForms.Test/OKHOSTING.UI.Net4.WinForms.Test.csproj</String>
+    <String>Xamarin/OKHOSTING.UI.Xamarin.Mac/OKHOSTING.UI.Xamarin.Mac.csproj</String>
+    <String>Net4/OKHOSTING.UI.Net4.WinForms/OKHOSTING.UI.Net4.WinForms.csproj</String>
+  </DisabledProjects>
 </Properties>

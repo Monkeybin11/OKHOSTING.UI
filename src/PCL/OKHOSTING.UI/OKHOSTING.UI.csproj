@@ -124,21 +124,17 @@
     <XliffResource Include="MultilingualResources\OKHOSTING.UI.pt.xlf" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\OKHOSTING.Core.1.0.20\lib\OKHOSTING.Core.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\OKHOSTING.Data.1.0.12\lib\OKHOSTING.Data.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c">
       <HintPath>..\..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+    <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7">
       <HintPath>..\..\packages\Validation.2.2.8\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Validation.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
