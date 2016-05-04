@@ -58,6 +58,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			return e;
 		}
 
+		protected override void OnPreRender(EventArgs e)
+		{
+			InnerTextBox.AutoPostBack = ValueChanged != null;
+			base.OnPreRender(e);
+		}
+
 		#region IInputControl
 
 		public event EventHandler<string> ValueChanged;

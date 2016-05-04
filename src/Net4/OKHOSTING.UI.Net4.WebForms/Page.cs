@@ -96,11 +96,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 					updatedInputControls.Add(control);
 					((ICalendar) control).Value = DateTime.Parse(postedValue);
 				}
-				else if (control is CheckBox && ((ICheckBox)control).Value != (postedValue == "checked"))
-				{
-					updatedInputControls.Add(control);
-					((ICheckBox) control).Value = postedValue == "checked";
-				}
 				else if (control is ListPicker && ((IListPicker) control).Value != postedValue)
 				{
 					updatedInputControls.Add(control);
@@ -133,10 +128,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 				else if (control is Calendar)
 				{
 					((Calendar) control).RaiseValueChanged();
-				}
-				else if (control is CheckBox)
-				{
-					((CheckBox) control).RaiseValueChanged();
 				}
 				else if (control is ListPicker)
 				{
@@ -171,7 +162,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 				}
 			}
 
-			//raise label & image click events
+			//raise labelbutton, checkbox & image click events
 
 			string eventTarget = Request.Form["__EVENTTARGET"];
 			string eventArgument = Request.Form["__EVENTARGUMENT"];
@@ -181,13 +172,18 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				IControl control = (IControl) ContentHolder.FindControl(eventTarget);
 
-				if (control is LabelButton && eventTarget == control.Name)
+				if (control is LabelButton)
 				{
 					((LabelButton) control).Raise_Click();
 				}
-				else if (control is IImageButton && eventTarget == control.Name)
+				else if (control is IImageButton)
 				{
 					((ImageButton) control).Raise_Click();
+				}
+				else if (control is ICheckBox)
+				{
+					((ICheckBox) control).Value = !((ICheckBox) control).Value;
+					((CheckBox) control).RaiseValueChanged();
 				}
 			}
 		}

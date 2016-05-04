@@ -436,5 +436,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			return true;
 		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			AutoPostBack = ValueChanged != null;
+			base.OnPreRender(e);
+		}
 	}
 }

@@ -6,7 +6,7 @@ namespace OKHOSTING.UI.Test
 {
 	public class CheckboxController: Controller
 	{
-		ICheckBox cbxColor;
+		ICheckBox checkBox;
 		ILabel lblLabel;
 
 		public override void Start()
@@ -16,39 +16,27 @@ namespace OKHOSTING.UI.Test
 			IStack stack = Platform.Current.Create<IStack>();
 
 			lblLabel = Platform.Current.Create<ILabel>();
-			lblLabel.Text = "This is a label";
+			lblLabel.Text = "Click on the checkbox";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
-			cbxColor = Platform.Current.Create<ICheckBox>();
-			cbxColor.Name = "color";
-			cbxColor.Value = true;
-			stack.Children.Add(cbxColor);
-
-			IButton cmdChange = Platform.Current.Create<IButton>();
-			cmdChange.Text = "Change";
-			cmdChange.Click += CmdChange_Click;
-			stack.Children.Add(cmdChange);
+			checkBox = Platform.Current.Create<ICheckBox>();
+			checkBox.Value = true;
+			checkBox.ValueChanged += checkBox_ValueChanged;
+			stack.Children.Add(checkBox);
 
 			IButton cmdClose = Platform.Current.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
-			Platform.Current.Page.Title = "Test label";
+			Platform.Current.Page.Title = "Test checkbox";
 			Platform.Current.Page.Content = stack;
 		}
 
-		private void CmdChange_Click(object sender, EventArgs e)
+		private void checkBox_ValueChanged(object sender, bool e)
 		{
-			if(cbxColor.Value == true)
-			{
-				lblLabel.FontColor = new Color(1, 255, 0, 0);
-			}
-			else
-			{
-				lblLabel.FontColor = new Color(1, 0, 0, 0);
-			}
+			lblLabel.Text = "You changed the value to: " + ((ICheckBox) sender).Value;
 		}
 
 		private void CmdClose_Click(object sender, EventArgs e)

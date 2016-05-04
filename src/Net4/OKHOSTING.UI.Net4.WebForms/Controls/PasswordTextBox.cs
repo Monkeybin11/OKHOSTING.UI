@@ -261,6 +261,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		protected override void OnPreRender(EventArgs e)
+		{
+			AutoPostBack = ValueChanged != null;
+			base.OnPreRender(e);
+		}
+
 		/// <summary>
 		/// Does nothing since we manage state ourselves
 		/// </summary>

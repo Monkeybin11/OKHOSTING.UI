@@ -44,7 +44,6 @@ namespace OKHOSTING.UI.Test
 			//lblHyperLink.Click += (object sender, EventArgs e) => new HyperLinkController().Start();
 			grid.SetContent(4, 0, lblHyperLink);
 
-
 			ILabelButton lblCheckbox = Platform.Current.Create<ILabelButton>();
 			lblCheckbox.Text = "Checkbox";
 			lblCheckbox.Click += (object sender, EventArgs e) => new CheckboxController().Start();
