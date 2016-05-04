@@ -27,7 +27,8 @@ namespace OKHOSTING.UI
 			}
 			catch
 			{
-				return string.Format("{0}.{1}", type.Name, name);
+				//return string.Format("{0}.{1}", type.Name, name);
+				return name;
 			}
 		}
 

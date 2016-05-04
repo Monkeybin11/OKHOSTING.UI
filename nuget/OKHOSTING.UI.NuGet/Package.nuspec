@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>OKHOSTING.UI</id>
-		<version>1.0.14</version>
+		<version>1.0.15</version>
 		<title>OKHOSTING.UI</title>
 		<authors>OK HOSTING</authors>
 		<owners>OK HOSTING</owners>
@@ -43,7 +43,7 @@
 			Please visit: https://github.com/okhosting/OKHOSTING.UI
 		</description>
 		<releaseNotes>
-			* Added Forms.BinaryField for binary data
+			* Translator gives better default non-translations
 		</releaseNotes>
 		<summary>
 			Open source multi-platform UI framework. Create your apps once on PCL and have your UI generated on runtime for ASP.NET, Windows Forms, WPF, Linux (Mono + WinForms), Mac OS (Mono + WinForms and Xamarin.Mac), iOS, Android, Windows Phone (via Xamarin.Forms) and Windows Universal Platform.
