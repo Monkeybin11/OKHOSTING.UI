@@ -1,8 +1,4 @@
-﻿using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layout;
-using OKHOSTING.UI.Net4.WebForms.Controls;
-using OKHOSTING.UI.Net4.WebForms.Controls.Layout;
-using System;
+﻿using System;
 using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms
@@ -16,7 +12,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			T control = base.Create<T>();
 
 			//give a default name to all controls to allow events to be correclty triggered
-			control.Name = "ctr_" + Random.Next();
+			if (string.IsNullOrWhiteSpace(control.Name))
+			{
+				control.Name = "ctr_" + Random.Next();
+			}
 
 			return control;
 		}

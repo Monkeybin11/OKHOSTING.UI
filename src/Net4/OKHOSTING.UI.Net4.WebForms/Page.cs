@@ -50,7 +50,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
 				ContentHolder.ID = "phContent";
-				base.Form.Controls.Clear();
 				base.Form.Controls.Add(ContentHolder);
 			}
 
@@ -83,7 +82,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 				string postedValue = Request.Form[postedValueName];
 
 				//get control that corresponds to this input
-				IControl control = (IControl) ContentHolder.FindControl(postedValueName);
+				IControl control = ContentHolder.FindControl(postedValueName) as IControl;
+
+				if(control == null)
+				{
+					continue;
+				}
 
 				//update control's value
 				if (control is Autocomplete && ((IAutocomplete)control).Value != postedValue)
@@ -95,6 +99,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 				{
 					updatedInputControls.Add(control);
 					((ICalendar) control).Value = DateTime.Parse(postedValue);
+				}
+				else if (control is CheckBox && ((ICheckBox) control).Value != (postedValue == "on"))
+				{
+					updatedInputControls.Add(control);
+					((ICheckBox) control).Value = postedValue == "on";
 				}
 				else if (control is ListPicker && ((IListPicker) control).Value != postedValue)
 				{
@@ -129,6 +138,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 				{
 					((Calendar) control).RaiseValueChanged();
 				}
+				else if (control is CheckBox)
+				{
+					((CheckBox) control).RaiseValueChanged();
+				}
 				else if (control is ListPicker)
 				{
 					((ListPicker) control).RaiseValueChanged();
@@ -154,7 +167,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 				string postedValue = Request.Form[postedValueName];
 
 				//get control that corresponds to this input
-				IControl control = (IControl) ContentHolder.FindControl(postedValueName);
+				//get control that corresponds to this input
+				IControl control = ContentHolder.FindControl(postedValueName) as IControl;
+
+				if (control == null)
+				{
+					continue;
+				}
 
 				if (control is Button && postedValue == ((Button) control).Text)
 				{
@@ -172,15 +191,15 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				IControl control = (IControl) ContentHolder.FindControl(eventTarget);
 
-				if (control is LabelButton)
+				if (control is LabelButton && eventTarget == control.Name)
 				{
 					((LabelButton) control).Raise_Click();
 				}
-				else if (control is IImageButton)
+				else if (control is IImageButton && eventTarget == control.Name)
 				{
 					((ImageButton) control).Raise_Click();
 				}
-				else if (control is ICheckBox)
+				else if (control is ICheckBox && eventTarget == control.Name && !updatedInputControls.Contains(control)) //check updatedInputControls collection because checkbox is causing double event raising
 				{
 					((ICheckBox) control).Value = !((ICheckBox) control).Value;
 					((CheckBox) control).RaiseValueChanged();
@@ -246,6 +265,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			base.OnPreRender(e);
+		}
+
+		protected override void OnInit(EventArgs e)
+		{
+			base.OnInit(e);
+			EnsureChildControls();
 		}
 	}
 }

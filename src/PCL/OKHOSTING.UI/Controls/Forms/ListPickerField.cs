@@ -3,7 +3,7 @@
 namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
-	/// Base class for all fields that uses a single TextBox as ValueControl
+	/// Base class for all fields that uses a single ListPicker as ValueControl
 	/// </summary>
 	public abstract class ListPickerField : FormField
 	{

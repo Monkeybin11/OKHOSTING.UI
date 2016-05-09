@@ -36,7 +36,7 @@ namespace OKHOSTING.UI.Controls.Forms
 				{
 					if (value == null)
 					{
-						((IListPicker)ValueControl).Value = Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue;
+						((IListPicker) ValueControl).Value = Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue;
 					}
 					else
 					{

@@ -20,6 +20,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			set
 			{
 				base.DataSource = value;
+				Items.Clear();
 			}
 		}
 
@@ -56,6 +57,18 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			if (base.DataSource != null && base.Items.Count == 0)
 			{
 				base.DataBind();
+			}
+
+			if (this.Items.FindByValue(this.SelectedValue) == null)
+			{
+				string itemList = string.Empty;
+
+				foreach (var item in Items)
+				{
+					itemList += Environment.NewLine + ((System.Web.UI.WebControls.ListItem)item).Value;
+				}
+
+				throw new Exception(string.Format("Selected value {0} is not present in the list: {1}", SelectedValue, itemList));
 			}
 
 			base.OnPreRender(e);
