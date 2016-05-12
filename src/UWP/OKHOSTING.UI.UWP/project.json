@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
-    "OKHOSTING.Core": "1.0.20"
+    "OKHOSTING.Core": "1.0.22"
   },
   "frameworks": {
     "uap10.0": {}

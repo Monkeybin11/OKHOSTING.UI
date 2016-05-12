@@ -262,7 +262,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.20": {
+      "OKHOSTING.Core/1.0.22": {
         "dependencies": {
           "PCLCrypto": "2.0.14"
         },
@@ -2066,7 +2066,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.20": {
+      "OKHOSTING.Core/1.0.22": {
         "dependencies": {
           "PCLCrypto": "2.0.14"
         },
@@ -3778,7 +3778,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.20": {
+      "OKHOSTING.Core/1.0.22": {
         "dependencies": {
           "PCLCrypto": "2.0.14"
         },
@@ -5459,7 +5459,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.20": {
+      "OKHOSTING.Core/1.0.22": {
         "dependencies": {
           "PCLCrypto": "2.0.14"
         },
@@ -7174,7 +7174,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.20": {
+      "OKHOSTING.Core/1.0.22": {
         "dependencies": {
           "PCLCrypto": "2.0.14"
         },
@@ -8855,7 +8855,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.20": {
+      "OKHOSTING.Core/1.0.22": {
         "dependencies": {
           "PCLCrypto": "2.0.14"
         },
@@ -10570,7 +10570,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.20": {
+      "OKHOSTING.Core/1.0.22": {
         "dependencies": {
           "PCLCrypto": "2.0.14"
         },
@@ -12642,14 +12642,16 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "OKHOSTING.Core/1.0.20": {
-      "sha512": "cwAoWNrBxym4Ke6Z+xQQdNv6mnGKBZUWDfsA9aHyNL7kVrMFiKCJuoArM9hFm7emfaSH9Izu8Vtx5w6Pmmg0lg==",
+    "OKHOSTING.Core/1.0.22": {
+      "sha512": "H3L8V3nTJofXnjbUNbz4fa49Khe7Mxyg5y/ojkt/wcWq5WYppUaw6DyplOg4sm1KTL6VB8BPJNmzoracA+Qrmw==",
       "type": "package",
       "files": [
-        "OKHOSTING.Core.1.0.20.nupkg.sha512",
+        "OKHOSTING.Core.1.0.22.nupkg.sha512",
         "OKHOSTING.Core.nuspec",
+        "content/_._",
         "lib/OKHOSTING.Core.dll",
         "lib/OKHOSTING.Core.pdb",
+        "lib/_._",
         "lib/net45/OKHOSTING.Core.Net4.dll",
         "lib/net45/OKHOSTING.Core.Net4.pdb",
         "lib/net45/OKHOSTING.Core.dll",
@@ -15606,7 +15608,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0",
-      "OKHOSTING.Core >= 1.0.20"
+      "OKHOSTING.Core >= 1.0.22"
     ],
     "UAP,Version=v10.0": []
   }

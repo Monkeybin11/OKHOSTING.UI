@@ -26,6 +26,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IInputControl
 
+		protected string _SelectedValue;
+
 		string IInputControl<string>.Value
 		{
 			get
@@ -34,6 +36,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				_SelectedValue = value;
 				base.SelectedValue = value;
 			}
 		}
@@ -57,6 +60,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			if (base.DataSource != null && base.Items.Count == 0)
 			{
 				base.DataBind();
+
+				if (string.IsNullOrWhiteSpace(SelectedValue) && string.IsNullOrWhiteSpace(_SelectedValue))
+				{
+					SelectedValue = ((IEnumerable<string>) DataSource).FirstOrDefault()?.ToString();
+				}
+				else if (string.IsNullOrWhiteSpace(SelectedValue) && !string.IsNullOrWhiteSpace(_SelectedValue))
+				{
+					SelectedValue = _SelectedValue;
+				}
 			}
 
 			if (this.Items.FindByValue(this.SelectedValue) == null)

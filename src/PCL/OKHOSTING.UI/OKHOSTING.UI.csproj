@@ -125,8 +125,9 @@
     <XliffResource Include="MultilingualResources\OKHOSTING.UI.pt.xlf" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\OKHOSTING.Core.1.0.20\lib\OKHOSTING.Core.dll</HintPath>
+    <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OKHOSTING.Core.1.0.22\lib\OKHOSTING.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\OKHOSTING.Data.1.0.12\lib\OKHOSTING.Data.dll</HintPath>

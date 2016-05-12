@@ -6,6 +6,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	public class Label : System.Web.UI.WebControls.Label, ILabel
 	{
+		private string OriginalText;
+
+		/// <summary>
+		/// Gets or sets the text of this Label. Also converts from text to html formated text 
+		/// </summary>
+		public override string Text
+		{
+			get
+			{
+				return OriginalText;
+			}
+			set
+			{
+				OriginalText = value;
+				base.Text = Core.StringExtensions.TextToHtml(value);
+			}
+		}
+
 		#region IControl
 
 		string IControl.Name
