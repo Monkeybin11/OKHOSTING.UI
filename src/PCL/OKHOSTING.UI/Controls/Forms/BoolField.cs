@@ -20,7 +20,7 @@ namespace OKHOSTING.UI.Controls.Forms
 				{
 					string val = ((IListPicker) ValueControl).Value;
 
-					if (string.IsNullOrWhiteSpace(val))
+					if (string.IsNullOrWhiteSpace(val) || val == Resources.Strings.OKHOSTING_UI_Controls_Forms_EmptyValue)
 					{
 						return null;
 					}
