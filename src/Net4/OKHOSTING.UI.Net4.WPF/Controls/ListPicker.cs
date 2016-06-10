@@ -39,14 +39,15 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		string IInputControl<string>.Value
-		{
-			get
+        {
+            get
+            {
+                var cbi = (System.Windows.Controls.ComboBoxItem) base.SelectedItem;
+                return cbi.Content as string;
+            }
+            set
 			{
-				return (string) base.SelectedItem;
-			}
-			set
-			{
-				base.SelectedItem = value;
+                base.SelectedItem = value;
 			}
 		}
 
