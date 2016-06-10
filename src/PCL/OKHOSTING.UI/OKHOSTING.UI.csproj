@@ -126,11 +126,12 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Core.1.0.22\lib\OKHOSTING.Core.dll</HintPath>
+      <HintPath>..\..\packages\OKHOSTING.Core.1.0.23\lib\OKHOSTING.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\OKHOSTING.Data.1.0.12\lib\OKHOSTING.Data.dll</HintPath>
+    <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OKHOSTING.Data.1.0.16\lib\OKHOSTING.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c">
       <HintPath>..\..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
