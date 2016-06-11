@@ -4,10 +4,25 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
+	/// <summary>
+	/// It is a control that represents a button.
+	/// <para xml:lang="es">Es un control que representa un boton</para>
+	/// </summary>
 	public class Button : System.Web.UI.WebControls.Button, IButton
 	{
+		/// <summary>
+		/// Occurs when click.
+		/// <para xml:lang="es">Ocurre cuando hay un evento clic de un boton.</para>
+		/// </summary>
 		public new event EventHandler Click;
 
+		/// <summary>
+		/// Raises the click.
+		/// <para xml:lang="es">Es el evento que proboca el clic</para>
+		/// </summary>
+		/// <returns>The click.
+		/// <para xml:lang="es">El clic.</para>
+		/// </returns>
 		protected internal virtual void Raise_Click()
 		{
 			if (Click != null)
@@ -18,6 +33,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the IC ontrol.
+		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
+		/// </summary>
+		/// <value>The name of the IC ontrol.
+		/// <para xml:lang="es">El nombre del control.</para>
+		/// </value>
 		string IControl.Name
 		{
 			get
@@ -30,6 +52,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the color of the IC ontrol. background.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
+		/// </summary>
+		/// <value>The color of the IC ontrol. background.
+		/// <para xml:lang="es">El color de fondo del control.</para>
+		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -42,6 +71,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the color of the IC ontrol. border.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
+		/// </summary>
+		/// <value>The color of the IC ontrol. border.
+		/// <para xml:lang="es">El color del borde del control.</para>
+		/// </value>
 		Color IControl.BorderColor
 		{
 			get
@@ -54,6 +90,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the IC ontrol..
+		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
+		/// </summary>
+		/// <value>The width of the IC ontrol.
+		/// <para xml:lang="es">El ancho del control</para>
+		/// </value>
 		double? IControl.Width
 		{
 			get
@@ -78,6 +121,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the height of the IC ontrol..
+		/// <para xml:lang="es">Obtiene o establece la altura del control</para>
+		/// </summary>
+		/// <value>The height of the IC ontrol.
+		/// <para xml:lang="es">La altura del control.</para>
+		/// </value>
 		double? IControl.Height
 		{
 			get
@@ -102,6 +152,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the IC ontrol. margin.
+		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
+		/// </summary>
+		/// <value>The IC ontrol. margin.
+		/// <para xml:lang="es">El margen del control.</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
@@ -125,6 +182,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the IC ontrol. border.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// </summary>
+		/// <value>The width of the IC ontrol. border.</value>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -148,17 +210,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the IC ontrol. horizontal alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
+		/// </summary>
+		/// <value>The IC ontrol. horizontal alignment.
+		/// <para xml:lang="es">La alineacion horizontal del control.</para>
+		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
 
+				//if not horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -187,17 +258,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the IC ontrol. vertical alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacio vertical del control</para>
+		/// </summary>
+		/// <value>The IC ontrol. vertical alignment.
+		/// <para xml:lang="es">La laineacion vertical del control.</para>
+		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
 
+				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -228,9 +308,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitraio que se puede usar para almacenar informacion personalizada sobre este elemento</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no tiene ningun valor predeterminado.</para>
 		/// </remmarks>
 		object IControl.Tag
 		{
@@ -241,6 +323,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region ITextControl
 
+		/// <summary>
+		/// Gets or sets the color of the IT ext control. font.
+		/// <para xml:lang="es">Obtiene o establece el color del texto del control.</para>
+		/// </summary>
+		/// <value>The color of the IT ext control. font.
+		/// <para xml:lang="es">El color del texto del control.</para>
+		/// </value>
 		Color ITextControl.FontColor
 		{
 			get
@@ -253,6 +342,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. font family.
+		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del control.</para>
+		/// </summary>
+		/// <value>IT ext control. font family.
+		/// <para xml:lang="es">La tipografia del texto del control.</para>
+		/// </value>
 		string ITextControl.FontFamily
 		{
 			get
@@ -265,6 +361,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the size of the IT ext control. font.
+		/// <para xml:lang="es">Obtiene o establece el tamaño del texto del control.</para>
+		/// </summary>
+		/// <value>The size of the IT ext control. font.
+		/// <para xml:lang="es">El tamaño del texto del control.</para>
+		/// </value>
 		double ITextControl.FontSize
 		{
 			get
@@ -277,6 +380,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. bold.
+		/// <para xml:lang="es">Obtiene o establece si existe texto en negritas en el control</para>
+		/// </summary>
+		/// <value>IT ext control. bold.
+		/// <para xml:lang="es">El texto en negritas del control.</para>
+		/// </value>
 		bool ITextControl.Bold
 		{
 			get
@@ -289,6 +399,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. italic.
+		/// <para xml:lang="es">Obtiene o establece si el control contiene texto en italica.</para>
+		/// </summary>
+		/// <value>IT ext control. italic.
+		/// <para xml:lang="es">El texto del control en italica.</para>
+		/// </value>
 		bool ITextControl.Italic
 		{
 			get
@@ -301,6 +418,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. underline.
+		/// <para xml:lang="es">Obtiene o establece si el control contiene texto subrrayado.</para>
+		/// </summary>
+		/// <value>IT ext control. underline.
+		/// <para xml:lang="es">El texto subrayado del control</para>
+		/// </value>
 		bool ITextControl.Underline
 		{
 			get
@@ -313,6 +437,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. text horizontal alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto</para>
+		/// </summary>
+		/// <value>IT ext control. text horizontal alignment.
+		/// <para xml:lang="es">La alineacion horizontal del texto</para>
+		/// </value>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
 
@@ -320,11 +451,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
 
+				//if not text horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the text horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -353,17 +486,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. text vertical alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del texto</para>
+		/// </summary>
+		/// <value>IT ext control. text vertical alignment.
+		/// <para xml:lang="es">La alineacion vertical del texto.</para>
+		/// </value>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
 
+				//if not text vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -392,6 +534,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. text padding.
+		/// <para xml:lang="es">Obtiene o establece el padding en el texto del control</para>
+		/// </summary>
+		/// <value>IT ext control. text padding.
+		/// <para xml:lang="es">El padding del texto del control.</para>
+		/// </value>
 		Thickness ITextControl.TextPadding
 
 		{

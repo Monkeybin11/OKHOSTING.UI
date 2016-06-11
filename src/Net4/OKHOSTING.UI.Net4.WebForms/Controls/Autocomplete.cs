@@ -4,13 +4,40 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
+	/// <summary>
+	/// Represents a control that is autocomplete.
+	/// <para xml:lang="es">Representa un control que es autocomplit.</para>
+	/// </summary>
 	public class Autocomplete : System.Web.UI.WebControls.Panel, IAutocomplete
 	{
+		/// <summary>
+		/// The inner text box.
+		/// <para xml:lang="es">El cuadro de tecxto</para>
+		/// </summary>
 		protected readonly TextBox InnerTextBox;
+
+		/// <summary>
+		/// The inner auto complete extender.
+		/// <para xml:lang="es">La extencion del control autocomplete</para>
+		/// </summary>
 		protected readonly AjaxControlToolkit.AutoCompleteExtender InnerAutoCompleteExtender;
+
+		/// <summary>
+		/// The inner watermark extender.
+		/// <para xml:lang="es">El texto con marca de agua del control.</para>
+		/// </summary>
 		protected readonly AjaxControlToolkit.TextBoxWatermarkExtender InnerWatermarkExtender;
+
+		/// <summary>
+		/// The session identifier.
+		/// <para xml:lang="es">El identificador de la sesión</para>
+		/// </summary>
 		protected readonly string SessionId;
 
+		/// <summary>
+		/// Initializes a new instance of the OKHOSTING.UI.Net4.WebForms.Controls.Autocomplete class.
+		/// <para xml:alng="es">Inicializa una nueva instacia de la clase OKHOSTING.UI.Net4.WebForms.Controls.Autocomplete</para>
+		/// </summary>
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
@@ -43,9 +70,23 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			OKHOSTING.UI.Session.Current[SessionId] = this;
 			InnerAutoCompleteExtender.ContextKey = SessionId;
 		}
-		
+
+		/// <summary>
+		/// Occurs when searching.
+		/// <para xml:lang="es">Evento que ocurre al momento de buscar.</para>
+		/// </summary>
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
 
+		/// <summary>
+		/// IAs the utocomplete. on searching.
+		/// <para xml:lang="es">Es la funcion de autocompletar al hacer la busqueda</para>
+		/// </summary>
+		/// <returns>The utocomplete. on searching.
+		/// <para xml:lang="es">El autocompletar en la busqueda.</para>
+		/// </returns>
+		/// <param name="text">Text.
+		/// <para xml:lang="es">El texto.</para>
+		/// </param>
 		AutocompleteSearchEventArgs IAutocomplete.OnSearching(string text)
 		{
 			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
@@ -58,6 +99,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			return e;
 		}
 
+		/// <summary>
+		/// Ons the pre render.
+		/// <para xml:lang="es">Es el metodo que se ejectua antes de generar el control si es que hay un valor cambiado.</para>
+		/// </summary>
+		/// <param name="e">E.
+		/// <para xml:lang="es">Eventos del objeto</para>
+		/// </param>
 		protected override void OnPreRender(EventArgs e)
 		{
 			InnerTextBox.AutoPostBack = ValueChanged != null;
@@ -66,8 +114,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IInputControl
 
+		/// <summary>
+		/// Occurs when value changed.
+		/// <para xml:lang="es">Es un evento que ocurre cuando se cambia el valor del texto</para>
+		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
+		/// <summary>
+		/// Gets or sets the II nput control string value.
+		/// <para xml:lang="es">Obtiene o establece el valor de la cadena en el control de entrada</para>
+		/// </summary>
+		/// <value>The II nput control string value.
+		/// <para xml:lang="es">El valor de la cadena del contro,l de entrada</para>
+		/// </value>
 		string IInputControl<string>.Value
 		{
 			get
@@ -80,6 +139,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Raises the value changed.
+		/// <para xml:lang="es">Detecta si hay un valor cambiado al momento de hacer el postback</para>
+		/// </summary>
+		/// <returns>The value changed.
+		/// <para xml:lang="es">El valor cambiado.</para>
+		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
 			if (ValueChanged != null)
@@ -92,6 +158,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the IC ontrol.
+		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
+		/// </summary>
+		/// <value>The name of the IC ontrol.
+		/// <para xml:lang="es">El nombre del control.</para>
+		/// </value>
 		string IControl.Name
 		{
 			get
@@ -104,6 +177,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the color of the IC ontrol. background.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
+		/// </summary>
+		/// <value>The color of the IC ontrol. background.
+		/// <para xml:lang="es">El color de fondo del control.</para>
+		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -116,6 +196,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the color of the IC ontrol. border.
+		/// <para xml:lang="es">obtiene o establece el color del borde del control.</para>
+		/// </summary>
+		/// <value>The color of the IC ontrol. border.
+		/// <para xml:lang="es">El color del borde del control</para>
+		/// </value>
 		Color IControl.BorderColor
 		{
 			get
@@ -128,6 +215,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the IC ontrol.
+		/// <para xml:lang="es">Obtiene o establece el ancho del control</para>
+		/// </summary>
+		/// <value>The width of the IC ontrol.
+		/// <para xml:lang="es">El ancho del control</para>
+		/// </value>
 		double? IControl.Width
 		{
 			get
@@ -152,6 +246,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the height of the IC ontrol.
+		/// <para xml:lang="es">Obtiene o establece la altura del control.</para>
+		/// </summary>
+		/// <value>The height of the IC ontrol.
+		/// <para xml:lang="es">La altura del control</para>
+		/// </value>
 		double? IControl.Height
 		{
 			get
@@ -176,6 +277,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the IC ontrol. margin.
+		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
+		/// </summary>
+		/// <value>The IC ontrol. margin.
+		/// <para xml:lang="es">El margen del control.</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
@@ -199,6 +307,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the IC ontrol. border.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// </summary>
+		/// <value>The width of the IC ontrol. border.
+		/// <para xml:lang="es">El ancho del borde del control.</para>
+		/// </value>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -222,17 +337,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the IC ontrol. horizontal alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
+		/// </summary>
+		/// <value>The IC ontrol. horizontal alignment.
+		/// <para xml:lang="es">La alineacion horizontal del control</para>
+		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
 				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
 
+				//if not horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -261,17 +385,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the IC ontrol. vertical alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del cvontrol</para>
+		/// </summary>
+		/// <value>The IC ontrol. vertical alignment.
+		/// <para xml:lang="es">La alineacion vertical del control</para>
+		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
 				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
 
+				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -302,9 +435,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.</para>
 		/// </remmarks>
 		object IControl.Tag
 		{
@@ -315,6 +450,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region ITextControl
 
+		/// <summary>
+		/// Gets or sets the color of the IT ext control. font.
+		/// <para xml:lang="es">Obtiene o establece el color del texto del control.</para>
+		/// </summary>
+		/// <value>The color of the IT ext control. font.
+		/// <para xml:lang="es">El color del texto del control.</para>
+		/// </value>
 		Color ITextControl.FontColor
 		{
 			get
@@ -327,6 +469,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. font family.
+		/// <para xml:alng="es">Obtiene o establece la tipografia del texto del control.</para>
+		/// </summary>
+		/// <value>Tipografia del texto del control.</value>
 		string ITextControl.FontFamily
 		{
 			get
@@ -339,6 +486,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the size of the IT ext control. font.
+		/// <para xml:lang="es">Obtiene o establece el tamaño del texto del control</para>
+		/// </summary>
+		/// <value>The size of the IT ext control. font.
+		/// <para xml:lamg="es">El tamaño del texto del control.</para>
+		/// </value>
 		double ITextControl.FontSize
 		{
 			get
@@ -351,6 +505,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. bold.
+		/// <para xml:lang="es">Obtiene o establece la existencia del texto del control en negritas</para>
+		/// </summary>
+		/// <value>IT ext control. bold.
+		/// <para xml:lang="es">Texto en negritas del control.</para>
+		/// </value>
 		bool ITextControl.Bold
 		{
 			get
@@ -363,6 +524,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. italic.
+		/// <para xml:lang="es">Obtiene o establece la existencia de texto en italica.</para>
+		/// </summary>
+		/// <value>IT ext control. italic.
+		/// <para xml:lang="es">Texto del control en italica.</para>
+		/// </value>
 		bool ITextControl.Italic
 		{
 			get
@@ -375,6 +543,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. underline.
+		/// <para xml:lang="es">Obtiene o establece el texto subrayado en el control.</para>
+		/// </summary>
+		/// <value>IT ext control. underline.
+		/// <para xml:lang="es">Texto subrayado en el control.</para>
+		/// </value>
 		bool ITextControl.Underline
 		{
 			get
@@ -387,6 +562,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. text horizontal alignment.
+		/// <para xml:lang="es">Obtiene o establece la laineacion horizontal del texto del control.</para>
+		/// </summary>
+		/// <value>IT ext control. text horizontal alignment.
+		/// <para xml:lang="es">La alineacion horizontal del texto del control.</para>
+		/// </value>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
 
@@ -394,11 +576,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
 
+				//if not text horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the text horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -427,17 +611,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. text vertical alignment.
+		/// <para xml:lang="es">Obtiene o establece la laineacion vertical del texto del control.</para>
+		/// </summary>
+		/// <value>IT ext control. text vertical alignment.
+		/// <para xml:lang="es">La alineacion vertical del texto del control</para>
+		/// </value>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
 			get
 			{
 				string cssClass = InnerTextBox.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
 
+				//if not text vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -466,6 +659,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. text padding.
+		/// <para xml:lang="es">Obtiene o establece la existencia de padding del texto del control</para>
+		/// </summary>
+		/// <value>IT ext control. text padding.
+		/// <para xml:lang="es">El padding del texto del control.</para>
+		/// </value>
 		Thickness ITextControl.TextPadding
 		{
 			get
@@ -489,6 +689,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Represents the base class for classes containing event data and provides a value to use in events that do not include event data
+		/// <para xml:lang="es">Representa la clase base para las clases que contienen datos de eventos y proporciona 
+		/// un valor para utilizar en los eventos que no incluyen datos de evento.</para>
+		/// </summary>
 		private class EventArgs<T>
 		{
 			public EventArgs()

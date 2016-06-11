@@ -627,7 +627,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 				}
 			}
 
-			/// <para>.</para>
 			/// <summary>
 			/// Determines the index of a specific item in the current instance.
 			/// <para xml:lang="es">Determina el indice de un control especificado en el panel actual.</para>
@@ -696,7 +695,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// Gets the enumerator of the controls natives content in the panel.
 			/// <para xml:lang="es">Obtiene la enumeracion de los controles nativos contenidos en el panel.</para>
 			/// </summary>
-			/// <returns>The enumerator.</returns>
+			/// <returns>The enumerator.
+			/// <para xml:lang="es">El enumerador</para>
+			/// </returns>
 			IEnumerator IEnumerable.GetEnumerator()
 			{
 				return GetEnumerator();
