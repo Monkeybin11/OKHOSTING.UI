@@ -5,6 +5,9 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
+    /// <summary>
+    /// Representa una imagen
+    /// </summary>
 	public class Image : System.Web.UI.WebControls.Image, IImage
 	{
 		#region IControl

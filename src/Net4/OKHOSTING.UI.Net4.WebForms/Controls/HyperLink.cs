@@ -414,6 +414,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the TextHorizontalAlignment of the HiperLink.
+        /// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del hiperlink</para>
+        /// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
 
@@ -421,12 +425,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
 
-				if (string.IsNullOrWhiteSpace(cssClass))
+                //if not text horizontal alignment is provided, the alignment back to the left.
+                if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
-				if (cssClass.EndsWith("left"))
+                //Verify the text horizontal alignment provided.
+                if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
 				}
@@ -454,18 +460,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the TextVerticalAlignment of the HiperLink.
+        /// <para xml:lang="es">Obtiene o establece la alineación vertical del hiperlink.</para>
+        /// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
 
-				if (string.IsNullOrWhiteSpace(cssClass))
+                //if not text vertical alignment is provided, the alignment back to the top.
+                if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
-				if (cssClass.EndsWith("top"))
+                //Verify the vertical alignment provided.
+                if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
 				}
@@ -493,6 +505,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+        /// <summary>
+        /// Gets or sets the padding text of the HiperLink.
+        /// <para xml:lang="es">obtiene o establece el padding del texto del hiperlink.</para>
+        /// </summary>
 		Thickness ITextControl.TextPadding
 		{
 			get
@@ -516,9 +532,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		#endregion
+        #endregion
 
-		public Uri Uri
+        /// <summary>
+        /// Gets or sets the address that will reference the hyperlink.
+        /// <para xml:lang="es">Obtiene o establece la direccion a la que hara referencia el hiperlink.</para>
+        /// </summary>
+        public Uri Uri
 		{
 			get
 			{
