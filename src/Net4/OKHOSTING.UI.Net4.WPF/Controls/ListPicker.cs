@@ -42,8 +42,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         {
             get
             {
-                var cbi = (System.Windows.Controls.ComboBoxItem) base.SelectedItem;
-                return cbi.Content as string;
+                return (string)base.SelectedItem;
             }
             set
 			{
