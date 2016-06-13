@@ -420,9 +420,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets IT ext control. text horizontal alignment.
-		/// <para xml:lang="es">Obtiene o establece </para>
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del control</para>
 		/// </summary>
-		/// <value>IT ext control. text horizontal alignment.</value>
+		/// <value>IT ext control. text horizontal alignment.
+		/// <para xml:lang="es">La alineacion horizontal del texto del control.</para>
+		/// </value>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
 
@@ -430,11 +432,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
 
+				//if not text horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the text horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -463,17 +467,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets IT ext control. text vertical alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion verical del texto del control.</para>
+		/// </summary>
+		/// <value>IT ext control. text vertical alignment.
+		/// <para xml:lang="es">La alineacion vertical del texto del control.</para>
+		/// </value>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
 
+				//if not text vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -502,6 +515,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the padding in the text control
+		/// <para xml:lang="es">Obtiene o establece el padding en el texto del control</para>
+		/// </summary>
+		/// <value>The OKHOSTING . user interface . controls. IT ext control. text padding.
+		/// <para xml:lang="es">El padding del texto del control.</para>
+		/// </value>
 		Thickness ITextControl.TextPadding
 		{
 			get
@@ -529,6 +549,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IInputControl
 
+		/// <summary>
+		/// Gets or sets the OKHOSTING . user interface . controls. II nput control< system. date time?>. value.
+		/// </summary>
+		/// <value>The OKHOSTING . user interface . controls. II nput control< system. date time?>. value.</value>
 		DateTime? IInputControl<DateTime?>.Value
 		{
 			get
@@ -544,8 +568,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Occurs when value changed.
+		/// </summary>
 		public event EventHandler<DateTime?> ValueChanged;
 
+		/// <summary>
+		/// Raises the value changed.
+		/// </summary>
+		/// <returns>The value changed.</returns>
 		protected internal void RaiseValueChanged()
 		{
 			if (ValueChanged != null)

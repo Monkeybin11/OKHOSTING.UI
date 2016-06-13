@@ -4,10 +4,21 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
+	/// <summary>
+	/// It is a control that represents a checkbox
+	/// <para xml:lang="es">Es un control que representa un checkbox</para>
+	/// </summary>
 	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox
 	{
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the checkbox
+		/// <para xml:lang="es">Obtiene o establece el nombre del checkbox</para>
+		/// </summary>
+		/// <value>The name of the checkbox.
+		/// <para xml:lang="es">El nombre del checkbox</para>
+		/// </value>
 		string IControl.Name
 		{
 			get
@@ -20,6 +31,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the background of the checkbox
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del checkbox</para>
+		/// </summary>
+		/// <value>The background of the checkbox.
+		/// <para xml:lang="es">El color de fondo del checkbox</para>
+		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -32,6 +50,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BorderColor of the checkbox
+		/// <para xml:lang="es">Obtiene o establece el color del borde del checkbox</para>
+		/// </summary>
+		/// <value>The BorderColor of the checkbox.
+		/// <para xml:lang="es">El color del borde del checkbox.</para>
+		/// </value>
 		Color IControl.BorderColor
 		{
 			get
@@ -44,6 +69,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the checkbox.
+		/// <para xml:lang="es">Obtiene o establece el ancho del checkbox</para>
+		/// </summary>
+		/// <value>The width of the checkbox.
+		/// <para xml:lang="es">El ancho del checkbox.</para>
+		/// </value>
 		double? IControl.Width
 		{
 			get
@@ -68,6 +100,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the height the checkbox.
+		/// <para xml:lang="es">Obtiene o establece la altura del checkbox</para>
+		/// </summary>
+		/// <value>The height of the ckeckbox.
+		/// <para xml:lang="es">La altura del checkbox</para>
+		/// </value>
 		double? IControl.Height
 		{
 			get
@@ -92,6 +131,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the margin of the checkbox
+		/// <para xml:lang="es">Obtiene o establece el margen del checkbox</para>
+		/// </summary>
+		/// <value>The margin of the checkbox.
+		/// <para xml:lang="es">El margen del checkbox.</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
@@ -115,6 +161,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BorderWidth of the checkbox.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del checkbox</para>
+		/// </summary>
+		/// <value>The BorderWidth of the checkbox.
+		/// <para xml:lang="es">El ancho del borde del checkbox </para>
+		/// </value>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -138,17 +191,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the horizontalalignment of the checkbox.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del checkbox</para> 
+		/// </summary>
+		/// <value>The horizontalalignment of the checkbox.</value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
 
+				//if not horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -177,17 +237,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the verticalalignment of the checkbox.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del checkbox</para>
+		/// </summary>
+		/// <value>The verticalalignment of the checkbox.</value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
 
+				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -218,9 +285,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">
+		/// Regresa el valor previsto. Esta propiedad no tiene ningun valor predeterminado.
+		/// </para>
 		/// </remmarks>
 		object IControl.Tag
 		{
@@ -231,6 +302,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region ITextControl
 
+		/// <summary>
+		/// Gets or sets the fontcolor of the Checkbox
+		/// <para xml:lang="es">Obtiene o establece el color de la fuente del checkbox</para>
+		/// </summary>
+		/// <value>The fontcolor of the checkbox.</value>
 		Color ITextControl.FontColor
 		{
 			get
@@ -243,6 +319,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets of the FontFamily of the checkbox.
+		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del checkbox</para>
+		/// </summary>
+		/// <value>The FontFamily of the checkbox.
+		/// <para xml:lang="es">La tipografia del texto del checkbox</para>
+		/// </value>
 		string ITextControl.FontFamily
 		{
 			get
@@ -255,6 +338,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the FontSize of checkbox.
+		/// <para xml:lang="es">Obtiene o establece el tamaño del texto del checkbox</para>
+		/// </summary>
+		/// <value>The fontsize of the checkbox.
+		/// <para xml:lang="es">El tamaño del texto del checkbox</para>
+		/// </value>
 		double ITextControl.FontSize
 		{
 			get
@@ -267,6 +357,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the text checkbox bold.
+		/// <para xml:lang="es">Obtiene  establece el texto en negritas del checkbox</para>
+		/// </summary>
+		/// <value>The checkbox text in bold.
+		/// <para xml:lang="es">El texto en negritas del checkbox</para>
+		/// </value>
 		bool ITextControl.Bold
 		{
 			get
@@ -279,6 +376,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets text checkbox italic.
+		/// <para xml:lamg="es">Obtiene o establece el texto en italica del checkbox</para> 
+		/// </summary>
+		/// <value>Text checkbox italic.
+		/// <para xml:lang="es">El texto enitalica del checkbox</para>
+		/// </value>
 		bool ITextControl.Italic
 		{
 			get
@@ -291,6 +395,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets text underline of the checkbox.
+		/// <para xml:lang="es">Obtiene o establece el texto subrayado del checkbox</para>
+		/// </summary>
+		/// <value>The text underline of the checkbox.</value>
 		bool ITextControl.Underline
 		{
 			get
@@ -303,6 +412,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets text ckeckbox. text horizontal alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del checkbox</para>
+		/// </summary>
+		/// <value>Text checkbox. text horizontal alignment.
+		/// <para xml:lang="es">La alineacion horizontal del texto del checkbox.</para>
+		/// </value>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
 
@@ -310,11 +426,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
 
+				//if not text horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the text horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -343,17 +461,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the TextVerticalAlignment of the checkbox.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del texto del checkbox</para>
+		/// </summary>
+		/// <value>The TextVerticalAlingnment of the checkbox.</value>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
 
+				//if not text vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -382,6 +507,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the padding in the text checkbox.
+		/// <para xml:lang="es">Obtiene o establece el padding del texto del checkbox.</para>
+		/// </summary>
+		/// <value>The padding in the text checkbox.
+		/// <para xml:lang="es">El padding del texto del checkbox</para>
+		/// </value>
 		Thickness ITextControl.TextPadding
 		{
 			get
@@ -407,6 +539,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		/// <summary>
+		/// Gets or sets the input value of the checkbox
+		/// <para xml:lang="es">Obtiene o establece el valor de entrada del checkbox</para>
+		/// </summary>
+		/// <value>The value of the checkbox.
+		/// <para xml:lang="es">El valor del checkbox</para>
+		/// </value>
 		bool IInputControl<bool>.Value
 		{
 			get
@@ -419,8 +558,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Occurs when value changed.
+		/// <para xml:lang="es">Se produce cuando cambia el valor</para>
+		/// </summary>
 		public event EventHandler<bool> ValueChanged;
 
+		/// <summary>
+		/// Raises the value changed.
+		/// <para xml:lang="es">Pone el valor cambiado</para>
+		/// </summary>
+		/// <returns>The value changed.
+		/// <para xml:lang="es">El valor cambiado.</para>
+		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
 			if (ValueChanged != null)
@@ -437,6 +587,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			return true;
 		}
 
+		/// <summary>
+		/// Ons the pre render.
+		/// </summary>
+		/// <returns>The pre render.</returns>
+		/// <param name="e">E.</param>
 		protected override void OnPreRender(EventArgs e)
 		{
 			AutoPostBack = ValueChanged != null;

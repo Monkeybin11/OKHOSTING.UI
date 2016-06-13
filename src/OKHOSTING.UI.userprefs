@@ -1,9 +1,12 @@
 ﻿<Properties StartupItem="../test/Xamarin/OKHOSTING.UI.Xamarin.Forms.Test/OKHOSTING.UI.Xamarin.Forms.Test.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/RelativePanel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Calendar.cs">
     <Files>
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/Grid.cs" Line="624" Column="2" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/RelativePanel.cs" Line="656" Column="46" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/Grid.cs" Line="1" Column="1" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/RelativePanel.cs" Line="1" Column="1" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/Stack.cs" Line="1" Column="1" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Autocomplete.cs" Line="1" Column="1" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Button.cs" Line="566" Column="4" />
+      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Calendar.cs" Line="523" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,9 +16,7 @@
               <Node name="Net4" expanded="True">
                 <Node name="OKHOSTING.UI.Net4.WebForms" expanded="True">
                   <Node name="Controls" expanded="True">
-                    <Node name="Layout" expanded="True">
-                      <Node name="RelativePanel.cs" selected="True" />
-                    </Node>
+                    <Node name="Calendar.cs" selected="True" />
                   </Node>
                 </Node>
               </Node>
@@ -25,10 +26,12 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Test.Xamarin.OKHOSTING.UI.Xamarin.Forms.Test PreferredExecutionTarget="MonoDevelop.Default" />
   <DisabledProjects>
     <String>Net4/OKHOSTING.UI.Net4.WPF/OKHOSTING.UI.Net4.WPF.csproj</String>
     <String>../test/Net4/OKHOSTING.UI.Net4.WebForms.Test/OKHOSTING.UI.Net4.WebForms.Test.csproj</String>
