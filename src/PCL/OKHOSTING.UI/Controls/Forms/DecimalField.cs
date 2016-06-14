@@ -4,9 +4,14 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// A field for decimal values
+	/// <para xml:lang="es">Un campo para valores decimales.</para>
 	/// </summary>
 	public class DecimalField : TextBoxField
 	{
+		/// <summary>
+		/// Gets or sets the value.
+		/// <para xml:lang="es">Obtiene o establece el valor.</para>
+		/// </summary>
 		public override object Value
 		{
 			get
@@ -26,6 +31,10 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets the type of the value.
+		/// <para xml:lang="es">Obtiene o establece el tipo del valor.</para>
+		/// </summary>
 		public override Type ValueType
 		{
 			get
@@ -36,6 +45,7 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">Crea los controles para visualizar el campo.</para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{
@@ -45,6 +55,10 @@ namespace OKHOSTING.UI.Controls.Forms
 			ValueControl.InputType = ITextBoxInputType.Number;
 		}
 
+		/// <summary>
+		/// Gets the is valid.
+		/// <para xml:lang="es">Determina si es valido el formato del dato.</para>
+		/// </summary>
 		public override bool IsValid
 		{
 			get

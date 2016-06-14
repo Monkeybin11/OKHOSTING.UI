@@ -5,10 +5,20 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
+	/// <summary>It represents a button with a background image
+	/// <para xml:lang="es">Representa un boton con una imagen de fondo</para>
+	/// </summary>
 	public class ImageButton : System.Web.UI.WebControls.ImageButton, IImageButton
 	{
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the control.
+		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
+		/// </summary>
+		/// <value>The name of the control.
+		/// <para xml:lang="es">El nombre del control.</para>
+		/// </value>
 		string IControl.Name
 		{
 			get
@@ -21,6 +31,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BackgroundColor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
+		/// </summary>
+		/// <value>The BackgroundColor of the control.
+		/// <para xml:lang="es">El color de fondo del control.</para>
+		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -33,6 +50,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BorderColor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
+		/// </summary>
+		/// <value>The BorderColor of the control.
+		/// <para xml:lang="es">El color del borde del control.</para>
+		/// </value>
 		Color IControl.BorderColor
 		{
 			get
@@ -45,6 +69,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the Width of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
+		/// </summary>
+		/// <value>The width of the control.
+		/// <para xml:lang="es">El ancho del control.</para>
+		/// </value>
 		double? IControl.Width
 		{
 			get
@@ -69,6 +100,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the Height of the control.
+		/// <para xml:lang="es">Obtiene o establece la altura del control.</para>
+		/// </summary>
+		/// <value>The height of the control.
+		/// <para xml:lang="es">La altura del control.</para>
+		/// </value>
 		double? IControl.Height
 		{
 			get
@@ -93,6 +131,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the Margin of the control.
+		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
+		/// </summary>
+		/// <value>The margin of the control.
+		/// <para xml:lang="es">El margen del control.</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
@@ -116,6 +161,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BorderWidth of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// </summary>
+		/// <value>The BorderWidth of the control.
+		/// <para xml:lang="es">El ancho del borde del control.</para>
+		/// </value>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -139,17 +191,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the HorizontalAlignment of the control.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
+		/// </summary>
+		/// <value>The HorizontalAlign of the control.
+		/// <para xml:lang="es">La alineacion horizontal del control.</para>
+		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
 
+				//if not horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -178,17 +239,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the VerticalAlignment of the control.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del control</para>
+		/// </summary>
+		/// <value>The VerticalAlignment of the control.
+		/// <para xml:lang="es">La alineación vertical del control.</para>
+		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
 
+				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -219,9 +289,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitrario que se puede usar para almacenar información personalizada sobre este elemento.</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.</para>
 		/// </remmarks>
 		object IControl.Tag
 		{
@@ -230,8 +302,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		/// <summary>
+		/// Occurs when click.
+		/// <para xml:lang="es">Se produce este evento al hacer clic en el control.</para>
+		/// </summary>
 		public new event EventHandler Click;
 
+		/// <summary>
+		/// Raises the click.
+		/// <para xml:lang="es">Es donde se proboca el evento clic.</para>
+		/// </summary>
+		/// <returns>The click.
+		/// <para xml:lang="es">El clic</para>
+		/// </returns>
 		protected internal virtual void Raise_Click()
 		{
 			if (Click != null)
@@ -240,6 +323,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Loads from file.
+		/// <para xml:lang="es">Carga la imagen del control desde una ruta de archivo.</para>
+		/// </summary>
+		/// <returns>The from file.
+		/// <para xml:lang="es">El archivo.</para>
+		/// </returns>
+		/// <param name="filePath">File path.
+		/// <para xml:lang="es">La ruta del archivo.</para>
+		/// </param>
 		public void LoadFromFile(string filePath)
 		{
 			if (!File.Exists(filePath))
@@ -280,11 +373,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Loads from URL.
+		/// <para xml:lang="es">Carga la imagen desde una direccion de internet.</para>
+		/// </summary>
+		/// <returns>The from URL.
+		/// <para xml:lang="es">La url de la imagen</para>
+		/// </returns>
+		/// <param name="url">URL.</param>
 		public void LoadFromUrl(System.Uri url)
 		{
 			base.ImageUrl = url.ToString();
 		}
 
+		/// <summary>
+		/// Loads from stream.
+		/// </summary>
+		/// <returns>The from stream.</returns>
+		/// <param name="v">V.</param>
 		public void LoadFromStream(string v)
 		{
 			throw new NotImplementedException();

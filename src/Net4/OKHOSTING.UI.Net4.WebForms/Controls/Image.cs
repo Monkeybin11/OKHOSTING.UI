@@ -5,13 +5,21 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-    /// <summary>
-    /// Representa una imagen
-    /// </summary>
+	/// <summary>
+	/// It represents an image to which we can give you design through its properties.
+	/// <para xml:lang="es">Representa una imagen a la cual le podemos dar diseño por medio de sus propiedades.</para>
+	/// </summary>
 	public class Image : System.Web.UI.WebControls.Image, IImage
 	{
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the Image.
+		/// <para xml:lang="es">Obtiene o establece el nombre de la imagen</para>
+		/// </summary>
+		/// <value>The name of the Image.
+		/// <para xml:lang="es">El nombre de la imagen.</para>
+		/// </value>
 		string IControl.Name
 		{
 			get
@@ -24,6 +32,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BackgroundColor of the Image.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo de la imagen.</para>
+		/// </summary>
+		/// <value>The BackgroundColor of the Image.
+		/// <para xml:lang="es">El color de fondo de la imagen.</para>
+		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -36,6 +51,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets of the BorderColor of the Image.
+		/// <para xml:lang="es">Obtiene o establece el color del borde de la imagen.</para>
+		/// </summary>
+		/// <value>The BorderColor of the Image.
+		/// <para xml:lang="es">El color del borde de la imagen.</para>
+		/// </value>
 		Color IControl.BorderColor
 		{
 			get
@@ -48,6 +70,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the Width the Imagen.
+		/// <para xml:lang="es">Obtien o establece el ancho de la imagen.</para>
+		/// </summary>
+		/// <value>The width of the Image.
+		/// <para xml:lang="es">El ancho de la imagen.</para>
+		/// </value>
 		double? IControl.Width
 		{
 			get
@@ -72,6 +101,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the Height the Image.
+		/// <para xml:lang="es">Obtiene o establece la altura de la imagen.</para>
+		/// </summary>
+		/// <value>The height of the Image.
+		/// <para xml:lang="es">La altura de la imagen.</para>
+		/// </value>
 		double? IControl.Height
 		{
 			get
@@ -96,6 +132,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the Margin the Image.
+		/// <para xml:lang="es">Obtiene o establece el margen de la imagen.</para>
+		/// </summary>
+		/// <value>The Margin of the Image.
+		/// <para xml:lang="es">El margen de la imagen.</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
@@ -119,6 +162,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets of the BorderWidht of the Image.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde de la imagen.</para>
+		/// </summary>
+		/// <value>The BorderWidth of the Image.
+		/// <para xml:lang="es">El ancho del borde de la imagen.</para>
+		/// </value>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -142,17 +192,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the HorizontalAlignment of the Image.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horixontal de la imagen</para>
+		/// </summary>
+		/// <value>The HorizontalAlignment of the Image.
+		/// <para xml:lang="es">La alineacion horizontal de la imagen.</para>
+		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
 
+				//if not horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -181,17 +240,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the VerticalAlignment of the Image.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical de la imagen</para>
+		/// </summary>
+		/// <value>The VerticalAlignment of the image.
+		/// <para xml:lang="es">La alineación vertical de la imagen.</para>
+		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
 
+				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -222,9 +290,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento.</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.</para>
 		/// </remmarks>
 		object IControl.Tag
 		{
@@ -233,6 +303,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		/// <summary>Load the image from files
+		/// <para xml:lang="es">Carga la imagen desde los archivos</para> 
+		/// </summary>
+		/// <returns>The from file.
+		/// <para xml:lang="es">El archivo</para>
+		/// </returns>
+		/// <param name="filePath">File path.
+		/// <para xml:lang="es">La ruta del archivo</para>
+		/// </param>
 		public void LoadFromFile(string filePath)
 		{
 			if (!File.Exists(filePath))
@@ -256,9 +335,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			LoadFromUrl(new System.Uri(url));
 		}
 
+		/// <summary>
+		/// Loads from stream.
+		/// </summary>
+		/// <returns>The from stream.</returns>
+		/// <param name="stream">Stream.</param>
 		public void LoadFromStream(Stream stream)
 		{
-			//save the sream to a temp file, and load as file from there
+			//save the stream to a temp file, and load as file from there
 			string tempDirectoryPath = Path.Combine(OKHOSTING.Core.Net4.DefaultPaths.Custom, "Temp");
 
 			if (!Directory.Exists(tempDirectoryPath))
@@ -273,6 +357,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Upload the file from an Internet address
+		/// <para xml:lang="es">Carga el archivo desde una direccion de internet</para> 
+		/// </summary>
+		/// <returns>The from URL.
+		/// <para xml:lang="es">La direccion de internet.</para>
+		/// </returns>
+		/// <param name="url">URL.</param>
 		public void LoadFromUrl(System.Uri url)
 		{
 			base.ImageUrl = url.ToString();

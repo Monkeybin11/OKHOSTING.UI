@@ -6,12 +6,21 @@ using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
+	/// <summary>
+	/// It represents a page of a form
+	/// <para xml:lang="es">Representa una pagina de un formulario.</para>
+	/// </summary>
 	public partial class Page : System.Web.UI.Page, IPage
 	{
+		/// <summary>
+		/// The content holder.
+		/// <para xml:lang="es">El contenido que contiene la pagina.</para>
+		/// </summary>
 		protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
 
 		/// <summary>
 		/// Restores Page state (content & title) and launch events
+		/// <para xml:lang="es">Restaura el estado de la pagina (Contenido y titulo) y lanza eventos</para>
 		/// </summary>
 		protected override void OnLoad(EventArgs e)
 		{
@@ -207,6 +216,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the content.
+		/// <para xml:lang="es">Obtiene o establece el contenido.</para>
+		/// </summary>
+		/// <value>The content.
+		/// <para xml:lang="es">El contenido.</para>
+		/// </value>
 		public IControl Content
 		{
 			get
@@ -229,6 +245,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
+		/// <summary>
+		/// Gets the width.
+		/// <para xml:lang="es">Obtiene el ancho de la pagina.</para>
+		/// </summary>
+		/// <value>The width.
+		/// <para xml:lang="es">El ancho.</para>
+		/// </value>
 		public double Width
 		{
 			get
@@ -242,6 +265,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
+		/// <summary>
+		/// Gets the height.
+		/// <para xml:lang="es">Obtiene la altura de la pagina.</para>
+		/// </summary>
+		/// <value>The height.
+		/// <para xml:lang="es">La altura</para>
+		/// </value>
 		public double Height
 		{
 			get
@@ -255,6 +285,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
+		/// <summary>
+		/// Ons the pre render.
+		/// <para xml:lang="es">Hace todos los pasos previos a la representacion.</para>
+		/// </summary>
+		/// <returns>The pre render.</returns>
+		/// <param name="e">E.</param>
 		protected override void OnPreRender(EventArgs e)
 		{
 			//save page state
@@ -267,6 +303,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 			base.OnPreRender(e);
 		}
 
+		/// <summary>
+		/// Performs the steps of initialization and configuration required to create a page.
+		/// <para xml:lang="es">Realiza las etapas de inicializacion y configuracion requeridas para crear una pagina.</para>
+		/// </summary>
+		/// <returns>The init.</returns>
+		/// <param name="e">E.</param>
 		protected override void OnInit(EventArgs e)
 		{
 			base.OnInit(e);

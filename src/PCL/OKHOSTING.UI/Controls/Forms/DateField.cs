@@ -4,14 +4,24 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// A field for selecting a date
+	/// <para xml:lang="es">Un campo para seleccionar una fecha.</para>
 	/// </summary>
 	public class DateField : TextBoxField
 	{
+		/// <summary>
+		/// Initializes a new instance of the DateField class.
+		/// <para xml:lang="es">Inicializa una nueva instancia de la clase DateField</para>
+		/// </summary>
 		public DateField()
 		{
 			Format = "yyyy/MM/dd";
 		}
 
+		/// <summary>
+		/// Gets or sets the value.
+		/// <para xml:lang="es">Obtiene o establece el valor del campo.</para>
+		/// </summary>
+		/// <value>The value.</value>
 		public override object Value
 		{
 			get
@@ -24,6 +34,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets the type of the value.
+		/// <para xml:lang="es">Obtiene o establece el tipo del valor</para>
+		/// </summary>
+		/// <value>The type of the value.</value>
 		public override Type ValueType
 		{
 			get
@@ -34,11 +49,13 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Format used to show and retrieve date value
+		/// <para xml:lang="es">Formato utilizado para mostrar y recuperar datos de valor.</para>
 		/// </summary>
 		public string Format { get; set; }
 
 		/// <summary>
 		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">Crea los controles para visualizar el campo.</para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{
@@ -48,6 +65,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			ValueControl.InputType = ITextBoxInputType.Date;
 		}
 
+		/// <summary>
+		/// Gets the is valid.
+		/// <para xml:lang="es">Determina si el formato del dato es valido.</para>
+		/// </summary>
+		/// <value>The is valid.</value>
 		public override bool IsValid
 		{
 			get

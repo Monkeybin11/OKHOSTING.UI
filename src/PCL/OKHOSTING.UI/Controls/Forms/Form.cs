@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
+	/// <summary>
+	/// It represents a form to store content.
+	/// <para xml:lang="es">Representa un formulario para almacenar contenido.</para>
+	/// </summary>
 	public class Form: IDisposable
 	{
 		#region Fields and properties
@@ -12,6 +16,10 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// <summary>
 		/// The grid that will be populated with all the fields. 
 		/// Add this content to your page after calling DataBind()
+		/// <para xml:lang="es">
+		/// La rejilla que se rellena con todos los campos.
+		/// Añade a su pagina este contenido despues de llamar a DataBind()
+		/// </para>
 		/// </summary>
 		public IGrid Content
 		{
@@ -21,19 +29,26 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Collection of fields that will be displayed in the current form
+		/// <para xml:lang="es">Colección de campos que se mostarara en el formulario actual.</para>
 		/// </summary>
 		public readonly List<FormField> Fields = new List<FormField>();
 
 		/// <summary>
 		/// Determines wether the labels will be shown at the right or the top of each value
+		/// <para xml:lang="es">Determina si las etiquetas se mostraran en la parte derecha o la parte superior de cada valor.</para>
 		/// </summary>
 		public CaptionPosition LabelPosition { get; set; } = CaptionPosition.Left;
 
 		/// <summary>
 		/// Gets or sets the number of columns to display horizontally
+		/// <para xml:lang="es">Obtiene o establece el numero de columnas que se muestran horizontalmente.</para>
 		/// </summary>
 		public int RepeatColumns { get; set; } = 1;
 
+		/// <summary>
+		/// Gets the is valid.
+		/// <para xml:lang="es">Establece si los campos son validos.</para>
+		/// </summary>
 		public bool IsValid
 		{
 			get
@@ -48,6 +63,7 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Creates all cells and controls based on the Fields collection
+		/// <para xml:lang="es">Crea todas las celdas y los controles basados en la coleccion de campos.</para>
 		/// </summary>
 		public virtual void DataBind()
 		{
@@ -215,9 +231,14 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Searches for a field with the specified Id
+		/// <para xml:lang="es">Busca un campo con Id especificado.</para>
 		/// </summary>
-		/// <param name="fieldName">Id of the field to be searched</param>
-		/// <returns>If found, the field with the specified Id, null otherwise</returns>
+		/// <param name="fieldName">Id of the field to be searched
+		/// <para xml:lang="es">Id del campo que va a ser buscado.</para>
+		/// </param>
+		/// <returns>If found, the field with the specified Id, null otherwise
+		/// <para xml:lang="es">Si lo encuentra, el campo con el Id especificado, de lo contrario nulo.</para>
+		/// </returns>
 		public FormField this[string fieldName]
 		{
 			get

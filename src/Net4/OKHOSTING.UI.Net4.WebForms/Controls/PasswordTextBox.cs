@@ -4,8 +4,16 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
+	/// <summary>
+	/// It represents a text box that masks the input visibly.
+	/// <para xml:lang="es">Representa un cuadro de texto que visiblemente enmascara la entrada.</para>
+	/// </summary>
 	public class PasswordTextBox : System.Web.UI.WebControls.TextBox, IPasswordTextBox
 	{
+		/// <summary>
+		/// Initializes a new instance of the PasswordTextBox class.
+		/// <para xml:lang="es">Inicializa una nueva instancia de la clase PasswordTextBox.</para>
+		/// </summary>
 		public PasswordTextBox()
 		{
 			base.TextMode = System.Web.UI.WebControls.TextBoxMode.Password;
@@ -13,6 +21,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the control.
+		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
+		/// </summary>
+		/// <value>The name of the control.
+		/// <para xml:lang="es">El nombre del control</para>
+		/// </value>
 		string IControl.Name
 		{
 			get
@@ -25,6 +40,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the background of the control.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control</para>
+		/// </summary>
+		/// <value>The background of the hiperlink.
+		/// <para xml:lang="es">El color de fondo del control.</para>
+		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -37,6 +59,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BorderColor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del control</para>
+		/// </summary>
+		/// <value>The BorderColor of the control.
+		/// <para xml:lang="es">El color del borde del control</para>
+		/// </value>
 		Color IControl.BorderColor
 		{
 			get
@@ -49,6 +78,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or Sets the width of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del control</para>
+		/// </summary>
+		/// <value>The width of the control.
+		/// <para xml:lang="es">El ancho del control</para>
+		/// </value>
 		double? IControl.Width
 		{
 			get
@@ -73,6 +109,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the Height of the control
+		/// <para xml:lang="es">Obtiene o establece la altura del control</para>
+		/// </summary>
+		/// <value>The height of the control.
+		/// <para xml:lang="es">La altura del control</para>
+		/// </value>
 		double? IControl.Height
 		{
 			get
@@ -97,6 +140,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the margin of the control.
+		/// <para xml:lang="es">Obtien o establece el margen del control</para>
+		/// </summary>
+		/// <value>The margin of the control.
+		/// <para xml:lang="es">El margen del control</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
@@ -120,6 +170,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the BorderWidth of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// </summary>
+		/// <value>The BorderWidth of the control.
+		/// <para xml:lang="es">El ancho del borde del control.</para>
+		/// </value>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -143,17 +200,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the HorizontalAlignment of the control.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
+		/// </summary>
+		/// <value>The HorizontalAlignment of the control.
+		/// <para xml:lang="es">La alineacion horizontal del control</para>
+		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
 
+				//if not horizontal alignment is provided, the alignment back to the left.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return HorizontalAlignment.Left;
 				}
 
+				//Verify the horizontal alignment provided.
 				if (cssClass.EndsWith("left"))
 				{
 					return HorizontalAlignment.Left;
@@ -182,17 +248,26 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the VerticalAlignment of the control.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del control</para>
+		/// </summary>
+		/// <value>The VerticalAlignemnt of the control.
+		/// <para xml:lang="es">La alineacion vertical del control</para>
+		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
 
+				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
 					return VerticalAlignment.Top;
 				}
 
+				//Verify the vertical alignment provided.
 				if (cssClass.EndsWith("top"))
 				{
 					return VerticalAlignment.Top;
@@ -223,9 +298,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">Obtiene o establece un objeto con valor arbitrario que puede ser usado para almacenar informacion personalizada de este elemento.</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.</para>
 		/// </remmarks>
 		object IControl.Tag
 		{
@@ -234,6 +311,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IInputControl
 
+		/// <summary>
+		/// Gets or sets the input control value.
+		/// <para xml:lang="es">Obtiene o establece el valor de entrada del control.</para>
+		/// </summary>
+		/// <value>The imput value.
+		/// <para xml:lang="es">El valor de entrada.</para>
+		/// </value>
 		string IInputControl<string>.Value
 		{
 			get
@@ -246,8 +330,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Occurs when value changed.
+		/// <para xml:lang="es">Ocurre cuando el valor es cambiado.</para>
+		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
+		/// <summary>
+		/// Raises the value changed.
+		/// <para xml:lang="es">Cambia el valor.</para>
+		/// </summary>
+		/// <returns>The value changed.
+		/// <para xml:lang="es">El valor cambiado</para>
+		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
 			if (ValueChanged != null)
@@ -261,6 +356,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		/// <summary>
+		/// Ons the pre render.
+		/// <para xml:lang="es">Ocurre antes de hacer el cambio.</para>
+		/// </summary>
+		/// <returns>The pre render.</returns>
+		/// <param name="e">E.</param>
 		protected override void OnPreRender(EventArgs e)
 		{
 			AutoPostBack = ValueChanged != null;

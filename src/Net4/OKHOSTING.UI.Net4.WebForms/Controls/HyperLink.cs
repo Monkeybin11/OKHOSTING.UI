@@ -35,7 +35,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// Gets or sets the background of the HiperLink.
 		/// <para xml:lang="es">Obtiene o establece el color de fondo del hiperlink</para>
 		/// </summary>
-		/// <value>The background of the hiperlink.</value>
+		/// <value>The background of the hiperlink.
+		/// <para xml:lang="es">El color de fondo del hiperlink</para>
+		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -52,7 +54,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// Gets or sets the BorderColor of the HiperLink.
 		/// <para xml:lang="es">Obtiene o establece el color del borde del hiperlink</para>
 		/// </summary>
-		/// <value>The BorderColor of the HiperLink.</value>
+		/// <value>The BorderColor of the HiperLink.
+		/// <para xml:lang="es">El color del borde del hiperlink</para>
+		/// </value>
 		Color IControl.BorderColor
 		{
 			get

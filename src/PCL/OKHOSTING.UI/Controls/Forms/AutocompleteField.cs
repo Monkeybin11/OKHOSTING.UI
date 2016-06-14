@@ -5,9 +5,15 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// A form field that uses an autocomplete for data input
+	/// <para xml:lang="es">Un campo de formulario que utiliza una función de autocompletar para la entrada de datos</para>
 	/// </summary>
 	public class AutocompleteField : FormField
 	{
+		/// <summary>
+		/// Gets or sets the value.
+		/// <para xml:lang="es">Obtiene o establece el valor</para>
+		/// </summary>
+		/// <value>The value.</value>
 		public override object Value
 		{
 			get
@@ -29,6 +35,7 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Control that parses the value to web
+		/// <para xml:lang="es">Control que analiza el valor de Web</para>
 		/// </summary>
 		public new IAutocomplete ValueControl
 		{
@@ -42,6 +49,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets the type of the value.
+		/// <para xml:lang="es">Obtiene el tipo del valor.</para>
+		/// </summary>
+		/// <value>The type of the value.</value>
 		public override Type ValueType
 		{
 			get
@@ -52,6 +64,7 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">Crea los controles para visualizar el campo</para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{

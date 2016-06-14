@@ -1,12 +1,7 @@
 ﻿<Properties StartupItem="../test/Xamarin/OKHOSTING.UI.Xamarin.Forms.Test/OKHOSTING.UI.Xamarin.Forms.Test.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Calendar.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PCL/OKHOSTING.UI/Controls/Forms/Form.cs">
     <Files>
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/Grid.cs" Line="1" Column="1" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/RelativePanel.cs" Line="1" Column="1" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Layout/Stack.cs" Line="1" Column="1" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Autocomplete.cs" Line="1" Column="1" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Button.cs" Line="566" Column="4" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Controls/Calendar.cs" Line="523" Column="27" />
+      <File FileName="PCL/OKHOSTING.UI/Controls/Forms/Form.cs" Line="240" Column="98" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,8 +10,15 @@
             <Node name="Source" expanded="True">
               <Node name="Net4" expanded="True">
                 <Node name="OKHOSTING.UI.Net4.WebForms" expanded="True">
+                  <Node name="Controls" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="PCL" expanded="True">
+                <Node name="OKHOSTING.UI" expanded="True">
                   <Node name="Controls" expanded="True">
-                    <Node name="Calendar.cs" selected="True" />
+                    <Node name="Forms" expanded="True">
+                      <Node name="Form.cs" selected="True" />
+                    </Node>
                   </Node>
                 </Node>
               </Node>
