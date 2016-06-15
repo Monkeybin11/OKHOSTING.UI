@@ -2,11 +2,17 @@
 {
 	/// <summary>
 	/// Base class for all fields that uses a single TextBox as ValueControl
+	/// <para xml:lang="es">
+	/// La clase base para todos los campos que utilizan un unico cuadro de texto como un control de valores.
+	/// </para>
 	/// </summary>
 	public abstract class TextBoxField : FormField
 	{
 		/// <summary>
 		/// Control that parses the value to web
+		/// <para xml:lang="es">
+		/// Control que convierte el valor a web.
+		/// </para>
 		/// </summary>
 		protected new ITextBox ValueControl
 		{
@@ -20,6 +26,13 @@
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the value.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el valor del campo.
+		/// </para>
+		/// </summary>
+		/// <value>The value.</value>
 		public override object Value
 		{
 			get
@@ -34,6 +47,9 @@
 
 		/// <summary>
 		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">
+		/// Crea los controles para visualizar el campo.
+		/// </para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{

@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 	/// <summary>
 	/// A container for storing objects grid and has design properties.
 	/// <para xml:lang="es">
-	/// Una contenedor de cuadricula para almacenar objetos y tiene propiedades de diseño.
+	/// Un contenedor de cuadricula para almacenar objetos y tiene propiedades de diseño.
 	/// </para>
 	/// </summary>
 	public class Grid : System.Web.UI.WebControls.Table, IGrid

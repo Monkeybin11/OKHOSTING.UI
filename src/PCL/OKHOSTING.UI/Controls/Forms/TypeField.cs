@@ -7,9 +7,19 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// Field for selecting a DataType
+	/// <para xml:lang="es">
+	/// Un campo para seleccion de tipo de datos.
+	/// </para>
 	/// </summary>
 	public class TypeField : ListPickerField
 	{
+		/// <summary>
+		/// Initializes a new instance of the TypeField class.
+		/// <para xml:lang="es">
+		/// Inicializa una nueva instancia de la clase TypeField.
+		/// </para>
+		/// </summary>
+		/// <param name="parent">Parent.</param>
 		public TypeField(Type parent)
 		{
 			if (parent == null)
@@ -20,6 +30,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			Parent = parent;
 		}
 
+		/// <summary>
+		/// Gets the type of the value.
+		/// <para xml:lang="es">Obtiene el tipo del valor.</para>
+		/// </summary>
+		/// <value>The type of the value.</value>
 		public override Type ValueType
 		{
 			get
@@ -28,6 +43,10 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the value.
+		/// <para xml:lang="es">Obtiene o establece el valor del tipo de campo.</para>
+		/// </summary>
 		public override object Value
 		{
 			get
@@ -57,11 +76,18 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// <summary>
 		/// The DataType (and subclasses of it) that will be available as an option in the DropDownList.
 		/// if set to null, all DataTypes will be available
+		/// <para xml:lang="es">
+		/// El tipo de datos (y subclases del mismo) que estará disponible como una opción en el DropDownList.
+		/// Si se establece en nulo, todos los tipos de datos estarán disponibles
+		/// </para>
 		/// </summary>
 		public readonly Type Parent;
 
 		/// <summary>
 		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">
+		/// Crea los controles para visualizar el campo.
+		/// </para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{

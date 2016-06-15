@@ -29,10 +29,15 @@ namespace OKHOSTING.UI
 		/// </summary>
 		protected readonly Stack<PageState> PageStateStack = new Stack<PageState>();
 
-        /// <summary>
-        /// <para xml:lang="es">Inicializa el control especificado.</para>
-        /// </summary>
-        /// <param name="controller">El control que se va a inicializar</param>
+		/// <summary>
+		/// Start the contoller specified
+		/// <para xml:lang="es">Inicializa el control especificado.</para>
+		/// </summary>
+		/// <param name="controller">The controller to start
+		/// <para xml:lang="es">
+		/// El control que se va a inicializar
+		/// </para>
+		/// </param>
 		protected internal virtual void StartController(Controller controller)
 		{
 			//save page state, if any
@@ -78,7 +83,13 @@ namespace OKHOSTING.UI
 		}
 
 		//public
-
+		/// <summary>
+		/// Create this instance.
+		/// <para xml:lang="es">Crea esta instancia.</para>
+		/// </summary>
+		/// <typeparam name="T">The 1st type parameter.
+		/// <para xml:lang="es">El primer tipo de parametro.</para>
+		/// </typeparam>
 		public virtual T Create<T>() where T : class, Controls.IControl
 		{
 			return Core.BaitAndSwitch.Create<T>(KnownPlatforms, null);
@@ -86,6 +97,7 @@ namespace OKHOSTING.UI
 
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
+		/// <para xml:lang="es">Obtiene la pagina que actualmente se esta mostrando al usuario</para>
 		/// </summary>
 		public virtual IPage Page
 		{
@@ -94,6 +106,9 @@ namespace OKHOSTING.UI
 
 		/// <summary>
 		/// Gets the Controller that is currently controlling the Page, the "currently executing" controller wich is at the top of the stack
+		/// <para xml:lang="es">
+		/// Obtiene el controlador que esta actualmente controlando la pagina, el control "que se esta actualmente ejecuanto" es el que esta en la parte superior de la pila
+		/// </para>
 		/// </summary>
 		public virtual Controller Controller
 		{
@@ -108,6 +123,13 @@ namespace OKHOSTING.UI
 			}
 		}
 
+		/// <summary>
+		/// Gets the state of the page.
+		/// <para xml:lang="es">Obtiene el estado de la pagina.</para>
+		/// </summary>
+		/// <value>The state of the page.
+		/// <para xml:lang="es">El estado de la pagina.</para>
+		/// </value>
 		public virtual PageState PageState
 		{
 			get
@@ -123,6 +145,9 @@ namespace OKHOSTING.UI
 
 		/// <summary>
 		/// Exits and closes the current app. Use this to dispose objects and release memory
+		/// <para xml:lang="es">
+		/// Se sale y cierra la aplicacion actual. Use esto para desechar objetos y liberar la memoria.
+		/// </para>
 		/// </summary>
 		public virtual void Finish()
 		{
@@ -133,11 +158,17 @@ namespace OKHOSTING.UI
 		}
 
 		//static
-
+		/// <summary>
+		/// It is an arrangement of the libraries of the platforms where you can deploy the application.
+		/// <para xml:lang="es">Es un arreglo de las libreris de las plataformas donde se puede implementar la aplicacion.</para>
+		/// </summary>
 		protected static readonly string[] KnownPlatforms = new string[] { "Net4.WinForms", "Net4.WebForms", "Net4.WPF", "UWP", "Xamarin.Forms", "Xamarin.Android", "Xamarin.iOS", "Xamarin.Windows" };
 
 		/// <summary>
 		/// Gets the currently executing App. In a web environment, an App instance is created for each user
+		/// <para xml:lang="es">
+		/// Obtiene la aplicacion que se esta ejecutando actualmente. En un entorno web, se crea una aplicacion para cada usuario.
+		/// </para>
 		/// </summary>
 		public static Platform Current
 		{

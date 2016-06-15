@@ -6,12 +6,28 @@ using System.Xml.Serialization;
 namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
-	/// A field for Xml values
+	/// A field for Xml values.
+	/// <para xml:lang="es">
+	/// Un campo para valores Xml.
+	/// </para>
 	/// </summary>
 	public class XmlSerializableField : StringField
 	{
+		/// <summary>
+		/// The type of the xml serializable.
+		/// <para xml:lang="es">
+		/// El tipo del xml serializable.
+		/// </para>
+		/// </summary>
 		public readonly Type XmlSerializableType;
 
+		/// <summary>
+		/// Initializes a new instance of the XmlSerializableField class.
+		/// <para xml:lang="es">
+		/// Inicializa una nueva instancia de la clase XmlSerializableField.
+		/// </para>
+		/// </summary>
+		/// <param name="xmlSerializableType">Xml serializable type.</param>
 		public XmlSerializableField(Type xmlSerializableType)
 		{
 			if (xmlSerializableType == null)
@@ -27,6 +43,12 @@ namespace OKHOSTING.UI.Controls.Forms
 			XmlSerializableType = xmlSerializableType;
 		}
 
+		/// <summary>
+		/// Gets or sets the value.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el valor del campo.
+		/// </para>
+		/// </summary>
 		public override object Value
 		{
 			get
@@ -39,6 +61,12 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets the type of the value.
+		/// <para xml:lang="es">
+		/// Obtiene el tipo del valor.
+		/// </para>
+		/// </summary>
 		public override Type ValueType
 		{
 			get
@@ -47,6 +75,13 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets the is valid.
+		/// <para xml:lang="es">
+		/// Determina si el valor es valido. 
+		/// </para>
+		/// </summary>
+		/// <value>The is valid.</value>
 		public override bool IsValid
 		{
 			get

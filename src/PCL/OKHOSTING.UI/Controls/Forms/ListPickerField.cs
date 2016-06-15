@@ -4,11 +4,13 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// Base class for all fields that uses a single ListPicker as ValueControl
+	/// <para xml:lang="es">La clase base para todos los campos que utilizan un solo ListPicker como control de valores.</para>
 	/// </summary>
 	public abstract class ListPickerField : FormField
 	{
 		/// <summary>
 		/// Control that parses the value to web
+		/// <para xml:lang="es">Control que parse el valor a web.</para>
 		/// </summary>
 		public new IListPicker ValueControl
 		{
@@ -24,6 +26,7 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">Crea los controles para visualizar el campo.</para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{

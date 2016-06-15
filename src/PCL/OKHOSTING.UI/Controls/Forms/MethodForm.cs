@@ -7,6 +7,9 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// A form used to retrieve all parameters necessary for executing a DataMethod
+	/// <para xml:lang="es">
+	/// Es una forma de utilizarlo para recuperar todos los parametros necesarios para la ejecucion de un metodo de datos.
+	/// </para>
 	/// </summary>
 	public class MethodForm: Form
 	{
@@ -23,9 +26,14 @@ namespace OKHOSTING.UI.Controls.Forms
 		}
 
 		/// <summary>
-		/// Adds a field for every argument that the DataMethos needs in order to be invoked
+		/// Adds a field for every argument that the DataMethos needs in order to be invoked.
+		/// <para xml:lang="es">
+		/// Agrega un campo para cada argumento que el DataMethods necesita para ser invocado.
+		/// </para>
 		/// </summary>
-		/// <param name="method">DataMethod which parameters will be used as fields</param>
+		/// <param name="method">DataMethod which parameters will be used as fields.
+		/// <para xml:lang="es">DataMethod de los parametrtos que se utilizan como campos.</para>
+		/// </param>
 		public override void DataBind()
 		{
 			uint order = 0;
@@ -52,9 +60,14 @@ namespace OKHOSTING.UI.Controls.Forms
 		}
 
 		/// <summary>
-		/// Copies all field values to a list of objects that will be used as parameters to invoke a DataMethod
+		/// Copies all field values to a list of objects that will be used as parameters to invoke a DataMethod.
+		/// <para xml:lang="es">
+		/// Copia todos los valores del campo a una lista de objetos que seran utilizados como parametros para invocar un DataMethod.
+		/// </para>
 		/// </summary>
-		/// <param name="parameters">List of objects that will be used as parameters to invoke a DataMethod</param>
+		/// <param name="parameters">List of objects that will be used as parameters to invoke a DataMethod.
+		/// <para xml:lang="es">Lista de parametros que seran utilizados como parametros para invocar un DataMethod.</para>
+		/// </param>
 		public virtual IEnumerable<object> GetParameters()
 		{
 			//search corresponding field for this DataValueInstance
@@ -64,6 +77,12 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Creates the field of specified type.
+		/// <para xml:lang="es">Crea el campo del tipo especificado.</para>
+		/// </summary>
+		/// <returns>The field from.</returns>
+		/// <param name="type">Type.</param>
 		protected virtual FormField CreateFieldFrom(Type type)
 		{
 			return FormField.CreateFieldFrom(type);

@@ -4,9 +4,14 @@ namespace OKHOSTING.UI.Controls.Forms
 {
 	/// <summary>
 	/// Field for string values
+	/// <para xml:lang="es">Un campo para valores de cadena.</para>
 	/// </summary>
 	public class StringField : FormField
 	{
+		/// <summary>
+		/// Gets or sets the value control.
+		/// <para xml:lang="es">Obtiene o establece el valor del control.</para>
+		/// </summary>
 		public new IInputControl<string> ValueControl
 		{
 			get
@@ -20,6 +25,10 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the value.
+		/// <para xml:lang="es">Obtiene o establece el valor del campo.</para>
+		/// </summary>
 		public override object Value
 		{
 			get
@@ -39,6 +48,10 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 		}
 
+		/// <summary>
+		/// Gets the type of the value.
+		/// <para xml:lang="es">Obtiene el tipo del valor.</para>
+		/// </summary>
 		public override Type ValueType
 		{
 			get
@@ -49,17 +62,27 @@ namespace OKHOSTING.UI.Controls.Forms
 		
 		/// <summary>
 		/// A regular expression pattern used for regex validation.
-		/// If set to null, no regex validation is done
+		/// If set to null, no regex validation is done.
+		/// <para xml:lang="es">
+		/// Un patron de exprecion regular utilizada para la validacion de expreciones regulares.
+		/// Si se establece en nulo, ninguna validacion de expreciones regulares se realiza.
+		/// </para>
 		/// </summary>
 		public string RegularExpression { get; set; }
 
 		/// <summary>
-		/// Maximum lenght allowed for the string Value. Zero means no limit
+		/// Maximum lenght allowed for the string Value. Zero means no limit.
+		/// <para xml:lang="es">
+		/// El valor maximo permitido para el valor de cadena. Cero significa que no hay limite.
+		/// </para>
 		/// </summary>
 		public int MaxLenght { get; set; }
 
 		/// <summary>
 		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">
+		/// Crea los controles para visualizar el campo.
+		/// </para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{
