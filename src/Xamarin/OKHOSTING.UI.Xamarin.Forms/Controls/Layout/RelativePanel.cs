@@ -8,22 +8,44 @@ using Xamarin.Forms;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
+	/// <summary>
+	/// Inspired by UWP and Xamarin.Forms RelativePanel's
+	/// <para xml:lang="es">
+	/// Un RelativePanel inspirado por WPF y Xamarin.Forms
+	/// </para>
+	/// </summary>
 	public class RelativePanel : global::Xamarin.Forms.RelativeLayout, IRelativePanel
 	{
+		/// <summary>
+		/// Initializes a new instance of the RelativePanel class.
+		/// <para xml:lang="es">Inicializa una nueva instancia de la clase RelativePanel</para>
+		/// </summary>
 		public RelativePanel()
 		{
 			_Children = new ControlList(base.Children);
 		}
 
+		/// <summary>
+		/// The children.
+		/// <para xml:lang="es">Lista de los controles hijos.</para>
+		/// </summary>
 		protected readonly ControlList _Children;
 
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the control.
+		/// <para xml:lang="es">Obtiene o establece el nombre del control.</para>
+		/// </summary>
 		string IControl.Name
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets wether Control is visible or not.
+		/// <para xml:lang="es">Obtiene o establece si el control es visible o no.</para>
+		/// </summary>
 		bool IControl.Visible
 		{
 			get
@@ -36,6 +58,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets wether Control is enabled or not.
+		/// <para xml:lang="es">Obtiene o establece si el control es habilitado o no.</para>
+		/// </summary>
 		bool IControl.Enabled
 		{
 			get
@@ -48,6 +74,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the Control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
+		/// </summary>
 		double? IControl.Width
 		{
 			get
@@ -63,6 +93,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the height of the Control.
+		/// <para xml:lang="es">Obtiene o establece la altura del control.</para>
+		/// </summary>
 		double? IControl.Height
 		{
 			get
@@ -78,11 +112,19 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the margin Control.
+		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
+		/// </summary>
 		Thickness IControl.Margin
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the backgroundcolor of the Control.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
+		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -95,16 +137,28 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the bordercolor of the Control.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
+		/// </summary>
 		Color IControl.BorderColor
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the borderwidth of the Control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// </summary>
 		Thickness IControl.BorderWidth
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the horizontal alignment of the Control.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
+		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
@@ -117,6 +171,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the vertical alignment of the Control.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical.</para>
+		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
@@ -131,9 +189,15 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">
+		/// Obtiene o establece un objeto de valor arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento.
+		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">
+		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
+		/// </para>
 		/// </remmarks>
 		object IControl.Tag
 		{

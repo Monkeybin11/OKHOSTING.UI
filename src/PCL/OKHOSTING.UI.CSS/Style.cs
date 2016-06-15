@@ -10,14 +10,22 @@ using OKHOSTING.UI.Controls.Layout;
 namespace OKHOSTING.UI.CSS
 {
 	/// <summary>
-	/// Reads a CSS file and generates a Style from them
+	/// Reads a CSS file and generates a Style from them.
+	/// <para xml:lang="es">
+	/// Lee un archivo css y genera un estilo de ellos.
+	/// </para>
 	/// </summary>
 	public class Style
 	{
 		/// <summary>
 		/// Applies a CSS stylesheet to the current App
+		/// <para xml:lang="es">
+		/// Aplica una hoja de estilo css para la aplicacion actual.
+		/// </para>
 		/// </summary>
-		/// <param name="styleSheet">A list of css rules to be applied to the current running App</param>
+		/// <param name="styleSheet">A list of css rules to be applied to the current running App
+		/// <para xml:lang="es">Una lista de reglas css que se aplicaran a la aplicacion actual en ejecucion.</para>
+		/// </param>
 		public static void ParseStyleRules(string styleSheet)
 		{
 			CssParser parser = new CssParser();
@@ -32,11 +40,17 @@ namespace OKHOSTING.UI.CSS
 
 		/// <summary>
 		/// A cache of parsed styles for better performance
+		/// <para xml:lang="es">
+		/// Un cache de estilos analizados para una mejor rendimiento.
+		/// </para>
 		/// </summary>
 		public static readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
 
 		/// <summary>
 		/// Applies the corresponding styles to a recently created control
+		/// <para xml:lang="es">
+		/// Aplica los estilos correspondientes a un control creado recientemente.
+		/// </para>
 		/// </summary>
 		public static void Apply(IControl e)
 		{
@@ -51,6 +65,9 @@ namespace OKHOSTING.UI.CSS
 
 		/// <summary>
 		/// Applies a CSS style to a IControl
+		/// <para xml:lang="es">
+		/// Aplica un estilo CSS a un Control.
+		/// </para>
 		/// </summary>
 		public static void Apply(ICssStyleDeclaration style, IControl control)
 		{
@@ -179,6 +196,9 @@ namespace OKHOSTING.UI.CSS
 
 		/// <summary>
 		/// Applies a CSS style ato a ITextControl including font style
+		/// <para xml:lang="es">
+		/// Aplica un estilo CSS a un control de texto incluyendo el estilo del texto.
+		/// </para>
 		/// </summary>
 		public static void Apply(ICssStyleDeclaration style, ITextControl control)
 		{

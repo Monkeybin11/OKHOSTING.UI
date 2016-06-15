@@ -5,10 +5,20 @@ using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
+	/// <summary>
+	/// It is a control that represents a grid where we can store objects.
+	/// <para xml:lang="es">
+	/// Es un control que representa una cuadricula donde podemos almacenar objetos.
+	/// </para>
+	/// </summary>
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
 		#region IGrid
-
+		/// <summary>
+		/// Gets or sets the column count.
+		/// <para xml:lang="es">Obtiene o establece el conteo de columnas del grid</para>
+		/// </summary>
+		/// <value>The OKHOSTING . user interface . controls. layout. IG rid. column count.</value>
 		int IGrid.ColumnCount
 		{
 			get
@@ -29,6 +39,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the row count.
+		/// <para xml:lang="es">Obtiene o establece el conteo de filas del grid</para>
+		/// </summary>
+		/// <value>The OKHOSTING . user interface . controls. layout. IG rid. row count.</value>
 		int IGrid.RowCount
 		{
 			get
@@ -49,6 +64,17 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets the controls conetent the grid
+		/// <para xml:lang="es">Obtiene los controles que contiene del grid</para>
+		/// </summary>
+		/// <returns>Los controles que contiene el grid.</returns>
+		/// <param name="row">Row.
+		/// <para xml:lang="es">Numero de filas</para>
+		/// </param>
+		/// <param name="column">Column.
+		/// <para xml:lang="es">Numero de columnas.</para>
+		/// </param>
 		IControl IGrid.GetContent(int row, int column)
 		{
 			foreach (global::Xamarin.Forms.View children in base.Children)
@@ -62,6 +88,20 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			return null;
 		}
 
+		/// <summary>
+		/// Sets the controls content the grid.
+		/// <para xml:lang="es">Establece los controles que contiene el grid.</para>
+		/// </summary>
+		/// <returns>The controls content the grid.
+		/// <para xml:lang="es">Los controles que contiene el grid</para>
+		/// </returns>
+		/// <param name="row">Row.
+		/// <para xml:lang="es">Las filas del grid.</para>
+		/// </param>
+		/// <param name="column">Column.
+		/// <para xml:lang="es">Las columnas del control.</para>
+		/// </param>
+		/// <param name="content">Content.</param>
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
 			global::Xamarin.Forms.Grid.SetRow((global::Xamarin.Forms.View) content, row);
@@ -69,12 +109,22 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 			base.Children.Add((global::Xamarin.Forms.View) content);
 		}
-		
+
+		/// <summary>
+		/// Gets or sets the cell margin.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el margen de las celdas del grid.
+		/// </para>
+		/// </summary>
 		Thickness IGrid.CellMargin
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the cell padding.
+		/// <para xml:lang="es">Obtiene o establece el padding de las celdas del grid.</para>
+		/// </summary>
 		Thickness IGrid.CellPadding
 		{
 			get
@@ -87,41 +137,109 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Sets the columnSpan the cell.
+		/// <para xml:lang="es">Establece las columnas que abarcara la celda.</para>
+		/// </summary>
+		/// <returns>The column span.
+		/// <para xml:lang="es">Las columnas que abarcará la celda.</para>
+		/// </returns>
+		/// <param name="columnSpan">Column span.</param>
+		/// <param name="content">Content.</param>
 		void IGrid.SetColumnSpan(int columnSpan, IControl content)
 		{
 			SetColumnSpan((global::Xamarin.Forms.BindableObject) content, columnSpan);
 		}
 
+		/// <summary>
+		/// Gets the ColumnSpan the cell.
+		/// <para xml:lang="es">Obtiene el numero de columnas que abarca la celda.</para>
+		/// </summary>
+		/// <returns>The column span.
+		/// <para xml:lang="es">Las colunmas que abarcara la celda.</para>
+		/// </returns>
+		/// <param name="content">Content.</param>
 		int IGrid.GetColumnSpan(IControl content)
 		{
 			return GetColumnSpan((global::Xamarin.Forms.BindableObject) content);
 		}
 
+		/// <summary>
+		/// Sets the RowSpan the cell.
+		/// <para xml:lang="es">Establece el numero de filas que abarcara la celda</para>
+		/// </summary>
+		/// <returns>The row span.
+		/// <para xml:lang="es">Las filas que abarcara la celda.</para>
+		/// </returns>
+		/// <param name="rowSpan">Row span.</param>
+		/// <param name="content">Content.</param>
 		void IGrid.SetRowSpan(int rowSpan, IControl content)
 		{
 			SetColumnSpan((global::Xamarin.Forms.BindableObject) content, rowSpan);
 		}
 
+		/// <summary>
+		/// Gets the RowSpan the cell.
+		/// <para xml:lang="es">Obtiene las filas que abarcara la celda.</para>
+		/// </summary>
+		/// <returns>The row span.
+		/// <para xml:lang="es">Las filas que abarcará la celda.</para>
+		/// </returns>
+		/// <param name="content">Content.</param>
 		int IGrid.GetRowSpan(IControl content)
 		{
 			return GetRowSpan((global::Xamarin.Forms.BindableObject) content);
 		}
 
+		/// <summary>
+		/// Sets the width of the grid.
+		/// <para xml:lang="es">Establece el ancho del grid.</para>
+		/// </summary>
+		/// <returns>The width.
+		/// <para xml:lang="es">El ancho.</para>
+		/// </returns>
+		/// <param name="column">Column.</param>
+		/// <param name="width">Width.</param>
 		void IGrid.SetWidth(int column, double width)
 		{
 			base.ColumnDefinitions[column].Width = new global::Xamarin.Forms.GridLength(width, global::Xamarin.Forms.GridUnitType.Star);
 		}
 
+		/// <summary>
+		/// Gets the width of the grid.
+		/// <para xml:lang="es">Obtiene el ancho del grid</para>
+		/// </summary>
+		/// <returns>The width.
+		/// <para xml:lang="es">El ancho del grid.</para>
+		/// </returns>
+		/// <param name="column">Column.</param>
 		double IGrid.GetWidth(int column)
 		{
 			return base.ColumnDefinitions[column].Width.Value;
 		}
 
+		/// <summary>
+		/// Sets of the height of the grid.
+		/// <para xml:lang="es">Establece la altura del grid.</para>
+		/// </summary>
+		/// <returns>The height.
+		/// <para xml:lang="es">La altura.</para>
+		/// </returns>
+		/// <param name="row">Row.</param>
+		/// <param name="height">Height.</param>
 		void IGrid.SetHeight(int row, double height)
 		{
 			base.RowDefinitions[row].Height = new global::Xamarin.Forms.GridLength(height, global::Xamarin.Forms.GridUnitType.Star);
 		}
 
+		/// <summary>
+		/// Gets the height of the grid.
+		/// <para xml:lang="es">Obtiene la altura del grid.</para>
+		/// </summary>
+		/// <returns>The height.
+		/// <para xml:lang="es">La altura del grid.</para>
+		/// </returns>
+		/// <param name="row">Row.</param>
 		double IGrid.GetHeight(int row)
 		{
 			return base.RowDefinitions[row].Height.Value;
@@ -130,12 +248,19 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		#endregion
 
 		#region IControl
-
+		/// <summary>
+		/// Gets or sets the name of the Control.
+		/// <para xml:lang="es">Obtiene o establece el nommbre del control.</para>
+		/// </summary>
 		string IControl.Name
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the if the control visible.
+		/// <para xml:lang="es">Obtiene o establece si el control es visible o no.</para>
+		/// </summary>
 		bool IControl.Visible
 		{
 			get
@@ -148,6 +273,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the control is enabled or not.
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control esta habilitado o no.
+		/// </para>
+		/// </summary>
 		bool IControl.Enabled
 		{
 			get
@@ -160,6 +291,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
+		/// </summary>
 		double? IControl.Width
 		{
 			get
@@ -175,6 +310,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the height of the control.
+		/// <para xml:lang="es">Obtiene o establece la altura del control.</para>
+		/// </summary>
 		double? IControl.Height
 		{
 			get
@@ -190,11 +329,19 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the margin of the control.
+		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
+		/// </summary>
 		Thickness IControl.Margin
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the backgroundcolor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control</para>
+		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -207,16 +354,30 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the bordercolor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
+		/// </summary>
 		Color IControl.BorderColor
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the borderwidth of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// </summary>
 		Thickness IControl.BorderWidth
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the horizontal alignment of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la alineacion horizontal del control.
+		/// </para>
+		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
@@ -229,6 +390,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the vertical alignment of the control.
+		/// <para xml:lang="es">Obtiene o establevce la alineacion vertical del control.</para>
+		/// </summary>
+		/// <value>The OKHOSTING . user interface . controls. IC ontrol. vertical alignment.</value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
@@ -243,17 +409,29 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">
+		/// Obtiene o establece un objeto de valor arbitrario que puede ser usado para almacenar información personalizada sobre este elemento.
+		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
-		/// </remmarks>
+		/// <para xml:lang="es">
+		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
+		/// </para>
+		/// </remarks>
 		object IControl.Tag
 		{
 			get; set;
 		}
 
 		#endregion
-
+		/// <summary>
+		/// Dispose
+		/// <para xml:lang="es">Libera la memoria</para>
+		/// </summary>
+		/// <returns>The identifier dispose.
+		/// <para xml:lang="es">El identificador Dispose.</para>
+		/// </returns>
 		void IDisposable.Dispose()
 		{
 		}
