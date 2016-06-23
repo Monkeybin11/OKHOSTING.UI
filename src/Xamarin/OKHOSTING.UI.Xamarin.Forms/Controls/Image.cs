@@ -4,34 +4,87 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
+	/// <summary>
+	/// It is a control that represents a image in a Xamarin.Forms.
+	/// <para xml:lang="es">
+	/// Es un control que representa una imagen en un Xamarin.Forms.
+	/// </para>
+	/// </summary>
 	public class Image : global::Xamarin.Forms.Image, IImage
 	{
+		/// <summary>
+		/// Load a image from URL.
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un Url.
+		/// </para>
+		/// </summary>
+		/// <param name="url">URL.
+		/// <para xml:lang="es">El URL</para>
+		/// </param>
 		void IImage.LoadFromUrl(Uri url)
 		{
 			base.Source = global::Xamarin.Forms.ImageSource.FromUri(url);
 		}
 
+		/// <summary>
+		/// Load a image from file.
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un archivo.
+		/// </para>
+		/// </summary>
+		/// <returns>The file of the image.</returns>
+		/// <param name="filePath">File path.
+		/// <para xml:lang="es">La ruta del archivo</para>
+		/// </param>
 		void IImage.LoadFromFile(string filePath)
 		{
 			base.Source = global::Xamarin.Forms.ImageSource.FromFile(filePath);
 		}
 
+		/// <summary>
+		/// Load a image from stream.
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un stream
+		/// </para>
+		/// </summary>
+		/// <returns>The stream of the image.</returns>
+		/// <param name="stream">Stream.
+		/// <para xml:lang="es">El stream de la imagen</para>
+		/// </param>
 		void IImage.LoadFromStream(Stream stream)
 		{
 			base.Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
 		}
 
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">
+		/// El identificador dispose.
+		/// </para>
+		/// </summary>
 		void IDisposable.Dispose()
 		{
 		}
 
 		#region IControl
 
+		/// <summary>
+		/// Gets or sets the name of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el nombre del control.
+		/// </para>
+		/// </summary>
 		string IControl.Name
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets wether the control is visible or not.
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control es visible o no.
+		/// </para>
+		/// </summary>
 		bool IControl.Visible
 		{
 			get
@@ -44,6 +97,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets wether the control is enabled or not
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control es habilitado o no.
+		/// </para>
+		/// </summary>
 		bool IControl.Enabled
 		{
 			get
@@ -56,6 +115,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el ancho del control.
+		/// </para>
+		/// </summary>
 		double? IControl.Width
 		{
 			get
@@ -71,6 +136,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the height of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la altura del control.
+		/// </para>
+		/// </summary>
 		double? IControl.Height
 		{
 			get
@@ -86,11 +157,23 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the control margin.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el margen del control.
+		/// </para>
+		/// </summary>
 		Thickness IControl.Margin
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets the color of the Control background.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el color de fondo del control.
+		/// </para>
+		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -103,18 +186,36 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the color of the control border.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el color del borde del control.
+		/// </para>
+		/// </summary>
 		Color IControl.BorderColor
 		{
 			get;
 			set;
 		}
 
+		/// <summary>
+		/// Gets or sets the width of the control border.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el ancho del borde del control.
+		/// </para>
+		/// </summary>
 		Thickness IControl.BorderWidth
 		{
 			get;
 			set;
 		}
 
+		/// <summary>
+		/// Gets or sets the control horizontal alignment.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la alineación horizontal del control.
+		/// </para>
+		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
@@ -127,6 +228,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the control vertical alignment.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la alineación vertical del control.
+		/// </para>
+		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
@@ -141,10 +248,16 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">
+		/// Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este elemento.
+		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
-		/// </remmarks>
+		/// <para xml:lang="es">
+		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
+		/// </para>
+		/// </remarks>
 		object IControl.Tag
 		{
 			get; set;

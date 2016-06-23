@@ -3,19 +3,47 @@ using System;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
+	/// <summary>
+	/// A multiline textbox
+	/// <para xml:lang="es">
+	/// Un cuadro de texto de multiples lineas.
+	/// </para>
+	/// </summary>
 	public class TextArea : global::Xamarin.Forms.Editor, ITextArea
 	{
+		/// <summary>
+		/// Initializes a new instance of the TextArea class.
+		/// <para xml:lang="es">
+		/// Inicializa una nueva instancia de la clase TextArea.
+		/// </para>
+		/// </summary>
 		public TextArea()
 		{
 			base.TextChanged += TextArea_TextChanged;
 		}
 
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">
+		/// El identificador dispose.
+		/// </para>
+		/// </summary>
+		/// <returns>The identifier isposable. dispose.</returns>
 		void IDisposable.Dispose()
 		{
 		}
 
 		#region IInputControl
 
+		/// <summary>
+		/// Texts the area text changed.
+		/// <para xml:lang="es">
+		/// Cambia el texto del cuadro cuando el usuario lo cambia.
+		/// </para>
+		/// </summary>
+		/// <returns>The area text changed.</returns>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		private void TextArea_TextChanged(object sender, global::Xamarin.Forms.TextChangedEventArgs e)
 		{
 			if (ValueChanged != null)
@@ -24,8 +52,20 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Occurs when value changed.
+		/// <para xml:lang="es">
+		/// Ocurre cuando el valor es cambiado.
+		/// </para>
+		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
+		/// <summary>
+		/// Gets or sets the user input value.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el valor de entrada del usuario.
+		/// </para>
+		/// </summary>
 		string IInputControl<string>.Value
 		{
 			get

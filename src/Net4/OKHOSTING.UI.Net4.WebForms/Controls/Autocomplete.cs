@@ -6,7 +6,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
 	/// <summary>
 	/// Represents a control that is autocomplete.
-	/// <para xml:lang="es">Representa un control que es autocomplit.</para>
+	/// <para xml:lang="es">Representa un control que es autocomplete.</para>
 	/// </summary>
 	public class Autocomplete : System.Web.UI.WebControls.Panel, IAutocomplete
 	{
@@ -440,7 +440,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
 		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.</para>
-		/// </remmarks>
+		/// </remarks>
 		object IControl.Tag
 		{
 			get; set;

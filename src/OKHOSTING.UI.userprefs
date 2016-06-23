@@ -1,15 +1,17 @@
-﻿<Properties StartupItem="../test/Xamarin/OKHOSTING.UI.Xamarin.Forms.Test/OKHOSTING.UI.Xamarin.Forms.Test.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="PCL/OKHOSTING.UI/Controls/Forms/FormField.cs">
+﻿<Properties StartupItem="../test/Xamarin/OKHOSTING.UI.Xamarin.Forms.Test.Droid/OKHOSTING.UI.Xamarin.Forms.Test.Droid.csproj">
+  <MonoDevelop.Ide.ItemProperties.Test.Xamarin.OKHOSTING.UI.Xamarin.Forms.Test.Droid PreferredExecutionTarget="Android.Xamarin_Android_API_15" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/HyperLink.cs">
     <Files>
-      <File FileName="PCL/OKHOSTING.UI/Thickness.cs" Line="66" Column="1" />
-      <File FileName="PCL/OKHOSTING.UI/Translator.cs" Line="1" Column="1" />
-      <File FileName="PCL/OKHOSTING.UI/VerticalAlignment.cs" Line="5" Column="59" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/Page.cs" Line="307" Column="88" />
-      <File FileName="Net4/OKHOSTING.UI.Net4.WebForms/SessionIdProvider.cs" Line="7" Column="2" />
-      <File FileName="PCL/OKHOSTING.UI/Controls/Forms/DateTimeField.cs" Line="22" Column="71" />
-      <File FileName="PCL/OKHOSTING.UI/Controls/Forms/EnumField.cs" Line="1" Column="1" />
-      <File FileName="PCL/OKHOSTING.UI/Controls/Forms/Form.cs" Line="240" Column="98" />
-      <File FileName="PCL/OKHOSTING.UI/Controls/Forms/FormField.cs" Line="137" Column="19" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/Calendar.cs" Line="350" Column="8" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/CheckBox.cs" Line="347" Column="3" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/ControlList.cs" Line="232" Column="2" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/HyperLink.cs" Line="406" Column="2" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/Image.cs" Line="237" Column="47" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/ImageButton.cs" Line="41" Column="41" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/Label.cs" Line="344" Column="3" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/ListPicker.cs" Line="271" Column="3" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/PasswordTextBox.cs" Line="274" Column="11" />
+      <File FileName="Xamarin/OKHOSTING.UI.Xamarin.Forms/Controls/TextArea.cs" Line="69" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,17 +20,33 @@
             <Node name="Source" expanded="True">
               <Node name="Net4" expanded="True">
                 <Node name="OKHOSTING.UI.Net4.WebForms" expanded="True">
-                  <Node name="Controls" expanded="True" />
+                  <Node name="Controls" expanded="True">
+                    <Node name="Layout" expanded="True" />
+                  </Node>
                 </Node>
               </Node>
               <Node name="PCL" expanded="True">
                 <Node name="OKHOSTING.UI" expanded="True">
                   <Node name="Controls" expanded="True">
-                    <Node name="Forms" expanded="True">
-                      <Node name="FormField.cs" selected="True" />
-                    </Node>
+                    <Node name="Layout" expanded="True" />
                   </Node>
                 </Node>
+                <Node name="OKHOSTING.UI.CSS" expanded="True" />
+              </Node>
+              <Node name="Xamarin" expanded="True">
+                <Node name="OKHOSTING.UI.Xamarin.Android" expanded="True" />
+                <Node name="OKHOSTING.UI.Xamarin.Forms" expanded="True">
+                  <Node name="Controls" expanded="True">
+                    <Node name="Layout" expanded="True" />
+                    <Node name="HyperLink.cs" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+            <Node name="Test" expanded="True">
+              <Node name="PCL" expanded="True" />
+              <Node name="Xamarin" expanded="True">
+                <Node name="OKHOSTING.UI.Xamarin.Forms.Test.Droid" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -38,7 +56,9 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/okhosting/Documents/OKHOSTING.UI/test/PCL/OKHOSTING.UI.Test/AutocompleteController.cs" line="10" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Test.Xamarin.OKHOSTING.UI.Xamarin.Forms.Test PreferredExecutionTarget="MonoDevelop.Default" />

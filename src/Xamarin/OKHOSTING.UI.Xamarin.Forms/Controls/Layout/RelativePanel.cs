@@ -198,7 +198,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// <para xml:lang="es">
 		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
 		/// </para>
-		/// </remmarks>
+		/// </remarks>
 		object IControl.Tag
 		{
 			get; set;
@@ -207,7 +207,13 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		#endregion
 
 		#region IDisposable
-
+		/// <summary>
+		/// Dispose.
+		/// <para xml:lang="es">Libera la memoria.</para>
+		/// </summary>
+		/// <returns>The identifier dispose.
+		/// <para xml:lang="es">El identificador dispose.</para>
+		/// </returns>
 		void IDisposable.Dispose()
 		{
 		}
@@ -215,7 +221,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		#endregion
 
 		#region IRelativePanel
-
+		/// <summary>
+		/// Gets the controls RelativePanel children.
+		/// <para xml:lang="es">Obtiene los controles hijos del RelativePanel.</para>
+		/// </summary>
 		IList<IControl> IRelativePanel.Children
 		{
 			get
@@ -223,7 +232,28 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				return _Children;
 			}
 		}
-		
+
+		/// <summary>
+		/// Adds the specified control to RelativePanel with vertical and horizontal alignment specified for the specified reference control.
+		/// <para xml:lang="es">
+		/// Agrega el control especificado al RelativePanel con la alineacion vertical y horizontal especificadas con respecto al control de referencia especificado.
+		/// </para>
+		/// </summary>
+		/// <returns>The control Relative panel add.
+		/// <para xml:lang="es">El control agregado al RelativePanel.</para>
+		/// </returns>
+		/// <param name="control">Control.
+		/// <para xml:lang="es">El control a agregar al control.</para>
+		/// </param>
+		/// <param name="horizontalContraint">Horizontal contraint.
+		/// <para xml:lang="es">Restriccion de la alineacion horizontal para el control.</para>
+		/// </param>
+		/// <param name="verticalContraint">Vertical contraint.
+		/// <para xml:lang="es">Restricciona de la alineacion vertical para el control.</para>
+		/// </param>
+		/// <param name="referenceControl">Reference control.
+		/// <para xml:lang="es">Control de referencia.</para>
+		/// </param>
 		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
 		{
 			if (control == null)

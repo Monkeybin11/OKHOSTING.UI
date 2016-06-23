@@ -186,7 +186,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// Gets or sets the width of the IC ontrol. border.
 		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
 		/// </summary>
-		/// <value>The width of the IC ontrol. border.</value>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -313,7 +312,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
 		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no tiene ningun valor predeterminado.</para>
-		/// </remmarks>
+		/// </remarks>
 		object IControl.Tag
 		{
 			get; set;

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace OKHOSTING.UI.Controls
 {
 	/// <summary>
-	/// It contains the events of Autocomplete.
+	/// It contains the events of Autocomplete control.
 	/// <para xml:lang="es">
-	/// Contiene los evetos de un Autocomplete.
+	/// Contiene los evetos de un control Autocomplete.
 	/// </para>
 	/// </summary>
 	public interface IAutocomplete: ITextControl, IInputControl<string>
