@@ -38,9 +38,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		protected readonly IList<Native.View> InnerList;
 
 		/// <summary>
-		/// Gets or sets the ControlList at the specified index.
+		/// Gets or sets the Control at the specified index.
 		/// <para xml:lang="es">
-		/// Obtiene o establece el ControlList en el indice especificado.
+		/// Obtiene o establece el Control en el indice especificado.
 		/// </para>
 		/// </summary>
 		/// <param name="index">Index.
