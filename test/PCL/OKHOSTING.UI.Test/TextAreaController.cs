@@ -70,6 +70,9 @@ namespace OKHOSTING.UI.Test
 
 		/// <summary>
 		/// Cmds the open click.
+		/// <para xml:lang="es">
+		/// Es el evento clic del boton cmdPrint, lo que hace es hacer visible el Label lblcoment y cambiarle el texto al mismo label.
+		/// </para>
 		/// </summary>
 		/// <returns>The open click.</returns>
 		/// <param name="sender">Sender.</param>
@@ -81,6 +84,15 @@ namespace OKHOSTING.UI.Test
 			txtTextarea.Enabled = false;
 		}
 
+		/// <summary>
+		/// It is the button click event cmdClose, what it does is end this instance.
+		/// <para xml:lang="es">
+		/// Es el evento clic del boton cmdClose, lo que hace es finalizar esta instancia.
+		/// </para>
+		/// </summary>
+		/// <returns>The close click.</returns>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		private void CmdClose_Click(object sender, EventArgs e)
 		{
 			this.Finish();
