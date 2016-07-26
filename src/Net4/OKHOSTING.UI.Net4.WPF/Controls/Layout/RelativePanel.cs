@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 {
@@ -174,17 +176,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				base.VerticalAlignment = Platform.Current.Parse(value);
 			}
 		}
-
-		Thickness IGrid.CellMargin
-		{
-			get; set;
-		}
-
-		Thickness IGrid.CellPadding
-		{
-			get; set;
-		}
-
+		
 		#endregion
 
 		/// <summary>
@@ -645,6 +637,203 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 		void IDisposable.Dispose()
 		{
+		}
+
+		public class VisualStateUwp : System.Windows.VisualState, System.ComponentModel.ISupportInitialize
+		{
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+			public class SetterBaseCollection : ObservableCollection<System.Windows.Setter> { }
+			private SetterBaseCollection _setters;
+			private ObservableCollection<StateTriggerBase> _triggers;
+
+			public VisualStateUwp()
+			{
+				_setters = new SetterBaseCollection();
+				_triggers = new ObservableCollection<StateTriggerBase>();
+				_triggers.CollectionChanged += triggers_CollectionChanged;
+				_setters.CollectionChanged += _setters_CollectionChanged;
+			}
+
+			private void _setters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+			{
+				SetActive(_triggers.Where(t => t.IsTriggerActive).Any());
+			}
+
+			private void triggers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+			{
+				if (e.NewItems != null)
+				{
+					foreach (var item in e.NewItems.OfType<StateTriggerBase>())
+					{
+						item.Owner = this;
+					}
+				}
+				if (e.OldItems != null)
+				{
+					foreach (var item in e.OldItems.OfType<StateTriggerBase>())
+					{
+						if (item.Owner == this)
+							item.Owner = null;
+					}
+				}
+				SetActive(_triggers.Where(t => t.IsTriggerActive).Any());
+			}
+
+			Action afterInit;
+			internal void SetActive(bool active)
+			{
+				if (_isInitializing)
+				{
+					afterInit = () => SetActive(active);
+					return;
+				}
+				if (Storyboard != null)
+				{
+					if (active)
+						Storyboard.Begin();
+					else
+						Storyboard.Stop();
+				}
+
+				//var storyboard = new System.Windows.Media.Animation.Storyboard();
+				foreach (var setter in _setters.OfType<System.Windows.Setter>())
+				{
+					System.Windows.DependencyProperty property = setter.Property;
+					object value = setter.Value; //Why doesn't this  return the actual value???
+					string targetName = setter.TargetName;
+
+					//var s = new System.Windows.Media.Animation.DoubleAnimation() { };
+					//System.Windows.Media.Animation.Storyboard.SetTargetName(s, setter.TargetName);
+					//System.Windows.Media.Animation.Storyboard.SetTargetProperty(s, new System.Windows.PropertyPath(string.Format("({0}.{1})", setter.Property.OwnerType.Name, setter.Property.Name )));
+					//s.To = (double)setter.Value;
+					//storyboard.Children.Add(s);
+
+					//This isn't really working... need a better way
+					//if (System.Windows.Application.Current.MainWindow != null)
+					//{
+					//	if (System.Windows.Application.Current.MainWindow.IsLoaded)
+					//	{
+					//		var target = System.Windows.Application.Current.MainWindow.FindName(targetName) as System.Windows.DependencyObject;
+					//		if (target != null)
+					//			target.SetValue(property, value);
+					//	}
+					//	else
+					//		System.Windows.Application.Current.MainWindow.Loaded += (s, e) =>
+					//		{
+					//			var target = System.Windows.Application.Current.MainWindow.FindName(targetName) as System.Windows.DependencyObject;
+					//			if (target != null)
+					//				target.SetValue(property, value);
+					//		};
+					//}
+				}
+				//storyboard.Begin()
+			}
+			private bool _isInitializing;
+
+			void ISupportInitialize.BeginInit()
+			{
+				_isInitializing = true;
+			}
+
+			void ISupportInitialize.EndInit()
+			{
+				_isInitializing = false;
+				if (afterInit != null)
+					afterInit();
+			}
+
+			/// <summary>
+			/// Gets a collection of Setter objects
+			/// </summary>
+			/// <returns>A collection of Setter objects. The default is an empty collection.</returns>
+			public SetterBaseCollection Setters { get { return _setters; } }
+
+			/// <summary>
+			/// Gets a collection of StateTriggerBase objects.
+			/// </summary>
+			/// <returns>A collection of StateTriggerBase objects. The default is an empty collection.</returns>
+			public ObservableCollection<StateTriggerBase> StateTriggers { get { return _triggers; } }
+		}
+
+		public abstract class StateTriggerBase : DependencyObject
+		{
+			private bool _isActive;
+
+			/// <summary>
+			/// Initializes a new instance of the StateTriggerBase class.
+			/// </summary>
+			protected StateTriggerBase() { }
+
+			/// <summary>
+			/// Sets the value that indicates whether the state trigger is active.
+			/// </summary>
+			/// <param name="IsActive">true if the system should apply the trigger; otherwise, false.</param>
+			protected void SetActive(bool IsActive)
+			{
+				_isActive = IsActive;
+				if (Owner != null && Owner.Storyboard != null)
+				{
+					Owner.SetActive(_isActive);
+				}
+			}
+
+			internal bool IsTriggerActive { get { return _isActive; } }
+
+			internal VisualStateUwp Owner { get; set; }
+
+		}
+
+		public class AdaptiveTrigger : StateTriggerBase
+		{
+
+
+			public double MinWindowHeight
+			{
+				get { return (double)GetValue(MinWindowHeightProperty); }
+				set { SetValue(MinWindowHeightProperty, value); }
+			}
+
+			public static readonly DependencyProperty MinWindowHeightProperty =
+				DependencyProperty.Register("MinWindowHeight", typeof(double), typeof(AdaptiveTrigger), new PropertyMetadata(0d));
+
+			public double MinWindowWidth
+			{
+				get { return (double)GetValue(MinWindowWidthProperty); }
+				set { SetValue(MinWindowWidthProperty, value); }
+			}
+
+			public static readonly DependencyProperty MinWindowWidthProperty =
+				DependencyProperty.Register("MinWindowWidth", typeof(double), typeof(AdaptiveTrigger), new PropertyMetadata(0d));
+
+
+		}
+
+		public class StateTrigger : StateTriggerBase
+		{
+			/// <summary>
+			/// Initializes a new instance of the StateTrigger class.
+			/// </summary>
+			public StateTrigger() { }
+
+			/// <summary>
+			/// Gets or sets a value that indicates whether the trigger should be applied
+			/// </summary>
+			/// <returns>true if the system should apply the trigger; otherwise, false.</returns>
+			public bool IsActive
+			{
+				get { return (bool)GetValue(IsActiveProperty); }
+				set { SetValue(IsActiveProperty, value); }
+			}
+
+			/// <summary>Identifies the IsActive dependency property.</summary>
+			/// <returns>The identifier for the IsActive dependency property.</returns>
+			public static readonly DependencyProperty IsActiveProperty =
+				DependencyProperty.Register("IsActive", typeof(bool), typeof(StateTrigger), new PropertyMetadata(false, OnIsActivePropertyChanged));
+
+			private static void OnIsActivePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+			{
+				((StateTrigger)d).SetActive((bool)e.NewValue);
+			}
 		}
 	}
 }

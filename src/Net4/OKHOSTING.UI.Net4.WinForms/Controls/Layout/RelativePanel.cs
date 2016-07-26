@@ -93,16 +93,24 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			base.Controls.Add((NativeControl) control);
 		}
 
+		protected bool arranged = false;
+
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
 			//invert child index of controls so they are shown in the order which they where added
-			foreach (NativeControl control in base.Controls)
+			if (!arranged)
 			{
-				control.BringToFront();
+				foreach (NativeControl control in base.Controls)
+				{
+					control.BringToFront();
+				}
+
+				arranged = true;
 			}
 
 			Platform.Current.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
+
 		}
 
 		#region IControl

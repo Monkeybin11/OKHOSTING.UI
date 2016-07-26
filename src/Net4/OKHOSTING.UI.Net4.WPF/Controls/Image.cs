@@ -32,6 +32,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			var bitmap = new System.Windows.Media.Imaging.BitmapImage();
 			bitmap.BeginInit();
+			bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
 			bitmap.UriSource = url;
 			bitmap.EndInit();
 

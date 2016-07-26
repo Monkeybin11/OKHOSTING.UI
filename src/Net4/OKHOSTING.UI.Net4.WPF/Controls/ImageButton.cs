@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class ImageButton : Image
+	public class ImageButton : Image, IImageButton
 	{
 		public ImageButton()
 		{
@@ -15,10 +15,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		private void InnerImage_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			if (Click != null)
-			{
-				Click(this, e);
-			}
+			Click?.Invoke(this, e);
 		}
 	}
 }

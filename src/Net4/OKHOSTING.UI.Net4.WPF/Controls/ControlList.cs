@@ -57,7 +57,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 			set
 			{
-				InnerList[index] = (Native.Control) value;
+				InnerList[index] = (System.Windows.FrameworkElement) value;
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         /// </param>
 		public void Add(IControl item)
 		{
-			InnerList.Add((Native.Control) item);
+			InnerList.Add((System.Windows.FrameworkElement) item);
 		}
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         /// </returns>
 		public bool Contains(IControl item)
 		{
-			return InnerList.Contains((Native.Control) item);
+			return InnerList.Contains((System.Windows.FrameworkElement) item);
 		}
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         /// </param>
 		public void CopyTo(IControl[] array, int arrayIndex)
 		{
-			InnerList.CopyTo((Native.Control[]) array, arrayIndex);
+			InnerList.CopyTo((System.Windows.FrameworkElement[]) array, arrayIndex);
 		}
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         /// <returns>The enumerator</returns>
 		public IEnumerator<IControl> GetEnumerator()
 		{
-			foreach (Native.Control view in InnerList)
+			foreach (System.Windows.FrameworkElement view in InnerList)
 			{
 				yield return (IControl) view;
 			}
@@ -180,7 +180,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         /// </returns>
 		public int IndexOf(IControl item)
 		{
-			return InnerList.IndexOf((Native.Control) item);
+			return InnerList.IndexOf((System.Windows.FrameworkElement) item);
 		}
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         /// </param>
 		public void Insert(int index, IControl item)
 		{
-			InnerList.Insert(index, (Native.Control) item);
+			InnerList.Insert(index, (System.Windows.FrameworkElement) item);
 		}
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
         /// <returns>True.</returns>
 		public bool Remove(IControl item)
 		{
-			InnerList.Remove((Native.Control) item);
+			InnerList.Remove((System.Windows.FrameworkElement) item);
 
 			return true;
 		}

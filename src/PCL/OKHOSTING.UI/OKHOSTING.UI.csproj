@@ -125,10 +125,6 @@
     <XliffResource Include="MultilingualResources\OKHOSTING.UI.pt.xlf" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Core.1.0.23\lib\OKHOSTING.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OKHOSTING.Data.1.0.16\lib\OKHOSTING.Data.dll</HintPath>
       <Private>True</Private>
@@ -142,6 +138,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
+      <Project>{3f4502fa-51ea-4cb9-8e50-46f828d240a1}</Project>
+      <Name>OKHOSTING.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />

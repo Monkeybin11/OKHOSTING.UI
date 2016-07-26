@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>OKHOSTING.UI.Net4.WebForms</id>
-		<version>1.0.11</version>
+		<version>1.0.17</version>
 		<title>OKHOSTING.UI.Net4.WebForms</title>
 		<authors>OK HOSTING</authors>
 		<owners>OK HOSTING</owners>
@@ -49,7 +49,7 @@
 		<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
 		<copyright>Copyright OK HOSTING SC 2015</copyright>
 		<dependencies>
-			<dependency id="OKHOSTING.UI" version="1.0.9" />
+			<dependency id="OKHOSTING.UI" version="1.0.17" />
 		</dependencies>
 		<references></references>
 		<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>
