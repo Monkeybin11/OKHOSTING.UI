@@ -26,6 +26,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Test.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::OKHOSTING.UI.Xamarin.Forms.Test.Droid.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Attribute

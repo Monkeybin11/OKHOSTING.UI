@@ -117,22 +117,6 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// </summary>
 		public virtual bool Required { get; set; }
 
-		#endregion
-
-		#region Methods
-
-		//abstract
-
-		/// <summary>
-		/// Creates the controls for displaying the field
-		/// <para xml:lang="es">
-		/// Crea los controles para visualizar el campo.
-		/// </para>
-		/// </summary>
-		protected abstract void CreateValueControl();
-
-		//non abstract
-
 		/// <summary>
 		/// Indicates wether all information written by the user has been succesfully validated or not
 		/// <para xml:lang="es">
@@ -153,6 +137,22 @@ namespace OKHOSTING.UI.Controls.Forms
 				}
 			}
 		}
+
+		#endregion
+
+		#region Methods
+
+		//abstract
+
+		/// <summary>
+		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">
+		/// Crea los controles para visualizar el campo.
+		/// </para>
+		/// </summary>
+		protected abstract void CreateValueControl();
+
+		//non abstract
 
 		/// <summary>
 		/// Returns the field's Id
