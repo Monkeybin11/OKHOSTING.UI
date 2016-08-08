@@ -23,10 +23,14 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		public void LoadFromUrl(System.Uri url)
 		{
-			using (var stream = new System.Net.WebClient().OpenRead(url))
+			try
 			{
-				base.Image = System.Drawing.Image.FromStream(stream);
+				using (var stream = new System.Net.WebClient().OpenRead(url))
+				{
+					base.Image = System.Drawing.Image.FromStream(stream);
+				}
 			}
+			catch { }
 		}
 
 		#region IControl
