@@ -26,7 +26,19 @@ namespace OKHOSTING.UI.Controls.Forms
 		{
 			get
 			{
-				return DateTime.ParseExact(ValueControl.Value, Format, System.Globalization.CultureInfo.InvariantCulture);
+				if (string.IsNullOrWhiteSpace(ValueControl.Value))
+				{
+					return null;
+				}
+
+				try
+				{
+					return DateTime.ParseExact(ValueControl.Value, Format, System.Globalization.CultureInfo.InvariantCulture);
+				}
+				catch
+				{
+					return null;
+				}
 			}
 			set
 			{

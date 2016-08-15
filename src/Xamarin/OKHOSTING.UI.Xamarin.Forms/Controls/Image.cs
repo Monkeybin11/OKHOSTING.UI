@@ -23,7 +23,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </param>
 		void IImage.LoadFromUrl(Uri url)
 		{
-			base.Source = global::Xamarin.Forms.ImageSource.FromUri(url);
+			base.Source = new global::Xamarin.Forms.UriImageSource
+			{
+				Uri = url,
+				CachingEnabled = true,
+				CacheValidity = new TimeSpan(1, 0, 0, 0)
+			};
 		}
 
 		/// <summary>
