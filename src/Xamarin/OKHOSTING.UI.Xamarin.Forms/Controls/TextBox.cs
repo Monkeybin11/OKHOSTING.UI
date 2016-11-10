@@ -381,8 +381,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return Platform.Current.Parse(base.HorizontalTextAlignment);
+			}
+			set
+			{
+				base.HorizontalTextAlignment = Platform.Current.ParseTextAlignment(value);
+			}
 		}
 
 		/// <summary>
