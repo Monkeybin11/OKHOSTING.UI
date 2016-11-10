@@ -32,6 +32,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		event EventHandler<string> IInputControl<string>.ValueChanged
+		{
+			add
+			{
+				throw new NotImplementedException();
+			}
+
+			remove
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		/// <summary>
 		/// Ons the text changed.
 		/// <para xml:lang="es">Es el evento enviado al cambiar el texto.</para>
@@ -684,6 +697,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		#endregion
+
+		string ITextBox.Placeholder
+		{
+			get; //TODO
+			set;
+		}
 
 		/// <summary>
 		/// Ons the pre render.

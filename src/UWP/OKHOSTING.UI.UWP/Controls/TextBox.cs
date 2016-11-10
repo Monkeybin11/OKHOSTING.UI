@@ -377,5 +377,17 @@ namespace OKHOSTING.UI.UWP.Controls
 				base.InputScope.Names.Add(scopeName);
 			}
 		}
+
+		string ITextBox.Placeholder
+		{
+			get
+			{
+				return base.PlaceholderText;
+			}
+			set
+			{
+				base.PlaceholderText = value;
+			}
+		}
 	}
 }

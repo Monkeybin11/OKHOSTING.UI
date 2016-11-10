@@ -242,6 +242,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			get; set;
 		}
 
+		string ITextBox.Placeholder
+		{
+			get; //TODO
+			set;
+		}
+
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
 			Platform.Current.DrawBorders(this, pevent);

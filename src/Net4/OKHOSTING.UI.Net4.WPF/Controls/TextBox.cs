@@ -364,5 +364,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				base.InputScope.Names.Add(scopeName);
 			}
 		}
+
+		string ITextBox.Placeholder
+		{
+			get; //TODO
+			set;
+		}
 	}
 }

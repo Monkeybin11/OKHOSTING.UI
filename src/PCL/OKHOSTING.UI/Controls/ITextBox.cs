@@ -23,5 +23,10 @@ namespace OKHOSTING.UI.Controls
 		/// </para>
 		/// </summary>
 		int MaxLength { get; set; }
+
+		/// <summary>
+		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
+		/// </summary>
+		string Placeholder { get; set; }
 	}
 }
