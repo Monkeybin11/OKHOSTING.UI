@@ -15,6 +15,11 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		public virtual Color Parse(System.Drawing.Color color)
 		{
+			if (color == null)
+			{
+				return new Color(255, 0, 0, 0);
+			}
+
 			return new Color(color.A, color.R, color.G, color.B);
 		}
 

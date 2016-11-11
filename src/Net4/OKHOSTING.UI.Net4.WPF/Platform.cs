@@ -19,12 +19,22 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		public virtual Color Parse(System.Windows.Media.Color color)
 		{
+			if (color == null)
+			{
+				return new Color(255, 0, 0, 0);
+			}
+
 			return new Color(color.A, color.R, color.G, color.B);
 		}
 
 		public virtual System.Windows.Media.Color Parse(Color color)
 		{
-			return System.Windows.Media.Color.FromArgb((byte)color.Alpha, (byte)color.Red, (byte)color.Green, (byte)color.Blue);
+			if (color == null)
+			{
+				return System.Windows.Media.Color.FromArgb(255, 0, 0, 0);
+			}
+
+			return System.Windows.Media.Color.FromArgb((byte) color.Alpha, (byte) color.Red, (byte) color.Green, (byte) color.Blue);
 		}
 
 		public virtual System.Windows.Thickness Parse(Thickness thickness)

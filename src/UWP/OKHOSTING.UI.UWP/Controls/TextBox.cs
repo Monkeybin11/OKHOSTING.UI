@@ -8,6 +8,8 @@ namespace OKHOSTING.UI.UWP.Controls
 		public TextBox()
 		{
 			base.TextChanged += TextBox_TextChanged;
+			base.LostFocus += TextBox_LostFocus;
+			base.GotFocus += TextBox_GotFocus;
 		}
 
 		void IDisposable.Dispose()
@@ -30,11 +32,26 @@ namespace OKHOSTING.UI.UWP.Controls
 		{
 			get
 			{
-				return base.Text;
+				if (IsPlaceHolder)
+				{
+					return null;
+				}
+				else
+				{
+					return base.Text;
+				}
 			}
 			set
 			{
-				base.Text = value;
+				if (!string.IsNullOrEmpty(value))
+				{
+					HidePlaceholder();
+					base.Text = value;
+				}
+				else
+				{
+					ShowPlaceholder();
+				}
 			}
 		}
 
@@ -191,14 +208,20 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
+		/// <summary>
+		/// Private member to store the FontColor
+		/// </summary>
+		private Color _FontColor;
+
 		Color ITextControl.FontColor
 		{
 			get
 			{
-				return Platform.Current.Parse(((Windows.UI.Xaml.Media.SolidColorBrush)base.Foreground).Color);
+				return _FontColor;
 			}
 			set
 			{
+				_FontColor = value;
 				base.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Platform.Current.Parse(value));
 			}
 		}
@@ -378,25 +401,82 @@ namespace OKHOSTING.UI.UWP.Controls
 			}
 		}
 
+		/// <summary>
+		/// Private member to store the placeholder
+		/// </summary>
+		private string _Placeholder;
+
+		/// <summary>
+		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
+		/// </summary>
 		string ITextBox.Placeholder
 		{
 			get
 			{
-				return base.PlaceholderText;
+				return _Placeholder;
 			}
 			set
 			{
-				base.PlaceholderText = value;
+				_Placeholder = value;
+				ShowPlaceholder();
 			}
 		}
+
+		/// <summary>
+		/// Private member to store the PlaceholderColor
+		/// </summary>
+		private Color _PlaceholderColor;
 
 		/// <summary>
 		/// The font color of the Placeholder text
 		/// </summary>
 		Color ITextBox.PlaceholderColor
 		{
-			get;
-			set;
+			get
+			{
+				return _PlaceholderColor;
+			}
+			set
+			{
+				_PlaceholderColor = value;
+				ShowPlaceholder();
+			}
+		}
+
+		/// <summary>
+		/// Wheter the placeholder is currently being displayed or not. It will only be displayed
+		/// when Value is empty and the TextBox does not the have the focus
+		/// </summary>
+		private bool IsPlaceHolder;
+
+		private void ShowPlaceholder()
+		{
+			if (string.IsNullOrEmpty(base.Text) || base.Text == ((ITextBox)this).Placeholder)
+			{
+				base.Text = ((ITextBox)this).Placeholder;
+				base.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Platform.Current.Parse(((ITextBox) this).PlaceholderColor));
+				IsPlaceHolder = true;
+			}
+		}
+
+		private void HidePlaceholder()
+		{
+			if (base.Text == ((ITextBox)this).Placeholder)
+			{
+				base.Text = null;
+				base.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Platform.Current.Parse(((ITextBox) this).FontColor));
+				IsPlaceHolder = false;
+			}
+		}
+
+		private void TextBox_GotFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			HidePlaceholder();
+		}
+
+		private void TextBox_LostFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			ShowPlaceholder();
 		}
 	}
 }

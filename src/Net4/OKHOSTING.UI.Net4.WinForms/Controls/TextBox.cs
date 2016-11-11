@@ -293,7 +293,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		/// </summary>
 		private Color _PlaceholderColor;
 
-
 		/// <summary>
 		/// The font color of the Placeholder text
 		/// </summary>
