@@ -8,28 +8,41 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public TextBox()
 		{
 			base.TextChanged += PasswordTextBox_TextChanged;
+			base.GotFocus += TextBox_GotFocus;
+			base.LostFocus += TextBox_LostFocus;
 		}
-
+		
 		#region IInputControl
 
 		private void PasswordTextBox_TextChanged(object sender, System.EventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>)this).Value);
-			}
-
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		string IInputControl<string>.Value
 		{
 			get
 			{
-				return base.Text;
+				if (IsPlaceHolder)
+				{
+					return null;
+				}
+				else
+				{
+					return base.Text;
+				}
 			}
 			set
 			{
-				base.Text = value;
+				if (!string.IsNullOrEmpty(value))
+				{
+					HidePlaceholder();
+					base.Text = value;
+				}
+				else
+				{
+					ShowPlaceholder();
+				}
 			}
 		}
 
@@ -125,14 +138,20 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#region ITextControl
 
+		/// <summary>
+		/// Private member to store the FontColor
+		/// </summary>
+		private Color _FontColor;
+
 		Color ITextControl.FontColor
 		{
 			get
 			{
-				return Platform.Current.Parse(base.ForeColor);
+				return _FontColor;
 			}
 			set
 			{
+				_FontColor = value;
 				base.ForeColor = Platform.Current.Parse(value);
 			}
 		}
@@ -237,15 +256,94 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
+		/// <summary>
+		/// The type of input that will be allowed for this TextBox
+		/// <para xml:lang="es">
+		/// El tipo de entrada que sera permitida para este cuadro de texto.
+		/// </para>
+		/// </summary>
 		ITextBoxInputType ITextBox.InputType
 		{
 			get; set;
 		}
 
+		/// <summary>
+		/// Private member to store the placeholder
+		/// </summary>
+		private string _Placeholder;
+
+		/// <summary>
+		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
+		/// </summary>
 		string ITextBox.Placeholder
 		{
-			get; //TODO
-			set;
+			get
+			{
+				return _Placeholder;
+			}
+			set
+			{
+				_Placeholder = value;
+				ShowPlaceholder();
+			}
+		}
+
+		/// <summary>
+		/// Private member to store the PlaceholderColor
+		/// </summary>
+		private Color _PlaceholderColor;
+
+
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color ITextBox.PlaceholderColor
+		{
+			get
+			{
+				return _PlaceholderColor;
+			}
+			set
+			{
+				_PlaceholderColor = value;
+				ShowPlaceholder();
+			}
+		}
+
+		/// <summary>
+		/// Wheter the placeholder is currently being displayed or not. It will only be displayed
+		/// when Value is empty and the TextBox does not the have the focus
+		/// </summary>
+		private bool IsPlaceHolder;
+
+		private void ShowPlaceholder()
+		{
+			if (string.IsNullOrEmpty(base.Text) || base.Text == ((ITextBox) this).Placeholder)
+			{
+				base.Text = ((ITextBox) this).Placeholder;
+				base.ForeColor = Platform.Current.Parse(((ITextBox) this).PlaceholderColor);
+				IsPlaceHolder = true;
+			}
+		}
+
+		private void HidePlaceholder()
+		{
+			if (base.Text == ((ITextBox) this).Placeholder)
+			{
+				base.Text = null;
+				base.ForeColor = Platform.Current.Parse(((ITextBox) this).FontColor);
+				IsPlaceHolder = false;
+			}
+		}
+
+		private void TextBox_LostFocus(object sender, EventArgs e)
+		{
+			ShowPlaceholder();
+		}
+
+		private void TextBox_GotFocus(object sender, EventArgs e)
+		{
+			HidePlaceholder();
 		}
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)

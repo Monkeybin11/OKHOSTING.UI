@@ -365,9 +365,21 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		/// <summary>
+		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
+		/// </summary>
 		string ITextBox.Placeholder
 		{
 			get; //TODO
+			set;
+		}
+
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color ITextBox.PlaceholderColor
+		{
+			get;
 			set;
 		}
 	}

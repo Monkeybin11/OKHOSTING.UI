@@ -389,5 +389,14 @@ namespace OKHOSTING.UI.UWP.Controls
 				base.PlaceholderText = value;
 			}
 		}
+
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color ITextBox.PlaceholderColor
+		{
+			get;
+			set;
+		}
 	}
 }

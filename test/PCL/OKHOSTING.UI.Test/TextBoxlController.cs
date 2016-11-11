@@ -33,8 +33,18 @@ namespace OKHOSTING.UI.Test
 
 			//Create an TextBox and adds it to the Stack
 			ITextBox txtText = Platform.Current.Create<ITextBox>();
-			txtText.Value = "Este es un TextBox";
+			txtText.Value = "This is a TextBox";
+			txtText.BorderColor = new Color(255, 255, 0, 0);
+			txtText.BorderWidth = new Thickness(1, 2, 3, 4);
 			stack.Children.Add(txtText);
+			
+			//Create an TextBox and adds it to the Stack
+			ITextBox txtTextPlaceholder = Platform.Current.Create<ITextBox>();
+			txtTextPlaceholder.BorderColor = new Color(255, 255, 0, 0);
+			txtTextPlaceholder.BorderWidth = new Thickness(1, 2, 3, 4);
+			txtTextPlaceholder.Placeholder = "Enter some text..";
+			txtTextPlaceholder.PlaceholderColor = new Color(255, 100, 100, 100);
+			stack.Children.Add(txtTextPlaceholder);
 
 			//Create the button cmdClose with specific text with the event also click and adds it to the stack.
 			IButton cmdClose = Platform.Current.Create<IButton>();

@@ -486,5 +486,20 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			get;
 			set;
 		}
+
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color ITextBox.PlaceholderColor
+		{
+			get
+			{
+				return Platform.Current.Parse(base.PlaceholderColor);
+			}
+			set
+			{
+				base.PlaceholderColor = Platform.Current.Parse(value);
+			}
+		}
 	}
 }

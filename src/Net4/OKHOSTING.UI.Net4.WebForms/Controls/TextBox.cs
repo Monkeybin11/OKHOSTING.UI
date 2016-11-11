@@ -698,11 +698,35 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		/// <summary>
+		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
+		/// </summary>
 		string ITextBox.Placeholder
 		{
-			get; //TODO
+			get
+			{
+				return InnerWatermarkExtender.WatermarkText;
+			}
+			set
+			{
+				InnerWatermarkExtender.WatermarkText = value;
+			}
+		}
+
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color ITextBox.PlaceholderColor
+		{
+			get;
 			set;
 		}
+
+		/// <summary>
+		/// The inner watermark extender.
+		/// <para xml:lang="es">El texto con marca de agua del control.</para>
+		/// </summary>
+		protected readonly AjaxControlToolkit.TextBoxWatermarkExtender InnerWatermarkExtender;
 
 		/// <summary>
 		/// Ons the pre render.
@@ -722,6 +746,23 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		protected override bool LoadPostData(string postDataKey, NameValueCollection postCollection)
 		{
 			return true;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the OKHOSTING.UI.Net4.WebForms.Controls.TextBox class.
+		/// <para xml:alng="es">Inicializa una nueva instacia de la clase OKHOSTING.UI.Net4.WebForms.Controls.TextBox</para>
+		/// </summary>
+		public TextBox()
+		{
+			//set a default id so we ensure the extender's TargetControlID is set
+			base.ID = "TextBox_InnerTextBox_" + new Random().Next();
+
+			//ajax watermark
+			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();
+			InnerWatermarkExtender.ID = base.UniqueID + "_TextBoxWatermarkExtender";
+			InnerWatermarkExtender.TargetControlID = base.ID;
+			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
+			base.Controls.Add(InnerWatermarkExtender);
 		}
 	}
 }

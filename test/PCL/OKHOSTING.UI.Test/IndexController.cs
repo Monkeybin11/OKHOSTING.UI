@@ -91,28 +91,34 @@ namespace OKHOSTING.UI.Test
 			grid.SetContent(9, 0, lblCalendar);
 
 			// Create an LabelButton that binds us to a TextAreaController.
-			ILabelButton lblarea = Platform.Current.Create<ILabelButton>();
-			lblarea.Text = "Text_Area";
-			lblarea.Click += (object sender, EventArgs e) => new TextAreaController().Start();
-			grid.SetContent(10, 0, lblarea);
+			ILabelButton lblTextBox = Platform.Current.Create<ILabelButton>();
+			lblTextBox.Text = "TextBox";
+			lblTextBox.Click += (object sender, EventArgs e) => new TextBoxController().Start();
+			grid.SetContent(10, 0, lblTextBox);
+
+			// Create an LabelButton that binds us to a TextAreaController.
+			ILabelButton lblTextArea = Platform.Current.Create<ILabelButton>();
+			lblTextArea.Text = "TextArea";
+			lblTextArea.Click += (object sender, EventArgs e) => new TextAreaController().Start();
+			grid.SetContent(11, 0, lblTextArea);
 
 			// Create an LabelButton that binds us to a ListPickerController.
 			ILabelButton lblpkr = Platform.Current.Create<ILabelButton>();
 			lblpkr.Text = "List_Picker";
 			lblpkr.Click += (object sender, EventArgs e) => new ListPickerController().Start();
-			grid.SetContent(11, 0, lblpkr);
+			grid.SetContent(12, 0, lblpkr);
 
 			// Create an LabelButton that binds us to a RelativePanelController.
 			ILabelButton lblRelativePanel = Platform.Current.Create<ILabelButton>();
 			lblRelativePanel.Text = "RelativePanel";
 			lblRelativePanel.Click += (object sender, EventArgs e) => new RelativePanelController().Start();
-			grid.SetContent(12, 0, lblRelativePanel);
+			grid.SetContent(13, 0, lblRelativePanel);
 
 			// Create an LabelButton that binds us to a FormController.
 			ILabelButton lblForm = Platform.Current.Create<ILabelButton>();
 			lblForm.Text = "Form";
 			lblForm.Click += (object sender, EventArgs e) => new FormController().Start();
-			grid.SetContent(13, 0, lblForm);
+			grid.SetContent(14, 0, lblForm);
 
 			// Establishes the content and title of the page.
 			Platform.Current.Page.Title = "Choose one control to test";

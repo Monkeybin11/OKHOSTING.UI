@@ -28,5 +28,10 @@ namespace OKHOSTING.UI.Controls
 		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
 		/// </summary>
 		string Placeholder { get; set; }
+
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color PlaceholderColor { get; set; }
 	}
 }
