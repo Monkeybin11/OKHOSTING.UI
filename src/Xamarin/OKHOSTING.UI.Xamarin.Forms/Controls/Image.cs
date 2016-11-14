@@ -27,7 +27,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			{
 				Uri = url,
 				CachingEnabled = true,
-				CacheValidity = new TimeSpan(7, 0, 0, 0)
+				CacheValidity = new TimeSpan(0, 0, 1, 0)
 			};
 		}
 
