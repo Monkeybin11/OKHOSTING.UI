@@ -33,11 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\OKHOSTING.Internal\src\packages\OKHOSTING.Core.1.0.23\lib\net45\OKHOSTING.Core.dll</HintPath>
+      <HintPath>..\..\packages\OKHOSTING.Core.1.0.23\lib\net45\OKHOSTING.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OKHOSTING.Core.Net4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\OKHOSTING.Internal\src\packages\OKHOSTING.Core.1.0.23\lib\net45\OKHOSTING.Core.Net4.dll</HintPath>
+      <HintPath>..\..\packages\OKHOSTING.Core.1.0.23\lib\net45\OKHOSTING.Core.Net4.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
