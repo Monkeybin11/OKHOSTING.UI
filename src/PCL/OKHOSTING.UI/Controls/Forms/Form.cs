@@ -205,6 +205,13 @@ namespace OKHOSTING.UI.Controls.Forms
 						continue;
 					}
 
+					//create new row if this is the first row or if RepeatColumns has been reached 
+					if (Content.RowCount == 0 || currentColumn >= RepeatColumns)
+					{
+						Content.RowCount += 2;
+						currentColumn = 0;
+					}
+
 					//Add name cells to the almost last row
 					Content.SetContent(Content.RowCount - 2, currentColumn, field.CaptionControl);
 
@@ -213,16 +220,6 @@ namespace OKHOSTING.UI.Controls.Forms
 
 					//increment column counter
 					currentColumn++;
-
-					//create new column if RepeatColumns has been reached
-					if (currentColumn >= RepeatColumns)
-					{
-						currentColumn = 0;
-
-						//add one row for captions and another for values
-						Content.RowCount++;
-						Content.RowCount++;
-					}
 				}
 			}
 
