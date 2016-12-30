@@ -5,39 +5,39 @@ using OKHOSTING.UI.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 {
-    /// <summary>
-    /// It represents a container where we can be stacked controls.								
+	/// <summary>
+	/// It represents a container where we can be stacked controls.								
 	/// <para xml:lang="es">
 	/// Representa un contenedor donde podemos ir apilando controles.
 	/// </para>
-    /// </summary>
+	/// </summary>
 	public class Stack : System.Windows.Controls.StackPanel, IStack
 	{
-        /// <summary>
-        /// Initializes a new instance of the Stack class.
+		/// <summary>
+		/// Initializes a new instance of the Stack class.
 		/// <para xml:lang="es">
-        /// Inicializa una nueva instancia de la clase Stack.
-        /// </para>
-        /// </summary>
+		/// Inicializa una nueva instancia de la clase Stack.
+		/// </para>
+		/// </summary>
 		public Stack()
 		{
 			_Children = new ControlList(base.Children);
 		}
 
-        /// <summary>
-        /// The children controls.
+		/// <summary>
+		/// The children controls.
 		/// <para xml:lang="es">
-        /// Lista de los controles hijos del Stack.
-        /// </para>
-        /// </summary>
+		/// Lista de los controles hijos del Stack.
+		/// </para>
+		/// </summary>
 		protected readonly ControlList _Children;
 
-        /// <summary>
-        /// Gets the controls IStack children.
+		/// <summary>
+		/// Gets the controls IStack children.
 		/// <para xml:lang="es">
-        /// Obtiene la lista de los controles hijos del Stack.
-        /// </para>
-        /// </summary>
+		/// Obtiene la lista de los controles hijos del Stack.
+		/// </para>
+		/// </summary>
 		IList<IControl> IStack.Children
 		{
 			get
@@ -46,25 +46,25 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// The identifier dispose.
+		/// <summary>
+		/// The identifier dispose.
 		/// <para xml:lang="es">
-        /// El identificador Dispose.
-        /// </para>
-        /// </summary>
+		/// El identificador Dispose.
+		/// </para>
+		/// </summary>
 		void IDisposable.Dispose()
 		{
 		}
 
-        #region IControl
+		#region IControl
 
-        /// <summary>
-        /// Gets or sets wether the control is visible or not
-        /// <para xml:lang="es">
-        /// Obtiene o establece si el control es visible o no.
-        /// </para>
-        /// </summary>
-        bool IControl.Visible
+		/// <summary>
+		/// Gets or sets wether the control is visible or not
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control es visible o no.
+		/// </para>
+		/// </summary>
+		bool IControl.Visible
 		{
 			get
 			{
@@ -83,12 +83,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets wether the control is enabled or not
+		/// <summary>
+		/// Gets or sets wether the control is enabled or not
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el control es habilitado o no.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		bool IControl.Enabled
 		{
 			get
@@ -101,12 +101,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Width of the control, in density independent pixels
+		/// <summary>
+		/// Width of the control, in density independent pixels
 		/// <para xml:lang="es">
 		/// Ancho del control, en dencidad de pixeles independientes.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		double? IControl.Width
 		{
 			get
@@ -122,12 +122,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Height of the control, in density independent pixels.
+		/// <summary>
+		/// Height of the control, in density independent pixels.
 		/// <para xml:lang="es">
 		/// Altura del control, en dencididad de pixeles independiente
 		/// </para>
-        /// </summary>
+		/// </summary>
 		double? IControl.Height
 		{
 			get
@@ -143,12 +143,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Space that this control will set between itself and it's container
+		/// <summary>
+		/// Space that this control will set between itself and it's container
 		/// <para xml:lang="es">
 		/// Espacio que este control se establecerá entre si mismo y su contenedor.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		Thickness IControl.Margin
 		{
 			get
@@ -161,12 +161,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the background color
+		/// <summary>
+		/// Gets or sets the background color
 		/// <para xml:lang="es">
 		/// Obtiene o establece el color de fondo del control.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -179,34 +179,34 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the border color
+		/// <summary>
+		/// Gets or sets the border color
 		/// <para xml:lang="es">
 		/// Obtiene o establece el color del borde del control.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		Color IControl.BorderColor
 		{
 			get; set;
 		}
 
-        /// <summary>
-        /// Border width, in density independent pixels (DIP)
+		/// <summary>
+		/// Border width, in density independent pixels (DIP)
 		/// <para xml:lang="es">
 		/// Ancho del borde, en dencidad de pixeles independientes (DIP)
 		/// </para>
-        /// </summary>
+		/// </summary>
 		Thickness IControl.BorderWidth
 		{
 			get; set;
 		}
 
-        /// <summary>
-        /// Horizontal alignment of the control with respect to it's container.
+		/// <summary>
+		/// Horizontal alignment of the control with respect to it's container.
 		/// <para xml:lang="es">
 		/// Alineación horizontal del control con respecto a su contenedor.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
@@ -219,12 +219,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
-        /// <summary>
-        /// Vertical alignment of the control with respect to it's container
+		/// <summary>
+		/// Vertical alignment of the control with respect to it's container
 		/// <para xml:lang="es">
 		/// Alineacion vertical del control con respecto a su contenedor.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get

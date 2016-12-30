@@ -39,14 +39,14 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		string IInputControl<string>.Value
-        {
-            get
-            {
-                return (string)base.SelectedItem;
-            }
-            set
+		{
+			get
 			{
-                base.SelectedItem = value;
+				return (string)base.SelectedItem;
+			}
+			set
+			{
+				base.SelectedItem = value;
 			}
 		}
 

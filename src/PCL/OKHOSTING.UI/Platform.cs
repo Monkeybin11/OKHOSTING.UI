@@ -5,9 +5,9 @@ namespace OKHOSTING.UI
 {
 	/// <summary>
 	/// Base class for platform independet apps, child classes should implement native platforms like WinForms, WebForms, XamarinForms, etc
-    /// <para xml:lang="es">
-    /// Clase base para la plataforma de aplicaciones independientes, las clases hijas deben implementar plataformas nativas como WinForms, WebForms, Formularios Xamarin, etc.
-    /// </para>
+	/// <para xml:lang="es">
+	/// Clase base para la plataforma de aplicaciones independientes, las clases hijas deben implementar plataformas nativas como WinForms, WebForms, Formularios Xamarin, etc.
+	/// </para>
 	/// </summary>
 	public abstract class Platform
 	{
@@ -15,17 +15,17 @@ namespace OKHOSTING.UI
 
 		/// <summary>
 		/// The stack where we will keep and organization of which controller is currently executing (at top) and which are in the background
-        /// <para xml:lang="es">
-        /// La pila donde vamos a guardar y organizar lo que el controlador esta ejecutando actualmente (en la parte superior) y que estan en el fondo.
-        /// </para>
+		/// <para xml:lang="es">
+		/// La pila donde vamos a guardar y organizar lo que el controlador esta ejecutando actualmente (en la parte superior) y que estan en el fondo.
+		/// </para>
 		/// </summary>
 		protected readonly Stack<Controller> ControllerStack = new Stack<Controller>();
 
 		/// <summary>
 		/// Stores that state of a page between postbacks or between controller starts and finish
-        /// <para xml:lang="es">
-        /// Almacena ese estado de una pagina entre las devoluciones de datos entre el inicio y el fin del control.
-        /// </para>
+		/// <para xml:lang="es">
+		/// Almacena ese estado de una pagina entre las devoluciones de datos entre el inicio y el fin del control.
+		/// </para>
 		/// </summary>
 		protected readonly Stack<PageState> PageStateStack = new Stack<PageState>();
 
@@ -56,13 +56,13 @@ namespace OKHOSTING.UI
 			Page.Content = null;
 		}
 
-        /// <summary>
-        /// Remoes the current controller from the stack and recreates the previous controler state, if any
-        /// <para xml:lang="es">
-        /// Elimina el controlador actual de la pila y recrea el estado del controlador anterior, en su caso
-        /// </para>
-        /// </summary>
-        protected internal virtual void FinishController()
+		/// <summary>
+		/// Remoes the current controller from the stack and recreates the previous controler state, if any
+		/// <para xml:lang="es">
+		/// Elimina el controlador actual de la pila y recrea el estado del controlador anterior, en su caso
+		/// </para>
+		/// </summary>
+		protected internal virtual void FinishController()
 		{
 			//remove controller and state from stacks
 			ControllerStack.Pop();

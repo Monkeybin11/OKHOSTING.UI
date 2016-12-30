@@ -3,38 +3,38 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-    /// <summary>
-    /// It is a control that represents a button.
+	/// <summary>
+	/// It is a control that represents a button.
 	/// <para xml:lang="es">
-    /// Es un control que representa un boton.
-    /// </para>
-    /// </summary>
+	/// Es un control que representa un boton.
+	/// </para>
+	/// </summary>
 	public class Button : System.Windows.Controls.Button, IButton
 	{
-        /// <summary>
-        /// Initializes a new instance of the OKHOSTING.UI.Xamarin.Forms.Controls.Button class.
+		/// <summary>
+		/// Initializes a new instance of the OKHOSTING.UI.Xamarin.Forms.Controls.Button class.
 		/// <para xml:lang="es">
 		/// Inicializa una nueva instancia de la clase OKHOSTING.UI.Xamarin.Forms.Controls.Button.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		public Button()
 		{
 		}
 
-        /// <summary>
-        /// The button click event.
+		/// <summary>
+		/// The button click event.
 		/// <para xml:lang="es">
-        /// El evento clic del boton.
-        /// </para>
-        /// </summary>
+		/// El evento clic del boton.
+		/// </para>
+		/// </summary>
 		public new event EventHandler Click;
 
-        /// <summary>
-        /// Raises the click.
+		/// <summary>
+		/// Raises the click.
 		/// <para xml:lang="es">
-        /// Es el evento que proboca el clic.
-        /// </para>
-        /// </summary>
+		/// Es el evento que proboca el clic.
+		/// </para>
+		/// </summary>
 		protected override void OnClick()
 		{
 			base.OnClick();
@@ -45,12 +45,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the text that control content.
-        /// <para xml:lang="es">
-        /// Obtiene o establece el texto que contiene el control.
-        /// </para>
-        /// </summary>
+		/// <summary>
+		/// Gets or sets the text that control content.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el texto que contiene el control.
+		/// </para>
+		/// </summary>
 		string IButton.Text
 		{
 			get
@@ -63,25 +63,25 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// The identifier dispose.
-        /// <para xml:lang="es">
-        /// El identificador dispose.
-        /// </para>
-        /// </summary>
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">
+		/// El identificador dispose.
+		/// </para>
+		/// </summary>
 		void IDisposable.Dispose()
 		{
 		}
 
-        #region IControl
+		#region IControl
 
-        /// <summary>
-        /// Gets or sets wether the control is visible or not
-        /// <para xml:lang="es">
-        /// Obtiene o establece si el control es visible o no.
-        /// </para>
-        /// </summary>
-        bool IControl.Visible
+		/// <summary>
+		/// Gets or sets wether the control is visible or not
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control es visible o no.
+		/// </para>
+		/// </summary>
+		bool IControl.Visible
 		{
 			get
 			{
@@ -100,12 +100,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets wether the control is enabled or not
+		/// <summary>
+		/// Gets or sets wether the control is enabled or not
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el control es habilitado o no.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		bool IControl.Enabled
 		{
 			get
@@ -118,12 +118,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the width of the IC ontrol..
+		/// <summary>
+		/// Gets or sets the width of the IC ontrol..
 		/// <para xml:lang="es">
-        /// Obtiene o establece el ancho del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece el ancho del control.
+		/// </para>
+		/// </summary>
 		double? IControl.Width
 		{
 			get
@@ -139,12 +139,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the height of the IC ontrol.
+		/// <summary>
+		/// Gets or sets the height of the IC ontrol.
 		/// <para xml:lang="es">
-        /// Obtiene o establece la altura del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece la altura del control.
+		/// </para>
+		/// </summary>
 		double? IControl.Height
 		{
 			get
@@ -160,12 +160,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the control margin.
+		/// <summary>
+		/// Gets or sets the control margin.
 		/// <para xml:lang="es">
-        /// Obtiene o establece el margen del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece el margen del control.
+		/// </para>
+		/// </summary>
 		Thickness IControl.Margin
 		{
 			get
@@ -178,12 +178,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the color of the Control background.
+		/// <summary>
+		/// Gets or sets the color of the Control background.
 		/// <para xml:lang="es">
-        /// Obtiene o establece el color de fondo del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece el color de fondo del control.
+		/// </para>
+		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -196,12 +196,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the color of the IC ontrol. border.
+		/// <summary>
+		/// Gets or sets the color of the IC ontrol. border.
 		/// <para xml:lang="es">
-        /// Obtiene o establece el color del borde del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece el color del borde del control.
+		/// </para>
+		/// </summary>
 		Color IControl.BorderColor
 		{
 			get
@@ -214,12 +214,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the width of the control border.
+		/// <summary>
+		/// Gets or sets the width of the control border.
 		/// <para xml:lang="es">
-        /// Obtiene o establece el ancho del borde del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece el ancho del borde del control.
+		/// </para>
+		/// </summary>
 		Thickness IControl.BorderWidth
 		{
 			get
@@ -232,12 +232,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the IC ontrol. horizontal alignment.
+		/// <summary>
+		/// Gets or sets the IC ontrol. horizontal alignment.
 		/// <para xml:lang="es">
-        /// Obtiene o establece la alineacion horizontal del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece la alineacion horizontal del control.
+		/// </para>
+		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
@@ -250,12 +250,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the IC ontrol. vertical alignment.
+		/// <summary>
+		/// Gets or sets the IC ontrol. vertical alignment.
 		/// <para xml:lang="es">
-        /// Obtiene o establece la alineacio vertical del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece la alineacio vertical del control.
+		/// </para>
+		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
@@ -268,17 +268,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region ITextControl
+		#region ITextControl
 
-        /// <summary>
-        /// Gets or sets text control font family.
-        /// <para xml:lang="es">
-        /// Obtiene o establece la tipografia del texto del control.
-        /// </para>
-        /// </summary>
-        string ITextControl.FontFamily
+		/// <summary>
+		/// Gets or sets text control font family.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la tipografia del texto del control.
+		/// </para>
+		/// </summary>
+		string ITextControl.FontFamily
 		{
 			get
 			{
@@ -290,12 +290,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the color of the text control font.
+		/// <summary>
+		/// Gets or sets the color of the text control font.
 		/// <para xml:lang="es">
-        /// Obtiene o establece el color del texto del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece el color del texto del control.
+		/// </para>
+		/// </summary>
 		Color ITextControl.FontColor
 		{
 			get
@@ -308,12 +308,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets wether Text control bold o no.
+		/// <summary>
+		/// Gets or sets wether Text control bold o no.
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el texto del control esta en negritas o no.
 		/// </para>
-        /// </summary>
+		/// </summary>
 		bool ITextControl.Bold
 		{
 			get
@@ -326,12 +326,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets wether text control italic or not.
+		/// <summary>
+		/// Gets or sets wether text control italic or not.
 		/// <para xml:lang="es">
-        /// Obtiene o establece si el texto del control esta en italica.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece si el texto del control esta en italica.
+		/// </para>
+		/// </summary>
 		bool ITextControl.Italic
 		{
 			get
@@ -344,12 +344,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets wether text control underline or not.
+		/// <summary>
+		/// Gets or sets wether text control underline or not.
 		/// <para xml:lang="es">
-        /// Obtiene o establece si el texto del control esta subrayado.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece si el texto del control esta subrayado.
+		/// </para>
+		/// </summary>
 		bool ITextControl.Underline
 		{
 			get
@@ -362,12 +362,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets text control horizontal alignment.
+		/// <summary>
+		/// Gets or sets text control horizontal alignment.
 		/// <para xml:lang="es">
-        /// Obtiene o establece la laineacion horizontal del texto del control.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece la laineacion horizontal del texto del control.
+		/// </para>
+		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
 			get
@@ -380,12 +380,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the text control vertical alignment.
+		/// <summary>
+		/// Gets or sets the text control vertical alignment.
 		/// <para xml:lang="es">
-        /// Obtiene o establece la alineacion vertical del texto.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece la alineacion vertical del texto.
+		/// </para>
+		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
 			get
@@ -398,12 +398,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the controls text padding.
+		/// <summary>
+		/// Gets or sets the controls text padding.
 		/// <para xml:lang="es">
-        /// Obtiene o establece el espacio entre un borde del control y su texto.
-        /// </para>
-        /// </summary>
+		/// Obtiene o establece el espacio entre un borde del control y su texto.
+		/// </para>
+		/// </summary>
 		Thickness ITextControl.TextPadding
 		{
 			get

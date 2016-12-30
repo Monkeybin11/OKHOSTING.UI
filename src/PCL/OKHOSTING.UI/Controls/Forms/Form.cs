@@ -251,11 +251,11 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Creates a division row with a category name
-        /// <para xml:lang="es">Crea una fila de divición con el nombre de una categoria.</para>
+		/// <para xml:lang="es">Crea una fila de divición con el nombre de una categoria.</para>
 		/// </summary>
 		/// <param name="category">Name of the category
-        /// <para xml:lang="es">Nombre de la categooria.</para>
-        /// </param>
+		/// <para xml:lang="es">Nombre de la categooria.</para>
+		/// </param>
 		protected void CreateCategoryRow(string category, IGrid grid)
 		{
 			ILabel caption = Platform.Current.Create<ILabel>();
@@ -268,7 +268,7 @@ namespace OKHOSTING.UI.Controls.Forms
 
 		/// <summary>
 		/// Creates a row that includes a label and another row for the value of a TableWide field
-        /// <para xml:lang="es">Crea una fila que incluye una etiqueta y otra fila para el valor de un campo TableWide.</para>
+		/// <para xml:lang="es">Crea una fila que incluye una etiqueta y otra fila para el valor de un campo TableWide.</para>
 		/// </summary>
 		/// <param name="field">FormField that will be included in these rows</param>
 		protected void CreateTableWideRow(FormField field, IGrid grid)
@@ -284,10 +284,10 @@ namespace OKHOSTING.UI.Controls.Forms
 			grid.SetColumnSpan(grid.ColumnCount, field.ValueControl);
 		}
 
-        /// <summary>
-        /// Releases resources for each field.
-        /// <para xml:lang="es">Libera los recursos de cada campo.</para>
-        /// </summary>
+		/// <summary>
+		/// Releases resources for each field.
+		/// <para xml:lang="es">Libera los recursos de cada campo.</para>
+		/// </summary>
 		public void Dispose()
 		{
 			foreach (FormField field in Fields)

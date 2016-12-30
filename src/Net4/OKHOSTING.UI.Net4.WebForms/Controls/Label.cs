@@ -4,21 +4,21 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-    /// <summary>
-    /// It represents a text label
-    /// <para xml:lang="es">Representa una etiqueta de texto</para> 
-    /// </summary>
+	/// <summary>
+	/// It represents a text label
+	/// <para xml:lang="es">Representa una etiqueta de texto</para> 
+	/// </summary>
 	public class Label : System.Web.UI.WebControls.Label, ILabel
 	{
-        /// <summary>
-        /// The OriginalText containing the label.
-        /// <para xml:lang="es">El texto original que contiene la etiqueta</para> 
-        /// </summary>
+		/// <summary>
+		/// The OriginalText containing the label.
+		/// <para xml:lang="es">El texto original que contiene la etiqueta</para> 
+		/// </summary>
 		private string OriginalText;
 
 		/// <summary>
 		/// Gets or sets the text of this Label. Also converts from text to html formated text 
-        /// <para xml:lang="es">Obtiene o establece el texto de esta etiqueta. Tambien convierte de texto a texto en formato HTML.</para>
+		/// <para xml:lang="es">Obtiene o establece el texto de esta etiqueta. Tambien convierte de texto a texto en formato HTML.</para>
 		/// </summary>
 		public override string Text
 		{
@@ -35,10 +35,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IControl
 
-        /// <summary>
-        /// Gets or sets the name of the Label.
-        /// <para xml:lang="es">Obtiene o establece el nombre de la etiqueta.</para>
-        /// </summary>
+		/// <summary>
+		/// Gets or sets the name of the Label.
+		/// <para xml:lang="es">Obtiene o establece el nombre de la etiqueta.</para>
+		/// </summary>
 		string IControl.Name
 		{
 			get
@@ -51,10 +51,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the BackgroundColor of the label.
-        /// <para xml:lang="es">Obtiene o establece el color de fondo de la etiqueta.</para>
-        /// </summary>
+		/// <summary>
+		/// Gets or sets the BackgroundColor of the label.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo de la etiqueta.</para>
+		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
@@ -67,10 +67,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the BorderColor of the Label.
-        /// <para xml:lang="es">Obtiene o establece el color de fondo de la etiqueta.</para>
-        /// </summary>
+		/// <summary>
+		/// Gets or sets the BorderColor of the Label.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo de la etiqueta.</para>
+		/// </summary>
 		Color IControl.BorderColor
 		{
 			get
@@ -83,10 +83,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets the Width of the Label.
-        /// <para xml:lang="es">Obtiene o establece el ancho de la etiqueta.</para>
-        /// </summary>
+		/// <summary>
+		/// Gets or sets the Width of the Label.
+		/// <para xml:lang="es">Obtiene o establece el ancho de la etiqueta.</para>
+		/// </summary>
 		double? IControl.Width
 		{
 			get
