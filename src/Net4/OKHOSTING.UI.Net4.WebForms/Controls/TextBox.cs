@@ -759,10 +759,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 			//ajax watermark
 			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();
-			InnerWatermarkExtender.ID = base.UniqueID + "_TextBoxWatermarkExtender";
-			InnerWatermarkExtender.TargetControlID = base.ID;
-			InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
-			base.Controls.Add(InnerWatermarkExtender);
+			//InnerWatermarkExtender.ID = base.UniqueID + "_TextBoxWatermarkExtender";
+			//InnerWatermarkExtender.TargetControlID = base.ID;
+			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
+			//base.Controls.Add(InnerWatermarkExtender);
 		}
 	}
 }
