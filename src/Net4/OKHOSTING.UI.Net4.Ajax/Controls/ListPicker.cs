@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls
+namespace OKHOSTING.UI.Net4.Ajax.Controls
 {
 	/// <summary>
 	/// It represents a control where the user can click and select a value from a list of options
@@ -114,13 +114,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				}
 			}
 
-			if (!string.IsNullOrWhiteSpace(SelectedValue) && Items.FindByValue(SelectedValue) == null)
+			if (this.Items.FindByValue(this.SelectedValue) == null)
 			{
 				string itemList = string.Empty;
 
 				foreach (var item in Items)
 				{
-					itemList += Environment.NewLine + ((System.Web.UI.WebControls.ListItem) item).Value;
+					itemList += Environment.NewLine + ((System.Web.UI.WebControls.ListItem)item).Value;
 				}
 
 				throw new Exception(string.Format("Selected value {0} is not present in the list: {1}", SelectedValue, itemList));

@@ -1,81 +1,72 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls
+namespace OKHOSTING.UI.Net4.Ajax.Controls
 {
 	/// <summary>
-	/// It represents a control where the user can click and select a value from a list of options
-	/// <para xml:lang="es">Representa un control donde el usuario puede dar clic y seleccionar un valor de una lista de opciones</para>
+	/// It represents a text box control.
+	/// <para xml:lang="es">Representa un control de cuadro de texto.</para>
 	/// </summary>
-	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker
+	public class TextBox : System.Web.UI.WebControls.TextBox, ITextBox
 	{
-		/// <summary>
-		/// Initializes a new instance of the ListPicker class.
-		/// <para xml:lang="es">Inicializa una nueva instancia de la clase ListPicker.</para>
-		/// </summary>
-		public ListPicker()
-		{
-		}
-
-		/// <summary>
-		/// Gets or sets the list of items containing the control.
-		/// <para xml:lang="es">Obtiene o establece la lista de los elementos que contiene el control.</para>
-		/// </summary>
-		/// <value>The list of items.
-		/// <para xml:lang="es">La lista de los elementos.</para>
-		/// </value>
-		IList<string> IListPicker.Items
-		{
-			get
-			{
-				return (IList<string>) base.DataSource;
-			}
-			set
-			{
-				base.DataSource = value;
-				Items.Clear();
-			}
-		}
-
 		#region IInputControl
 
 		/// <summary>
-		/// The selected value.
-		/// <para xml:lang="es">El valor seleccionado.</para>
+		/// Gets or sets the user imput value.
+		/// <para xml:lang="es">Obtiene o establece el valor de entrada del usuario</para>
 		/// </summary>
-		protected string _SelectedValue;
-
-		/// <summary>
-		/// Gets or sets the value of the user input
-		/// <para xml:lang="es">Obtiene o establece el valor de la entrada del usuario</para>
-		/// </summary>
-		/// <value>The value of the user imput.
-		/// <para xml:lang="es">El valor de la entrada del usuario.</para>
+		/// <value>The input value.
+		/// <para xml:lang="es">El valor de entrada.</para>
 		/// </value>
 		string IInputControl<string>.Value
 		{
 			get
 			{
-				return base.SelectedValue;
+				return base.Text;
 			}
 			set
 			{
-				_SelectedValue = value;
-				base.SelectedValue = value;
+				base.Text = value;
+			}
+		}
+
+		event EventHandler<string> IInputControl<string>.ValueChanged
+		{
+			add
+			{
+				throw new NotImplementedException();
+			}
+
+			remove
+			{
+				throw new NotImplementedException();
 			}
 		}
 
 		/// <summary>
+		/// Ons the text changed.
+		/// <para xml:lang="es">Es el evento enviado al cambiar el texto.</para>
+		/// </summary>
+		/// <returns>The text changed.
+		/// <para xml:lang="es">El texto cambiado.</para>
+		/// </returns>
+		/// <param name="e">E.</param>
+		protected override void OnTextChanged(EventArgs e)
+		{
+			base.OnTextChanged(e);
+		}
+
+		/// <summary>
 		/// Occurs when value changed.
-		/// <para xml:lang="es">Ocurre cuando es cambiado el valor.</para>
+		/// <para xml:lang="es">Ocurre cuando el valor fue cambiado.</para>
 		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
 		/// <summary>
 		/// Raises the value changed.
-		/// <para xml:lang="es">Muestra el valor cambiado.</para>
+		/// <para xml:lang="es">Cambia el valor.</para>
 		/// </summary>
 		/// <returns>The value changed.
 		/// <para xml:lang="es">El valor cambiado.</para>
@@ -89,54 +80,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		#endregion
-
-		/// <summary>
-		/// Ons the pre render.
-		/// <para xml:lang="es">Ocurre antes de cambiar el nuevo valor.</para>
-		/// </summary>
-		/// <returns>The pre render.</returns>
-		/// <param name="e">E.</param>
-		protected override void OnPreRender(EventArgs e)
-		{
-			AutoPostBack = ValueChanged != null;
-
-			if (base.DataSource != null && base.Items.Count == 0)
-			{
-				base.DataBind();
-
-				if (string.IsNullOrWhiteSpace(SelectedValue) && string.IsNullOrWhiteSpace(_SelectedValue))
-				{
-					SelectedValue = ((IEnumerable<string>) DataSource).FirstOrDefault()?.ToString();
-				}
-				else if (string.IsNullOrWhiteSpace(SelectedValue) && !string.IsNullOrWhiteSpace(_SelectedValue))
-				{
-					SelectedValue = _SelectedValue;
-				}
-			}
-
-			if (!string.IsNullOrWhiteSpace(SelectedValue) && Items.FindByValue(SelectedValue) == null)
-			{
-				string itemList = string.Empty;
-
-				foreach (var item in Items)
-				{
-					itemList += Environment.NewLine + ((System.Web.UI.WebControls.ListItem) item).Value;
-				}
-
-				throw new Exception(string.Format("Selected value {0} is not present in the list: {1}", SelectedValue, itemList));
-			}
-
-			base.OnPreRender(e);
-		}
-
-		/// <summary>
-		/// Does nothing since we manage state ourselves
-		/// <para xml:lang="es">No hace nada ya que nosotros manejamos el estado.</para>
-		/// </summary>
-		protected override bool LoadPostData(string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
-		{
-			return true;
-		}
 
 		#region IControl
 
@@ -369,10 +312,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets the VerticalAlignment of the control.
-		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del control</para>
+		/// <para xml:lang="es">Obtiene o establece la alineación vertical del control</para>
 		/// </summary>
 		/// <value>The VerticalAlignemnt of the control.
-		/// <para xml:lang="es">La alineacion vertical del control</para>
+		/// <para xml:lang="es">La alineación vertical del control</para>
 		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
@@ -417,7 +360,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
-		/// <para xml:lang="es">Obtiene un objeto con valor arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento.</para>
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este objeto.</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
@@ -664,6 +607,162 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the type of the user input textbox.
+		/// <para xml:lang="es">Obtiene o establece el tipo de entrada del usuario al textbox.</para>
+		/// </summary>
+		/// <value>The type of the user input.</value>
+		ITextBoxInputType ITextBox.InputType
+		{
+			get
+			{
+				//if not InputType is provided, the InputType back to the text.
+				if (base.Attributes["type"] == null)
+				{
+					return ITextBoxInputType.Text;
+				}
+
+				//InputTypes
+				switch (base.Attributes["type"])
+				{
+					case "date":
+						return ITextBoxInputType.Date;
+
+					case "datetime":
+						return ITextBoxInputType.DateTime;
+
+					case "email":
+						return ITextBoxInputType.Email;
+
+					case "number":
+						return ITextBoxInputType.Number;
+
+					case "tel":
+						return ITextBoxInputType.Telephone;
+
+					case "text":
+						return ITextBoxInputType.Text;
+
+					case "time":
+						return ITextBoxInputType.Time;
+
+					case "url":
+						return ITextBoxInputType.Url;
+
+					default:
+						return ITextBoxInputType.Text;
+				}
+			}
+			set
+			{
+				switch (value)
+				{
+					case ITextBoxInputType.Date:
+						base.Attributes["type"] = "date";
+						break;
+
+					case ITextBoxInputType.DateTime:
+						base.Attributes["type"] = "datetime";
+						break;
+
+					case ITextBoxInputType.Email:
+						base.Attributes["type"] = "email";
+						break;
+
+					case ITextBoxInputType.Number:
+						base.Attributes["type"] = "number";
+						break;
+
+					case ITextBoxInputType.Telephone:
+						base.Attributes["type"] = "tel";
+						break;
+
+					case ITextBoxInputType.Text:
+						base.Attributes["type"] = "text";
+						break;
+
+					case ITextBoxInputType.Time:
+						base.Attributes["type"] = "time";
+						break;
+
+					case ITextBoxInputType.Url:
+						base.Attributes["type"] = "url";
+						break;
+
+					default:
+						base.Attributes["type"] = "text";
+						break;
+				}
+			}
+		}
+
 		#endregion
+
+		/// <summary>
+		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
+		/// </summary>
+		string ITextBox.Placeholder
+		{
+			get
+			{
+				return InnerWatermarkExtender.WatermarkText;
+			}
+			set
+			{
+				InnerWatermarkExtender.WatermarkText = value;
+			}
+		}
+
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color ITextBox.PlaceholderColor
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// The inner watermark extender.
+		/// <para xml:lang="es">El texto con marca de agua del control.</para>
+		/// </summary>
+		protected readonly AjaxControlToolkit.TextBoxWatermarkExtender InnerWatermarkExtender;
+
+		/// <summary>
+		/// Ons the pre render.
+		/// <para xml:lang="es">Ocurre antes de cambiar el valor</para>
+		/// </summary>
+		/// <returns>The pre render.</returns>
+		/// <param name="e">E.</param>
+		protected override void OnPreRender(EventArgs e)
+		{
+			AutoPostBack = ValueChanged != null;
+			base.OnPreRender(e);
+		}
+
+		/// <summary>
+		/// Does nothing since we manage state ourselves
+		/// </summary>
+		protected override bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+		{
+			return true;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the OKHOSTING.UI.Net4.Ajax.Controls.TextBox class.
+		/// <para xml:alng="es">Inicializa una nueva instacia de la clase OKHOSTING.UI.Net4.Ajax.Controls.TextBox</para>
+		/// </summary>
+		public TextBox()
+		{
+			//set a default id so we ensure the extender's TargetControlID is set
+			base.ID = "TextBox_InnerTextBox_" + new Random().Next();
+
+			//ajax watermark
+			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();
+			InnerWatermarkExtender.ID = base.UniqueID + "_TextBoxWatermarkExtender";
+			InnerWatermarkExtender.TargetControlID = base.ID;
+			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
+			base.Controls.Add(InnerWatermarkExtender);
+		}
 	}
 }

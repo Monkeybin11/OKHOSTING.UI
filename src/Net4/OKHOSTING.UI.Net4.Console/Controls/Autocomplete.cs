@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls
+namespace OKHOSTING.UI.Net4.Console.Controls
 {
 	/// <summary>
 	/// Represents a control that is autocomplete.
@@ -35,14 +35,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		protected readonly string SessionId;
 
 		/// <summary>
-		/// Initializes a new instance of the OKHOSTING.UI.Net4.WebForms.Controls.Autocomplete class.
-		/// <para xml:alng="es">Inicializa una nueva instacia de la clase OKHOSTING.UI.Net4.WebForms.Controls.Autocomplete</para>
+		/// Initializes a new instance of the OKHOSTING.UI.Net4.Console.Controls.Autocomplete class.
+		/// <para xml:alng="es">Inicializa una nueva instacia de la clase OKHOSTING.UI.Net4.Console.Controls.Autocomplete</para>
 		/// </summary>
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
 			InnerTextBox = (TextBox) Platform.Current.Create<ITextBox>();
-			InnerTextBox.ID = "Autocomplete_InnerTextBox_" + Guid.NewGuid();
+			InnerTextBox.ID = "Autocomplete_InnerTextBox_" + new Random().Next();
 			base.Controls.Add(InnerTextBox);
 
 			//ajax autocompleter
@@ -66,7 +66,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			base.Controls.Add(InnerWatermarkExtender);
 
 			//add a unique id to session so we can invoke OnSearching from a ashx page
-			SessionId = "Autocomplete_" + Guid.NewGuid();
+			SessionId = "Autocomplete_" + new Random().Next();
 			OKHOSTING.UI.Session.Current[SessionId] = this;
 			InnerAutoCompleteExtender.ContextKey = SessionId;
 		}

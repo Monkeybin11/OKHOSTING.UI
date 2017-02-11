@@ -1,81 +1,52 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Linq;
 using OKHOSTING.UI.Controls;
+using System;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls
+namespace OKHOSTING.UI.Net4.Ajax.Controls
 {
 	/// <summary>
-	/// It represents a control where the user can click and select a value from a list of options
-	/// <para xml:lang="es">Representa un control donde el usuario puede dar clic y seleccionar un valor de una lista de opciones</para>
+	/// It represents a control input multiline text
+	/// <para xml:lang="es">Representa un control de entrada de texto de varias líneas</para>
 	/// </summary>
-	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker
+	public class TextArea : System.Web.UI.WebControls.TextBox, ITextArea
 	{
 		/// <summary>
-		/// Initializes a new instance of the ListPicker class.
-		/// <para xml:lang="es">Inicializa una nueva instancia de la clase ListPicker.</para>
+		/// Initializes a new instance of the TextArea class.
+		/// <para xml:lang="es">Inicializa una nueva instancia de la clase TextArea.</para>
 		/// </summary>
-		public ListPicker()
+		public TextArea()
 		{
-		}
-
-		/// <summary>
-		/// Gets or sets the list of items containing the control.
-		/// <para xml:lang="es">Obtiene o establece la lista de los elementos que contiene el control.</para>
-		/// </summary>
-		/// <value>The list of items.
-		/// <para xml:lang="es">La lista de los elementos.</para>
-		/// </value>
-		IList<string> IListPicker.Items
-		{
-			get
-			{
-				return (IList<string>) base.DataSource;
-			}
-			set
-			{
-				base.DataSource = value;
-				Items.Clear();
-			}
+			base.TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
 		}
 
 		#region IInputControl
 
 		/// <summary>
-		/// The selected value.
-		/// <para xml:lang="es">El valor seleccionado.</para>
-		/// </summary>
-		protected string _SelectedValue;
-
-		/// <summary>
-		/// Gets or sets the value of the user input
+		/// Gets or sets the user input value.
 		/// <para xml:lang="es">Obtiene o establece el valor de la entrada del usuario</para>
 		/// </summary>
-		/// <value>The value of the user imput.
-		/// <para xml:lang="es">El valor de la entrada del usuario.</para>
-		/// </value>
+		/// <value>The OKHOSTING . user interface . controls. II nput control< system. string>. value.</value>
 		string IInputControl<string>.Value
 		{
 			get
 			{
-				return base.SelectedValue;
+				return base.Text;
 			}
 			set
 			{
-				_SelectedValue = value;
-				base.SelectedValue = value;
+				base.Text = value;
 			}
 		}
 
 		/// <summary>
 		/// Occurs when value changed.
-		/// <para xml:lang="es">Ocurre cuando es cambiado el valor.</para>
+		/// <para xml:lang="es">Ocurre cuando cambia el valor.</para>
 		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
 		/// <summary>
 		/// Raises the value changed.
-		/// <para xml:lang="es">Muestra el valor cambiado.</para>
+		/// <para xml:lang="es">Cambia el valor.</para>
 		/// </summary>
 		/// <returns>The value changed.
 		/// <para xml:lang="es">El valor cambiado.</para>
@@ -84,59 +55,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			if (ValueChanged != null)
 			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
+				ValueChanged(this, ((IInputControl<string>)this).Value);
 			}
 		}
 
 		#endregion
-
-		/// <summary>
-		/// Ons the pre render.
-		/// <para xml:lang="es">Ocurre antes de cambiar el nuevo valor.</para>
-		/// </summary>
-		/// <returns>The pre render.</returns>
-		/// <param name="e">E.</param>
-		protected override void OnPreRender(EventArgs e)
-		{
-			AutoPostBack = ValueChanged != null;
-
-			if (base.DataSource != null && base.Items.Count == 0)
-			{
-				base.DataBind();
-
-				if (string.IsNullOrWhiteSpace(SelectedValue) && string.IsNullOrWhiteSpace(_SelectedValue))
-				{
-					SelectedValue = ((IEnumerable<string>) DataSource).FirstOrDefault()?.ToString();
-				}
-				else if (string.IsNullOrWhiteSpace(SelectedValue) && !string.IsNullOrWhiteSpace(_SelectedValue))
-				{
-					SelectedValue = _SelectedValue;
-				}
-			}
-
-			if (!string.IsNullOrWhiteSpace(SelectedValue) && Items.FindByValue(SelectedValue) == null)
-			{
-				string itemList = string.Empty;
-
-				foreach (var item in Items)
-				{
-					itemList += Environment.NewLine + ((System.Web.UI.WebControls.ListItem) item).Value;
-				}
-
-				throw new Exception(string.Format("Selected value {0} is not present in the list: {1}", SelectedValue, itemList));
-			}
-
-			base.OnPreRender(e);
-		}
-
-		/// <summary>
-		/// Does nothing since we manage state ourselves
-		/// <para xml:lang="es">No hace nada ya que nosotros manejamos el estado.</para>
-		/// </summary>
-		protected override bool LoadPostData(string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
-		{
-			return true;
-		}
 
 		#region IControl
 
@@ -369,10 +292,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets the VerticalAlignment of the control.
-		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del control</para>
+		/// <para xml:lang="es">Obtiene o establece la alineación vertical del control</para>
 		/// </summary>
 		/// <value>The VerticalAlignemnt of the control.
-		/// <para xml:lang="es">La alineacion vertical del control</para>
+		/// <para xml:lang="es">La alineación vertical del control</para>
 		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
@@ -417,7 +340,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
-		/// <para xml:lang="es">Obtiene un objeto con valor arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento.</para>
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este elemento</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
@@ -665,5 +588,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		#endregion
+
+		/// <summary>
+		/// Ons the pre render.
+		/// <para xml:lang="es">Ocurre antes de cambiar el nuevo valor.</para>
+		/// </summary>
+		/// <param name="e">E.</param>
+		protected override void OnPreRender(EventArgs e)
+		{
+			AutoPostBack = ValueChanged != null;
+			base.OnPreRender(e);
+		}
+
+		/// <summary>
+		/// Does nothing since we manage state ourselves
+		/// </summary>
+		protected override bool LoadPostData(string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
+		{
+			return true;
+		}
 	}
 }

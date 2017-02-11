@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Net4.WebForms.Controls;
+using OKHOSTING.UI.Net4.Console.Controls;
 using System.Collections.Generic;
 
-namespace OKHOSTING.UI.Net4.WebForms
+namespace OKHOSTING.UI.Net4.Console
 {
 	/// <summary>
 	/// It represents a page of a form
@@ -58,7 +58,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			if (ContentHolder == null)
 			{
 				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				ContentHolder.ID = "ContentHolder";
+				ContentHolder.ID = "phContent";
 				base.Form.Controls.Add(ContentHolder);
 			}
 

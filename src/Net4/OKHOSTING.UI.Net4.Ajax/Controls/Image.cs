@@ -3,7 +3,7 @@ using System.Linq;
 using System.IO;
 using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls
+namespace OKHOSTING.UI.Net4.Ajax.Controls
 {
 	/// <summary>
 	/// It represents an image to which we can give you design through its properties.
@@ -350,7 +350,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				Directory.CreateDirectory(tempDirectoryPath);
 			}
 
-			string tempFilePath = Path.Combine(tempDirectoryPath, Guid.NewGuid().ToString());
+			string tempFilePath = Path.Combine(tempDirectoryPath, new Random().Next().ToString());
 			using (var fileStream = File.OpenWrite(tempFilePath))
 			{
 				stream.CopyTo(fileStream);

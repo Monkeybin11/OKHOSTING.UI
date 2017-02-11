@@ -317,10 +317,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </returns>
 		protected internal virtual void Raise_Click()
 		{
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
+			Click?.Invoke(this, new EventArgs());
 		}
 
 		/// <summary>
@@ -352,8 +349,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 
 			//we finally get the "relative" path of the file and load it as a url
-			string url = filePath.Replace(this.Page.MapPath("/"), string.Empty);
-			LoadFromUrl(new System.Uri(url));
+			string url = filePath.Replace(Page.MapPath("/"), string.Empty);
+			LoadFromUrl(new Uri(url));
 		}
 
 		public void LoadFromStream(Stream stream)
@@ -366,11 +363,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				Directory.CreateDirectory(tempDirectoryPath);
 			}
 
-			string tempFilePath = Path.Combine(tempDirectoryPath, new Random().Next().ToString());
+			string tempFilePath = Path.Combine(tempDirectoryPath, Guid.NewGuid().ToString());
 			using (var fileStream = File.OpenWrite(tempFilePath))
 			{
 				stream.CopyTo(fileStream);
 			}
+
+			string url = tempFilePath.Replace(Page.MapPath("/"), string.Empty);
+			LoadFromUrl(new Uri(url));
 		}
 
 		/// <summary>

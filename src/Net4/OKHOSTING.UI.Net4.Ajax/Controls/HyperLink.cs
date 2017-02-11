@@ -1,151 +1,23 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls
+namespace OKHOSTING.UI.Net4.Ajax.Controls
 {
 	/// <summary>
-	/// It represents a control where the user can click and select a value from a list of options
-	/// <para xml:lang="es">Representa un control donde el usuario puede dar clic y seleccionar un valor de una lista de opciones</para>
+	/// Its a control that represents a HiperLink
+	/// <para xml:lang="es">Es un control que representa un hiperlink</para>
 	/// </summary>
-	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker
+	public class HyperLink : System.Web.UI.WebControls.HyperLink, IHyperLink
 	{
-		/// <summary>
-		/// Initializes a new instance of the ListPicker class.
-		/// <para xml:lang="es">Inicializa una nueva instancia de la clase ListPicker.</para>
-		/// </summary>
-		public ListPicker()
-		{
-		}
-
-		/// <summary>
-		/// Gets or sets the list of items containing the control.
-		/// <para xml:lang="es">Obtiene o establece la lista de los elementos que contiene el control.</para>
-		/// </summary>
-		/// <value>The list of items.
-		/// <para xml:lang="es">La lista de los elementos.</para>
-		/// </value>
-		IList<string> IListPicker.Items
-		{
-			get
-			{
-				return (IList<string>) base.DataSource;
-			}
-			set
-			{
-				base.DataSource = value;
-				Items.Clear();
-			}
-		}
-
-		#region IInputControl
-
-		/// <summary>
-		/// The selected value.
-		/// <para xml:lang="es">El valor seleccionado.</para>
-		/// </summary>
-		protected string _SelectedValue;
-
-		/// <summary>
-		/// Gets or sets the value of the user input
-		/// <para xml:lang="es">Obtiene o establece el valor de la entrada del usuario</para>
-		/// </summary>
-		/// <value>The value of the user imput.
-		/// <para xml:lang="es">El valor de la entrada del usuario.</para>
-		/// </value>
-		string IInputControl<string>.Value
-		{
-			get
-			{
-				return base.SelectedValue;
-			}
-			set
-			{
-				_SelectedValue = value;
-				base.SelectedValue = value;
-			}
-		}
-
-		/// <summary>
-		/// Occurs when value changed.
-		/// <para xml:lang="es">Ocurre cuando es cambiado el valor.</para>
-		/// </summary>
-		public event EventHandler<string> ValueChanged;
-
-		/// <summary>
-		/// Raises the value changed.
-		/// <para xml:lang="es">Muestra el valor cambiado.</para>
-		/// </summary>
-		/// <returns>The value changed.
-		/// <para xml:lang="es">El valor cambiado.</para>
-		/// </returns>
-		protected internal void RaiseValueChanged()
-		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
-		}
-
-		#endregion
-
-		/// <summary>
-		/// Ons the pre render.
-		/// <para xml:lang="es">Ocurre antes de cambiar el nuevo valor.</para>
-		/// </summary>
-		/// <returns>The pre render.</returns>
-		/// <param name="e">E.</param>
-		protected override void OnPreRender(EventArgs e)
-		{
-			AutoPostBack = ValueChanged != null;
-
-			if (base.DataSource != null && base.Items.Count == 0)
-			{
-				base.DataBind();
-
-				if (string.IsNullOrWhiteSpace(SelectedValue) && string.IsNullOrWhiteSpace(_SelectedValue))
-				{
-					SelectedValue = ((IEnumerable<string>) DataSource).FirstOrDefault()?.ToString();
-				}
-				else if (string.IsNullOrWhiteSpace(SelectedValue) && !string.IsNullOrWhiteSpace(_SelectedValue))
-				{
-					SelectedValue = _SelectedValue;
-				}
-			}
-
-			if (!string.IsNullOrWhiteSpace(SelectedValue) && Items.FindByValue(SelectedValue) == null)
-			{
-				string itemList = string.Empty;
-
-				foreach (var item in Items)
-				{
-					itemList += Environment.NewLine + ((System.Web.UI.WebControls.ListItem) item).Value;
-				}
-
-				throw new Exception(string.Format("Selected value {0} is not present in the list: {1}", SelectedValue, itemList));
-			}
-
-			base.OnPreRender(e);
-		}
-
-		/// <summary>
-		/// Does nothing since we manage state ourselves
-		/// <para xml:lang="es">No hace nada ya que nosotros manejamos el estado.</para>
-		/// </summary>
-		protected override bool LoadPostData(string postDataKey, System.Collections.Specialized.NameValueCollection postCollection)
-		{
-			return true;
-		}
-
 		#region IControl
 
 		/// <summary>
-		/// Gets or sets the name of the control.
-		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
+		/// Gets or sets the name of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el nombre del hiperlink</para>
 		/// </summary>
-		/// <value>The name of the control.
-		/// <para xml:lang="es">El nombre del control</para>
+		/// <value>The name of the HiperLink.
+		/// <para xml:lang="es">El nombre del hiperlink</para>
 		/// </value>
 		string IControl.Name
 		{
@@ -160,11 +32,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the background of the control.
-		/// <para xml:lang="es">Obtiene o establece el color de fondo del control</para>
+		/// Gets or sets the background of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del hiperlink</para>
 		/// </summary>
 		/// <value>The background of the hiperlink.
-		/// <para xml:lang="es">El color de fondo del control.</para>
+		/// <para xml:lang="es">El color de fondo del hiperlink</para>
 		/// </value>
 		Color IControl.BackgroundColor
 		{
@@ -179,11 +51,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the BorderColor of the control.
-		/// <para xml:lang="es">Obtiene o establece el color del borde del control</para>
+		/// Gets or sets the BorderColor of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del hiperlink</para>
 		/// </summary>
-		/// <value>The BorderColor of the control.
-		/// <para xml:lang="es">El color del borde del control</para>
+		/// <value>The BorderColor of the HiperLink.
+		/// <para xml:lang="es">El color del borde del hiperlink</para>
 		/// </value>
 		Color IControl.BorderColor
 		{
@@ -198,11 +70,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or Sets the width of the control.
-		/// <para xml:lang="es">Obtiene o establece el ancho del control</para>
+		/// Gets or Sets the width of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el ancho del hiperlink</para>
 		/// </summary>
-		/// <value>The width of the control.
-		/// <para xml:lang="es">El ancho del control</para>
+		/// <value>The width of the HiperLink.
+		/// <para xml:lang="es">El ancho del hiperlink</para>
 		/// </value>
 		double? IControl.Width
 		{
@@ -229,11 +101,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the Height of the control
-		/// <para xml:lang="es">Obtiene o establece la altura del control</para>
+		/// Gets or sets the Height of the HiperLink
+		/// <para xml:lang="es">Obtiene o establece la altura del hiperlink</para>
 		/// </summary>
-		/// <value>The height of the control.
-		/// <para xml:lang="es">La altura del control</para>
+		/// <value>The height of the HiperLink.
+		/// <para xml:lang="es">La altura del hiperlink</para>
 		/// </value>
 		double? IControl.Height
 		{
@@ -260,11 +132,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the margin of the control.
-		/// <para xml:lang="es">Obtien o establece el margen del control</para>
+		/// Gets or sets the margin of the HiperLink.
+		/// <para xml:lang="es">Obtien o establece el margen del hiperlink</para>
 		/// </summary>
-		/// <value>The margin of the control.
-		/// <para xml:lang="es">El margen del control</para>
+		/// <value>The margin of the HiperLink.
+		/// <para xml:lang="es">El margen del hiperlink</para>
 		/// </value>
 		Thickness IControl.Margin
 		{
@@ -290,11 +162,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the BorderWidth of the control.
-		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// Gets or sets the BorderWidth of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del hiperlink.</para>
 		/// </summary>
-		/// <value>The BorderWidth of the control.
-		/// <para xml:lang="es">El ancho del borde del control.</para>
+		/// <value>The BorderWidth of the HiperLink.
+		/// <para xml:lang="es">El ancho del borde del hiperlink.</para>
 		/// </value>
 		Thickness IControl.BorderWidth
 		{
@@ -320,11 +192,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the HorizontalAlignment of the control.
-		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
+		/// Gets or sets the HorizontalAlignment of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del hiperlink.</para>
 		/// </summary>
-		/// <value>The HorizontalAlignment of the control.
-		/// <para xml:lang="es">La alineacion horizontal del control</para>
+		/// <value>The HorizontalAlignment of the HiperLink.
+		/// <para xml:lang="es">La alineacion horizontal del hiperlink</para>
 		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
@@ -368,11 +240,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the VerticalAlignment of the control.
-		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del control</para>
+		/// Gets or sets the VerticalAlignment of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del hiperlink</para>
 		/// </summary>
-		/// <value>The VerticalAlignemnt of the control.
-		/// <para xml:lang="es">La alineacion vertical del control</para>
+		/// <value>The VerticalAlignemnt of the HiperLink.
+		/// <para xml:lang="es">La alineacion vertical del hiperlink</para>
 		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
@@ -417,11 +289,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
-		/// <para xml:lang="es">Obtiene un objeto con valor arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento.</para>
+		/// <para xml:lang="es">Obtiene o establece un valor de objeto arbitrario que se puede usar para almacenar informacion personalizada sobre este elemento</para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
-		/// <para xml:lang="es">Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.</para>
+		/// <para xml:alng="es">Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.</para>
 		/// </remmarks>
 		object IControl.Tag
 		{
@@ -433,11 +305,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		#region ITextControl
 
 		/// <summary>
-		/// Gets or sets the FontColor of the control.
-		/// <para xml:lang="es">Obtiene o establece el color del texto del control.</para>
+		/// Gets or sets the FontColor of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el color del texto del iperlink.</para>
 		/// </summary>
-		/// <value>The FontColor of the control.
-		/// <para xml:lang="es">El color del texto del control.</para>
+		/// <value>The FontColor of the HiperLink.
+		/// <para xml:lang="es">El color del texto del hiperlink.</para>
 		/// </value>
 		Color ITextControl.FontColor
 		{
@@ -452,11 +324,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the FontFamily of the control.
-		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del control</para>
+		/// Gets or sets the FontFamily of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del hiperlink</para>
 		/// </summary>
-		/// <value>The FontFamily of the control.
-		/// <para xml:lang="es">La tipografia del texto del control.</para>
+		/// <value>The FontFamily of the HiperLink.
+		/// <para xml:lang="es">La tipografia del texto del hiperlink.</para>
 		/// </value>
 		string ITextControl.FontFamily
 		{
@@ -471,11 +343,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the FontSize of the control.
-		/// <para xml:lang="es">Obtiene o establece el tamaño del texto del control.</para>
+		/// Gets or sets the FontSize of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el tamaño del texto del hiperlink.</para>
 		/// </summary>
-		/// <value>The FontSize of the control.
-		/// <para xml:lang="es">El tamaño del texto del control.</para>
+		/// <value>The FontSize of the HiperLink.
+		/// <para xml:lang="es">El tamaño del texto del hiperlink.</para>
 		/// </value>
 		double ITextControl.FontSize
 		{
@@ -490,11 +362,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the bold text of the control.
-		/// <para xml:lang="es">Obtiene o establece el texto en negritas del control.</para>
+		/// Gets or sets the bold text of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el texto en negritas del hiperlink.</para>
 		/// </summary>
-		/// <value>The text bold of the control.
-		/// <para xml:lang="es">El texto en negritas del control.</para>
+		/// <value>The text bold of the HiperLink.
+		/// <para xml:lang="es">El texto en negritas del hiperlink.</para>
 		/// </value>
 		bool ITextControl.Bold
 		{
@@ -509,11 +381,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the italic text of the control.
-		/// <para xml:lang="es">Obtiene o establece el texto en italica del control</para>
+		/// Gets or sets the italic text of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el texto en italica del hiperlink</para>
 		/// </summary>
-		/// <value>The italic text of the control.
-		/// <para xml:lang="es">El texto en italica del control</para>
+		/// <value>The italic text of the HiperLink.
+		/// <para xml:lang="es">El texto en italica del hiperlink</para>
 		/// </value>
 		bool ITextControl.Italic
 		{
@@ -528,11 +400,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the UnderLine text of the control.
-		/// <para xml:lang="es">Obtiene o establece el texto en subrayado del control</para>
+		/// Gets or sets the UnderLine text of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece el texto en subrayado del hiperlink</para>
 		/// </summary>
-		/// <value>The UnderLine text of the control.
-		/// <para xml:lang="es">El texto en subrayado del control</para>
+		/// <value>The UnderLine text of the HiperLink.
+		/// <para xml:lang="es">El texto en subrayado del hiperlink</para>
 		/// </value>
 		bool ITextControl.Underline
 		{
@@ -547,8 +419,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the TextHorizontalAlignment of the control.
-		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del control</para>
+		/// Gets or sets the TextHorizontalAlignment of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del hiperlink</para>
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
@@ -593,8 +465,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the TextVerticalAlignment of the control.
-		/// <para xml:lang="es">Obtiene o establece la alineación vertical del control.</para>
+		/// Gets or sets the TextVerticalAlignment of the HiperLink.
+		/// <para xml:lang="es">Obtiene o establece la alineación vertical del hiperlink.</para>
 		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
@@ -638,8 +510,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the padding text of the control.
-		/// <para xml:lang="es">obtiene o establece el padding del texto del control.</para>
+		/// Gets or sets the padding text of the HiperLink.
+		/// <para xml:lang="es">obtiene o establece el padding del texto del hiperlink.</para>
 		/// </summary>
 		Thickness ITextControl.TextPadding
 		{
@@ -665,5 +537,21 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		#endregion
+
+		/// <summary>
+		/// Gets or sets the address that will reference the hyperlink.
+		/// <para xml:lang="es">Obtiene o establece la direccion a la que hara referencia el hiperlink.</para>
+		/// </summary>
+		public Uri Uri
+		{
+			get
+			{
+				return new Uri(base.NavigateUrl);
+			}
+			set
+			{
+				base.NavigateUrl = value.ToString();
+			}
+		}
 	}
 }

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6B651D1-BEB9-42DC-AE6F-FB51DC39AED8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OKHOSTING.UI.Net4.Console</RootNamespace>
+    <AssemblyName>OKHOSTING.UI.Net4.Console</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Binding">
+      <HintPath>..\..\..\..\consoleframework\ConsoleFramework\bin\Debug\Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="ConsoleFramework">
+      <HintPath>..\..\..\..\consoleframework\ConsoleFramework\bin\Debug\ConsoleFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xaml">
+      <HintPath>..\..\..\..\consoleframework\ConsoleFramework\bin\Debug\Xaml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\Autocomplete.cs" />
+    <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\Calendar.cs" />
+    <Compile Include="Controls\CheckBox.cs" />
+    <Compile Include="Controls\HyperLink.cs" />
+    <Compile Include="Controls\Image.cs" />
+    <Compile Include="Controls\ImageButton.cs" />
+    <Compile Include="Controls\Label.cs" />
+    <Compile Include="Controls\LabelButton.cs" />
+    <Compile Include="Controls\Layout\Grid.cs" />
+    <Compile Include="Controls\Layout\RelativePanel.cs" />
+    <Compile Include="Controls\Layout\Stack.cs" />
+    <Compile Include="Controls\ListPicker.cs" />
+    <Compile Include="Controls\PasswordTextBox.cs" />
+    <Compile Include="Controls\TextArea.cs" />
+    <Compile Include="Controls\TextBox.cs" />
+    <Compile Include="Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Platform.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
+      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+      <Name>OKHOSTING.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Linq;
 using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Net4.WebForms.Controls;
+using OKHOSTING.UI.Net4.Ajax.Controls;
 using System.Collections.Generic;
+using System.Web;
 
-namespace OKHOSTING.UI.Net4.WebForms
+namespace OKHOSTING.UI.Net4.Ajax
 {
 	/// <summary>
 	/// It represents a page of a form
 	/// <para xml:lang="es">Representa una pagina de un formulario.</para>
 	/// </summary>
-	public partial class Page : System.Web.UI.Page, IPage
+	public partial class Page : System.Web.IHttpHandler, IPage
 	{
 		/// <summary>
 		/// The content holder.
@@ -58,7 +59,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			if (ContentHolder == null)
 			{
 				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				ContentHolder.ID = "ContentHolder";
+				ContentHolder.ID = "phContent";
 				base.Form.Controls.Add(ContentHolder);
 			}
 
@@ -285,6 +286,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
+		public bool IsReusable
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		/// <summary>
 		/// Ons the pre render.
 		/// <para xml:lang="es">Hace todos los pasos previos a la representacion.</para>
@@ -313,6 +322,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			base.OnInit(e);
 			EnsureChildControls();
+		}
+
+		public void ProcessRequest(HttpContext context)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
