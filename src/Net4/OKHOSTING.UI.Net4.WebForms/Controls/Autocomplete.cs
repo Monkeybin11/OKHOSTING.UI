@@ -155,11 +155,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return InnerTextBox.ID;
+				return base.ID;
 			}
 			set
 			{
-				InnerTextBox.ID = value;
+				base.ID = value;
 			}
 		}
 
