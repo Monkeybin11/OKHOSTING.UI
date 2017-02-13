@@ -573,10 +573,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<bool>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
 		}
 
 		/// <summary>

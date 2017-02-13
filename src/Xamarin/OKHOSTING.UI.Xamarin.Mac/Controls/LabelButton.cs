@@ -15,10 +15,7 @@ namespace OKHOSTING.UI.Xamarin.Mac.Controls
 
 		private void OnLabelClicked()
 		{
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
+			Click?.Invoke(this, new EventArgs());
 		}
 
 		public event EventHandler Click;

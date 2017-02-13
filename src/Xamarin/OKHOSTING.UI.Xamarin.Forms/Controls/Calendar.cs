@@ -46,10 +46,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void Calendar_DateSelected(object sender, global::Xamarin.Forms.DateChangedEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
 		}
 
 		/// <summary>

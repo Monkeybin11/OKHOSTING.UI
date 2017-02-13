@@ -12,10 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Mac.Controls
 
 		private void Button_Clicked(object sender, EventArgs e)
 		{
-			if (Click != null)
-			{
-				Click(sender, e);
-			}
+			Click?.Invoke(sender, e);
 		}
 
 		public event EventHandler Click;

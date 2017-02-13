@@ -73,10 +73,7 @@ namespace OKHOSTING.UI.Xamarin.Mac.Controls
 		{
 			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
 
-			if (Searching != null)
-			{
-				Searching(this, e);
-			}
+			Searching?.Invoke(this, e);
 
 			ResultView = new global::Xamarin.Mac.ListView();
 			ResultView.ItemsSource = e.SearchResult;

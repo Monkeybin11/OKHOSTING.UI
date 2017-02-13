@@ -56,10 +56,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				}
 			}
 
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>)this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		/// <summary>

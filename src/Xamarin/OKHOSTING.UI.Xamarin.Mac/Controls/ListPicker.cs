@@ -14,10 +14,7 @@ namespace OKHOSTING.UI.Xamarin.Mac.Controls
 
 		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (SelectedItemChanged != null)
-			{
-				SelectedItemChanged(sender, e);
-			}
+			SelectedItemChanged?.Invoke(sender, e);
 		}
 
 		IEnumerable<string> IListPicker.DataSource

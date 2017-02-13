@@ -28,10 +28,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void Button_Clicked(object sender, EventArgs e)
 		{
-			if (Click != null)
-			{
-				Click(sender, e);
-			}
+			Click?.Invoke(sender, e);
 		}
 
 		/// <summary>

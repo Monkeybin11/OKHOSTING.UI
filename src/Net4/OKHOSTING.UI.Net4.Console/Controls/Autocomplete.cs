@@ -91,10 +91,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		{
 			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
 
-			if (Searching != null)
-			{
-				Searching(this, e);
-			}
+			Searching?.Invoke(this, e);
 
 			return e;
 		}
@@ -148,10 +145,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		#endregion

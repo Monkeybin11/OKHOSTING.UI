@@ -14,10 +14,7 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		private void Calendar_DateChanged(object sender, Windows.UI.Xaml.Controls.DatePickerValueChangedEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
 		}
 
 		public event EventHandler<DateTime?> ValueChanged;

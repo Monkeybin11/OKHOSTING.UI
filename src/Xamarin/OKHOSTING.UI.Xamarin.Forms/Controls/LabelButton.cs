@@ -34,10 +34,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <returns>The label clicked.</returns>
 		private void OnLabelClicked()
 		{
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
+			Click?.Invoke(this, new EventArgs());
 		}
 
 		/// <summary>

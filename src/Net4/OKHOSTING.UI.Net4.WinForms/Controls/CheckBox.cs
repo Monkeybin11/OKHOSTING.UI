@@ -14,10 +14,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		private void CheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<bool>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
 		}
 
 		public bool SelectedValue

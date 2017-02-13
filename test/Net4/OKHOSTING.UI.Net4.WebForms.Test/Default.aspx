@@ -7,6 +7,9 @@
     <title></title>
 </head>
 <body style="margin: 0">
-    <form id="form1" runat="server"></form>
+    <form id="form1" runat="server">
+		<asp:ScriptManager runat="server"></asp:ScriptManager>
+		<asp:PlaceHolder ID="ContentHolder" runat="server"></asp:PlaceHolder>
+    </form>
 </body>
 </html>

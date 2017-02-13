@@ -579,10 +579,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <returns>The value changed.</returns>
 		protected internal void RaiseValueChanged()
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
 		}
 
 		#endregion

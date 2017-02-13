@@ -12,10 +12,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		private void LabelButton_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			if(Click != null)
-			{
-				Click(this, e);
-			}
+			Click?.Invoke(this, e);
 		}
 
 		public event EventHandler Click;

@@ -12,10 +12,7 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
-			if (Click != null)
-			{
-				Click(sender, new EventArgs());
-			}
+			Click?.Invoke(sender, new EventArgs());
 		}
 
 		public new event EventHandler Click;

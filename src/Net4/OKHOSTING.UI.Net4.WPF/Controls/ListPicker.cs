@@ -32,10 +32,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		private void ListPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		string IInputControl<string>.Value

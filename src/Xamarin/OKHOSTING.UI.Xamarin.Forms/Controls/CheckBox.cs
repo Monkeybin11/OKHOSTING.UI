@@ -43,10 +43,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void CheckBox_Toggled(object sender, global::Xamarin.Forms.ToggledEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<bool>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
 		}
 
 		/// <summary>

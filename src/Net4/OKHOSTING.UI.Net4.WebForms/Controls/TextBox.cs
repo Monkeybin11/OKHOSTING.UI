@@ -73,10 +73,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		#endregion
@@ -755,14 +752,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public TextBox()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			base.ID = "TextBox_InnerTextBox_" + Guid.NewGuid();
+			base.ID = "TextBox_InnerTextBox_" + new Random().Next();
 
 			//ajax watermark
 			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();
-			//InnerWatermarkExtender.ID = base.UniqueID + "_TextBoxWatermarkExtender";
-			//InnerWatermarkExtender.TargetControlID = base.ID;
+			InnerWatermarkExtender.ID = ID + "_TextBoxWatermarkExtender";
+			InnerWatermarkExtender.TargetControlID = ID;
 			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
-			//base.Controls.Add(InnerWatermarkExtender);
+			base.Controls.Add(InnerWatermarkExtender);
 		}
 	}
 }

@@ -317,10 +317,7 @@ namespace OKHOSTING.UI.Net4.Ajax.Controls
 		/// </returns>
 		protected internal virtual void Raise_Click()
 		{
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
+			Click?.Invoke(this, new EventArgs());
 		}
 
 		/// <summary>

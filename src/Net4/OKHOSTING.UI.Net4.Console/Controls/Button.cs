@@ -25,10 +25,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </returns>
 		protected internal virtual void Raise_Click()
 		{
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
+			Click?.Invoke(this, new EventArgs());
 		}
 
 		#region IControl

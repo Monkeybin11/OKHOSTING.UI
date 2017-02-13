@@ -71,10 +71,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		/// <summary>

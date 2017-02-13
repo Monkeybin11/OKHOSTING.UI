@@ -76,10 +76,7 @@ namespace OKHOSTING.UI
 		/// </summary>
 		protected virtual void OnSessionStart()
 		{
-			if (Session_Start != null)
-			{
-				Session_Start(this, new EventArgs());
-			}
+			Session_Start?.Invoke(this, new EventArgs());
 		}
 
 		/// <summary>
@@ -91,10 +88,7 @@ namespace OKHOSTING.UI
 		protected virtual void OnSessionEnd()
 		{
 			//raise events
-			if (Session_End != null)
-			{
-				Session_End(this, new EventArgs());
-			}
+			Session_End?.Invoke(this, new EventArgs());
 
 			//clear all session data
 			this.Clear();

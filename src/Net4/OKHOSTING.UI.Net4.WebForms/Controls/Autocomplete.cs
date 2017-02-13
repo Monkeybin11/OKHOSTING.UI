@@ -42,12 +42,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
 			InnerTextBox = (TextBox) Platform.Current.Create<ITextBox>();
-			InnerTextBox.ID = "Autocomplete_InnerTextBox_" + Guid.NewGuid();
+			((ITextBox) InnerTextBox).Placeholder = "Search";
 			base.Controls.Add(InnerTextBox);
 
 			//ajax autocompleter
 			InnerAutoCompleteExtender = new AjaxControlToolkit.AutoCompleteExtender();
-			InnerAutoCompleteExtender.ID = base.UniqueID + "_AutoCompleteExtender";
+			InnerAutoCompleteExtender.ID = InnerTextBox.ID + "_AutoCompleteExtender";
 			InnerAutoCompleteExtender.TargetControlID = InnerTextBox.ID;
 			InnerAutoCompleteExtender.UseContextKey = true;
 			InnerAutoCompleteExtender.ServiceMethod = "Search";
@@ -57,17 +57,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			InnerAutoCompleteExtender.EnableCaching = false;
 			base.Controls.Add(InnerAutoCompleteExtender);
 
-			//ajax watermark
-			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();
-			InnerWatermarkExtender.WatermarkText = "Search";
-			InnerWatermarkExtender.ID = base.UniqueID + "_TextBoxWatermarkExtender";
-			InnerWatermarkExtender.TargetControlID = InnerTextBox.ID;
-			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
-			base.Controls.Add(InnerWatermarkExtender);
-
 			//add a unique id to session so we can invoke OnSearching from a ashx page
 			SessionId = "Autocomplete_" + Guid.NewGuid();
-			OKHOSTING.UI.Session.Current[SessionId] = this;
+			Session.Current[SessionId] = this;
 			InnerAutoCompleteExtender.ContextKey = SessionId;
 		}
 
@@ -91,10 +83,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
 
-			if (Searching != null)
-			{
-				Searching(this, e);
-			}
+			Searching?.Invoke(this, e);
 
 			return e;
 		}
@@ -148,10 +137,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		#endregion

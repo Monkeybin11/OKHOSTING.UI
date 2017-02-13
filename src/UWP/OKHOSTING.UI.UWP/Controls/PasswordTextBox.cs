@@ -22,10 +22,7 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		private void NativeTextBox_PasswordChanged(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		public event EventHandler<string> ValueChanged;

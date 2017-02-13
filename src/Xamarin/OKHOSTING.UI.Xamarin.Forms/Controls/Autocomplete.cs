@@ -113,10 +113,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			AutocompleteSearchEventArgs e = new AutocompleteSearchEventArgs(text);
 
-			if (Searching != null)
-			{
-				Searching(this, e);
-			}
+			Searching?.Invoke(this, e);
 
 			ResultView = new global::Xamarin.Forms.ListView();
 			ResultView.ItemsSource = e.SearchResult;
@@ -167,10 +164,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </returns>
 		private void OnValueChanged()
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		/// <summary>

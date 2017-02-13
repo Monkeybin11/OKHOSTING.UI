@@ -38,11 +38,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		protected override void OnClick()
 		{
 			base.OnClick();
-			
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
+
+			Click?.Invoke(this, new EventArgs());
 		}
 
 		/// <summary>

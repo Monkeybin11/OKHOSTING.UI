@@ -41,6 +41,7 @@ namespace OKHOSTING.UI.Test
 			txtBox.Height = 80;
 			txtBox.FontFamily = "Times new roman";
 			txtBox.FontSize = 20;
+			txtBox.Searching += TxtBox_Searching;
 			Stack.Children.Add(txtBox);
 
 			// Creates a button with your event Click and adds it to the stack.
@@ -52,6 +53,11 @@ namespace OKHOSTING.UI.Test
 			// Establishes the content and title of the page
 			Platform.Current.Page.Title = "Test Autocomplete";
 			Platform.Current.Page.Content = Stack;
+		}
+
+		private void TxtBox_Searching(object sender, AutocompleteSearchEventArgs e)
+		{
+			e.SearchResult = new[] { "Pedro", "Donaciana", "Muñoz", "Mata", "Lozano" };
 		}
 
 		/// <summary>

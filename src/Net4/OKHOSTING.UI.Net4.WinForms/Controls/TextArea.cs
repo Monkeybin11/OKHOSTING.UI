@@ -15,10 +15,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		private void PasswordTextBox_TextChanged(object sender, System.EventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>)this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		string IInputControl<string>.Value

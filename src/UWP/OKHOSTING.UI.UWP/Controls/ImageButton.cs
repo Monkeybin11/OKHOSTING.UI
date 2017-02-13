@@ -15,10 +15,7 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		private void ImageButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
 		{
-			if (Click != null)
-			{
-				Click(this, new EventArgs());
-			}
+			Click?.Invoke(this, new EventArgs());
 		}
 	}
 }

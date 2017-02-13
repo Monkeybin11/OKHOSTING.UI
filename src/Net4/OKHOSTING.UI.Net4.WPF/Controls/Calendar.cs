@@ -44,10 +44,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <param name="e">e</param>
 		private void Calendar_SelectedDatesChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
 		}
 
 		/// <summary>

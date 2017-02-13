@@ -24,10 +24,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			{
 				Command = new global::Xamarin.Forms.Command(() => 
 				{
-					if (Click != null)
-					{
-						Click(this, new EventArgs());
-					}
+					Click?.Invoke(this, new EventArgs());
 				}),
 				NumberOfTapsRequired = 1
 			};

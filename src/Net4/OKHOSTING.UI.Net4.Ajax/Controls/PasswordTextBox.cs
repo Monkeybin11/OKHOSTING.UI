@@ -345,10 +345,7 @@ namespace OKHOSTING.UI.Net4.Ajax.Controls
 		/// </returns>
 		protected internal void RaiseValueChanged()
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>)this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		#endregion

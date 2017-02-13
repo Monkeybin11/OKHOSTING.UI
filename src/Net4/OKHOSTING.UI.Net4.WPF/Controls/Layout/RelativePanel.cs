@@ -738,8 +738,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			void ISupportInitialize.EndInit()
 			{
 				_isInitializing = false;
-				if (afterInit != null)
-					afterInit();
+				afterInit?.Invoke();
 			}
 
 			/// <summary>

@@ -14,10 +14,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		private void Calendar_ValueChanged(object sender, EventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<DateTime?>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
 		}
 
 		DateTime? IInputControl<DateTime?>.Value

@@ -44,10 +44,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <param name="e">e</param>
 		private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<bool>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
 		}
 
 		/// <summary>

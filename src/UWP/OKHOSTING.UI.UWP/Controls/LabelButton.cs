@@ -12,10 +12,7 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		private void LabelButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
 		{
-			if(Click != null)
-			{
-				Click(sender, new EventArgs());
-			}
+			Click?.Invoke(sender, new EventArgs());
 		}
 
 		public event EventHandler Click;

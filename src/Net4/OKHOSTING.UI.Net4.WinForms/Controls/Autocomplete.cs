@@ -23,10 +23,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			var e = new AutocompleteSearchEventArgs(text);
 
-			if (Searching != null)
-			{
-				Searching(this, e);
-			}
+			Searching?.Invoke(this, e);
 
 			return e;
 		}
@@ -35,10 +32,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		private void Autocomplete_TextChanged(object sender, EventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<string>)this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		public new event EventHandler<string> ValueChanged;

@@ -18,10 +18,7 @@ namespace OKHOSTING.UI.UWP.Controls
 
 		private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, ((IInputControl<bool>) this).Value);
-			}
+			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
 		}
 
 		public event EventHandler<bool> ValueChanged;
