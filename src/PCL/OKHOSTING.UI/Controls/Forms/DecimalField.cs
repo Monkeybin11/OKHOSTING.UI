@@ -18,16 +18,23 @@ namespace OKHOSTING.UI.Controls.Forms
 			{
 				if (string.IsNullOrWhiteSpace(ValueControl.Value))
 				{
-					return 0;
+					return 0M;
 				}
 				else
 				{
-					return int.Parse(ValueControl.Value);
+					return decimal.Parse(ValueControl.Value);
 				}
 			}
 			set
 			{
-				ValueControl.Value = ((int)value).ToString();
+				if (value == null)
+				{
+					ValueControl.Value = string.Empty;
+				}
+				else
+				{
+					ValueControl.Value = (Convert.ToDecimal(value)).ToString();
+				}
 			}
 		}
 

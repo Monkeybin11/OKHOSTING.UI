@@ -162,7 +162,7 @@ namespace OKHOSTING.UI
 		/// It is an arrangement of the libraries of the platforms where you can deploy the application.
 		/// <para xml:lang="es">Es un arreglo de las libreris de las plataformas donde se puede implementar la aplicacion.</para>
 		/// </summary>
-		protected static readonly string[] KnownPlatforms = new string[] { "Net4.WinForms", "Net4.WebForms", "Net4.WPF", "UWP", "Xamarin.Forms", "Xamarin.Android", "Xamarin.iOS", "Xamarin.Windows" };
+		protected static readonly string[] KnownPlatforms = new string[] { "Net4.Ajax", "Net4.Console", "Net4.WinForms", "Net4.WebForms", "Net4.WPF", "UWP", "Xamarin.Forms", "Xamarin.Android", "Xamarin.iOS", "Xamarin.Windows", "Xamarin.Mac" };
 
 		/// <summary>
 		/// Gets the currently executing App. In a web environment, an App instance is created for each user

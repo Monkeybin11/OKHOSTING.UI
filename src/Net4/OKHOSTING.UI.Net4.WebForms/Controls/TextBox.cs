@@ -32,27 +32,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		event EventHandler<string> IInputControl<string>.ValueChanged
-		{
-			add
-			{
-				throw new NotImplementedException();
-			}
-
-			remove
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		/// <summary>
-		/// Ons the text changed.
+		/// On the text changed.
 		/// <para xml:lang="es">Es el evento enviado al cambiar el texto.</para>
 		/// </summary>
 		/// <returns>The text changed.
 		/// <para xml:lang="es">El texto cambiado.</para>
 		/// </returns>
-		/// <param name="e">E.</param>
 		protected override void OnTextChanged(EventArgs e)
 		{
 			base.OnTextChanged(e);

@@ -52,7 +52,14 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			set
 			{
-				ValueControl.Value = Data.Convert.ToString((IStringSerializable) value);
+				if (value == null)
+				{
+					ValueControl.Value = null;
+				}
+				else
+				{
+					ValueControl.Value = Data.Convert.ToString((IStringSerializable) value);
+				}
 			}
 		}
 

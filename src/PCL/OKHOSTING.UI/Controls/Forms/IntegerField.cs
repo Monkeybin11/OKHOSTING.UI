@@ -29,7 +29,10 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			set
 			{
-				ValueControl.Value = value.ToString();
+				if (value == null)
+				{
+					ValueControl.Value = value.ToString();
+				}
 			}
 		}
 

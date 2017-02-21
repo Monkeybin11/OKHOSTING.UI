@@ -42,7 +42,14 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			set
 			{
-				ValueControl.Value = ((DateTime) value).ToString(Format);
+				if (value == null)
+				{
+					ValueControl.Value = string.Empty;
+				}
+				else
+				{
+					ValueControl.Value = ((DateTime) value).ToString(Format);
+				}
 			}
 		}
 
