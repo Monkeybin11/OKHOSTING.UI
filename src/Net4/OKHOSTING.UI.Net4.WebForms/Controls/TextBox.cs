@@ -738,7 +738,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public TextBox()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			base.ID = "TextBox_InnerTextBox_" + new Random().Next();
+			base.ID = "TextBox_InnerTextBox_" + Guid.NewGuid();
 
 			//ajax watermark
 			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();

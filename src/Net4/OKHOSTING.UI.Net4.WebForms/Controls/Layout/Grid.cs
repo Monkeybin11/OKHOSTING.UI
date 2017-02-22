@@ -339,14 +339,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 
 				foreach (System.Web.UI.WebControls.TableRow row in Rows)
 				{
-					while (row.Cells.Count < value)
+					int totalCells = 0;
+					
+					foreach (System.Web.UI.WebControls.TableCell cell in row.Cells)
 					{
-						row.Cells.Add(new System.Web.UI.WebControls.TableCell());
+						totalCells += cell.ColumnSpan;
 					}
 
-					while (row.Cells.Count > value)
+					while (totalCells > value)
 					{
-						row.Cells.RemoveAt(row.Cells.Count - 1);
+						var cell = row.Cells[row.Cells.Count - 1];
+						row.Cells.Remove(cell);
+						totalCells -= cell.ColumnSpan;
+					}
+
+					while (totalCells < value)
+					{
+						row.Cells.Add(new System.Web.UI.WebControls.TableCell() { ColumnSpan = 1 });
+						totalCells++;
 					}
 				}
 			}
@@ -503,6 +513,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell) ((System.Web.UI.WebControls.WebControl) content).Parent;
 			cell.ColumnSpan = columnSpan;
+
+			//reset cells
+			((IGrid) this).ColumnCount = ((IGrid) this).ColumnCount;
 		}
 
 		/// <summary>
