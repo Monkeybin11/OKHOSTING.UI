@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>OKHOSTING.UI.Xamarin.Forms</id>
-		<version>1.0.20</version>
+		<version>1.0.27</version>
 		<title>OKHOSTING.UI.Xamarin.Forms</title>
 		<authors>OK HOSTING</authors>
 		<owners>OK HOSTING</owners>
@@ -48,7 +48,7 @@
 		<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
 		<copyright>Copyright OK HOSTING SC 2015</copyright>
 		<dependencies>
-			<dependency id="OKHOSTING.UI" version="1.0.4" />
+			<dependency id="OKHOSTING.UI" version="1.0.26" />
 		</dependencies>
 		<references></references>
 		<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>

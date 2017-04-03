@@ -58,7 +58,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			base.Controls.Add(InnerAutoCompleteExtender);
 
 			//add a unique id to session so we can invoke OnSearching from a ashx page
-			SessionId = "Autocomplete_" + Guid.NewGuid();
+			SessionId = "Autocomplete_" + Guid.NewGuid().ToString().Replace('-', '_');
 			Session.Current[SessionId] = this;
 			InnerAutoCompleteExtender.ContextKey = SessionId;
 		}

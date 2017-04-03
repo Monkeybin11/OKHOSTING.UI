@@ -61,6 +61,7 @@
     <Compile Include="Controls\Forms\XmlSerializableField.cs" />
     <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Controls\IInputControl.cs" />
+    <Compile Include="Controls\Layout\IFlow.cs" />
     <Compile Include="Controls\Layout\IRelativePanel.cs" />
     <Compile Include="PageState.cs" />
     <Compile Include="Platform.cs" />
@@ -126,11 +127,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Core.1.0.28\lib\OKHOSTING.Core.dll</HintPath>
+      <HintPath>..\..\packages\OKHOSTING.Core.1.0.33\lib\OKHOSTING.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Data.1.0.16\lib\OKHOSTING.Data.dll</HintPath>
+      <HintPath>..\..\packages\OKHOSTING.Data.1.0.19\lib\OKHOSTING.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c">

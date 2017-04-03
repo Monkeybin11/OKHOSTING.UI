@@ -12,6 +12,7 @@ namespace OKHOSTING.UI.UWP.Controls.Layout
 		public Stack()
 		{
 			_Children = new ControlList(base.Children);
+			base.Orientation = Windows.UI.Xaml.Controls.Orientation.Vertical;
 		}
 
 		IList<IControl> IStack.Children

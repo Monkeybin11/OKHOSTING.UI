@@ -26,6 +26,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		public Stack()
 		{
 			_Children = new ControlList(base.Children);
+			base.Orientation = global::Xamarin.Forms.StackOrientation.Vertical;
 		}
 
 		/// <summary>

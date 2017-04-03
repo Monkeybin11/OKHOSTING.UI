@@ -69,10 +69,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//get title and content from the state, in case it has a different Page instance
-			if (Platform.Current.PageState != null && !IsPostBack)
+			if (Platform.Current.PageState != null && Platform.Current.PageState.Content != null)
 			{
 				Title = Platform.Current.PageState.Title;
 				Content = Platform.Current.PageState.Content;
+			}
+
+			if (!IsPostBack)
+			{
 				return;
 			}
 
@@ -307,7 +311,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected override void OnInit(EventArgs e)
 		{
 			base.OnInit(e);
-			//EnsureChildControls();
+			EnsureChildControls();
 		}
 	}
 }

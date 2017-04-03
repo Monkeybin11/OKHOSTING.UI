@@ -20,10 +20,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		public Stack()
 		{
 			Children = new ControlList(this);
-			InnerGrid = new Grid();
-			((IGrid) InnerGrid).ColumnCount = 1;
-
-			base.Controls.Add(InnerGrid);
 		}
 
 		#region IControl
@@ -319,12 +315,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		#endregion
 
 		/// <summary>
-		/// The actual grid that contains all controls in a "stacky" way
-		/// <para xml:lang="es">El grid actual que contiene todos los controles de una manera apilada.</para>
-		/// </summary>
-		protected readonly Grid InnerGrid;
-
-		/// <summary>
 		/// The list of all the child controls
 		/// <para xml:lang="es">La lista de todos los controles hijos</para>
 		/// </summary>
@@ -348,18 +338,18 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// The container stack.
 			/// <para xml:lang="es">El contenido del Stack</para>
 			/// </summary>
-			private readonly Stack ContainerStack;
+			private readonly Stack Container;
 
 			/// <summary>
 			/// Initializes a new instance of the OKHOSTING.UI.Net4.WebForms.Controls.Layout.Stack.ControlList class.
 			/// <para xml:lang="es">Inicializa una nueva instancia de la clase OKHOSTING.UI.Net4.WebForms.Controls.Layout.Stack.ControlList</para>
 			/// </summary>
-			/// <param name="containerStack">Container stack.
+			/// <param name="container">Container stack.
 			/// <para xml:lang="es">Pila de contenedores</para>
 			/// </param>
-			public ControlList(Stack containerStack)
+			public ControlList(Stack container)
 			{
-				ContainerStack = containerStack;
+				Container = container;
 			}
 
 			/// <summary>
@@ -371,12 +361,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
 				get
 				{
-					return (IControl) ContainerStack.InnerGrid.Rows[index].Cells[0].Controls[0];
+					return (IControl) Container.Controls[index * 2];
 				}
 				set
 				{
-					ContainerStack.InnerGrid.Rows[index].Cells[0].Controls.Clear();
-					ContainerStack.InnerGrid.Rows[index].Cells[0].Controls.Add((System.Web.UI.Control) value);
+					Container.Controls.RemoveAt(index * 2);
+					Container.Controls.AddAt(index * 2, (System.Web.UI.Control) value);
 				}
 			}
 
@@ -391,7 +381,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
 				get
 				{
-					return ContainerStack.InnerGrid.Rows.Count;
+					return Container.Controls.Count / 2;
 				}
 			}
 
@@ -416,9 +406,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </param>
 			public void Add(IControl item)
 			{
-				int last = ContainerStack.InnerGrid.Rows.Count;
-				((IGrid) ContainerStack.InnerGrid).RowCount = last + 1;
-				((IGrid) ContainerStack.InnerGrid).SetContent(last, 0, item);
+				Container.Controls.Add((System.Web.UI.Control) item);
+				Container.Controls.Add(new System.Web.UI.LiteralControl("<br />"));
 			}
 
 			/// <summary>
@@ -427,7 +416,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </summary>
 			public void Clear()
 			{
-				ContainerStack.InnerGrid.Rows.Clear();
+				Container.Controls.Clear();
 			}
 
 			/// <summary>
@@ -439,15 +428,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </param>
 			public bool Contains(IControl item)
 			{
-				foreach (System.Web.UI.WebControls.TableRow row in ContainerStack.InnerGrid.Rows)
-				{
-					if (row.Cells[0].Controls.Count > 0 && row.Cells[0].Controls[0] == item)
-					{
-						return true;
-					}
-				}
-
-				return false;
+				return Container.Controls.Contains((System.Web.UI.Control) item);
 			}
 
 			/// <summary>
@@ -462,14 +443,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </param>
 			public void CopyTo(IControl[] array, int arrayIndex)
 			{
-				for (int i = 0; i < ContainerStack.InnerGrid.Rows.Count; i++)
+				for (int i = 0; i < Container.Controls.Count; i += 2)
 				{
-					System.Web.UI.WebControls.TableRow row = ContainerStack.InnerGrid.Rows[i];
-
-					if (row.Cells[0].Controls.Count > 0)
-					{
-						array[i] = (IControl) row.Cells[0].Controls[0];
-					}
+					array[i] = (IControl) Container.Controls[i];
 				}
 			}
 
@@ -482,9 +458,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </returns>
 			public IEnumerator<IControl> GetEnumerator()
 			{
-				foreach (System.Web.UI.WebControls.TableRow row in ContainerStack.InnerGrid.Rows)
+				foreach (var control in Container.Controls)
 				{
-					yield return (IControl) row.Controls[0];
+					if (control is System.Web.UI.LiteralControl && ((System.Web.UI.LiteralControl) control).Text == "<br />")
+					{
+						continue;
+					}
+
+					yield return (IControl) control;
 				}
 			}
 
@@ -497,16 +478,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </param>
 			public int IndexOf(IControl item)
 			{
-				for (int i = 0; i < ContainerStack.InnerGrid.Rows.Count; i++)
-				{
-					System.Web.UI.WebControls.TableRow row = ContainerStack.InnerGrid.Rows[i];
-
-					if (row.Cells[0].Controls.Count > 0 && row.Cells[0].Controls[0] == item)
-					{
-						return i;
-					}
-				}
-				return -1;
+				return Container.Controls.IndexOf((System.Web.UI.Control) item) / 2;
 			}
 
 			/// <summary>
@@ -521,10 +493,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </param>
 			public void Insert(int index, IControl item)
 			{
-				var row = new System.Web.UI.WebControls.TableRow();
-				row.Controls.Add((System.Web.UI.Control) item);
-
-				ContainerStack.InnerGrid.Rows.AddAt(index, row);
+				Container.Controls.AddAt(index * 2, (System.Web.UI.Control) item);
 			}
 
 			/// <summary>
@@ -536,16 +505,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </param>
 			public bool Remove(IControl item)
 			{
-				foreach (System.Web.UI.WebControls.TableRow row in ContainerStack.InnerGrid.Rows)
+				if (Contains(item))
 				{
-					if (row.Cells[0].Controls.Contains((System.Web.UI.Control) item))
-					{
-						row.Cells[0].Controls.Clear();
-						return true;
-					}
-				}
+					int index = Container.Controls.IndexOf((System.Web.UI.Control) item);
 
-				return false;
+					Container.Controls.RemoveAt(index);
+					Container.Controls.RemoveAt(index);  //remove <br />
+
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 
 			/// <summary>
@@ -557,7 +529,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			/// </param>
 			public void RemoveAt(int index)
 			{
-				ContainerStack.InnerGrid.Rows.RemoveAt(index);
+				Container.Controls.RemoveAt(index);
+				Container.Controls.RemoveAt(index);  //remove <br />
 			}
 
 			/// <summary>

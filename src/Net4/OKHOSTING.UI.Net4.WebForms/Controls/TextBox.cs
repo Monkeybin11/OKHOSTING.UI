@@ -641,11 +641,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				switch (value)
 				{
 					case ITextBoxInputType.Date:
-						base.Attributes["type"] = "date";
-						break;
-
 					case ITextBoxInputType.DateTime:
-						base.Attributes["type"] = "datetime";
+						base.Attributes["type"] = "date";
 						break;
 
 					case ITextBoxInputType.Email:
@@ -738,14 +735,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public TextBox()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			base.ID = "TextBox_InnerTextBox_" + Guid.NewGuid();
+			base.ID = "TextBox_InnerTextBox_" + Guid.NewGuid().ToString().Replace('-', '_');
 
 			//ajax watermark
 			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();
 			InnerWatermarkExtender.ID = ID + "_TextBoxWatermarkExtender";
 			InnerWatermarkExtender.TargetControlID = ID;
 			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
-			base.Controls.Add(InnerWatermarkExtender);
+			//base.Controls.Add(InnerWatermarkExtender);
 		}
 	}
 }

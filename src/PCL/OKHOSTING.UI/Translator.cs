@@ -1,7 +1,7 @@
 ﻿using static OKHOSTING.Core.TypeExtensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 
 namespace OKHOSTING.UI
 {
@@ -20,24 +20,6 @@ namespace OKHOSTING.UI
 		private readonly static Dictionary<Type, System.Resources.ResourceManager> Managers = new Dictionary<Type, System.Resources.ResourceManager>();
 
 		/// <summary>
-		/// Gets the manager.
-		/// <para xml:lang="es">Obtiene el manejador de recursos.</para>
-		/// </summary>
-		/// <returns>The manager.
-		/// <para xml:lang="es">El manejador.</para>
-		/// </returns>
-		/// <param name="type">Type.</param>
-		private static System.Resources.ResourceManager GetManager(Type type)
-		{
-			if (!Managers.ContainsKey(type))
-			{
-				Managers.Add(type, new System.Resources.ResourceManager(type));
-			}
-
-			return Managers[type];
-		}
-
-		/// <summary>
 		/// Gets the string.
 		/// <para xml:lang="es">Devuelve el manejador que corresponda con el nombre especificado.</para>
 		/// </summary>
@@ -46,15 +28,24 @@ namespace OKHOSTING.UI
 		/// <param name="name">Name.</param>
 		public static string GetString(Type type, string name)
 		{
-			try
+			var resourceNames = type.GetTypeInfo().Assembly.GetManifestResourceNames();
+
+			foreach (var resource in resourceNames)
 			{
-				return GetManager(type).GetString(name);
+				try
+				{
+					var manager = new System.Resources.ResourceManager(resource.Replace(".resources", string.Empty), type.GetTypeInfo().Assembly);
+					var result = manager.GetString(name);
+
+					if (!string.IsNullOrWhiteSpace(result))
+					{
+						return result;
+					}
+				}
+				catch { }
 			}
-			catch
-			{
-				//return string.Format("{0}.{1}", type.Name, name);
-				return name;
-			}
+		
+			return name;
 		}
 
 		/// <summary>
@@ -71,9 +62,9 @@ namespace OKHOSTING.UI
 		/// Translate the specified member.
 		/// </summary>
 		/// <param name="member">Member.</param>
-		public static string Translate(System.Reflection.MemberInfo member)
+		public static string Translate(MemberInfo member)
 		{
-			return GetString(member.DeclaringType, member.GetFriendlyFullName().Replace('.', '_'));
+			return GetString(member.DeclaringType, member.GetFriendlyName().Replace('.', '_'));
 		}
 
 		/// <summary>

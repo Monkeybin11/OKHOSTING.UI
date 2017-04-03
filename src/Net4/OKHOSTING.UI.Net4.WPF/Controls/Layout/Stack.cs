@@ -22,6 +22,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		public Stack()
 		{
 			_Children = new ControlList(base.Children);
+			base.Orientation = System.Windows.Controls.Orientation.Vertical;
 		}
 
 		/// <summary>

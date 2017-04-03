@@ -383,7 +383,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <param name="url">URL.</param>
 		public void LoadFromUrl(System.Uri url)
 		{
-			base.ImageUrl = url.ToString();
+			base.ImageUrl = url?.ToString();
 		}
 
 		/// <summary>

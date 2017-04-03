@@ -107,6 +107,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			global::Xamarin.Forms.Grid.SetRow((global::Xamarin.Forms.View) content, row);
 			global::Xamarin.Forms.Grid.SetColumn((global::Xamarin.Forms.View) content, column);
 
+			//remove previous content, if any
+			var currentContent = ((IGrid) this).GetContent(row, column);
+
+			if (currentContent != null)
+			{
+				base.Children.Remove((global::Xamarin.Forms.View) currentContent);
+			}
+
 			base.Children.Add((global::Xamarin.Forms.View) content);
 		}
 
@@ -425,6 +433,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		#endregion
+
 		/// <summary>
 		/// Dispose
 		/// <para xml:lang="es">Libera la memoria</para>

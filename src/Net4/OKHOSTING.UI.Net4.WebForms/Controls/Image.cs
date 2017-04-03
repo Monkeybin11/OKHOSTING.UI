@@ -332,7 +332,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 			//we finally get the "relative" path of the file and load it as a url
 			string url = filePath.Replace(this.Page.MapPath("/"), string.Empty);
-			LoadFromUrl(new System.Uri(url));
+			LoadFromUrl(new Uri(url));
 		}
 
 		/// <summary>
@@ -343,7 +343,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public void LoadFromStream(Stream stream)
 		{
 			//save the stream to a temp file, and load as file from there
-			string tempDirectoryPath = Path.Combine(OKHOSTING.Core.Net4.DefaultPaths.Custom, "Temp");
+			string tempDirectoryPath = Path.Combine(Core.Net4.DefaultPaths.Custom, "Temp");
 
 			if (!Directory.Exists(tempDirectoryPath))
 			{
@@ -355,6 +355,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				stream.CopyTo(fileStream);
 			}
+
+			LoadFromFile(tempFilePath);
 		}
 
 		/// <summary>

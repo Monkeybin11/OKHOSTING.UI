@@ -272,9 +272,9 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.28": {
+      "OKHOSTING.Core/1.0.33": {
         "dependencies": {
-          "PCLCrypto": "2.0.14"
+          "PCLCrypto": "2.0.147"
         },
         "compile": {
           "lib/win8/OKHOSTING.Core.UWP.dll": {},
@@ -285,10 +285,9 @@
           "lib/win8/OKHOSTING.Core.dll": {}
         }
       },
-      "PCLCrypto/2.0.140": {
+      "PCLCrypto/2.0.147": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.NCrypt": "0.1.501",
+          "PInvoke.NCrypt": "0.3.2",
           "Validation": "2.2.8"
         },
         "compile": {
@@ -298,47 +297,47 @@
           "lib/portable-win81+wpa81/PCLCrypto.dll": {}
         }
       },
-      "PInvoke.BCrypt/0.1.501": {
+      "PInvoke.BCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.Kernel32": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Kernel32": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         }
       },
-      "PInvoke.Kernel32/0.1.501": {
+      "PInvoke.Kernel32/0.3.2": {
         "dependencies": {
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         }
       },
-      "PInvoke.NCrypt/0.1.501": {
+      "PInvoke.NCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.BCrypt": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         }
       },
-      "PInvoke.Windows.Core/0.1.501": {
+      "PInvoke.Windows.Core/0.3.2": {
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         }
       },
       "runtime.native.System.IO.Compression/4.1.0": {
@@ -2327,9 +2326,9 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.28": {
+      "OKHOSTING.Core/1.0.33": {
         "dependencies": {
-          "PCLCrypto": "2.0.14"
+          "PCLCrypto": "2.0.147"
         },
         "compile": {
           "lib/win8/OKHOSTING.Core.UWP.dll": {},
@@ -2340,10 +2339,9 @@
           "lib/win8/OKHOSTING.Core.dll": {}
         }
       },
-      "PCLCrypto/2.0.140": {
+      "PCLCrypto/2.0.147": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.NCrypt": "0.1.501",
+          "PInvoke.NCrypt": "0.3.2",
           "Validation": "2.2.8"
         },
         "compile": {
@@ -2353,47 +2351,47 @@
           "lib/portable-win81+wpa81/PCLCrypto.dll": {}
         }
       },
-      "PInvoke.BCrypt/0.1.501": {
+      "PInvoke.BCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.Kernel32": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Kernel32": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         }
       },
-      "PInvoke.Kernel32/0.1.501": {
+      "PInvoke.Kernel32/0.3.2": {
         "dependencies": {
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         }
       },
-      "PInvoke.NCrypt/0.1.501": {
+      "PInvoke.NCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.BCrypt": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         }
       },
-      "PInvoke.Windows.Core/0.1.501": {
+      "PInvoke.Windows.Core/0.3.2": {
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -4515,9 +4513,9 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.28": {
+      "OKHOSTING.Core/1.0.33": {
         "dependencies": {
-          "PCLCrypto": "2.0.14"
+          "PCLCrypto": "2.0.147"
         },
         "compile": {
           "lib/win8/OKHOSTING.Core.UWP.dll": {},
@@ -4528,10 +4526,9 @@
           "lib/win8/OKHOSTING.Core.dll": {}
         }
       },
-      "PCLCrypto/2.0.140": {
+      "PCLCrypto/2.0.147": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.NCrypt": "0.1.501",
+          "PInvoke.NCrypt": "0.3.2",
           "Validation": "2.2.8"
         },
         "compile": {
@@ -4541,47 +4538,47 @@
           "lib/portable-win81+wpa81/PCLCrypto.dll": {}
         }
       },
-      "PInvoke.BCrypt/0.1.501": {
+      "PInvoke.BCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.Kernel32": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Kernel32": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         }
       },
-      "PInvoke.Kernel32/0.1.501": {
+      "PInvoke.Kernel32/0.3.2": {
         "dependencies": {
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         }
       },
-      "PInvoke.NCrypt/0.1.501": {
+      "PInvoke.NCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.BCrypt": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         }
       },
-      "PInvoke.Windows.Core/0.1.501": {
+      "PInvoke.Windows.Core/0.3.2": {
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -6744,9 +6741,9 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.28": {
+      "OKHOSTING.Core/1.0.33": {
         "dependencies": {
-          "PCLCrypto": "2.0.14"
+          "PCLCrypto": "2.0.147"
         },
         "compile": {
           "lib/win8/OKHOSTING.Core.UWP.dll": {},
@@ -6757,10 +6754,9 @@
           "lib/win8/OKHOSTING.Core.dll": {}
         }
       },
-      "PCLCrypto/2.0.140": {
+      "PCLCrypto/2.0.147": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.NCrypt": "0.1.501",
+          "PInvoke.NCrypt": "0.3.2",
           "Validation": "2.2.8"
         },
         "compile": {
@@ -6770,47 +6766,47 @@
           "lib/portable-win81+wpa81/PCLCrypto.dll": {}
         }
       },
-      "PInvoke.BCrypt/0.1.501": {
+      "PInvoke.BCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.Kernel32": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Kernel32": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         }
       },
-      "PInvoke.Kernel32/0.1.501": {
+      "PInvoke.Kernel32/0.3.2": {
         "dependencies": {
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         }
       },
-      "PInvoke.NCrypt/0.1.501": {
+      "PInvoke.NCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.BCrypt": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         }
       },
-      "PInvoke.Windows.Core/0.1.501": {
+      "PInvoke.Windows.Core/0.3.2": {
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -8941,9 +8937,9 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.28": {
+      "OKHOSTING.Core/1.0.33": {
         "dependencies": {
-          "PCLCrypto": "2.0.14"
+          "PCLCrypto": "2.0.147"
         },
         "compile": {
           "lib/win8/OKHOSTING.Core.UWP.dll": {},
@@ -8954,10 +8950,9 @@
           "lib/win8/OKHOSTING.Core.dll": {}
         }
       },
-      "PCLCrypto/2.0.140": {
+      "PCLCrypto/2.0.147": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.NCrypt": "0.1.501",
+          "PInvoke.NCrypt": "0.3.2",
           "Validation": "2.2.8"
         },
         "compile": {
@@ -8967,47 +8962,47 @@
           "lib/portable-win81+wpa81/PCLCrypto.dll": {}
         }
       },
-      "PInvoke.BCrypt/0.1.501": {
+      "PInvoke.BCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.Kernel32": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Kernel32": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         }
       },
-      "PInvoke.Kernel32/0.1.501": {
+      "PInvoke.Kernel32/0.3.2": {
         "dependencies": {
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         }
       },
-      "PInvoke.NCrypt/0.1.501": {
+      "PInvoke.NCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.BCrypt": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         }
       },
-      "PInvoke.Windows.Core/0.1.501": {
+      "PInvoke.Windows.Core/0.3.2": {
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -11175,9 +11170,9 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.28": {
+      "OKHOSTING.Core/1.0.33": {
         "dependencies": {
-          "PCLCrypto": "2.0.14"
+          "PCLCrypto": "2.0.147"
         },
         "compile": {
           "lib/win8/OKHOSTING.Core.UWP.dll": {},
@@ -11188,10 +11183,9 @@
           "lib/win8/OKHOSTING.Core.dll": {}
         }
       },
-      "PCLCrypto/2.0.140": {
+      "PCLCrypto/2.0.147": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.NCrypt": "0.1.501",
+          "PInvoke.NCrypt": "0.3.2",
           "Validation": "2.2.8"
         },
         "compile": {
@@ -11201,47 +11195,47 @@
           "lib/portable-win81+wpa81/PCLCrypto.dll": {}
         }
       },
-      "PInvoke.BCrypt/0.1.501": {
+      "PInvoke.BCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.Kernel32": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Kernel32": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         }
       },
-      "PInvoke.Kernel32/0.1.501": {
+      "PInvoke.Kernel32/0.3.2": {
         "dependencies": {
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         }
       },
-      "PInvoke.NCrypt/0.1.501": {
+      "PInvoke.NCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.BCrypt": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         }
       },
-      "PInvoke.Windows.Core/0.1.501": {
+      "PInvoke.Windows.Core/0.3.2": {
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -13372,9 +13366,9 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "OKHOSTING.Core/1.0.28": {
+      "OKHOSTING.Core/1.0.33": {
         "dependencies": {
-          "PCLCrypto": "2.0.14"
+          "PCLCrypto": "2.0.147"
         },
         "compile": {
           "lib/win8/OKHOSTING.Core.UWP.dll": {},
@@ -13385,10 +13379,9 @@
           "lib/win8/OKHOSTING.Core.dll": {}
         }
       },
-      "PCLCrypto/2.0.140": {
+      "PCLCrypto/2.0.147": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.NCrypt": "0.1.501",
+          "PInvoke.NCrypt": "0.3.2",
           "Validation": "2.2.8"
         },
         "compile": {
@@ -13398,47 +13391,47 @@
           "lib/portable-win81+wpa81/PCLCrypto.dll": {}
         }
       },
-      "PInvoke.BCrypt/0.1.501": {
+      "PInvoke.BCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.Kernel32": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Kernel32": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll": {}
         }
       },
-      "PInvoke.Kernel32/0.1.501": {
+      "PInvoke.Kernel32/0.3.2": {
         "dependencies": {
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll": {}
         }
       },
-      "PInvoke.NCrypt/0.1.501": {
+      "PInvoke.NCrypt/0.3.2": {
         "dependencies": {
-          "PInvoke.BCrypt": "0.1.501",
-          "PInvoke.Windows.Core": "0.1.501"
+          "PInvoke.BCrypt": "0.3.2",
+          "PInvoke.Windows.Core": "0.3.2"
         },
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll": {}
         }
       },
-      "PInvoke.Windows.Core/0.1.501": {
+      "PInvoke.Windows.Core/0.3.2": {
         "compile": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         },
         "runtime": {
-          "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
+          "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -15677,11 +15670,11 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "OKHOSTING.Core/1.0.28": {
-      "sha512": "YzgOumeqK9FqVvd87ico/mFpUMdtewWVeyW58/8hcrzH69np5OEKncEprsgFg9ONh3U9736AkFvSkbhOjA/MUg==",
+    "OKHOSTING.Core/1.0.33": {
+      "sha512": "1P4AoSHmweK2l8Ch7wTiUz47QijjB42Uf7jQHFxTnQpLfQjQnoFcs4G4lBNJbMnE3w4zE2jW3eYjd+Sw+1e5ng==",
       "type": "package",
       "files": [
-        "OKHOSTING.Core.1.0.28.nupkg.sha512",
+        "OKHOSTING.Core.1.0.33.nupkg.sha512",
         "OKHOSTING.Core.nuspec",
         "content/_._",
         "lib/OKHOSTING.Core.dll",
@@ -15700,11 +15693,11 @@
         "tools/uninstall.ps1"
       ]
     },
-    "PCLCrypto/2.0.140": {
-      "sha512": "u5aJVPKAYJtSVuW6bPmC6G1RShnuwuTC9OOnWmnBquvoSbSp1Py9Hv0Z2TAxf8QUqsbPo8QTIk6AbJYopxzWVg==",
+    "PCLCrypto/2.0.147": {
+      "sha512": "OFNDBjhP+qPukqB8PiGbWDo70gHsEzSKupL47JisjYFQaGwlPPCnN8ah59QCzIvsg9IUr2AecGKXF3ONpyFL9g==",
       "type": "package",
       "files": [
-        "PCLCrypto.2.0.140.nupkg.sha512",
+        "PCLCrypto.2.0.147.nupkg.sha512",
         "PCLCrypto.nuspec",
         "lib/MonoAndroid23/PCLCrypto.dll",
         "lib/MonoAndroid23/PCLCrypto.xml",
@@ -15722,46 +15715,58 @@
         "lib/xamarinios10/PCLCrypto.xml"
       ]
     },
-    "PInvoke.BCrypt/0.1.501": {
-      "sha512": "ZS38oJ9UgF1LWUJnfnE+wc32aJ64JC/UdyuLBoWKdCbpuhZ4EH/MUutjLPVcbDuBnggdIWpmaQDCyxUf0YVFkQ==",
+    "PInvoke.BCrypt/0.3.2": {
+      "sha512": "6nSjPx88F+dcQgxfbM/lkYhi/zQWxwBcGAS3de/Q7YmPr5QdLNv5ZMk2UEFpMQhlFNya4TdUy5i3HKA12uMa7Q==",
       "type": "package",
       "files": [
-        "PInvoke.BCrypt.0.1.501.nupkg.sha512",
+        "PInvoke.BCrypt.0.3.2.nupkg.sha512",
         "PInvoke.BCrypt.nuspec",
+        "lib/net40/PInvoke.BCrypt.dll",
+        "lib/net40/PInvoke.BCrypt.xml",
         "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll",
-        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.xml"
+        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.xml",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.dll",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.BCrypt.xml"
       ]
     },
-    "PInvoke.Kernel32/0.1.501": {
-      "sha512": "sYw6nWdYWdAcvexHXwS2leRN7SFzxNy5PNSV3F7XQb3WXgTDym6NtytaGV7GSSwP5ZsScRJKfb9DmX+NCLgRqQ==",
+    "PInvoke.Kernel32/0.3.2": {
+      "sha512": "zkd5Vc5AQ9B489GMNlmd0wdKnRoLl1B/TnouwcjtaqWbDJ17TQSvBRnV7xjVEpBHQtL/248EaUTcDprJe9bZMA==",
       "type": "package",
       "files": [
-        "PInvoke.Kernel32.0.1.501.nupkg.sha512",
+        "PInvoke.Kernel32.0.3.2.nupkg.sha512",
         "PInvoke.Kernel32.nuspec",
         "lib/net40/PInvoke.Kernel32.dll",
         "lib/net40/PInvoke.Kernel32.xml",
         "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll",
-        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.xml"
+        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.xml",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.dll",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Kernel32.xml"
       ]
     },
-    "PInvoke.NCrypt/0.1.501": {
-      "sha512": "JrU5Fi7qf6TSP4P1m26s4y+O7mhKsW0uG29q4q4meHGrQtm5iSUto+gJNA6H/SAnzvSDpzZp2Hsti6YgOT27pQ==",
+    "PInvoke.NCrypt/0.3.2": {
+      "sha512": "s7SIBXlr3qolZaM5mGEXG2sKBY4yFVHTWBlwhRC93le08Aj+n/IaFVnB9LBFv6mpCCivXdzad+9EX6HHds4PyQ==",
       "type": "package",
       "files": [
-        "PInvoke.NCrypt.0.1.501.nupkg.sha512",
+        "PInvoke.NCrypt.0.3.2.nupkg.sha512",
         "PInvoke.NCrypt.nuspec",
+        "lib/net40/PInvoke.NCrypt.dll",
+        "lib/net40/PInvoke.NCrypt.xml",
         "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll",
-        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.xml"
+        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.xml",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.dll",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.NCrypt.xml"
       ]
     },
-    "PInvoke.Windows.Core/0.1.501": {
-      "sha512": "uWM97mhUQ6M9HGm88tif6zJfoMLrkfKOajbcJ5Oemjf9Aoc29wK9endneQW31pzqWiVYdte40woMwXCN0SoOUA==",
+    "PInvoke.Windows.Core/0.3.2": {
+      "sha512": "cLG8L2mBqeM6mwKxYg34uZnW5A4cAqyWY4nh+ogxon6BOPLcuQ2QSK/b1IKduUIQg6mDgf06rZUVbuVVPi9+fg==",
       "type": "package",
       "files": [
-        "PInvoke.Windows.Core.0.1.501.nupkg.sha512",
+        "PInvoke.Windows.Core.0.3.2.nupkg.sha512",
         "PInvoke.Windows.Core.nuspec",
         "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll",
-        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.xml"
+        "lib/portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.xml",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.dll",
+        "lib/portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/PInvoke.Windows.Core.xml"
       ]
     },
     "runtime.any.System.Collections/4.0.11": {
@@ -21502,7 +21507,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
-      "OKHOSTING.Core >= 1.0.28"
+      "OKHOSTING.Core >= 1.0.33"
     ],
     "UAP,Version=v10.0": []
   }

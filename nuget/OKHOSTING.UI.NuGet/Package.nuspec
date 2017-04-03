@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>OKHOSTING.UI</id>
-		<version>1.0.22</version>
+		<version>1.0.26</version>
 		<title>OKHOSTING.UI</title>
 		<authors>OK HOSTING</authors>
 		<owners>OK HOSTING</owners>
@@ -55,7 +55,7 @@
 		<licenseUrl>http://okhosting.com/open-source-license</licenseUrl>
 		<copyright>Copyright OK HOSTING SC 2015</copyright>
 		<dependencies>
-			<dependency id="OKHOSTING.Data" version="1.0.4" />
+			<dependency id="OKHOSTING.Data" version="1.0.16" />
 		</dependencies>
 		<references></references>
 		<tags>okhosting, ui, user interface, multiplatform, xamarin, android, ois, mac, wpf, windows forms, asp.net, web forms, pcl</tags>
@@ -64,7 +64,6 @@
 		<file src="..\..\src\PCL\OKHOSTING.UI\bin\Release\OKHOSTING.UI.dll" target="lib" />
 		<file src="..\..\src\PCL\OKHOSTING.UI\bin\Release\OKHOSTING.UI.pdb" target="lib" />
 		<file src="lib\" target="lib" />
-		<file src="tools\" target="tools" />
 		<file src="content\" target="content" />
 	</files>
 </package>

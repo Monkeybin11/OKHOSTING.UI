@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\Layout\RelativePanel.cs" />
+    <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Calendar.cs" />
