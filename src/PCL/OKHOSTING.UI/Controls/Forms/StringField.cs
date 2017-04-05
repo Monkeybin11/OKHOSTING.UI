@@ -78,6 +78,21 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// </summary>
 		public int MaxLenght { get; set; }
 
+		public override bool IsValid
+		{
+			get
+			{
+				if (string.IsNullOrWhiteSpace(RegularExpression))
+				{
+					return base.IsValid;
+				}
+				else
+				{
+					return base.IsValid && new OKHOSTING.Data.Validation.RegexValidator(RegularExpression).Validate(Value) == null;
+				}
+			}
+		}
+
 		/// <summary>
 		/// Creates the controls for displaying the field
 		/// <para xml:lang="es">
