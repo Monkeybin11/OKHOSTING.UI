@@ -337,40 +337,18 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				throw new ArgumentOutOfRangeException("filePath", "The file does not exist");
 			}
 
-			//file is not located inside the web app, so we create a copy in a temp directory			
-			if (!filePath.StartsWith(this.Page.MapPath("/")))
+			using (var stream = File.OpenRead(filePath))
 			{
-				string tempDirectoryPath = Path.Combine(OKHOSTING.Core.Net4.DefaultPaths.Custom, "Temp");
-
-				if (!Directory.Exists(tempDirectoryPath))
-				{
-					Directory.CreateDirectory(tempDirectoryPath);
-				}
+				LoadFromStream(stream);
 			}
-
-			//we finally get the "relative" path of the file and load it as a url
-			string url = filePath.Replace(Page.MapPath("/"), string.Empty);
-			LoadFromUrl(new Uri(url));
 		}
 
 		public void LoadFromStream(Stream stream)
 		{
-			//save the sream to a temp file, and load as file from there
-			string tempDirectoryPath = Path.Combine(OKHOSTING.Core.Net4.DefaultPaths.Custom, "Temp");
-
-			if (!Directory.Exists(tempDirectoryPath))
-			{
-				Directory.CreateDirectory(tempDirectoryPath);
-			}
-
-			string tempFilePath = Path.Combine(tempDirectoryPath, Guid.NewGuid().ToString());
-			using (var fileStream = File.OpenWrite(tempFilePath))
-			{
-				stream.CopyTo(fileStream);
-			}
-
-			string url = tempFilePath.Replace(Page.MapPath("/"), string.Empty);
-			LoadFromUrl(new Uri(url));
+			BinaryReader br = new BinaryReader(stream);
+			byte[] bytes = br.ReadBytes((int) stream.Length);
+			string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+			ImageUrl = "data:image/png;base64," + base64String;
 		}
 
 		/// <summary>
@@ -384,16 +362,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public void LoadFromUrl(System.Uri url)
 		{
 			base.ImageUrl = url?.ToString();
-		}
-
-		/// <summary>
-		/// Loads from stream.
-		/// </summary>
-		/// <returns>The from stream.</returns>
-		/// <param name="v">V.</param>
-		public void LoadFromStream(string v)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

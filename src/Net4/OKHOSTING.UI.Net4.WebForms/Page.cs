@@ -173,10 +173,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				//get posted value by user
 				string postedValue = Request.Form[postedValueName];
+				string controlName = postedValueName;
 
+				//is this an image button?
+				if (postedValueName.EndsWith(".x"))
+				{
+					controlName = postedValueName.Split('.').First();
+				}
+				
 				//get control that corresponds to this input
-				//get control that corresponds to this input
-				IControl control = ContentHolder.FindControl(postedValueName) as IControl;
+				IControl control = ContentHolder.FindControl(controlName) as IControl;
 
 				if (control == null)
 				{
@@ -186,6 +192,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 				if (control is Button && postedValue == ((Button) control).Text)
 				{
 					((Button) control).Raise_Click();
+				}
+				else if (control is IImageButton)
+				{
+					((ImageButton) control).Raise_Click();
 				}
 			}
 

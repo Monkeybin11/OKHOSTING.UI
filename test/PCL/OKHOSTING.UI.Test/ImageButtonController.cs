@@ -15,6 +15,7 @@ namespace OKHOSTING.UI.Test
 	{
 		// Declare an image
 		IImage imgPicture;
+		ILabel lblLabel;
 
 		/// <summary>
 		/// Start this instance.
@@ -30,14 +31,14 @@ namespace OKHOSTING.UI.Test
 			IStack stack = Platform.Current.Create<IStack>();
 
 			// Create an Label with text and size specified and adds it to the Stack
-			ILabel lblLabel = Platform.Current.Create<ILabel>();
+			lblLabel = Platform.Current.Create<ILabel>();
 			lblLabel.Text = "View an image from Url";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
 			// Create a button with a specific size and indicating the URL of your background image also your event clic and adds it to the stack
 			IImageButton imgbtn = Platform.Current.Create<IImageButton>();
-			imgbtn.LoadFromUrl(new Uri("http://okhosting.com/wp-content/uploads/2016/02/okhosting-150x150.png"));
+			imgbtn.LoadFromUrl(new Uri("http://okhosting.com/resources/uploads/2015/08/web-hosting-con-administracion-via-panel-de-control.gif"));
 			imgbtn.Height = 100;
 			imgbtn.Width = 100;
 			imgbtn.Click += CmdViewImage_Click;
@@ -74,6 +75,7 @@ namespace OKHOSTING.UI.Test
 		private void CmdViewImage_Click(object sender, EventArgs e)
 		{
 			imgPicture.Visible = true;
+			lblLabel.Text += " -clicked";
 		}
 
 		/// <summary>
