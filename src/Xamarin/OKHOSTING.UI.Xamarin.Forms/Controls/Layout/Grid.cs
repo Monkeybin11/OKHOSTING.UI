@@ -34,6 +34,16 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 				while (base.ColumnDefinitions.Count > value)
 				{
+					for (int r = 0; r < RowDefinitions.Count; r++)
+					{
+						var currentContent = ((IGrid) this).GetContent(r, base.ColumnDefinitions.Count - 1);
+
+						if (currentContent != null)
+						{
+							base.Children.Remove((global::Xamarin.Forms.View) currentContent);
+						}
+					}
+
 					base.ColumnDefinitions.RemoveAt(base.ColumnDefinitions.Count - 1);
 				}
 			}
@@ -59,6 +69,16 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 				while (base.RowDefinitions.Count > value)
 				{
+					for (int c = 0; c < ColumnDefinitions.Count; c++)
+					{
+						var currentContent = ((IGrid) this).GetContent(base.RowDefinitions.Count - 1, c);
+
+						if (currentContent != null)
+						{
+							base.Children.Remove((global::Xamarin.Forms.View) currentContent);
+						}
+					}
+
 					base.RowDefinitions.RemoveAt(base.RowDefinitions.Count - 1);
 				}
 			}

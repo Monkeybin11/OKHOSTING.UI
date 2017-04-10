@@ -303,14 +303,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		/// <summary>Load the image from files
-		/// <para xml:lang="es">Carga la imagen desde los archivos</para> 
+		/// <summary>
+		/// Loads from file.
+		/// <para xml:lang="es">Carga la imagen del control desde una ruta de archivo.</para>
 		/// </summary>
 		/// <returns>The from file.
-		/// <para xml:lang="es">El archivo</para>
+		/// <para xml:lang="es">El archivo.</para>
 		/// </returns>
 		/// <param name="filePath">File path.
-		/// <para xml:lang="es">La ruta del archivo</para>
+		/// <para xml:lang="es">La ruta del archivo.</para>
 		/// </param>
 		public void LoadFromFile(string filePath)
 		{
@@ -319,57 +320,31 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				throw new ArgumentOutOfRangeException("filePath", "The file does not exist");
 			}
 
-			//file is not located inside the web app, so we create a copy in a temp directory			
-			if (!filePath.StartsWith(this.Page.MapPath("/")))
+			using (var stream = File.OpenRead(filePath))
 			{
-				string tempDirectoryPath = Path.Combine(OKHOSTING.Core.Net4.DefaultPaths.Custom, "Temp");
-
-				if (!Directory.Exists(tempDirectoryPath))
-				{
-					Directory.CreateDirectory(tempDirectoryPath);
-				}
+				LoadFromStream(stream);
 			}
-
-			//we finally get the "relative" path of the file and load it as a url
-			string url = filePath.Replace(this.Page.MapPath("/"), string.Empty);
-			LoadFromUrl(new Uri(url));
 		}
 
-		/// <summary>
-		/// Loads from stream.
-		/// </summary>
-		/// <returns>The from stream.</returns>
-		/// <param name="stream">Stream.</param>
 		public void LoadFromStream(Stream stream)
 		{
-			//save the stream to a temp file, and load as file from there
-			string tempDirectoryPath = Path.Combine(Core.Net4.DefaultPaths.Custom, "Temp");
-
-			if (!Directory.Exists(tempDirectoryPath))
-			{
-				Directory.CreateDirectory(tempDirectoryPath);
-			}
-
-			string tempFilePath = Path.Combine(tempDirectoryPath, Guid.NewGuid().ToString());
-			using (var fileStream = File.OpenWrite(tempFilePath))
-			{
-				stream.CopyTo(fileStream);
-			}
-
-			LoadFromFile(tempFilePath);
+			BinaryReader br = new BinaryReader(stream);
+			byte[] bytes = br.ReadBytes((int)stream.Length);
+			string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+			ImageUrl = "data:image/png;base64," + base64String;
 		}
 
 		/// <summary>
-		/// Upload the file from an Internet address
-		/// <para xml:lang="es">Carga el archivo desde una direccion de internet</para> 
+		/// Loads from URL.
+		/// <para xml:lang="es">Carga la imagen desde una direccion de internet.</para>
 		/// </summary>
 		/// <returns>The from URL.
-		/// <para xml:lang="es">La direccion de internet.</para>
+		/// <para xml:lang="es">La url de la imagen</para>
 		/// </returns>
 		/// <param name="url">URL.</param>
 		public void LoadFromUrl(System.Uri url)
 		{
-			base.ImageUrl = url.ToString();
+			base.ImageUrl = url?.ToString();
 		}
 	}
 }
