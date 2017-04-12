@@ -14,7 +14,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	{
 		public Image()
 		{
-			base.DownsampleToViewSize = true;
+			//base.DownsampleToViewSize = true;
 			//base.CacheType = FFImageLoading.Cache.CacheType.Disk;
 			//base.CacheDuration = new TimeSpan(6, 0, 0);
 		}
