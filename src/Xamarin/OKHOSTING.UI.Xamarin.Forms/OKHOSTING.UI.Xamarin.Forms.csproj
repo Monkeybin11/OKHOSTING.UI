@@ -69,6 +69,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FFImageLoading">
+      <HintPath>..\..\..\..\FFImageLoading-master\source\FFImageLoading.Forms.Droid\bin\Release\FFImageLoading.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms">
+      <HintPath>..\..\..\..\FFImageLoading-master\source\FFImageLoading.Forms.Droid\bin\Release\FFImageLoading.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform">
+      <HintPath>..\..\..\..\FFImageLoading-master\source\FFImageLoading.Forms.Droid\bin\Release\FFImageLoading.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsViewGroup">
+      <HintPath>..\..\..\..\FFImageLoading-master\source\FFImageLoading.Forms.Droid\bin\Release\FormsViewGroup.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
