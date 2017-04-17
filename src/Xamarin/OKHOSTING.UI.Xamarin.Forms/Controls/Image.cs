@@ -51,7 +51,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		void IImage.LoadFromFile(string filePath)
 		{
 			base.Source = global::Xamarin.Forms.ImageSource.FromFile(filePath);
-		}
+		} 
 
 		/// <summary>
 		/// Load a image from stream.
