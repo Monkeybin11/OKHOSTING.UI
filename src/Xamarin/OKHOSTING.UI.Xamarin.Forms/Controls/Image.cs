@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// Es un control que representa una imagen en un Xamarin.Forms.
 	/// </para>
 	/// </summary>
-	public class Image : global::Xamarin.Forms.Image, IImage
+	public class Image : FFImageLoading.Forms.CachedImage, IImage
 	{
 		public Image()
 		{
@@ -33,8 +33,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			base.Source = new global::Xamarin.Forms.UriImageSource
 			{
 				Uri = url,
-				CachingEnabled = true,
-				CacheValidity = new TimeSpan(0, 0, 1, 0)
+				//CachingEnabled = true,
+				//CacheValidity = new TimeSpan(0, 0, 1, 0)
 			};
 		}
 
@@ -144,6 +144,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				if (value.HasValue)
 				{
 					base.WidthRequest = value.Value;
+					base.DownsampleWidth = value.Value;
 				}
 			}
 		}
@@ -165,6 +166,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				if (value.HasValue)
 				{
 					base.HeightRequest = value.Value;
+					base.DownsampleHeight = value.Value;
 				}
 			}
 		}
