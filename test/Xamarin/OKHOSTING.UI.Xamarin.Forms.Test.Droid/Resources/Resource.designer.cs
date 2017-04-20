@@ -26,7 +26,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Test.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::OKHOSTING.UI.Xamarin.Forms.Test.Droid.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Animation
@@ -3332,12 +3331,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Test.Droid
 		
 		public partial class String
 		{
-			
-			// aapt resource value: 0x7f080039
-			public const int ApplicationName = 2131230777;
-			
-			// aapt resource value: 0x7f080038
-			public const int Hello = 2131230776;
 			
 			// aapt resource value: 0x7f080014
 			public const int abc_action_bar_home_description = 2131230740;
