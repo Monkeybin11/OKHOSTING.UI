@@ -61,7 +61,6 @@
     <Compile Include="Controls\Forms\XmlSerializableField.cs" />
     <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Controls\IInputControl.cs" />
-    <Compile Include="Controls\IVideoPlayer.cs" />
     <Compile Include="Controls\Layout\IFlow.cs" />
     <Compile Include="Controls\Layout\IRelativePanel.cs" />
     <Compile Include="PageState.cs" />
