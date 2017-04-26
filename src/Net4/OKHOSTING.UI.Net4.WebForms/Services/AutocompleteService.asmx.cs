@@ -30,8 +30,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			//set default count, if no count is defined
 			if (count == 0) count = 20;
 
-			Autocomplete autocomplete = (Autocomplete)OKHOSTING.UI.Session.Current[contextKey];
-			var e = ((UI.Controls.IAutocomplete)autocomplete).OnSearching(prefixText);
+			Autocomplete autocomplete = (Autocomplete) UI.Session.Current[contextKey];
+			var e = ((UI.Controls.IAutocomplete) autocomplete).OnSearching(prefixText);
 
 			return e.SearchResult.ToArray();
 		}

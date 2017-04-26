@@ -109,11 +109,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		//static
 
+		static Platform()
+		{
+			SessionIdProvider.Setup();
+		}
+
 		public static new Platform Current
 		{
 			get
 			{
-				var platform = (Platform)UI.Platform.Current;
+				var platform = (Platform) UI.Platform.Current;
 
 				if (platform == null)
 				{

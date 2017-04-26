@@ -39,6 +39,7 @@
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Controls\Layout\RelativePanel.cs" />
+    <Compile Include="Controls\VideoPlayer.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />

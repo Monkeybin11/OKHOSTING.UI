@@ -8,46 +8,30 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 	/// It is a control that represents a button.
 	/// <para xml:lang="es">Es un control que representa un boton</para>
 	/// </summary>
-	public class Button : System.Web.UI.WebControls.Button, IButton
+	public class Button : ConsoleFramework.Controls.Button, IButton
 	{
+		public Button()
+		{
+			base.OnClick += Button_OnClick;
+		}
+
+		private void Button_OnClick(object sender, ConsoleFramework.Events.RoutedEventArgs e)
+		{
+			Click?.Invoke(sender, e);
+		}
+
 		/// <summary>
 		/// Occurs when click.
 		/// <para xml:lang="es">Ocurre cuando hay un evento clic de un boton.</para>
 		/// </summary>
-		public new event EventHandler Click;
+		public event EventHandler Click;
 
-		/// <summary>
-		/// Raises the click.
-		/// <para xml:lang="es">Es el evento que proboca el clic</para>
-		/// </summary>
-		/// <returns>The click.
-		/// <para xml:lang="es">El clic.</para>
-		/// </returns>
-		protected internal virtual void Raise_Click()
+		public void Dispose()
 		{
-			Click?.Invoke(this, new EventArgs());
+			throw new NotImplementedException();
 		}
 
 		#region IControl
-
-		/// <summary>
-		/// Gets or sets the name of the IC ontrol.
-		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
-		/// </summary>
-		/// <value>The name of the IC ontrol.
-		/// <para xml:lang="es">El nombre del control.</para>
-		/// </value>
-		string IControl.Name
-		{
-			get
-			{
-				return base.ID;
-			}
-			set
-			{
-				base.ID = value;
-			}
-		}
 
 		/// <summary>
 		/// Gets or sets the color of the IC ontrol. background.
@@ -58,14 +42,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		Color IControl.BackgroundColor
 		{
-			get
-			{
-				return Platform.Current.Parse(base.BackColor);
-			}
-			set
-			{
-				base.BackColor = Platform.Current.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -77,14 +55,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		Color IControl.BorderColor
 		{
-			get
-			{
-				return Platform.Current.Parse(base.BorderColor);
-			}
-			set
-			{
-				base.BorderColor = Platform.Current.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -98,7 +70,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		{
 			get
 			{
-				if (base.Width.IsEmpty)
+				if (!base.Width.HasValue)
 				{
 					return null;
 				}
@@ -107,14 +79,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 			}
 			set
 			{
-				if (value.HasValue)
-				{
-					base.Width = new System.Web.UI.WebControls.Unit(value.Value, System.Web.UI.WebControls.UnitType.Pixel);
-				}
-				else
-				{
-					base.Width = new System.Web.UI.WebControls.Unit();
-				}
+				base.Width = (int?) value;
 			}
 		}
 
@@ -129,7 +94,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		{
 			get
 			{
-				if (base.Height.IsEmpty)
+				if (!base.Height.HasValue)
 				{
 					return null;
 				}
@@ -138,14 +103,7 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 			}
 			set
 			{
-				if (value.HasValue)
-				{
-					base.Height = new System.Web.UI.WebControls.Unit(value.Value, System.Web.UI.WebControls.UnitType.Pixel);
-				}
-				else
-				{
-					base.Height = new System.Web.UI.WebControls.Unit();
-				}
+				base.Height = (int?) value;
 			}
 		}
 
@@ -160,22 +118,11 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		{
 			get
 			{
-				double left, top, right, bottom;
-				Thickness thickness = new Thickness();
-
-				if (double.TryParse(base.Style["margin-left"], out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["margin-top"], out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["margin-right"], out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["margin-bottom"], out bottom)) thickness.Bottom = bottom;
-
-				return new Thickness(left, top, right, bottom);
+				return Platform.Current.Parse(base.Margin);
 			}
 			set
 			{
-				if (value.Left.HasValue) base.Style["margin-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["margin-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["margin-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
+				base.Margin = Platform.Current.Parse(value);
 			}
 		}
 
@@ -185,25 +132,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get
-			{
-				double left, top, right, bottom;
-				Thickness thickness = new Thickness();
-
-				if (double.TryParse(base.Style["border-left-width"], out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["border-top-width"], out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["border-right-width"], out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["border-bottom-width"], out bottom)) thickness.Bottom = bottom;
-
-				return new Thickness(left, top, right, bottom);
-			}
-			set
-			{
-				if (value.Left.HasValue) base.Style["border-left-width"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["border-top-width"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["border-right-width"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -217,40 +147,11 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		{
 			get
 			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("horizontal-alignment")).SingleOrDefault();
-
-				//if not horizontal alignment is provided, the alignment back to the left.
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return HorizontalAlignment.Left;
-				}
-
-				//Verify the horizontal alignment provided.
-				if (cssClass.EndsWith("left"))
-				{
-					return HorizontalAlignment.Left;
-				}
-				else if (cssClass.EndsWith("right"))
-				{
-					return HorizontalAlignment.Right;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return HorizontalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return HorizontalAlignment.Fill;
-				}
-				else
-				{
-					return HorizontalAlignment.Left;
-				}
+				return Platform.Current.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				base.HorizontalAlignment = Platform.Current.Parse(value);
 			}
 		}
 
@@ -265,40 +166,11 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		{
 			get
 			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
-
-				//if not vertical alignment is provided, the alignment back to the top.
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return VerticalAlignment.Top;
-				}
-
-				//Verify the vertical alignment provided.
-				if (cssClass.EndsWith("top"))
-				{
-					return VerticalAlignment.Top;
-				}
-				else if (cssClass.EndsWith("bottom"))
-				{
-					return VerticalAlignment.Bottom;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return VerticalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return VerticalAlignment.Fill;
-				}
-				else
-				{
-					return VerticalAlignment.Top;
-				}
+				return Platform.Current.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				base.VerticalAlignment = Platform.Current.Parse(value);
 			}
 		}
 
@@ -328,14 +200,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		Color ITextControl.FontColor
 		{
-			get
-			{
-				return Platform.Current.Parse(base.ForeColor);
-			}
-			set
-			{
-				base.ForeColor = Platform.Current.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -347,14 +213,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		string ITextControl.FontFamily
 		{
-			get
-			{
-				return base.Font.Name;
-			}
-			set
-			{
-				base.Font.Name = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -366,14 +226,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		double ITextControl.FontSize
 		{
-			get
-			{
-				return base.Font.Size.Unit.Value;
-			}
-			set
-			{
-				base.Font.Size = new System.Web.UI.WebControls.FontUnit(value, System.Web.UI.WebControls.UnitType.Pixel);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -385,14 +239,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		bool ITextControl.Bold
 		{
-			get
-			{
-				return base.Font.Bold;
-			}
-			set
-			{
-				base.Font.Bold = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -404,14 +252,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		bool ITextControl.Italic
 		{
-			get
-			{
-				return base.Font.Italic;
-			}
-			set
-			{
-				base.Font.Italic = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -423,14 +265,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		bool ITextControl.Underline
 		{
-			get
-			{
-				return base.Font.Underline;
-			}
-			set
-			{
-				base.Font.Underline = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -442,44 +278,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-
-			get
-			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
-
-				//if not text horizontal alignment is provided, the alignment back to the left.
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return HorizontalAlignment.Left;
-				}
-
-				//Verify the text horizontal alignment provided.
-				if (cssClass.EndsWith("left"))
-				{
-					return HorizontalAlignment.Left;
-				}
-				else if (cssClass.EndsWith("right"))
-				{
-					return HorizontalAlignment.Right;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return HorizontalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return HorizontalAlignment.Fill;
-				}
-				else
-				{
-					return HorizontalAlignment.Left;
-				}
-			}
-			set
-			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
-				Platform.Current.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -491,43 +291,8 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// </value>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get
-			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
-
-				//if not text vertical alignment is provided, the alignment back to the top.
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return VerticalAlignment.Top;
-				}
-
-				//Verify the vertical alignment provided.
-				if (cssClass.EndsWith("top"))
-				{
-					return VerticalAlignment.Top;
-				}
-				else if (cssClass.EndsWith("bottom"))
-				{
-					return VerticalAlignment.Bottom;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return VerticalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return VerticalAlignment.Fill;
-				}
-				else
-				{
-					return VerticalAlignment.Top;
-				}
-			}
-			set
-			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
-				Platform.Current.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -538,26 +303,51 @@ namespace OKHOSTING.UI.Net4.Console.Controls
 		/// <para xml:lang="es">El padding del texto del control.</para>
 		/// </value>
 		Thickness ITextControl.TextPadding
+		{
+			get;
+			set;
+		}
 
+		public string Text
 		{
 			get
 			{
-				double left, top, right, bottom;
-				Thickness thickness = new Thickness();
-
-				if (double.TryParse(base.Style["padding-left"], out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["padding-top"], out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["padding-right"], out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["padding-bottom"], out bottom)) thickness.Bottom = bottom;
-
-				return new Thickness(left, top, right, bottom);
+				return base.Caption;
 			}
 			set
 			{
-				if (value.Left.HasValue) base.Style["padding-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+				base.Caption = value;
+			}
+		}
+
+		public bool Visible
+		{
+			get
+			{
+				return base.Visibility == ConsoleFramework.Controls.Visibility.Visible;
+			}
+			set
+			{
+				if (value)
+				{
+					base.Visibility = ConsoleFramework.Controls.Visibility.Collapsed;
+				}
+				else
+				{
+					base.Visibility = ConsoleFramework.Controls.Visibility.Visible;
+				}
+			}
+		}
+
+		public bool Enabled
+		{
+			get
+			{
+				return !base.Disabled;
+			}
+			set
+			{
+				base.Disabled = !value;
 			}
 		}
 
