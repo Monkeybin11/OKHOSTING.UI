@@ -199,11 +199,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Current.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
@@ -239,11 +239,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -257,11 +257,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -314,11 +314,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.TextColor);
+				return Platform.Parse(base.TextColor);
 			}
 			set
 			{
-				base.TextColor = Platform.Current.Parse(value);
+				base.TextColor = Platform.Parse(value);
 			}
 		}
 
@@ -380,11 +380,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.HorizontalTextAlignment);
+				return Platform.Parse(base.HorizontalTextAlignment);
 			}
 			set
 			{
-				base.HorizontalTextAlignment = Platform.Current.ParseTextAlignment(value);
+				base.HorizontalTextAlignment = Platform.ParseTextAlignment(value);
 			}
 		}
 
@@ -491,11 +491,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.PlaceholderColor);
+				return Platform.Parse(base.PlaceholderColor);
 			}
 			set
 			{
-				base.PlaceholderColor = Platform.Current.Parse(value);
+				base.PlaceholderColor = Platform.Parse(value);
 			}
 		}
 	}

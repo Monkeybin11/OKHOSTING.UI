@@ -157,11 +157,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Padding);
+				return Platform.Parse(base.Padding);
 			}
 			set
 			{
-				base.Padding = Platform.Current.Parse(value);
+				base.Padding = Platform.Parse(value);
 			}
 		}
 
@@ -374,11 +374,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Current.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
@@ -410,11 +410,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -427,11 +427,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Current.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 

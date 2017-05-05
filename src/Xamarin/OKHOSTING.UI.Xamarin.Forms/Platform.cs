@@ -22,7 +22,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </para>
 		/// </summary>
 		/// <param name="thickness">Thickness.</param>
-		public virtual Thickness Parse(global::Xamarin.Forms.Thickness thickness)
+		public static Thickness Parse(global::Xamarin.Forms.Thickness thickness)
 		{
 			return new Thickness(thickness.Left, thickness.Top, thickness.Right, thickness.Bottom);
 		}
@@ -34,7 +34,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </para>
 		/// </summary>
 		/// <param name="thickness">Thickness.</param>
-		public virtual global::Xamarin.Forms.Thickness Parse(Thickness thickness)
+		public static global::Xamarin.Forms.Thickness Parse(Thickness thickness)
 		{
 			return new global::Xamarin.Forms.Thickness(thickness.Left.Value, thickness.Top.Value, thickness.Right.Value, thickness.Bottom.Value);
 		}
@@ -46,7 +46,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </para>
 		/// </summary>
 		/// <param name="color">Color.</param>
-		public virtual Color Parse(global::Xamarin.Forms.Color color)
+		public static Color Parse(global::Xamarin.Forms.Color color)
 		{
 			return new Color((int) color.A, (int) color.R, (int) color.G, (int) color.B);
 		}
@@ -61,7 +61,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// <para xml:lang="es">El color.</para>
 		/// </returns>
 		/// <param name="color">Color.</param>
-		public virtual global::Xamarin.Forms.Color Parse(Color color)
+		public static global::Xamarin.Forms.Color Parse(Color color)
 		{
 			return global::Xamarin.Forms.Color.FromRgba(color.Red, color.Green, color.Blue, color.Alpha);
 		}
@@ -79,7 +79,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </para>
 		/// </returns>
 		/// <param name="horizontalAlignment">HorizontalAlignment.</param>
-		public virtual HorizontalAlignment Parse(global::Xamarin.Forms.LayoutAlignment horizontalAlignment)
+		public static HorizontalAlignment Parse(global::Xamarin.Forms.LayoutAlignment horizontalAlignment)
 		{
 			switch (horizontalAlignment)
 			{
@@ -106,7 +106,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </para>
 		/// </summary>
 		/// <param name="horizontalAlignment">HorizontalAlignment.</param>
-		public virtual global::Xamarin.Forms.LayoutAlignment Parse(HorizontalAlignment horizontalAlignment)
+		public static global::Xamarin.Forms.LayoutAlignment Parse(HorizontalAlignment horizontalAlignment)
 		{
 			switch (horizontalAlignment)
 			{
@@ -138,7 +138,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </para>
 		/// </returns>
 		/// <param name="verticalAlignment">Vertical alignment.</param>
-		public virtual VerticalAlignment ParseVerticalAlignment(global::Xamarin.Forms.LayoutAlignment verticalAlignment)
+		public static VerticalAlignment ParseVerticalAlignment(global::Xamarin.Forms.LayoutAlignment verticalAlignment)
 		{
 			switch (verticalAlignment)
 			{
@@ -168,7 +168,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// <para xml:lang="es">La alineacion vertical.</para>
 		/// </returns>
 		/// <param name="verticalAlignment">VerticalAlignment.</param>
-		public virtual global::Xamarin.Forms.LayoutAlignment Parse(VerticalAlignment verticalAlignment)
+		public static global::Xamarin.Forms.LayoutAlignment Parse(VerticalAlignment verticalAlignment)
 		{
 			switch (verticalAlignment)
 			{
@@ -198,7 +198,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// <para xml:lang="es">La alineación vertical.</para>
 		/// </returns>
 		/// <param name="textAlignment">TextAlignment.</param>
-		public VerticalAlignment ParseVerticalTextAlignment(global::Xamarin.Forms.TextAlignment textAlignment)
+		public static VerticalAlignment ParseVerticalTextAlignment(global::Xamarin.Forms.TextAlignment textAlignment)
 		{
 			switch (textAlignment)
 			{
@@ -226,7 +226,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </para>
 		/// </returns>
 		/// <param name="textAlignment">Text alignment.</param>
-		public HorizontalAlignment Parse(global::Xamarin.Forms.TextAlignment textAlignment)
+		public static HorizontalAlignment Parse(global::Xamarin.Forms.TextAlignment textAlignment)
 		{
 			switch (textAlignment)
 			{
@@ -252,7 +252,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// <para xml:lang="es">La alineacion del texto.</para>
 		/// </returns>
 		/// <param name="alignment">alignment.</param>
-		public global::Xamarin.Forms.TextAlignment ParseTextAlignment(HorizontalAlignment alignment)
+		public static global::Xamarin.Forms.TextAlignment ParseTextAlignment(HorizontalAlignment alignment)
 		{
 			switch (alignment)
 			{
@@ -279,7 +279,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </summary>
 		/// <returns>The text alignment.</returns>
 		/// <param name="alignment">Alignment.</param>
-		public global::Xamarin.Forms.TextAlignment ParseTextAlignment(VerticalAlignment alignment)
+		public static global::Xamarin.Forms.TextAlignment ParseTextAlignment(VerticalAlignment alignment)
 		{
 			switch (alignment)
 			{
