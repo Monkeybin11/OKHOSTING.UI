@@ -17792,7 +17792,7 @@
       ]
     },
     "Microsoft.NETCore.UniversalWindowsPlatform/5.3.2": {
-      "sha512": "bkCwDauf84lNL4BOXwa6+LWmimtAroK9TtdTrAlrMU4q0RipFnMx1mIpQBVZ9tqc6fD2B8BaqoqDRFlodcF6TA==",
+      "sha512": "utm/T05UroLR2+88kUfqGUhPAa1hKojOY60P4uueHbeV4ps74Ewgd64iIVTQ5nggs4J7Mz2rOpDMniziMiwxvw==",
       "type": "package",
       "files": [
         "Microsoft.NETCore.UniversalWindowsPlatform.5.3.2.nupkg.sha512",

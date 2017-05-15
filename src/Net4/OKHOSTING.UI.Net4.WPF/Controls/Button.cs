@@ -12,16 +12,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 	public class Button : System.Windows.Controls.Button, IButton
 	{
 		/// <summary>
-		/// Initializes a new instance of the OKHOSTING.UI.Xamarin.Forms.Controls.Button class.
-		/// <para xml:lang="es">
-		/// Inicializa una nueva instancia de la clase OKHOSTING.UI.Xamarin.Forms.Controls.Button.
-		/// </para>
-		/// </summary>
-		public Button()
-		{
-		}
-
-		/// <summary>
 		/// The button click event.
 		/// <para xml:lang="es">
 		/// El evento clic del boton.

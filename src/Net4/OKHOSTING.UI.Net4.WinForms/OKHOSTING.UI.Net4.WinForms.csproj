@@ -80,6 +80,9 @@
     <Compile Include="Controls\Layout\Flow.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\WebView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>
