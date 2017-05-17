@@ -46,7 +46,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				if (value.HasValue)
 				{
-					base.Width = (int)value;
+					base.Width = (int) value;
 				}
 			}
 		}
@@ -61,7 +61,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				if (value.HasValue)
 				{
-					base.Height = (int)value;
+					base.Height = (int) value;
 				}
 			}
 		}
@@ -102,7 +102,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(value, ((IControl)this).VerticalAlignment);
+				base.Anchor = Platform.Current.ParseAnchor(value, ((IControl) this).VerticalAlignment);
 			}
 		}
 
@@ -114,7 +114,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(((IControl)this).HorizontalAlignment, value);
+				base.Anchor = Platform.Current.ParseAnchor(((IControl) this).HorizontalAlignment, value);
 			}
 		}
 
