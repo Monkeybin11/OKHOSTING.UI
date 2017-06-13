@@ -62,6 +62,7 @@
     <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Controls\IInputControl.cs" />
     <Compile Include="Controls\ISlider.cs" />
+    <Compile Include="Controls\IVideoPlayer.cs" />
     <Compile Include="Controls\IWebView.cs" />
     <Compile Include="Controls\Layout\IFlow.cs" />
     <Compile Include="Controls\Layout\IRelativePanel.cs" />

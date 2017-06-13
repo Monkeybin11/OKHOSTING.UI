@@ -37,21 +37,18 @@ namespace OKHOSTING.UI.Xamarin.Android
 			}
 		}
 		
-		public partial class String
+		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020001
-			public static int ApplicationName = 2130837505;
-			
 			// aapt resource value: 0x7f020000
-			public static int Hello = 2130837504;
+			public static int icon = 2130837504;
 			
-			static String()
+			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 			}
 			
-			private String()
+			private Drawable()
 			{
 			}
 		}
