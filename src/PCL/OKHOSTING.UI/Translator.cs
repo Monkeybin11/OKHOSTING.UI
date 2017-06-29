@@ -75,5 +75,21 @@ namespace OKHOSTING.UI
 		{
 			return GetString(enumValue.GetType(), enumValue.GetType().GetFriendlyFullName().Replace('.', '_') + '_' + enumValue);
 		}
+
+		/// <summary>
+		/// Returns an enum value, taking a translated string as input
+		/// </summary>
+		public static Enum DeTranslate(string enumTranslatedValue, Type enumType)
+		{
+			foreach (Enum unit in Enum.GetValues(enumType))
+			{
+				if(Translate(unit) == enumTranslatedValue)
+				{
+					return unit;
+				}
+			}
+
+			return null;
+		}
 	}
 }
