@@ -80,6 +80,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DatePicker.cs" />
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\Layout\RelativePanel.AttachedProperties.cs" />
     <Compile Include="Controls\Layout\RelativePanel.cs" />
@@ -110,7 +111,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

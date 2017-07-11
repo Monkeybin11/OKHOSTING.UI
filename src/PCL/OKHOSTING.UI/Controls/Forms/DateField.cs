@@ -6,7 +6,7 @@ namespace OKHOSTING.UI.Controls.Forms
 	/// A field for selecting a date
 	/// <para xml:lang="es">Un campo para seleccionar una fecha.</para>
 	/// </summary>
-	public class DateField : TextBoxField
+	public class DateField : FormField
 	{
 		/// <summary>
 		/// Initializes a new instance of the DateField class.
@@ -14,7 +14,6 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// </summary>
 		public DateField()
 		{
-			Format = "yyyy/MM/dd";
 		}
 
 		/// <summary>
@@ -26,30 +25,11 @@ namespace OKHOSTING.UI.Controls.Forms
 		{
 			get
 			{
-				if (string.IsNullOrWhiteSpace(ValueControl.Value))
-				{
-					return null;
-				}
-
-				try
-				{
-					return DateTime.ParseExact(ValueControl.Value, Format, System.Globalization.CultureInfo.InvariantCulture);
-				}
-				catch
-				{
-					return null;
-				}
+				return ((IDatePicker) ValueControl).Value;
 			}
 			set
 			{
-				if (value == null)
-				{
-					ValueControl.Value = string.Empty;
-				}
-				else
-				{
-					ValueControl.Value = ((DateTime) value).ToString(Format);
-				}
+				((IDatePicker) ValueControl).Value = (DateTime) value;
 			}
 		}
 
@@ -79,23 +59,7 @@ namespace OKHOSTING.UI.Controls.Forms
 		protected override void CreateValueControl()
 		{
 			//create date texbox from base
-			base.CreateValueControl();
-
-			ValueControl.InputType = ITextBoxInputType.Date;
-		}
-
-		/// <summary>
-		/// Gets the is valid.
-		/// <para xml:lang="es">Determina si el formato del dato es valido.</para>
-		/// </summary>
-		/// <value>The is valid.</value>
-		public override bool IsValid
-		{
-			get
-			{
-				DateTime test;
-				return base.IsValid && DateTime.TryParseExact(ValueControl.Value, Format, null, System.Globalization.DateTimeStyles.None, out test);
-			}
+			ValueControl = Platform.Current.Create<IDatePicker>();
 		}
 	}
 }

@@ -83,6 +83,7 @@ namespace OKHOSTING.UI
 		}
 
 		//public
+
 		/// <summary>
 		/// Create this instance.
 		/// <para xml:lang="es">Crea esta instancia.</para>

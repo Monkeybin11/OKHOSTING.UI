@@ -3,16 +3,16 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Calendar : System.Windows.Forms.MonthCalendar, ICalendar
+	public class DatePicker : System.Windows.Forms.DateTimePicker, ICalendar
 	{
-		public Calendar()
+		public DatePicker()
 		{
-			base.DateChanged += Calendar_DateChanged;
+			base.ValueChanged += Calendar_ValueChanged;
 		}
 
 		#region IInputControl
 
-		private void Calendar_DateChanged(object sender, EventArgs e)
+		private void Calendar_ValueChanged(object sender, EventArgs e)
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
 		}
@@ -21,13 +21,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return base.SelectionStart;
+				return base.Value;
 			}
 			set
 			{
 				if (value.HasValue)
 				{
-					base.SelectionStart = value.Value;
+					base.Value = value.Value;
 				}
 			}
 		}

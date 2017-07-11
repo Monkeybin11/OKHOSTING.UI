@@ -80,9 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\TimeOfDayPicker.cs" />
+    <Compile Include="Controls\DatePicker.cs" />
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\Layout\RelativePanel.cs" />
     <Compile Include="Controls\Layout\Flow.cs" />
+    <Compile Include="Controls\TextBoxBase.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />
@@ -119,7 +122,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
     <Content Include="Services\AutocompleteService.asmx" />
     <Content Include="Services\PageSize.ashx" />

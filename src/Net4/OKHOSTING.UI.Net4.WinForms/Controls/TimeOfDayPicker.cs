@@ -3,36 +3,37 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Calendar : System.Windows.Forms.MonthCalendar, ICalendar
+	public class TimeOfDayPicker : System.Windows.Forms.DateTimePicker, ITimeOfDayPicker
 	{
-		public Calendar()
+		public TimeOfDayPicker()
 		{
-			base.DateChanged += Calendar_DateChanged;
+			base.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+			base.ValueChanged += Picker_ValueChanged;
 		}
 
 		#region IInputControl
 
-		private void Calendar_DateChanged(object sender, EventArgs e)
+		private void Picker_ValueChanged(object sender, EventArgs e)
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
+			ValueChanged?.Invoke(this, ((IInputControl<TimeSpan?>) this).Value);
 		}
 
-		DateTime? IInputControl<DateTime?>.Value
+		TimeSpan? IInputControl<TimeSpan?>.Value
 		{
 			get
 			{
-				return base.SelectionStart;
+				return base.Value.TimeOfDay;
 			}
 			set
 			{
 				if (value.HasValue)
 				{
-					base.SelectionStart = value.Value;
+					base.Value = DateTime.Today.Add(value.Value);
 				}
 			}
 		}
 
-		public new event EventHandler<DateTime?> ValueChanged;
+		public new event EventHandler<TimeSpan?> ValueChanged;
 
 		#endregion
 	

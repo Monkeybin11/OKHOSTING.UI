@@ -71,6 +71,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\TimeOfDayPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DatePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -142,7 +148,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

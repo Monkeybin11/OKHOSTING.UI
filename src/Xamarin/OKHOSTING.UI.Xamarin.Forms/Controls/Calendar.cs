@@ -7,7 +7,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// It is a control that represents a calendar in a Xamarin.Forms.
 	/// <para xml:lang="es">Es un control que representa un calendario en un Xamarin.Forms</para>
 	/// </summary>
-	public class Calendar : global::Xamarin.Forms.DatePicker, ICalendar
+	public class Calendar : global::Xamarin.Forms.cal, ICalendar
 	{
 		/// <summary>
 		/// Initializes a new instance of the Calendar class.

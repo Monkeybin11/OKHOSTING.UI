@@ -1,4 +1,5 @@
 ﻿using System;
+using static OKHOSTING.Core.StringExtensions;
 
 namespace OKHOSTING.UI.Controls.Forms
 {
@@ -36,7 +37,7 @@ namespace OKHOSTING.UI.Controls.Forms
 		{
 			get
 			{
-				return PCLCrypto.WinRTCrypto.CryptographicBuffer.DecodeFromBase64String(ValueControl.Value);
+				return ValueControl.Value.FromBase64ToBytes();
 			}
 			set
 			{
@@ -46,7 +47,7 @@ namespace OKHOSTING.UI.Controls.Forms
 				}
 				else
 				{
-					ValueControl.Value = PCLCrypto.WinRTCrypto.CryptographicBuffer.EncodeToBase64String((byte[]) value);
+					ValueControl.Value = ((byte[]) value).FromBytesToBase64();
 				}
 			}
 		}

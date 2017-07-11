@@ -46,6 +46,7 @@
     <Compile Include="Controls\Forms\PasswordField.cs" />
     <Compile Include="Controls\Forms\StringSerializableField.cs" />
     <Compile Include="Controls\Forms\TextBoxField.cs" />
+    <Compile Include="Controls\Forms\TimeSpanField.cs" />
     <Compile Include="Controls\Forms\TypeField.cs" />
     <Compile Include="Controls\Forms\DateField.cs" />
     <Compile Include="Controls\Forms\DateTimeField.cs" />
@@ -59,6 +60,9 @@
     <Compile Include="Controls\Forms\ReadOnlyField.cs" />
     <Compile Include="Controls\Forms\StringField.cs" />
     <Compile Include="Controls\Forms\XmlSerializableField.cs" />
+    <Compile Include="Controls\ITimeOfDayPicker.cs" />
+    <Compile Include="Controls\ITimeSpanPicker.cs" />
+    <Compile Include="Controls\IDatePicker.cs" />
     <Compile Include="Controls\IImageButton.cs" />
     <Compile Include="Controls\IInputControl.cs" />
     <Compile Include="Controls\ISlider.cs" />
@@ -129,25 +133,14 @@
     <XliffResource Include="MultilingualResources\OKHOSTING.UI.pt.xlf" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="OKHOSTING.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Core.1.0.33\lib\OKHOSTING.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="OKHOSTING.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\OKHOSTING.Data.1.0.22\lib\OKHOSTING.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c">
-      <HintPath>..\..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
-    </Reference>
-    <Reference Include="Validation, Version=2.4.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Validation.2.4.15\lib\portable-net45+win8+wp8+wpa81\Validation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
+      <Project>{3f4502fa-51ea-4cb9-8e50-46f828d240a1}</Project>
+      <Name>OKHOSTING.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
+      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
+      <Name>OKHOSTING.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />

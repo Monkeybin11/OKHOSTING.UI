@@ -41,6 +41,7 @@ namespace OKHOSTING.UI.Controls.Forms
 			ValueControl = Platform.Current.Create<Layout.IFlow>();
 			
 			txtValue = Platform.Current.Create<ITextBox>();
+			txtValue.InputType = ITextBoxInputType.Number;
 			txtValue.Value = "0";
 			
 			lstUnit = Platform.Current.Create<IListPicker>();
@@ -68,9 +69,9 @@ namespace OKHOSTING.UI.Controls.Forms
 					return null;
 				}
 
-				int lenght;
+				double lenght;
 				
-				if(int.TryParse(txtValue.Value, out lenght))
+				if(double.TryParse(txtValue.Value, out lenght))
 				{
 					Core.TimeUnit.Unit unit = (Core.TimeUnit.Unit) Translator.DeTranslate(lstUnit.Value, typeof(Core.TimeUnit.Unit));
 
