@@ -76,7 +76,6 @@ namespace OKHOSTING.UI.Controls.Forms
 			//if there are more than one category, group fields by category
 			bool categorize = false;
 			string currentCategory = string.Empty;
-			int categoryCount = 0;
 
 			#region Sort fields and init values
 
@@ -92,8 +91,8 @@ namespace OKHOSTING.UI.Controls.Forms
 					//set a "Category.SortOrder.Name" string comparission
 					string val1, val2;
 
-					val1 = f1.Category + "." + (f1.ValueControl.Enabled ? "1" : "0") + "." + (f1.Required ? "0" : "1") + (f1.TableWide ? "1" : "0") + f1.SortOrder.ToString("0:000000000000000") + f1.Name;
-					val2 = f2.Category + "." + (f2.ValueControl.Enabled ? "1" : "0") + "." + (f2.Required ? "0" : "1") + (f2.TableWide ? "1" : "0") + f2.SortOrder.ToString("0:000000000000000") + f2.Name;
+					val1 = f1.SortOrder.ToString("0:000000000000000") + f1.Category + "." + (f1.ValueControl.Enabled ? "1" : "0") + "." + (f1.Required ? "0" : "1") + (f1.TableWide ? "1" : "0") + f1.Name;
+					val2 = f2.SortOrder.ToString("0:000000000000000") + f2.Category + "." + (f2.ValueControl.Enabled ? "1" : "0") + "." + (f2.Required ? "0" : "1") + (f2.TableWide ? "1" : "0") + f2.Name;
 
 					//compare categories
 					return val1.CompareTo(val2);
@@ -105,15 +104,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			{
 				field.Container = this;
 
-				if (currentCategory != field.Category)
+				if (field.Category != "General")
 				{
-					currentCategory = field.Category;
-					categoryCount++;
+					categorize = true;
 				}
 			}
-
-			//decide wether or not to categorize
-			if (categoryCount > 1) categorize = true;
 
 			#endregion
 
@@ -123,6 +118,7 @@ namespace OKHOSTING.UI.Controls.Forms
 			if (this.LabelPosition == CaptionPosition.Left)
 			{
 				Content.ColumnCount = RepeatColumns < 2 ? 2 : (int) Math.Max(RepeatColumns, Math.Ceiling((decimal) RepeatColumns / 2) * 2);
+				Content.RowCount++;
 
 				//add every field
 				foreach (FormField field in Fields)
@@ -151,7 +147,7 @@ namespace OKHOSTING.UI.Controls.Forms
 					}
 
 					//create new row if this is the first row or if RepeatColumns has been reached 
-					if (Content.RowCount == 0 || currentColumn >= RepeatColumns)
+					if (currentColumn >= RepeatColumns)
 					{
 						Content.RowCount++;
 						currentColumn = 0;
@@ -175,6 +171,7 @@ namespace OKHOSTING.UI.Controls.Forms
 			else
 			{
 				Content.ColumnCount = RepeatColumns;
+				Content.RowCount += 2;
 
 				//add every field
 				foreach (FormField field in Fields)
@@ -206,10 +203,10 @@ namespace OKHOSTING.UI.Controls.Forms
 					}
 
 					//create new row if this is the first row or if RepeatColumns has been reached 
-					if (Content.RowCount == 0 || currentColumn >= RepeatColumns)
+					if (currentColumn >= RepeatColumns)
 					{
-						Content.RowCount += 2;
 						currentColumn = 0;
+						Content.RowCount += 2;
 					}
 
 					//Add name cells to the almost last row

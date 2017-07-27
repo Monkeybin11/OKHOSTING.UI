@@ -40,7 +40,7 @@ namespace OKHOSTING.UI.Controls.Forms
 			}
 			set
 			{
-				ValueControl.Text = (string) value;
+				ValueControl.Text = value?.ToString();
 			}
 		}
 

@@ -1,6 +1,7 @@
 ﻿using static OKHOSTING.Core.TypeExtensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace OKHOSTING.UI
@@ -28,6 +29,11 @@ namespace OKHOSTING.UI
 		/// <param name="name">Name.</param>
 		public static string GetString(Type type, string name)
 		{
+			if (string.IsNullOrWhiteSpace(name))
+			{
+				throw new ArgumentNullException(nameof(name));
+			}
+
 			var resourceNames = type.GetTypeInfo().Assembly.GetManifestResourceNames();
 
 			foreach (var resource in resourceNames)
@@ -45,7 +51,14 @@ namespace OKHOSTING.UI
 				catch { }
 			}
 		
-			return name;
+			if(name.Contains("_"))
+			{
+				return name.Split('_').Last();
+			}
+			else
+			{
+				return name;
+			}
 		}
 
 		/// <summary>

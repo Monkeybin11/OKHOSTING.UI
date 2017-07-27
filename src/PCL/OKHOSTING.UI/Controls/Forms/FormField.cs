@@ -218,6 +218,11 @@ namespace OKHOSTING.UI.Controls.Forms
 			//validate arguments
 			if (type == null) throw new ArgumentNullException("type");
 
+			if (Nullable.GetUnderlyingType(type) != null)
+			{
+				type = Nullable.GetUnderlyingType(type);
+			}
+
 			//field
 			FormField field;
 
@@ -242,7 +247,14 @@ namespace OKHOSTING.UI.Controls.Forms
 			//DateTime
 			else if (type.Equals(typeof(DateTime)))
 			{
-				field = new DateTimeField();
+				//field = new DateTimeField();
+				field = new DateField();
+			}
+
+			//TimeSpan
+			else if (type.Equals(typeof(TimeSpan)))
+			{
+				field = new TimeSpanField();
 			}
 
 			//Numeric
