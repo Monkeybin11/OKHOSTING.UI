@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace OKHOSTING.UI.Controls.Forms
+namespace OKHOSTING.UI.Forms
 {
 	/// <summary>
 	/// A field for Xml values.

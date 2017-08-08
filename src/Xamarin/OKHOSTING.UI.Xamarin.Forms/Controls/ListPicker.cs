@@ -22,6 +22,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		public ListPicker()
 		{
 			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
+			((IListPicker) this).Width = 230;
 		}
 
 		/// <summary>

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using OKHOSTING.UI.Controls;
+using System;
 using System.Collections.Generic;
 
-namespace OKHOSTING.UI.Controls.Forms
+namespace OKHOSTING.UI.Forms
 {
 	/// <summary>
 	/// A field for boolean values

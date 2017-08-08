@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace OKHOSTING.UI
 {
@@ -77,7 +78,7 @@ namespace OKHOSTING.UI
 		/// <param name="member">Member.</param>
 		public static string Translate(MemberInfo member)
 		{
-			return GetString(member.DeclaringType, member.GetFriendlyName().Replace('.', '_'));
+			return GetString(member.DeclaringType, member.GetFriendlyFullName().Replace('.', '_'));
 		}
 
 		/// <summary>
@@ -103,6 +104,74 @@ namespace OKHOSTING.UI
 			}
 
 			return null;
+		}
+
+		public static string GenerateResource(Assembly assembly)
+		{
+			StringBuilder builder = new StringBuilder();
+
+			foreach (var type in assembly.DefinedTypes)
+			{
+				builder.Append(GenerateResource(type));
+			}
+
+			return builder.ToString();
+		}
+
+		/// <summary>
+		/// Generates the xml content that hsould be included in a resource file, containing all public fields, properties
+		/// </summary>
+		/// <param name="dtype"></param>
+		/// <returns></returns>
+		public static string GenerateResource(TypeInfo dtype)
+		{
+			StringBuilder builder = new StringBuilder();
+
+			string t = string.Format(
+@"<data name=""{0}"" xml:space=""preserve"">
+	<value>{1}</value>
+</data>", dtype.AsType().GetFriendlyFullName().Replace('.', '_'), SeparateCamelCase(dtype.Name));
+
+			builder.AppendLine(t);
+
+			foreach (var dmember in dtype.DeclaredMembers.Where(m => !m.IsCompilerGenerated() && !(m is ConstructorInfo)))
+			{
+				if (dmember.Name.StartsWith("get") || dmember.Name.StartsWith("set") || dmember.Name == "ToString")
+				{
+					continue;
+				}
+				
+				string s = string.Format(
+@"<data name=""{0}"" xml:space=""preserve"">
+	<value>{1}</value>
+</data>", dtype.AsType().GetFriendlyFullName().Replace('.', '_') + '_' + dmember.Name, SeparateCamelCase(dmember.Name));
+
+				builder.AppendLine(s);
+			}
+
+			return builder.ToString();
+		}
+
+		private static string SeparateCamelCase(string s)
+		{
+			StringBuilder member = new StringBuilder();
+
+			for (int i = 0; i < s.Length; i++)
+			{
+				char c = s[i];
+
+				if (i > 0 && (char.IsUpper(c) || char.IsDigit(c)))
+				{
+					member.Append(' ');
+					member.Append(char.ToLower(c));
+				}
+				else
+				{
+					member.Append(c);
+				}
+			}
+
+			return member.ToString();
 		}
 	}
 }

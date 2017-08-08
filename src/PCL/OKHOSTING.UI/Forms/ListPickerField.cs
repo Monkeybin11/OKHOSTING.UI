@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using OKHOSTING.UI.Controls;
+using System.Collections.Generic;
 
-namespace OKHOSTING.UI.Controls.Forms
+namespace OKHOSTING.UI.Forms
 {
 	/// <summary>
 	/// Base class for all fields that uses a single ListPicker as ValueControl

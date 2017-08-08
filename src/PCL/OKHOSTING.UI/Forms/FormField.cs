@@ -1,10 +1,11 @@
 ﻿using OKHOSTING.Core;
 using OKHOSTING.Data.Validation;
+using OKHOSTING.UI.Controls;
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace OKHOSTING.UI.Controls.Forms
+namespace OKHOSTING.UI.Forms
 {
 	/// <summary>
 	/// An item that will be displayed in the dataform

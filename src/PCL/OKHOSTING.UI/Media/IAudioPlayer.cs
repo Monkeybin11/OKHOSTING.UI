@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OKHOSTING.UI
+namespace OKHOSTING.UI.Media
 {
 	public interface IAudioPlayer
 	{

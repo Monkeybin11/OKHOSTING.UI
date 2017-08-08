@@ -1,9 +1,10 @@
-﻿using OKHOSTING.UI.Controls.Layout;
+﻿using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OKHOSTING.UI.Controls.Forms
+namespace OKHOSTING.UI.Forms
 {
 	/// <summary>
 	/// It represents a form to store content.

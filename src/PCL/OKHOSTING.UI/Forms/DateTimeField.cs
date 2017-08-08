@@ -1,6 +1,7 @@
-﻿using System;
+﻿using OKHOSTING.UI.Controls;
+using System;
 
-namespace OKHOSTING.UI.Controls.Forms
+namespace OKHOSTING.UI.Forms
 {
 	/// <summary>
 	/// A field for selecting a date and time

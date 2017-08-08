@@ -1,6 +1,8 @@
-﻿using System;
+﻿using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layout;
+using System;
 
-namespace OKHOSTING.UI.Controls.Forms
+namespace OKHOSTING.UI.Forms
 {
 	/// <summary>
 	/// A field for selecting a date
@@ -17,11 +19,11 @@ namespace OKHOSTING.UI.Controls.Forms
 		/// Control que convierte el valor a web.
 		/// </para>
 		/// </summary>
-		protected new Layout.IFlow ValueControl
+		protected new IFlow ValueControl
 		{
 			get
 			{
-				return (Layout.IFlow) base.ValueControl;
+				return (IFlow) base.ValueControl;
 			}
 			set
 			{
@@ -38,7 +40,7 @@ namespace OKHOSTING.UI.Controls.Forms
 		protected override void CreateValueControl()
 		{
 			//create a sinple TextBox
-			ValueControl = Platform.Current.Create<Layout.IFlow>();
+			ValueControl = Platform.Current.Create<IFlow>();
 			
 			txtValue = Platform.Current.Create<ITextBox>();
 			txtValue.InputType = ITextBoxInputType.Number;
