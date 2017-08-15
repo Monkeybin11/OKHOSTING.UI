@@ -206,7 +206,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			get
 			{
-				var platform = (Platform)UI.Platform.Current;
+				var platform = (Platform) UI.Platform.Current;
 
 				if (platform == null)
 				{

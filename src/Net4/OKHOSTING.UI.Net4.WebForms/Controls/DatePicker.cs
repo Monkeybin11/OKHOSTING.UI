@@ -25,7 +25,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return DateTime.Parse(base.Text);
+				DateTime val;
+
+				if (DateTime.TryParse(base.Text, out val))
+				{
+					return val;
+				}
+				else
+				{
+					return null;
+				}
 			}
 			set
 			{
