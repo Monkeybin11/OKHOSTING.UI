@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
 	public class Platform : UI.Platform
 	{
-		protected readonly Random Random = new Random();
+		protected int ControlCounter = 0;
+
+		public readonly List<UrlRewriteRule> UriMap = new List<UrlRewriteRule>();
 
 		public override T Create<T>()
 		{
@@ -14,8 +17,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//give a default name to all controls to allow events to be correclty triggered
 			if (string.IsNullOrWhiteSpace(control.Name))
 			{
-				control.Name = "ctr_" + Random.Next();
+				control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
 			}
+
+			ControlCounter++;
 
 			return control;
 		}
@@ -43,16 +48,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 			switch (value)
 			{
 				case HorizontalAlignment.Center:
-					return "hotizontal-alignment-center";
+					return "horizontal-alignment-center";
 
 				case HorizontalAlignment.Fill:
-					return "hotizontal-alignment-fill";
+					return "horizontal-alignment-fill";
 
 				case HorizontalAlignment.Left:
-					return "hotizontal-alignment-left";
+					return "horizontal-alignment-left";
 
 				case HorizontalAlignment.Right:
-					return "hotizontal-alignment-right";
+					return "horizontal-alignment-right";
 			}
 
 			throw new ArgumentOutOfRangeException("value");
@@ -105,6 +110,53 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			control.CssClass = control.CssClass.Replace(className, string.Empty).Trim();
+		}
+
+		public UrlRewriteRule GetUrlRewriteRuleFor(Uri uri)
+		{
+			foreach(var rule in UriMap)
+			{
+				System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(rule.UrlRegexPattern);
+
+				if (uri.IsAbsoluteUri)
+				{
+					uri = new Uri(uri.PathAndQuery, UriKind.Relative);
+				}
+
+				if (regex.IsMatch(uri.ToString()))
+				{
+					return rule;
+				}
+			}
+
+			return null;
+		}
+
+		public UrlRewriteRule GetUrlRewriteRuleFor(Type controllerType)
+		{
+			return UriMap.Where(r => r.ControllerType.Equals(controllerType) || r.ControllerType.IsSubclassOf(controllerType)).FirstOrDefault();
+		}
+
+		protected override void StartController(Controller controller)
+		{
+			ControlCounter = 0;
+
+			base.StartController(controller);
+
+			var rule = GetUrlRewriteRuleFor(controller.GetType());
+
+			if (rule == null)
+			{
+				return;
+			}
+
+			//we are on the corect url
+			var uri = rule.GetUri(controller);
+
+			if (uri != new Uri(System.Web.HttpContext.Current.Request.RawUrl, UriKind.Relative))
+			{
+				System.Web.HttpContext.Current.Response.Redirect(uri.ToString(), false);
+			}
 		}
 
 		//static

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\VideoPlayer.cs" />
     <Compile Include="Controls\TimeOfDayPicker.cs" />
     <Compile Include="Controls\DatePicker.cs" />
     <Compile Include="Controls\ImageButton.cs" />
@@ -80,6 +81,8 @@
       <DependentUpon>PageSize.ashx</DependentUpon>
     </Compile>
     <Compile Include="SessionIdProvider.cs" />
+    <Compile Include="BasicUrlRewriteRule.cs" />
+    <Compile Include="UrlRewriteRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Net4\OKHOSTING.Core.Net4\OKHOSTING.Core.Net4.csproj">
@@ -102,6 +105,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Content Include="General.css" />
     <Content Include="Services\AutocompleteService.asmx" />
     <Content Include="Services\PageSize.ashx" />
   </ItemGroup>

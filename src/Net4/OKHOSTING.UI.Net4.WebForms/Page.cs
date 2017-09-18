@@ -62,6 +62,38 @@ namespace OKHOSTING.UI.Net4.WebForms
 				base.Form.Controls.Add(ContentHolder);
 			}
 
+			//search for a rewrite rule for this uri
+			var rule = Platform.Current.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
+
+			if (rule!= null)
+			{
+				//should we start a different controller than the current one?
+				if (Platform.Current.Controller != null)
+				{
+					bool startNew = false;
+
+					if (!rule.ControllerType.IsAssignableFrom(Platform.Current.Controller.GetType()))
+					{
+						startNew = true;
+					}
+					else
+					{
+						var currentUri = rule.GetUri(Platform.Current.Controller).ToString();
+
+						if (currentUri != Request.RawUrl)
+						{
+							startNew = true;
+						}
+					}
+
+					if (startNew)
+					{
+						var newController = rule.GetController(new Uri(Request.RawUrl, UriKind.Relative));
+						newController.Start();
+					}
+				}
+			}
+
 			//there is no controller assigned, exit
 			if (Platform.Current.Controller == null)
 			{
@@ -308,6 +340,9 @@ namespace OKHOSTING.UI.Net4.WebForms
 				Platform.Current.PageState.Title = Title;
 				Platform.Current.PageState.Content = Content;
 			}
+
+			//allow friendly urls on forms
+			Form.Action = Request.RawUrl;
 
 			base.OnPreRender(e);
 		}

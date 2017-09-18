@@ -17,7 +17,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
 		{
-
+			System.Web.HttpContext.Current.RewritePath("Default.aspx");
 		}
 
 		void Application_PreRequestHandlerExecute(object sender, EventArgs e)
