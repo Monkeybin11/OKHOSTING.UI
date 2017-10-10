@@ -35,7 +35,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/js/PageSize.js"));
 
 			//if this is the first request, get page size
-			if (!IsPostBack && Width == 0 && Height == 0)
+			if (Width == 0 && Height == 0)
 			{
 				string pageSizeJS = @"
 				<script type='text/javascript'>
@@ -140,6 +140,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 					updatedInputControls.Add(control);
 					((ICalendar) control).Value = DateTime.Parse(postedValue);
 				}
+				else if (control is DatePicker)
+				{
+					DateTime date = DateTime.MinValue;
+					
+					if (DateTime.TryParse(postedValue, out date) && ((IInputControl<DateTime?>) control).Value != date)
+					{
+						updatedInputControls.Add(control);
+						((IInputControl<DateTime?>)control).Value = date;
+					}
+				}
 				else if (control is CheckBox && ((ICheckBox) control).Value != (postedValue == "on"))
 				{
 					updatedInputControls.Add(control);
@@ -177,6 +187,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 				else if (control is Calendar)
 				{
 					((Calendar) control).RaiseValueChanged();
+				}
+				else if (control is DatePicker)
+				{
+					((DatePicker) control).RaiseValueChanged();
 				}
 				else if (control is CheckBox)
 				{

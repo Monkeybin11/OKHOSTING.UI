@@ -5,10 +5,6 @@ namespace OKHOSTING.UI.Net4.WinForms
 {
 	public class Page : System.Windows.Forms.Form, IPage
 	{
-		public Page()
-		{
-		}
-
 		public IControl Content
 		{
 			get

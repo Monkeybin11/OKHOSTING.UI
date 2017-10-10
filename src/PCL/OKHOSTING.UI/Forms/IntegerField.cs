@@ -21,7 +21,7 @@ namespace OKHOSTING.UI.Forms
 			{
 				if (string.IsNullOrWhiteSpace(ValueControl.Value))
 				{
-					return 0;
+					return null;
 				}
 				else
 				{
@@ -31,6 +31,10 @@ namespace OKHOSTING.UI.Forms
 			set
 			{
 				if (value == null)
+				{
+					ValueControl.Value = null;
+				}
+				else
 				{
 					ValueControl.Value = value.ToString();
 				}

@@ -35,7 +35,14 @@ namespace OKHOSTING.UI.Forms
 				}
 				else
 				{
-					return Enum.Parse(EnumType, ValueControl.Value);
+					try
+					{
+						return Enum.Parse(EnumType, ValueControl.Value);
+					}
+					catch
+					{
+						return null;
+					}
 				}
 			}
 			set

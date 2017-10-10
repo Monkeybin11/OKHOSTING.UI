@@ -6,7 +6,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 {
 	public class Platform : UI.Platform
 	{
-		protected int ControlCounter = 0;
+		protected readonly Random Random = new Random();
+		//protected int ControlCounter = 0;
 
 		public readonly List<UrlRewriteRule> UriMap = new List<UrlRewriteRule>();
 
@@ -17,10 +18,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//give a default name to all controls to allow events to be correclty triggered
 			if (string.IsNullOrWhiteSpace(control.Name))
 			{
-				control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
+				control.Name = $"ctr_{control.GetType().Name}_{Random.Next()}";
+				//control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
 			}
 
-			ControlCounter++;
+			//ControlCounter++;
 
 			return control;
 		}
@@ -139,7 +141,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		protected override void StartController(Controller controller)
 		{
-			ControlCounter = 0;
+			//ControlCounter = 0;
 
 			base.StartController(controller);
 

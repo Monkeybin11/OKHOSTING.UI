@@ -21,7 +21,7 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
-			Platform.Current.Controller.Resize();
+			Platform.Current?.Controller?.Resize();
 		}
 
 		public new IControl Content

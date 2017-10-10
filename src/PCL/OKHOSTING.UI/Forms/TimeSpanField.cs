@@ -1,6 +1,7 @@
 ﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
+using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Forms
 {
@@ -47,6 +48,7 @@ namespace OKHOSTING.UI.Forms
 			txtValue.Value = "0";
 			
 			lstUnit = Platform.Current.Create<IListPicker>();
+			lstUnit.Items = new List<string>();
 
 			foreach (Enum unit in Enum.GetValues(typeof(Core.TimeUnit.Unit)))
 			{

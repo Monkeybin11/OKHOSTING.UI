@@ -30,6 +30,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		public void LoadFromUrl(Uri url)
 		{
+			if(url == null)
+			{
+				return;
+			}
+
 			var bitmap = new System.Windows.Media.Imaging.BitmapImage();
 			bitmap.BeginInit();
 			bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
