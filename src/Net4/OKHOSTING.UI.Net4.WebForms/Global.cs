@@ -17,6 +17,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
 		{
+			if (System.Web.HttpContext.Current.Request.FilePath.EndsWith(".axd"))
+			{
+				return;
+			}
+
+			if (System.IO.File.Exists(Server.MapPath(System.Web.HttpContext.Current.Request.FilePath)))
+			{
+				return;
+			}
+
 			System.Web.HttpContext.Current.RewritePath("Default.aspx");
 		}
 
