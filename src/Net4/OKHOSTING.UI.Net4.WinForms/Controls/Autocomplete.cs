@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using OKHOSTING.UI.Controls;
@@ -14,21 +15,20 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
             base.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
 			base.TextChanged += Autocomplete_TextChanged;
-			//Searching+=
 		}
 
-        public static AutoCompleteStringCollection Datos()
+        protected AutoCompleteStringCollection Datos()
         {
-            var array = new[] { "Pedro", "Donaciana", "Muñoz", "Mata", "Lozano" };
+            var e = this.OnSearching(((IInputControl<string>)this).Value);
 
-            AutoCompleteStringCollection datos = new AutoCompleteStringCollection();
+            AutoCompleteStringCollection stringCollection = new AutoCompleteStringCollection();
 
-            foreach(string dato in array)
+            foreach(string d in e.SearchResult.ToArray())
             {
-                datos.Add(dato);
+                stringCollection.Add(d);
             }
 
-            return datos;
+            return stringCollection;
         }
 
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
