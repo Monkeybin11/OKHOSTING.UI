@@ -10,20 +10,25 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Autocomplete()
 		{
-            base.AutoCompleteCustomSource = Datos();
+            base.AutoCompleteCustomSource = LoadAutoComplete();
             base.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             base.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-			base.TextChanged += Autocomplete_TextChanged;
+            base.TextChanged += Autocomplete_TextChanged;
 		}
 
-        protected AutoCompleteStringCollection Datos()
+        protected AutoCompleteStringCollection LoadAutoComplete()
         {
-            var e = this.OnSearching(((IInputControl<string>)this).Value);
-
             AutoCompleteStringCollection stringCollection = new AutoCompleteStringCollection();
 
-            foreach(string d in e.SearchResult.ToArray())
+            var e = this.OnSearching(((IInputControl<string>)this).Value);
+
+            if(e.SearchResult == null)
+            {
+                return stringCollection;
+            }
+
+            foreach (string d in e.SearchResult.ToArray())
             {
                 stringCollection.Add(d);
             }
@@ -47,9 +52,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		private void Autocomplete_TextChanged(object sender, EventArgs e)
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
-		}
+            base.AutoCompleteCustomSource = LoadAutoComplete();
+        }
 
-		public new event EventHandler<string> ValueChanged;
+        public new event EventHandler<string> ValueChanged;
 
 		string IInputControl<string>.Value
 		{
