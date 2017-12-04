@@ -56,7 +56,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			set
 			{
 				//remove all controls from columns to be removed
-				for (int column = base.ColumnCount - 1; column >= value; column++)
+				for (int column = base.ColumnCount - 1; column >= value; column--)
 				{
 					for (int row = 0; row < base.RowCount; row++)
 					{
