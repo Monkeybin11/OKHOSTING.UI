@@ -12,9 +12,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		{
 			//AutoScroll = true;
 			_Children = new ControlList(base.Controls);
-		}
+            //base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            //| System.Windows.Forms.AnchorStyles.Left)
+            //| System.Windows.Forms.AnchorStyles.Right)));
+        }
 
-		protected readonly ControlList _Children;
+        protected readonly ControlList _Children;
 
 		IList<IControl> IRelativePanel.Children
 		{

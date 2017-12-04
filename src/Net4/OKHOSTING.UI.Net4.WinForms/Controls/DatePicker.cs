@@ -3,7 +3,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class DatePicker : System.Windows.Forms.DateTimePicker, ICalendar
+	public class DatePicker : System.Windows.Forms.DateTimePicker, IDatePicker
 	{
 		public DatePicker()
 		{
@@ -25,10 +25,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				if (value.HasValue)
+                if (value.HasValue)
 				{
-					base.Value = value.Value;
-				}
+                    if(value.Value < base.MinDate)
+                    {
+                        base.Value = Value;
+                    }
+                    else
+                    {
+					    base.Value = value.Value;
+                    }
+                }
 			}
 		}
 

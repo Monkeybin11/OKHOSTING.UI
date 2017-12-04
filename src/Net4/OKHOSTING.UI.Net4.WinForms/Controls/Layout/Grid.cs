@@ -10,9 +10,15 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		{
 			Platform.Current.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
-		}
 
-		IControl IGrid.GetContent(int row, int column)
+            //AutoScroll = true;
+            AutoSize = true;
+            //base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            //| System.Windows.Forms.AnchorStyles.Left)
+            //| System.Windows.Forms.AnchorStyles.Right)));
+        }
+
+        IControl IGrid.GetContent(int row, int column)
 		{
 			return base.GetControlFromPosition(column, row) as IControl;
 		}

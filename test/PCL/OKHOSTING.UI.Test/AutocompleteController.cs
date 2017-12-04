@@ -37,8 +37,8 @@ namespace OKHOSTING.UI.Test
 			txtBox.Name = "Team";
 			txtBox.FontColor = new Color(1, 36, 24, 130);
 			txtBox.BorderColor = new Color(1, 229, 238, 0);
-			txtBox.Width = 100;
-			txtBox.Height = 80;
+			txtBox.Width = 150;
+			txtBox.Height = 30;
 			txtBox.FontFamily = "Times new roman";
 			txtBox.FontSize = 20;
 			txtBox.Searching += TxtBox_Searching;

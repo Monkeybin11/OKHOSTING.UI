@@ -17,7 +17,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 
 			if (Platform.Current.Controller == null)
 			{
-				new IndexController().Start();
+                //new IndexController().Start();
+                new AutocompleteController().Start();
+                //new OKHOSTING.UI.Net4.WebForms.Controls.Autocomplete();
 			}
 		}
 	}

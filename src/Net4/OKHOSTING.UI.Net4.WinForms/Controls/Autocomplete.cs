@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
@@ -7,15 +9,27 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Autocomplete()
 		{
-			//var allowedTypes = new System.Windows.Forms.AutoCompleteStringCollection();
-			//allowedTypes.AddRange(yourArrayOfSuggestions);
-			//AutoCompleteCustomSource = allowedTypes;
-			//AutoCompleteMode = AutoCompleteMode.Suggest;
-			//AutoCompleteSource = AutoCompleteSource.CustomSource;
+            base.AutoCompleteCustomSource = Datos();
+            base.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            base.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
 			base.TextChanged += Autocomplete_TextChanged;
 			//Searching+=
 		}
+
+        public static AutoCompleteStringCollection Datos()
+        {
+            var array = new[] { "Pedro", "Donaciana", "Muñoz", "Mata", "Lozano" };
+
+            AutoCompleteStringCollection datos = new AutoCompleteStringCollection();
+
+            foreach(string dato in array)
+            {
+                datos.Add(dato);
+            }
+
+            return datos;
+        }
 
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
 

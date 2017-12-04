@@ -11,9 +11,20 @@ namespace OKHOSTING.UI.Net4.WinForms
 			System.Windows.Forms.Application.Exit();
 		}
 
-		//virtual
+        public override T Create<T>()
+        {
+            var control = base.Create<T>() as System.Windows.Forms.Control;
 
-		public virtual Color Parse(System.Drawing.Color color)
+            //control.Anchor = ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            //| System.Windows.Forms.AnchorStyles.Left)
+            //| System.Windows.Forms.AnchorStyles.Right));
+
+            return control as T;
+        }
+
+        //virtual
+
+        public virtual Color Parse(System.Drawing.Color color)
 		{
 			if (color == null)
 			{

@@ -14,11 +14,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Test
 		{
 			base.OnLoad(e);
 
-			if (Platform.Current.Controller == null)
-			{
-				Platform.Current.Page = this;
-				new IndexController().Start();
-			}
-		}
+            if (Platform.Current.Controller == null)
+            {
+                Platform.Current.Page = this;
+                new IndexController().Start();
+            }
+        }
 	}
 }
