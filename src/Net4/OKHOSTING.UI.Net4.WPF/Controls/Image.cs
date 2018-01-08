@@ -4,17 +4,8 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {
-	public class Image : System.Windows.Controls.Panel, IControl
+	public class Image : System.Windows.Controls.Image, IImage
 	{
-		protected readonly System.Windows.Controls.Image InnerImage;
-
-		public Image()
-		{
-			InnerImage = new System.Windows.Controls.Image();
-
-            base.Children.Add(InnerImage);
-		}
-
 		public void LoadFromFile(string filePath)
 		{
 			LoadFromUrl(new Uri(filePath));
@@ -27,7 +18,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			bitmap.StreamSource = stream;
 			bitmap.EndInit();
 
-			InnerImage.Source = bitmap;
+			Source = bitmap;
 		}
 
 		public void LoadFromUrl(Uri url)
@@ -37,13 +28,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 				return;
 			}
 
-			var bitmap = new System.Windows.Media.Imaging.BitmapImage();
-			bitmap.BeginInit();
-			bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
-			bitmap.UriSource = url;
-			bitmap.EndInit();
-
-			InnerImage.Source = bitmap;
+			var bitmap = new System.Windows.Media.Imaging.BitmapImage(url);
+			Source = bitmap;
 		}
 
 		public void Dispose()
@@ -129,11 +115,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				throw new NotImplementedException();
+				//return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush) base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
+				//base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
 			}
 		}
 

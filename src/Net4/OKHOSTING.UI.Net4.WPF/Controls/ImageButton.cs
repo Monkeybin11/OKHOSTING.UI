@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 	{
 		public ImageButton()
 		{
-			InnerImage.MouseUp += InnerImage_MouseUp;
+			MouseUp += InnerImage_MouseUp;
 		}
 
 		public event EventHandler Click;
