@@ -6,15 +6,16 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Autocomplete : TextBox, IAutocomplete
+	public class Autocomplete : ListPicker, IAutocomplete
 	{
 		public Autocomplete()
 		{
-            base.AutoCompleteCustomSource = LoadAutoComplete();
-            base.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //base.AutoCompleteCustomSource = LoadAutoComplete();
+            base.AutoCompleteMode = AutoCompleteMode.Suggest;
             base.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             base.TextChanged += Autocomplete_TextChanged;
+
 		}
 
         protected AutoCompleteStringCollection LoadAutoComplete()
@@ -52,7 +53,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		private void Autocomplete_TextChanged(object sender, EventArgs e)
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
-            base.AutoCompleteCustomSource = LoadAutoComplete();
+
+            if (!string.IsNullOrWhiteSpace(base.Text) && base.Text.Length > 5)
+            {
+                base.AutoCompleteCustomSource = LoadAutoComplete();
+            }
         }
 
         public new event EventHandler<string> ValueChanged;

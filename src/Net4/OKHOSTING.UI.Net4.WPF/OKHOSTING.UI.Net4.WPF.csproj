@@ -64,19 +64,20 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WpfAutoCompleteControls, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\OKHOSTING.Inside\src\packages\WpfAutoCompleteControls.0.16\lib\net45\WpfAutoCompleteControls.dll</HintPath>
+      <HintPath>..\..\packages\WpfAutoCompleteControls.0.16\lib\net45\WpfAutoCompleteControls.dll</HintPath>
     </Reference>
     <Reference Include="ZKWeb.System.Drawing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\OKHOSTING.Inside\src\packages\ZKWeb.System.Drawing.4.0.0\lib\net45\ZKWeb.System.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AutoComplete.cs" />
+    <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\DatePicker.cs" />
     <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Controls\Layout\RelativePanel.AttachedProperties.cs" />
     <Compile Include="Controls\Layout\RelativePanel.cs" />
     <Compile Include="Controls\Layout\Flow.cs" />
+    <Compile Include="Controls\Layout\Stack.cs" />
     <Compile Include="Controls\Slider.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Button.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Controls\Label.cs" />
     <Compile Include="Controls\LabelButton.cs" />
     <Compile Include="Controls\Layout\Grid.cs" />
-    <Compile Include="Controls\Layout\Stack.cs" />
     <Compile Include="Controls\ListPicker.cs" />
     <Compile Include="Controls\PasswordTextBox.cs" />
     <Compile Include="Controls\TextArea.cs" />
@@ -115,7 +115,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

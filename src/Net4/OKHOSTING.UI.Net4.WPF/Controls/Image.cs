@@ -11,6 +11,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		public Image()
 		{
 			InnerImage = new System.Windows.Controls.Image();
+
+            base.Children.Add(InnerImage);
 		}
 
 		public void LoadFromFile(string filePath)

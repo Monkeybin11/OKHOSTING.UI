@@ -35,7 +35,7 @@ namespace OKHOSTING.UI.Test
 			// Create an Autocomplete with a size and type text color and size specific and adds it to the stack.
 			IAutocomplete txtBox = Platform.Current.Create<IAutocomplete>();
 			txtBox.Name = "Team";
-			txtBox.FontColor = new Color(1, 36, 24, 130);
+			txtBox.FontColor = new Color(255, 36, 24, 130);
 			txtBox.BorderColor = new Color(1, 229, 238, 0);
 			txtBox.Width = 150;
 			txtBox.Height = 30;

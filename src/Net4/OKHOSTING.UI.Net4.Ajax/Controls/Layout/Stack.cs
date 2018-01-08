@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
-namespace OKHOSTING.UI.Net4.Ajax.Controls.Layout
+namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 {
 	/// <summary>
 	/// It is a container shaped pile where you can be stacked objects, which we can give you design through its properties
 	/// <para xml:lang="es">Es un contenedor en forma de pila, donde puedes ir apilando objetos, al cual le podemos dar diseño por medio de sus propiedades</para>
 	/// </summary>
-	public class Stack : System.Web.UI.WebControls.Panel, IStack
+	public class Stack : RelativePanel, IStack
 	{
 		/// <summary>
 		/// Initializes a new instance of the OKHOSTING.UI.Net4.Ajax.Controls.Layout.Stack class.

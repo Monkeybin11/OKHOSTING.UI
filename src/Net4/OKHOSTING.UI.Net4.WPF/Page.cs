@@ -16,7 +16,13 @@ namespace OKHOSTING.UI.Net4.WPF
 
 			//allows for automatic vertical scrolling
 			Scroller = new System.Windows.Controls.ScrollViewer();
-			base.Content = Scroller;
+            Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+            Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Visible;
+            //base.Width = Double.NaN;
+            //base.Height = Double.NaN;
+            base.SizeToContent = System.Windows.SizeToContent.Manual;
+
+            base.Content = Scroller;
 		}
 
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
@@ -32,6 +38,12 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 			set
 			{
+                if (value != null)
+                {
+                    value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
+                    value.VerticalAlignment = UI.VerticalAlignment.Fill;
+                }
+                
 				Scroller.Content = value;
 			}
 		}

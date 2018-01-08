@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	{
 		public DatePicker()
 		{
-			base.Attributes["type"] = "date";
+			//base.Attributes["type"] = "date";
 		}
 
 		#region IInputControl

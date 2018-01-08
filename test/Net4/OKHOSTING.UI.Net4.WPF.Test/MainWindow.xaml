@@ -1,12 +1,12 @@
-﻿<Window x:Class="OKHOSTING.UI.Net4.WPF.Test.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OKHOSTING.UI.Net4.WPF.Test"
+        xmlns:Layout="clr-namespace:OKHOSTING.UI.Net4.WPF.Controls.Layout;assembly=OKHOSTING.UI.Net4.WPF" xmlns:Controls="clr-namespace:OKHOSTING.UI.Net4.WPF.Controls;assembly=OKHOSTING.UI.Net4.WPF" x:Class="OKHOSTING.UI.Net4.WPF.Test.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <Image HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="121" Margin="20,22,0,0" Source="http://directorio-negocios.okhosting.com/iconos/icono.png"/>
+
 </Window>

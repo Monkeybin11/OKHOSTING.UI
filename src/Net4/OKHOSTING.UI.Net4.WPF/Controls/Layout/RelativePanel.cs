@@ -48,7 +48,10 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		public RelativePanel()
 		{
 			_Children = new ControlList(base.Children);
-		}
+            VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
+        }
 
 		protected readonly ControlList _Children;
 

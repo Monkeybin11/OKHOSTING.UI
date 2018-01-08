@@ -26,8 +26,8 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
             IRelativePanel panel = Platform.Current.Create<IRelativePanel>();
-            panel.Width = Platform.Current.Page.Width * 0.8; 
-            panel.Height = Platform.Current.Page.Height * 0.8;
+            panel.Width = Platform.Current.Page.Width; 
+            panel.Height = Platform.Current.Page.Height;
             panel.BackgroundColor = new Color(255, 80, 100, 250);
 
             IStack stack = Platform.Current.Create<IStack>();
@@ -38,20 +38,31 @@ namespace OKHOSTING.UI.Test
             //Create an Grid with specified columns and rows.
             IGrid grid = Platform.Current.Create<IGrid>();
             grid.BackgroundColor = new Color(255, 200, 100, 80);
-            grid.Width = panel.Width * 0.6;
-            grid.Height = panel.Height * 0.6;
+            //grid.Width = panel.Width * 1.6;
+            //grid.Height = panel.Height * 1.6;
 
 			grid.ColumnCount = 1;
 			grid.RowCount = 10;
+
+            IImageButton imgPrueba = Platform.Current.Create<IImageButton>();
+            imgPrueba.LoadFromUrl(new Uri("http://directorio-negocios.okhosting.com/iconos/icono.png"));
+            //imgPrueba.Height = 50;
+            //imgPrueba.Width = 50;
+            grid.SetContent(0, 0, imgPrueba);
+            grid.SetHeight(0, 200);
+            grid.SetWidth(0, 200);
 
             // Create an LabelButton that binds us to a AutocompleteController.
             ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
             lblAutocomplete.BackgroundColor = new Color(150, 100, 250, 80);
 			lblAutocomplete.Text = "Autocomplete";
-            lblAutocomplete.Width = grid.Width * 0.6;
+            lblAutocomplete.Width = panel.Width * 1.6;
+            lblAutocomplete.Height = panel.Height * 1.6;
 			lblAutocomplete.Click += (object sender, EventArgs e) => new AutocompleteController().Start();
             //stack.Children.Add(lblAutocomplete);
-            grid.SetContent(0, 0, lblAutocomplete);
+            grid.SetContent(1, 0, lblAutocomplete);
+            grid.SetHeight(1, 1200);
+            grid.SetWidth(0, 1200);
 
             //// Create an LabelButton that binds us to a LabelController.
             //ILabelButton lblLabel = Platform.Current.Create<ILabelButton>();

@@ -21,7 +21,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public Grid()
 		{
-		}
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+
+            Width = Double.NaN;
+            Height = Double.NaN;
+        }
 
 		/// <summary>
 		/// /// Gets or sets the number of columns that will contain the grid.

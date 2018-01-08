@@ -13,6 +13,7 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			base.Finish();
 			System.Windows.Application.Current.Shutdown();
+
 		}
 
 		//virtual
