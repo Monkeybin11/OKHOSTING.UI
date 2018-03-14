@@ -249,7 +249,7 @@ namespace OKHOSTING.UI.Forms
 			else if (type.Equals(typeof(DateTime)))
 			{
 				//field = new DateTimeField();
-				field = new DateField();
+				field = new DateTimeField();
 			}
 
 			//TimeSpan

@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// Represents a control that is autocomplete.
 	/// <para xml:lang="es">Representa un control que es autocomplete.</para>
 	/// </summary>
-	public class Autocomplete : System.Web.UI.WebControls.Panel, IAutocomplete
+	public class Autocomplete : System.Web.UI.WebControls.Panel, IAutocomplete, IWebInputControl
 	{
 		/// <summary>
 		/// The inner text box.
@@ -126,18 +126,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				InnerTextBox.Text = value;
 			}
-		}
-
-		/// <summary>
-		/// Raises the value changed.
-		/// <para xml:lang="es">Detecta si hay un valor cambiado al momento de hacer el postback</para>
-		/// </summary>
-		/// <returns>The value changed.
-		/// <para xml:lang="es">El valor cambiado.</para>
-		/// </returns>
-		protected internal void RaiseValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		#endregion
@@ -685,6 +673,30 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			public EventArgs()
 			{
 			}
+		}
+
+		#endregion
+
+		#region IWebInputControl
+
+		bool IWebInputControl.HandlePostBack()
+		{
+			string postedValue = Page.Request.Form[ID];
+
+			if (postedValue != ((IAutocomplete) this).Value)
+			{
+				((IAutocomplete) this).Value = postedValue;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void IWebInputControl.RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((IAutocomplete) this).Value);
 		}
 
 		#endregion

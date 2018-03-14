@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a button.
 	/// <para xml:lang="es">Es un control que representa un boton</para>
 	/// </summary>
-	public class Button : System.Web.UI.WebControls.Button, IButton
+	public class Button : System.Web.UI.WebControls.Button, IButton, IWebClickableControl
 	{
 		/// <summary>
 		/// Occurs when click.
@@ -16,14 +16,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public new event EventHandler Click;
 
-		/// <summary>
-		/// Raises the click.
-		/// <para xml:lang="es">Es el evento que proboca el clic</para>
-		/// </summary>
-		/// <returns>The click.
-		/// <para xml:lang="es">El clic.</para>
-		/// </returns>
-		protected internal virtual void Raise_Click()
+		void IWebClickableControl.RaiseClick()
 		{
 			Click?.Invoke(this, new EventArgs());
 		}

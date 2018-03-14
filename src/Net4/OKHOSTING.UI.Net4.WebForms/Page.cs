@@ -34,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/js/jquery-ui.js"));
 			Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/js/PageSize.js"));
 
-			//if this is the first request, get page size
+			//if this is the first request, get page size and finish
 			if (Width == 0 && Height == 0)
 			{
 				string pageSizeJS = @"
@@ -50,6 +50,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 				//register javascripts
 				Page.ClientScript.RegisterStartupScript(this.GetType(), "SetPageSize", pageSizeJS);
+				Response.Flush();
+				Response.End();
 
 				return;
 			}
@@ -101,11 +103,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//get title and content from the state, in case it has a different Page instance
-			if (Platform.Current.PageState != null && Platform.Current.PageState.Content != null)
-			{
-				Title = Platform.Current.PageState.Title;
-				Content = Platform.Current.PageState.Content;
-			}
+			Title = Platform.Current.PageState?.Title;
+			Content = Platform.Current.PageState?.Content;
 
 			if (!IsPostBack)
 			{
@@ -113,106 +112,36 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//keep track of wich IInputControls had ther value updated so we can reaise IInputControl.OnValueChanged
-			List<IControl> updatedInputControls = new List<IControl>();
+			List<IWebInputControl> updatedInputControls = new List<IWebInputControl>();
 
 			//restore state
-			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			foreach (var control in GetAllControls())
 			{
-				//get posted value by user
-				string postedValue = Request.Form[postedValueName];
-
-				//get control that corresponds to this input
-				IControl control = ContentHolder.FindControl(postedValueName) as IControl;
-
-				if(control == null)
+				if (control is IWebInputControl && ((IWebInputControl) control).HandlePostBack())
 				{
-					continue;
-				}
-
-				//update control's value
-				if (control is Autocomplete && ((IAutocomplete)control).Value != postedValue)
-				{
-					updatedInputControls.Add(control);
-					((IAutocomplete) control).Value = postedValue;
-				}
-				else if (control is Calendar && ((ICalendar) control).Value != DateTime.Parse(postedValue))
-				{
-					updatedInputControls.Add(control);
-					((ICalendar) control).Value = DateTime.Parse(postedValue);
-				}
-				else if (control is DatePicker)
-				{
-					DateTime date = DateTime.MinValue;
-					
-					if (DateTime.TryParse(postedValue, out date) && ((IInputControl<DateTime?>) control).Value != date)
-					{
-						updatedInputControls.Add(control);
-						((IInputControl<DateTime?>)control).Value = date;
-					}
-				}
-				else if (control is CheckBox && ((ICheckBox) control).Value != (postedValue == "on"))
-				{
-					updatedInputControls.Add(control);
-					((ICheckBox) control).Value = postedValue == "on";
-				}
-				else if (control is ListPicker && ((IListPicker) control).Value != postedValue)
-				{
-					updatedInputControls.Add(control);
-					((IListPicker) control).Value = postedValue;
-				}
-				else if (control is PasswordTextBox && ((IPasswordTextBox) control).Value != postedValue)
-				{
-					updatedInputControls.Add(control);
-					((IPasswordTextBox) control).Value = postedValue;
-				}
-				else if (control is TextArea && ((ITextArea) control).Value != postedValue)
-				{
-					updatedInputControls.Add(control);
-					((ITextArea) control).Value = postedValue;
-				}
-				else if (control is TextBox && ((ITextBox) control).Value != postedValue)
-				{ 
-					updatedInputControls.Add(control);
-					((ITextBox) control).Value = postedValue;
+					updatedInputControls.Add((IWebInputControl) control);
 				}
 			}
 
-			//raise IInputControl.OnValueChanged events
-			foreach (IControl control in updatedInputControls)
+			//raise IInputControl.ValueChanged events
+			foreach (IWebInputControl control in updatedInputControls)
 			{
-				if (control is Autocomplete)
-				{
-					((Autocomplete) control).RaiseValueChanged();
-				}
-				else if (control is Calendar)
-				{
-					((Calendar) control).RaiseValueChanged();
-				}
-				else if (control is DatePicker)
-				{
-					((DatePicker) control).RaiseValueChanged();
-				}
-				else if (control is CheckBox)
-				{
-					((CheckBox) control).RaiseValueChanged();
-				}
-				else if (control is ListPicker)
-				{
-					((ListPicker) control).RaiseValueChanged();
-				}
-				else if (control is PasswordTextBox)
-				{
-					((PasswordTextBox) control).RaiseValueChanged();
-				}
-				else if (control is TextArea)
-				{
-					((TextArea) control).RaiseValueChanged();
-				}
-				else if (control is TextBox)
-				{
-					((TextBox) control).RaiseValueChanged();
-				}
+				control.RaiseValueChanged();
 			}
+
+			//handle uploaded files
+			//foreach (string f in Request.Files)
+			//{
+			//	System.Web.HttpPostedFile file = Request.Files[f];
+
+			//	if (file.ContentLength <= 0)
+			//	{
+			//		continue;
+			//	}
+
+			//	WebFilePicker control = ContentHolder.FindControl(f) as WebFilePicker;
+			//	control.Container.Value = new System.IO.BinaryReader(file.InputStream).ReadBytes((int)file.InputStream.Length);
+			//}
 
 			//raise button click events
 			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
@@ -224,24 +153,19 @@ namespace OKHOSTING.UI.Net4.WebForms
 				//is this an image button?
 				if (postedValueName.EndsWith(".x"))
 				{
-					controlName = postedValueName.Split('.').First();
+					controlName = postedValueName.Split('.').First();	
 				}
 				
 				//get control that corresponds to this input
-				IControl control = ContentHolder.FindControl(controlName) as IControl;
-
-				if (control == null)
-				{
-					continue;
-				}
-
+				IWebClickableControl control = ContentHolder.FindControl(controlName) as IWebClickableControl;
+					
 				if (control is Button && postedValue == ((Button) control).Text)
 				{
-					((Button) control).Raise_Click();
+					control?.RaiseClick();
 				}
 				else if (control is IImageButton)
 				{
-					((ImageButton) control).Raise_Click();
+					control?.RaiseClick();
 				}
 			}
 
@@ -253,21 +177,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//get control that corresponds to this input
 			if (!string.IsNullOrWhiteSpace(eventTarget))
 			{
-				IControl control = (IControl) ContentHolder.FindControl(eventTarget);
-
-				if (control is LabelButton && eventTarget == control.Name)
-				{
-					((LabelButton) control).Raise_Click();
-				}
-				else if (control is IImageButton && eventTarget == control.Name)
-				{
-					((ImageButton) control).Raise_Click();
-				}
-				else if (control is ICheckBox && eventTarget == control.Name && !updatedInputControls.Contains(control)) //check updatedInputControls collection because checkbox is causing double event raising
-				{
-					((ICheckBox) control).Value = !((ICheckBox) control).Value;
-					((CheckBox) control).RaiseValueChanged();
-				}
+				IWebClickableControl control = ContentHolder.FindControl(eventTarget) as IWebClickableControl;
+				control?.RaiseClick();
 			}
 		}
 
@@ -337,6 +248,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 				}
 
 				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"];
+			}
+		}
+
+		public IEnumerable<IControl> GetAllControls()
+		{
+			foreach (IControl ctr in Platform.GetAllControls(this))
+			{
+				yield return ctr;
 			}
 		}
 

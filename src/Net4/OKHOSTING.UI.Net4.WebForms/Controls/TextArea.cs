@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It represents a control input multiline text
 	/// <para xml:lang="es">Representa un control de entrada de texto de varias líneas</para>
 	/// </summary>
-	public class TextArea : System.Web.UI.WebControls.TextBox, ITextArea
+	public class TextArea : System.Web.UI.WebControls.TextBox, ITextArea, IWebInputControl
 	{
 		/// <summary>
 		/// Initializes a new instance of the TextArea class.
@@ -43,18 +43,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <para xml:lang="es">Ocurre cuando cambia el valor.</para>
 		/// </summary>
 		public event EventHandler<string> ValueChanged;
-
-		/// <summary>
-		/// Raises the value changed.
-		/// <para xml:lang="es">Cambia el valor.</para>
-		/// </summary>
-		/// <returns>The value changed.
-		/// <para xml:lang="es">El valor cambiado.</para>
-		/// </returns>
-		protected internal void RaiseValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
-		}
 
 		#endregion
 
@@ -582,6 +570,30 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
 				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
 			}
+		}
+
+		#endregion
+
+		#region IWebInputControl
+
+		bool IWebInputControl.HandlePostBack()
+		{
+			string postedValue = Page.Request.Form[ID];
+
+			if (postedValue != ((ITextArea) this).Value)
+			{
+				((ITextArea) this).Value = postedValue;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void IWebInputControl.RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ITextArea) this).Value);
 		}
 
 		#endregion

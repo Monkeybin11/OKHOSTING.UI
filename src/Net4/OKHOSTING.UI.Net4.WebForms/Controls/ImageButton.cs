@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// <summary>It represents a button with a background image
 	/// <para xml:lang="es">Representa un boton con una imagen de fondo</para>
 	/// </summary>
-	public class ImageButton : System.Web.UI.WebControls.ImageButton, IImageButton
+	public class ImageButton : System.Web.UI.WebControls.ImageButton, IImageButton, IWebClickableControl
 	{
 		#region IControl
 
@@ -308,14 +308,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public new event EventHandler Click;
 
-		/// <summary>
-		/// Raises the click.
-		/// <para xml:lang="es">Es donde se proboca el evento clic.</para>
-		/// </summary>
-		/// <returns>The click.
-		/// <para xml:lang="es">El clic</para>
-		/// </returns>
-		protected internal virtual void Raise_Click()
+		void IWebClickableControl.RaiseClick()
 		{
 			Click?.Invoke(this, new EventArgs());
 		}

@@ -1,15 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
 using System.Collections;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {

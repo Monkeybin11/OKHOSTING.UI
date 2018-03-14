@@ -183,5 +183,21 @@ namespace OKHOSTING.UI.Net4.WebForms
 				return platform;
 			}
 		}
+
+		/// <summary>
+		/// Returns all the contained controls, recursively
+		/// </summary>
+		public static IEnumerable<System.Web.UI.Control> GetAllControls(System.Web.UI.Control control)
+		{
+			foreach (System.Web.UI.Control ctr in control.Controls)
+			{
+				yield return ctr;
+
+				foreach(System.Web.UI.Control ctr2 in GetAllControls(ctr))
+				{
+					yield return ctr2;
+				}
+			}
+		}
 	}
 }

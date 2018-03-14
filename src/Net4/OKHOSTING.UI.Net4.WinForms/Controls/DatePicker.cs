@@ -25,17 +25,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-                if (value.HasValue)
+				if (value.HasValue)
 				{
-                    if(value.Value < base.MinDate)
-                    {
-                        base.Value = Value;
-                    }
-                    else
-                    {
-					    base.Value = value.Value;
-                    }
-                }
+					if(value.Value < base.MinDate)
+					{
+						base.Value = Value;
+					}
+					else
+					{
+						base.Value = value.Value;
+					}
+				}
 			}
 		}
 

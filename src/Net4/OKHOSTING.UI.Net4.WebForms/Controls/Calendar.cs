@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a calendar
 	/// <para xml:lang="es">Es un control que representa un calendario</para>
 	/// </summary>
-	public class Calendar : System.Web.UI.WebControls.Calendar, ICalendar
+	public class Calendar : System.Web.UI.WebControls.Calendar, ICalendar, IWebInputControl
 	{
 		#region IControl
 
@@ -573,13 +573,28 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<DateTime?> ValueChanged;
 
-		/// <summary>
-		/// Raises the value changed.
-		/// </summary>
-		/// <returns>The value changed.</returns>
-		protected internal void RaiseValueChanged()
+		#endregion
+
+		#region IWebInputControl
+
+		bool IWebInputControl.HandlePostBack()
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
+			string postedValue = Page.Request.Form[ID];
+
+			if (DateTime.Parse(postedValue) != ((ICalendar) this).Value)
+			{
+				((ICalendar) this).Value = DateTime.Parse(postedValue);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void IWebInputControl.RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ICalendar) this).Value);
 		}
 
 		#endregion

@@ -10,32 +10,32 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Autocomplete()
 		{
-            //base.AutoCompleteCustomSource = LoadAutoComplete();
-            base.AutoCompleteMode = AutoCompleteMode.Suggest;
-            base.AutoCompleteSource = AutoCompleteSource.CustomSource;
+			//base.AutoCompleteCustomSource = LoadAutoComplete();
+			base.AutoCompleteMode = AutoCompleteMode.Suggest;
+			base.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            base.TextChanged += Autocomplete_TextChanged;
+			base.TextChanged += Autocomplete_TextChanged;
 
 		}
 
-        protected AutoCompleteStringCollection LoadAutoComplete()
-        {
-            AutoCompleteStringCollection stringCollection = new AutoCompleteStringCollection();
+		protected AutoCompleteStringCollection LoadAutoComplete()
+		{
+			AutoCompleteStringCollection stringCollection = new AutoCompleteStringCollection();
 
-            var e = this.OnSearching(((IInputControl<string>)this).Value);
+			var e = this.OnSearching(((IInputControl<string>)this).Value);
 
-            if(e.SearchResult == null)
-            {
-                return stringCollection;
-            }
+			if(e.SearchResult == null)
+			{
+				return stringCollection;
+			}
 
-            foreach (string d in e.SearchResult.ToArray())
-            {
-                stringCollection.Add(d);
-            }
+			foreach (string d in e.SearchResult.ToArray())
+			{
+				stringCollection.Add(d);
+			}
 
-            return stringCollection;
-        }
+			return stringCollection;
+		}
 
 		public event EventHandler<AutocompleteSearchEventArgs> Searching;
 
@@ -54,13 +54,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 
-            if (!string.IsNullOrWhiteSpace(base.Text) && base.Text.Length > 5)
-            {
-                base.AutoCompleteCustomSource = LoadAutoComplete();
-            }
-        }
+			if (!string.IsNullOrWhiteSpace(base.Text) && base.Text.Length > 5)
+			{
+				base.AutoCompleteCustomSource = LoadAutoComplete();
+			}
+		}
 
-        public new event EventHandler<string> ValueChanged;
+		public new event EventHandler<string> ValueChanged;
 
 		string IInputControl<string>.Value
 		{

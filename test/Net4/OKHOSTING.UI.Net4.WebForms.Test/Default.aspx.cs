@@ -3,23 +3,15 @@ using System;
 
 namespace OKHOSTING.UI.Net4.WebForms.Test
 {
-	public partial class Default : OKHOSTING.UI.Net4.WebForms.Page
+	public partial class Default : Page
 	{
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
 
-			//page size is yet to be determined, since this is the first load
-			if (!IsPostBack && Width == 0 && Height == 0)
-			{
-				return;
-			}
-
 			if (Platform.Current.Controller == null)
 			{
-                //new IndexController().Start();
-                new AutocompleteController().Start();
-                //new OKHOSTING.UI.Net4.WebForms.Controls.Autocomplete();
+                new IndexController().Start();
 			}
 		}
 	}

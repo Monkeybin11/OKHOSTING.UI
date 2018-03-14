@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\IWebClickableControl.cs" />
     <Compile Include="Controls\VideoPlayer.cs" />
     <Compile Include="Controls\TimeOfDayPicker.cs" />
     <Compile Include="Controls\DatePicker.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Controls\Layout\RelativePanel.cs" />
     <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Controls\TextBoxBase.cs" />
+    <Compile Include="Controls\IWebInputControl.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />

@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It represents a text box that masks the input visibly.
 	/// <para xml:lang="es">Representa un cuadro de texto que visiblemente enmascara la entrada.</para>
 	/// </summary>
-	public class PasswordTextBox : System.Web.UI.WebControls.TextBox, IPasswordTextBox
+	public class PasswordTextBox : System.Web.UI.WebControls.TextBox, IPasswordTextBox, IWebInputControl
 	{
 		/// <summary>
 		/// Initializes a new instance of the PasswordTextBox class.
@@ -309,6 +309,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get; set;
 		}
 
+		#endregion
+
 		#region IInputControl
 
 		/// <summary>
@@ -350,6 +352,27 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		#region IWebInputControl
+
+		bool IWebInputControl.HandlePostBack()
+		{
+			string postedValue = Page.Request.Form[ID];
+
+			if (postedValue != ((IPasswordTextBox) this).Value)
+			{
+				((IPasswordTextBox) this).Value = postedValue;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void IWebInputControl.RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((IPasswordTextBox) this).Value);
+		}
 
 		#endregion
 

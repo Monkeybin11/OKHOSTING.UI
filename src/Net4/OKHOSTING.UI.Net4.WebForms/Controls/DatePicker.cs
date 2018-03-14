@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a calendar
 	/// <para xml:lang="es">Es un control que representa un calendario</para>
 	/// </summary>
-	public class DatePicker : TextBoxBase, IDatePicker
+	public class DatePicker : TextBoxBase, IDatePicker, IWebInputControl
 	{
 		public DatePicker()
 		{
@@ -57,6 +57,31 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		protected internal void RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>) this).Value);
+		}
+
+		#endregion
+
+		#region IWebInputControl
+
+		bool IWebInputControl.HandlePostBack()
+		{
+			DateTime date = DateTime.MinValue;
+			string postedValue = Page.Request.Form[ID];
+
+			if (DateTime.TryParse(postedValue, out date) && date != ((IDatePicker) this).Value)
+			{
+				((IDatePicker) this).Value = date;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void IWebInputControl.RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((IDatePicker) this).Value);
 		}
 
 		#endregion

@@ -10,17 +10,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		public Stack()
 		{
 
-            AutoScroll = true;
-            AutoSize = true;
-            FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            WrapContents = false;
+			AutoScroll = true;
+			AutoSize = true;
+			FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+			WrapContents = false;
 
-            _Children = new ControlList(base.Controls);
+			_Children = new ControlList(base.Controls);
 
-            //base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            //| System.Windows.Forms.AnchorStyles.Left)
-            //| System.Windows.Forms.AnchorStyles.Right)));
-        }
+			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			//| System.Windows.Forms.AnchorStyles.Left)
+			//| System.Windows.Forms.AnchorStyles.Right)));
+		}
 
 		protected readonly ControlList _Children;
 

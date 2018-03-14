@@ -4,7 +4,7 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class TimeOfDayPicker : TextBoxBase, ITimeOfDayPicker
+	public class TimeOfDayPicker : TextBoxBase, ITimeOfDayPicker, IWebInputControl
 	{
 		public TimeOfDayPicker()
 		{
@@ -37,13 +37,29 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<TimeSpan?> ValueChanged;
 
-		/// <summary>
-		/// Raises the value changed.
-		/// </summary>
-		/// <returns>The value changed.</returns>
-		protected internal void RaiseValueChanged()
+		#endregion
+
+		#region IWebInputControl
+
+		bool IWebInputControl.HandlePostBack()
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<TimeSpan?>) this).Value);
+			TimeSpan span = TimeSpan.Zero;
+			string postedValue = Page.Request.Form[ID];
+
+			if (TimeSpan.TryParse(postedValue, out span) && span != ((ITimeOfDayPicker) this).Value)
+			{
+				((ITimeOfDayPicker) this).Value = span;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void IWebInputControl.RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ITimeOfDayPicker) this).Value);
 		}
 
 		#endregion

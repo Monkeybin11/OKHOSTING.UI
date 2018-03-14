@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a checkbox
 	/// <para xml:lang="es">Es un control que representa un checkbox</para>
 	/// </summary>
-	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox
+	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox, IWebInputControl
 	{
 		#region IControl
 
@@ -539,6 +539,31 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		#region IWebInputControl
+
+		bool IWebInputControl.HandlePostBack()
+		{
+			string postedValue = Page.Request.Form[ID];
+			bool value = postedValue == "on";
+
+			if (value != ((ICheckBox) this).Value)
+			{
+				((ICheckBox) this).Value = value;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		void IWebInputControl.RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ICheckBox) this).Value);
+		}
+
+		#endregion
+
 		/// <summary>
 		/// Gets or sets the input value of the checkbox
 		/// <para xml:lang="es">Obtiene o establece el valor de entrada del checkbox</para>
@@ -563,18 +588,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <para xml:lang="es">Se produce cuando cambia el valor</para>
 		/// </summary>
 		public event EventHandler<bool> ValueChanged;
-
-		/// <summary>
-		/// Raises the value changed.
-		/// <para xml:lang="es">Pone el valor cambiado</para>
-		/// </summary>
-		/// <returns>The value changed.
-		/// <para xml:lang="es">El valor cambiado.</para>
-		/// </returns>
-		protected internal void RaiseValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
-		}
 
 		/// <summary>
 		/// Does nothing since we manage state ourselves
