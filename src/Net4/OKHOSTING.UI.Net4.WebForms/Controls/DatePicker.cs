@@ -12,7 +12,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	{
 		public DatePicker()
 		{
-			//base.Attributes["type"] = "date";
+			Attributes["pattern"] = @"(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}";
+			Attributes["placeholder"] = @"dd/mm/yyyy";
 		}
 
 		#region IInputControl
@@ -27,7 +28,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				DateTime val;
 
-				if (DateTime.TryParse(base.Text, out val))
+				if (DateTime.TryParseExact(base.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.AssumeLocal, out val))
 				{
 					return val;
 				}
@@ -40,7 +41,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				if (value.HasValue)
 				{
-					base.Text = value.Value.ToString();
+					base.Text = value.Value.ToString("dd/MM/yyyy");
 				}
 			}
 		}

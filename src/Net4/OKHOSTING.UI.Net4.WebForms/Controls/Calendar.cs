@@ -579,17 +579,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		bool IWebInputControl.HandlePostBack()
 		{
-			string postedValue = Page.Request.Form[ID];
-
-			if (DateTime.Parse(postedValue) != ((ICalendar) this).Value)
-			{
-				((ICalendar) this).Value = DateTime.Parse(postedValue);
-				return true;
-			}
-			else
+			if (Page.Request.Form["__EVENTTARGET"] != ID)
 			{
 				return false;
 			}
+
+			var arg = Page.Request.Form["__EVENTARGUMENT"];
+
+			if (!int.TryParse(arg, out int i))
+			{
+				return false;
+			}
+
+			SelectedDate = new DateTime(2000, 1, 1).AddDays(int.Parse(arg));
+			return true;
 		}
 
 		void IWebInputControl.RaiseValueChanged()

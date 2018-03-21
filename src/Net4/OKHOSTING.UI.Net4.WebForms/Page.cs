@@ -50,8 +50,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 				//register javascripts
 				Page.ClientScript.RegisterStartupScript(this.GetType(), "SetPageSize", pageSizeJS);
-				Response.Flush();
-				Response.End();
 
 				return;
 			}
@@ -114,10 +112,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//keep track of wich IInputControls had ther value updated so we can reaise IInputControl.OnValueChanged
 			List<IWebInputControl> updatedInputControls = new List<IWebInputControl>();
 
-			//restore state
-			foreach (var control in GetAllControls())
+			//handle posted values
+			foreach (IWebInputControl control in GetAllControls().Where(c => c is IWebInputControl))
 			{
-				if (control is IWebInputControl && ((IWebInputControl) control).HandlePostBack())
+				if (control.HandlePostBack())
 				{
 					updatedInputControls.Add((IWebInputControl) control);
 				}
@@ -129,56 +127,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 				control.RaiseValueChanged();
 			}
 
-			//handle uploaded files
-			//foreach (string f in Request.Files)
-			//{
-			//	System.Web.HttpPostedFile file = Request.Files[f];
-
-			//	if (file.ContentLength <= 0)
-			//	{
-			//		continue;
-			//	}
-
-			//	WebFilePicker control = ContentHolder.FindControl(f) as WebFilePicker;
-			//	control.Container.Value = new System.IO.BinaryReader(file.InputStream).ReadBytes((int)file.InputStream.Length);
-			//}
-
 			//raise button click events
-			foreach (string postedValueName in Request.Form.AllKeys.Where(k => !k.StartsWith("__")))
+			foreach (IWebClickableControl control in GetAllControls().Where(c => c is IWebClickableControl))
 			{
-				//get posted value by user
-				string postedValue = Request.Form[postedValueName];
-				string controlName = postedValueName;
-
-				//is this an image button?
-				if (postedValueName.EndsWith(".x"))
-				{
-					controlName = postedValueName.Split('.').First();	
-				}
-				
-				//get control that corresponds to this input
-				IWebClickableControl control = ContentHolder.FindControl(controlName) as IWebClickableControl;
-					
-				if (control is Button && postedValue == ((Button) control).Text)
-				{
-					control?.RaiseClick();
-				}
-				else if (control is IImageButton)
-				{
-					control?.RaiseClick();
-				}
-			}
-
-			//raise labelbutton, checkbox & image click events
-
-			string eventTarget = Request.Form["__EVENTTARGET"];
-			string eventArgument = Request.Form["__EVENTARGUMENT"];
-
-			//get control that corresponds to this input
-			if (!string.IsNullOrWhiteSpace(eventTarget))
-			{
-				IWebClickableControl control = ContentHolder.FindControl(eventTarget) as IWebClickableControl;
-				control?.RaiseClick();
+				control.RaiseClick();
 			}
 		}
 
@@ -253,7 +205,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		public IEnumerable<IControl> GetAllControls()
 		{
-			foreach (IControl ctr in Platform.GetAllControls(this))
+			foreach (IControl ctr in Platform.GetAllControls(this).Where(c => c is IControl))
 			{
 				yield return ctr;
 			}

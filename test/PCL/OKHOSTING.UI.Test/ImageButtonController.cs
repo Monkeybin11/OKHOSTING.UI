@@ -46,7 +46,7 @@ namespace OKHOSTING.UI.Test
 
 			// Create a image not visible, with an size specified and indicating the URL and adds it to Stack
 			imgPicture = Platform.Current.Create<IImage>();
-			imgPicture.LoadFromUrl(new Uri("http://www.patycantu.com/wp-content/uploads/2014/07/91.jpg"));
+			imgPicture.LoadFromUrl(new Uri("https://www.merriam-webster.com/assets/mw/images/gallery/gal-wap-slideshow-slide/aztec-2666-4b768308b161027e77ae775f6abea503@1x.jpg"));
 			imgPicture.Height = 250;
 			imgPicture.Width = 600;
 			imgPicture.Visible = false;

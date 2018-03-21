@@ -17,18 +17,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		protected readonly TextBox InnerTextBox;
 
 		/// <summary>
-		/// The inner auto complete extender.
-		/// <para xml:lang="es">La extencion del control autocomplete</para>
-		/// </summary>
-		protected readonly AjaxControlToolkit.AutoCompleteExtender InnerAutoCompleteExtender;
-
-		/// <summary>
-		/// The inner watermark extender.
-		/// <para xml:lang="es">El texto con marca de agua del control.</para>
-		/// </summary>
-		protected readonly AjaxControlToolkit.TextBoxWatermarkExtender InnerWatermarkExtender;
-
-		/// <summary>
 		/// The session identifier.
 		/// <para xml:lang="es">El identificador de la sesión</para>
 		/// </summary>
@@ -45,22 +33,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			((ITextBox) InnerTextBox).Placeholder = "Search";
 			base.Controls.Add(InnerTextBox);
 
-			//ajax autocompleter
-			InnerAutoCompleteExtender = new AjaxControlToolkit.AutoCompleteExtender();
-			InnerAutoCompleteExtender.ID = InnerTextBox.ID + "_AutoCompleteExtender";
-			InnerAutoCompleteExtender.TargetControlID = InnerTextBox.ID;
-			InnerAutoCompleteExtender.UseContextKey = true;
-			InnerAutoCompleteExtender.ServiceMethod = "Search";
-			InnerAutoCompleteExtender.ServicePath = "/Services/AutoCompleteService.asmx";
-			//InnerAutoCompleteExtender.CompletionListCssClass = "AutoComplete_List";
-			//InnerAutoCompleteExtender.CompletionListItemCssClass = "AutoComplete_ListItem";
-			InnerAutoCompleteExtender.EnableCaching = false;
-			base.Controls.Add(InnerAutoCompleteExtender);
+			////ajax autocompleter
+			//InnerAutoCompleteExtender = new AjaxControlToolkit.AutoCompleteExtender();
+			//InnerAutoCompleteExtender.ID = InnerTextBox.ID + "_AutoCompleteExtender";
+			//InnerAutoCompleteExtender.TargetControlID = InnerTextBox.ID;
+			//InnerAutoCompleteExtender.UseContextKey = true;
+			//InnerAutoCompleteExtender.ServiceMethod = "Search";
+			//InnerAutoCompleteExtender.ServicePath = "/Services/AutoCompleteService.asmx";
+			////InnerAutoCompleteExtender.CompletionListCssClass = "AutoComplete_List";
+			////InnerAutoCompleteExtender.CompletionListItemCssClass = "AutoComplete_ListItem";
+			//InnerAutoCompleteExtender.EnableCaching = false;
+			//base.Controls.Add(InnerAutoCompleteExtender);
 
-			//add a unique id to session so we can invoke OnSearching from a ashx page
-			SessionId = "Autocomplete_" + Guid.NewGuid().ToString().Replace('-', '_');
-			Session.Current[SessionId] = this;
-			InnerAutoCompleteExtender.ContextKey = SessionId;
+			////add a unique id to session so we can invoke OnSearching from a ashx page
+			//SessionId = "Autocomplete_" + Guid.NewGuid().ToString().Replace('-', '_');
+			//Session.Current[SessionId] = this;
+			//InnerAutoCompleteExtender.ContextKey = SessionId;
 		}
 
 		/// <summary>

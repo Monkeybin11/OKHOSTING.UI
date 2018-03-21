@@ -32,6 +32,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ButtonController.cs" />
+    <Compile Include="TimePickerController.cs" />
+    <Compile Include="DatePickerController.cs" />
     <Compile Include="CalendarController.cs" />
     <Compile Include="HyperLinkController.cs" />
     <Compile Include="CheckboxController.cs" />

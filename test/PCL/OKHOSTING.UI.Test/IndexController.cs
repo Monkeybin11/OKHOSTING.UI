@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -25,40 +22,19 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Start();
 
-            IRelativePanel panel = Platform.Current.Create<IRelativePanel>();
-            panel.Width = Platform.Current.Page.Width; 
-            panel.Height = Platform.Current.Page.Height;
-            panel.BackgroundColor = new Color(255, 80, 100, 250);
-
-            IStack stack = Platform.Current.Create<IStack>();
-            stack.BackgroundColor = new Color(180, 100, 100, 100);
-            stack.Width = panel.Width * 0.8;
-            stack.Height = panel.Height * 0.8;
-
             //Create an Grid with specified columns and rows.
             IGrid grid = Platform.Current.Create<IGrid>();
-            grid.BackgroundColor = new Color(255, 0, 0, 0);
 
 			grid.ColumnCount = 1;
-			grid.RowCount = 15;
-
-            IImage imgPrueba = Platform.Current.Create<IImage>();
-            imgPrueba.LoadFromUrl(new Uri("http://directorio-negocios.okhosting.com/iconos/icono.png"));
-            grid.SetContent(0, 0, imgPrueba);
-            grid.SetHeight(0, 20);
-            grid.SetWidth(0, 20);
+			grid.RowCount = 18;
 
 			// Create an LabelButton that binds us to a AutocompleteController.
 			ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
 			lblAutocomplete.BackgroundColor = new Color(150, 100, 250, 80);
 			lblAutocomplete.Text = "Autocomplete";
-			lblAutocomplete.Width = panel.Width * 1.6;
-			lblAutocomplete.Height = panel.Height * 1.6;
 			lblAutocomplete.Click += (object sender, EventArgs e) => new AutocompleteController().Start();
 			//stack.Children.Add(lblAutocomplete);
 			grid.SetContent(1, 0, lblAutocomplete);
-			grid.SetHeight(1, 1200);
-			grid.SetWidth(0, 1200);
 
 			// Create an LabelButton that binds us to a LabelController.
 			ILabelButton lblLabel = Platform.Current.Create<ILabelButton>();
@@ -143,12 +119,22 @@ namespace OKHOSTING.UI.Test
 			lblForm.Text = "Form";
 			lblForm.Click += (object sender, EventArgs e) => new FormController().Start();
 			grid.SetContent(14, 0, lblForm);
-			stack.Children.Add(grid);
 
-            panel.Add(stack, RelativePanelHorizontalContraint.LeftWith,  RelativePanelVerticalContraint.TopWith);
+			// Create an LabelButton that binds us to a FormController.
+			ILabelButton lblDatePicker = Platform.Current.Create<ILabelButton>();
+			lblDatePicker.Text = "DatePicker";
+			lblDatePicker.Click += (object sender, EventArgs e) => new DatePickerController().Start();
+			grid.SetContent(15, 0, lblDatePicker);
+
+			// Create an LabelButton that binds us to a FormController.
+			ILabelButton lblTimePicker = Platform.Current.Create<ILabelButton>();
+			lblTimePicker.Text = "TimePicker";
+			lblTimePicker.Click += (object sender, EventArgs e) => new TimePickerController().Start();
+			grid.SetContent(16, 0, lblTimePicker);
+
 			// Establishes the content and title of the page.
 			Platform.Current.Page.Title = "Choose one control to test";
-			Platform.Current.Page.Content = panel;
+			Platform.Current.Page.Content = grid;
 		}
 	 }
 }

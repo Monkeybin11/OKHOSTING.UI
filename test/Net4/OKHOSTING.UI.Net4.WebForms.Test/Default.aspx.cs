@@ -9,9 +9,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 		{
 			base.OnLoad(e);
 
+			if (Width == 0 && Height == 0)
+			{
+				return;
+			}
+
 			if (Platform.Current.Controller == null)
 			{
                 new IndexController().Start();
+                //new TextBoxController().Start();
 			}
 		}
 	}

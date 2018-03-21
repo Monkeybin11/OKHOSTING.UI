@@ -8,7 +8,6 @@
 </head>
 <body style="margin: 0">
     <form id="form1" runat="server">
-		<asp:ScriptManager runat="server"></asp:ScriptManager>
     </form>
 </body>
 </html>

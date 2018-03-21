@@ -18,7 +18,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IWebClickableControl.RaiseClick()
 		{
-			Click?.Invoke(this, new EventArgs());
+			string postedValue = Page.Request.Form[ID];
+
+			if (postedValue == Text)
+			{
+				Click?.Invoke(this, new EventArgs());
+			}
 		}
 
 		#region IControl

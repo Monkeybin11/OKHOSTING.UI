@@ -8,7 +8,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	{
 		public TimeOfDayPicker()
 		{
-			base.Attributes["type"] = "time";
+			//Attributes["pattern"] = "(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}";
+			Attributes["pattern"] = "(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9])";
+			Attributes["placeholder"] = @"HH:MM";
 		}
 
 		#region IInputControl
@@ -21,13 +23,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return TimeSpan.Parse(base.Text);
+				TimeSpan val;
+
+				if (TimeSpan.TryParseExact(base.Text, "hh\\:mm", null, out val))
+				{
+					return val;
+				}
+				else
+				{
+					return null;
+				}
 			}
 			set
 			{
 				if (value.HasValue)
 				{
-					base.Text = value.Value.ToString();
+					base.Text = value.Value.ToString("hh\\:mm");
 				}
 			}
 		}

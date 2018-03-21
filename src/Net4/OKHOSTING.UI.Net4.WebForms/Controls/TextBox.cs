@@ -127,7 +127,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				{
 					case ITextBoxInputType.Date:
 					case ITextBoxInputType.DateTime:
-						base.Attributes["type"] = "date";
+						base.Attributes["type"] = "datetime-local";
 						break;
 
 					case ITextBoxInputType.Email:
@@ -168,11 +168,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return InnerWatermarkExtender.WatermarkText;
+				return Attributes["placeholder"];
 			}
 			set
 			{
-				InnerWatermarkExtender.WatermarkText = value;
+				Attributes["placeholder"] = value;
 			}
 		}
 
@@ -186,12 +186,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// The inner watermark extender.
-		/// <para xml:lang="es">El texto con marca de agua del control.</para>
-		/// </summary>
-		protected readonly AjaxControlToolkit.TextBoxWatermarkExtender InnerWatermarkExtender;
-
-		/// <summary>
 		/// Ons the pre render.
 		/// <para xml:lang="es">Ocurre antes de cambiar el valor</para>
 		/// </summary>
@@ -201,23 +195,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			AutoPostBack = ValueChanged != null;
 			base.OnPreRender(e);
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the OKHOSTING.UI.Net4.WebForms.Controls.TextBox class.
-		/// <para xml:alng="es">Inicializa una nueva instacia de la clase OKHOSTING.UI.Net4.WebForms.Controls.TextBox</para>
-		/// </summary>
-		public TextBox()
-		{
-			//set a default id so we ensure the extender's TargetControlID is set
-			base.ID = "TextBox_InnerTextBox_" + Guid.NewGuid().ToString().Replace('-', '_');
-
-			//ajax watermark
-			InnerWatermarkExtender = new AjaxControlToolkit.TextBoxWatermarkExtender();
-			InnerWatermarkExtender.ID = ID + "_TextBoxWatermarkExtender";
-			InnerWatermarkExtender.TargetControlID = ID;
-			//InnerWatermarkExtender.WatermarkCssClass = "AutoComplete_Watermark";
-			//base.Controls.Add(InnerWatermarkExtender);
 		}
 	}
 }

@@ -12,6 +12,8 @@ namespace OKHOSTING.UI.Test
 	/// </summary>
 	class PasswordTextBoxControler: Controller
 	{
+		ILabel lblPasword;
+
 		/// <summary>
 		/// Start this instance.
 		/// <para xml:lang="es">
@@ -26,7 +28,7 @@ namespace OKHOSTING.UI.Test
 			IStack stack = Platform.Current.Create<IStack>();
 
 			// Create an Label with text and size specific and adds it to the Stack.
-			ILabel lblPasword = Platform.Current.Create<ILabel>();
+			lblPasword = Platform.Current.Create<ILabel>();
 			lblPasword.VerticalAlignment = VerticalAlignment.Bottom;
 			lblPasword.Text = "Enter your password";
 			lblPasword.Height = 30;
@@ -40,6 +42,7 @@ namespace OKHOSTING.UI.Test
 			txtBox.Width = 100;
 			txtBox.BorderWidth = new Thickness(5);
 			txtBox.VerticalAlignment = VerticalAlignment.Center;
+			txtBox.ValueChanged += TxtBox_ValueChanged;
 			stack.Children.Add(txtBox);
 
 			// Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
@@ -51,6 +54,11 @@ namespace OKHOSTING.UI.Test
 			// Establishes the content and title of the page.
 			Platform.Current.Page.Title = "Test Autocomplete";
 			Platform.Current.Page.Content = stack;
+		}
+
+		private void TxtBox_ValueChanged(object sender, string e)
+		{
+			lblPasword.Text = "Your password's lenght is:" + e.Length;
 		}
 
 		/// <summary>

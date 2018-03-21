@@ -12,6 +12,8 @@ namespace OKHOSTING.UI.Test
 	/// </summary>
 	public class TextBoxController: Controller
 	{
+		ITextBox txtTextPlaceholder;
+
 		/// <summary>
 		/// Start this instance.
 		/// <para xml:lang="es">
@@ -36,10 +38,11 @@ namespace OKHOSTING.UI.Test
 			txtText.Value = "This is a TextBox";
 			txtText.BorderColor = new Color(255, 255, 0, 0);
 			txtText.BorderWidth = new Thickness(1, 2, 3, 4);
+			txtText.ValueChanged += TxtText_ValueChanged;
 			stack.Children.Add(txtText);
 			
 			//Create an TextBox and adds it to the Stack
-			ITextBox txtTextPlaceholder = Platform.Current.Create<ITextBox>();
+			txtTextPlaceholder = Platform.Current.Create<ITextBox>();
 			txtTextPlaceholder.BorderColor = new Color(255, 255, 0, 0);
 			txtTextPlaceholder.BorderWidth = new Thickness(1, 2, 3, 4);
 			txtTextPlaceholder.Placeholder = "Enter some text..";
@@ -55,6 +58,11 @@ namespace OKHOSTING.UI.Test
 			// Establishes the content and title of the page.
 			Platform.Current.Page.Title = "Test label";
 			Platform.Current.Page.Content = stack;
+		}
+
+		private void TxtText_ValueChanged(object sender, string e)
+		{
+			txtTextPlaceholder.Value = e;
 		}
 
 		/// <summary>
