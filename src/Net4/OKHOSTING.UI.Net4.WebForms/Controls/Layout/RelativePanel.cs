@@ -162,11 +162,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			ClientScripts.Add(positionJS);
 		}
 
-		/// <summary>
-		/// Raises the pre render event.
-		/// <para xml:lang="es"></para>
-		/// </summary>
-		/// <param name="e">E.</param>
 		protected override void OnPreRender(EventArgs e)
 		{
 			base.OnPreRender(e);
@@ -186,7 +181,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			, string.Join(Environment.NewLine, ClientScripts)
 			);
 
-			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(this.GetType(), "position_" + base.ClientID, positionJS);
+			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
 		}
 
 		#region IControl

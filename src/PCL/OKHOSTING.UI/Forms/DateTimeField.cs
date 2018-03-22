@@ -7,9 +7,10 @@ namespace OKHOSTING.UI.Forms
 	/// A field for selecting a date and time
 	/// <para xml:lang="es">Un campo para la seleccion de una fecha y hora.</para>
 	/// </summary>
-	public class DateTimeField : TextBoxField
+	public class DateTimeField : FormField
 	{
-		const string Format = "yyyy/MM/dd hh:mm";
+		protected IDatePicker DatePicker;
+		protected ITimeOfDayPicker TimePicker;
 
 		public override Type ValueType
 		{
@@ -23,43 +24,35 @@ namespace OKHOSTING.UI.Forms
 		{
 			get
 			{
-				if (string.IsNullOrWhiteSpace(ValueControl.Value))
+				if (DatePicker.Value != null && TimePicker.Value != null)
 				{
-					return null;
+					return DatePicker.Value.Value.Add(TimePicker.Value.Value);
 				}
-
-				try
+				else
 				{
-					return DateTime.ParseExact(ValueControl.Value, Format, System.Globalization.CultureInfo.InvariantCulture);
-				}
-				catch
-				{
-					return null;
+					return DatePicker.Value;
 				}
 			}
 			set
 			{
-				if (value == null)
-				{
-					ValueControl.Value = string.Empty;
-				}
-				else
-				{
-					ValueControl.Value = ((DateTime) value).ToString(Format);
-				}
+				DatePicker.Value = (DateTime) value;
+				TimePicker.Value = ((DateTime) value).TimeOfDay;
 			}
 		}
+
 		/// <summary>
 		/// Creates the controls for displaying the field
 		/// <para xml:lang="es">Crea los controles para visualizar el campo.</para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			//create date texbox from base
-			base.CreateValueControl();
+			DatePicker = Platform.Current.Create<IDatePicker>();
+			TimePicker = Platform.Current.Create<ITimeOfDayPicker>();
+			var flow = Platform.Current.Create<Controls.Layout.IFlow>();
+			flow.Children.Add(DatePicker);
+			flow.Children.Add(TimePicker);
 
-			//adjust controls width
-			ValueControl.InputType = ITextBoxInputType.DateTime;
+			ValueControl = flow;
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			//Attributes["pattern"] = "(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}";
 			Attributes["pattern"] = "(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9])";
-			Attributes["placeholder"] = @"HH:MM";
+			Attributes["placeholder"] = @"hh:mm";
 		}
 
 		#region IInputControl
@@ -36,9 +36,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				if (value.HasValue)
+				if (value != null)
 				{
 					base.Text = value.Value.ToString("hh\\:mm");
+				}
+				else
+				{
+					base.Text = null;
 				}
 			}
 		}
@@ -60,6 +64,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			if (TimeSpan.TryParse(postedValue, out span) && span != ((ITimeOfDayPicker) this).Value)
 			{
 				((ITimeOfDayPicker) this).Value = span;
+				return true;
+			}
+			else if (string.IsNullOrWhiteSpace(postedValue) && ((ITimeOfDayPicker) this).Value != null)
+			{
+				((ITimeOfDayPicker) this).Value = null;
 				return true;
 			}
 			else

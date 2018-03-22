@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using OKHOSTING.UI.Controls;
+using NativeControl = System.Web.UI.Control;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
@@ -39,9 +39,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				if (value.HasValue)
+				if (value != null)
 				{
 					base.Text = value.Value.ToString("dd/MM/yyyy");
+				}
+				else
+				{
+					base.Text = null;
 				}
 			}
 		}
@@ -74,6 +78,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				((IDatePicker) this).Value = date;
 				return true;
 			}
+			else if (string.IsNullOrWhiteSpace(postedValue) && ((IDatePicker) this).Value != null)
+			{
+				((IDatePicker) this).Value = null;
+				return true;
+			}
 			else
 			{
 				return false;
@@ -86,5 +95,27 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		#endregion
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			base.OnPreRender(e);
+
+			string js = string.Format
+			(
+				@"
+				<script type='text/javascript'>
+					$(document).ready
+					(
+						function()
+						{{
+							$(""#{0}"").datepicker($.datepicker.regional[""es""]);
+						}}
+					);
+				</script>"
+			, ClientID
+			);
+
+			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "datepicker_" + base.ClientID, js);
+		}
 	}
 }

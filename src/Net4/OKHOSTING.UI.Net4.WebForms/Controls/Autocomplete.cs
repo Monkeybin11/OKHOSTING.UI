@@ -86,7 +86,50 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		protected override void OnPreRender(EventArgs e)
 		{
 			InnerTextBox.AutoPostBack = ValueChanged != null;
+
 			base.OnPreRender(e);
+
+			string positionJS = string.Format
+			(
+				@"
+				<script type='text/javascript'>
+					$(document).ready
+					(
+						function()
+						{{
+							$( ""#{0}"" ).autocomplete
+							({{
+								source: function( request, response )
+								{{
+									$.ajax( 
+									{{
+										url: ""Services/Autocomplete.ashx"",
+										data:
+										{{
+											term: request.term,
+											count: 25,
+											controlId: ""{1}"",
+										}},
+										success: function( data ) 
+										{{
+											response( data );
+										}}
+									}});
+								}},
+								minLength: 2,
+								select: function( event, ui ) 
+								{{
+								//log( ""Selected: "" + ui.item.value + "" aka "" + ui.item.id );
+								}}
+							}});
+						}}
+					);
+				</script>"
+			, InnerTextBox.ClientID
+			, ID
+			);
+
+			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
 		}
 
 		#region IInputControl

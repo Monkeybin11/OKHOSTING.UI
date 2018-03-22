@@ -32,6 +32,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//load javascript dependencies
 			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
 			Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/js/jquery-ui.js"));
+			Page.ClientScript.RegisterClientScriptInclude("jquery-ui-i18n", ResolveUrl("~/js/jquery-ui-i18n.min.js"));
 			Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/js/PageSize.js"));
 
 			//if this is the first request, get page size and finish
@@ -49,7 +50,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 				</script>";
 
 				//register javascripts
-				Page.ClientScript.RegisterStartupScript(this.GetType(), "SetPageSize", pageSizeJS);
+				Page.ClientScript.RegisterStartupScript(GetType(), "SetPageSize", pageSizeJS);
 
 				return;
 			}

@@ -33,8 +33,7 @@ namespace OKHOSTING.UI.Test
 			lblAutocomplete.BackgroundColor = new Color(150, 100, 250, 80);
 			lblAutocomplete.Text = "Autocomplete";
 			lblAutocomplete.Click += (object sender, EventArgs e) => new AutocompleteController().Start();
-			//stack.Children.Add(lblAutocomplete);
-			grid.SetContent(1, 0, lblAutocomplete);
+			grid.SetContent(0, 0, lblAutocomplete);
 
 			// Create an LabelButton that binds us to a LabelController.
 			ILabelButton lblLabel = Platform.Current.Create<ILabelButton>();
