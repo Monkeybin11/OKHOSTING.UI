@@ -78,7 +78,7 @@ namespace OKHOSTING.UI
 		/// <param name="member">Member.</param>
 		public static string Translate(MemberInfo member)
 		{
-			return GetString(member.DeclaringType, member.GetFriendlyFullName().Replace('.', '_'));
+			return GetString(member.DeclaringType, member.GetFriendlyFullName().Replace('.', '_').Replace(',', '_').Replace('(', '_').Replace(')', '_'));
 		}
 
 		/// <summary>
