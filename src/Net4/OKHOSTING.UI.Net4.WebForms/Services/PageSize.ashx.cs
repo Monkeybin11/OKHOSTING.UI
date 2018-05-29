@@ -18,16 +18,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			var json = new System.Web.Script.Serialization.JavaScriptSerializer();
 
 			//refresh when this is the first load (session width is null) or when size has changed, so we can rearrange layout if we want to
-			var refresh = Platform.Current.Page.Width != width || Platform.Current.Page.Height != height;
+			var refresh = Platform.Page.Width != width || Platform.Page.Height != height;
 			var output = json.Serialize(new { Refresh = refresh });
 
 			//save new page size in session
 			Session.Current[typeof(Page) + ".Width"] = width;
 			Session.Current[typeof(Page) + ".Height"] = height;
 
-			if (refresh && Platform.Current.Controller != null)
+			if (refresh && Platform.Controller != null)
 			{
-				Platform.Current.Controller.Resize();
+				Platform.Controller.Resize();
 			}
 
 			context.Response.Write(output);

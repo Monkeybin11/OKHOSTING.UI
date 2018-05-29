@@ -310,7 +310,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		{
 			get
 			{
-				return (Platform) UI.Platform.Current;
+				return (Platform) UI.Platform;
 			}
 		}
 	}

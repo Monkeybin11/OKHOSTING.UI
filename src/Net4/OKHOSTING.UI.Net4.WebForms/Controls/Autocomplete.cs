@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			InnerTextBox = (TextBox) Platform.Current.Create<ITextBox>();
+			InnerTextBox = (TextBox) Platform.Create<ITextBox>();
 			((ITextBox) InnerTextBox).Placeholder = "Search";
 			base.Controls.Add(InnerTextBox);
 
@@ -129,7 +129,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			, ID
 			);
 
-			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
+			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
 		}
 
 		#region IInputControl
@@ -193,11 +193,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(InnerTextBox.BackColor);
+				return Platform.Parse(InnerTextBox.BackColor);
 			}
 			set
 			{
-				InnerTextBox.BackColor = Platform.Current.Parse(value);
+				InnerTextBox.BackColor = Platform.Parse(value);
 			}
 		}
 
@@ -212,11 +212,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(InnerTextBox.BorderColor);
+				return Platform.Parse(InnerTextBox.BorderColor);
 			}
 			set
 			{
-				InnerTextBox.BorderColor = Platform.Current.Parse(value);
+				InnerTextBox.BorderColor = Platform.Parse(value);
 			}
 		}
 
@@ -385,8 +385,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -433,8 +433,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -466,11 +466,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(InnerTextBox.ForeColor);
+				return Platform.Parse(InnerTextBox.ForeColor);
 			}
 			set
 			{
-				InnerTextBox.ForeColor = Platform.Current.Parse(value);
+				InnerTextBox.ForeColor = Platform.Parse(value);
 			}
 		}
 
@@ -611,8 +611,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
-				Platform.Current.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
+				Platform.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -659,8 +659,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
-				Platform.Current.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
+				Platform.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 

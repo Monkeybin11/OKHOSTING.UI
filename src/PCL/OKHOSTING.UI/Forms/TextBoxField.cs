@@ -56,7 +56,7 @@ namespace OKHOSTING.UI.Forms
 		protected override void CreateValueControl()
 		{
 			//create a sinple TextBox
-			ValueControl = Platform.Current.Create<ITextBox>();
+			ValueControl = Platform.Create<ITextBox>();
 		}
 	}
 }

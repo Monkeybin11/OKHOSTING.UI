@@ -7,8 +7,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Test
 	{
 		public App ()
 		{
-			Platform.Current.Page = new Page();
-			MainPage = (global::Xamarin.Forms.Page)Platform.Current.Page;
+			Platform.Page = new Page();
+			MainPage = (global::Xamarin.Forms.Page)Platform.Page;
 			new OKHOSTING.UI.Test.IndexController().Start();
 		}
 

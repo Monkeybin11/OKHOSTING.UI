@@ -115,7 +115,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			, ClientID
 			);
 
-			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "datepicker_" + base.ClientID, js);
+			Page.ClientScript.RegisterStartupScript(GetType(), "datepicker_" + base.ClientID, js);
 		}
 	}
 }

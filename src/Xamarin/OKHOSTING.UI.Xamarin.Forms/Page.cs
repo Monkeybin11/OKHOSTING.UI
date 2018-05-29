@@ -54,9 +54,9 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		{
 			base.OnSizeAllocated(width, height);
 
-			if (Platform.Current.Controller != null)
+			if (Platform.Controller != null)
 			{
-				Platform.Current.Controller.Resize();
+				Platform.Controller.Resize();
 			}
 		}
 	}

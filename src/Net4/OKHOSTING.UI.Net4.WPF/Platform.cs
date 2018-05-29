@@ -16,9 +16,9 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		}
 
-		//virtual
+		//static
 
-		public virtual Color Parse(System.Windows.Media.Color color)
+		public static Color Parse(System.Windows.Media.Color color)
 		{
 			if (color == null)
 			{
@@ -28,7 +28,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			return new Color(color.A, color.R, color.G, color.B);
 		}
 
-		public virtual System.Windows.Media.Color Parse(Color color)
+		public static System.Windows.Media.Color Parse(Color color)
 		{
 			if (color == null)
 			{
@@ -38,7 +38,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			return System.Windows.Media.Color.FromArgb((byte) color.Alpha, (byte) color.Red, (byte) color.Green, (byte) color.Blue);
 		}
 
-		public virtual System.Windows.Thickness Parse(Thickness thickness)
+		public static System.Windows.Thickness Parse(Thickness thickness)
 		{
 			System.Windows.Thickness nativeThickness = new System.Windows.Thickness();
 
@@ -50,12 +50,12 @@ namespace OKHOSTING.UI.Net4.WPF
 			return nativeThickness;
 		}
 
-		public virtual Thickness Parse(System.Windows.Thickness nativeThickness)
+		public static Thickness Parse(System.Windows.Thickness nativeThickness)
 		{
 			return new Thickness(nativeThickness.Left, nativeThickness.Top, nativeThickness.Right, nativeThickness.Bottom);
 		}
 
-		public virtual HorizontalAlignment Parse(System.Windows.HorizontalAlignment horizontalAlignment)
+		public static HorizontalAlignment Parse(System.Windows.HorizontalAlignment horizontalAlignment)
 		{
 			switch (horizontalAlignment)
 			{
@@ -75,7 +75,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			throw new ArgumentOutOfRangeException("horizontalAlignment");
 		}
 
-		public virtual System.Windows.HorizontalAlignment Parse(HorizontalAlignment horizontalAlignment)
+		public static System.Windows.HorizontalAlignment Parse(HorizontalAlignment horizontalAlignment)
 		{
 			switch (horizontalAlignment)
 			{
@@ -95,7 +95,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			throw new ArgumentOutOfRangeException("horizontalAlignment");
 		}
 
-		public virtual VerticalAlignment Parse(System.Windows.VerticalAlignment verticalAlignment)
+		public static VerticalAlignment Parse(System.Windows.VerticalAlignment verticalAlignment)
 		{
 			switch (verticalAlignment)
 			{
@@ -115,7 +115,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			throw new ArgumentOutOfRangeException("horizontalAlignment");
 		}
 
-		public virtual System.Windows.VerticalAlignment Parse(VerticalAlignment verticalAlignment)
+		public static System.Windows.VerticalAlignment Parse(VerticalAlignment verticalAlignment)
 		{
 			switch (verticalAlignment)
 			{
@@ -135,7 +135,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			throw new ArgumentOutOfRangeException("verticalAlignment");
 		}
 
-		public HorizontalAlignment Parse(TextAlignment textAlignment)
+		public static HorizontalAlignment Parse(TextAlignment textAlignment)
 		{
 			switch (textAlignment)
 			{
@@ -155,7 +155,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			return HorizontalAlignment.Left;
 		}
 
-		public TextAlignment ParseTextAlignment(HorizontalAlignment alignment)
+		public static TextAlignment ParseTextAlignment(HorizontalAlignment alignment)
 		{
 			switch (alignment)
 			{
@@ -173,24 +173,6 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 
 			return TextAlignment.Left;
-		}
-
-		//static
-
-		public static new Platform Current
-		{
-			get
-			{
-				var platform = (Platform) UI.Platform.Current;
-
-				if (platform == null)
-				{
-					platform = new Platform();
-					UI.Platform.Current = platform;
-				}
-
-				return platform;
-			}
 		}
 	}
 }

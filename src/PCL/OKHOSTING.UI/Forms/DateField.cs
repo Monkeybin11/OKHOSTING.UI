@@ -60,7 +60,7 @@ namespace OKHOSTING.UI.Forms
 		protected override void CreateValueControl()
 		{
 			//create date texbox from base
-			ValueControl = Platform.Current.Create<IDatePicker>();
+			ValueControl = Platform.Create<IDatePicker>();
 		}
 	}
 }

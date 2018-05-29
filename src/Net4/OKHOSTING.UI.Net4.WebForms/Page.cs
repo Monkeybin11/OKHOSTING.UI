@@ -12,6 +12,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 	/// </summary>
 	public partial class Page : System.Web.UI.Page, IPage
 	{
+		protected readonly Platform Platform = new Platform();
+		
 		/// <summary>
 		/// The content holder.
 		/// <para xml:lang="es">El contenido que contiene la pagina.</para>
@@ -27,7 +29,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			base.OnLoad(e);
 
 			//assign as current page
-			Platform.Current.Page = this;
+			Platform.Page = this;
 
 			//load javascript dependencies
 			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
@@ -64,22 +66,22 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//search for a rewrite rule for this uri
-			var rule = Platform.Current.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
+			var rule = Platform.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
 
 			if (rule!= null)
 			{
 				//should we start a different controller than the current one?
-				if (Platform.Current.Controller != null)
+				if (Platform.Controller != null)
 				{
 					bool startNew = false;
 
-					if (!rule.ControllerType.IsAssignableFrom(Platform.Current.Controller.GetType()))
+					if (!rule.ControllerType.IsAssignableFrom(Platform.Controller.GetType()))
 					{
 						startNew = true;
 					}
 					else
 					{
-						var currentUri = rule.GetUri(Platform.Current.Controller).ToString();
+						var currentUri = rule.GetUri(Platform.Controller).ToString();
 
 						if (currentUri != Request.RawUrl)
 						{
@@ -96,14 +98,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//there is no controller assigned, exit
-			if (Platform.Current.Controller == null)
+			if (Platform.Controller == null)
 			{
 				return;
 			}
 
 			//get title and content from the state, in case it has a different Page instance
-			Title = Platform.Current.PageState?.Title;
-			Content = Platform.Current.PageState?.Content;
+			Title = Platform.PageState?.Title;
+			Content = Platform.PageState?.Content;
 
 			if (!IsPostBack)
 			{
@@ -221,10 +223,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected override void OnPreRender(EventArgs e)
 		{
 			//save page state
-			if (Platform.Current.PageState != null)
+			if (Platform.PageState != null)
 			{
-				Platform.Current.PageState.Title = Title;
-				Platform.Current.PageState.Content = Content;
+				Platform.PageState.Title = Title;
+				Platform.PageState.Content = Content;
 			}
 
 			//allow friendly urls on forms

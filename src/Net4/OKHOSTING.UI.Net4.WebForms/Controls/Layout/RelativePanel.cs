@@ -181,7 +181,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			, string.Join(Environment.NewLine, ClientScripts)
 			);
 
-			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
+			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
 		}
 
 		#region IControl
@@ -216,11 +216,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackColor);
+				return Platform.Parse(base.BackColor);
 			}
 			set
 			{
-				base.BackColor = Platform.Current.Parse(value);
+				base.BackColor = Platform.Parse(value);
 			}
 		}
 
@@ -235,11 +235,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BorderColor);
+				return Platform.Parse(base.BorderColor);
 			}
 			set
 			{
-				base.BorderColor = Platform.Current.Parse(value);
+				base.BorderColor = Platform.Parse(value);
 			}
 		}
 
@@ -406,8 +406,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -454,8 +454,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 

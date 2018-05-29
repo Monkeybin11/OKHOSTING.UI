@@ -11,9 +11,11 @@ namespace OKHOSTING.UI.Net4.WinForms
 			System.Windows.Forms.Application.Exit();
 		}
 
-		public override T Create<T>()
+		//static
+
+		public static new T Create<T>() where T : class, IControl
 		{
-			var control = base.Create<T>() as System.Windows.Forms.Control;
+			var control = UI.Platform.Create<T>() as System.Windows.Forms.Control;
 
 			//control.Anchor = ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 			//| System.Windows.Forms.AnchorStyles.Left)
@@ -22,9 +24,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return control as T;
 		}
 
-		//virtual
-
-		public virtual Color Parse(System.Drawing.Color color)
+		public static Color Parse(System.Drawing.Color color)
 		{
 			if (color == null)
 			{
@@ -34,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return new Color(color.A, color.R, color.G, color.B);
 		}
 
-		public virtual System.Drawing.Color Parse(Color color)
+		public static System.Drawing.Color Parse(Color color)
 		{
 			if (color == null)
 			{
@@ -44,7 +44,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return System.Drawing.Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
 		}
 
-		public virtual System.Windows.Forms.Padding Parse(Thickness thickness)
+		public static System.Windows.Forms.Padding Parse(Thickness thickness)
 		{
 			if (thickness == null)
 			{
@@ -61,12 +61,12 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return padding;
 		}
 
-		public virtual Thickness Parse(System.Windows.Forms.Padding margin)
+		public static Thickness Parse(System.Windows.Forms.Padding margin)
 		{
 			return new Thickness(margin.Left, margin.Top, margin.Right, margin.Bottom);
 		}
 
-		public virtual Tuple<HorizontalAlignment, VerticalAlignment> Parse(System.Drawing.ContentAlignment alignment)
+		public static Tuple<HorizontalAlignment, VerticalAlignment> Parse(System.Drawing.ContentAlignment alignment)
 		{
 			switch (alignment)
 			{
@@ -99,7 +99,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			throw new ArgumentOutOfRangeException("alignment");
 		}
 
-		public virtual System.Drawing.ContentAlignment ParseContentAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
+		public static System.Drawing.ContentAlignment ParseContentAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
 		{
 			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Fill) return System.Drawing.ContentAlignment.BottomCenter;
 			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Center) return System.Drawing.ContentAlignment.BottomCenter;
@@ -124,7 +124,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			throw new ArgumentOutOfRangeException("horizontalAlignment");
 		}
 
-		public virtual Tuple<HorizontalAlignment, VerticalAlignment> Parse(System.Windows.Forms.AnchorStyles anchor)
+		public static Tuple<HorizontalAlignment, VerticalAlignment> Parse(System.Windows.Forms.AnchorStyles anchor)
 		{
 			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Top);
 			if (anchor == (System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Bottom)) return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Bottom);
@@ -149,7 +149,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Left, VerticalAlignment.Top);
 		}
 
-		public virtual System.Windows.Forms.AnchorStyles ParseAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical)
+		public static System.Windows.Forms.AnchorStyles ParseAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical)
 		{
 			if (horizontal == HorizontalAlignment.Left && vertical == VerticalAlignment.Top) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top;
 			if (horizontal == HorizontalAlignment.Left && vertical == VerticalAlignment.Bottom) return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Bottom;
@@ -174,7 +174,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Top;
 		}
 
-		public virtual HorizontalAlignment Parse(System.Windows.Forms.HorizontalAlignment textAlign)
+		public static HorizontalAlignment Parse(System.Windows.Forms.HorizontalAlignment textAlign)
 		{
 			switch (textAlign)
 			{
@@ -191,7 +191,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return HorizontalAlignment.Left;
 		}
 
-		public virtual System.Windows.Forms.HorizontalAlignment Parse(HorizontalAlignment horizontalAlign)
+		public static System.Windows.Forms.HorizontalAlignment Parse(HorizontalAlignment horizontalAlign)
 		{
 			switch (horizontalAlign)
 			{
@@ -211,25 +211,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return System.Windows.Forms.HorizontalAlignment.Left;
 		}
 
-		//static
-
-		public static new Platform Current
-		{
-			get
-			{
-				var platform = (Platform) UI.Platform.Current;
-
-				if (platform == null)
-				{
-					platform = new Platform();
-					UI.Platform.Current = platform;
-				}
-
-				return platform;
-			}
-		}
-
-		public virtual void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
+		public static void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
 		{
 			//calculate the 4 points or coordinates of the border
 			System.Drawing.Point p1 = control.Bounds.Location; //top left
@@ -246,10 +228,10 @@ namespace OKHOSTING.UI.Net4.WinForms
 			//draw custom border here
 			if (((IControl) control).BorderColor != null && ((IControl) control).BorderWidth != null)
 			{
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p4, p1); //left
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p1, p2); //top
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p2, p3); //right
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Current.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p3, p4); //bottom
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p4, p1); //left
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p1, p2); //top
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p2, p3); //right
+				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p3, p4); //bottom
 			}
 		}
 	}

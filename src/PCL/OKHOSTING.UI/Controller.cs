@@ -10,13 +10,15 @@
 	/// </summary>
 	public abstract class Controller
 	{
+		public Platform Platform { get; set; }
+		
 		/// <summary>
 		/// Will be executed when this controller "executes" at first
 		/// <para xml:lang="es">Se produce cuando este controlador "ejecuta" un primer metodo.</para>
 		/// </summary>
 		public virtual void Start()
 		{
-			Platform.Current.StartController(this);
+			Platform.StartController(this);
 		}
 
 		/// <summary>
@@ -47,7 +49,7 @@
 		/// </summary>
 		public virtual void Finish()
 		{
-			Platform.Current.FinishController();
+			Platform.FinishController();
 		}
 	}
 }

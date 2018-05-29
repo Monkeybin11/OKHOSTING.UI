@@ -13,7 +13,7 @@ namespace OKHOSTING.UI.Test
 	public class ListPickerController : Controller
 	{
 		// Create an Stack
-		IStack stack = Platform.Current.Create<IStack>();
+		IStack stack = Platform.Create<IStack>();
 		// Create an ListPicker
 		IListPicker lstColor;
 
@@ -28,37 +28,37 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create an Label with text and size specific and adds it to the Stack.
-			ILabel lblLabel = Platform.Current.Create<ILabel>();
+			ILabel lblLabel = Platform.Create<ILabel>();
 			lblLabel.Text = "This is a label";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
 			// Create the ListPicker lstFont with the specific items, here can change the fontfamily of the label and adds it to the Stack.
-			IListPicker lstFont = Platform.Current.Create<IListPicker>();
+			IListPicker lstFont = Platform.Create<IListPicker>();
 			lstFont.Items = new string[] { "Arial", "Verdana", "Times new roman", "Helvetica" };
 			lstFont.ValueChanged += (object sender, string e) => lblLabel.FontFamily = lstFont.Value;
 			stack.Children.Add(lstFont);
 
 			// Create the ListPicker lstColor with the specific items and adds it to Stack  
-			lstColor = Platform.Current.Create<IListPicker>();
+			lstColor = Platform.Create<IListPicker>();
 			lstColor.Items = new string[] { "Red", "Green", "Blue" };
 			stack.Children.Add(lstColor);
 
 			// Create the button cmdColor with specific text, with the event also click and adds it to the stack.
-			IButton cmdColor = Platform.Current.Create<IButton>();
+			IButton cmdColor = Platform.Create<IButton>();
 			cmdColor.Text = "Set Color";
 			cmdColor.Click += CmdSetColor_Click;
 			stack.Children.Add(cmdColor);
 
 			// Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
-			IButton cmdClose = Platform.Current.Create<IButton>();
+			IButton cmdClose = Platform.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page.
-			Platform.Current.Page.Title = "Test label";
-			Platform.Current.Page.Content = stack;
+			Platform.Page.Title = "Test label";
+			Platform.Page.Content = stack;
 		}
 
 		/// <summary>

@@ -28,29 +28,29 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create a Stack
-			IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Create<IStack>();
 
 			// Creates an Label with text and a specific size and adds it to the stack.
-			lblLabel = Platform.Current.Create<ILabel>();
+			lblLabel = Platform.Create<ILabel>();
 			lblLabel.Text = "Click on the checkbox";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
 			// Creates an CheckBox selected with the event also click and adds it to the stack.
-			checkBox = Platform.Current.Create<ICheckBox>();
+			checkBox = Platform.Create<ICheckBox>();
 			checkBox.Value = true;
 			checkBox.ValueChanged += checkBox_ValueChanged;
 			stack.Children.Add(checkBox);
 
 			// Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
-			IButton cmdClose = Platform.Current.Create<IButton>();
+			IButton cmdClose = Platform.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page
-			Platform.Current.Page.Title = "Test checkbox";
-			Platform.Current.Page.Content = stack;
+			Platform.Page.Title = "Test checkbox";
+			Platform.Page.Content = stack;
 		}
 
 		/// <summary>

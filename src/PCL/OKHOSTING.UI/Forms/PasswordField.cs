@@ -68,7 +68,7 @@ namespace OKHOSTING.UI.Forms
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			ValueControl = Platform.Current.Create<IPasswordTextBox>();
+			ValueControl = Platform.Create<IPasswordTextBox>();
 		}
 	}
 }

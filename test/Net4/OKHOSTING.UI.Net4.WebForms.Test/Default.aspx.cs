@@ -14,7 +14,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 				return;
 			}
 
-			if (Platform.Current.Controller == null)
+			if (Platform.Controller == null)
 			{
                 new IndexController().Start();
                 //new TextBoxController().Start();

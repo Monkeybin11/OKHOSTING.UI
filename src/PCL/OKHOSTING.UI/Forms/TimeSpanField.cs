@@ -41,13 +41,13 @@ namespace OKHOSTING.UI.Forms
 		protected override void CreateValueControl()
 		{
 			//create a sinple TextBox
-			ValueControl = Platform.Current.Create<IFlow>();
+			ValueControl = Platform.Create<IFlow>();
 			
-			txtValue = Platform.Current.Create<ITextBox>();
+			txtValue = Platform.Create<ITextBox>();
 			txtValue.InputType = ITextBoxInputType.Number;
 			txtValue.Value = "0";
 			
-			lstUnit = Platform.Current.Create<IListPicker>();
+			lstUnit = Platform.Create<IListPicker>();
 			lstUnit.Items = new List<string>();
 
 			foreach (Enum unit in Enum.GetValues(typeof(Core.TimeUnit.Unit)))
