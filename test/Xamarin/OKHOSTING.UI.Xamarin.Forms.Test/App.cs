@@ -3,14 +3,13 @@ using System;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Test
 {
-	public class MyApplication : global::Xamarin.Forms.Application
+	public class App : global::Xamarin.Forms.Application
 	{
-		public MyApplication ()
+		public App ()
 		{
-			var app = new App();
-			app.Page = new Page();
-			MainPage = (global::Xamarin.Forms.Page) app.Page;
-			new UI.Test.IndexController().Start();
+			Platform.Page = new Page();
+			MainPage = (global::Xamarin.Forms.Page)Platform.Page;
+			new OKHOSTING.UI.Test.IndexController().Start();
 		}
 
 		protected override void OnStart ()

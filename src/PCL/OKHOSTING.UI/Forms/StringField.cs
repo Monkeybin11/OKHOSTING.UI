@@ -104,11 +104,11 @@ namespace OKHOSTING.UI.Forms
 		{
 			if (MaxLenght == 0)
 			{
-				ValueControl = App.Create<ITextArea>();
+				ValueControl = Platform.Create<ITextArea>();
 			}
 			else
 			{
-				ValueControl = App.Create<ITextBox>();
+				ValueControl = Platform.Create<ITextBox>();
 			}
 		}
 	}

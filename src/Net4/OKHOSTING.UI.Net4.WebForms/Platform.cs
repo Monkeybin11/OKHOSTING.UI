@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
-	public class App : UI.App
+	public class Platform : UI.Platform
 	{
 		//protected int ControlCounter = 0;
 
@@ -67,9 +67,9 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		protected static readonly Random Random = new Random();
 
-		public new T Create<T>() where T : class, UI.Controls.IControl
+		public static new T Create<T>() where T : class, UI.Controls.IControl
 		{
-			T control = base.Create<T>();
+			T control = UI.Platform.Create<T>();
 
 			//give a default name to all controls to allow events to be correclty triggered
 			if (string.IsNullOrWhiteSpace(control.Name))

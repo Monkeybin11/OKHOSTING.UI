@@ -19,9 +19,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 
 			if (count == 0) count = 20;
 
-			var app = (App) HttpContext.Current.Session["App"];
-
-			Controls.Autocomplete autocomplete = (Controls.Autocomplete) ((Page) app.Page).FindControl(controlId);
+			Controls.Autocomplete autocomplete = (Controls.Autocomplete) ((Page) Platform.Page).FindControl(controlId);
 			var e = ((UI.Controls.IAutocomplete) autocomplete).OnSearching(term);
 			
 			context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(e.SearchResult));

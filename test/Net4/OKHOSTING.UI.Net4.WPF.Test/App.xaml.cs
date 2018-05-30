@@ -6,18 +6,17 @@ namespace OKHOSTING.UI.Net4.WPF.Test
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
-	public partial class MyApp : Application
+	public partial class App : Application
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
 
-			App app = new App();
-			app.Page = new Page();
+			Platform.Page = new OKHOSTING.UI.Net4.WPF.Page();
 
 			new IndexController().Start();
 
-			((Page) app.Page).Show();
+			((Page)Platform.Page).Show();
 		}
 	}
 }

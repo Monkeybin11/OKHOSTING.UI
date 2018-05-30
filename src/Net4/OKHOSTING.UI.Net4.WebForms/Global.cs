@@ -7,11 +7,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		protected void Application_Start(object sender, EventArgs e)
 		{
+			SessionIdProvider.Setup();
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
 		{
-			System.Web.HttpContext.Current.Session.Add("App", new App());
+
 		}
 
 		protected void Application_BeginRequest(object sender, EventArgs e)

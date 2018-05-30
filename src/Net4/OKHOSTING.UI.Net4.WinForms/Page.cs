@@ -5,7 +5,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 {
 	public class Page : System.Windows.Forms.Form, IPage
 	{
-		public UI.App App { get; set; }
+		protected readonly Platform Platform = new Platform();
 
 		public IControl Content
 		{
@@ -16,7 +16,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 					return null;
 				}
 
-				return (IControl) Controls[0];
+				return (IControl)Controls[0];
 			}
 			set
 			{
@@ -60,9 +60,9 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		protected override void OnResize(EventArgs e)
 		{
-			if (App.Controller != null) 
+			if (Platform.Controller != null) 
 			{
-				App.Controller.Resize ();
+				Platform.Controller.Resize ();
 			}
 
 			base.OnResize(e);

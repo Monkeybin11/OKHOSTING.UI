@@ -69,7 +69,7 @@ namespace OKHOSTING.UI.Forms
 		public virtual void DataBind()
 		{
 			//the grid that will actually be displayed to the user and contain all the fields
-			Content = App.Create<IGrid>();
+			Content = Platform.Create<IGrid>();
 
 			//column counter
 			int currentColumn = 0;
@@ -253,7 +253,7 @@ namespace OKHOSTING.UI.Forms
 		/// </param>
 		protected void CreateCategoryRow(string category, IGrid grid)
 		{
-			ILabel caption = App.Create<ILabel>();
+			ILabel caption = Platform.Create<ILabel>();
 			caption.Text = category;
 
 			grid.RowCount++;

@@ -14,9 +14,8 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </summary>
 		public Application ()
 		{
-			var app = new App();
-			app.Page = new Page();
-			MainPage = (global::Xamarin.Forms.Page) app.Page;
+			Platform.Page = new Page();
+			MainPage = (global::Xamarin.Forms.Page) Platform.Page;
 		}
 
 		/// <summary>

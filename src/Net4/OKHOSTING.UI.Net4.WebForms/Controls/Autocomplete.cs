@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			InnerTextBox = (TextBox) App.Create<ITextBox>();
+			InnerTextBox = (TextBox) Platform.Create<ITextBox>();
 			((ITextBox) InnerTextBox).Placeholder = "Search";
 			base.Controls.Add(InnerTextBox);
 
@@ -193,11 +193,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Parse(InnerTextBox.BackColor);
+				return Platform.Parse(InnerTextBox.BackColor);
 			}
 			set
 			{
-				InnerTextBox.BackColor = App.Parse(value);
+				InnerTextBox.BackColor = Platform.Parse(value);
 			}
 		}
 
@@ -212,11 +212,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Parse(InnerTextBox.BorderColor);
+				return Platform.Parse(InnerTextBox.BorderColor);
 			}
 			set
 			{
-				InnerTextBox.BorderColor = App.Parse(value);
+				InnerTextBox.BorderColor = Platform.Parse(value);
 			}
 		}
 
@@ -385,8 +385,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				App.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -433,8 +433,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				App.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -466,11 +466,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Parse(InnerTextBox.ForeColor);
+				return Platform.Parse(InnerTextBox.ForeColor);
 			}
 			set
 			{
-				InnerTextBox.ForeColor = App.Parse(value);
+				InnerTextBox.ForeColor = Platform.Parse(value);
 			}
 		}
 
@@ -611,8 +611,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
-				App.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
+				Platform.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -659,8 +659,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
-				App.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
+				Platform.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 

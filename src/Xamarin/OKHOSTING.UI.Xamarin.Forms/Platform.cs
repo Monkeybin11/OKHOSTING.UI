@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 	/// Es la plataforma en la que se mostara la aplicacion.
 	/// </para>
 	/// </summary>
-	public class App : UI.App
+	public class Platform : UI.Platform
 	{
 		//virtual
 		/// <summary>
@@ -297,6 +297,21 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 
 			return global::Xamarin.Forms.TextAlignment.Start;
+		}
+
+		//static
+		/// <summary>
+		/// Gets the current platform.
+		/// <para xml:lang="es">
+		/// Obtiene la plataforma actual.
+		/// </para>
+		/// </summary>
+		public static new Platform Current
+		{
+			get
+			{
+				return (Platform) UI.Platform;
+			}
 		}
 	}
 }

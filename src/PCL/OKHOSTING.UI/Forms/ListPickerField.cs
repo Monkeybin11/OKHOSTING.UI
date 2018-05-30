@@ -31,7 +31,7 @@ namespace OKHOSTING.UI.Forms
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			ValueControl = App.Create<IListPicker>();
+			ValueControl = Platform.Create<IListPicker>();
 			ValueControl.Items = new List<string>();
 
 			//Add null value to DropDwonList if not required

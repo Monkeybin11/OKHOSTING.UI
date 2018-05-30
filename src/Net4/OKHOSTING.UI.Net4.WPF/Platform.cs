@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace OKHOSTING.UI.Net4.WPF
 {
-	public class App : UI.App
+	public class Platform : UI.Platform
 	{
 		public override void Finish()
 		{

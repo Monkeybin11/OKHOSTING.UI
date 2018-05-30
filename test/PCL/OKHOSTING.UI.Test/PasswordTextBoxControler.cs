@@ -25,17 +25,17 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create an Stack.
-			IStack stack = App.Create<IStack>();
+			IStack stack = Platform.Create<IStack>();
 
 			// Create an Label with text and size specific and adds it to the Stack.
-			lblPasword = App.Create<ILabel>();
+			lblPasword = Platform.Create<ILabel>();
 			lblPasword.VerticalAlignment = VerticalAlignment.Bottom;
 			lblPasword.Text = "Enter your password";
 			lblPasword.Height = 30;
 			stack.Children.Add(lblPasword);
 
 			// Create an PaswordTextBox with backgroundcolor, width and bordercolor specific, aligned center and adds it to the Stack.
-			IPasswordTextBox txtBox = App.Create<IPasswordTextBox>();
+			IPasswordTextBox txtBox = Platform.Create<IPasswordTextBox>();
 			txtBox.Name = "Password";
 			txtBox.BackgroundColor = new Color(1, 230, 200, 135);
 			txtBox.BorderColor = new Color(1, 229, 238, 125);
@@ -46,14 +46,14 @@ namespace OKHOSTING.UI.Test
 			stack.Children.Add(txtBox);
 
 			// Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
-			IButton cmdClose = App.Create<IButton>();
+			IButton cmdClose = Platform.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page.
-			App.Page.Title = "Test Autocomplete";
-			App.Page.Content = stack;
+			Platform.Page.Title = "Test Autocomplete";
+			Platform.Page.Content = stack;
 		}
 
 		private void TxtBox_ValueChanged(object sender, string e)

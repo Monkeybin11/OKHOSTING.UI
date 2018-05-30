@@ -28,10 +28,10 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create an stack
-			IStack stack = App.Create<IStack>();
+			IStack stack = Platform.Create<IStack>();
 
 			// Creates the button with text, size and specific color, with the event also click and adds it to the stack
-			cmdShow = App.Create<IButton>();
+			cmdShow = Platform.Create<IButton>();
 			cmdShow.Text = "Show/Hide";
 			cmdShow.Click += CmdShow_Click;
 			cmdShow.BackgroundColor = new Color(1, 255, 0, 0);
@@ -39,20 +39,20 @@ namespace OKHOSTING.UI.Test
 			stack.Children.Add(cmdShow);
 
 			// Create an Label with text specific, not visible and adds it to the stack
-			lbltext = App.Create<ILabel>();
+			lbltext = Platform.Create<ILabel>();
 			lbltext.Text = "I'm visible, i want an ice-cream";
 			lbltext.Visible = false;
 			stack.Children.Add(lbltext);
 
 			// Create another button with a specific text with your event click and adds it to the stack
-			IButton cmdClose = App.Create<IButton>();
+			IButton cmdClose = Platform.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page
-			App.Page.Title = "Test label";
-			App.Page.Content = stack;
+			Platform.Page.Title = "Test label";
+			Platform.Page.Content = stack;
 		}
 
 		/// <summary>

@@ -13,11 +13,6 @@ namespace OKHOSTING.UI
 	public interface IPage
 	{
 		/// <summary>
-		/// App that is making this page work
-		/// </summary>
-		App App { get; set; }
-
-		/// <summary>
 		/// Title for this page
 		/// <para xml:lang="es">
 		/// El titulo para esta pagina.

@@ -42,11 +42,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Parse(base.BackColor);
+				return Platform.Parse(base.BackColor);
 			}
 			set
 			{
-				base.BackColor = App.Parse(value);
+				base.BackColor = Platform.Parse(value);
 			}
 		}
 
@@ -61,11 +61,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return App.Parse(base.BorderColor);
+				return Platform.Parse(base.BorderColor);
 			}
 			set
 			{
-				base.BorderColor = App.Parse(value);
+				base.BorderColor = Platform.Parse(value);
 			}
 		}
 
@@ -234,8 +234,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				App.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -282,8 +282,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				App.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				App.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 

@@ -10,7 +10,7 @@
 	/// </summary>
 	public abstract class Controller
 	{
-		public App App { get; set; }
+		public Platform Platform { get; set; }
 		
 		/// <summary>
 		/// Will be executed when this controller "executes" at first
@@ -18,7 +18,7 @@
 		/// </summary>
 		public virtual void Start()
 		{
-			App.StartController(this);
+			Platform.StartController(this);
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@
 		/// </summary>
 		public virtual void Finish()
 		{
-			App.FinishController();
+			Platform.FinishController();
 		}
 	}
 }

@@ -28,42 +28,42 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			//Create an Stack
-			IStack stack = App.Create<IStack>();
+			IStack stack = Platform.Create<IStack>();
 
 			//Create the Label lblLabel with text an height specific and adds it to the Stack.
-			ILabel lblLabel = App.Create<ILabel>();
+			ILabel lblLabel = Platform.Create<ILabel>();
 			lblLabel.Text = "Enter your comment";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
 			//Create an textArea with size specific and adds it to the Stack
-			txtTextarea = App.Create<ITextArea>();
+			txtTextarea = Platform.Create<ITextArea>();
 			txtTextarea.Value = "";
 			txtTextarea.Width = 200;
 			txtTextarea.Height = 100;
 			stack.Children.Add(txtTextarea);
 
 			//Create the button cmdPrint with text specific with the event also click and adds it to the stack.
-			IButton cmdPrint = App.Create<IButton>();
+			IButton cmdPrint = Platform.Create<IButton>();
 			cmdPrint.Text = "Print your coment";
 			cmdPrint.Click += CmdOpen_Click;
 			stack.Children.Add(cmdPrint);
 
 			//Create the Label lblcoment not visible and with width specific and adds it to the Stack
-			lblcoment = App.Create<ILabel>();
+			lblcoment = Platform.Create<ILabel>();
 			lblcoment.Visible = false;
 			lblcoment.Width = 200;
 			stack.Children.Add(lblcoment);
 
 			//Create the button cmdClose with specific text with the event also click and adds it to the stack.
-			IButton cmdClose = App.Create<IButton>();
+			IButton cmdClose = Platform.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page.
-			App.Page.Title = "Test label";
-			App.Page.Content = stack;
+			Platform.Page.Title = "Test label";
+			Platform.Page.Content = stack;
 
 			
 		}
