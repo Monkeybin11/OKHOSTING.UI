@@ -86,7 +86,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			SearchPage = new Page();
 			SearchPage.Content = SearchStack;
 
-			((Page) Platform.Page).Navigation.PushAsync(SearchPage);
+			Application.Current.MainPage.Navigation.PushAsync(SearchPage);
 		}
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			ResultPage = new global::Xamarin.Forms.ContentPage();
 			ResultPage.Content = ResultView;
 
-			((Page) Platform.Page).Navigation.PushAsync(ResultPage);
+			Application.Current.MainPage.Navigation.PushAsync(SearchPage);
 
 			return e;
 		}
@@ -147,10 +147,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 
 			//close result page
-			((Page) Platform.Page).Navigation.PopAsync();
+			Application.Current.MainPage.Navigation.PopAsync();
 
 			//close search page and get back to original page
-			((Page) Platform.Page).Navigation.PopAsync();
+			Application.Current.MainPage.Navigation.PopAsync();
 		}
 
 		#region IInputControl

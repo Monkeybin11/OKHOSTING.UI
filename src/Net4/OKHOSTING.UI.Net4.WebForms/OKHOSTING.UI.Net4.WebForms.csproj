@@ -80,7 +80,6 @@
     <Compile Include="Services\PageSize.ashx.cs">
       <DependentUpon>PageSize.ashx</DependentUpon>
     </Compile>
-    <Compile Include="SessionIdProvider.cs" />
     <Compile Include="BasicUrlRewriteRule.cs" />
     <Compile Include="UrlRewriteRule.cs" />
   </ItemGroup>

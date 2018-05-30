@@ -9,7 +9,11 @@ namespace OKHOSTING.UI.Net4.WPF
 	public partial class Page : System.Windows.Window, IPage
 	{
 		protected readonly System.Windows.Controls.ScrollViewer Scroller;
-		protected readonly Platform Platform = new Platform();
+
+		/// <summary>
+		/// Platform that is managing this page
+		/// </summary>
+		public UI.Platform Platform { get; set; }
 
 		public Page()
 		{

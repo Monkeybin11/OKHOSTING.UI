@@ -11,6 +11,11 @@ namespace OKHOSTING.UI.Xamarin.Forms
 	public class Page : global::Xamarin.Forms.ContentPage, IPage
 	{
 		/// <summary>
+		/// Platform that is managing this page
+		/// </summary>
+		public UI.Platform Platform { get; set; }
+
+		/// <summary>
 		/// The scroll.
 		/// <para xml:lang="es">El scroll de la pagina.</para>
 		/// </summary>

@@ -5,7 +5,10 @@ namespace OKHOSTING.UI.Net4.WinForms
 {
 	public class Page : System.Windows.Forms.Form, IPage
 	{
-		protected readonly Platform Platform = new Platform();
+		/// <summary>
+		/// Platform that is managing this page
+		/// </summary>
+		public UI.Platform Platform { get; set; }
 
 		public IControl Content
 		{

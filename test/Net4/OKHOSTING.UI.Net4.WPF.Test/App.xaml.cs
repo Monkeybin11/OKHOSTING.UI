@@ -12,11 +12,11 @@ namespace OKHOSTING.UI.Net4.WPF.Test
 		{
 			base.OnStartup(e);
 
-			Platform.Page = new OKHOSTING.UI.Net4.WPF.Page();
+			Platform platform = new Platform();
+			platform.Page = new Page();
+			((Page) platform.Page).Show();
 
 			new IndexController().Start();
-
-			((Page)Platform.Page).Show();
 		}
 	}
 }

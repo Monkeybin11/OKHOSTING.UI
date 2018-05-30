@@ -85,18 +85,6 @@ namespace OKHOSTING.UI
 		//public
 
 		/// <summary>
-		/// Create this instance.
-		/// <para xml:lang="es">Crea esta instancia.</para>
-		/// </summary>
-		/// <typeparam name="T">The 1st type parameter.
-		/// <para xml:lang="es">El primer tipo de parametro.</para>
-		/// </typeparam>
-		public static T Create<T>() where T : class, Controls.IControl
-		{
-			return Core.BaitAndSwitch.Create<T>(KnownPlatforms, null);
-		}
-
-		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
 		/// <para xml:lang="es">Obtiene la pagina que actualmente se esta mostrando al usuario</para>
 		/// </summary>
@@ -159,6 +147,19 @@ namespace OKHOSTING.UI
 		}
 
 		//static
+
+		/// <summary>
+		/// Create this instance.
+		/// <para xml:lang="es">Crea esta instancia.</para>
+		/// </summary>
+		/// <typeparam name="T">The 1st type parameter.
+		/// <para xml:lang="es">El primer tipo de parametro.</para>
+		/// </typeparam>
+		public static T Create<T>() where T : class, Controls.IControl
+		{
+			return Core.BaitAndSwitch.Create<T>(KnownPlatforms, null);
+		}
+
 		/// <summary>
 		/// It is an arrangement of the libraries of the platforms where you can deploy the application.
 		/// <para xml:lang="es">Es un arreglo de las libreris de las plataformas donde se puede implementar la aplicacion.</para>

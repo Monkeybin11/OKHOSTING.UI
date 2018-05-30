@@ -10,8 +10,11 @@
 	/// </summary>
 	public abstract class Controller
 	{
+		/// <summary>
+		/// Platform that is managing this controller
+		/// </summary>
 		public Platform Platform { get; set; }
-		
+
 		/// <summary>
 		/// Will be executed when this controller "executes" at first
 		/// <para xml:lang="es">Se produce cuando este controlador "ejecuta" un primer metodo.</para>

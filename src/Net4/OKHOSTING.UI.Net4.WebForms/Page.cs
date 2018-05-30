@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 	/// </summary>
 	public partial class Page : System.Web.UI.Page, IPage
 	{
-		protected readonly Platform Platform = new Platform();
+		public UI.Platform Platform { get; set; }
 		
 		/// <summary>
 		/// The content holder.
@@ -27,6 +27,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
+
+			Platform = (Platform) System.Web.HttpContext.Current.Session["Platform"];
 
 			//assign as current page
 			Platform.Page = this;
@@ -66,7 +68,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//search for a rewrite rule for this uri
-			var rule = Platform.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
+			var rule = ((Platform) Platform).GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
 
 			if (rule!= null)
 			{
@@ -120,7 +122,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				if (control.HandlePostBack())
 				{
-					updatedInputControls.Add((IWebInputControl) control);
+					updatedInputControls.Add(control);
 				}
 			}
 
@@ -177,12 +179,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (!OKHOSTING.UI.Session.Current.ContainsKey(typeof(Page) + ".Width"))
+				if (Session[typeof(Page) + ".Width"] == null)
 				{
-					OKHOSTING.UI.Session.Current[typeof(Page) + ".Width"] = (double) 0;
+					Session[typeof(Page) + ".Width"] = (double) 0;
 				}
 
-				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Width"];
+				return (double) Session[typeof(Page) + ".Width"];
 			}
 		}
 
@@ -197,18 +199,18 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (!OKHOSTING.UI.Session.Current.ContainsKey(typeof(Page) + ".Height"))
+				if (Session[typeof(Page) + ".Height"] == null)
 				{
-					OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"] = (double) 0;
+					Session[typeof(Page) + ".Height"] = (double) 0;
 				}
 
-				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"];
+				return (double) Session[typeof(Page) + ".Height"];
 			}
 		}
 
 		public IEnumerable<IControl> GetAllControls()
 		{
-			foreach (IControl ctr in Platform.GetAllControls(this).Where(c => c is IControl))
+			foreach (IControl ctr in WebForms.Platform.GetAllControls(this).Where(c => c is IControl))
 			{
 				yield return ctr;
 			}

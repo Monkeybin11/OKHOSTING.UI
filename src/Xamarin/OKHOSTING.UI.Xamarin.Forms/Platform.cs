@@ -298,20 +298,5 @@ namespace OKHOSTING.UI.Xamarin.Forms
 
 			return global::Xamarin.Forms.TextAlignment.Start;
 		}
-
-		//static
-		/// <summary>
-		/// Gets the current platform.
-		/// <para xml:lang="es">
-		/// Obtiene la plataforma actual.
-		/// </para>
-		/// </summary>
-		public static new Platform Current
-		{
-			get
-			{
-				return (Platform) UI.Platform;
-			}
-		}
 	}
 }
