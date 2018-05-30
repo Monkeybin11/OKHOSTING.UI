@@ -81,11 +81,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Margin);
+				return App.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Parse(value);
+				base.Margin = App.Parse(value);
 			}
 		}
 
@@ -93,11 +93,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return App.Parse(base.BackColor);
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = App.Parse(value);
 			}
 		}
 
@@ -109,11 +109,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Anchor).Item1;
+				return App.Parse(base.Anchor).Item1;
 			}
 			set
 			{
-				base.Anchor = Platform.ParseAnchor(value, ((IControl)this).VerticalAlignment);
+				base.Anchor = App.ParseAnchor(value, ((IControl)this).VerticalAlignment);
 			}
 		}
 
@@ -121,11 +121,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Anchor).Item2;
+				return App.Parse(base.Anchor).Item2;
 			}
 			set
 			{
-				base.Anchor = Platform.ParseAnchor(((IControl)this).HorizontalAlignment, value);
+				base.Anchor = App.ParseAnchor(((IControl)this).HorizontalAlignment, value);
 			}
 		}
 
@@ -137,11 +137,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.ForeColor);
+				return App.Parse(base.ForeColor);
 			}
 			set
 			{
-				base.ForeColor = Platform.Parse(value);
+				base.ForeColor = App.Parse(value);
 			}
 		}
 
@@ -210,11 +210,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.TextAlign).Item1;
+				return App.Parse(base.TextAlign).Item1;
 			}
 			set
 			{
-				base.TextAlign = Platform.ParseContentAlignment(value, ((ITextControl)this).VerticalAlignment);
+				base.TextAlign = App.ParseContentAlignment(value, ((ITextControl)this).VerticalAlignment);
 			}
 		}
 
@@ -222,11 +222,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.TextAlign).Item2;
+				return App.Parse(base.TextAlign).Item2;
 			}
 			set
 			{
-				base.TextAlign = Platform.ParseContentAlignment(((ITextControl)this).HorizontalAlignment, value);
+				base.TextAlign = App.ParseContentAlignment(((ITextControl)this).HorizontalAlignment, value);
 			}
 		}
 
@@ -234,11 +234,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Padding);
+				return App.Parse(base.Padding);
 			}
 			set
 			{
-				base.Padding = Platform.Parse(value);
+				base.Padding = App.Parse(value);
 			}
 		}
 
@@ -246,7 +246,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
-			Platform.DrawBorders(this, pevent);
+			App.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
 	}

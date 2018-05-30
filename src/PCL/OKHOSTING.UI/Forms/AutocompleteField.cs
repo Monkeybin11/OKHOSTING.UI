@@ -69,7 +69,7 @@ namespace OKHOSTING.UI.Forms
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			ValueControl = Platform.Create<IAutocomplete>();
+			ValueControl = App.Create<IAutocomplete>();
 		}
 	}
 }

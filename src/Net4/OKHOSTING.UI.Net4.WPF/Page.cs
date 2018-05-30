@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WPF
 	public partial class Page : System.Windows.Window, IPage
 	{
 		protected readonly System.Windows.Controls.ScrollViewer Scroller;
-		protected readonly Platform Platform = new Platform();
+		public UI.App App { get; set; }
 
 		public Page()
 		{
@@ -28,7 +28,7 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
-			Platform.Controller?.Resize();
+			App.Controller?.Resize();
 		}
 
 		public new IControl Content

@@ -23,17 +23,17 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create a Stack
-			IStack Stack = Platform.Create<IStack>();
+			IStack Stack = App.Create<IStack>();
 
 			// Creates an Label with text and a specific size and adds it to the stack.
-			ILabel lblLabel = Platform.Create<ILabel>();
+			ILabel lblLabel = App.Create<ILabel>();
 			lblLabel.Text = "Tis is my team";
 			lblLabel.Height = 50;
 			lblLabel.FontSize = 20;
 			Stack.Children.Add(lblLabel);
 
 			// Create an Autocomplete with a size and type text color and size specific and adds it to the stack.
-			IAutocomplete txtBox = Platform.Create<IAutocomplete>();
+			IAutocomplete txtBox = App.Create<IAutocomplete>();
 			txtBox.Name = "Team";
 			txtBox.FontColor = new Color(255, 36, 24, 130);
 			txtBox.BorderColor = new Color(1, 229, 238, 0);
@@ -45,14 +45,14 @@ namespace OKHOSTING.UI.Test
 			Stack.Children.Add(txtBox);
 
 			// Creates a button with your event Click and adds it to the stack.
-			IButton cmdClose = Platform.Create<IButton>();
+			IButton cmdClose = App.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			Stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page
-			Platform.Page.Title = "Test Autocomplete";
-			Platform.Page.Content = Stack;
+			App.Page.Title = "Test Autocomplete";
+			App.Page.Content = Stack;
 		}
 
 		private void TxtBox_Searching(object sender, AutocompleteSearchEventArgs e)

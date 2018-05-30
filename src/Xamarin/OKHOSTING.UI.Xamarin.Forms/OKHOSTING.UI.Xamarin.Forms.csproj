@@ -42,7 +42,7 @@
     <Compile Include="Controls\Layout\RelativePanel.cs" />
     <Compile Include="Controls\Slider.cs" />
     <Compile Include="Controls\WebView.cs" />
-    <Compile Include="Platform.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\CheckBox.cs" />

@@ -14,9 +14,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Test
 		{
 			base.OnLoad(e);
 
-            if (Platform.Controller == null)
+            if (App.Controller == null)
             {
-                Platform.Page = this;
+				App.Page = this;
                 new IndexController().Start();
             }
         }

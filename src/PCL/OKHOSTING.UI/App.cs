@@ -9,7 +9,7 @@ namespace OKHOSTING.UI
 	/// Clase base para la plataforma de aplicaciones independientes, las clases hijas deben implementar plataformas nativas como WinForms, WebForms, Formularios Xamarin, etc.
 	/// </para>
 	/// </summary>
-	public abstract class Platform
+	public abstract class App
 	{
 		//protected & internal
 
@@ -40,6 +40,11 @@ namespace OKHOSTING.UI
 		/// </param>
 		protected internal virtual void StartController(Controller controller)
 		{
+			if (controller == null)
+			{
+				throw new ArgumentNullException(nameof(controller));
+			}
+
 			//save page state, if any
 			if (PageState != null)
 			{
@@ -54,6 +59,7 @@ namespace OKHOSTING.UI
 			//reset page
 			Page.Title = string.Empty;
 			Page.Content = null;
+			Controller.App = this;
 		}
 
 		/// <summary>
@@ -84,17 +90,7 @@ namespace OKHOSTING.UI
 
 		//public
 
-		/// <summary>
-		/// Create this instance.
-		/// <para xml:lang="es">Crea esta instancia.</para>
-		/// </summary>
-		/// <typeparam name="T">The 1st type parameter.
-		/// <para xml:lang="es">El primer tipo de parametro.</para>
-		/// </typeparam>
-		public static T Create<T>() where T : class, Controls.IControl
-		{
-			return Core.BaitAndSwitch.Create<T>(KnownPlatforms, null);
-		}
+		IPage _Page;
 
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
@@ -102,7 +98,19 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual IPage Page
 		{
-			get; set;
+			get
+			{
+				return _Page;
+			}
+			set
+			{
+				_Page = value;
+
+				if(_Page != null)
+				{
+					_Page.App = this;
+				}
+			}
 		}
 
 		/// <summary>
@@ -158,7 +166,20 @@ namespace OKHOSTING.UI
 			}
 		}
 
+		/// <summary>
+		/// Create this instance.
+		/// <para xml:lang="es">Crea esta instancia.</para>
+		/// </summary>
+		/// <typeparam name="T">The 1st type parameter.
+		/// <para xml:lang="es">El primer tipo de parametro.</para>
+		/// </typeparam>
+		public T Create<T>() where T : class, Controls.IControl
+		{
+			return Core.BaitAndSwitch.Create<T>(KnownPlatforms, null);
+		}
+
 		//static
+
 		/// <summary>
 		/// It is an arrangement of the libraries of the platforms where you can deploy the application.
 		/// <para xml:lang="es">Es un arreglo de las libreris de las plataformas donde se puede implementar la aplicacion.</para>

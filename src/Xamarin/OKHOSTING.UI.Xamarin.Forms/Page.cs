@@ -16,6 +16,8 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// </summary>
 		private readonly global::Xamarin.Forms.ScrollView Scroll;
 
+		public UI.App App { get; set; }
+
 		/// <summary>
 		/// Initializes a new instance of the Page class.
 		/// <para xml:lang="es">Inicializa una nueva instancia de la clase Page</para>
@@ -54,9 +56,9 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		{
 			base.OnSizeAllocated(width, height);
 
-			if (Platform.Controller != null)
+			if (App.Controller != null)
 			{
-				Platform.Controller.Resize();
+				App.Controller.Resize();
 			}
 		}
 	}

@@ -64,7 +64,7 @@ namespace OKHOSTING.UI.Forms
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			ValueControl = Platform.Create<ILabel>();
+			ValueControl = App.Create<ILabel>();
 		}
 	}
 }

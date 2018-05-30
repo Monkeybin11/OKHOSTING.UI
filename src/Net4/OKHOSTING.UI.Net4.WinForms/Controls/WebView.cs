@@ -41,11 +41,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Margin);
+				return App.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Parse(value);
+				base.Margin = App.Parse(value);
 			}
 		}
 
@@ -53,11 +53,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return App.Parse(base.BackColor);
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = App.Parse(value);
 			}
 		}
 
@@ -69,11 +69,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Anchor).Item1;
+				return App.Parse(base.Anchor).Item1;
 			}
 			set
 			{
-				base.Anchor = Platform.ParseAnchor(value, ((IControl) this).VerticalAlignment);
+				base.Anchor = App.ParseAnchor(value, ((IControl) this).VerticalAlignment);
 			}
 		}
 
@@ -81,11 +81,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Anchor).Item2;
+				return App.Parse(base.Anchor).Item2;
 			}
 			set
 			{
-				base.Anchor = Platform.ParseAnchor(((IControl) this).HorizontalAlignment, value);
+				base.Anchor = App.ParseAnchor(((IControl) this).HorizontalAlignment, value);
 			}
 		}
 

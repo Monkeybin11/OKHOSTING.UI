@@ -73,7 +73,7 @@
     <Compile Include="Media\IThumbnail.cs" />
     <Compile Include="Media\IAudioPlayer.cs" />
     <Compile Include="PageState.cs" />
-    <Compile Include="Platform.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Controls\ITextBoxInputType.cs" />
     <Compile Include="Controls\ITextControl.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
@@ -112,7 +112,6 @@
     <Compile Include="Controls\IListPicker.cs" />
     <Compile Include="Controls\Layout\IStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="Thickness.cs" />
   </ItemGroup>

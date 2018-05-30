@@ -103,11 +103,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.Margin);
+				return App.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Parse(value);
+				base.Margin = App.Parse(value);
 			}
 		}
 
@@ -138,11 +138,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalAlignment);
+				return App.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = Platform.Parse(value);
+				base.HorizontalAlignment = App.Parse(value);
 			}
 		}
 
@@ -150,11 +150,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.VerticalAlignment);
+				return App.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = Platform.Parse(value);
+				base.VerticalAlignment = App.Parse(value);
 			}
 		}
 

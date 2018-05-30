@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 	/// </summary>
 	public partial class Page : System.Web.UI.Page, IPage
 	{
-		protected readonly Platform Platform = new Platform();
+		public UI.App App { get; set; }
 		
 		/// <summary>
 		/// The content holder.
@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			base.OnLoad(e);
 
 			//assign as current page
-			Platform.Page = this;
+			App.Page = this;
 
 			//load javascript dependencies
 			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
@@ -66,22 +66,22 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//search for a rewrite rule for this uri
-			var rule = Platform.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
+			var rule = ((App) App).GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
 
 			if (rule!= null)
 			{
 				//should we start a different controller than the current one?
-				if (Platform.Controller != null)
+				if (App.Controller != null)
 				{
 					bool startNew = false;
 
-					if (!rule.ControllerType.IsAssignableFrom(Platform.Controller.GetType()))
+					if (!rule.ControllerType.IsAssignableFrom(App.Controller.GetType()))
 					{
 						startNew = true;
 					}
 					else
 					{
-						var currentUri = rule.GetUri(Platform.Controller).ToString();
+						var currentUri = rule.GetUri(App.Controller).ToString();
 
 						if (currentUri != Request.RawUrl)
 						{
@@ -98,14 +98,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//there is no controller assigned, exit
-			if (Platform.Controller == null)
+			if (App.Controller == null)
 			{
 				return;
 			}
 
 			//get title and content from the state, in case it has a different Page instance
-			Title = Platform.PageState?.Title;
-			Content = Platform.PageState?.Content;
+			Title = App.PageState?.Title;
+			Content = App.PageState?.Content;
 
 			if (!IsPostBack)
 			{
@@ -177,12 +177,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (!OKHOSTING.UI.Session.Current.ContainsKey(typeof(Page) + ".Width"))
+				if (Session[typeof(Page) + ".Width"] == null)
 				{
-					OKHOSTING.UI.Session.Current[typeof(Page) + ".Width"] = (double) 0;
+					Session[typeof(Page) + ".Width"] = (double) 0;
 				}
 
-				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Width"];
+				return (double) Session[typeof(Page) + ".Width"];
 			}
 		}
 
@@ -197,18 +197,18 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (!OKHOSTING.UI.Session.Current.ContainsKey(typeof(Page) + ".Height"))
+				if (Session[typeof(Page) + ".Height"] == null)
 				{
-					OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"] = (double) 0;
+					Session[typeof(Page) + ".Height"] = (double) 0;
 				}
 
-				return (double) OKHOSTING.UI.Session.Current[typeof(Page) + ".Height"];
+				return (double) Session[typeof(Page) + ".Height"];
 			}
 		}
 
 		public IEnumerable<IControl> GetAllControls()
 		{
-			foreach (IControl ctr in Platform.GetAllControls(this).Where(c => c is IControl))
+			foreach (IControl ctr in WebForms.App.GetAllControls(this).Where(c => c is IControl))
 			{
 				yield return ctr;
 			}
@@ -223,10 +223,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected override void OnPreRender(EventArgs e)
 		{
 			//save page state
-			if (Platform.PageState != null)
+			if (App.PageState != null)
 			{
-				Platform.PageState.Title = Title;
-				Platform.PageState.Content = Content;
+				App.PageState.Title = Title;
+				App.PageState.Content = Content;
 			}
 
 			//allow friendly urls on forms

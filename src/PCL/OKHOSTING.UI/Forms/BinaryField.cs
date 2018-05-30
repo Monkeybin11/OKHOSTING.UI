@@ -72,7 +72,7 @@ namespace OKHOSTING.UI.Forms
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			ValueControl = Platform.Create<ITextArea>();
+			ValueControl = App.Create<ITextArea>();
 		}
 	}
 }

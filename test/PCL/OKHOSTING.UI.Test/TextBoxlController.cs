@@ -25,16 +25,16 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			//Create an Stack
-			IStack stack = Platform.Create<IStack>();
+			IStack stack = App.Create<IStack>();
 
 			//Create an Label with text and height specific and adds it to the Stack.
-			ILabel lblLabel = Platform.Create<ILabel>();
+			ILabel lblLabel = App.Create<ILabel>();
 			lblLabel.Text = "Enter your name";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
 			//Create an TextBox and adds it to the Stack
-			ITextBox txtText = Platform.Create<ITextBox>();
+			ITextBox txtText = App.Create<ITextBox>();
 			txtText.Value = "This is a TextBox";
 			txtText.BorderColor = new Color(255, 255, 0, 0);
 			txtText.BorderWidth = new Thickness(1, 2, 3, 4);
@@ -42,7 +42,7 @@ namespace OKHOSTING.UI.Test
 			stack.Children.Add(txtText);
 			
 			//Create an TextBox and adds it to the Stack
-			txtTextPlaceholder = Platform.Create<ITextBox>();
+			txtTextPlaceholder = App.Create<ITextBox>();
 			txtTextPlaceholder.BorderColor = new Color(255, 255, 0, 0);
 			txtTextPlaceholder.BorderWidth = new Thickness(1, 2, 3, 4);
 			txtTextPlaceholder.Placeholder = "Enter some text..";
@@ -50,14 +50,14 @@ namespace OKHOSTING.UI.Test
 			stack.Children.Add(txtTextPlaceholder);
 
 			//Create the button cmdClose with specific text with the event also click and adds it to the stack.
-			IButton cmdClose = Platform.Create<IButton>();
+			IButton cmdClose = App.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page.
-			Platform.Page.Title = "Test label";
-			Platform.Page.Content = stack;
+			App.Page.Title = "Test label";
+			App.Page.Content = stack;
 		}
 
 		private void TxtText_ValueChanged(object sender, string e)

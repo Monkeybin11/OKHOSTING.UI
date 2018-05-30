@@ -54,7 +54,7 @@
     <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Controls\TextBoxBase.cs" />
     <Compile Include="Controls\IWebInputControl.cs" />
-    <Compile Include="Platform.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Calendar.cs" />
@@ -80,7 +80,6 @@
     <Compile Include="Services\PageSize.ashx.cs">
       <DependentUpon>PageSize.ashx</DependentUpon>
     </Compile>
-    <Compile Include="SessionIdProvider.cs" />
     <Compile Include="BasicUrlRewriteRule.cs" />
     <Compile Include="UrlRewriteRule.cs" />
   </ItemGroup>

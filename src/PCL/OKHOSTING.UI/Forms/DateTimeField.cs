@@ -46,9 +46,9 @@ namespace OKHOSTING.UI.Forms
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			DatePicker = Platform.Create<IDatePicker>();
-			TimePicker = Platform.Create<ITimeOfDayPicker>();
-			var flow = Platform.Create<Controls.Layout.IFlow>();
+			DatePicker = App.Create<IDatePicker>();
+			TimePicker = App.Create<ITimeOfDayPicker>();
+			var flow = App.Create<Controls.Layout.IFlow>();
 			flow.Children.Add(DatePicker);
 			flow.Children.Add(TimePicker);
 

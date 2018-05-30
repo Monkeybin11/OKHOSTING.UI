@@ -79,7 +79,7 @@
     <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Controls\Layout\Stack.cs" />
     <Compile Include="Controls\Slider.cs" />
-    <Compile Include="Platform.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Calendar.cs" />
     <Compile Include="Controls\CheckBox.cs" />

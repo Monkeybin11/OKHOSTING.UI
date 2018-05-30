@@ -19,23 +19,23 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create an Stack
-			IStack stack = Platform.Create<IStack>();
+			IStack stack = App.Create<IStack>();
 
 			// Create an Label with text and size specific and adds it to the Stack.
-			lblLabel = Platform.Create<ILabelButton>();
+			lblLabel = App.Create<ILabelButton>();
 			lblLabel.Click += LblLabel_Click;
 			lblLabel.Text = "Click me!";
 			stack.Children.Add(lblLabel);
 
 			// Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
-			IButton cmdClose = Platform.Create<IButton>();
+			IButton cmdClose = App.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page.
-			Platform.Page.Title = "Test label";
-			Platform.Page.Content = stack;
+			App.Page.Title = "Test label";
+			App.Page.Content = stack;
 		}
 
 		private void LblLabel_Click(object sender, EventArgs e)

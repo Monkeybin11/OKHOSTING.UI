@@ -52,19 +52,19 @@ namespace OKHOSTING.UI.Test
 			Form.DataBind();
 
 			// Creates the Button cmdSave with text specific, with the event also click.
-			IButton cmdSave = Platform.Create<IButton>();
+			IButton cmdSave = App.Create<IButton>();
 			cmdSave.Text = "Save";
 			cmdSave.Click += CmdSave_Click;
 
 			// Create a new Stack.
-			IStack stack = Platform.Create<IStack>();
+			IStack stack = App.Create<IStack>();
 			// Adds the content of the Form and the button cmdSave it to the stack
 			stack.Children.Add(Form.Content);
 			stack.Children.Add(cmdSave);
 
 			// Establishes the content and title of the page
-			Platform.Page.Title = "Form";
-			Platform.Page.Content = stack;
+			App.Page.Title = "Form";
+			App.Page.Content = stack;
 		}
 
 		/// <summary>

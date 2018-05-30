@@ -31,17 +31,17 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create an RelativePanel.
-			IRelativePanel panel = Platform.Create<IRelativePanel>();
+			IRelativePanel panel = App.Create<IRelativePanel>();
 
 			//should be a background image
-			BackgroundImage = Platform.Create<IImage>();
+			BackgroundImage = App.Create<IImage>();
 			BackgroundImage.LoadFromUrl(new Uri("http://okhosting.com/resources/uploads/2015/09/diseno-de-paginas-responsivas.png"));
-			BackgroundImage.Width = Platform.Page.Width;
-			BackgroundImage.Height = Platform.Page.Height;
+			BackgroundImage.Width = App.Page.Width;
+			BackgroundImage.Height = App.Page.Height;
 			panel.Add(BackgroundImage, RelativePanelHorizontalContraint.LeftWith, RelativePanelVerticalContraint.TopWith);
 
 			//Create the Label lblLabel with text, fontcolor, backgroundcolor and margin specific.
-			ILabel lblLabel = Platform.Create<ILabel>();
+			ILabel lblLabel = App.Create<ILabel>();
 			lblLabel.Text = "This label is centered";
 			lblLabel.FontColor = new Color(255, 0, 0, 255);
 			lblLabel.BackgroundColor = new Color(255, 255, 0, 0);
@@ -49,7 +49,7 @@ namespace OKHOSTING.UI.Test
 			panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
 
 			//Create the Label lblLabel2 with text, Fontcolor, backgroundcolor and margin specific.
-			ILabel lblLabel2 = Platform.Create<ILabel>();
+			ILabel lblLabel2 = App.Create<ILabel>();
 			lblLabel2.Text = "This label is centered and below the first one";
 			lblLabel2.FontColor = new Color(255, 0, 0, 255);
 			lblLabel2.BackgroundColor = new Color(255, 0, 255, 0);
@@ -57,7 +57,7 @@ namespace OKHOSTING.UI.Test
 			panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel);
 
 			//Creates the Button cmdClose with text, fontcolor, backgroundcolor and margin specific, with the event also click and adds it to the stack.
-			IButton cmdClose = Platform.Create<IButton>();
+			IButton cmdClose = App.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			cmdClose.FontColor = new Color(255, 0, 0, 0);
@@ -66,8 +66,8 @@ namespace OKHOSTING.UI.Test
 			panel.Add(cmdClose, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.AboveOf, lblLabel);
 
 			// Establishes the content and title of the page.
-			Platform.Page.Title = "Test RelativePanel";
-			Platform.Page.Content = panel;
+			App.Page.Title = "Test RelativePanel";
+			App.Page.Content = panel;
 		}
 
 		/// <summary>
@@ -80,8 +80,8 @@ namespace OKHOSTING.UI.Test
 		{
 			base.Resize();
 
-			BackgroundImage.Width = Platform.Page.Width;
-			BackgroundImage.Height = Platform.Page.Height;
+			BackgroundImage.Width = App.Page.Width;
+			BackgroundImage.Height = App.Page.Height;
 		}
 
 		/// <summary>

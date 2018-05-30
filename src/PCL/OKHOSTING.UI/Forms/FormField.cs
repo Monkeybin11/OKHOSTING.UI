@@ -21,7 +21,7 @@ namespace OKHOSTING.UI.Forms
 		/// </summary>
 		public FormField()
 		{
-			CaptionControl = Platform.Create<ILabel>();
+			CaptionControl = App.Create<ILabel>();
 		}
 
 		private IControl _ValueControl;
