@@ -203,7 +203,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// <param name="content">Content.</param>
 		void IGrid.SetRowSpan(int rowSpan, IControl content)
 		{
-			SetColumnSpan((global::Xamarin.Forms.BindableObject) content, rowSpan);
+            SetRowSpan((global::Xamarin.Forms.BindableObject) content, rowSpan);
 		}
 
 		/// <summary>
