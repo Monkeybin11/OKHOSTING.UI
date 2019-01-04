@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 {
@@ -52,11 +53,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -73,11 +74,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BorderColor);
+				return base.BorderColor;
 			}
 			set
 			{
-				base.BorderColor = Platform.Parse(value);
+				base.BorderColor = value;
 			}
 		}
 
@@ -430,6 +431,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 		}
 
+		IList<IControl> IContainer.Children
+		{
+			get
+			{
+				return IGridExtensions.GetAllControlls(this).ToList();
+			}
+		}
+
 		/// <summary>
 		/// Gets the number of rows and columns of the grid
 		/// <para xml:alng="es">Obtiene el numero de filas y columnas del grid</para>
@@ -445,12 +454,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		IControl IGrid.GetContent(int row, int column)
 		{
+			if (Rows.Count < row + 1 || Rows[row].Cells.Count < column + 1)
+			{
+				return null;
+			}
+
 			if (Rows[row].Cells[column].Controls.Count == 0)
 			{
 				return null;
 			}
 
-			return (IControl)Rows[row].Cells[column].Controls[0];
+			return (IControl) Rows[row].Cells[column].Controls[0];
 		}
 
 		/// <summary>
@@ -485,18 +499,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 
 			Rows[row].Cells[column].Controls.Clear();
 			Rows[row].Cells[column].Controls.Add((System.Web.UI.Control)content);
-		}
-
-		/// <summary>
-		/// Gets all controls of the current grid.
-		/// <para xml:lang="es">Obtiene todos los controles del grid actual</para>
-		/// </summary>
-		/// <returns>The all controls.
-		/// <para xml:lang="es">Todos los controles.</para>
-		/// </returns>
-		public List<IControl> GetAllControls()
-		{
-			return IGridExtensions.GetAllControlls(this).ToList();
 		}
 
 		/// <summary>

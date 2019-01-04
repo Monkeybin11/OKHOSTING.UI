@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -54,11 +55,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -73,11 +74,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BorderColor);
+				return base.BorderColor;
 			}
 			set
 			{
-				base.BorderColor = Platform.Parse(value);
+				base.BorderColor = value;
 			}
 		}
 
@@ -321,7 +322,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </summary>
 		public readonly ControlList Children;
 
-		IList<IControl> IFlow.Children
+		IList<IControl> IContainer.Children
 		{
 			get
 			{

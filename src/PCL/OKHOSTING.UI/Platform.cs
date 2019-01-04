@@ -166,4 +166,4 @@ namespace OKHOSTING.UI
 		/// </summary>
 		protected static readonly string[] KnownPlatforms = new string[] { "Net4.WinForms", "Net4.WebForms", "Net4.WPF", "UWP", "Xamarin.Forms", "Xamarin.Android", "Xamarin.iOS", "Xamarin.Windows", "Xamarin.Mac", "Net4.Ajax", "Net4.Console", "Gtk#" };
 	}
-}
+}2

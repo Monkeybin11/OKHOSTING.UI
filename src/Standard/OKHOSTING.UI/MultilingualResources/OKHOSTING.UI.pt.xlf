@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="pt" original="OKHOSTING.UI/RESOURCES/STRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+	<header>
+	  <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1517.0" tool-company="Microsoft" />
+	</header>
+	<body>
+	  <group id="OKHOSTING.UI/RESOURCES/STRINGS.RESX" datatype="resx">
+		<trans-unit id="OKHOSTING_UI_Controls_Forms_BoolField_False" translate="yes" xml:space="preserve">
+		  <source>False</source>
+		  <target state="new">False</target>
+		</trans-unit>
+		<trans-unit id="OKHOSTING_UI_Controls_Forms_BoolField_True" translate="yes" xml:space="preserve">
+		  <source>True</source>
+		  <target state="new">True</target>
+		</trans-unit>
+		<trans-unit id="OKHOSTING_UI_Controls_Forms_CaptionPosition_Left" translate="yes" xml:space="preserve">
+		  <source>Left</source>
+		  <target state="new">Left</target>
+		</trans-unit>
+		<trans-unit id="OKHOSTING_UI_Controls_Forms_CaptionPosition_Top" translate="yes" xml:space="preserve">
+		  <source>Top</source>
+		  <target state="new">Top</target>
+		</trans-unit>
+		<trans-unit id="OKHOSTING_UI_Controls_Forms_EmptyValue" translate="yes" xml:space="preserve">
+		  <source>-</source>
+		  <target state="new">-</target>
+		</trans-unit>
+	  </group>
+	</body>
+  </file>
+</xliff>

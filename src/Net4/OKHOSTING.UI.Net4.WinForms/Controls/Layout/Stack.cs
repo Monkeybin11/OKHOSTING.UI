@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -80,11 +80,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = value;
 			}
 		}
 

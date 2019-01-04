@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -33,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// Obtiene la lista de los controles hijos del Stack.
 		/// </para>
 		/// </summary>
-		IList<IControl> IFlow.Children
+		IList<IControl> IContainer.Children
 		{
 			get
 			{

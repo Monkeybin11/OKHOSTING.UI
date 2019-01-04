@@ -41,7 +41,6 @@
     <Compile Include="Forms\BinaryField.cs" />
     <Compile Include="Forms\BoolField.cs" />
     <Compile Include="Forms\AutocompleteField.cs" />
-    <Compile Include="Forms\MethodForm.cs" />
     <Compile Include="Forms\ListPickerField.cs" />
     <Compile Include="Forms\PasswordField.cs" />
     <Compile Include="Forms\StringSerializableField.cs" />
@@ -132,16 +131,6 @@
   <ItemGroup>
     <XliffResource Include="MultilingualResources\OKHOSTING.UI.es.xlf" />
     <XliffResource Include="MultilingualResources\OKHOSTING.UI.pt.xlf" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{a5394469-222e-47f2-b88e-670f7d25ad8e}</Project>
-      <Name>OKHOSTING.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
-      <Name>OKHOSTING.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />

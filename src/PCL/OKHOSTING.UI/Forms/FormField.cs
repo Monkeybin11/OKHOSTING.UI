@@ -2,6 +2,7 @@
 using OKHOSTING.Data.Validation;
 using OKHOSTING.UI.Controls;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -11,7 +12,7 @@ namespace OKHOSTING.UI.Forms
 	/// An item that will be displayed in the dataform
 	/// <para xml:lang="es">Un elemento que se muestra en el dataform</para>
 	/// </summary>
-	public abstract class FormField: IDisposable
+	public abstract class FormField : IDisposable
 	{
 		/// <summary>
 		/// Initializes a new instance of the FormField class.
@@ -206,105 +207,6 @@ namespace OKHOSTING.UI.Forms
 
 		#endregion
 
-		#region Static
-
-		/// <summary>
-		/// Creates a field that will contain a value of a specific type
-		/// <para xml:lang="es">
-		/// Crea un campo que contendra un valor de un tipo especifico.
-		/// </para>
-		/// </summary>
-		public static FormField CreateFieldFrom(Type type)
-		{
-			//validate arguments
-			if (type == null) throw new ArgumentNullException("type");
-
-			if (Nullable.GetUnderlyingType(type) != null)
-			{
-				type = Nullable.GetUnderlyingType(type);
-			}
-
-			//field
-			FormField field;
-
-			//Enum
-			if (type.GetTypeInfo().IsEnum)
-			{
-				field = new EnumField(type);
-			}
-
-			//Type, ignore this since we can't know if type means Person (as in a serializable object) or typeof(Person) as a type which child types you would choose from
-			//else if (type.Equals(typeof(Type)))
-			//{
-			//	field = new TypeField();
-			//}
-
-			//Bool
-			else if (type.Equals(typeof(bool)))
-			{
-				field = new BoolField();
-			}
-
-			//DateTime
-			else if (type.Equals(typeof(DateTime)))
-			{
-				//field = new DateTimeField();
-				field = new DateTimeField();
-			}
-
-			//TimeSpan
-			else if (type.Equals(typeof(TimeSpan)))
-			{
-				field = new TimeSpanField();
-			}
-
-			//Numeric
-			else if (type.IsNumeric())
-			{
-				if (type.IsIntegral())
-				{
-					field = new IntegerField();
-				}
-				else
-				{
-					field = new DecimalField();
-				}
-			}
-
-			//String serializable
-			else if (type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(Data.IStringSerializable)))
-			{
-				field = new StringSerializableField(type);
-			}
-
-			//XML
-			else if (type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(System.Xml.Serialization.IXmlSerializable)))
-			{
-				field = new XmlSerializableField(type);
-			}
-
-			//String
-			else if (type.Equals(typeof(string)))
-			{
-				field = new StringField();
-			}
-
-			//byte[]
-			else if (type.Equals(typeof(byte[])))
-			{
-				field = new BinaryField();
-			}
-
-			//otherwise just create a textbox
-			else
-			{
-				field = new StringField();
-			}
-
-			//return
-			return field;
-		}
-
-		#endregion
+		
 	}
 }

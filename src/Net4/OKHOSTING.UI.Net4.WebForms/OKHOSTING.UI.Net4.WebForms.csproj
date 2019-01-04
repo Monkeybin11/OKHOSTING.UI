@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OKHOSTING.UI.Net4.WebForms</RootNamespace>
     <AssemblyName>OKHOSTING.UI.Net4.WebForms</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\IWebClickableControl.cs" />
+    <Compile Include="Controls\UserControl.cs" />
     <Compile Include="Controls\VideoPlayer.cs" />
     <Compile Include="Controls\TimeOfDayPicker.cs" />
     <Compile Include="Controls\DatePicker.cs" />
@@ -80,26 +82,8 @@
     <Compile Include="Services\PageSize.ashx.cs">
       <DependentUpon>PageSize.ashx</DependentUpon>
     </Compile>
-    <Compile Include="BasicUrlRewriteRule.cs" />
+    <Compile Include="UrlRewriteBasicRule.cs" />
     <Compile Include="UrlRewriteRule.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Net4\OKHOSTING.Core.Net4\OKHOSTING.Core.Net4.csproj">
-      <Project>{46bdaec2-7677-4223-b009-940db478a220}</Project>
-      <Name>OKHOSTING.Core.Net4</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{a5394469-222e-47f2-b88e-670f7d25ad8e}</Project>
-      <Name>OKHOSTING.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
-      <Name>OKHOSTING.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
-      <Project>{F9D654B5-6B7A-4573-B8C8-FD09B96C021B}</Project>
-      <Name>OKHOSTING.UI</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="General.css" />
@@ -122,6 +106,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
+      <Project>{a5394469-222e-47f2-b88e-670f7d25ad8e}</Project>
+      <Name>OKHOSTING.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj">
+      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
+      <Name>OKHOSTING.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
+      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+      <Name>OKHOSTING.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Drawing;
 using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
@@ -29,7 +30,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			InnerTextBox = (TextBox) Platform.Create<ITextBox>();
+			InnerTextBox = (TextBox) Core.BaitAndSwitch.Create<ITextBox>();
 			((ITextBox) InnerTextBox).Placeholder = "Search";
 			base.Controls.Add(InnerTextBox);
 
@@ -193,11 +194,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(InnerTextBox.BackColor);
+				return InnerTextBox.BackColor;
 			}
 			set
 			{
-				InnerTextBox.BackColor = Platform.Parse(value);
+				InnerTextBox.BackColor = value;
 			}
 		}
 
@@ -212,11 +213,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(InnerTextBox.BorderColor);
+				return InnerTextBox.BorderColor;
 			}
 			set
 			{
-				InnerTextBox.BorderColor = Platform.Parse(value);
+				InnerTextBox.BorderColor = value;
 			}
 		}
 
@@ -466,11 +467,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(InnerTextBox.ForeColor);
+				return InnerTextBox.ForeColor;
 			}
 			set
 			{
-				InnerTextBox.ForeColor = Platform.Parse(value);
+				InnerTextBox.ForeColor = value;
 			}
 		}
 

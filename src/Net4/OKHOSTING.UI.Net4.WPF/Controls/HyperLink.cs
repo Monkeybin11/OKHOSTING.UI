@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
@@ -131,7 +132,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Parse(((System.Windows.Media.SolidColorBrush) base.Background).Color);
 			}
 			set
 			{

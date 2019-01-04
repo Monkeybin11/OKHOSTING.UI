@@ -6,9 +6,9 @@ namespace OKHOSTING.UI.Net4.WinForms
 	public class Page : System.Windows.Forms.Form, IPage
 	{
 		/// <summary>
-		/// Platform that is managing this page
+		/// App that is running on this page
 		/// </summary>
-		public UI.Platform Platform { get; set; }
+		public App App { get; set; }
 
 		public IControl Content
 		{
@@ -19,7 +19,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 					return null;
 				}
 
-				return (IControl)Controls[0];
+				return (IControl) Controls[0];
 			}
 			set
 			{
@@ -45,30 +45,27 @@ namespace OKHOSTING.UI.Net4.WinForms
 			}
 		}
 
-		double IPage.Width
+		double? IPage.Width
 		{
 			get
 			{
-				return base.Width;
+				return Width;
 			}
 		}
 
-		double IPage.Height
+		double? IPage.Height
 		{
 			get
 			{
-				return base.Height;
+				return Height;
 			}
 		}
+
+		public event EventHandler Resized;
 
 		protected override void OnResize(EventArgs e)
 		{
-			if (Platform.Controller != null) 
-			{
-				Platform.Controller.Resize ();
-			}
-
-			base.OnResize(e);
+			Resized?.Invoke(this, null);
 		}
 	}
 }

@@ -12,8 +12,22 @@ namespace OKHOSTING.UI.Net4.WebForms
 	/// </summary>
 	public partial class Page : System.Web.UI.Page, IPage
 	{
-		public UI.Platform Platform { get; set; }
+		/// <summary>
+		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
+		/// </summary>
+		protected int ControlCounter = 0;
 		
+		/// <summary>
+		/// Adds a name to all controls created, necessary to handle postbacks
+		/// </summary>
+		protected virtual void App_ControlCreated(object sender, IControl e)
+		{
+			if (string.IsNullOrWhiteSpace(e.Name))
+			{
+				e.Name = $"ctr_{e.GetType().Name}_{ControlCounter++}";
+			}
+		}
+
 		/// <summary>
 		/// The content holder.
 		/// <para xml:lang="es">El contenido que contiene la pagina.</para>
@@ -21,17 +35,30 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
 
 		/// <summary>
+		/// Raises the Resized event
+		/// </summary>
+		protected internal void OnResized()
+		{
+			Resized?.Invoke(this, null);
+		}
+
+		/// <summary>
 		/// Restores Page state (content & title) and launch events
 		/// <para xml:lang="es">Restaura el estado de la pagina (Contenido y titulo) y lanza eventos</para>
 		/// </summary>
 		protected override void OnLoad(EventArgs e)
 		{
+			Session["Page"] = this;
+
 			base.OnLoad(e);
 
-			Platform = (Platform) System.Web.HttpContext.Current.Session["Platform"];
-
-			//assign as current page
-			Platform.Page = this;
+			//create placeholder for content
+			if (ContentHolder == null)
+			{
+				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
+				ContentHolder.ID = "ContentHolder";
+				base.Form.Controls.Add(ContentHolder);
+			}
 
 			//load javascript dependencies
 			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
@@ -59,62 +86,81 @@ namespace OKHOSTING.UI.Net4.WebForms
 				return;
 			}
 
-			//create placeholder for content
-			if (ContentHolder == null)
-			{
-				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				ContentHolder.ID = "ContentHolder";
-				base.Form.Controls.Add(ContentHolder);
-			}
-
 			//search for a rewrite rule for this uri
-			var rule = ((Platform) Platform).GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
+			var rule = Platform.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
 
-			if (rule!= null)
+			//replace old page with current one
+			var pages = App.State.Keys.Where(p => p is Page);
+
+			if (pages.Any())
 			{
-				//should we start a different controller than the current one?
-				if (Platform.Controller != null)
+				Stack<PageState> newState = new Stack<PageState>();
+
+				foreach (var page in pages.ToArray())
 				{
-					bool startNew = false;
+					var stateStack = App.State[page];
 
-					if (!rule.ControllerType.IsAssignableFrom(Platform.Controller.GetType()))
+					foreach (var item in stateStack.Reverse())
 					{
-						startNew = true;
-					}
-					else
-					{
-						var currentUri = rule.GetUri(Platform.Controller).ToString();
-
-						if (currentUri != Request.RawUrl)
-						{
-							startNew = true;
-						}
+						newState.Push(item);
 					}
 
-					if (startNew)
-					{
-						var newController = rule.GetController(new Uri(Request.RawUrl, UriKind.Relative));
-						newController.Start();
-					}
+					App.State.Remove(page);
+				}
+
+				App.State.Add(this, newState);
+
+				foreach (PageState st in newState)
+				{
+					st.Controller.Page = this;
 				}
 			}
 
-			//there is no controller assigned, exit
-			if (Platform.Controller == null)
+			var state = App[this];
+
+			//should we start a different controller than the current one?
+			if (rule != null && state?.Controller != null)
 			{
-				return;
+				bool startNew = false;
+
+				if (!rule.ControllerType.IsAssignableFrom(state.Controller.GetType()))
+				{
+					startNew = true;
+				}
+				else
+				{
+					var currentUri = rule.GetUri(state.Controller).ToString();
+
+					if (currentUri != Request.RawUrl)
+					{
+						startNew = true;
+					}
+				}
+				
+				if (startNew)
+				{
+					var newController = rule.GetController(new Uri(Request.RawUrl, UriKind.Relative));
+					newController.Page = this;
+					newController.Start();
+				}
 			}
 
 			//get title and content from the state, in case it has a different Page instance
-			Title = Platform.PageState?.Title;
-			Content = Platform.PageState?.Content;
+			Title = state?.Title;
+			Content = state?.Content;
+
+			//there is no controller assigned, exit
+			if (state?.Controller == null)
+			{
+				return;
+			}
 
 			if (!IsPostBack)
 			{
 				return;
 			}
 
-			//keep track of wich IInputControls had ther value updated so we can reaise IInputControl.OnValueChanged
+			//keep track of wich IInputControls had their value updated so we can reaise IInputControl.OnValueChanged
 			List<IWebInputControl> updatedInputControls = new List<IWebInputControl>();
 
 			//handle posted values
@@ -138,6 +184,61 @@ namespace OKHOSTING.UI.Net4.WebForms
 				control.RaiseClick();
 			}
 		}
+
+		/// <summary>
+		/// Ons the pre render.
+		/// <para xml:lang="es">Hace todos los pasos previos a la representacion.</para>
+		/// </summary>
+		/// <returns>The pre render.</returns>
+		/// <param name="e">E.</param>
+		protected override void OnPreRender(EventArgs e)
+		{
+			//save page state
+			var state = App[this];
+
+			if (state != null)
+			{
+				state.Title = Title;
+				state.Content = Content;
+			}
+
+			//allow friendly urls on forms
+			Form.Action = Request.RawUrl;
+
+			base.OnPreRender(e);
+		}
+
+		/// <summary>
+		/// Performs the steps of initialization and configuration required to create a page.
+		/// <para xml:lang="es">Realiza las etapas de inicializacion y configuracion requeridas para crear una pagina.</para>
+		/// </summary>
+		/// <returns>The init.</returns>
+		/// <param name="e">E.</param>
+		protected override void OnInit(EventArgs e)
+		{
+			base.OnInit(e);
+			EnsureChildControls();
+		}
+
+		/// <summary>
+		/// App that is running on this page
+		/// </summary>
+		public virtual App App
+		{
+			get
+			{
+				return (App) Session["App"];
+			}
+			set
+			{
+				Session["App"] = value;
+			}
+		}
+
+		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		public event EventHandler Resized;
 
 		/// <summary>
 		/// Gets or sets the content.
@@ -175,7 +276,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// <value>The width.
 		/// <para xml:lang="es">El ancho.</para>
 		/// </value>
-		public double Width
+		public double? Width
 		{
 			get
 			{
@@ -195,7 +296,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// <value>The height.
 		/// <para xml:lang="es">La altura</para>
 		/// </value>
-		public double Height
+		public double? Height
 		{
 			get
 			{
@@ -210,43 +311,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		public IEnumerable<IControl> GetAllControls()
 		{
-			foreach (IControl ctr in WebForms.Platform.GetAllControls(this).Where(c => c is IControl))
+			foreach (IControl ctr in Platform.GetAllControls(this).Where(c => c is IControl))
 			{
 				yield return ctr;
 			}
-		}
-
-		/// <summary>
-		/// Ons the pre render.
-		/// <para xml:lang="es">Hace todos los pasos previos a la representacion.</para>
-		/// </summary>
-		/// <returns>The pre render.</returns>
-		/// <param name="e">E.</param>
-		protected override void OnPreRender(EventArgs e)
-		{
-			//save page state
-			if (Platform.PageState != null)
-			{
-				Platform.PageState.Title = Title;
-				Platform.PageState.Content = Content;
-			}
-
-			//allow friendly urls on forms
-			Form.Action = Request.RawUrl;
-
-			base.OnPreRender(e);
-		}
-
-		/// <summary>
-		/// Performs the steps of initialization and configuration required to create a page.
-		/// <para xml:lang="es">Realiza las etapas de inicializacion y configuracion requeridas para crear una pagina.</para>
-		/// </summary>
-		/// <returns>The init.</returns>
-		/// <param name="e">E.</param>
-		protected override void OnInit(EventArgs e)
-		{
-			base.OnInit(e);
-			EnsureChildControls();
 		}
 	}
 }

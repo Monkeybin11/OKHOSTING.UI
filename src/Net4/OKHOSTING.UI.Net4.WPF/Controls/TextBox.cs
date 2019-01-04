@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
@@ -435,9 +436,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		private void ShowPlaceholder()
 		{
-			if (string.IsNullOrEmpty(base.Text) || base.Text == ((ITextBox)this).Placeholder)
+			if (string.IsNullOrEmpty(base.Text) || base.Text == ((ITextBox) this).Placeholder)
 			{
-				base.Text = ((ITextBox)this).Placeholder;
+				base.Text = ((ITextBox) this).Placeholder;
 				base.Foreground = new System.Windows.Media.SolidColorBrush(Platform.Parse(((ITextBox) this).PlaceholderColor));
 				IsPlaceHolder = true;
 			}
@@ -445,7 +446,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		private void HidePlaceholder()
 		{
-			if (base.Text == ((ITextBox)this).Placeholder)
+			if (base.Text == ((ITextBox) this).Placeholder)
 			{
 				base.Text = null;
 				base.Foreground = new System.Windows.Media.SolidColorBrush(Platform.Parse(((ITextBox) this).FontColor));

@@ -18,7 +18,7 @@
 			window.location = window.location;
 		};
 	}).error(function (xhr) {
-		alert("Problem to retrieve browser size.");
+		console.log("Problem to retrieve browser size");
 	});
 }
 

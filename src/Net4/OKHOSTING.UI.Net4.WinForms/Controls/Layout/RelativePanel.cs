@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
@@ -19,7 +20,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		protected readonly ControlList _Children;
 
-		IList<IControl> IRelativePanel.Children
+		IList<IControl> IContainer.Children
 		{
 			get
 			{
@@ -42,7 +43,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 			NativeControl nativeControl = (NativeControl) control;
 			NativeControl nativeReference = (NativeControl) referenceControl;
-			System.Drawing.Point location = new System.Drawing.Point();
+			Point location = new Point();
 			
 			switch (horizontalContraint)
 			{
@@ -164,11 +165,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = value;
 			}
 		}
 

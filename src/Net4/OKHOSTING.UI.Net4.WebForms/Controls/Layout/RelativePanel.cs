@@ -1,6 +1,7 @@
 ﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
+using System.Drawing;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// <value>The children.
 		/// <para xml:lang="es">Los controles hijos</para>
 		/// </value>
-		IList<IControl> IRelativePanel.Children
+		IList<IControl> IContainer.Children
 		{
 			get
 			{
@@ -216,11 +217,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -235,11 +236,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BorderColor);
+				return base.BorderColor;
 			}
 			set
 			{
-				base.BorderColor = Platform.Parse(value);
+				base.BorderColor = value;
 			}
 		}
 

@@ -1,8 +1,11 @@
-﻿using OKHOSTING.UI.Controls;
+﻿using OKHOSTING.Core;
+using OKHOSTING.Data.Validation;
+using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace OKHOSTING.UI.Forms
 {
@@ -288,6 +291,222 @@ namespace OKHOSTING.UI.Forms
 			foreach (FormField field in Fields)
 			{
 				field.Dispose();
+			}
+		}
+
+		#endregion
+
+		#region Creating fields
+
+		/// <summary>
+		/// Creates a field that will contain a value of a specific type
+		/// <para xml:lang="es">
+		/// Crea un campo que contendra un valor de un tipo especifico.
+		/// </para>
+		/// </summary>
+		public virtual FormField CreateFieldFor(Type type)
+		{
+			//validate arguments
+			if (type == null) throw new ArgumentNullException("type");
+
+			if (Nullable.GetUnderlyingType(type) != null)
+			{
+				type = Nullable.GetUnderlyingType(type);
+			}
+
+			//field
+			FormField field;
+
+			//Enum
+			if (type.GetTypeInfo().IsEnum)
+			{
+				field = new EnumField(type);
+			}
+
+			//Type, ignore this since we can't know if type means Person (as in a serializable object) or typeof(Person) as a type which child types you would choose from
+			//else if (type.Equals(typeof(Type)))
+			//{
+			//	field = new TypeField();
+			//}
+
+			//Bool
+			else if (type.Equals(typeof(bool)))
+			{
+				field = new BoolField();
+			}
+
+			//DateTime
+			else if (type.Equals(typeof(DateTime)))
+			{
+				//field = new DateTimeField();
+				field = new DateTimeField();
+			}
+
+			//TimeSpan
+			else if (type.Equals(typeof(TimeSpan)))
+			{
+				field = new TimeSpanField();
+			}
+
+			//Numeric
+			else if (type.IsNumeric())
+			{
+				if (type.IsIntegral())
+				{
+					field = new IntegerField();
+				}
+				else
+				{
+					field = new DecimalField();
+				}
+			}
+
+			//String serializable
+			else if (type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(Data.IStringSerializable)))
+			{
+				field = new StringSerializableField(type);
+			}
+
+			//XML
+			else if (type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(System.Xml.Serialization.IXmlSerializable)))
+			{
+				field = new XmlSerializableField(type);
+			}
+
+			//String
+			else if (type.Equals(typeof(string)))
+			{
+				field = new StringField();
+			}
+
+			//byte[]
+			else if (type.Equals(typeof(byte[])))
+			{
+				field = new BinaryField();
+			}
+
+			//otherwise just create a textbox
+			else
+			{
+				field = new StringField();
+			}
+
+			//return
+			return field;
+		}
+
+		/// <summary>
+		/// Creates a field for a DataMember
+		/// <para xml:lang="es">
+		/// Crea un campo para un DataMember
+		/// </para>
+		/// </summary>
+		public virtual FormField CreateFieldFor(MemberInfo member)
+		{
+			//if there's no values defined, exit
+			if (member == null) throw new ArgumentNullException(nameof(member));
+
+			//field
+			FormField field;
+			Type returnType = Data.MemberExpression.GetReturnType(member);
+
+			//String
+			if (returnType.Equals(typeof(string)))
+			{
+				if (member.Name.ToLower() == "password" || member.Name.ToLower() == "pwd")
+				{
+					field = new PasswordField();
+				}
+				else
+				{
+					field = new StringField();
+
+					//set max lenght, if defined
+					int maxLenght = (int) StringLengthValidator.GetMaxLength(member);
+
+					if (maxLenght == 0)
+					{
+						field.TableWide = true;
+					}
+					else
+					{
+						((StringField) field).MaxLenght = maxLenght;
+					}
+
+					//set regular expression validation, if defined
+					var regex = member.CustomAttributes.Where(att => att.AttributeType.Equals(typeof(RegexValidator))).SingleOrDefault();
+
+					if (regex != null)
+					{
+						((StringField)field).RegularExpression = (string)regex.ConstructorArguments[0].Value;
+					}
+				}
+			}
+
+			//otherwise delegate to the static method to create the field from the return type
+			else
+			{
+				field = CreateFieldFor(returnType);
+			}
+
+			field.Name = member.Name;
+			field.Required = RequiredValidator.IsRequired(member);
+			field.CaptionControl.Text = Translator.Translate(member);
+			//if (member.Column.IsPrimaryKey) field.SortOrder = 0;
+
+			return field;
+		}
+
+		/// <summary>
+		/// Creates fields for every Member that is mapped on a persistent object
+		/// <para xml:lang="es">
+		/// Agrega campos para cada miembro que se asigna en un objeto persistente
+		/// </para>
+		/// </summary>
+		/// <param name="instance">
+		/// Object which values will be copied to the form
+		/// <para xml:lang="es">
+		/// Objeto que se van a copiar al formulario
+		/// </para>
+		/// </param>
+		public virtual IEnumerable<FormField> CreateFieldsFor(object instance)
+		{
+			//validate arguments
+			if (instance == null) throw new ArgumentNullException(nameof(instance));
+			Type type = instance.GetType();
+
+			//create fields
+			foreach (MemberInfo member in type.GetAllMemberInfos())
+			{
+				FormField field = CreateFieldFor(member);
+				field.Value = Data.MemberExpression.GetValue(member, instance);
+
+				yield return field;
+			}
+		}
+
+		/// <summary>
+		/// Creates fiels for all the parameters that a method needs to be executed
+		/// </summary>
+		public virtual IEnumerable<FormField> CreateFieldsFor(MethodInfo method)
+		{
+			uint order = 0;
+
+			//add a field for each parameter
+			foreach (ParameterInfo param in method.GetParameters())
+			{
+				FormField field;
+
+				field = CreateFieldFor(param.ParameterType);
+
+				//set common values
+				field.Name = param.Name;
+				field.Required = !param.IsOptional && !param.IsOut;
+				//field.CaptionControl.Text = new System.Resources.ResourceManager(method.DeclaringType).GetString(method.GetFriendlyFullName().Replace('.', '_') + '_' + param.Name);
+				field.CaptionControl.Text = param.Name;
+				field.SortOrder = order++;
+
+				yield return field;
 			}
 		}
 

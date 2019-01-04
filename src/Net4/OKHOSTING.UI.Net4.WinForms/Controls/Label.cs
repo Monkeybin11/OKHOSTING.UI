@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Label : System.Windows.Forms.Label, UI.Controls.ILabel
+	public class Label : System.Windows.Forms.Label, ILabel
 	{
 		public Label()
 		{
-			base.AutoSize = false;
+			base.AutoSize = true;
 		}
 
 		#region IControl
@@ -62,11 +58,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -106,11 +102,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.ForeColor);
+				return base.ForeColor;
 			}
 			set
 			{
-				base.ForeColor = Platform.Parse(value);
+				base.ForeColor = value;
 			}
 		}
 

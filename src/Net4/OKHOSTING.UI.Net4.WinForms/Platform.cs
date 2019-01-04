@@ -1,47 +1,14 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Net4.WinForms
 {
-	public class Platform : UI.Platform
+	public static class Platform
 	{
-		public override void Finish()
+		public static void Finish()
 		{
-			base.Finish();
 			System.Windows.Forms.Application.Exit();
-		}
-
-		//static
-
-		public static new T Create<T>() where T : class, IControl
-		{
-			var control = UI.Platform.Create<T>() as System.Windows.Forms.Control;
-
-			//control.Anchor = ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			//| System.Windows.Forms.AnchorStyles.Left)
-			//| System.Windows.Forms.AnchorStyles.Right));
-
-			return control as T;
-		}
-
-		public static Color Parse(System.Drawing.Color color)
-		{
-			if (color == null)
-			{
-				return new Color(255, 0, 0, 0);
-			}
-
-			return new Color(color.A, color.R, color.G, color.B);
-		}
-
-		public static System.Drawing.Color Parse(Color color)
-		{
-			if (color == null)
-			{
-				return default(System.Drawing.Color);
-			}
-
-			return System.Drawing.Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
 		}
 
 		public static System.Windows.Forms.Padding Parse(Thickness thickness)
@@ -228,10 +195,10 @@ namespace OKHOSTING.UI.Net4.WinForms
 			//draw custom border here
 			if (((IControl) control).BorderColor != null && ((IControl) control).BorderWidth != null)
 			{
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p4, p1); //left
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p1, p2); //top
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p2, p3); //right
-				pevent.Graphics.DrawLine(new System.Drawing.Pen(Platform.Parse(((IControl)control).BorderColor), (float)((IControl)control).BorderWidth.Left), p3, p4); //bottom
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p4, p1); //left
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p1, p2); //top
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p2, p3); //right
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p3, p4); //bottom
 			}
 		}
 	}

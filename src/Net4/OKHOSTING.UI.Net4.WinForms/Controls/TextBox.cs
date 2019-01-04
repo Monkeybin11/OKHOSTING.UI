@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
@@ -98,11 +99,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -152,7 +153,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			set
 			{
 				_FontColor = value;
-				base.ForeColor = Platform.Parse(value);
+				base.ForeColor = value;
 			}
 		}
 
@@ -320,7 +321,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			if (string.IsNullOrEmpty(base.Text) || base.Text == ((ITextBox) this).Placeholder)
 			{
 				base.Text = ((ITextBox) this).Placeholder;
-				base.ForeColor = Platform.Parse(((ITextBox) this).PlaceholderColor);
+				base.ForeColor = ((ITextBox) this).PlaceholderColor;
 				IsPlaceHolder = true;
 			}
 		}
@@ -330,7 +331,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			if (base.Text == ((ITextBox) this).Placeholder)
 			{
 				base.Text = null;
-				base.ForeColor = Platform.Parse(((ITextBox) this).FontColor);
+				base.ForeColor = ((ITextBox) this).FontColor;
 				IsPlaceHolder = false;
 			}
 		}

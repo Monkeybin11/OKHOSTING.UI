@@ -1,31 +1,24 @@
-﻿using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layout;
-using OKHOSTING.UI.Net4.WPF.Controls;
-using OKHOSTING.UI.Net4.WPF.Controls.Layout;
-using System;
+﻿using System;
+using System.Drawing;
 using System.Windows;
 
 namespace OKHOSTING.UI.Net4.WPF
 {
-	public class Platform : UI.Platform
+	public static class Platform
 	{
-		public override void Finish()
+		public static void Finish()
 		{
-			base.Finish();
-			System.Windows.Application.Current.Shutdown();
-
+			Application.Current.Shutdown();
 		}
-
-		//static
 
 		public static Color Parse(System.Windows.Media.Color color)
 		{
 			if (color == null)
 			{
-				return new Color(255, 0, 0, 0);
+				return Color.FromArgb(255, 0, 0, 0);
 			}
 
-			return new Color(color.A, color.R, color.G, color.B);
+			return Color.FromArgb(color.A, color.R, color.G, color.B);
 		}
 
 		public static System.Windows.Media.Color Parse(Color color)
@@ -35,7 +28,7 @@ namespace OKHOSTING.UI.Net4.WPF
 				return System.Windows.Media.Color.FromArgb(255, 0, 0, 0);
 			}
 
-			return System.Windows.Media.Color.FromArgb((byte) color.Alpha, (byte) color.Red, (byte) color.Green, (byte) color.Blue);
+			return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
 		}
 
 		public static System.Windows.Thickness Parse(Thickness thickness)
