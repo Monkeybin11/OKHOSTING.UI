@@ -16,7 +16,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Nombre de la fuente.
 		/// </para>
 		/// </summary>
-		public string FontFamily { get; set; }
+		public string FontFamily
+		{
+			get
+			{
+				return (string) Get(nameof(FontFamily));
+			}
+			set
+			{
+				Set(nameof(FontFamily), value);
+			}
+		}
 
 		/// <summary>
 		/// Color of the font
@@ -24,7 +34,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Color del texto.
 		/// </para>
 		/// </summary>
-		public Color FontColor { get; set; }
+		public Color FontColor
+		{
+			get
+			{
+				return (Color) Get(nameof(FontColor));
+			}
+			set
+			{
+				Set(nameof(FontColor), value);
+			}
+		}
 
 		/// <summary>
 		/// Size of the font, in DIP
@@ -32,7 +52,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Tamaño del texto, en DIP
 		/// </para>
 		/// </summary>
-		public double FontSize { get; set; }
+		public double FontSize
+		{
+			get
+			{
+				return (double) Get(nameof(FontSize));
+			}
+			set
+			{
+				Set(nameof(FontSize), value);
+			}
+		}
 
 		/// <summary>
 		/// Wether the font is bold or not
@@ -40,7 +70,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Si el texto esta en negrita o no.
 		/// </para>
 		/// </summary>
-		public bool Bold { get; set; }
+		public bool Bold
+		{
+			get
+			{
+				return (bool) Get(nameof(Bold));
+			}
+			set
+			{
+				Set(nameof(Bold), value);
+			}
+		}
 
 		/// <summary>
 		/// Wether the font is italic or not
@@ -48,7 +88,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Si el texto esta en italica o no.
 		/// </para>
 		/// </summary>
-		public bool Italic { get; set; }
+		public bool Italic
+		{
+			get
+			{
+				return (bool) Get(nameof(Italic));
+			}
+			set
+			{
+				Set(nameof(Italic), value);
+			}
+		}
 
 		/// <summary>
 		/// Wether the font is underscored or not
@@ -56,7 +106,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Si el texto esta en subrayado o no.
 		/// </para>
 		/// </summary>
-		public bool Underline { get; set; }
+		public bool Underline
+		{
+			get
+			{
+				return (bool) Get(nameof(Underline));
+			}
+			set
+			{
+				Set(nameof(Underline), value);
+			}
+		}
 
 		/// <summary>
 		/// Horizontal alignment of the text with respect to the control
@@ -64,7 +124,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Alineación horizontal del texto con respecto al control.
 		/// </para>
 		/// </summary>
-		public HorizontalAlignment TextHorizontalAlignment { get; set; }
+		public HorizontalAlignment TextHorizontalAlignment
+		{
+			get
+			{
+				return (HorizontalAlignment) Get(nameof(TextHorizontalAlignment));
+			}
+			set
+			{
+				Set(nameof(TextHorizontalAlignment), value);
+			}
+		}
 
 		/// <summary>
 		/// Vertical alignment of the text with respect to the control
@@ -72,7 +142,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Alineacion vertical del texto con respecto al control.
 		/// </para>
 		/// </summary>
-		public VerticalAlignment TextVerticalAlignment { get; set; }
+		public VerticalAlignment TextVerticalAlignment
+		{
+			get
+			{
+				return (VerticalAlignment) Get(nameof(TextVerticalAlignment));
+			}
+			set
+			{
+				Set(nameof(TextVerticalAlignment), value);
+			}
+		}
 
 		/// <summary>
 		/// Space that this control will set between a it's border and it's text.
@@ -80,6 +160,16 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Espacio que este control se establecera entre un borde y el texto.
 		/// </para>
 		/// </summary>
-		public Thickness TextPadding { get; set; }
+		public Thickness TextPadding
+		{
+			get
+			{
+				return (Thickness) Get(nameof(TextPadding));
+			}
+			set
+			{
+				Set(nameof(TextPadding), value);
+			}
+		}
 	}
 }

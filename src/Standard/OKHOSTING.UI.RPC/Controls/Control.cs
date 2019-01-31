@@ -1,5 +1,4 @@
 ﻿using OKHOSTING.UI.Controls;
-using System.ComponentModel;
 using System.Drawing;
 
 namespace OKHOSTING.UI.RPC.Controls
@@ -99,7 +98,6 @@ namespace OKHOSTING.UI.RPC.Controls
 				Set(nameof(Name), value);
 			}
 		}
-
 
 		/// <summary>
 		/// Space that this control will set between itself and it's container
@@ -225,27 +223,12 @@ namespace OKHOSTING.UI.RPC.Controls
 		{
 			get
 			{
-				return (object) Get(nameof(Tag));
+				return Get(nameof(Tag));
 			}
 			set
 			{
 				Set(nameof(Tag), value);
 			}
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		public virtual void Dispose()
-		{
-		}
-
-		/// <summary>
-		/// Triggers the property changed event for a specific property.
-		/// </summary>
-		/// <param name="propertyName">The name of the property that has changed.</param>
-		protected void NotifyPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

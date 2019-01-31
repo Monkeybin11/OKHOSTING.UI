@@ -136,6 +136,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 					case ITextBoxInputType.Number:
 						base.Attributes["type"] = "number";
+						base.Attributes["step"] = "0.01";
 						break;
 
 					case ITextBoxInputType.Telephone:
