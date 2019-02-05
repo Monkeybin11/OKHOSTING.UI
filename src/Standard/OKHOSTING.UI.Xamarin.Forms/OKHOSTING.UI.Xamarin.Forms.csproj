@@ -20,4 +20,8 @@
     <ProjectReference Include="..\OKHOSTING.UI\OKHOSTING.UI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Media\" />
+  </ItemGroup>
+
 </Project>

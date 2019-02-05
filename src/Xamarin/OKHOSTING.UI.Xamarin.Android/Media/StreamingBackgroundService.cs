@@ -18,10 +18,10 @@ namespace OKHOSTING.UI.Xamarin.Android.Media
 	public class StreamingBackgroundService : Service, AudioManager.IOnAudioFocusChangeListener
 	{
 		//Actions
-		public const string ActionPlay = "OKHOSTING.Streaming.Xamarin.Android.action.PLAY";
-		public const string ActionPause = "OKHOSTING.Streaming.Xamarin.Android.action.PAUSE";
-		public const string ActionStop = "OKHOSTING.Streaming.Xamarin.Android.action.STOP";
-		public const string ActionSource = "OKHOSTING.Streaming.Xamarin.Android.action.SOURCE";
+		public const string ActionPlay = "OKHOSTING.UI.Xamarin.Android.Media.StreamingBackgroundService.action.PLAY";
+		public const string ActionPause = "OKHOSTING.UI.Xamarin.Android.Media.StreamingBackgroundService.action.PAUSE";
+		public const string ActionStop = "OKHOSTING.UI.Xamarin.Android.Media.StreamingBackgroundService.action.STOP";
+		public const string ActionSource = "OKHOSTING.UI.Xamarin.Android.Media.StreamingBackgroundService.action.SOURCE";
 
 		private System.Uri Source { get; set; }
 
@@ -248,13 +248,13 @@ namespace OKHOSTING.UI.Xamarin.Android.Media
 			var pendingIntent = PendingIntent.GetActivity(this, 0, new Intent(this, ReturnTo), 0);
 
 			NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-			builder.SetTicker("Señal Global");
-			builder.SetContentTitle("Señal Global");
-			builder.SetContentText("Estas escuchando Señal Global");
+			builder.SetTicker("Streaming in background");
+			builder.SetContentTitle("OKHOSTING.UI");
+			builder.SetContentText("Your are streaming audio in the background");
 			builder.SetContentIntent(pendingIntent);
 			builder.SetOngoing(true);
 			builder.SetCategory(Notification.CategoryService);
-			builder.SetSmallIcon(Resource.Drawable.icon);
+			//builder.SetSmallIcon(Resource.Drawable.icon);
 
 			StartForeground(NotificationId, builder.Build());
 		}

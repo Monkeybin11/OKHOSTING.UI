@@ -1,4 +1,3 @@
-using System;
 using Android.Content;
 using OKHOSTING.UI.Media;
 
@@ -9,9 +8,9 @@ namespace OKHOSTING.UI.Xamarin.Android.Media
 	/// </summary>
 	public class AudioPlayer : IAudioPlayer
 	{
-		protected Uri _Source;
+		protected string _Source;
 
-		public Uri Source
+		public string Source
 		{
 			get
 			{
@@ -22,7 +21,7 @@ namespace OKHOSTING.UI.Xamarin.Android.Media
 				_Source = value;
 
 				Intent intent = new Intent(StreamingBackgroundService.ActionSource);
-				intent.PutExtra("source", value.ToString());
+				intent.PutExtra("source", value);
 				global::Android.App.Application.Context.StartService(intent);
 			}
 		}

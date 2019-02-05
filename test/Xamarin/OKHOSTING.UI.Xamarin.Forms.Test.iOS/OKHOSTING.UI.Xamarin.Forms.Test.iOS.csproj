@@ -110,6 +110,10 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Media\AudioBuffer.cs" />
+    <Compile Include="Media\AudioPlayer.cs" />
+    <Compile Include="Media\StreamingPlayback.cs" />
+    <Compile Include="Media\Thumbnail.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
