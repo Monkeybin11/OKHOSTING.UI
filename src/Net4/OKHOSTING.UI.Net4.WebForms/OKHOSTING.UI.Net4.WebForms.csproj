@@ -56,6 +56,7 @@
     <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Controls\TextBoxBase.cs" />
     <Compile Include="Controls\IWebInputControl.cs" />
+    <Compile Include="Media\OpenFile.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />
