@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.8.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -65,7 +62,6 @@
     <Compile Include="Controls\WebView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Media\AudioPlayer.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>
@@ -132,9 +128,6 @@
       <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

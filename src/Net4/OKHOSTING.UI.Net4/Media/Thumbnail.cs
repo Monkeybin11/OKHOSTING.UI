@@ -2,6 +2,9 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using Xabe.FFmpeg;
+using Xabe.FFmpeg.Enums;
+using Xabe.FFmpeg.Model;
 
 namespace OKHOSTING.UI.Net4.Media
 {
@@ -18,11 +21,10 @@ namespace OKHOSTING.UI.Net4.Media
 
 		public Stream CreateVideoThumbnail(string localVideoPath)
 		{
-			Stream result = new MemoryStream();
-			var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
-			ffMpeg.GetVideoThumbnail(localVideoPath, result, 5);
+			string output = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + FileExtensions.Png);
+			IConversionResult result = Conversion.Snapshot(localVideoPath, output, TimeSpan.FromSeconds(0)).Start().Result;
 
-			return result;
+			return File.Open(output, FileMode.Open);
 		}
 	}
 }
