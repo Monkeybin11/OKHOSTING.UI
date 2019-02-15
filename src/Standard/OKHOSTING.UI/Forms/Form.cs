@@ -134,13 +134,15 @@ namespace OKHOSTING.UI.Forms
 					//if a field with TableWide = true is found, create a row for this field only
 					if (field.TableWide)
 					{
-						//create new rows for this field
-						CreateTableWideRow(field, content);
-						
 						//reset counter
 						currentColumn = 0;
 
+						//create new rows for this field
+						CreateTableWideRow(field, content);
+
 						//go to next field
+						content.RowCount++;
+						currentColumn = 0;
 						continue;
 					}
 
