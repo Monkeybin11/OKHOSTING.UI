@@ -19,20 +19,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		#region IInputControl
 
 		/// <summary>
-		/// Gets or sets the OKHOSTING . user interface . controls. II nput control< system. date time?>. value.
+		/// Gets or sets the OKHOSTING.UI.Controls.IInputControl<System.DateTime?>. value.
 		/// </summary>
-		/// <value>The OKHOSTING . user interface . controls. II nput control< system. date time?>. value.</value>
 		DateTime? IInputControl<DateTime?>.Value
 		{
 			get
 			{
-				DateTime val;
+				var values = base.Text?.Split('/');
 
-				if (DateTime.TryParseExact(base.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.AssumeLocal, out val))
+				try
 				{
-					return val;
+					return new DateTime(int.Parse(values[2]), int.Parse(values[1]), int.Parse(values[0]));
 				}
-				else
+				catch
 				{
 					return null;
 				}
@@ -73,14 +72,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			DateTime date = DateTime.MinValue;
 			string postedValue = Page.Request.Form[ID];
 
-			if (DateTime.TryParse(postedValue, out date) && date != ((IDatePicker) this).Value)
+			if (base.Text != postedValue)
 			{
-				((IDatePicker) this).Value = date;
-				return true;
-			}
-			else if (string.IsNullOrWhiteSpace(postedValue) && ((IDatePicker) this).Value != null)
-			{
-				((IDatePicker) this).Value = null;
+				base.Text = postedValue;
 				return true;
 			}
 			else
