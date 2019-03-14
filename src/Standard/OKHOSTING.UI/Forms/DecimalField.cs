@@ -23,7 +23,7 @@ namespace OKHOSTING.UI.Forms
 			{
 				if (string.IsNullOrWhiteSpace(ValueControl.Value))
 				{
-					return 0M;
+					return null;
 				}
 				else
 				{
@@ -38,7 +38,7 @@ namespace OKHOSTING.UI.Forms
 				}
 				else
 				{
-					ValueControl.Value = (Convert.ToDecimal(value)).ToString();
+					ValueControl.Value = Convert.ToDecimal(value).ToString();
 				}
 			}
 		}
