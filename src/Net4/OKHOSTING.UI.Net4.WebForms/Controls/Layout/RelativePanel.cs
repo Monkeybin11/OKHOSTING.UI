@@ -36,7 +36,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// <value>The children.
 		/// <para xml:lang="es">Los controles hijos</para>
 		/// </value>
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

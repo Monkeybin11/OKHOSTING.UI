@@ -45,7 +45,7 @@ namespace OKHOSTING.UI.RPC.Controls
 
 		public AutocompleteSearchEventArgs OnSearching(string text)
 		{
-			throw new NotImplementedException();
+			return (AutocompleteSearchEventArgs) base.Invoke(nameof(OnSearching), new[] { text });
 		}
 	}
 }

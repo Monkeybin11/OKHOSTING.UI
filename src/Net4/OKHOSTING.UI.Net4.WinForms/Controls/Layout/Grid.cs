@@ -217,7 +217,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			return base.RowStyles[row].Height;
 		}
 
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

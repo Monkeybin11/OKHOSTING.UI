@@ -34,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// Obtiene la lista de los controles hijos del Stack.
 		/// </para>
 		/// </summary>
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

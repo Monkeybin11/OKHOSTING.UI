@@ -206,7 +206,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public readonly ControlList Controls;
 
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

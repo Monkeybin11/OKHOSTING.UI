@@ -456,7 +456,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 		#endregion
 
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

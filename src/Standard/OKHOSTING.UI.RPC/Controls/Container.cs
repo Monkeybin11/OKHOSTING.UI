@@ -9,17 +9,19 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public  class Container : Control, IContainer
 	{
-		public IList<IControl> Children { get; } = new List<IControl>();
+		public ICollection<IControl> Children { get; } = new List<IControl>();
 
-		//public override void Dispose()
-		//{
-		//	if (Children != null)
-		//	{
-		//		foreach(var c in Children)
-		//		{
-		//			c.Dispose();
-		//		}
-		//	}
-		//}
+		public override void Dispose()
+		{
+			if (Children != null)
+			{
+				foreach (var c in Children)
+				{
+					c.Dispose();
+				}
+			}
+
+			base.Dispose();
+		}
 	}
 }

@@ -5,7 +5,7 @@ namespace OKHOSTING.UI.RPC.Media
 {
 	public class AudioPlayer: IAudioPlayer
 	{
-		public Uri Source { get; set; }
+		public string Source { get; set; }
 		public void Play() { }
 		public void Pause() { }
 		public void Stop() { }

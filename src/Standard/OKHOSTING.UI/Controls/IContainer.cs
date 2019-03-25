@@ -8,6 +8,6 @@ namespace OKHOSTING.UI.Controls
 	/// </summary>
 	public interface IContainer : IControl
 	{
-		IList<IControl> Children { get; }
+		ICollection<IControl> Children { get; }
 	}
 }

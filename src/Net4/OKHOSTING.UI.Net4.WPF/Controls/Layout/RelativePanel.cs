@@ -525,7 +525,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			throw new ArgumentException("RelativePanel error: Value must be of type UIElement");
 		}
 
-		IList<IControl> UI.Controls.IContainer.Children
+		ICollection<IControl> UI.Controls.IContainer.Children
 		{
 			get
 			{

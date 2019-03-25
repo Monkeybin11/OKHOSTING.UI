@@ -310,7 +310,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			return base.RowDefinitions[row].Height.Value;
 		}
 
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

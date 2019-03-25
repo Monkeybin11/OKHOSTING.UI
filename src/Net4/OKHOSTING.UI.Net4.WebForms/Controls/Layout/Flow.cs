@@ -322,7 +322,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </summary>
 		public readonly ControlList Children;
 
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

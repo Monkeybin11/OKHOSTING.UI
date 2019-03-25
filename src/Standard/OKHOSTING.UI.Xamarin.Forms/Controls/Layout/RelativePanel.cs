@@ -225,7 +225,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// Gets the controls RelativePanel children.
 		/// <para xml:lang="es">Obtiene los controles hijos del RelativePanel.</para>
 		/// </summary>
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

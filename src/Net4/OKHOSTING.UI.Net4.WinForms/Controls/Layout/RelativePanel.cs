@@ -20,7 +20,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		protected readonly ControlList _Children;
 
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{

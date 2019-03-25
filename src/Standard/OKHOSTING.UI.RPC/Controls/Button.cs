@@ -29,6 +29,16 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Se lanza despues de que el usuario ha hecho clic en el botón.
 		/// </para>
 		/// </summary>
-		public event EventHandler Click;
+		public event EventHandler Click
+		{
+			add
+			{
+				throw new NotImplementedException();
+			}
+			remove
+			{
+				throw new NotImplementedException();
+			}
+		}
 	}
 }

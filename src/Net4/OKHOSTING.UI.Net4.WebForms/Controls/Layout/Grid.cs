@@ -431,7 +431,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 		}
 
-		IList<IControl> IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
