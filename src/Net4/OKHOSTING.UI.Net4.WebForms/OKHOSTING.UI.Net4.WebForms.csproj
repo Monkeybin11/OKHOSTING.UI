@@ -115,7 +115,7 @@
       <Name>OKHOSTING.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
-      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+      <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
   </ItemGroup>
