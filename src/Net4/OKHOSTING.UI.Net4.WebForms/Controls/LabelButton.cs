@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a single button with a text label
 	/// <para xml:lang="es">Es un control que representa un boton sencillo con una etiqueta de texto</para>
 	/// </summary>
-	public class LabelButton : System.Web.UI.WebControls.LinkButton, ILabelButton, IWebClickableControl
+	public class LabelButton : System.Web.UI.WebControls.LinkButton, ILabelButton, IClickable
 	{
 		/// <summary>
 		/// Occurs when click.
@@ -17,7 +17,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public new event EventHandler Click;
 
-		void IWebClickableControl.RaiseClick()
+		void IClickable.RaiseClick()
 		{
 			if (Page.Request.Form["__EVENTTARGET"] == ID)
 			{

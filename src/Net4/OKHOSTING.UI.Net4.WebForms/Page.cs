@@ -161,10 +161,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//keep track of wich IInputControls had their value updated so we can reaise IInputControl.OnValueChanged
-			List<IWebInputControl> updatedInputControls = new List<IWebInputControl>();
+			List<IInputControl> updatedInputControls = new List<IInputControl>();
 
 			//handle posted values
-			foreach (IWebInputControl control in GetAllControls().Where(c => c is IWebInputControl))
+			foreach (IInputControl control in GetAllControls().Where(c => c is IInputControl))
 			{
 				if (control.HandlePostBack())
 				{
@@ -173,13 +173,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//raise IInputControl.ValueChanged events
-			foreach (IWebInputControl control in updatedInputControls)
+			foreach (IInputControl control in updatedInputControls)
 			{
 				control.RaiseValueChanged();
 			}
 
 			//raise button click events
-			foreach (IWebClickableControl control in GetAllControls().Where(c => c is IWebClickableControl))
+			foreach (Controls.IClickable control in GetAllControls().Where(c => c is Controls.IClickable))
 			{
 				control.RaiseClick();
 			}

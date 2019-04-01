@@ -11,7 +11,14 @@ namespace OKHOSTING.UI.RPC.Controls
 	{
 		public DateTime? Value
 		{
-			get; set;
+			get
+			{
+				return (DateTime?) Get(nameof(Value));
+			}
+			set
+			{
+				Set(nameof(Value), value);
+			}
 		}
 
 		public event EventHandler<DateTime?> ValueChanged;

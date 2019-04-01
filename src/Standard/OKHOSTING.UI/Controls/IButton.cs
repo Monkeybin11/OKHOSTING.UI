@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OKHOSTING.UI.Controls
+﻿namespace OKHOSTING.UI.Controls
 {
 	/// <summary>
 	/// It contains the events of Button.

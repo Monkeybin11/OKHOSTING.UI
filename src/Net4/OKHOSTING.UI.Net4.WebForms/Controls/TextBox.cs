@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It represents a text box control.
 	/// <para xml:lang="es">Representa un control de cuadro de texto.</para>
 	/// </summary>
-	public class TextBox : TextBoxBase, ITextBox, IWebInputControl
+	public class TextBox : TextBoxBase, ITextBox, IInputControl
 	{
 		#region IInputControl
 
@@ -53,7 +53,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IWebInputControl.HandlePostBack()
+		bool IInputControl.HandlePostBack()
 		{
 			string postedValue = Page.Request.Form[ID];
 
@@ -68,7 +68,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		void IInputControl.RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}

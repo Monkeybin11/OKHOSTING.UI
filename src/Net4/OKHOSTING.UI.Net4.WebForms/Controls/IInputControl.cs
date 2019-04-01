@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Defines methods that every webforms control must implement in order to handle state and postback values
 	/// </summary>
-	public interface IWebInputControl
+	public interface IInputControl
 	{
 		/// <summary>
 		/// Takes the value that was posted by the user and returns true if ValueChanged event should be raised

@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// <summary>It represents a button with a background image
 	/// <para xml:lang="es">Representa un boton con una imagen de fondo</para>
 	/// </summary>
-	public class ImageButton : System.Web.UI.WebControls.ImageButton, IImageButton, IWebClickableControl
+	public class ImageButton : System.Web.UI.WebControls.ImageButton, IImageButton, IClickable
 	{
 		#region IControl
 
@@ -309,7 +309,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public new event EventHandler Click;
 
-		void IWebClickableControl.RaiseClick()
+		void IClickable.RaiseClick()
 		{
 			string postedValue = Page.Request.Form[ID + ".x"];
 

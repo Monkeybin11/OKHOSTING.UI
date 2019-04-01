@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It represents a control input multiline text
 	/// <para xml:lang="es">Representa un control de entrada de texto de varias líneas</para>
 	/// </summary>
-	public class TextArea : System.Web.UI.WebControls.TextBox, ITextArea, IWebInputControl
+	public class TextArea : System.Web.UI.WebControls.TextBox, ITextArea, IInputControl
 	{
 		/// <summary>
 		/// Initializes a new instance of the TextArea class.
@@ -577,7 +577,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IWebInputControl.HandlePostBack()
+		bool IInputControl.HandlePostBack()
 		{
 			string postedValue = Page.Request.Form[ID];
 
@@ -592,7 +592,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		void IInputControl.RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((ITextArea) this).Value);
 		}

@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It represents a control where the user can click and select a value from a list of options
 	/// <para xml:lang="es">Representa un control donde el usuario puede dar clic y seleccionar un valor de una lista de opciones</para>
 	/// </summary>
-	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker, IWebInputControl
+	public class ListPicker : System.Web.UI.WebControls.DropDownList, IListPicker, IInputControl
 	{
 		/// <summary>
 		/// Initializes a new instance of the ListPicker class.
@@ -671,7 +671,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IWebInputControl.HandlePostBack()
+		bool IInputControl.HandlePostBack()
 		{
 			string postedValue = Page.Request.Form[ID];
 
@@ -686,7 +686,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		void IInputControl.RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IListPicker) this).Value);
 		}

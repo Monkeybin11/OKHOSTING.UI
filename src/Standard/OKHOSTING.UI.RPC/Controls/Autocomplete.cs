@@ -9,21 +9,11 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// Contiene los evetos de un control Autocomplete.
 	/// </para>
 	/// </summary>
-	public class Autocomplete: TextControl, IAutocomplete
+	public class Autocomplete: TextControl, IAutocomplete, IInputControl
 	{
 		public string Value { get; set; }
 
-		public event EventHandler<string> ValueChanged
-		{
-			add
-			{
-				throw new NotImplementedException();
-			}
-			remove
-			{
-				throw new NotImplementedException();
-			}
-		}
+		public event EventHandler<string> ValueChanged;
 
 		/// <summary>
 		/// Raises after the user writes something and triggers a search
@@ -31,21 +21,16 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Lo lanza despues de que el usuario escrive algo desencadena una busqueda.
 		/// </para>
 		/// </summary>
-		public event EventHandler<AutocompleteSearchEventArgs> Searching
-		{
-			add
-			{
-				throw new NotImplementedException();
-			}
-			remove
-			{
-				throw new NotImplementedException();
-			}
-		}
-
+		public event EventHandler<AutocompleteSearchEventArgs> Searching;
+	
 		public AutocompleteSearchEventArgs OnSearching(string text)
 		{
 			return (AutocompleteSearchEventArgs) base.Invoke(nameof(OnSearching), new[] { text });
+		}
+
+		public void RaiseValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((IAutocomplete)this).Value);
 		}
 	}
 }

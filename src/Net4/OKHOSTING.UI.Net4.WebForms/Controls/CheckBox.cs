@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a checkbox
 	/// <para xml:lang="es">Es un control que representa un checkbox</para>
 	/// </summary>
-	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox, IWebInputControl
+	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox, IInputControl
 	{
 		#region IControl
 
@@ -301,9 +301,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		#region IWebInputControl
+		#region IInputControl
 
-		bool IWebInputControl.HandlePostBack()
+		bool IInputControl.HandlePostBack()
 		{
 			string postedValue = Page.Request.Form[ID];
 			bool value = postedValue == "on";
@@ -319,7 +319,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		void IInputControl.RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((ICheckBox) this).Value);
 		}
