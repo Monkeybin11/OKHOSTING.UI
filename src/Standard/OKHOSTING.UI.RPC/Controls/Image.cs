@@ -12,7 +12,10 @@
 		/// Carga la imagen desde un Url.
 		/// </para>
 		/// </summary>
-		void LoadFromUrl(System.Uri url) { }
+		void LoadFromUrl(System.Uri url)
+		{
+			base.Invoke(nameof(LoadFromUrl), new[] { url });
+		}
 
 		/// <summary>
 		/// Loads the image from a local file
@@ -20,7 +23,10 @@
 		/// Carga la imagen desde un archivo local
 		/// </para>
 		/// </summary>
-		void LoadFromFile(string filePath) { }
+		void LoadFromFile(string filePath)
+		{
+			base.Invoke(nameof(LoadFromFile), new[] { filePath });
+		}
 
 		/// <summary>
 		/// Loads the image from a stream
@@ -28,6 +34,9 @@
 		/// Carga la imagen desde un stream
 		/// </para>
 		/// </summary>
-		void LoadFromStream(System.IO.Stream stream) { }
+		void LoadFromStream(System.IO.Stream stream)
+		{
+			base.Invoke(nameof(LoadFromStream), new[] { stream });
+		}
 	}
 }
