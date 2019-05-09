@@ -38,7 +38,7 @@ namespace OKHOSTING.UI.Forms
 				}
 				else
 				{
-					ValueControl.Value = Convert.ToDecimal(value).ToString();
+					ValueControl.Value = Convert.ToDecimal(value).ToString(System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
 				}
 			}
 		}
