@@ -6,7 +6,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 	/// <summary>
 	/// It is the platform on which the application is displayed.
 	/// <para xml:lang="es">
-	/// Es la plataforma en la que se mostara la aplicacion.
+	/// Es la plataforma en la que se mostara la aplicacion.  
 	/// </para>
 	/// </summary>
 	public static class Platform
