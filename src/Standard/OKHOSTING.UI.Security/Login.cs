@@ -57,6 +57,7 @@ namespace OKHOSTING.UI.Security
 			cmdRegister.Click += cmdRegister_Click; ;
 
 			IStack stack = Core.BaitAndSwitch.Create<IStack>();
+            stack.Name = "stkLogin";
 			stack.Children.Add(formContainer);
 			stack.Children.Add(lblMessage);
 			stack.Children.Add(cmdLogin);
