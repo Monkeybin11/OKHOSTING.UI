@@ -13,7 +13,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public DatePicker()
 		{
             //Attributes["pattern"] = @"(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}";
-            Attributes["pattern"] = @"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d";
+            //Attributes["pattern"] = @"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d";
             Attributes["placeholder"] = @"mm/dd/yyyy";
 		}
 
@@ -103,7 +103,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 					(
 						function()
 						{{
-							$(""#{0}"").datepicker($.datepicker.regional[""es""]);
+							$(""#{0}"").datepicker($.datepicker.regional[""en""]);
 						}}
 					);
 				</script>"
