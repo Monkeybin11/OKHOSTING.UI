@@ -52,7 +52,7 @@ namespace OKHOSTING.UI.Forms
 		{
 			get
 			{
-				Type itemType = EnumerableType.GetCollectionItemType();
+				Type itemType = EnumerableType.GetEnumerableItemType();
 				IList values = (IList) typeof(List<>).MakeGenericType(itemType).CreateInstance();
 
 				if (string.IsNullOrWhiteSpace(ValueControl.Value))
