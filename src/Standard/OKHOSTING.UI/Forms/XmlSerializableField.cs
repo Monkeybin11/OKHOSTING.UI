@@ -53,11 +53,11 @@ namespace OKHOSTING.UI.Forms
 		{
 			get
 			{
-				return Data.Convert.ToIXmlSerializable(ValueControl.Value, XmlSerializableType);
+				return Data.Convert.FromXml(ValueControl.Value);
 			}
 			set
 			{
-				ValueControl.Value = Data.Convert.ToString((IXmlSerializable) value);
+				ValueControl.Value = Data.Convert.ToXml((IXmlSerializable) value);
 			}
 		}
 

@@ -69,7 +69,6 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		public static void Apply(ICssStyleDeclaration style, IControl control)
 		{
-
 			AngleSharp.Css.Values.Color color;
 			AngleSharp.Css.Values.Length lenght;
 			bool parsed;
