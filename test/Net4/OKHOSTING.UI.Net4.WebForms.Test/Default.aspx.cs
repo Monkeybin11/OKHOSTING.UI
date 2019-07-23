@@ -1,5 +1,4 @@
-﻿using OKHOSTING.UI.Test;
-using System;
+﻿using System;
 
 namespace OKHOSTING.UI.Net4.WebForms.Test
 {
@@ -14,9 +13,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 				return;
 			}
 
-			if (Platform.Controller == null)
+			App app = (App) Session["App"];
+
+			if (app.State.Count == 0)
 			{
-				new IndexController().Start();
+				//new IndexController().Start();
 				//new TextBoxController().Start();
 			}
 		}

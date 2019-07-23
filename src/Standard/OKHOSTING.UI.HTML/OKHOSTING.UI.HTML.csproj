@@ -8,4 +8,10 @@
     <PackageReference Include="AngleSharp" Version="0.12.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
+    <ProjectReference Include="..\OKHOSTING.UI\OKHOSTING.UI.csproj" />
+  </ItemGroup>
+
 </Project>
