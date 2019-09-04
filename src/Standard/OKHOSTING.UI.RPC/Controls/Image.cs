@@ -1,10 +1,13 @@
-﻿namespace OKHOSTING.UI.RPC.Controls
+﻿using System.IO;
+using OKHOSTING.UI.Controls;
+
+namespace OKHOSTING.UI.RPC.Controls
 {
 	/// <summary>
 	/// Image.
 	/// <para xml:lang="es">Una imagen a mostrar.</para>
 	/// </summary>
-	public class Image: Control
+	public class Image: Control, IImage
 	{
 		/// <summary>
 		/// Loads the image from a Url
@@ -12,7 +15,7 @@
 		/// Carga la imagen desde un Url.
 		/// </para>
 		/// </summary>
-		void LoadFromUrl(System.Uri url)
+		public void LoadFromUrl(System.Uri url)
 		{
 			base.Invoke(nameof(LoadFromUrl), new[] { url });
 		}
@@ -23,7 +26,7 @@
 		/// Carga la imagen desde un archivo local
 		/// </para>
 		/// </summary>
-		void LoadFromFile(string filePath)
+		public void LoadFromFile(string filePath)
 		{
 			base.Invoke(nameof(LoadFromFile), new[] { filePath });
 		}
@@ -34,9 +37,20 @@
 		/// Carga la imagen desde un stream
 		/// </para>
 		/// </summary>
-		void LoadFromStream(System.IO.Stream stream)
+		public void LoadFromStream(Stream stream)
 		{
 			base.Invoke(nameof(LoadFromStream), new[] { stream });
+		}
+
+		/// <summary>
+		/// Load a image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		public void LoadFromBytes(byte[] bytes)
+		{
+			LoadFromStream(new MemoryStream(bytes));
 		}
 	}
 }

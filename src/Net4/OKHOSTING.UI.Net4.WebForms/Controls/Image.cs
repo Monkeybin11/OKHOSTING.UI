@@ -330,7 +330,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public void LoadFromStream(Stream stream)
 		{
 			BinaryReader br = new BinaryReader(stream);
-			byte[] bytes = br.ReadBytes((int)stream.Length);
+			byte[] bytes = br.ReadBytes((int) stream.Length);
 			string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
 			ImageUrl = "data:image/png;base64," + base64String;
 		}
@@ -343,9 +343,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <para xml:lang="es">La url de la imagen</para>
 		/// </returns>
 		/// <param name="url">URL.</param>
-		public void LoadFromUrl(System.Uri url)
+		public void LoadFromUrl(Uri url)
 		{
 			base.ImageUrl = url?.ToString();
+		}
+
+		/// <summary>
+		/// Load a image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		public void LoadFromBytes(byte[] bytes)
+		{
+			LoadFromStream(new MemoryStream(bytes));
 		}
 	}
 }

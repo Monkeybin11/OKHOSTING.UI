@@ -29,5 +29,13 @@
 		/// </para>
 		/// </summary>
 		void LoadFromStream(System.IO.Stream stream);
+
+		/// <summary>
+		/// Loads the image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga la imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		void LoadFromBytes(byte[] bytes);
 	}
 }

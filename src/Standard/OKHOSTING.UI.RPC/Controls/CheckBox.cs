@@ -15,32 +15,23 @@ namespace OKHOSTING.UI.RPC.Controls
 			set;
 		}
 
-		public event EventHandler<bool> ValueChanged;
+		private event EventHandler<bool> _ValueChanged;
 
-
-		#region IWebInputControl
-
-		bool IWebInputControl.HandlePostBack()
+		public event EventHandler<bool> ValueChanged
 		{
-			string postedValue = Page.Request.Form[ID];
-			bool value = postedValue == "on";
-
-			if (value != ((ICheckBox)this).Value)
+			add
 			{
-				((ICheckBox)this).Value = value;
-				return true;
+				_ValueChanged += value;
 			}
-			else
+			remove
 			{
-				return false;
+				_ValueChanged -= value;
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		public void OnValueChanged(bool e)
 		{
-			ValueChanged?.Invoke(this, ((ICheckBox)this).Value);
+			_ValueChanged?.Invoke(this, e);
 		}
-
-		#endregion
 	}
 }

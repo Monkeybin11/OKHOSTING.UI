@@ -10,7 +10,7 @@ namespace OKHOSTING.UI
 	/// Clase base para aplicaciones independientes de plataforma 
 	/// </para>
 	/// </summary>
-	public class App
+	public class App: IDisposable
 	{
 		public readonly Dictionary<IPage, Stack<PageState>> State = new Dictionary<IPage, Stack<PageState>>();
 
@@ -151,6 +151,12 @@ namespace OKHOSTING.UI
 					FinishController(page);
 				}
 			}
+		}
+
+		public virtual void Dispose()
+		{
+			Finish();
+			State.Clear();
 		}
 
 		public IPage MainPage

@@ -32,7 +32,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </param>
 		void IImage.LoadFromUrl(Uri url)
 		{
-			base.Source = new global::Xamarin.Forms.UriImageSource
+			Source = new global::Xamarin.Forms.UriImageSource
 			{
 				Uri = url,
 				CachingEnabled = true,
@@ -52,7 +52,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </param>
 		void IImage.LoadFromFile(string filePath)
 		{
-			base.Source = global::Xamarin.Forms.ImageSource.FromFile(filePath);
+			Source = global::Xamarin.Forms.ImageSource.FromFile(filePath);
 		}
 
 		/// <summary>
@@ -67,7 +67,19 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </param>
 		void IImage.LoadFromStream(Stream stream)
 		{
-			base.Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
+			Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
+		}
+
+
+		/// <summary>
+		/// Load a image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		void IImage.LoadFromBytes(byte[] bytes)
+		{
+			((IImage) this).LoadFromStream(new MemoryStream(bytes));
 		}
 
 		/// <summary>

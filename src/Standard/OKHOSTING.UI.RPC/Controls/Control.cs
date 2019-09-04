@@ -230,5 +230,16 @@ namespace OKHOSTING.UI.RPC.Controls
 				Set(nameof(Tag), value);
 			}
 		}
+
+		public override void Init()
+		{
+			Init<IControl>();
+		}
+
+		protected virtual void Init<T>()
+		{
+			Variable = new OKHOSTING.RPC.Variable(Name ?? GetHashCode().ToString());
+			Server.Execute(() => Core.BaitAndSwitch.Create<T>(), Variable);
+		}
 	}
 }

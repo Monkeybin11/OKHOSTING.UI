@@ -8,17 +8,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Image()
 		{
-			base.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 		}
 
 		public void LoadFromFile(string filePath)
 		{
-			base.Image = System.Drawing.Image.FromFile(filePath);
+			Image = System.Drawing.Image.FromFile(filePath);
 		}
 
 		public void LoadFromStream(Stream stream)
 		{
-			base.Image = System.Drawing.Image.FromStream(stream);
+			Image = System.Drawing.Image.FromStream(stream);
 		}
 
 		public void LoadFromUrl(System.Uri url)
@@ -27,10 +27,21 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				using (var stream = new System.Net.WebClient().OpenRead(url))
 				{
-					base.Image = System.Drawing.Image.FromStream(stream);
+					Image = System.Drawing.Image.FromStream(stream);
 				}
 			}
 			catch { }
+		}
+
+		/// <summary>
+		/// Load a image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		void IImage.LoadFromBytes(byte[] bytes)
+		{
+			((IImage) this).LoadFromStream(new MemoryStream(bytes));
 		}
 
 		#region IControl

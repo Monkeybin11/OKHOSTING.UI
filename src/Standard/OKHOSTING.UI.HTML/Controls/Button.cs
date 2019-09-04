@@ -16,7 +16,7 @@ namespace OKHOSTING.UI.HTML.Controls
 			var context = BrowsingContext.New(config);
 
 			//Parse the document from the content of a response to a virtual request
-			var document = context.OpenAsync(req => req.Content("<h1>Some example source</h1><p>This is a paragraph element")).Result;
+			var document = context.OpenNewAsync().Result;
 
 			var button = document.CreateElement<IHtmlButtonElement>();
 			button.Value = "https://okhosting.com";
