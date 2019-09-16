@@ -1,68 +1,94 @@
-﻿using OKHOSTING.UI.Controls;
-using System;
-using System.Drawing;
+﻿using System;
+using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	/// <summary>
-	/// It is a control that represents a button in a Xamarin.Forms.
-	/// <para xml:lang="es">Es un control que representa un boton en un Xamarin.Forms</para>
+	/// It is a control that represents a CheckBox in a Xamarin.Forms.
+	/// <para xml:lang="es">Es un control que representa un CheckBox en un Xamarin.Forms</para>
 	/// </summary>
-	public class Button : global::Xamarin.Forms.Button, IButton
+	public class CheckBox : global::Xamarin.Forms.Switch, ICheckBox
 	{
 		/// <summary>
-		/// Initializes a new instance of the OKHOSTING.UI.Xamarin.Forms.Controls.Button class.
+		/// Initializes a new instance of the CheckBox class.
 		/// <para xml:lang="es">
-		/// Inicializa una nueva instancia de la clase OKHOSTING.UI.Xamarin.Forms.Controls.Button.
+		/// Iniciarliza una nueva instancia de la clase CheckBox.
 		/// </para>
 		/// </summary>
-		public Button()
+		public CheckBox()
 		{
-			base.Clicked += Button_Clicked;
+			base.Toggled += CheckBox_Toggled;
 		}
-
-		/// <summary>
-		/// Occurs when clicking the button
-		/// <para xml:lang="es">Ocurre al dar clic al boton</para>
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">E.</param>
-		private void Button_Clicked(object sender, EventArgs e)
-		{
-			Click?.Invoke(sender, e);
-		}
-
-		/// <summary>
-		/// The button click event.
-		/// <para xml:lang="es">El evento clic del boton.</para>
-		/// </summary>
-		public event EventHandler Click;
 
 		/// <summary>
 		/// The identifier dispose.
-		/// <para xml:lang="es">El identificador Dispose.</para>
+		/// <para xml:lang="es">
+		/// El identificador dispose
+		/// </para>
 		/// </summary>
 		/// <returns>The identifier isposable. dispose.</returns>
 		void IDisposable.Dispose()
 		{
 		}
 
+		#region IInputControl
+
+		/// <summary>
+		/// Checks the box toggled.
+		/// <para xml:lang="es">
+		/// Comprueba si el checkBox esta seleccionado.
+		/// </para>
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		private void CheckBox_Toggled(object sender, global::Xamarin.Forms.ToggledEventArgs e)
+		{
+			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
+		}
+
+		/// <summary>
+		/// Occurs when value changed.
+		/// <para xml:lang="es">
+		/// Ocurre cuando el valor del checkbox es cambiado.
+		/// </para>
+		/// </summary>
+		public event EventHandler<bool> ValueChanged;
+
+		/// <summary>
+		/// Gets or sets the user input value.
+		/// <para xml:lanmg="es">
+		/// Obtiene o establece el valor de entrada del usuario.
+		/// </para>
+		/// </summary>
+		bool IInputControl<bool>.Value
+		{
+			get
+			{
+				return base.IsToggled;
+			}
+			set
+			{
+				base.IsToggled = value;
+			}
+		}
+
+		#endregion
+
 		#region IControl
 
 		/// <summary>
-		/// Gets or sets the name of the IC ontrol.
-		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
+		/// Gets or sets the name of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el nombre del control.
+		/// </para>
 		/// </summary>
-		/// <value>The name of the IC ontrol.
-		/// <para xml:lang="es">El nombre del control.</para>
-		/// </value>
 		string IControl.Name
 		{
 			get; set;
 		}
 
 		/// <summary>
-		/// Gets or sets wether the control is visible or not
+		/// Gets or sets wether the control is visible or not.
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el control es visible o no.
 		/// </para>
@@ -98,7 +124,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the width of the IC ontrol..
+		/// Gets or sets the width of the control.
 		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
 		/// </summary>
 		double? IControl.Width
@@ -117,9 +143,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the height of the IC ontrol..
+		/// Gets or sets the height of the control.
 		/// <para xml:lang="es">Obtiene o establece la altura del control</para>
-		/// </summary>
+		/// </summary>	
 		double? IControl.Height
 		{
 			get
@@ -152,91 +178,76 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the color of the IC ontrol. border.
+		/// Gets or sets the color of the control border.
 		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.BorderColor);
-			}
-			set
-			{
-				base.BorderColor = Forms.Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
-		/// Gets or sets the width of the IC ontrol. border.
+		/// Gets or sets the width of the control border.
 		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get
-			{
-				return new Thickness(base.BorderWidth);
-			}
-			set
-			{
-				if (value.Top.HasValue)
-				{
-					base.BorderWidth = value.Top.Value;
-				}
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
-		/// Gets or sets the IC ontrol. horizontal alignment.
+		/// Gets or sets the control horizontal alignment.
 		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
 		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the IC ontrol. vertical alignment.
-		/// <para xml:lang="es">Obtiene o establece la alineacio vertical del control</para>
+		/// Gets or sets the control vertical alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineación vertical del control</para>
 		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
 		/// <para xml:lang="es">
-		/// Obtiene o establece un valor de objeto arbitraio que se puede usar para almacenar informacion personalizada sobre este elemento
+		/// Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar información personalizada de este elemento.
 		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
 		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. Esta propiedad no tiene ningun valor predeterminado.
+		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
 		/// </para>
 		/// </remarks>
 		object IControl.Tag
@@ -249,53 +260,35 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		#region ITextControl
 
 		/// <summary>
-		/// Gets or sets IT ext control. font family.
+		/// Gets or sets text control font family.
 		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del control.</para>
 		/// </summary>
 		string ITextControl.FontFamily
 		{
-			get
-			{
-				return base.FontFamily;
-			}
-			set
-			{
-				base.FontFamily = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
-		/// Gets or sets the color of the IT ext control. font.
+		/// Gets or sets the color of the text control font.
 		/// <para xml:lang="es">Obtiene o establece el color del texto del control.</para>
 		/// </summary>
 		Color ITextControl.FontColor
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.TextColor);
-			}
-			set
-			{
-				base.TextColor = Forms.Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
-		/// Gets or sets wether Text control bold o no.
+		/// Gets or sets wether Text control bold or no.
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el texto del control esta en negritas o no.
 		/// </para>
 		/// </summary>
 		bool ITextControl.Bold
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -304,14 +297,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Italic
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -349,6 +336,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <para xml:lang="es">Obtiene o establece el espacio entre un borde del control y su texto.</para>
 		/// </summary>
 		Thickness ITextControl.TextPadding
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the control font.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el tamaño del texto del control.
+		/// </para>
+		/// </summary>
+		double ITextControl.FontSize
 		{
 			get;
 			set;

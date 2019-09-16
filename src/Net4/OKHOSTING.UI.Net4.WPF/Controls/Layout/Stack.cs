@@ -247,10 +247,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			{
 				get
 				{
-					return (IControl)ContainerStack.InnerGrid.GetContent(index, 0);
+					return ContainerStack.InnerGrid.GetContent(index, 0);
 				}
 				set
 				{
+					ContainerStack.InnerGrid.SetContent(index, 0, value);
 				}
 			}
 
@@ -314,8 +315,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </param>
 			public bool Contains(IControl item)
 			{
-
-				return false;
+				return ContainerStack.InnerGrid.Children.Contains(item);
 			}
 
 			/// <summary>
@@ -330,16 +330,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </param>
 			public void CopyTo(IControl[] array, int arrayIndex)
 			{
-				//for (int i = 0; i < ContainerStack.InnerGrid.RowCount; i++)
-				//{
-	//				int row 
-				//	System.Windows.UIElement row = ContainerStack.InnerGrid.Children[i];
-
-				//	if (row != null)
-				//	{
-				//		array[i] = (IControl) row;
-				//	}
-				//}
+				ContainerStack.InnerGrid.Children.CopyTo(array, arrayIndex);
 			}
 
 			/// <summary>
@@ -351,8 +342,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </returns>
 			public IEnumerator<IControl> GetEnumerator()
 			{
-				IEnumerator<IControl> list = null;
-				return list;
+				return ContainerStack.InnerGrid.Children.GetEnumerator();
 			}
 
 			/// <summary>

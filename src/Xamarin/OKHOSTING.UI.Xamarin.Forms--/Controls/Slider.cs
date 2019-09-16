@@ -1,11 +1,55 @@
-﻿using System;
-using System.Drawing;
-using OKHOSTING.UI.Controls;
+﻿using OKHOSTING.UI.Controls;
+using System;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	public class WebView: global::Xamarin.Forms.WebView, IWebView
+	/// <summary>
+	/// A single line textbox
+	/// <para xml:lang="es">
+	/// Un cuadro de texto de una sola linea.
+	/// </para>
+	/// </summary>
+	public class Slider : global::Xamarin.Forms.Slider, ISlider
 	{
+		/// <summary>
+		/// Initializes a new instance of the TextBox class.
+		/// <para xml:lang="es">
+		/// Inicializa una nueva instancia de la clase TextBox.
+		/// </para>
+		/// </summary>
+		public Slider()
+		{
+			base.ValueChanged += Slider_ValueChanged;
+		}
+
+		private void Slider_ValueChanged(object sender, global::Xamarin.Forms.ValueChangedEventArgs e)
+		{
+			ValueChanged?.Invoke(sender, e.NewValue);
+		}
+
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">
+		/// El identificador dispose.
+		/// </para>
+		/// </summary>
+		/// <returns>The identifier isposable. dispose.</returns>
+		void IDisposable.Dispose()
+		{
+		}
+
+		#region IInputControl
+
+		/// <summary>
+		/// Occurs when value changed.
+		/// <para xml:lang="es">
+		/// Ocurre cuando el valor del textbox es cambiado.
+		/// </para>
+		/// </summary>
+		public new event EventHandler<double> ValueChanged;
+
+		#endregion
+
 		#region IControl
 
 		/// <summary>
@@ -118,11 +162,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
@@ -158,11 +202,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -176,11 +220,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -201,25 +245,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			get; set;
 		}
 
-		public void Dispose()
-		{
-			throw new NotImplementedException();
-		}
-
 		#endregion
-
-		Uri _Source;
-
-		public new Uri Source
-		{
-			get
-			{
-				return _Source;
-			}
-			set
-			{
-				base.Source = _Source = value;
-			}
-		}
 	}
 }

@@ -1,79 +1,83 @@
 ﻿using System;
-using System.Drawing;
+using System.IO;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	/// <summary>
-	/// It is a control that represents a CheckBox in a Xamarin.Forms.
-	/// <para xml:lang="es">Es un control que representa un CheckBox en un Xamarin.Forms</para>
+	/// It is a control that represents a image in a Xamarin.Forms.
+	/// <para xml:lang="es">
+	/// Es un control que representa una imagen en un Xamarin.Forms.
+	/// </para>
 	/// </summary>
-	public class CheckBox : global::Xamarin.Forms.Switch, ICheckBox
+	public class Image : global::Xamarin.Forms.Image, IImage
+	//public class Image : FFImageLoading.Forms.CachedImage, IImage
 	{
+		public Image()
+		{
+			//base.DownsampleToViewSize = true;
+			//base.CacheType = FFImageLoading.Cache.CacheType.Disk;
+			//base.CacheDuration = new TimeSpan(6, 0, 0);
+		}
+
 		/// <summary>
-		/// Initializes a new instance of the CheckBox class.
+		/// Load a image from URL.
 		/// <para xml:lang="es">
-		/// Iniciarliza una nueva instancia de la clase CheckBox.
+		/// Carga una imagen desde un Url.
 		/// </para>
 		/// </summary>
-		public CheckBox()
+		/// <param name="url">URL.
+		/// <para xml:lang="es">El URL</para>
+		/// </param>
+		void IImage.LoadFromUrl(Uri url)
 		{
-			base.Toggled += CheckBox_Toggled;
+			base.Source = new global::Xamarin.Forms.UriImageSource
+			{
+				Uri = url,
+				CachingEnabled = true,
+				CacheValidity = new TimeSpan(0, 0, 1, 0)
+			};
+		}
+
+		/// <summary>
+		/// Load a image from file.
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un archivo.
+		/// </para>
+		/// </summary>
+		/// <returns>The file of the image.</returns>
+		/// <param name="filePath">File path.
+		/// <para xml:lang="es">La ruta del archivo</para>
+		/// </param>
+		void IImage.LoadFromFile(string filePath)
+		{
+			base.Source = global::Xamarin.Forms.ImageSource.FromFile(filePath);
+		}
+
+		/// <summary>
+		/// Load a image from stream.
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un stream
+		/// </para>
+		/// </summary>
+		/// <returns>The stream of the image.</returns>
+		/// <param name="stream">Stream.
+		/// <para xml:lang="es">El stream de la imagen</para>
+		/// </param>
+		void IImage.LoadFromStream(Stream stream)
+		{
+			base.Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
 		}
 
 		/// <summary>
 		/// The identifier dispose.
 		/// <para xml:lang="es">
-		/// El identificador dispose
+		/// El identificador dispose.
 		/// </para>
 		/// </summary>
-		/// <returns>The identifier isposable. dispose.</returns>
 		void IDisposable.Dispose()
 		{
 		}
-
-		#region IInputControl
-
-		/// <summary>
-		/// Checks the box toggled.
-		/// <para xml:lang="es">
-		/// Comprueba si el checkBox esta seleccionado.
-		/// </para>
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">E.</param>
-		private void CheckBox_Toggled(object sender, global::Xamarin.Forms.ToggledEventArgs e)
-		{
-			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
-		}
-
-		/// <summary>
-		/// Occurs when value changed.
-		/// <para xml:lang="es">
-		/// Ocurre cuando el valor del checkbox es cambiado.
-		/// </para>
-		/// </summary>
-		public event EventHandler<bool> ValueChanged;
-
-		/// <summary>
-		/// Gets or sets the user input value.
-		/// <para xml:lanmg="es">
-		/// Obtiene o establece el valor de entrada del usuario.
-		/// </para>
-		/// </summary>
-		bool IInputControl<bool>.Value
-		{
-			get
-			{
-				return base.IsToggled;
-			}
-			set
-			{
-				base.IsToggled = value;
-			}
-		}
-
-		#endregion
 
 		#region IControl
 
@@ -126,7 +130,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the width of the control.
-		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece el ancho del control.
+		/// </para>
 		/// </summary>
 		double? IControl.Width
 		{
@@ -145,8 +151,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the height of the control.
-		/// <para xml:lang="es">Obtiene o establece la altura del control</para>
-		/// </summary>	
+		/// <para xml:lang="es">
+		/// Obtiene o establece la altura del control.
+		/// </para>
+		/// </summary>
 		double? IControl.Height
 		{
 			get
@@ -164,7 +172,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the control margin.
-		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece el margen del control.
+		/// </para>
 		/// </summary>
 		Thickness IControl.Margin
 		{
@@ -173,23 +183,27 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the color of the Control background.
-		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece el color de fondo del control.
+		/// </para>
 		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets the color of the control border.
-		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece el color del borde del control.
+		/// </para>
 		/// </summary>
 		Color IControl.BorderColor
 		{
@@ -199,7 +213,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the width of the control border.
-		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece el ancho del borde del control.
+		/// </para>
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
@@ -209,40 +225,44 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the control horizontal alignment.
-		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece la alineación horizontal del control.
+		/// </para>
 		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets the control vertical alignment.
-		/// <para xml:lang="es">Obtiene o establece la alineación vertical del control</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece la alineación vertical del control.
+		/// </para>
 		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
 		/// <para xml:lang="es">
-		/// Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar información personalizada de este elemento.
+		/// Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este elemento.
 		/// </para>
 		/// </summary>
 		/// <remarks>

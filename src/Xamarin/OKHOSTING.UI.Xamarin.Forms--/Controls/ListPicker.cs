@@ -1,57 +1,53 @@
 ﻿using System;
-using System.Drawing;
+using System.Linq;
+using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	/// <summary>
-	/// It is a control that represents a HyperLink in a Xamarin.Forms.
+	/// List picker.
 	/// <para xml:lang="es">
-	/// Es un control que representa un HyperLink en un Xamarin.Forms.
+	/// Una lista de elementos donde el usuario puede seleccionar un elemento.
 	/// </para>
 	/// </summary>
-	public class HyperLink : global::Xamarin.Forms.Button, IHyperLink
+	public class ListPicker : global::Xamarin.Forms.Picker, IListPicker
 	{
 		/// <summary>
-		/// Initializes a new instance of the HyperLink class.
+		/// Initializes a new instance of the ListPicker class.
 		/// <para xml:lang="es">
-		/// Inicializa una nueva instancia de la clase HyperLink.
+		/// Inicializa una nueva instancia de la clase ListPicker.
 		/// </para>
 		/// </summary>
-		public HyperLink()
+		public ListPicker()
 		{
-			base.Clicked += HyperLink_Clicked;
+			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
+			((IListPicker) this).Width = 230;
 		}
 
 		/// <summary>
-		/// Hypers the link clicked.
+		/// Gets or sets the list of items from which the user can select one.
 		/// <para xml:lang="es">
-		/// Reaccion al hacer clic en el enlace.
+		/// Obtiene o establece la lista de elementos de los que puede seleccionar uno el usuario.
 		/// </para>
 		/// </summary>
-		/// <returns>The link clicked.</returns>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">E.</param>
-		private void HyperLink_Clicked(object sender, EventArgs e)
-		{
-			global::Xamarin.Forms.Device.OpenUri(((IHyperLink) this).Uri);
-		}
-
-		/// <summary>
-		/// Gets or sets the Hyperlink URI.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la URL del hiperlink.
-		/// </para>
-		/// </summary>
-		Uri IHyperLink.Uri
+		IList<string> IListPicker.Items
 		{
 			get
 			{
-				return new Uri(base.Text);
+				return base.Items;
 			}
 			set
 			{
-				base.Text = value.ToString();
+				if (base.Items.Any())
+				{
+					base.Items.Clear();
+				}
+				
+				foreach (string item in value)
+				{
+					base.Items.Add(item);
+				}
 			}
 		}
 
@@ -65,6 +61,58 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		void IDisposable.Dispose()
 		{
 		}
+
+		#region IInputControl
+
+		/// <summary>
+		/// Lists the picker selected index changed.
+		/// <para xml:lang="es">
+		/// Lista de los indices a seleccionar.
+		/// </para>
+		/// </summary>
+		/// <returns>The picker selected index changed.</returns>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
+		}
+
+		/// <summary>
+		/// Occurs when value changed.
+		/// <para xml:lang="es">
+		/// Ocurre cuando se cambia el valor.
+		/// </para>
+		/// </summary>
+		public event EventHandler<string> ValueChanged;
+
+		/// <summary>
+		/// Gets or sets the user impiut value.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el valor seleccionado por el usuario.
+		/// </para>
+		/// </summary>
+		string IInputControl<string>.Value
+		{
+			get
+			{
+				if(base.SelectedIndex == -1)
+				{
+					return null;
+				}
+				else
+				{
+					return ((IListPicker)this).Items.ToArray()[base.SelectedIndex];
+				}
+			}
+			set
+			{
+				int index = ((IListPicker)this).Items.ToList().IndexOf(value);
+				base.SelectedIndex = index;
+			}
+		}
+
+		#endregion
 
 		#region IControl
 
@@ -97,12 +145,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-			/// <summary>
-			/// Gets or sets wether the control is enabled or not
-			/// <para xml:lang="es">
-			/// Obtiene o establece si el control es habilitado o no.
-			/// </para>
-			/// </summary>
+		/// <summary>
+		/// Gets or sets wether the control is enabled or not
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control es habilitado o no.
+		/// </para>
+		/// </summary>
 		bool IControl.Enabled
 		{
 			get
@@ -141,7 +189,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <para xml:lang="es">
 		/// Obtiene o establece la altura del control.
 		/// </para>
-		/// </summary>	
+		/// </summary>
 		double? IControl.Height
 		{
 			get
@@ -178,11 +226,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
@@ -194,14 +242,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.BorderColor);
-			}
-			set
-			{
-				base.BorderColor = Forms.Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -212,34 +254,25 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get
-			{
-				return new Thickness(base.BorderWidth);
-			}
-			set
-			{
-				if (value.Top.HasValue)
-				{
-					base.BorderWidth = value.Top.Value;
-				}
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Gets or sets the control horizontal alignment.
 		/// <para xml:lang="es">
-		/// Obtiene o establece la alineacion horizontal del control.
+		/// Obtiene o establece la alineación horizontal del control.
 		/// </para>
 		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -253,24 +286,24 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
 		/// <para xml:lang="es">
-		/// Obtiene o establece un un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este elemento.
+		/// Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este elemento.
 		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
 		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
+		/// Devuelve el valor previsto. Esta propiedad no contiene une valor predeterminado.
 		/// </para>
 		/// </remarks>
 		object IControl.Tag
@@ -290,14 +323,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		string ITextControl.FontFamily
 		{
-			get
-			{
-				return base.FontFamily;
-			}
-			set
-			{
-				base.FontFamily = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -308,14 +335,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color ITextControl.FontColor
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.TextColor);
-			}
-			set
-			{
-				base.TextColor = Forms.Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -326,14 +347,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Bold
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -344,14 +359,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Italic
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -392,11 +401,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the controls text padding.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el espacio entre un borde del control y su texto.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece el espacio entre un borde del control y su texto.</para>
 		/// </summary>
 		Thickness ITextControl.TextPadding
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the control font.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el tamaño del texto del control.
+		/// </para>
+		/// </summary>
+		double ITextControl.FontSize
 		{
 			get;
 			set;

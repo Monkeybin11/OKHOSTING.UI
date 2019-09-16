@@ -1,22 +1,45 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
-using System.Drawing;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	/// <summary>
-	/// It is a control that represents a Label in a Xamarin.Forms.
-	/// <para xml:lang="es">
-	/// Es un control que representa una etiqueta en un Xamarin.Forms.
-	/// </para>
+	/// It is a control that represents a button in a Xamarin.Forms.
+	/// <para xml:lang="es">Es un control que representa un boton en un Xamarin.Forms</para>
 	/// </summary>
-	public class Label : global::Xamarin.Forms.Label, ILabel
+	public class Button : global::Xamarin.Forms.Button, IButton
 	{
 		/// <summary>
-		/// The identifier dispose.
+		/// Initializes a new instance of the OKHOSTING.UI.Xamarin.Forms.Controls.Button class.
 		/// <para xml:lang="es">
-		/// El identificador dispose.
+		/// Inicializa una nueva instancia de la clase OKHOSTING.UI.Xamarin.Forms.Controls.Button.
 		/// </para>
+		/// </summary>
+		public Button()
+		{
+			base.Clicked += Button_Clicked;
+		}
+
+		/// <summary>
+		/// Occurs when clicking the button
+		/// <para xml:lang="es">Ocurre al dar clic al boton</para>
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		private void Button_Clicked(object sender, EventArgs e)
+		{
+			Click?.Invoke(sender, e);
+		}
+
+		/// <summary>
+		/// The button click event.
+		/// <para xml:lang="es">El evento clic del boton.</para>
+		/// </summary>
+		public event EventHandler Click;
+
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">El identificador Dispose.</para>
 		/// </summary>
 		/// <returns>The identifier isposable. dispose.</returns>
 		void IDisposable.Dispose()
@@ -26,18 +49,19 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		#region IControl
 
 		/// <summary>
-		/// Gets or sets the name of the control.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el nombre del control.
-		/// </para>
+		/// Gets or sets the name of the IC ontrol.
+		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
 		/// </summary>
+		/// <value>The name of the IC ontrol.
+		/// <para xml:lang="es">El nombre del control.</para>
+		/// </value>
 		string IControl.Name
 		{
 			get; set;
 		}
 
 		/// <summary>
-		/// Gets or sets wether the control is visible or not.
+		/// Gets or sets wether the control is visible or not
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el control es visible o no.
 		/// </para>
@@ -73,10 +97,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the width of the control.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el ancho del control.
-		/// </para>
+		/// Gets or sets the width of the IC ontrol..
+		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
 		/// </summary>
 		double? IControl.Width
 		{
@@ -94,10 +116,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the height of the control.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la altura del control.
-		/// </para>
+		/// Gets or sets the height of the IC ontrol..
+		/// <para xml:lang="es">Obtiene o establece la altura del control</para>
 		/// </summary>
 		double? IControl.Height
 		{
@@ -116,9 +136,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the control margin.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el margen del control.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
 		/// </summary>
 		Thickness IControl.Margin
 		{
@@ -127,90 +145,97 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the color of the Control background.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el color de fondo del control.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
 		/// </summary>
 		Color IControl.BackgroundColor
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the color of the control border.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el color del borde del control.
-		/// </para>
+		/// Gets or sets the color of the IC ontrol. border.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get; set;
+			get
+			{
+				return Platform.Parse(base.BorderColor);
+			}
+			set
+			{
+				base.BorderColor = Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
-		/// Gets or sets the width of the control border.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el ancho del borde del control.
-		/// </para>
+		/// Gets or sets the width of the IC ontrol. border.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get; set;
+			get
+			{
+				return new Thickness(base.BorderWidth);
+			}
+			set
+			{
+				if (value.Top.HasValue)
+				{
+					base.BorderWidth = value.Top.Value;
+				}
+			}
 		}
 
 		/// <summary>
-		/// Gets or sets the control horizontal alignment.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la alineación horizontal del control.
-		/// </para>
+		/// Gets or sets the IC ontrol. horizontal alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
 		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the control vertical alignment.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la alineación vertical del control.
-		/// </para>
+		/// Gets or sets the IC ontrol. vertical alignment.
+		/// <para xml:lang="es">Obtiene o establece la alineacio vertical del control</para>
 		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
 		/// <para xml:lang="es">
-		/// Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este elemento.
+		/// Obtiene o establece un valor de objeto arbitraio que se puede usar para almacenar informacion personalizada sobre este elemento
 		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
 		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
+		/// Devuelve el valor previsto. Esta propiedad no tiene ningun valor predeterminado.
 		/// </para>
 		/// </remarks>
 		object IControl.Tag
@@ -223,10 +248,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		#region ITextControl
 
 		/// <summary>
-		/// Gets or sets text control font family.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la tipografia del texto del control.
-		/// </para>
+		/// Gets or sets IT ext control. font family.
+		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del control.</para>
 		/// </summary>
 		string ITextControl.FontFamily
 		{
@@ -241,25 +264,23 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the color of the text control font.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el color del texto del control.
-		/// </para>
+		/// Gets or sets the color of the IT ext control. font.
+		/// <para xml:lang="es">Obtiene o establece el color del texto del control.</para>
 		/// </summary>
 		Color ITextControl.FontColor
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.TextColor);
+				return Platform.Parse(base.TextColor);
 			}
 			set
 			{
-				base.TextColor = Forms.Platform.Parse(value);
+				base.TextColor = Platform.Parse(value);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets wether Text control bold or no.
+		/// Gets or sets wether Text control bold o no.
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el texto del control esta en negritas o no.
 		/// </para>
@@ -278,9 +299,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets wether text control italic or not.
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el texto del control esta en italica.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece si el texto del control esta en italica.</para>
 		/// </summary>
 		bool ITextControl.Italic
 		{
@@ -296,9 +315,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets wether text control underline or not.
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el texto del control esta subrayado.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece si el texto del control esta subrayado.</para>
 		/// </summary>
 		bool ITextControl.Underline
 		{
@@ -308,38 +325,22 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets text control horizontal alignment.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la laineacion horizontal del texto del control.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece la laineacion horizontal del texto del control.</para>
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.HorizontalTextAlignment);
-			}
-			set
-			{
-				base.HorizontalTextAlignment = Forms.Platform.ParseTextAlignment(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Gets or sets the text control vertical alignment.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la alineacion vertical del texto.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del texto.</para>
 		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get
-			{
-				return Forms.Platform.ParseVerticalTextAlignment(base.VerticalTextAlignment);
-			}
-			set
-			{
-				base.VerticalTextAlignment = Forms.Platform.ParseTextAlignment(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>

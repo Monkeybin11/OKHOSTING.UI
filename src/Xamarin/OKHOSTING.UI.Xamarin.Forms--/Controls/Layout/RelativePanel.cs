@@ -1,10 +1,10 @@
-﻿using OKHOSTING.UI.Controls;
+﻿using System;
+using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
-using System;
-using System.Drawing;
 using System.Collections.Generic;
 using View = global::Xamarin.Forms.View;
 using Constraint = global::Xamarin.Forms.Constraint;
+using Xamarin.Forms;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
@@ -129,11 +129,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
@@ -163,11 +163,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -179,11 +179,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -225,7 +225,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// Gets the controls RelativePanel children.
 		/// <para xml:lang="es">Obtiene los controles hijos del RelativePanel.</para>
 		/// </summary>
-		ICollection<IControl> IContainer.Children
+		IList<IControl> IRelativePanel.Children
 		{
 			get
 			{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -33,7 +34,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// Gets the controls IStack children.
 		/// <para xml:lang="es">Obtiene la lista de los controles hijos del Stack.</para>
 		/// </summary>
-		IList<IControl> IFlow.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
@@ -160,11 +161,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.BackgroundColor);
+				return Forms.Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Parse(value);
+				base.BackgroundColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -202,11 +203,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalOptions.Alignment);
+				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -220,11 +221,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 

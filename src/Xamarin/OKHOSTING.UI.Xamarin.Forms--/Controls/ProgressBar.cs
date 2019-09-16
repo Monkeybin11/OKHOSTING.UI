@@ -1,6 +1,5 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
-using System.Drawing;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
@@ -10,24 +9,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// Un cuadro de texto de una sola linea.
 	/// </para>
 	/// </summary>
-	public class Slider : global::Xamarin.Forms.Slider, ISlider
+	public class ProgressBar : global::Xamarin.Forms.ProgressBar, IProgressBar
 	{
-		/// <summary>
-		/// Initializes a new instance of the TextBox class.
-		/// <para xml:lang="es">
-		/// Inicializa una nueva instancia de la clase TextBox.
-		/// </para>
-		/// </summary>
-		public Slider()
-		{
-			base.ValueChanged += Slider_ValueChanged;
-		}
-
-		private void Slider_ValueChanged(object sender, global::Xamarin.Forms.ValueChangedEventArgs e)
-		{
-			ValueChanged?.Invoke(sender, e.NewValue);
-		}
-
 		/// <summary>
 		/// The identifier dispose.
 		/// <para xml:lang="es">
@@ -38,18 +21,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		void IDisposable.Dispose()
 		{
 		}
-
-		#region IInputControl
-
-		/// <summary>
-		/// Occurs when value changed.
-		/// <para xml:lang="es">
-		/// Ocurre cuando el valor del textbox es cambiado.
-		/// </para>
-		/// </summary>
-		public new event EventHandler<double> ValueChanged;
-
-		#endregion
 
 		#region IControl
 
@@ -244,6 +215,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		object IControl.Tag
 		{
 			get; set;
+		}
+
+		public double Value
+		{
+			get
+			{
+				return base.Progress;
+			}
+			set
+			{
+				base.Progress = value;
+			}
 		}
 
 		#endregion

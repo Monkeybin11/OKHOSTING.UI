@@ -1,18 +1,15 @@
-﻿using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layout;
-using OKHOSTING.UI.Xamarin.Forms.Controls;
-using OKHOSTING.UI.Xamarin.Forms.Controls.Layout;
-using System;
+﻿using System;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Xamarin.Forms
 {
 	/// <summary>
 	/// It is the platform on which the application is displayed.
 	/// <para xml:lang="es">
-	/// Es la plataforma en la que se mostara la aplicacion.
+	/// Es la plataforma en la que se mostara la aplicacion.  
 	/// </para>
 	/// </summary>
-	public class Platform : UI.Platform
+	public static class Platform
 	{
 		//virtual
 		/// <summary>
@@ -48,7 +45,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// <param name="color">Color.</param>
 		public static Color Parse(global::Xamarin.Forms.Color color)
 		{
-			return new Color((int) color.A, (int) color.R, (int) color.G, (int) color.B);
+			return Color.FromArgb((int) color.A, (int) color.R, (int) color.G, (int) color.B);
 		}
 
 		/// <summary>
@@ -63,7 +60,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// <param name="color">Color.</param>
 		public static global::Xamarin.Forms.Color Parse(Color color)
 		{
-			return global::Xamarin.Forms.Color.FromRgba(color.Red, color.Green, color.Blue, color.Alpha);
+			return global::Xamarin.Forms.Color.FromRgba(color.R, color.G, color.B, color.A);
 		}
 
 		/// <summary>

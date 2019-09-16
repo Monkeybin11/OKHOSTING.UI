@@ -11,25 +11,9 @@ namespace OKHOSTING.UI.Xamarin.Forms
 	public class Page : global::Xamarin.Forms.ContentPage, IPage
 	{
 		/// <summary>
-		/// App that is running on this page
+		/// Platform that is managing this page
 		/// </summary>
-		public App App { get; set; }
-
-		double? IPage.Width
-		{
-			get
-			{
-				return Width;
-			}
-		}
-
-		double? IPage.Height
-		{
-			get
-			{
-				return Height;
-			}
-		}
+		public UI.Platform Platform { get; set; }
 
 		/// <summary>
 		/// The scroll.
@@ -64,8 +48,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			}
 		}
 
-		public event EventHandler Resized;
-
 		/// <summary>
 		/// Ons the size allocated.
 		/// <para xml:lang="es">El tamaño asignado a la pagina.</para>
@@ -76,7 +58,11 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			base.OnSizeAllocated(width, height);
-			Resized?.Invoke(this, null);
+
+			if (Platform.Controller != null)
+			{
+				Platform.Controller.Resize();
+			}
 		}
 	}
 }

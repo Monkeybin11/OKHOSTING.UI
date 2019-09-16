@@ -12,11 +12,20 @@ namespace OKHOSTING.UI.Net4.WPF.Test
 		{
 			base.OnStartup(e);
 
-			Platform platform = new Platform();
-			platform.Page = new Page();
-			((Page) platform.Page).Show();
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.IImage), typeof(Controls.Image));
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.IImageButton), typeof(Controls.ImageButton));
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.ILabel), typeof(Controls.Label));
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.ILabelButton), typeof(Controls.LabelButton));
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.IListPicker), typeof(Controls.ListPicker));
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.IAutocomplete), typeof(Controls.Autocomplete));
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.Layout.IRelativePanel), typeof(Controls.Layout.RelativePanel));
+			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.Layout.IStack), typeof(Controls.Layout.Stack));
 
-			new IndexController().Start();
+			var page = new Page();
+			page.App = new UI.App();
+			new IndexController() { Page = page }.Start();
+
+			page.Show();
 		}
 	}
 }

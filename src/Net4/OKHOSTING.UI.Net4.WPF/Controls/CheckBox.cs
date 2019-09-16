@@ -21,6 +21,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		public CheckBox()
 		{
 			base.Checked += CheckBox_Checked;
+			base.Unchecked += CheckBox_Unchecked;
+		}
+
+		private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
+		{
+			ValueChanged?.Invoke(this, ((IInputControl<bool>) this).Value);
+		}
+
+		private void CheckBox_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+		{
+			ValueChanged?.Invoke(this, ((IInputControl<bool>) this).Value);
 		}
 
 		/// <summary>
@@ -34,19 +45,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		#region IInputControl
-
-		/// <summary>
-		/// Checks the box toggled.
-		/// <para xml:lang="es">
-		/// Comprueba si el checkBox esta seleccionado.
-		/// </para>
-		/// </summary>
-		/// <param name="sender">Sender</param>
-		/// <param name="e">e</param>
-		private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
-		{
-			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
-		}
 
 		/// <summary>
 		/// Gets or sets the user input value.

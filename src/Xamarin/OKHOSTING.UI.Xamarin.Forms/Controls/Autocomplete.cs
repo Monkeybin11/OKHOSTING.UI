@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using OKHOSTING.Core;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -86,7 +88,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			SearchPage = new Page();
 			SearchPage.Content = SearchStack;
 
-			Application.Current.MainPage.Navigation.PushAsync(SearchPage);
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(SearchPage);
 		}
 
 		/// <summary>
@@ -122,7 +124,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			ResultPage = new global::Xamarin.Forms.ContentPage();
 			ResultPage.Content = ResultView;
 
-			Application.Current.MainPage.Navigation.PushAsync(SearchPage);
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(SearchPage);
 
 			return e;
 		}
@@ -147,10 +149,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 
 			//close result page
-			Application.Current.MainPage.Navigation.PopAsync();
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 
 			//close search page and get back to original page
-			Application.Current.MainPage.Navigation.PopAsync();
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 		}
 
 		#region IInputControl
@@ -303,11 +305,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackgroundColor);
+				return Forms.Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Parse(value);
+				base.BackgroundColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -343,11 +345,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalOptions.Alignment);
+				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -361,11 +363,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 

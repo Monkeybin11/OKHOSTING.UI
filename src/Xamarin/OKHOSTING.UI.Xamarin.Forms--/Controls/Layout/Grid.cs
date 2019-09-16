@@ -2,8 +2,6 @@
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
@@ -159,11 +157,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.Padding);
+				return Platform.Parse(base.Padding);
 			}
 			set
 			{
-				base.Padding = Forms.Platform.Parse(value);
+				base.Padding = Platform.Parse(value);
 			}
 		}
 
@@ -376,11 +374,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
@@ -412,11 +410,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -429,11 +427,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -455,14 +453,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		#endregion
-
-		ICollection<IControl> IContainer.Children
-		{
-			get
-			{
-				return IGridExtensions.GetAllControlls(this).ToList();
-			}
-		}
 
 		/// <summary>
 		/// Dispose

@@ -1,55 +1,25 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using OKHOSTING.UI.Controls;
-using System.Drawing;
+﻿using OKHOSTING.UI.Controls;
+using System;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
 	/// <summary>
-	/// List picker.
+	/// A single line textbox
 	/// <para xml:lang="es">
-	/// Una lista de elementos donde el usuario puede seleccionar un elemento.
+	/// Un cuadro de texto de una sola linea.
 	/// </para>
 	/// </summary>
-	public class ListPicker : global::Xamarin.Forms.Picker, IListPicker
+	public class TextBox : global::Xamarin.Forms.Entry, ITextBox
 	{
 		/// <summary>
-		/// Initializes a new instance of the ListPicker class.
+		/// Initializes a new instance of the TextBox class.
 		/// <para xml:lang="es">
-		/// Inicializa una nueva instancia de la clase ListPicker.
+		/// Inicializa una nueva instancia de la clase TextBox.
 		/// </para>
 		/// </summary>
-		public ListPicker()
+		public TextBox()
 		{
-			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
-			((IListPicker) this).Width = 230;
-		}
-
-		/// <summary>
-		/// Gets or sets the list of items from which the user can select one.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la lista de elementos de los que puede seleccionar uno el usuario.
-		/// </para>
-		/// </summary>
-		IList<string> IListPicker.Items
-		{
-			get
-			{
-				return base.Items;
-			}
-			set
-			{
-				if (base.Items.Any())
-				{
-					base.Items.Clear();
-				}
-				
-				foreach (string item in value)
-				{
-					base.Items.Add(item);
-				}
-			}
+			base.TextChanged += TextBox_TextChanged;
 		}
 
 		/// <summary>
@@ -66,50 +36,52 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		#region IInputControl
 
 		/// <summary>
-		/// Lists the picker selected index changed.
+		/// Texts the box text changed.
 		/// <para xml:lang="es">
-		/// Lista de los indices a seleccionar.
+		/// Cambia el texto del textbox y lanza el evento ValueChanged.
 		/// </para>
 		/// </summary>
-		/// <returns>The picker selected index changed.</returns>
+		/// <returns>The box text changed.</returns>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">E.</param>
-		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
+		private void TextBox_TextChanged(object sender, global::Xamarin.Forms.TextChangedEventArgs e)
 		{
+			//apply maxlenght
+			if (!string.IsNullOrEmpty(e.NewTextValue))
+			{
+				if (((ITextBox) this).MaxLength > 0 && e.NewTextValue.Length > ((ITextBox) this).MaxLength)
+				{
+					base.Text = e.NewTextValue.Substring(0, ((ITextBox) this).MaxLength);
+					return; //exit and do not raise ValueChanged event
+				}
+			}
+
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
 		/// <summary>
 		/// Occurs when value changed.
 		/// <para xml:lang="es">
-		/// Ocurre cuando se cambia el valor.
+		/// Ocurre cuando el valor del textbox es cambiado.
 		/// </para>
 		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
 		/// <summary>
-		/// Gets or sets the user impiut value.
+		/// Gets or sets the user input value.
 		/// <para xml:lang="es">
-		/// Obtiene o establece el valor seleccionado por el usuario.
+		/// Obtiene o establece el valor de la entrada del usuario.
 		/// </para>
 		/// </summary>
 		string IInputControl<string>.Value
 		{
 			get
 			{
-				if(base.SelectedIndex == -1)
-				{
-					return null;
-				}
-				else
-				{
-					return ((IListPicker)this).Items.ToArray()[base.SelectedIndex];
-				}
+				return base.Text;
 			}
 			set
 			{
-				int index = ((IListPicker)this).Items.ToList().IndexOf(value);
-				base.SelectedIndex = index;
+				base.Text = value;
 			}
 		}
 
@@ -227,11 +199,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Platform.Parse(value);
 			}
 		}
 
@@ -243,8 +215,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		/// <summary>
@@ -255,8 +226,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		/// <summary>
@@ -269,11 +239,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -287,11 +257,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
 			}
 		}
 
@@ -304,7 +274,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
 		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. Esta propiedad no contiene une valor predeterminado.
+		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
 		/// </para>
 		/// </remarks>
 		object IControl.Tag
@@ -324,8 +294,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		string ITextControl.FontFamily
 		{
-			get;
-			set;
+			get
+			{
+				return base.FontFamily;
+			}
+			set
+			{
+				base.FontFamily = value;
+			}
 		}
 
 		/// <summary>
@@ -336,8 +312,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color ITextControl.FontColor
 		{
-			get;
-			set;
+			get
+			{
+				return Platform.Parse(base.TextColor);
+			}
+			set
+			{
+				base.TextColor = Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -348,20 +330,32 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Bold
 		{
-			get;
-			set;
+			get
+			{
+				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
+			}
+			set
+			{
+				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
+			}
 		}
 
 		/// <summary>
 		/// Gets or sets wether text control italic or not.
 		/// <para xml:lang="es">
-		/// Obtiene o establece si el texto del control esta en italica.
+		/// Obtiene o establece si el texto del control esta en italica o no.
 		/// </para>
 		/// </summary>
 		bool ITextControl.Italic
 		{
-			get;
-			set;
+			get
+			{
+				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
+			}
+			set
+			{
+				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
+			}
 		}
 
 		/// <summary>
@@ -369,7 +363,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el texto del control esta subrayado.
 		/// </para>
-		/// </summary>
+		/// </summary>	
 		bool ITextControl.Underline
 		{
 			get;
@@ -384,8 +378,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return Platform.Parse(base.HorizontalTextAlignment);
+			}
+			set
+			{
+				base.HorizontalTextAlignment = Platform.ParseTextAlignment(value);
+			}
 		}
 
 		/// <summary>
@@ -402,7 +402,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		/// <summary>
 		/// Gets or sets the controls text padding.
-		/// <para xml:lang="es">Obtiene o establece el espacio entre un borde del control y su texto.</para>
+		/// <para xml:lang="es">
+		/// Obtiene o establece el espacio entre un borde del control y su texto.
+		/// </para>
 		/// </summary>
 		Thickness ITextControl.TextPadding
 		{
@@ -410,18 +412,91 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			set;
 		}
 
+		#endregion
+
 		/// <summary>
-		/// Gets or sets the size of the control font.
+		/// Gets or sets the type of the user Text box input.
 		/// <para xml:lang="es">
-		/// Obtiene o establece el tamaño del texto del control.
+		/// Obtiene o establece el tipo de entrada del texto del textbox.
 		/// </para>
 		/// </summary>
-		double ITextControl.FontSize
+		ITextBoxInputType ITextBox.InputType
+		{
+			get
+			{
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Email) return ITextBoxInputType.Email;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Numeric) return ITextBoxInputType.Number;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Telephone) return ITextBoxInputType.Telephone;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Text) return ITextBoxInputType.Text;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Url) return ITextBoxInputType.Url;
+
+				return ITextBoxInputType.Text;
+			}
+			set
+			{
+				switch (value)
+				{
+					case ITextBoxInputType.Date:
+					case ITextBoxInputType.DateTime:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						break;
+
+					case ITextBoxInputType.Email:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Email;
+						break;
+
+					case ITextBoxInputType.Number:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Numeric;
+						break;
+
+					case ITextBoxInputType.Telephone:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Telephone;
+						break;
+
+					case ITextBoxInputType.Text:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Text;
+						break;
+
+					case ITextBoxInputType.Time:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						break;
+
+					case ITextBoxInputType.Url:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Url;
+						break;
+
+					default:
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						break;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the length of the Text box max.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la longitud maxima del textbox.
+		/// </para>
+		/// </summary>
+		int ITextBox.MaxLength
 		{
 			get;
 			set;
 		}
 
-		#endregion
+		/// <summary>
+		/// The font color of the Placeholder text
+		/// </summary>
+		Color ITextBox.PlaceholderColor
+		{
+			get
+			{
+				return Platform.Parse(base.PlaceholderColor);
+			}
+			set
+			{
+				base.PlaceholderColor = Platform.Parse(value);
+			}
+		}
 	}
 }

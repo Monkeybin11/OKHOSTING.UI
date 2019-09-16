@@ -33,6 +33,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			Source = bitmap;
 		}
 
+		/// <summary>
+		/// Load a image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		void IImage.LoadFromBytes(byte[] bytes)
+		{
+			LoadFromStream(new MemoryStream(bytes));
+		}
+
 		public void Dispose()
 		{
 		}
