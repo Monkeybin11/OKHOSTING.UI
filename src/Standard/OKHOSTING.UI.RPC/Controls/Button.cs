@@ -23,8 +23,6 @@ namespace OKHOSTING.UI.RPC.Controls
 			}
 		}
 
-		private event EventHandler _Click;
-
 		/// <summary>
 		/// Raises after the user clicked on the button
 		/// <para xml:lang="es">
@@ -35,22 +33,12 @@ namespace OKHOSTING.UI.RPC.Controls
 		{
 			add
 			{
-				_Click += value;
+				AddHybridEventHandler(nameof(Click), value);
 			}
 			remove
 			{
-				_Click -= value;
+				RemoveHybridEventHandler(nameof(Click), value);
 			}
-		}
-
-		public void OnClick(EventArgs e)
-		{
-			_Click?.Invoke(this, e);
-		}
-
-		public override void Init()
-		{
-			Init<IButton>();
 		}
 	}
 }

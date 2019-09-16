@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="Controls\IClickable.cs" />
     <Compile Include="Controls\UserControl.cs" />
-    <Compile Include="Controls\VideoPlayer.cs" />
+    <Compile Include="Media\VideoPlayer.cs" />
     <Compile Include="Controls\TimeOfDayPicker.cs" />
     <Compile Include="Controls\DatePicker.cs" />
     <Compile Include="Controls\ImageButton.cs" />
@@ -108,21 +108,21 @@
     <Content Include="Services\Autocomplete.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{560d0790-2e31-4465-8444-d81541252db7}</Project>
+      <Project>{6cf50275-9d06-4d23-8f5a-66efcfe8c278}</Project>
       <Name>OKHOSTING.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{53a5fe4a-7da1-4875-8c8d-870e5bb3c090}</Project>
+      <Project>{3b08e5e9-6279-44a3-8c01-f11f8e518d31}</Project>
       <Name>OKHOSTING.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
       <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

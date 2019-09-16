@@ -17,7 +17,7 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// </summary>
 		public void LoadFromUrl(System.Uri url)
 		{
-			base.Invoke(nameof(LoadFromUrl), new[] { url });
+			Invoke(nameof(LoadFromUrl), url);
 		}
 
 		/// <summary>
@@ -28,7 +28,7 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// </summary>
 		public void LoadFromFile(string filePath)
 		{
-			base.Invoke(nameof(LoadFromFile), new[] { filePath });
+			Invoke(nameof(LoadFromFile), filePath);
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// </summary>
 		public void LoadFromStream(Stream stream)
 		{
-			base.Invoke(nameof(LoadFromStream), new[] { stream });
+			Invoke(nameof(LoadFromStream), stream);
 		}
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// </summary>
 		public void LoadFromBytes(byte[] bytes)
 		{
-			LoadFromStream(new MemoryStream(bytes));
+			Invoke(nameof(LoadFromBytes), bytes);
 		}
 	}
 }

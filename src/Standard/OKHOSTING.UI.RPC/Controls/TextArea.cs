@@ -11,8 +11,28 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public class TextArea : TextControl, ITextArea
 	{
-		public string Value { get; set; }
+		public string Value
+		{
+			get
+			{
+				return (string) Get(nameof(Value));
+			}
+			set
+			{
+				Set(nameof(Value), value);
+			}
+		}
 
-		public event EventHandler<string> ValueChanged;
+		public event EventHandler<string> ValueChanged
+		{
+			add
+			{
+				AddHybridEventHandler(nameof(ValueChanged), value);
+			}
+			remove
+			{
+				RemoveHybridEventHandler(nameof(ValueChanged), value);
+			}
+		}
 	}
 }

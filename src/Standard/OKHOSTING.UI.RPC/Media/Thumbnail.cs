@@ -6,7 +6,7 @@ namespace OKHOSTING.UI.RPC.Media
 	/// <summary>
 	/// Faciliates the creation of thumbnails for both videos and images
 	/// </summary>
-	public class Thumbnail: IThumbnail
+	public class Thumbnail: OKHOSTING.RPC.Bidireccional.ServerObject, IThumbnail
 	{
 		/// <summary>
 		/// Creates a thumbnail image from a local video
@@ -15,7 +15,7 @@ namespace OKHOSTING.UI.RPC.Media
 		/// <returns>A stream containing the thumbnail bitmap</returns>
 		public Stream CreateVideoThumbnail(string localVideoPath)
 		{
-			throw new System.NotImplementedException();
+			return (Stream) Invoke(nameof(CreateVideoThumbnail), localVideoPath);
 		}
 
 		/// <summary>
@@ -28,7 +28,7 @@ namespace OKHOSTING.UI.RPC.Media
 		/// <returns>A stream containing the thumbnail bitmap</returns>
 		public Stream CreateImageThumbnail(Stream original, int width, int height, int quality)
 		{
-			throw new System.NotImplementedException();
+			return (Stream) Invoke(nameof(CreateImageThumbnail), original, width, height, quality);
 		}
 	}
 }

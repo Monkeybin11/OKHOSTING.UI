@@ -12,9 +12,41 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public class ListPicker: TextControl, IListPicker
 	{
-		public IList<string> Items { get; set; }
-		public int SelectedIndex { get; set; }
-		public string Value { get; set; }
+		public IList<string> Items
+		{
+			get
+			{
+				return (IList<string>) Get(nameof(Items));
+			}
+			set
+			{
+				Set(nameof(Items), value);
+			}
+		}
+
+		public int SelectedIndex
+		{
+			get
+			{
+				return (int)Get (nameof(SelectedIndex));
+			}
+			set
+			{
+				Set(nameof(SelectedIndex), value);
+			}
+		}
+
+		public string Value
+		{
+			get
+			{
+				return (string) Get(nameof(Value));
+			}
+			set
+			{
+				Set(nameof(Value), value);
+			}
+		}
 
 		public event EventHandler<string> ValueChanged;
 	}

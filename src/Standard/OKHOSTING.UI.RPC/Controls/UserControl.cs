@@ -9,10 +9,52 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public class UserControl : Control, IUserControl
 	{
-		public App App { get; set; }
-		public string Title { get; set; }
-		public IControl Content { get; set; }
+		public App App
+		{
+			get
+			{
+				return (App) Get(nameof(App));
+			}
+			set
+			{
+				Set(nameof(App), value);
+			}
+		}
 
-		public event EventHandler Resized;
+		public string Title
+		{
+			get
+			{
+				return (string) Get(nameof(Title));
+			}
+			set
+			{
+				Set(nameof(Title), value);
+			}
+		}
+
+		public IControl Content
+		{
+			get
+			{
+				return (IControl) Get(nameof(Content));
+			}
+			set
+			{
+				Set(nameof(Content), value);
+			}
+		}
+
+		public event EventHandler Resized
+		{
+			add
+			{
+				AddHybridEventHandler(nameof(Resized), value);
+			}
+			remove
+			{
+				RemoveHybridEventHandler(nameof(Resized), value);
+			}
+		}
 	}
 }

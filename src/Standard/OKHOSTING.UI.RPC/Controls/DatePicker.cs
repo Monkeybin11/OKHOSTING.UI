@@ -9,8 +9,28 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public class DatePicker : TextControl, IDatePicker
 	{
-		public DateTime? Value { get; set; }
+		public DateTime? Value
+		{
+			get
+			{
+				return (DateTime?) Get(nameof(Value));
+			}
+			set
+			{
+				Set(nameof(Value), value);
+			}
+		}
 
-		public event EventHandler<DateTime?> ValueChanged;
+		public event EventHandler<DateTime?> ValueChanged
+		{
+			add
+			{
+				AddHybridEventHandler(nameof(ValueChanged), value);
+			}
+			remove
+			{
+				RemoveHybridEventHandler(nameof(ValueChanged), value);
+			}
+		}
 	}
 }

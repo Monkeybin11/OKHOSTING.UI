@@ -11,27 +11,26 @@ namespace OKHOSTING.UI.RPC.Controls
 	{
 		public bool Value
 		{
-			get;
-			set;
+			get
+			{
+				return (bool) Get(nameof(Value));
+			}
+			set
+			{
+				Set(nameof(Value), value);
+			}
 		}
-
-		private event EventHandler<bool> _ValueChanged;
 
 		public event EventHandler<bool> ValueChanged
 		{
 			add
 			{
-				_ValueChanged += value;
+				AddHybridEventHandler(nameof(ValueChanged), value);
 			}
 			remove
 			{
-				_ValueChanged -= value;
+				RemoveHybridEventHandler(nameof(ValueChanged), value);
 			}
-		}
-
-		public void OnValueChanged(bool e)
-		{
-			_ValueChanged?.Invoke(this, e);
 		}
 	}
 }

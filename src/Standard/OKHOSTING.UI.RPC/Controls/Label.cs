@@ -10,6 +10,16 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public class Label: TextControl, ILabel
 	{
-		public string Text { get; set; }
+		public string Text
+		{
+			get
+			{
+				return (string) Get(nameof(Text));
+			}
+			set
+			{
+				Set(nameof(Text), value);
+			}
+		}
 	}
 }

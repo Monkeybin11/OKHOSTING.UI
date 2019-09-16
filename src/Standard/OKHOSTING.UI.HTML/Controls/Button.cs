@@ -1,13 +1,21 @@
 ﻿using AngleSharp;
 using AngleSharp.Html.Dom;
-using System;
-using System.Collections.Generic;
 using AngleSharp.Dom;
+using OKHOSTING.UI.Controls;
+using System;
 
 namespace OKHOSTING.UI.HTML.Controls
 {
-	public class Button : Control
+	public class Button : TextControl, IButton
 	{
+		public string Text { get; set; }
+
+		public event EventHandler Click;
+
+		public override void Dispose()
+		{
+		}
+
 		public override string GenerateHtml()
 		{
 			var config = Configuration.Default;
@@ -19,9 +27,8 @@ namespace OKHOSTING.UI.HTML.Controls
 			var document = context.OpenNewAsync().Result;
 
 			var button = document.CreateElement<IHtmlButtonElement>();
-			button.Value = "https://okhosting.com";
-			button.TextContent = "OK HOSTING";
-			button.Title = "Lo mejor del mundo";
+			button.TextContent = Text;
+			button.Title = Text;
 
 			return button.OuterHtml;
 		}

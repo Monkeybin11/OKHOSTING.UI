@@ -13,104 +13,78 @@ namespace OKHOSTING.UI.RPC.Controls.Layout
 	/// </summary>
 	public class Grid : Container, IGrid
 	{
-		public Grid()
-		{
-		}
-
-		public IControl[,] Content { get; set; }
-
-		public Dictionary<IControl, int> ColumnSpans { get; set; }
-
-		public Dictionary<IControl, int> RowSpans { get; set; }
-
-		public double[] Widths { get; set; }
-
-		public double[] Heights { get; set; }
-
-		int _ColumnCount;
-
 		public int ColumnCount
 		{
 			get
 			{
-				return _ColumnCount;
+				return (int) Get(nameof(ColumnCount));
 			}
 			set
 			{
-				if (_ColumnCount != value)
-				{
-					_ColumnCount = value;
-					SetColumnsAndRows();
-				}
+				Set(nameof(ColumnCount), value);
 			}
 		}
 
-		int _RowCount
+		public int RowCount
 		{
 			get
 			{
-				return _RowCount;
+				return (int) Get(nameof(RowCount));
 			}
 			set
 			{
-				if (_RowCount != value)
-				{
-					_RowCount = value;
-					SetColumnsAndRows();
-				}
+				Set(nameof(RowCount), value);
 			}
 		}
 
-		public int RowCount { get; set; }
-
 		public IControl GetContent(int row, int column)
 		{
-			return Content[row, column];
+			return (IControl) Invoke(nameof(GetContent), row, column);
 		}
 
 		public void SetContent(int row, int column, IControl content)
 		{
-			Content[row, column] = content;
+			Invoke(nameof(SetContent), row, column, content);
 		}
 
 		public int GetColumnSpan(IControl content)
 		{
-			return ColumnSpans[content];
+			return (int) Invoke(nameof(GetColumnSpan), content);
 		}
 
 		public void SetColumnSpan(int columnSpan, IControl content)
 		{
-			ColumnSpans[content] = columnSpan;
+			Invoke(nameof(SetColumnSpan), columnSpan, content);
 		}
 
 		public void SetRowSpan(int rowSpan, IControl content)
 		{
-			RowSpans[content] = rowSpan;
+			Invoke(nameof(SetRowSpan), rowSpan, content);
 		}
 
 		public int GetRowSpan(IControl content)
 		{
-			return RowSpans[content];
+			return (int) Invoke(nameof(GetRowSpan), content);
 		}
 
 		public void SetWidth(int column, double width)
 		{
-			Widths[column] = width;
+			Invoke(nameof(SetWidth), column, width);
 		}
 
 		public double GetWidth(int column)
 		{
-			return Widths[column];
+			return (double) Invoke(nameof(GetWidth), column);
 		}
 
 		public void SetHeight(int row, double height)
 		{
-			Heights[row] = height;
+			Invoke(nameof(SetHeight), row, height);
 		}
 
 		public double GetHeight(int row)
 		{
-			return Heights[row];
+			return (double) Invoke(nameof(GetHeight), row);
 		}
 
 		/// <summary>
@@ -119,7 +93,17 @@ namespace OKHOSTING.UI.RPC.Controls.Layout
 		/// Es el espacio que el grid fijara entre una celda y otra.
 		/// </para>
 		/// </summary>
-		public Thickness CellMargin { get; set; }
+		public Thickness CellMargin
+		{
+			get
+			{
+				return (Thickness) Get(nameof(CellMargin));
+			}
+			set
+			{
+				Set(nameof(CellMargin), value);
+			}
+		}
 
 		/// <summary>
 		/// Space that this grid will set between a cell's border and that cell's content
@@ -127,36 +111,16 @@ namespace OKHOSTING.UI.RPC.Controls.Layout
 		/// Es el espacio que el grid fijara entre el limite de la celda y el contenido de la celda.
 		/// </para>
 		/// </summary>
-		public Thickness CellPadding { get; set; }
-
-		protected void SetColumnsAndRows()
+		public Thickness CellPadding
 		{
-			var newContent = new IControl[RowCount, ColumnCount];
-
-			for (int r = 0; r < RowCount; r++)
+			get
 			{
-				for (int c = 0; c < ColumnCount; c++)
-				{
-					newContent[r, c] = Content[r, c];
-				}
+				return (Thickness) Get(nameof(CellPadding));
 			}
-
-			Content = newContent;
-
-			var newHeights = new double[RowCount];
-
-			for (int r = 0; r < RowCount; r++)
+			set
 			{
-				newHeights[r] = Heights[r];
-			}
-
-			var newWidths = new double[ColumnCount];
-
-			for (int c = 0; c < ColumnCount; c++)
-			{
-				newWidths[c] = Widths[c];
+				Set(nameof(CellPadding), value);
 			}
 		}
-
 	}
 }

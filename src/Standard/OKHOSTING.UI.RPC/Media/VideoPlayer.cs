@@ -1,8 +1,9 @@
 ﻿using OKHOSTING.UI.Media;
+using OKHOSTING.UI.RPC.Controls;
 
 namespace OKHOSTING.UI.RPC.Media
 {
-	public class AudioPlayer : OKHOSTING.RPC.Bidireccional.ServerObject, IAudioPlayer
+	public class VideoPlayer : Control, IVideoPlayer
 	{
 		public string Source
 		{

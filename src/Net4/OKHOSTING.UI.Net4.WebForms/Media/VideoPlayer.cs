@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.IO;
 using OKHOSTING.UI.Controls;
-using System.Web.UI;
+using OKHOSTING.UI.Media;
 
-namespace OKHOSTING.UI.Net4.WebForms.Controls
+namespace OKHOSTING.UI.Net4.WebForms.Media
 {
 	/// <summary>
 	/// It represents an image to which we can give you design through its properties.
@@ -305,9 +304,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		private Uri _Source;
+		private string _Source;
 
-		public Uri Source
+		public string Source
 		{
 			get
 			{

@@ -10,7 +10,28 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public class HyperLink: TextControl, IHyperLink
 	{
-		public string Text { get; set; }
-		public System.Uri Uri { get; set; }
+		public string Text
+		{
+			get
+			{
+				return (string) Get(nameof(Text));
+			}
+			set
+			{
+				Set(nameof(Text), value);
+			}
+		}
+
+		public System.Uri Uri
+		{
+			get
+			{
+				return (System.Uri) Get(nameof(Uri));
+			}
+			set
+			{
+				Set(nameof(Uri), value);
+			}
+		}
 	}
 }

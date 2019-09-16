@@ -45,7 +45,7 @@ namespace OKHOSTING.UI.RPC.Controls.Layout
 		/// </param>
 		public void Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
 		{
-			throw new System.NotImplementedException();
+			Invoke(nameof(Add), control, horizontalContraint, verticalContraint, referenceControl);
 		}
 	}
 }

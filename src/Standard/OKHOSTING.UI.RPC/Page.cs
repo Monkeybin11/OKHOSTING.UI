@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.RPC
 	/// Representa una "ventana" que contiene una vista. En WinForms se trata de un formulario, en ASP.NET es un formulario web, en Xamarin forms sera una pagina.
 	/// </para>
 	/// </summary>
-	public class Page: OKHOSTING.RPC.CachedVariableProxy, IPage
+	public class Page: OKHOSTING.RPC.Bidireccional.ServerObject, IPage
 	{
 		/// <summary>
 		/// App that is running on this page
@@ -92,12 +92,21 @@ namespace OKHOSTING.UI.RPC
 		/// <summary>
 		/// Raised when the page is resized
 		/// </summary>
-		public event EventHandler Resized;
+		public event EventHandler Resized
+		{
+			add
+			{
+				AddHybridEventHandler(nameof(Resized), value);
+			}
+			remove
+			{
+				RemoveHybridEventHandler(nameof(Resized), value);
+			}
+		}
 
 		public virtual void CopyTo(IPage page)
 		{
-			page.Title = Title;
-			page.Content = Content;
+			Invoke(nameof(CopyTo), new[] { page });
 		}
 	}
 }

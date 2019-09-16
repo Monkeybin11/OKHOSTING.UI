@@ -8,8 +8,28 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// </summary>
 	public class TimeSpanPicker : TextControl, ITimeSpanPicker
 	{
-		public TimeSpan? Value { get; set; }
+		public TimeSpan? Value
+		{
+			get
+			{
+				return (TimeSpan?) Get(nameof(Value));
+			}
+			set
+			{
+				Set(nameof(Value), value);
+			}
+		}
 
-		public event EventHandler<TimeSpan?> ValueChanged;
+		public event EventHandler<TimeSpan?> ValueChanged
+		{
+			add
+			{
+				AddHybridEventHandler(nameof(ValueChanged), value);
+			}
+			remove
+			{
+				RemoveHybridEventHandler(nameof(ValueChanged), value);
+			}
+		}
 	}
 }

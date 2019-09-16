@@ -7,7 +7,7 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// Base class for all user controls
 	/// <para xml:lang="es">Interfaz base para todos los controles de usuario.</para>
 	/// </summary>
-	public abstract class Control: OKHOSTING.RPC.CachedVariableProxy, IControl
+	public abstract class Control: OKHOSTING.RPC.Bidireccional.ServerObject, IControl
 	{
 		/// <summary>
 		/// Friendly programming name (or id) of the control. A simple view should not contain 2 controls with the same name.
@@ -229,17 +229,6 @@ namespace OKHOSTING.UI.RPC.Controls
 			{
 				Set(nameof(Tag), value);
 			}
-		}
-
-		public override void Init()
-		{
-			Init<IControl>();
-		}
-
-		protected virtual void Init<T>()
-		{
-			Variable = new OKHOSTING.RPC.Variable(Name ?? GetHashCode().ToString());
-			Server.Execute(() => Core.BaitAndSwitch.Create<T>(), Variable);
 		}
 	}
 }

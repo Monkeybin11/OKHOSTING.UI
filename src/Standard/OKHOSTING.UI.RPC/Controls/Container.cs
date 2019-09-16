@@ -7,12 +7,27 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// A calendar for date selection..
 	/// <para xml:lang="es">Un calendario para seleccion de fechas.</para>
 	/// </summary>
-	public  class Container : Control, IContainer
+	public class Container : Control, IContainer
 	{
-		public ICollection<IControl> Children { get; } = new List<IControl>();
+		public ICollection<IControl> Children
+		{
+			get; protected set;
+		}
+
+		public override void Init()
+		{
+			base.Init();
+
+			Children = new OKHOSTING.RPC.Bidireccional.ServerCollection<IControl>()
+			{
+				Server = Server,
+			};
+		}
 
 		public override void Dispose()
 		{
+			Invoke(nameof(Dispose));
+
 			if (Children != null)
 			{
 				foreach (var c in Children)
@@ -20,8 +35,6 @@ namespace OKHOSTING.UI.RPC.Controls
 					c.Dispose();
 				}
 			}
-
-			base.Dispose();
 		}
 	}
 }

@@ -16,6 +16,16 @@ namespace OKHOSTING.UI.RPC.Controls
 		/// Se lanza despues de que el usuario ha hecho clic en la imagen.
 		/// </para>
 		/// </summary>
-		event EventHandler Click;
+		public event EventHandler Click
+		{
+			add
+			{
+				AddHybridEventHandler(nameof(Click), value);
+			}
+			remove
+			{
+				RemoveHybridEventHandler(nameof(Click), value);
+			}
+		}
 	}
 }

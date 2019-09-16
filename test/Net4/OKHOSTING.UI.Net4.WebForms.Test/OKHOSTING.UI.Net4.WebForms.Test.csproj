@@ -106,14 +106,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{560d0790-2e31-4465-8444-d81541252db7}</Project>
-      <Name>OKHOSTING.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{53a5fe4a-7da1-4875-8c8d-870e5bb3c090}</Project>
-      <Name>OKHOSTING.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\src\Net4\OKHOSTING.UI.Net4.WebForms\OKHOSTING.UI.Net4.WebForms.csproj">
       <Project>{734C6A3D-406E-421F-878B-64425DD137DF}</Project>
       <Name>OKHOSTING.UI.Net4.WebForms</Name>

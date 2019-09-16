@@ -5,6 +5,16 @@
 		/// <summary>
 		/// Progress value, must be between 0 and 100
 		/// </summary>
-		double Value { get; set; }
+		public double Value
+		{
+			get
+			{
+				return (double) Get(nameof(Value));
+			}
+			set
+			{
+				Set(nameof(Value), value);
+			}
+		}
 	}
 }

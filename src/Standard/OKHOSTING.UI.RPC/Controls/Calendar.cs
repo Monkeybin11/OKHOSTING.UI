@@ -21,6 +21,16 @@ namespace OKHOSTING.UI.RPC.Controls
 			}
 		}
 
-		public event EventHandler<DateTime?> ValueChanged;
+		public event EventHandler<DateTime?> ValueChanged
+		{
+			add
+			{
+				AddHybridEventHandler(nameof(ValueChanged), value);
+			}
+			remove
+			{
+				RemoveHybridEventHandler(nameof(ValueChanged), value);
+			}
+		}
 	}
 }
