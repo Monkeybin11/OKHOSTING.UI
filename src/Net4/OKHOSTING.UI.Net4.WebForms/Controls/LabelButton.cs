@@ -19,7 +19,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IClickable.RaiseClick()
 		{
-			if (Page.Request.Form["__EVENTTARGET"] == ID)
+			if (Page.Request.Form["__EVENTTARGET"] == ClientID)
 			{
 				Click?.Invoke(this, new EventArgs());
 			}

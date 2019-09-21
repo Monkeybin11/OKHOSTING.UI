@@ -19,7 +19,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IClickable.RaiseClick()
 		{
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page.Request.Form[ClientID];
 
 			if (postedValue == Text)
 			{

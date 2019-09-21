@@ -205,6 +205,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//allow friendly urls on forms
 			Form.Action = Request.RawUrl;
 
+			ControlCounter = 0;
+
+			foreach (var control in GetAllControls())
+			{
+				if (string.IsNullOrWhiteSpace(control.Name))
+				{
+					control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
+				}
+			}
+
 			base.OnPreRender(e);
 		}
 

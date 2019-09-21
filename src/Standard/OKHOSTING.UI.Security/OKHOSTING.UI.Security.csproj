@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
     <ProjectReference Include="..\..\..\..\OKHOSTING.Security\src\Standard\OKHOSTING.Security\OKHOSTING.Security.csproj" />
     <ProjectReference Include="..\OKHOSTING.UI\OKHOSTING.UI.csproj" />
   </ItemGroup>

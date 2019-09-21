@@ -4,19 +4,15 @@ namespace OKHOSTING.UI.Net4.WebForms
 {
 	public class Global : System.Web.HttpApplication
 	{
-		protected static readonly Random Random = new Random();
+		protected static int ControlCounter = 0;
 
 		protected virtual void Application_Start(object sender, EventArgs e)
 		{
-			Core.BaitAndSwitch.PlatformSpecificModifiers.Add(new Tuple<Type, Func<object, object>>(typeof(UI.Controls.IControl), (control) =>
+			Core.BaitAndSwitch.PlatformSpecificModifiers.Add(new Tuple<Type, Func<object, object>>(typeof(UI.Controls.IControl), control =>
 			{
 				if (string.IsNullOrWhiteSpace(((UI.Controls.IControl) control).Name))
 				{
-					lock (Random)
-					{
-						((UI.Controls.IControl) control).Name = $"ctr_{control.GetType().Name}_{Random.Next()}";
-						//control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
-					}
+					//((UI.Controls.IControl) control).Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
 				}
 
 				return control;
