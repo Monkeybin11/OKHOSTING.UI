@@ -9,19 +9,19 @@ using Android.App;
 [assembly: AssemblyTitle("OKHOSTING.UI.Xamarin.Android")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("OKHOSTING.UI.Xamarin.Android")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 
 // Version information for an assembly consists of the following four values:
 //
-//	  Major Version
-//	  Minor Version 
-//	  Build Number
-//	  Revision
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:

@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Xamarin.iOS.Media
 	public class AudioPlayer: IAudioPlayer
 	{
 		StreamingPlayback Playback;
-		Uri PlayingURI = null;
+		string PlayingURI = null;
 		public bool IsPlaying = false;
 
 		public AudioPlayer()
@@ -39,7 +39,7 @@ namespace OKHOSTING.UI.Xamarin.iOS.Media
 				session.SetCategory (AVAudioSessionCategory.Playback, AVAudioSessionCategoryOptions.DefaultToSpeaker);
 				session.OverrideOutputAudioPort (AVAudioSessionPortOverride.Speaker, out error);
 
-				Playback.Play (Source);
+				Playback.Play (new Uri(Source));
 				PlayingURI = Source;
 			}
 			else if(PlayingURI == Source)
@@ -61,7 +61,7 @@ namespace OKHOSTING.UI.Xamarin.iOS.Media
 			IsPlaying = false;
 		}
 
-		public Uri Source 
+		public string Source 
 		{
 			get;
 			set;

@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Windows;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -21,12 +23,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public Grid()
 		{
-            HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-            VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+			HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
 
-            Width = Double.NaN;
-            Height = Double.NaN;
-        }
+			Width = Double.NaN;
+			Height = Double.NaN;
+		}
 
 		/// <summary>
 		/// /// Gets or sets the number of columns that will contain the grid.
@@ -48,7 +50,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				//remove all controls from rows to be removed
 				for (int i = 0; i < base.Children.Count; i++)
 				{
-					UIElement element = base.Children[i];
+					System.Windows.UIElement element = base.Children[i];
 
 					if (Grid.GetColumn(element) > value)
 					{
@@ -85,7 +87,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				//remove all controls from rows to be removed
 				for (int i = 0; i < base.Children.Count; i++)
 				{
-					UIElement element = base.Children[i];
+					System.Windows.UIElement element = base.Children[i];
 
 					if (Grid.GetRow(element) > value)
 					{
@@ -120,7 +122,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </returns>
 		IControl IGrid.GetContent(int row, int column)
 		{
-			foreach (UIElement children in base.Children)
+			foreach (System.Windows.UIElement children in base.Children)
 			{
 				if (Grid.GetRow(children) == row && Grid.GetColumn(children) == column)
 				{
@@ -148,17 +150,16 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
-			var currentControl = ((IGrid)this).GetContent(row, column);
+			var currentControl = ((IGrid) this).GetContent(row, column);
 
 			if (currentControl != null)
 			{
 				base.Children.Remove((System.Windows.UIElement) currentControl);
 			}
 
-			Grid.SetRow((System.Windows.UIElement) content, row);
-			Grid.SetColumn((System.Windows.UIElement) content, column);
-
-			base.Children.Add((System.Windows.UIElement) content);
+			SetRow((System.Windows.UIElement) content, row);
+			SetColumn((System.Windows.UIElement) content, column);
+			Children.Add((System.Windows.UIElement) content);
 		}
 
 		/// <summary>
@@ -173,7 +174,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// <returns>The arrange size
 		/// <para xml:lang="es">El tamaño fijado.</para>
 		/// </returns>
-		protected override Size ArrangeOverride(Size arrangeSize)
+		protected override System.Windows.Size ArrangeOverride(System.Windows.Size arrangeSize)
 		{
 			//apply paddings here? http://stackoverflow.com/questions/1319974/wpf-grid-with-column-row-margin-padding
 			return base.ArrangeOverride(arrangeSize);
@@ -201,7 +202,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		void IGrid.SetColumnSpan(int columnSpan, IControl content)
 		{
-			SetColumnSpan((UIElement) content, columnSpan);
+			SetColumnSpan((System.Windows.UIElement) content, columnSpan);
 		}
 
 		/// <summary>
@@ -216,7 +217,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </returns>
 		int IGrid.GetColumnSpan(IControl content)
 		{
-			return GetColumnSpan((UIElement) content);
+			return GetColumnSpan((System.Windows.UIElement) content);
 		}
 
 		/// <summary>
@@ -231,7 +232,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		void IGrid.SetRowSpan(int rowSpan, IControl content)
 		{
-			SetRowSpan((UIElement) content, rowSpan);
+			SetRowSpan((System.Windows.UIElement) content, rowSpan);
 		}
 
 		/// <summary>
@@ -246,7 +247,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </returns>
 		int IGrid.GetRowSpan(IControl content)
 		{
-			return GetRowSpan((UIElement) content);
+			return GetRowSpan((System.Windows.UIElement) content);
 		}
 
 		/// <summary>
@@ -261,7 +262,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		void IGrid.SetWidth(int column, double width)
 		{
-			base.ColumnDefinitions[column].Width = new GridLength(width, GridUnitType.Pixel);
+			base.ColumnDefinitions[column].Width = new System.Windows.GridLength(width, System.Windows.GridUnitType.Pixel);
 		}
 
 		/// <summary>
@@ -291,7 +292,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		void IGrid.SetHeight(int row, double height)
 		{
-			base.RowDefinitions[row].Height = new GridLength(height, GridUnitType.Pixel);
+			base.RowDefinitions[row].Height = new System.Windows.GridLength(height, System.Windows.GridUnitType.Pixel);
 		}
 
 		/// <summary>
@@ -307,6 +308,14 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		double IGrid.GetHeight(int row)
 		{
 			return base.RowDefinitions[row].Height.Value;
+		}
+
+		ICollection<IControl> IContainer.Children
+		{
+			get
+			{
+				return IGridExtensions.GetAllControlls(this).ToList();
+			}
 		}
 
 		#region IControl
@@ -406,11 +415,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Margin);
+				return Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Current.Parse(value);
+				base.Margin = Platform.Parse(value);
 			}
 		}
 
@@ -424,11 +433,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
+				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Parse(value));
 			}
 		}
 
@@ -464,11 +473,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.HorizontalAlignment);
+				return Platform.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = Platform.Current.Parse(value);
+				base.HorizontalAlignment = Platform.Parse(value);
 			}
 		}
 
@@ -482,11 +491,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.VerticalAlignment);
+				return Platform.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = Platform.Current.Parse(value);
+				base.VerticalAlignment = Platform.Parse(value);
 			}
 		}
 

@@ -16,20 +16,37 @@ namespace OKHOSTING.UI.Net4.WPF
 
 			//allows for automatic vertical scrolling
 			Scroller = new System.Windows.Controls.ScrollViewer();
-            Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
-            Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Visible;
-            //base.Width = Double.NaN;
-            //base.Height = Double.NaN;
-            base.SizeToContent = System.Windows.SizeToContent.Manual;
+			Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Visible;
+			SizeToContent = System.Windows.SizeToContent.Manual;
 
-            base.Content = Scroller;
+			base.Content = Scroller;
 		}
 
+		/// <summary>
+		/// App that is running on this page
+		/// </summary>
+		public App App { get; set; }
+
+		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		public event EventHandler Resized;
+
+		/// <summary>
+		/// Raises the Resized event
+		/// </summary>
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
-			Platform.Current?.Controller?.Resize();
+			Resized?.Invoke(this, null);
 		}
 
+		/// <summary>
+		/// Each Page only contains one main view, which can optionally be a container and contain more views
+		/// <para xml:lang="es">
+		/// Cada ventana solo contiene una vista principal, que puede ser opcionalmente un contenedor y contener mas vistas.
+		/// </para>
+		/// </summary>
 		public new IControl Content
 		{
 			get
@@ -38,13 +55,29 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 			set
 			{
-                if (value != null)
-                {
-                    value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
-                    value.VerticalAlignment = UI.VerticalAlignment.Fill;
-                }
-                
+				if (value != null)
+				{
+					value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
+					value.VerticalAlignment = UI.VerticalAlignment.Fill;
+				}
+				
 				Scroller.Content = value;
+			}
+		}
+
+		double? IPage.Width
+		{
+			get
+			{
+				return Width;
+			}
+		}
+
+		double? IPage.Height
+		{
+			get
+			{
+				return Height;
 			}
 		}
 

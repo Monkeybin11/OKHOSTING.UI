@@ -1,6 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System.IO;
-using System;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
@@ -8,17 +8,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Image()
 		{
-			base.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 		}
 
 		public void LoadFromFile(string filePath)
 		{
-			base.Image = System.Drawing.Image.FromFile(filePath);
+			Image = System.Drawing.Image.FromFile(filePath);
 		}
 
 		public void LoadFromStream(Stream stream)
 		{
-			base.Image = System.Drawing.Image.FromStream(stream);
+			Image = System.Drawing.Image.FromStream(stream);
 		}
 
 		public void LoadFromUrl(System.Uri url)
@@ -27,10 +27,21 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				using (var stream = new System.Net.WebClient().OpenRead(url))
 				{
-					base.Image = System.Drawing.Image.FromStream(stream);
+					Image = System.Drawing.Image.FromStream(stream);
 				}
 			}
 			catch { }
+		}
+
+		/// <summary>
+		/// Load a image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		void IImage.LoadFromBytes(byte[] bytes)
+		{
+			((IImage) this).LoadFromStream(new MemoryStream(bytes));
 		}
 
 		#region IControl
@@ -69,11 +80,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Margin);
+				return Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Current.Parse(value);
+				base.Margin = Platform.Parse(value);
 			}
 		}
 
@@ -81,11 +92,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Current.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -97,11 +108,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Anchor).Item1;
+				return Platform.Parse(base.Anchor).Item1;
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(value, ((IControl)this).VerticalAlignment);
+				base.Anchor = Platform.ParseAnchor(value, ((IControl)this).VerticalAlignment);
 			}
 		}
 
@@ -109,11 +120,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Anchor).Item2;
+				return Platform.Parse(base.Anchor).Item2;
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(((IControl)this).HorizontalAlignment, value);
+				base.Anchor = Platform.ParseAnchor(((IControl)this).HorizontalAlignment, value);
 			}
 		}
 
@@ -121,7 +132,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
-			Platform.Current.DrawBorders(this, pevent);
+			Platform.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
 	}

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,10 +49,10 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		public RelativePanel()
 		{
 			_Children = new ControlList(base.Children);
-            VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+			HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 
-        }
+		}
 
 		protected readonly ControlList _Children;
 
@@ -126,11 +127,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Margin);
+				return Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Current.Parse(value);
+				base.Margin = Platform.Parse(value);
 			}
 		}
 
@@ -138,11 +139,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
+				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Parse(value));
 			}
 		}
 
@@ -160,11 +161,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.HorizontalAlignment);
+				return Platform.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = Platform.Current.Parse(value);
+				base.HorizontalAlignment = Platform.Parse(value);
 			}
 		}
 
@@ -172,11 +173,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.VerticalAlignment);
+				return Platform.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = Platform.Current.Parse(value);
+				base.VerticalAlignment = Platform.Parse(value);
 			}
 		}
 		
@@ -195,7 +196,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// The size that this element determines it needs during layout, based on its calculations
 		/// of child element sizes.
 		/// </returns>
-		protected override Size MeasureOverride(Size availableSize)
+		protected override System.Windows.Size MeasureOverride(System.Windows.Size availableSize)
 		{
 			foreach (var child in Children.OfType<FrameworkElement>())
 			{
@@ -213,7 +214,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// and its children.
 		/// </param>
 		/// <returns>The actual size used.</returns>
-		protected override Size ArrangeOverride(Size finalSize)
+		protected override System.Windows.Size ArrangeOverride(System.Windows.Size finalSize)
 		{
 			Dictionary<string, UIElement> elements = new Dictionary<string, UIElement>();
 			foreach (var child in Children.OfType<FrameworkElement>().Where(c => c.Name != null))
@@ -524,7 +525,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			throw new ArgumentException("RelativePanel error: Value must be of type UIElement");
 		}
 
-		IList<IControl> IRelativePanel.Children
+		ICollection<IControl> UI.Controls.IContainer.Children
 		{
 			get
 			{
@@ -642,10 +643,10 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 		}
 
-		public class VisualStateUwp : System.Windows.VisualState, System.ComponentModel.ISupportInitialize
+		public class VisualStateUwp : VisualState, ISupportInitialize
 		{
-			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-			public class SetterBaseCollection : ObservableCollection<System.Windows.Setter> { }
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public class SetterBaseCollection : ObservableCollection<Setter> { }
 			private SetterBaseCollection _setters;
 			private ObservableCollection<StateTriggerBase> _triggers;
 
@@ -787,8 +788,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 		public class AdaptiveTrigger : StateTriggerBase
 		{
-
-
 			public double MinWindowHeight
 			{
 				get { return (double)GetValue(MinWindowHeightProperty); }
@@ -806,8 +805,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 			public static readonly DependencyProperty MinWindowWidthProperty =
 				DependencyProperty.Register("MinWindowWidth", typeof(double), typeof(AdaptiveTrigger), new PropertyMetadata(0d));
-
-
 		}
 
 		public class StateTrigger : StateTriggerBase

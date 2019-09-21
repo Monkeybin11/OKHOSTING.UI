@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -33,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// Obtiene la lista de los controles hijos del Stack.
 		/// </para>
 		/// </summary>
-		IList<IControl> IFlow.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
@@ -148,11 +149,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Margin);
+				return Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Current.Parse(value);
+				base.Margin = Platform.Parse(value);
 			}
 		}
 
@@ -166,11 +167,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
+				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Parse(value));
 			}
 		}
 
@@ -206,11 +207,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.HorizontalAlignment);
+				return Platform.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = Platform.Current.Parse(value);
+				base.HorizontalAlignment = Platform.Parse(value);
 			}
 		}
 
@@ -224,11 +225,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return Platform.Current.Parse(base.VerticalAlignment);
+				return Platform.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = Platform.Current.Parse(value);
+				base.VerticalAlignment = Platform.Parse(value);
 			}
 		}
 

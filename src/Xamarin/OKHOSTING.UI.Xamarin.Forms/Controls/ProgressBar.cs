@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {

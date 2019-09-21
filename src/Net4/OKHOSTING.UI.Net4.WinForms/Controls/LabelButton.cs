@@ -7,7 +7,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
-			Platform.Current.DrawBorders(this, pevent);
+			Platform.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
 	}

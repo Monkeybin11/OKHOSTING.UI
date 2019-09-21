@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class Label : System.Windows.Forms.Label, UI.Controls.ILabel
+	public class Label : System.Windows.Forms.Label, ILabel
 	{
 		public Label()
 		{
-			base.AutoSize = false;
+			base.AutoSize = true;
 		}
 
 		#region IControl
@@ -50,11 +46,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Margin);
+				return Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Current.Parse(value);
+				base.Margin = Platform.Parse(value);
 			}
 		}
 
@@ -62,11 +58,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Current.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -78,11 +74,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Anchor).Item1;
+				return Platform.Parse(base.Anchor).Item1;
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(value, ((IControl)this).VerticalAlignment);
+				base.Anchor = Platform.ParseAnchor(value, ((IControl)this).VerticalAlignment);
 			}
 		}
 
@@ -90,11 +86,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Anchor).Item2;
+				return Platform.Parse(base.Anchor).Item2;
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(((IControl)this).HorizontalAlignment, value);
+				base.Anchor = Platform.ParseAnchor(((IControl)this).HorizontalAlignment, value);
 			}
 		}
 
@@ -106,11 +102,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.ForeColor);
+				return base.ForeColor;
 			}
 			set
 			{
-				base.ForeColor = Platform.Current.Parse(value);
+				base.ForeColor = value;
 			}
 		}
 
@@ -179,11 +175,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.TextAlign).Item1;
+				return Platform.Parse(base.TextAlign).Item1;
 			}
 			set
 			{
-				base.TextAlign = Platform.Current.ParseContentAlignment(value, ((ITextControl)this).VerticalAlignment);
+				base.TextAlign = Platform.ParseContentAlignment(value, ((ITextControl)this).VerticalAlignment);
 			}
 		}
 
@@ -191,11 +187,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.TextAlign).Item2;
+				return Platform.Parse(base.TextAlign).Item2;
 			}
 			set
 			{
-				base.TextAlign = Platform.Current.ParseContentAlignment(((ITextControl)this).HorizontalAlignment, value);
+				base.TextAlign = Platform.ParseContentAlignment(((ITextControl)this).HorizontalAlignment, value);
 			}
 		}
 
@@ -203,11 +199,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Padding);
+				return Platform.Parse(base.Padding);
 			}
 			set
 			{
-				base.Padding = Platform.Current.Parse(value);
+				base.Padding = Platform.Parse(value);
 			}
 		}
 
@@ -215,7 +211,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
-			Platform.Current.DrawBorders(this, pevent);
+			Platform.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
 	}

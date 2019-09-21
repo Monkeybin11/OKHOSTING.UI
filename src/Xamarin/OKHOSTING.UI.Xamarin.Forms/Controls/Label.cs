@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
@@ -134,11 +135,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackgroundColor);
+				return Forms.Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Parse(value);
+				base.BackgroundColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -174,11 +175,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalOptions.Alignment);
+				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -192,11 +193,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -249,11 +250,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.TextColor);
+				return Forms.Platform.Parse(base.TextColor);
 			}
 			set
 			{
-				base.TextColor = Platform.Parse(value);
+				base.TextColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -315,11 +316,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalTextAlignment);
+				return Forms.Platform.Parse(base.HorizontalTextAlignment);
 			}
 			set
 			{
-				base.HorizontalTextAlignment = Platform.ParseTextAlignment(value);
+				base.HorizontalTextAlignment = Forms.Platform.ParseTextAlignment(value);
 			}
 		}
 
@@ -333,11 +334,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.ParseVerticalTextAlignment(base.VerticalTextAlignment);
+				return Forms.Platform.ParseVerticalTextAlignment(base.VerticalTextAlignment);
 			}
 			set
 			{
-				base.VerticalTextAlignment = Platform.ParseTextAlignment(value);
+				base.VerticalTextAlignment = Forms.Platform.ParseTextAlignment(value);
 			}
 		}
 

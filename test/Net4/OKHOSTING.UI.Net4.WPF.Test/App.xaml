@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:OKHOSTING.UI.Net4.WPF.Test"
              >
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

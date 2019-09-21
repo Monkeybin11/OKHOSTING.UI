@@ -42,12 +42,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.12.1.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\AngleSharp.0.12.1\lib\net46\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="AngleSharp.Css, Version=0.12.1.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\AngleSharp.Css.0.12.1\lib\net46\AngleSharp.Css.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\src\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -94,16 +106,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
+      <Project>{6cf50275-9d06-4d23-8f5a-66efcfe8c278}</Project>
+      <Name>OKHOSTING.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\src\Net4\OKHOSTING.UI.Net4.WebForms\OKHOSTING.UI.Net4.WebForms.csproj">
       <Project>{734C6A3D-406E-421F-878B-64425DD137DF}</Project>
       <Name>OKHOSTING.UI.Net4.WebForms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\src\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
-      <Project>{F9D654B5-6B7A-4573-B8C8-FD09B96C021B}</Project>
+    <ProjectReference Include="..\..\..\src\Standard\OKHOSTING.UI.CSS\OKHOSTING.UI.CSS.csproj">
+      <Project>{bbd74716-7ed6-49f0-8700-90183204deab}</Project>
+      <Name>OKHOSTING.UI.CSS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
+      <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PCL\OKHOSTING.UI.Test\OKHOSTING.UI.Test.csproj">
-      <Project>{15245B1F-7C2E-4553-B6C8-24C946F433DA}</Project>
+    <ProjectReference Include="..\..\Standard\OKHOSTING.UI.Test\OKHOSTING.UI.Test.csproj">
+      <Project>{B9F98DB9-8957-45D8-88AC-54D771C23C60}</Project>
       <Name>OKHOSTING.UI.Test</Name>
     </ProjectReference>
   </ItemGroup>
@@ -111,8 +131,10 @@
     <Content Include="Services\PageSize.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
     <Content Include="Services\Autocomplete.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -7,9 +7,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Test
 	{
 		public App ()
 		{
-			Platform.Current.Page = new Page();
-			MainPage = (global::Xamarin.Forms.Page)Platform.Current.Page;
-			new OKHOSTING.UI.Test.IndexController().Start();
+			Platform platform = new Platform();
+			platform.Page = new Page();
+			MainPage = (global::Xamarin.Forms.Page) platform.Page;
+
+			new UI.Test.IndexController().Start();
 		}
 
 		protected override void OnStart ()

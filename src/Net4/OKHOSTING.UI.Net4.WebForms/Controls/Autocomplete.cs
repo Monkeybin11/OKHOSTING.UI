@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Drawing;
 using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
@@ -8,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// Represents a control that is autocomplete.
 	/// <para xml:lang="es">Representa un control que es autocomplete.</para>
 	/// </summary>
-	public class Autocomplete : System.Web.UI.WebControls.Panel, IAutocomplete, IWebInputControl
+	public class Autocomplete : System.Web.UI.WebControls.Panel, IAutocomplete, IInputControl
 	{
 		/// <summary>
 		/// The inner text box.
@@ -29,7 +30,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public Autocomplete()
 		{
 			//set a default id so we ensure the extender's TargetControlID is set
-			InnerTextBox = (TextBox) Platform.Current.Create<ITextBox>();
+			InnerTextBox = (TextBox) Core.BaitAndSwitch.Create<ITextBox>();
 			((ITextBox) InnerTextBox).Placeholder = "Search";
 			base.Controls.Add(InnerTextBox);
 
@@ -129,7 +130,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			, ID
 			);
 
-			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
+			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
 		}
 
 		#region IInputControl
@@ -193,11 +194,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(InnerTextBox.BackColor);
+				return InnerTextBox.BackColor;
 			}
 			set
 			{
-				InnerTextBox.BackColor = Platform.Current.Parse(value);
+				InnerTextBox.BackColor = value;
 			}
 		}
 
@@ -212,11 +213,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(InnerTextBox.BorderColor);
+				return InnerTextBox.BorderColor;
 			}
 			set
 			{
-				InnerTextBox.BorderColor = Platform.Current.Parse(value);
+				InnerTextBox.BorderColor = value;
 			}
 		}
 
@@ -385,8 +386,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -433,8 +434,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -466,11 +467,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(InnerTextBox.ForeColor);
+				return InnerTextBox.ForeColor;
 			}
 			set
 			{
-				InnerTextBox.ForeColor = Platform.Current.Parse(value);
+				InnerTextBox.ForeColor = value;
 			}
 		}
 
@@ -611,8 +612,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
-				Platform.Current.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
+				Platform.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -659,8 +660,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
-				Platform.Current.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
+				Platform.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -710,7 +711,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IWebInputControl.HandlePostBack()
+		bool IInputControl.HandlePostBack()
 		{
 			string postedValue = Page.Request.Form[ID];
 
@@ -725,7 +726,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		void IInputControl.RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IAutocomplete) this).Value);
 		}

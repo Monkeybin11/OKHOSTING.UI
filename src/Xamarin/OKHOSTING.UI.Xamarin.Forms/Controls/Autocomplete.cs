@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using OKHOSTING.Core;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -16,7 +18,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		public Autocomplete()
 		{
-			GoSearchButton = Platform.Current.Create<IButton>();
+			GoSearchButton = BaitAndSwitch.Create<IButton>();
 			GoSearchButton.Click += GoSearchButton_Click;
 		}
 
@@ -75,18 +77,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void GoSearchButton_Click(object sender, EventArgs e)
 		{
-			SearchText = Platform.Current.Create<ITextBox>();
-			SearchButton = Platform.Current.Create<IButton>();
+			SearchText = BaitAndSwitch.Create<ITextBox>();
+			SearchButton = BaitAndSwitch.Create<IButton>();
 			SearchButton.Text = "Search";
 			SearchButton.Click += SearchButton_Click;
-			SearchStack = Platform.Current.Create<IStack>();
+			SearchStack = BaitAndSwitch.Create<IStack>();
 			SearchStack.Children.Add(SearchText);
 			SearchStack.Children.Add(SearchButton);
 
 			SearchPage = new Page();
 			SearchPage.Content = SearchStack;
 
-			((Page) Platform.Current.Page).Navigation.PushAsync(SearchPage);
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(SearchPage);
 		}
 
 		/// <summary>
@@ -122,7 +124,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			ResultPage = new global::Xamarin.Forms.ContentPage();
 			ResultPage.Content = ResultView;
 
-			((Page) Platform.Current.Page).Navigation.PushAsync(ResultPage);
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(SearchPage);
 
 			return e;
 		}
@@ -147,10 +149,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 
 			//close result page
-			((Page) Platform.Current.Page).Navigation.PopAsync();
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 
 			//close search page and get back to original page
-			((Page) Platform.Current.Page).Navigation.PopAsync();
+			global::Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
 		}
 
 		#region IInputControl
@@ -303,11 +305,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackgroundColor);
+				return Forms.Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Parse(value);
+				base.BackgroundColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -343,11 +345,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalOptions.Alignment);
+				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -361,11 +363,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
@@ -226,11 +227,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackgroundColor);
+				return Forms.Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Parse(value);
+				base.BackgroundColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -268,11 +269,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalOptions.Alignment);
+				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -286,11 +287,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 

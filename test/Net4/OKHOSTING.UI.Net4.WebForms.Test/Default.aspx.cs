@@ -14,10 +14,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 				return;
 			}
 
-			if (Platform.Current.Controller == null)
+			App app = (App) Session["App"];
+
+			if (app.State.Count == 0)
 			{
-                new IndexController().Start();
-                //new TextBoxController().Start();
+				new IndexController() { Page = this }.Start();
 			}
 		}
 	}

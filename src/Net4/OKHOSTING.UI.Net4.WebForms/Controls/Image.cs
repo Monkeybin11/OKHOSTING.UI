@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.IO;
 using OKHOSTING.UI.Controls;
@@ -43,11 +44,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Current.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -62,11 +63,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BorderColor);
+				return base.BorderColor;
 			}
 			set
 			{
-				base.BorderColor = Platform.Current.Parse(value);
+				base.BorderColor = value;
 			}
 		}
 
@@ -235,8 +236,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -283,8 +284,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -329,7 +330,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public void LoadFromStream(Stream stream)
 		{
 			BinaryReader br = new BinaryReader(stream);
-			byte[] bytes = br.ReadBytes((int)stream.Length);
+			byte[] bytes = br.ReadBytes((int) stream.Length);
 			string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
 			ImageUrl = "data:image/png;base64," + base64String;
 		}
@@ -342,9 +343,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <para xml:lang="es">La url de la imagen</para>
 		/// </returns>
 		/// <param name="url">URL.</param>
-		public void LoadFromUrl(System.Uri url)
+		public void LoadFromUrl(Uri url)
 		{
 			base.ImageUrl = url?.ToString();
+		}
+
+		/// <summary>
+		/// Load a image from an array of bytes
+		/// <para xml:lang="es">
+		/// Carga una imagen desde un arreglo de bytes
+		/// </para>
+		/// </summary>
+		public void LoadFromBytes(byte[] bytes)
+		{
+			LoadFromStream(new MemoryStream(bytes));
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Linq;
+using System.Web;
 
 namespace OKHOSTING.UI.Net4.WebForms.Services
 {
@@ -10,6 +11,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 		public void ProcessRequest(HttpContext context)
 		{
 			context.Response.ContentType = "application/json";
+			App app = (App) HttpContext.Current.Session["App"];
+			Page page = (Page) HttpContext.Current.Session["Page"];
+
+			if (page == null)
+			{
+				return;
+			}
 
 			//get provided page size
 			double width = double.Parse(context.Request.QueryString["Width"]);
@@ -18,16 +26,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			var json = new System.Web.Script.Serialization.JavaScriptSerializer();
 
 			//refresh when this is the first load (session width is null) or when size has changed, so we can rearrange layout if we want to
-			var refresh = Platform.Current.Page.Width != width || Platform.Current.Page.Height != height;
-			var output = json.Serialize(new { Refresh = refresh });
+			var resized = page.Width != width || page.Height != height;
+			var output = json.Serialize(new { Refresh = resized });
 
 			//save new page size in session
-			Session.Current[typeof(Page) + ".Width"] = width;
-			Session.Current[typeof(Page) + ".Height"] = height;
+			context.Session[typeof(Page) + ".Width"] = width;
+			context.Session[typeof(Page) + ".Height"] = height;
 
-			if (refresh && Platform.Current.Controller != null)
+			if (resized)
 			{
-				Platform.Current.Controller.Resize();
+				page.OnResized();
 			}
 
 			context.Response.Write(output);

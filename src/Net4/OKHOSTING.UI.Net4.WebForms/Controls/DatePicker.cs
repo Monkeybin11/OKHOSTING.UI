@@ -8,31 +8,31 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a calendar
 	/// <para xml:lang="es">Es un control que representa un calendario</para>
 	/// </summary>
-	public class DatePicker : TextBoxBase, IDatePicker, IWebInputControl
+	public class DatePicker : TextBoxBase, IDatePicker, IInputControl
 	{
 		public DatePicker()
 		{
-			Attributes["pattern"] = @"(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}";
-			Attributes["placeholder"] = @"dd/mm/yyyy";
+            //Attributes["pattern"] = @"(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}";
+            //Attributes["pattern"] = @"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d";
+            Attributes["placeholder"] = @"mm/dd/yyyy";
 		}
 
 		#region IInputControl
 
 		/// <summary>
-		/// Gets or sets the OKHOSTING . user interface . controls. II nput control< system. date time?>. value.
+		/// Gets or sets the OKHOSTING.UI.Controls.IInputControl<System.DateTime?>. value.
 		/// </summary>
-		/// <value>The OKHOSTING . user interface . controls. II nput control< system. date time?>. value.</value>
 		DateTime? IInputControl<DateTime?>.Value
 		{
 			get
 			{
-				DateTime val;
+				var values = base.Text?.Split('/');
 
-				if (DateTime.TryParseExact(base.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.AssumeLocal, out val))
+				try
 				{
-					return val;
+					return new DateTime(int.Parse(values[2]), int.Parse(values[0]), int.Parse(values[1]));
 				}
-				else
+				catch
 				{
 					return null;
 				}
@@ -41,7 +41,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				if (value != null)
 				{
-					base.Text = value.Value.ToString("dd/MM/yyyy");
+					base.Text = value.Value.ToString("MM/dd/yyyy");
 				}
 				else
 				{
@@ -68,19 +68,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IWebInputControl.HandlePostBack()
+		bool IInputControl.HandlePostBack()
 		{
 			DateTime date = DateTime.MinValue;
 			string postedValue = Page.Request.Form[ID];
 
-			if (DateTime.TryParse(postedValue, out date) && date != ((IDatePicker) this).Value)
+			if (base.Text != postedValue)
 			{
-				((IDatePicker) this).Value = date;
-				return true;
-			}
-			else if (string.IsNullOrWhiteSpace(postedValue) && ((IDatePicker) this).Value != null)
-			{
-				((IDatePicker) this).Value = null;
+				base.Text = postedValue;
 				return true;
 			}
 			else
@@ -89,7 +84,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		void IInputControl.RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IDatePicker) this).Value);
 		}
@@ -108,14 +103,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 					(
 						function()
 						{{
-							$(""#{0}"").datepicker($.datepicker.regional[""es""]);
+							$(""#{0}"").datepicker($.datepicker.regional[""en""]);
 						}}
 					);
 				</script>"
 			, ClientID
 			);
 
-			((System.Web.UI.Page) Platform.Current.Page).ClientScript.RegisterStartupScript(GetType(), "datepicker_" + base.ClientID, js);
+			Page.ClientScript.RegisterStartupScript(GetType(), "datepicker_" + base.ClientID, js);
 		}
 	}
 }

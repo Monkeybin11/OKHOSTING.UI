@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using OKHOSTING.UI.Controls;
 
@@ -8,7 +9,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// It is a control that represents a checkbox
 	/// <para xml:lang="es">Es un control que representa un checkbox</para>
 	/// </summary>
-	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox, IWebInputControl
+	public class CheckBox : System.Web.UI.WebControls.CheckBox, ICheckBox, IInputControl
 	{
 		#region IControl
 
@@ -42,11 +43,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Current.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -61,11 +62,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BorderColor);
+				return base.BorderColor;
 			}
 			set
 			{
-				base.BorderColor = Platform.Current.Parse(value);
+				base.BorderColor = value;
 			}
 		}
 
@@ -232,8 +233,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -278,8 +279,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -300,248 +301,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		#region ITextControl
+		#region IInputControl
 
-		/// <summary>
-		/// Gets or sets the fontcolor of the Checkbox
-		/// <para xml:lang="es">Obtiene o establece el color de la fuente del checkbox</para>
-		/// </summary>
-		/// <value>The fontcolor of the checkbox.</value>
-		Color ITextControl.FontColor
-		{
-			get
-			{
-				return Platform.Current.Parse(base.ForeColor);
-			}
-			set
-			{
-				base.ForeColor = Platform.Current.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets of the FontFamily of the checkbox.
-		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del checkbox</para>
-		/// </summary>
-		/// <value>The FontFamily of the checkbox.
-		/// <para xml:lang="es">La tipografia del texto del checkbox</para>
-		/// </value>
-		string ITextControl.FontFamily
-		{
-			get
-			{
-				return base.Font.Name;
-			}
-			set
-			{
-				base.Font.Name = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the FontSize of checkbox.
-		/// <para xml:lang="es">Obtiene o establece el tamaño del texto del checkbox</para>
-		/// </summary>
-		/// <value>The fontsize of the checkbox.
-		/// <para xml:lang="es">El tamaño del texto del checkbox</para>
-		/// </value>
-		double ITextControl.FontSize
-		{
-			get
-			{
-				return base.Font.Size.Unit.Value;
-			}
-			set
-			{
-				base.Font.Size = new System.Web.UI.WebControls.FontUnit(value, System.Web.UI.WebControls.UnitType.Pixel);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the text checkbox bold.
-		/// <para xml:lang="es">Obtiene  establece el texto en negritas del checkbox</para>
-		/// </summary>
-		/// <value>The checkbox text in bold.
-		/// <para xml:lang="es">El texto en negritas del checkbox</para>
-		/// </value>
-		bool ITextControl.Bold
-		{
-			get
-			{
-				return base.Font.Bold;
-			}
-			set
-			{
-				base.Font.Bold = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets text checkbox italic.
-		/// <para xml:lamg="es">Obtiene o establece el texto en italica del checkbox</para> 
-		/// </summary>
-		/// <value>Text checkbox italic.
-		/// <para xml:lang="es">El texto enitalica del checkbox</para>
-		/// </value>
-		bool ITextControl.Italic
-		{
-			get
-			{
-				return base.Font.Italic;
-			}
-			set
-			{
-				base.Font.Italic = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets text underline of the checkbox.
-		/// <para xml:lang="es">Obtiene o establece el texto subrayado del checkbox</para>
-		/// </summary>
-		/// <value>The text underline of the checkbox.</value>
-		bool ITextControl.Underline
-		{
-			get
-			{
-				return base.Font.Underline;
-			}
-			set
-			{
-				base.Font.Underline = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets text ckeckbox. text horizontal alignment.
-		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del checkbox</para>
-		/// </summary>
-		/// <value>Text checkbox. text horizontal alignment.
-		/// <para xml:lang="es">La alineacion horizontal del texto del checkbox.</para>
-		/// </value>
-		HorizontalAlignment ITextControl.TextHorizontalAlignment
-		{
-
-			get
-			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
-
-				//if not text horizontal alignment is provided, the alignment back to the left.
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return HorizontalAlignment.Left;
-				}
-
-				//Verify the text horizontal alignment provided.
-				if (cssClass.EndsWith("left"))
-				{
-					return HorizontalAlignment.Left;
-				}
-				else if (cssClass.EndsWith("right"))
-				{
-					return HorizontalAlignment.Right;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return HorizontalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return HorizontalAlignment.Fill;
-				}
-				else
-				{
-					return HorizontalAlignment.Left;
-				}
-			}
-			set
-			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
-				Platform.Current.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the TextVerticalAlignment of the checkbox.
-		/// <para xml:lang="es">Obtiene o establece la alineacion vertical del texto del checkbox</para>
-		/// </summary>
-		/// <value>The TextVerticalAlingnment of the checkbox.</value>
-		VerticalAlignment ITextControl.TextVerticalAlignment
-		{
-			get
-			{
-				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
-
-				//if not text vertical alignment is provided, the alignment back to the top.
-				if (string.IsNullOrWhiteSpace(cssClass))
-				{
-					return VerticalAlignment.Top;
-				}
-
-				//Verify the vertical alignment provided.
-				if (cssClass.EndsWith("top"))
-				{
-					return VerticalAlignment.Top;
-				}
-				else if (cssClass.EndsWith("bottom"))
-				{
-					return VerticalAlignment.Bottom;
-				}
-				else if (cssClass.EndsWith("center"))
-				{
-					return VerticalAlignment.Center;
-				}
-				else if (cssClass.EndsWith("fill"))
-				{
-					return VerticalAlignment.Fill;
-				}
-				else
-				{
-					return VerticalAlignment.Top;
-				}
-			}
-			set
-			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
-				Platform.Current.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the padding in the text checkbox.
-		/// <para xml:lang="es">Obtiene o establece el padding del texto del checkbox.</para>
-		/// </summary>
-		/// <value>The padding in the text checkbox.
-		/// <para xml:lang="es">El padding del texto del checkbox</para>
-		/// </value>
-		Thickness ITextControl.TextPadding
-		{
-			get
-			{
-				double left, top, right, bottom;
-				Thickness thickness = new Thickness();
-
-				if (double.TryParse(base.Style["padding-left"], out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["padding-top"], out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["padding-right"], out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["padding-bottom"], out bottom)) thickness.Bottom = bottom;
-
-				return new Thickness(left, top, right, bottom);
-			}
-			set
-			{
-				if (value.Left.HasValue) base.Style["padding-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
-			}
-		}
-
-		#endregion
-
-		#region IWebInputControl
-
-		bool IWebInputControl.HandlePostBack()
+		bool IInputControl.HandlePostBack()
 		{
 			string postedValue = Page.Request.Form[ID];
 			bool value = postedValue == "on";
@@ -557,7 +319,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
-		void IWebInputControl.RaiseValueChanged()
+		void IInputControl.RaiseValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((ICheckBox) this).Value);
 		}

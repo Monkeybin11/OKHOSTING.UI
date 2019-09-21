@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls

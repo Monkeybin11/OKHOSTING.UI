@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
@@ -20,6 +21,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		public CheckBox()
 		{
 			base.Checked += CheckBox_Checked;
+			base.Unchecked += CheckBox_Unchecked;
+		}
+
+		private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
+		{
+			ValueChanged?.Invoke(this, ((IInputControl<bool>) this).Value);
+		}
+
+		private void CheckBox_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+		{
+			ValueChanged?.Invoke(this, ((IInputControl<bool>) this).Value);
 		}
 
 		/// <summary>
@@ -33,19 +45,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		#region IInputControl
-
-		/// <summary>
-		/// Checks the box toggled.
-		/// <para xml:lang="es">
-		/// Comprueba si el checkBox esta seleccionado.
-		/// </para>
-		/// </summary>
-		/// <param name="sender">Sender</param>
-		/// <param name="e">e</param>
-		private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
-		{
-			ValueChanged?.Invoke(this, ((IInputControl<bool>)this).Value);
-		}
 
 		/// <summary>
 		/// Gets or sets the user input value.
@@ -177,11 +176,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Margin);
+				return Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Current.Parse(value);
+				base.Margin = Platform.Parse(value);
 			}
 		}
 
@@ -195,11 +194,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+				return Platform.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
 			}
 			set
 			{
-				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
+				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Parse(value));
 			}
 		}
 
@@ -213,11 +212,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
+				return Platform.Parse(((System.Windows.Media.SolidColorBrush)base.BorderBrush).Color);
 			}
 			set
 			{
-				base.BorderBrush = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
+				base.BorderBrush = new System.Windows.Media.SolidColorBrush(Platform.Parse(value));
 			}
 		}
 
@@ -231,11 +230,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BorderThickness);
+				return Platform.Parse(base.BorderThickness);
 			}
 			set
 			{
-				base.BorderThickness = Platform.Current.Parse(value);
+				base.BorderThickness = Platform.Parse(value);
 			}
 		}
 
@@ -249,11 +248,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.HorizontalAlignment);
+				return Platform.Parse(base.HorizontalAlignment);
 			}
 			set
 			{
-				base.HorizontalAlignment = Platform.Current.Parse(value);
+				base.HorizontalAlignment = Platform.Parse(value);
 			}
 		}
 
@@ -267,158 +266,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.VerticalAlignment);
+				return Platform.Parse(base.VerticalAlignment);
 			}
 			set
 			{
-				base.VerticalAlignment = Platform.Current.Parse(value);
-			}
-		}
-
-		#endregion
-
-		#region ITextControl
-
-		/// <summary>
-		/// Gets or sets text control font family.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la tipografia del texto del control.
-		/// </para>
-		/// </summary>
-		string ITextControl.FontFamily
-		{
-			get
-			{
-				return base.FontFamily.Source;
-			}
-			set
-			{
-				base.FontFamily = new System.Windows.Media.FontFamily(value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the color of the text control font.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el color del texto del control.
-		/// </para>
-		/// </summary>
-		Color ITextControl.FontColor
-		{
-			get
-			{
-				return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Foreground).Color);
-			}
-			set
-			{
-				base.Foreground = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets wether Text control bold or no.
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el texto del control esta en negritas o no.
-		/// </summary>
-		bool ITextControl.Bold
-		{
-			get
-			{
-				return base.FontWeight == System.Windows.FontWeights.Bold;
-			}
-			set
-			{
-				base.FontWeight = System.Windows.FontWeights.Bold;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets wether text control italic or not.
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el texto del control esta en italica.
-		/// </para>
-		/// </summary>
-		bool ITextControl.Italic
-		{
-			get
-			{
-				return base.FontStyle == System.Windows.FontStyles.Italic;
-			}
-			set
-			{
-				base.FontStyle = System.Windows.FontStyles.Italic;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets wether text control underline or not.
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el texto del control esta subrayado.
-		/// </para>
-		/// </summary>
-		bool ITextControl.Underline
-		{
-			get
-			{
-				return false;
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets text control horizontal alignment.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la laineacion horizontal del texto del control.
-		/// </para>
-		/// </summary>
-		HorizontalAlignment ITextControl.TextHorizontalAlignment
-		{
-			get
-			{
-				return Platform.Current.Parse(base.HorizontalContentAlignment);
-			}
-			set
-			{
-				base.HorizontalContentAlignment = Platform.Current.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the text control vertical alignment.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la alineacion vertical del texto.
-		/// </para>
-		/// </summary>
-		VerticalAlignment ITextControl.TextVerticalAlignment
-		{
-			get
-			{
-				return Platform.Current.Parse(base.VerticalContentAlignment);
-			}
-			set
-			{
-				base.VerticalContentAlignment = Platform.Current.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the controls text padding.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el espacio entre un borde del control y su texto.
-		/// </para>
-		/// </summary>
-		Thickness ITextControl.TextPadding
-		{
-			get
-			{
-				return Platform.Current.Parse(base.Padding);
-			}
-			set
-			{
-				base.Padding = Platform.Current.Parse(value);
+				base.VerticalAlignment = Platform.Parse(value);
 			}
 		}
 

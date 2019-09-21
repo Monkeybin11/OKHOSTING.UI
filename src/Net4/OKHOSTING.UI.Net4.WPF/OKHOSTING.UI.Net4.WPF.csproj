@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OKHOSTING.UI.Net4.WPF</RootNamespace>
     <AssemblyName>OKHOSTING.UI.Net4.WPF</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -37,6 +40,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\OKHOSTING.Inside\src\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -52,6 +56,7 @@
     <Reference Include="System.Reactive.Windows.Threading, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\OKHOSTING.Inside\src\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\OKHOSTING.Inside\src\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -79,6 +84,10 @@
     <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Controls\Layout\Stack.cs" />
     <Compile Include="Controls\Slider.cs" />
+    <Compile Include="Controls\UserControl.cs" />
+    <Compile Include="Controls\TimeOfDayPicker.xaml.cs">
+      <DependentUpon>TimeOfDayPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Calendar.cs" />
@@ -97,20 +106,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Net4\OKHOSTING.Core.Net4\OKHOSTING.Core.Net4.csproj">
-      <Project>{46bdaec2-7677-4223-b009-940db478a220}</Project>
-      <Name>OKHOSTING.Core.Net4</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\PCL\OKHOSTING.Core\OKHOSTING.Core.csproj">
-      <Project>{3f4502fa-51ea-4cb9-8e50-46f828d240a1}</Project>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
+      <Project>{6cf50275-9d06-4d23-8f5a-66efcfe8c278}</Project>
       <Name>OKHOSTING.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\PCL\OKHOSTING.Data\OKHOSTING.Data.csproj">
-      <Project>{5ba0cbac-63e5-4e01-aeca-67ae3b63503b}</Project>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj">
+      <Project>{3b08e5e9-6279-44a3-8c01-f11f8e518d31}</Project>
       <Name>OKHOSTING.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PCL\OKHOSTING.UI\OKHOSTING.UI.csproj">
-      <Project>{f9d654b5-6b7a-4573-b8c8-fd09b96c021b}</Project>
+    <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
+      <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
   </ItemGroup>
@@ -118,6 +123,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\TimeOfDayPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

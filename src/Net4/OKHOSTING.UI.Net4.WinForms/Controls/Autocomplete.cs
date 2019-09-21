@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using OKHOSTING.UI.Controls;
 
@@ -22,14 +21,14 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			AutoCompleteStringCollection stringCollection = new AutoCompleteStringCollection();
 
-			var e = this.OnSearching(((IInputControl<string>)this).Value);
+			var e = OnSearching(((IInputControl<string>) this).Value);
 
-			if(e.SearchResult == null)
+			if (e.SearchResult == null)
 			{
 				return stringCollection;
 			}
 
-			foreach (string d in e.SearchResult.ToArray())
+			foreach (string d in e.SearchResult)
 			{
 				stringCollection.Add(d);
 			}
@@ -52,7 +51,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		private void Autocomplete_TextChanged(object sender, EventArgs e)
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
+			ValueChanged?.Invoke(this, ((IInputControl<string>) this).Value);
 
 			if (!string.IsNullOrWhiteSpace(base.Text) && base.Text.Length > 5)
 			{

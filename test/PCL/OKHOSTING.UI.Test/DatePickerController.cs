@@ -26,35 +26,35 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create an Stack
-			IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Create<IStack>();
 
 			// Creates an Label with text and a specific size and adds it to the stack.
-			lblLabel = Platform.Current.Create<ILabel>();
+			lblLabel = Platform.Create<ILabel>();
 			lblLabel.Text = "Select a date";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
 			// Creates an Calendar with text specific and adds it to the stack.
-			picker = Platform.Current.Create<IDatePicker>();
+			picker = Platform.Create<IDatePicker>();
 			picker.Name = "datePicker";
 			picker.Bold = true;
 			stack.Children.Add(picker);
 
 			// Creates the Button cmdChange with text specific, with the event also click and adds it to the stack.
-			IButton cmdChange = Platform.Current.Create<IButton>();
+			IButton cmdChange = Platform.Create<IButton>();
 			cmdChange.Text = "Select";
 			cmdChange.Click += CmdChange_Click;
 			stack.Children.Add(cmdChange);
 
 			// Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
-			IButton cmdClose = Platform.Current.Create<IButton>();
+			IButton cmdClose = Platform.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page
-			Platform.Current.Page.Title = "Test date picker";
-			Platform.Current.Page.Content = stack;
+			Platform.Page.Title = "Test date picker";
+			Platform.Page.Content = stack;
 		}
 
 		/// <summary>

@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Drawing;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
@@ -71,11 +72,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Margin);
+				return Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Platform.Current.Parse(value);
+				base.Margin = Platform.Parse(value);
 			}
 		}
 
@@ -83,11 +84,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Current.Parse(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -99,11 +100,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Anchor).Item1;
+				return Platform.Parse(base.Anchor).Item1;
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(value, ((IControl)this).VerticalAlignment);
+				base.Anchor = Platform.ParseAnchor(value, ((IControl)this).VerticalAlignment);
 			}
 		}
 
@@ -111,11 +112,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return Platform.Current.Parse(base.Anchor).Item2;
+				return Platform.Parse(base.Anchor).Item2;
 			}
 			set
 			{
-				base.Anchor = Platform.Current.ParseAnchor(((IControl)this).HorizontalAlignment, value);
+				base.Anchor = Platform.ParseAnchor(((IControl)this).HorizontalAlignment, value);
 			}
 		}
 
@@ -123,7 +124,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
-			Platform.Current.DrawBorders(this, pevent);
+			Platform.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
 	}

@@ -28,16 +28,16 @@ namespace OKHOSTING.UI.Test
 			base.Start();
 
 			// Create an Stack
-			IStack stack = Platform.Current.Create<IStack>();
+			IStack stack = Platform.Create<IStack>();
 
 			// Create an Label with text and size specified and adds it to the Stack
-			lblLabel = Platform.Current.Create<ILabel>();
+			lblLabel = Platform.Create<ILabel>();
 			lblLabel.Text = "View an image from Url";
 			lblLabel.Height = 30;
 			stack.Children.Add(lblLabel);
 
 			// Create a button with a specific size and indicating the URL of your background image also your event clic and adds it to the stack
-			IImageButton imgbtn = Platform.Current.Create<IImageButton>();
+			IImageButton imgbtn = Platform.Create<IImageButton>();
 			imgbtn.LoadFromUrl(new Uri("http://okhosting.com/resources/uploads/2015/08/web-hosting-con-administracion-via-panel-de-control.gif"));
 			imgbtn.Height = 100;
 			imgbtn.Width = 100;
@@ -45,7 +45,7 @@ namespace OKHOSTING.UI.Test
 			stack.Children.Add(imgbtn);
 
 			// Create a image not visible, with an size specified and indicating the URL and adds it to Stack
-			imgPicture = Platform.Current.Create<IImage>();
+			imgPicture = Platform.Create<IImage>();
 			imgPicture.LoadFromUrl(new Uri("https://www.merriam-webster.com/assets/mw/images/gallery/gal-wap-slideshow-slide/aztec-2666-4b768308b161027e77ae775f6abea503@1x.jpg"));
 			imgPicture.Height = 250;
 			imgPicture.Width = 600;
@@ -53,14 +53,14 @@ namespace OKHOSTING.UI.Test
 			stack.Children.Add(imgPicture);
 
 			// Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
-			IButton cmdClose = Platform.Current.Create<IButton>();
+			IButton cmdClose = Platform.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page
-			Platform.Current.Page.Title = "Test label";
-			Platform.Current.Page.Content = stack;
+			Platform.Page.Title = "Test label";
+			Platform.Page.Content = stack;
 		}
 
 		/// <summary>

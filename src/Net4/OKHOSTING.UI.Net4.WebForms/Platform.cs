@@ -4,48 +4,14 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
-	public class Platform : UI.Platform
+	public static class Platform
 	{
-		protected readonly Random Random = new Random();
-		//protected int ControlCounter = 0;
-
-		public readonly List<UrlRewriteRule> UriMap = new List<UrlRewriteRule>();
-
-		public override T Create<T>()
+		public static void Finish()
 		{
-			T control = base.Create<T>();
-
-			//give a default name to all controls to allow events to be correclty triggered
-			if (string.IsNullOrWhiteSpace(control.Name))
-			{
-				control.Name = $"ctr_{control.GetType().Name}_{Random.Next()}";
-				//control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
-			}
-
-			//ControlCounter++;
-
-			return control;
-		}
-
-		public override void Finish()
-		{
-			base.Finish();
 			System.Web.Security.FormsAuthentication.SignOut();
 		}
 
-		//virtual
-
-		public virtual Color Parse(System.Drawing.Color color)
-		{
-			return new Color(color.A, color.R, color.G, color.B);
-		}
-
-		public virtual System.Drawing.Color Parse(Color color)
-		{
-			return System.Drawing.Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
-		}
-
-		public virtual string Parse(HorizontalAlignment value)
+		public static string Parse(HorizontalAlignment value)
 		{
 			switch (value)
 			{
@@ -65,7 +31,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			throw new ArgumentOutOfRangeException("value");
 		}
 
-		public virtual string Parse(VerticalAlignment value)
+		public static string Parse(VerticalAlignment value)
 		{
 			switch (value)
 			{
@@ -85,7 +51,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			throw new ArgumentOutOfRangeException("value");
 		}
 
-		public virtual void AddCssClass(System.Web.UI.WebControls.WebControl control, string className)
+		public static void AddCssClass(System.Web.UI.WebControls.WebControl control, string className)
 		{
 			if (!control.CssClass.Contains(className))
 			{
@@ -93,12 +59,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
-		public virtual void RemoveCssClass(System.Web.UI.WebControls.WebControl control, string className)
+		public static void RemoveCssClass(System.Web.UI.WebControls.WebControl control, string className)
 		{
 			control.CssClass = control.CssClass.Replace(className, string.Empty).Trim();
 		}
 
-		public virtual void RemoveCssClassesStartingWith(System.Web.UI.WebControls.WebControl control, string className)
+		public static void RemoveCssClassesStartingWith(System.Web.UI.WebControls.WebControl control, string className)
 		{
 			var cssClasses = control.CssClass.Split().ToList();
 
@@ -114,9 +80,38 @@ namespace OKHOSTING.UI.Net4.WebForms
 			control.CssClass = control.CssClass.Replace(className, string.Empty).Trim();
 		}
 
-		public UrlRewriteRule GetUrlRewriteRuleFor(Uri uri)
+		/// <summary>
+		/// Returns all the contained controls, recursively
+		/// </summary>
+		public static IEnumerable<System.Web.UI.Control> GetAllControls(System.Web.UI.Control control)
 		{
-			foreach(var rule in UriMap)
+			foreach (System.Web.UI.Control ctr in control.Controls)
+			{
+				yield return ctr;
+
+				foreach(System.Web.UI.Control ctr2 in GetAllControls(ctr))
+				{
+					yield return ctr2;
+				}
+			}
+		}
+
+		/// <summary>
+		/// List of rules that define which controllers are attached to wich URI paths
+		/// </summary>
+		public static readonly List<UrlRewriteRule> UriMap = new List<UrlRewriteRule>();
+
+		/// <summary>
+		/// Enables friendly urls for the app
+		/// </summary>
+		public static void EnableUrlRewrite(App app)
+		{
+			app.ControllerStarted += App_ControllerStarted;
+		}
+
+		public static UrlRewriteRule GetUrlRewriteRuleFor(Uri uri)
+		{
+			foreach (var rule in UriMap)
 			{
 				System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(rule.UrlRegexPattern);
 
@@ -134,17 +129,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			return null;
 		}
 
-		public UrlRewriteRule GetUrlRewriteRuleFor(Type controllerType)
+		public static UrlRewriteRule GetUrlRewriteRuleFor(Type controllerType)
 		{
 			return UriMap.Where(r => r.ControllerType.Equals(controllerType) || r.ControllerType.IsSubclassOf(controllerType)).FirstOrDefault();
 		}
 
-		protected override void StartController(Controller controller)
+		private static void App_ControllerStarted(object sender, Controller controller)
 		{
-			//ControlCounter = 0;
-
-			base.StartController(controller);
-
 			var rule = GetUrlRewriteRuleFor(controller.GetType());
 
 			if (rule == null)
@@ -152,51 +143,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 				return;
 			}
 
-			//we are on the corect url
+			//are we on the correct url?
 			var uri = rule.GetUri(controller);
 
 			if (uri != new Uri(System.Web.HttpContext.Current.Request.RawUrl, UriKind.Relative))
 			{
 				System.Web.HttpContext.Current.Response.Redirect(uri.ToString(), false);
-			}
-		}
-
-		//static
-
-		static Platform()
-		{
-			SessionIdProvider.Setup();
-		}
-
-		public static new Platform Current
-		{
-			get
-			{
-				var platform = (Platform) UI.Platform.Current;
-
-				if (platform == null)
-				{
-					platform = new Platform();
-					UI.Platform.Current = platform;
-				}
-
-				return platform;
-			}
-		}
-
-		/// <summary>
-		/// Returns all the contained controls, recursively
-		/// </summary>
-		public static IEnumerable<System.Web.UI.Control> GetAllControls(System.Web.UI.Control control)
-		{
-			foreach (System.Web.UI.Control ctr in control.Controls)
-			{
-				yield return ctr;
-
-				foreach(System.Web.UI.Control ctr2 in GetAllControls(ctr))
-				{
-					yield return ctr2;
-				}
 			}
 		}
 	}

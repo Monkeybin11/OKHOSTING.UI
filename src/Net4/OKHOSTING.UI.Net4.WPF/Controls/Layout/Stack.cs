@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Drawing;
 using System.Collections;
 using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
@@ -19,19 +19,19 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public Stack()
 		{
-            Controls = new ControlList(this);
-			InnerGrid = Platform.Current.Create<IGrid>();
+			Controls = new ControlList(this);
+			InnerGrid = Core.BaitAndSwitch.Create<IGrid>();
 			InnerGrid.ColumnCount = 1;
-            InnerGrid.RowCount = 1;
+			InnerGrid.RowCount = 1;
 
 			base.Children.Add((System.Windows.UIElement)InnerGrid);
 
-            HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-            VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            Width = Double.NaN;
-            Height = Double.NaN;
+			HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+			Width = Double.NaN;
+			Height = Double.NaN;
 
-        }
+		}
 
 		#region IControl
 
@@ -44,15 +44,15 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		Color IControl.BackgroundColor
 		{
-            get
-            {
-                return Platform.Current.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
-            }
-            set
-            {
-                base.Background = new System.Windows.Media.SolidColorBrush(Platform.Current.Parse(value));
-            }
-        }
+			get
+			{
+				return Platform.Parse(((System.Windows.Media.SolidColorBrush)base.Background).Color);
+			}
+			set
+			{
+				base.Background = new System.Windows.Media.SolidColorBrush(Platform.Parse(value));
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the color of the IC ontrol. border.
@@ -63,8 +63,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		Color IControl.BorderColor
 		{
-            get; set;
-        }
+			get; set;
+		}
 
 		/// <summary>
 		/// Gets or sets the width of the IC ontrol.
@@ -75,18 +75,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		double? IControl.Width
 		{
-            get
-            {
-                return base.Width;
-            }
-            set
-            {
-                if (value.HasValue)
-                {
-                    base.Width = value.Value;
-                }
-            }
-        }
+			get
+			{
+				return base.Width;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Width = value.Value;
+				}
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the height of the IC ontrol.
@@ -97,18 +97,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		double? IControl.Height
 		{
-            get
-            {
-                return base.Height;
-            }
-            set
-            {
-                if (value.HasValue)
-                {
-                    base.Height = value.Value;
-                }
-            }
-        }
+			get
+			{
+				return base.Height;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.Height = value.Value;
+				}
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the IC ontrol. margin.
@@ -119,15 +119,15 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		Thickness IControl.Margin
 		{
-            get
-            {
-                return Platform.Current.Parse(base.Margin);
-            }
-            set
-            {
-                base.Margin = Platform.Current.Parse(value);
-            }
-        }
+			get
+			{
+				return Platform.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = Platform.Parse(value);
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the width of the IC ontrol. border.
@@ -138,8 +138,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		Thickness IControl.BorderWidth
 		{
-            get; set;
-        }
+			get; set;
+		}
 
 		/// <summary>
 		/// Gets or sets the IC ontrol. horizontal alignment.
@@ -150,15 +150,15 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
-            get
-            {
-                return Platform.Current.Parse(base.HorizontalAlignment);
-            }
-            set
-            {
-                base.HorizontalAlignment = Platform.Current.Parse(value);
-            }
-        }
+			get
+			{
+				return Platform.Parse(base.HorizontalAlignment);
+			}
+			set
+			{
+				base.HorizontalAlignment = Platform.Parse(value);
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the IC ontrol. vertical alignment.
@@ -169,15 +169,15 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
-            get
-            {
-                return Platform.Current.Parse(base.VerticalAlignment);
-            }
-            set
-            {
-                base.VerticalAlignment = Platform.Current.Parse(value);
-            }
-        }
+			get
+			{
+				return Platform.Parse(base.VerticalAlignment);
+			}
+			set
+			{
+				base.VerticalAlignment = Platform.Parse(value);
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element.
@@ -206,7 +206,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public readonly ControlList Controls;
 
-		IList<IControl> IStack.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
@@ -238,30 +238,31 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				ContainerStack = containerStack;
 			}
 
-            /// <summary>
-            /// Gets or sets the OKHOSTING.UI.Net4.Ajax.Controls.Layout.Stack.ControlList at the specified index.
-            /// <para xml:lang="es">Obtiene o establece la lista de controles en el indice especificado.</para>
-            /// </summary>
-            /// <param name="index">Index.</param>
-            public IControl this[int index]
-            {
-                get
-                {
-                    return (IControl)ContainerStack.InnerGrid.GetContent(index, 0);
-                }
-                set
-                {
-                }
-            }
+			/// <summary>
+			/// Gets or sets the OKHOSTING.UI.Net4.Ajax.Controls.Layout.Stack.ControlList at the specified index.
+			/// <para xml:lang="es">Obtiene o establece la lista de controles en el indice especificado.</para>
+			/// </summary>
+			/// <param name="index">Index.</param>
+			public IControl this[int index]
+			{
+				get
+				{
+					return ContainerStack.InnerGrid.GetContent(index, 0);
+				}
+				set
+				{
+					ContainerStack.InnerGrid.SetContent(index, 0, value);
+				}
+			}
 
-            /// <summary>
-            /// Gets the count of rows in the container.
-            /// <para xml:lang="es">Obtiene el conteo de filas en el contenedor</para>
-            /// </summary>
-            /// <value>The count.
-            /// <para xml:lang="es">El conteo.</para>
-            /// </value>
-            public int Count
+			/// <summary>
+			/// Gets the count of rows in the container.
+			/// <para xml:lang="es">Obtiene el conteo de filas en el contenedor</para>
+			/// </summary>
+			/// <value>The count.
+			/// <para xml:lang="es">El conteo.</para>
+			/// </value>
+			public int Count
 			{
 				get
 				{
@@ -290,9 +291,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </param>
 			public void Add(IControl item)
 			{
-                ContainerStack.InnerGrid.SetContent(ContainerStack.InnerGrid.RowCount, 0, item);
-                ContainerStack.InnerGrid.RowCount++;
-                
+				ContainerStack.InnerGrid.SetContent(ContainerStack.InnerGrid.RowCount, 0, item);
+				ContainerStack.InnerGrid.RowCount++;
+				
 				//((IGrid) ContainerStack.InnerGrid).SetContent(((IGrid)ContainerStack.InnerGrid).RowCount + 1, 0, item);
 			}
 
@@ -314,8 +315,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </param>
 			public bool Contains(IControl item)
 			{
-
-				return false;
+				return ContainerStack.InnerGrid.Children.Contains(item);
 			}
 
 			/// <summary>
@@ -330,16 +330,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </param>
 			public void CopyTo(IControl[] array, int arrayIndex)
 			{
-				//for (int i = 0; i < ContainerStack.InnerGrid.RowCount; i++)
-				//{
-    //                int row 
-				//	System.Windows.UIElement row = ContainerStack.InnerGrid.Children[i];
-
-				//	if (row != null)
-				//	{
-				//		array[i] = (IControl) row;
-				//	}
-				//}
+				ContainerStack.InnerGrid.Children.CopyTo(array, arrayIndex);
 			}
 
 			/// <summary>
@@ -351,8 +342,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </returns>
 			public IEnumerator<IControl> GetEnumerator()
 			{
-                IEnumerator<IControl> list = null;
-                return list;
+				return ContainerStack.InnerGrid.Children.GetEnumerator();
 			}
 
 			/// <summary>
@@ -376,29 +366,29 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				return -1;
 			}
 
-            /// <summary>
-            /// Insert the specified index and item.
-            /// <para xml:lang="es">Inserta el control especificado en el indice especificado.</para>
-            /// </summary>
-            /// <param name="index">Index.
-            /// <para xml:lang="es">El indice especificado</para>
-            /// </param>
-            /// <param name="item">Item.
-            /// <para xml:lang="es">El control especificado.</para>
-            /// </param>
-            public void Insert(int index, IControl item)
-            {
-                ContainerStack.InnerGrid.SetContent(index, 0, item);
-            }
+			/// <summary>
+			/// Insert the specified index and item.
+			/// <para xml:lang="es">Inserta el control especificado en el indice especificado.</para>
+			/// </summary>
+			/// <param name="index">Index.
+			/// <para xml:lang="es">El indice especificado</para>
+			/// </param>
+			/// <param name="item">Item.
+			/// <para xml:lang="es">El control especificado.</para>
+			/// </param>
+			public void Insert(int index, IControl item)
+			{
+				ContainerStack.InnerGrid.SetContent(index, 0, item);
+			}
 
-            /// <summary>
-            /// Remove the specified item.
-            /// <para xml:lang="es">Quita la primera aparicion del control especificado en el contenedor actual.</para>
-            /// </summary>
-            /// <param name="item">Item.
-            /// <para xml:lang="es">El control especificado</para>
-            /// </param>
-            public bool Remove(IControl item)
+			/// <summary>
+			/// Remove the specified item.
+			/// <para xml:lang="es">Quita la primera aparicion del control especificado en el contenedor actual.</para>
+			/// </summary>
+			/// <param name="item">Item.
+			/// <para xml:lang="es">El control especificado</para>
+			/// </param>
+			public bool Remove(IControl item)
 			{
 				//foreach (System.Windows.UIElement row in ContainerStack.InnerGrid.Children)
 				//{
