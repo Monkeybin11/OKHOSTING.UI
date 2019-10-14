@@ -16,6 +16,14 @@ namespace OKHOSTING.UI.CSS
 	public class Style
 	{
 		/// <summary>
+		/// A cache of parsed styles for better performance
+		/// <para xml:lang="es">
+		/// Un cache de estilos analizados para una mejor rendimiento.
+		/// </para>
+		/// </summary>
+		public readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
+
+		/// <summary>
 		/// Applies a CSS stylesheet to the current App
 		/// <para xml:lang="es">
 		/// Aplica una hoja de estilo css para la aplicacion actual.
@@ -24,7 +32,7 @@ namespace OKHOSTING.UI.CSS
 		/// <param name="styleSheet">A list of css rules to be applied to the current running App
 		/// <para xml:lang="es">Una lista de reglas css que se aplicaran a la aplicacion actual en ejecucion.</para>
 		/// </param>
-		public static void ParseStyleRules(string styleSheet)
+		public void ParseStyleRules(string styleSheet)
 		{
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
@@ -37,20 +45,12 @@ namespace OKHOSTING.UI.CSS
 		}
 
 		/// <summary>
-		/// A cache of parsed styles for better performance
-		/// <para xml:lang="es">
-		/// Un cache de estilos analizados para una mejor rendimiento.
-		/// </para>
-		/// </summary>
-		public static readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
-
-		/// <summary>
 		/// Applies the corresponding styles to a recently created control
 		/// <para xml:lang="es">
 		/// Aplica los estilos correspondientes a un control creado recientemente.
 		/// </para>
 		/// </summary>
-		public static void Apply(IControl e)
+		public void Apply(IControl e)
 		{
 			string selector = "." + e.GetType().Name;
 
@@ -67,7 +67,7 @@ namespace OKHOSTING.UI.CSS
 		/// Aplica un estilo CSS a un Control.
 		/// </para>
 		/// </summary>
-		public static void Apply(ICssStyleDeclaration style, IControl control)
+		public void Apply(ICssStyleDeclaration style, IControl control)
 		{
 			AngleSharp.Css.Values.Color color;
 			AngleSharp.Css.Values.Length lenght;
@@ -197,7 +197,7 @@ namespace OKHOSTING.UI.CSS
 		/// Aplica un estilo CSS a un control de texto incluyendo el estilo del texto.
 		/// </para>
 		/// </summary>
-		public static void Apply(ICssStyleDeclaration style, ITextControl control)
+		public void Apply(ICssStyleDeclaration style, ITextControl control)
 		{
 			//first parse as IControl
 			Apply(style, (IControl) control);

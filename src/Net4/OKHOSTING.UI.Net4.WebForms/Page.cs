@@ -321,7 +321,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		public IEnumerable<IControl> GetAllControls()
 		{
-			foreach (IControl ctr in Platform.GetAllControls(this).Where(c => c is IControl))
+			foreach (IControl ctr in ControlExtensions.GetAllControls(this).Where(c => c is IControl))
 			{
 				yield return ctr;
 			}

@@ -117,6 +117,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		/// <summary>
+		/// Space that this control will set between itself and it's own border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// </para>
+		/// </summary>
+		Thickness IControl.Padding
+		{
+			get;
+			set;
+		}
+
 		Color IControl.BackgroundColor
 		{
 			get
