@@ -12,6 +12,17 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// </summary>
 	public class ProgressBar : global::Xamarin.Forms.ProgressBar, IProgressBar
 	{
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">
+		/// El identificador dispose.
+		/// </para>
+		/// </summary>
+		/// <returns>The identifier isposable. dispose.</returns>
+		void IDisposable.Dispose()
+		{
+		}
+
 		#region IControl
 
 		/// <summary>
@@ -102,12 +113,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				}
 			}
 		}
-
 		/// <summary>
 		/// Gets or sets the control margin.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el margen del control.
-		/// </para>
+		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
 		/// </summary>
 		Thickness IControl.Margin
 		{
@@ -122,9 +130,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
-		/// Space that this control will set between its content and its border
+		/// Space that this control will set between itself and it's own border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// Espacio que este control se establecerá entre si mismo y su propio borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -226,25 +234,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			get; set;
 		}
 
-		/// <summary>
-		/// Gets or sets a list of classes that define a control's style. 
-		/// Exactly the same concept as in CSS. 
-		/// </summary>
-		string IControl.CssClass { get; set; }
-
-		#endregion
-		
-		/// <summary>
-		/// The identifier dispose.
-		/// <para xml:lang="es">
-		/// El identificador dispose.
-		/// </para>
-		/// </summary>
-		/// <returns>The identifier isposable. dispose.</returns>
-		void IDisposable.Dispose()
-		{
-		}
-
 		public double Value
 		{
 			get
@@ -256,5 +245,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				base.Progress = value;
 			}
 		}
+
+		#endregion
 	}
 }

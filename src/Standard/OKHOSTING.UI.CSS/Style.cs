@@ -1,13 +1,9 @@
-﻿using AngleSharp.Dom.Css;
-using AngleSharp.Parser.Css;
-using OKHOSTING.Core;
-using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layout;
-using System;
+﻿using System.Linq;
 using System.Collections.Generic;
+using AngleSharp.Dom.Css;
+using AngleSharp.Parser.Css;
+using OKHOSTING.UI.Controls;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
 
 namespace OKHOSTING.UI.CSS
 {
@@ -19,20 +15,24 @@ namespace OKHOSTING.UI.CSS
 	/// </summary>
 	public class Style
 	{
-		#region Public
-
 		/// <summary>
-		/// Parses CSS stylesheet and stores the rules internally
+		/// A cache of parsed styles for better performance
 		/// <para xml:lang="es">
-		/// Parsea una hoja de estilo CSS y guarda las reglas localmente
+		/// Un cache de estilos analizados para una mejor rendimiento.
 		/// </para>
 		/// </summary>
-		/// <param name="styleSheet">A CSS style sheet
+		public readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
+
+		/// <summary>
+		/// Applies a CSS stylesheet to the current App
 		/// <para xml:lang="es">
-		/// Una hoja de estilos CSS
+		/// Aplica una hoja de estilo css para la aplicacion actual.
 		/// </para>
+		/// </summary>
+		/// <param name="styleSheet">A list of css rules to be applied to the current running App
+		/// <para xml:lang="es">Una lista de reglas css que se aplicaran a la aplicacion actual en ejecucion.</para>
 		/// </param>
-		public void Parse(string styleSheet)
+		public void ParseStyleRules(string styleSheet)
 		{
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
@@ -50,263 +50,16 @@ namespace OKHOSTING.UI.CSS
 		/// Aplica los estilos correspondientes a un control creado recientemente.
 		/// </para>
 		/// </summary>
-		public void Apply(IPage page)
+		public void Apply(IControl e)
 		{
-			var allControls = App.GetAllChildren(page.Content);
+			string selector = "." + e.GetType().Name;
 
-			foreach (var rule in ParsedStyleRules)
+			//select the correct styles using the selector, and apply
+			foreach (ICssStyleDeclaration style in ParsedStyleRules.Where(s => s.SelectorText == selector))
 			{
-				var selectedControls = SelectBy(allControls, rule.SelectorText);
-
-				foreach (var control in selectedControls)
-				{
-					Apply(rule.Style, control);
-				}
+				Apply(style, e);
 			}
 		}
-
-		#endregion
-
-		#region Protected
-
-		protected string[] SplitBySpace(string singleSelectorText)
-		{
-			return singleSelectorText.Split(' ').Select(s => s.ToLower().Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
-		}
-
-		protected string[] SplitByCommas(string selectorText)
-		{
-			return selectorText.Split(',').Select(s => s.ToLower().Trim()).ToArray();
-		}
-
-		/// <summary>
-		/// A cache of parsed styles for better performance
-		/// <para xml:lang="es">
-		/// Un cache de estilos analizados para una mejor rendimiento.
-		/// </para>
-		/// </summary>
-		protected readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
-
-		/// <summary>
-		/// Selects all controls that match the specified CSS selector
-		/// </summary>
-		/// <param name="controls">List of controls to filter</param>
-		/// <param name="selector">CSS full selector, might include commas, pe: #mycontrolname, .myclass</param>
-		/// <returns>List of controls that have the specified Id (Name)</returns>
-		protected IEnumerable<IControl> SelectBy(IEnumerable<IControl> controls, string selector)
-		{
-			var allSelectors = SplitByCommas(selector);
-
-			foreach (var s in allSelectors)
-			{
-				IEnumerable<IControl> selected = controls;
-				var subSelectors = SplitBySpace(s);
-
-				for (int i = 0; i < subSelectors.Length; i++)
-				{
-					var subSelector = subSelectors[i];
-
-					//select all child when this is a "container" CSS selector like "p a, div img"
-					if (i > 0)
-					{
-						selected = App.GetAllChildren(selected);
-					}
-
-					if (selector == "*")
-					{
-						//do not filter
-					}
-					else if (selector.StartsWith("#"))
-					{
-						selected = SelectById(selected, selector);
-					}
-					else if (selector.Contains("."))
-					{
-						selected = SelectByClass(selected, selector);
-					}
-					else if (selector.Contains("["))
-					{
-						selected = SelectByAttribute(selected, selector);
-					}
-					else if (selector[0].Category() == CharExtensions.CharCategory.Letter)
-					{
-						selected = SelectByElementType(selected, selector);
-					}
-
-					else throw new ArgumentOutOfRangeException(nameof(selector), "Argument is not a supported CSS selector");
-				}
-
-				foreach (var control in selected)
-				{
-					yield return control;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Selects all controls that have the specified CSS Id
-		/// </summary>
-		/// <param name="controls">List of controls to filter</param>
-		/// <param name="selector">CSS id selector, pe: #mycontrolname</param>
-		/// <returns>List of controls that have the specified Id (Name)</returns>
-		protected IEnumerable<IControl> SelectById(IEnumerable<IControl> controls, string selector)
-		{
-			string id = selector.Substring(1);
-			return controls.Where(c => c.Name == id);
-		}
-
-		/// <summary>
-		/// Selects all controls that have the specified CSS class
-		/// </summary>
-		/// <param name="controls">List of controls to filter</param>
-		/// <param name="selector">CSS class selector, pe: .myclass</param>
-		/// <returns>List of controls that have the specified css class</returns>
-		protected IEnumerable<IControl> SelectByClass(IEnumerable<IControl> controls, string selector)
-		{
-			//support .class1.class2 selector that means to select all items that have BOTH classes declared
-			if (selector.IndexOf('.') != selector.LastIndexOf('.'))
-			{
-				var classes = selector.Split('.');
-				return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).ContainsAll(classes));
-			}
-
-			string element = selector.Substring(0, selector.IndexOf('.'));
-			string className = selector.Substring(selector.IndexOf('.') + 1);
-
-			if (element != null)
-			{
-				return SelectByElementType(controls, element).Where(c =>  c.CssClass != null && SplitBySpace(c.CssClass).Contains(className));
-			}
-			else
-			{
-				return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).Contains(className));
-			}
-		}
-
-		/// <summary>
-		/// Selects all controls that have the specified element type
-		/// </summary>
-		/// <param name="controls">List of controls to filter</param>
-		/// <param name="selector">CSS element selector, pe: label, button, a, textbox</param>
-		/// <returns>List of controls that have the specified css class</returns>
-		protected IEnumerable<IControl> SelectByElementType(IEnumerable<IControl> controls, string selector)
-		{
-			return controls.Where(c => c.GetType().Name.Equals(selector, StringComparison.OrdinalIgnoreCase));
-		}
-
-		/// <summary>
-		/// Selects all controls that matches the specified attribute selector
-		/// </summary>
-		/// <param name="controls">List of controls to filter</param>
-		/// <param name="selector">CSS attribute selector, pe: [href], img[src='image.png'], a[href='okhosting']</param>
-		/// <returns>List of controls that match the specified css attribute selector</returns>
-		protected IEnumerable<IControl> SelectByAttribute(IEnumerable<IControl> controls, string selector)
-		{
-			string op = null;
-			string element = selector.Substring(0, selector.IndexOf('['));
-
-			if (selector.Contains("~="))
-			{
-				op = "~=";
-			}
-			else if (selector.Contains("|="))
-			{
-				op = "|=";
-			}
-			else if (selector.Contains("^="))
-			{
-				op = "^=";
-			}
-			else if (selector.Contains("$="))
-			{
-				op = "$=";
-			}
-			else if (selector.Contains("*="))
-			{
-				op = "*=";
-			}
-			else if (selector.Contains("="))
-			{
-				op = "=";
-			}
-
-			var opIndex = selector.IndexOf(op);
-			string attName = selector.Substring(0, opIndex).TrimStart('[');
-			string attValue = selector.Substring(opIndex + op.Length).TrimEnd(']');
-			var elementControls = controls;
-
-			if (!string.IsNullOrWhiteSpace(element))
-			{
-				elementControls = SelectByElementType(elementControls, element);
-			}
-
-			foreach (var c in elementControls)
-			{
-				var type = c.GetType();
-				var member = type.GetMember(attName).Where(m => m is PropertyInfo || m is FieldInfo).FirstOrDefault();
-
-				if (member == null)
-				{
-					continue;
-				}
-
-				var controlValue = Data.MemberExpression.GetValue(member, c);
-				var convertedAttValue = Data.Convert.ChangeType(attValue, Data.MemberExpression.GetReturnType(member));
-
-				switch (op)
-				{
-					//no operator means declaring the member is enough
-					case null:
-						yield return c;
-						break;
-
-					case "=":
-						if (controlValue == convertedAttValue)
-						{
-							yield return c;
-						}
-
-						break;
-
-					case "~=":
-					case "*=":
-						if (controlValue.ToString().Contains(convertedAttValue.ToString()))
-						{
-							yield return c;
-						}
-
-						break;
-
-					case "|=":
-						if (controlValue == convertedAttValue || controlValue.ToString() == convertedAttValue.ToString() + "-")
-						{
-							yield return c;
-						}
-
-						break;
-
-					case "^=":
-						if (controlValue.ToString().StartsWith(convertedAttValue.ToString()))
-						{
-							yield return c;
-						}
-
-						break;
-
-					case "$=":
-						if (controlValue.ToString().EndsWith(convertedAttValue.ToString()))
-						{
-							yield return c;
-						}
-
-						break;
-				}
-			}
-		}
-		
-		#endregion
-
-		#region Static
 
 		/// <summary>
 		/// Applies a CSS style to a IControl
@@ -314,13 +67,14 @@ namespace OKHOSTING.UI.CSS
 		/// Aplica un estilo CSS a un Control.
 		/// </para>
 		/// </summary>
-		public static void Apply(ICssStyleDeclaration style, IControl control)
+		public void Apply(ICssStyleDeclaration style, IControl control)
 		{
 			AngleSharp.Css.Values.Color color;
 			AngleSharp.Css.Values.Length lenght;
 			bool parsed;
 
 			//background and border colors
+
 			color = AngleSharp.Css.Values.Color.FromHex(style.BackgroundColor);
 			control.BackgroundColor = Color.FromArgb(color.A, color.R, color.G, color.B);
 
@@ -384,6 +138,7 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//vertical alignment
+
 			switch (style.VerticalAlign)
 			{
 				case "top":
@@ -399,11 +154,14 @@ namespace OKHOSTING.UI.CSS
 					break;
 			}
 
+
 			//height and width
+
 			if (AngleSharp.Css.Values.Length.TryParse(style.Height, out lenght)) control.Height = lenght.ToPixel();
 			if (AngleSharp.Css.Values.Length.TryParse(style.Width, out lenght)) control.Width = lenght.ToPixel();
 
 			//border
+
 			Thickness borderWidth = new Thickness();
 			AngleSharp.Css.Values.Length.TryParse(style.BorderTopWidth, out lenght);
 			borderWidth.Top = lenght.ToPixel();
@@ -416,6 +174,7 @@ namespace OKHOSTING.UI.CSS
 			control.BorderWidth = borderWidth;
 
 			//margin
+
 			Thickness margin = new Thickness();
 			AngleSharp.Css.Values.Length.TryParse(style.MarginTop, out lenght);
 			margin.Top = lenght.ToPixel();
@@ -427,19 +186,8 @@ namespace OKHOSTING.UI.CSS
 			margin.Left = lenght.ToPixel();
 			control.Margin = margin;
 
-			//padding
-			Thickness padding = new Thickness();
-			AngleSharp.Css.Values.Length.TryParse(style.MarginTop, out lenght);
-			padding.Top = lenght.ToPixel();
-			AngleSharp.Css.Values.Length.TryParse(style.MarginRight, out lenght);
-			padding.Right = lenght.ToPixel();
-			AngleSharp.Css.Values.Length.TryParse(style.MarginBottom, out lenght);
-			padding.Bottom = lenght.ToPixel();
-			AngleSharp.Css.Values.Length.TryParse(style.MarginLeft, out lenght);
-			padding.Left = lenght.ToPixel();
-			control.Padding = padding;
-
 			//visibility
+
 			control.Visible = style.Visibility != "none" && style.Visibility != "hidden";
 		}
 
@@ -449,7 +197,7 @@ namespace OKHOSTING.UI.CSS
 		/// Aplica un estilo CSS a un control de texto incluyendo el estilo del texto.
 		/// </para>
 		/// </summary>
-		public static void Apply(ICssStyleDeclaration style, ITextControl control)
+		public void Apply(ICssStyleDeclaration style, ITextControl control)
 		{
 			//first parse as IControl
 			Apply(style, (IControl) control);
@@ -461,7 +209,9 @@ namespace OKHOSTING.UI.CSS
 
 			AngleSharp.Css.Values.Color color = AngleSharp.Css.Values.Color.FromHex(style.Color);
 			control.FontColor = Color.FromArgb(color.A, color.R, color.G, color.B);
+
 			control.FontFamily = style.FontFamily;
+
 			AngleSharp.Css.Values.Length lenght;
 
 			if (AngleSharp.Css.Values.Length.TryParse(style.FontSize, out lenght))
@@ -491,39 +241,5 @@ namespace OKHOSTING.UI.CSS
 			//just grab the sabe vertical aligned parsed form the other mnethod
 			control.TextVerticalAlignment = control.VerticalAlignment;
 		}
-
-		static Style()
-		{
-			ElementTypeEquivalents = new Dictionary<string, Type>();
-
-			ElementTypeEquivalents.Add("a", typeof(IHyperLink));
-			ElementTypeEquivalents.Add("table", typeof(IGrid));
-			ElementTypeEquivalents.Add("input[type=button]", typeof(IButton));
-			ElementTypeEquivalents.Add("input[type=submit]", typeof(IButton));
-			ElementTypeEquivalents.Add("input[type=check]", typeof(ICheckBox));
-			ElementTypeEquivalents.Add("input[type=text]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=password]", typeof(IPasswordTextBox));
-			ElementTypeEquivalents.Add("input[type=time]", typeof(ITimeOfDayPicker));
-			ElementTypeEquivalents.Add("input[type=date]", typeof(IDatePicker));
-			ElementTypeEquivalents.Add("input[type=datetime-local ]", typeof(IDatePicker));
-			ElementTypeEquivalents.Add("input[type=email]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=month]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=number]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=range]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=search]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=tel]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=url]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("input[type=week]", typeof(ITextBox));
-			ElementTypeEquivalents.Add("label", typeof(ILabel));
-			ElementTypeEquivalents.Add("p", typeof(ILabel));
-			ElementTypeEquivalents.Add("img", typeof(IImage));
-			ElementTypeEquivalents.Add("select", typeof(IListPicker));
-			ElementTypeEquivalents.Add("textarea", typeof(ITextArea));
-			ElementTypeEquivalents.Add("frame", typeof(IWebView));
-		}
-
-		public static readonly Dictionary<string, Type> ElementTypeEquivalents;
-
-		#endregion
 	}
 }
