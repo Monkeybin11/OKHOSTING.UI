@@ -22,6 +22,7 @@ namespace OKHOSTING.UI.Security
 		protected override void OnStart()
 		{
 			IUserControl formContainer = Core.BaitAndSwitch.Create<IUserControl>();
+			formContainer.App = Page.App;
 			Form = new Form(formContainer);
 
 			lblMessage = Core.BaitAndSwitch.Create<ILabel>();
