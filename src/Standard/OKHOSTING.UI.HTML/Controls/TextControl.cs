@@ -26,6 +26,11 @@ namespace OKHOSTING.UI.HTML.Controls
 		public HorizontalAlignment HorizontalAlignment { get; set; }
 		public VerticalAlignment VerticalAlignment { get; set; }
 		public object Tag { get; set; }
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		public string CssClass { get; set; }
 
 		public abstract void Dispose();
 	}

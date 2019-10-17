@@ -82,6 +82,18 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
+		Thickness IControl.Padding
+		{
+			get
+			{
+				return Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Platform.Parse(value);
+			}
+		}
+
 		Color IControl.BackgroundColor
 		{
 			get
@@ -121,6 +133,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 				base.Anchor = Platform.ParseAnchor(((IControl)this).HorizontalAlignment, value);
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
 
 		#endregion
 

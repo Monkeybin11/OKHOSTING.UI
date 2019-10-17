@@ -228,13 +228,32 @@ namespace OKHOSTING.UI
 				yield break;
 			}
 
-			foreach (var children in ((Controls.IContainer) control).Children)
+			foreach (var child in ((Controls.IContainer) control).Children)
 			{
-				yield return children;
+				yield return child;
 
-				foreach (var subChildren in GetAllChildren(children))
+				foreach (var subChild in GetAllChildren(child))
 				{
-					yield return subChildren;
+					yield return subChild;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets a list of controls and subcontrols in a recursive way
+		/// </summary>
+		public static IEnumerable<Controls.IControl> GetAllChildren(IEnumerable<Controls.IControl> controls)
+		{
+			if (controls == null)
+			{
+				throw new ArgumentNullException(nameof(controls));
+			}
+
+			foreach (var control in controls)
+			{
+				foreach (var child in GetAllChildren(control))
+				{
+					yield return child;
 				}
 			}
 		}

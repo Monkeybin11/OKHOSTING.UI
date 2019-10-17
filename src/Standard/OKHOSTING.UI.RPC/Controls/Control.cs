@@ -230,5 +230,11 @@ namespace OKHOSTING.UI.RPC.Controls
 				Set(nameof(Tag), value);
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		public string CssClass { get; set; }
 	}
 }

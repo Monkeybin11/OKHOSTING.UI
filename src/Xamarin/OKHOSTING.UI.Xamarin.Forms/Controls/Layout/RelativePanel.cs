@@ -113,12 +113,39 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Gets or sets the margin Control.
-		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
+		/// Gets or sets the control margin.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el margen del control.
+		/// </para>
 		/// </summary>
 		Thickness IControl.Margin
 		{
-			get; set;
+			get
+			{
+				return Forms.Platform.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = Forms.Platform.Parse(value);
+			}
+		}
+
+		/// <summary>
+		/// Space that this control will set between its content and its border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// </para>
+		/// </summary>
+		Thickness IControl.Padding
+		{
+			get
+			{
+				return Forms.Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -204,9 +231,16 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			get; set;
 		}
 
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
 		#endregion
 
 		#region IDisposable
+
 		/// <summary>
 		/// Dispose.
 		/// <para xml:lang="es">Libera la memoria.</para>

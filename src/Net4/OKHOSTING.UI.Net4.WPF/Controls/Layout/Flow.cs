@@ -158,6 +158,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		/// <summary>
+		/// Space that this control will set between its content and its border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// </para>
+		/// </summary>
+		Thickness IControl.Padding
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Gets or sets the background color
 		/// <para xml:lang="es">
 		/// Obtiene o establece el color de fondo del control.
@@ -232,6 +244,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				base.VerticalAlignment = Platform.Parse(value);
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
 
 		#endregion
 	}

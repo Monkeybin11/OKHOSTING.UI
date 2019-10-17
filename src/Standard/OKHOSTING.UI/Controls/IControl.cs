@@ -56,6 +56,14 @@ namespace OKHOSTING.UI.Controls
 		/// </para>
 		/// </summary>
 		Thickness Margin { get; set; }
+		
+		/// <summary>
+		/// Space that this control will set between its content and its border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// </para>
+		/// </summary>
+		Thickness Padding { get; set; }
 
 		/// <summary>
 		/// Background color
@@ -115,6 +123,6 @@ namespace OKHOSTING.UI.Controls
 		/// Gets or sets a list of classes that define a control's style. 
 		/// Exactly the same concept as in CSS. 
 		/// </summary>
-		//string CssClass { get; set; }
+		string CssClass { get; set; }
 	}
 }
