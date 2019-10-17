@@ -19,59 +19,28 @@ namespace OKHOSTING.UI.CSS
 	/// </summary>
 	public class Style
 	{
+		#region Public
+
 		/// <summary>
-		/// Applies a CSS stylesheet to the current App
+		/// Parses CSS stylesheet and stores the rules internally
 		/// <para xml:lang="es">
-		/// Aplica una hoja de estilo css para la aplicacion actual.
+		/// Parsea una hoja de estilo CSS y guarda las reglas localmente
 		/// </para>
 		/// </summary>
-		/// <param name="styleSheet">A list of css rules to be applied to the current running App
-		/// <para xml:lang="es">Una lista de reglas css que se aplicaran a la aplicacion actual en ejecucion.</para>
+		/// <param name="styleSheet">A CSS style sheet
+		/// <para xml:lang="es">
+		/// Una hoja de estilos CSS
+		/// </para>
 		/// </param>
-		public static void ParseStyleRules(string styleSheet)
+		public void Parse(string styleSheet)
 		{
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
-			
+
 			//get only the rules that are actually styles
 			foreach (ICssStyleRule rule in cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style))
 			{
 				ParsedStyleRules.Add(rule);
-			}
-		}
-
-		protected IEnumerable<string> SplitBySpace(string singleSelectorText)
-		{
-			return singleSelectorText.Split(' ').Select(s => s.ToLower().Trim()).Where(s => !string.IsNullOrWhiteSpace(s));
-		}
-
-		protected IEnumerable<string> SplitByCommas(string selectorText)
-		{
-			return selectorText.Split(',').Select(s => s.ToLower().Trim());
-		}
-
-		/// <summary>
-		/// A cache of parsed styles for better performance
-		/// <para xml:lang="es">
-		/// Un cache de estilos analizados para una mejor rendimiento.
-		/// </para>
-		/// </summary>
-		public static readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
-
-		/// <summary>
-		/// Applies the corresponding styles to a recently created control
-		/// <para xml:lang="es">
-		/// Aplica los estilos correspondientes a un control creado recientemente.
-		/// </para>
-		/// </summary>
-		public static void Apply(IControl e)
-		{
-			string selector = "." + e.GetType().Name;
-
-			//select the correct styles using the selector, and apply
-			foreach (ICssStyleDeclaration style in ParsedStyleRules.Where(s => s.Selector.Text == selector))
-			{
-				Apply(style, e);
 			}
 		}
 
@@ -84,129 +53,94 @@ namespace OKHOSTING.UI.CSS
 		public void Apply(IPage page)
 		{
 			var allControls = App.GetAllChildren(page.Content);
-		}
 
-		public IEnumerable<IControl> SelectControls(IEnumerable<IControl> controls, ICssStyleRule rule)
-		{
-			var allSelectors = SplitByCommas(rule.SelectorText);
-			List<IControl> selected = controls.ToList();
-
-			foreach (var selector in allSelectors)
+			foreach (var rule in ParsedStyleRules)
 			{
-				var subSelectors = SplitBySpace(selector);
+				var selectedControls = Select(allControls, rule.SelectorText);
 
-				foreach (var subSelector in subSelectors)
+				foreach (var control in selectedControls)
 				{
-					if (subSelector == "*")
-					{
-						//do not filter at all
-					}
-					else if (subSelector.StartsWith("#"))
-					{
-						string id = subSelector.Substring(1);
-						selected = selected.Where(c => c.Name == id).ToList();
-					}
-					else if (subSelector.StartsWith("."))
-					{
-						string className = subSelector.Substring(1);
-						selected = selected.Where(c => c.Name == className).ToList();
-					}
-					else if (subSelector.StartsWith("["))
-					{
-						string op = "=";
-
-						if (subSelector.Contains("~="))
-						{
-							op = "~=";
-						}
-						else if (subSelector.Contains("~="))
-						{
-							op = "~=";
-						}
-						else if (subSelector.Contains("|="))
-						{
-							op = "|=";
-						}
-						else if (subSelector.Contains("^="))
-						{
-							op = "^=";
-						}
-						else if (subSelector.Contains("$="))
-						{
-							op = "$=";
-						}
-						else if (subSelector.Contains("*="))
-						{
-							op = "*=";
-						}
-						else if (subSelector.Contains("="))
-						{
-							op = "=";
-						}
-
-						var opIndex = subSelector.IndexOf(op);
-						string attName = subSelector.Substring(0, opIndex);
-						string attValue = subSelector.Substring(opIndex + op.Length);
-
-						foreach (var control in selected)
-						{
-							var type = control.GetType();
-							var member = type.GetMember(attName).Where(m => m is PropertyInfo || m is FieldInfo).FirstOrDefault();
-
-							if (member == null)
-							{
-								continue;
-							}
-
-							var controlValue = Data.MemberExpression.GetValue(member, control);
-							var convertedAttValue = Data.Convert.ChangeType(attValue, Data.MemberExpression.GetReturnType(member));
-
-							switch (op)
-							{
-								case "=":
-									if (controlValue == convertedAttValue)
-									{
-
-									}
-									break;
-								default:
-									break;
-							}
-						}
-					}
-				}
-
-				foreach (var s in selected)
-				{
-					yield return s;
+					Apply(rule.Style, control);
 				}
 			}
 		}
 
-		public IEnumerable<IControl> SelectControls(IEnumerable<IControl> controls, string selector)
-		{
-			if (selector == "*")
-			{
-				return controls;
-			}
-			else if (selector.StartsWith("#"))
-			{
-				return SelectById(controls, selector);
-			}
-			else if (selector.StartsWith("."))
-			{
-				return SelectByClass(controls, selector);
-			}
-			else if (selector.Contains("["))
-			{
-				return SelectByAttribute(controls, selector);
-			}
-			else if (selector[0].Category() == CharExtensions.CharCategory.Letter)
-			{
-				return SelectByElementType(controls, selector);
-			}
+		#endregion
 
-			else throw new System.ArgumentOutOfRangeException(nameof(selector), "Argument is not a supported CSS selector");
+		#region Protected
+
+		protected string[] SplitBySpace(string singleSelectorText)
+		{
+			return singleSelectorText.Split(' ').Select(s => s.ToLower().Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
+		}
+
+		protected string[] SplitByCommas(string selectorText)
+		{
+			return selectorText.Split(',').Select(s => s.ToLower().Trim()).ToArray();
+		}
+
+		/// <summary>
+		/// A cache of parsed styles for better performance
+		/// <para xml:lang="es">
+		/// Un cache de estilos analizados para una mejor rendimiento.
+		/// </para>
+		/// </summary>
+		protected readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
+
+		/// <summary>
+		/// Selects all controls that match the specified CSS selector
+		/// </summary>
+		/// <param name="controls">List of controls to filter</param>
+		/// <param name="selector">CSS full selector, might include commas, pe: #mycontrolname, .myclass</param>
+		/// <returns>List of controls that have the specified Id (Name)</returns>
+		protected IEnumerable<IControl> SelectBy(IEnumerable<IControl> controls, string selector)
+		{
+			var allSelectors = SplitByCommas(selector);
+
+			foreach (var s in allSelectors)
+			{
+				IEnumerable<IControl> selected = controls;
+				var subSelectors = SplitBySpace(s);
+
+				for (int i = 0; i < subSelectors.Length; i++)
+				{
+					var subSelector = subSelectors[i];
+
+					//select all child when this is a "container" CSS selector like "p a, div img"
+					if (i > 0)
+					{
+						selected = App.GetAllChildren(selected);
+					}
+
+					if (selector == "*")
+					{
+						//do not filter
+					}
+					else if (selector.StartsWith("#"))
+					{
+						selected = SelectById(selected, selector);
+					}
+					else if (selector.Contains("."))
+					{
+						selected = SelectByClass(selected, selector);
+					}
+					else if (selector.Contains("["))
+					{
+						selected = SelectByAttribute(selected, selector);
+					}
+					else if (selector[0].Category() == CharExtensions.CharCategory.Letter)
+					{
+						selected = SelectByElementType(selected, selector);
+					}
+
+					else throw new ArgumentOutOfRangeException(nameof(selector), "Argument is not a supported CSS selector");
+				}
+
+				foreach (var control in selected)
+				{
+					yield return control;
+				}
+			}
 		}
 
 		/// <summary>
@@ -215,7 +149,7 @@ namespace OKHOSTING.UI.CSS
 		/// <param name="controls">List of controls to filter</param>
 		/// <param name="selector">CSS id selector, pe: #mycontrolname</param>
 		/// <returns>List of controls that have the specified Id (Name)</returns>
-		public IEnumerable<IControl> SelectById(IEnumerable<IControl> controls, string selector)
+		protected IEnumerable<IControl> SelectById(IEnumerable<IControl> controls, string selector)
 		{
 			string id = selector.Substring(1);
 			return controls.Where(c => c.Name == id);
@@ -225,26 +159,48 @@ namespace OKHOSTING.UI.CSS
 		/// Selects all controls that have the specified CSS class
 		/// </summary>
 		/// <param name="controls">List of controls to filter</param>
-		/// <param name="selector">CSS id selector, pe: .myclass</param>
+		/// <param name="selector">CSS class selector, pe: .myclass</param>
 		/// <returns>List of controls that have the specified css class</returns>
-		public IEnumerable<IControl> SelectByClass(IEnumerable<IControl> controls, string selector)
+		protected IEnumerable<IControl> SelectByClass(IEnumerable<IControl> controls, string selector)
 		{
-			string className = selector.Substring(1);
-			return controls.Where(c => c.Name == className);
+			//support .class1.class2 selector that means to select all items that have BOTH classes declared
+			if (selector.IndexOf('.') != selector.LastIndexOf('.'))
+			{
+				var classes = selector.Split('.');
+				return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).ContainsAll(classes));
+			}
+
+			string element = selector.Substring(0, selector.IndexOf('.'));
+			string className = selector.Substring(selector.IndexOf('.') + 1);
+
+			if (element != null)
+			{
+				return SelectByElementType(controls, element).Where(c =>  c.CssClass != null && SplitBySpace(c.CssClass).Contains(className));
+			}
+			else
+			{
+				return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).Contains(className));
+			}
 		}
 
 		/// <summary>
 		/// Selects all controls that have the specified element type
 		/// </summary>
 		/// <param name="controls">List of controls to filter</param>
-		/// <param name="selector">CSS id selector, pe: label, button, a, textbox</param>
+		/// <param name="selector">CSS element selector, pe: label, button, a, textbox</param>
 		/// <returns>List of controls that have the specified css class</returns>
-		public IEnumerable<IControl> SelectByElementType(IEnumerable<IControl> controls, string selector)
+		protected IEnumerable<IControl> SelectByElementType(IEnumerable<IControl> controls, string selector)
 		{
-			return controls.Where(c => c.GetType().Name.Equals(selector, System.StringComparison.OrdinalIgnoreCase));
+			return controls.Where(c => c.GetType().Name.Equals(selector, StringComparison.OrdinalIgnoreCase));
 		}
 
-		public IEnumerable<IControl> SelectByAttribute(IEnumerable<IControl> controls, string selector)
+		/// <summary>
+		/// Selects all controls that matches the specified attribute selector
+		/// </summary>
+		/// <param name="controls">List of controls to filter</param>
+		/// <param name="selector">CSS attribute selector, pe: [href], img[src='image.png'], a[href='okhosting']</param>
+		/// <returns>List of controls that match the specified css attribute selector</returns>
+		protected IEnumerable<IControl> SelectByAttribute(IEnumerable<IControl> controls, string selector)
 		{
 			string op = null;
 			string element = selector.Substring(0, selector.IndexOf('['));
@@ -347,6 +303,10 @@ namespace OKHOSTING.UI.CSS
 				}
 			}
 		}
+		
+		#endregion
+
+		#region Static
 
 		/// <summary>
 		/// Applies a CSS style to a IControl
@@ -361,7 +321,6 @@ namespace OKHOSTING.UI.CSS
 			bool parsed;
 
 			//background and border colors
-
 			color = AngleSharp.Css.Values.Color.FromHex(style.BackgroundColor);
 			control.BackgroundColor = Color.FromArgb(color.A, color.R, color.G, color.B);
 
@@ -425,7 +384,6 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//vertical alignment
-
 			switch (style.VerticalAlign)
 			{
 				case "top":
@@ -441,14 +399,11 @@ namespace OKHOSTING.UI.CSS
 					break;
 			}
 
-
 			//height and width
-
 			if (AngleSharp.Css.Values.Length.TryParse(style.Height, out lenght)) control.Height = lenght.ToPixel();
 			if (AngleSharp.Css.Values.Length.TryParse(style.Width, out lenght)) control.Width = lenght.ToPixel();
 
 			//border
-
 			Thickness borderWidth = new Thickness();
 			AngleSharp.Css.Values.Length.TryParse(style.BorderTopWidth, out lenght);
 			borderWidth.Top = lenght.ToPixel();
@@ -461,7 +416,6 @@ namespace OKHOSTING.UI.CSS
 			control.BorderWidth = borderWidth;
 
 			//margin
-
 			Thickness margin = new Thickness();
 			AngleSharp.Css.Values.Length.TryParse(style.MarginTop, out lenght);
 			margin.Top = lenght.ToPixel();
@@ -473,8 +427,19 @@ namespace OKHOSTING.UI.CSS
 			margin.Left = lenght.ToPixel();
 			control.Margin = margin;
 
-			//visibility
+			//padding
+			Thickness padding = new Thickness();
+			AngleSharp.Css.Values.Length.TryParse(style.MarginTop, out lenght);
+			padding.Top = lenght.ToPixel();
+			AngleSharp.Css.Values.Length.TryParse(style.MarginRight, out lenght);
+			padding.Right = lenght.ToPixel();
+			AngleSharp.Css.Values.Length.TryParse(style.MarginBottom, out lenght);
+			padding.Bottom = lenght.ToPixel();
+			AngleSharp.Css.Values.Length.TryParse(style.MarginLeft, out lenght);
+			padding.Left = lenght.ToPixel();
+			control.Padding = padding;
 
+			//visibility
 			control.Visible = style.Visibility != "none" && style.Visibility != "hidden";
 		}
 
@@ -496,9 +461,7 @@ namespace OKHOSTING.UI.CSS
 
 			AngleSharp.Css.Values.Color color = AngleSharp.Css.Values.Color.FromHex(style.Color);
 			control.FontColor = Color.FromArgb(color.A, color.R, color.G, color.B);
-
 			control.FontFamily = style.FontFamily;
-
 			AngleSharp.Css.Values.Length lenght;
 
 			if (AngleSharp.Css.Values.Length.TryParse(style.FontSize, out lenght))
@@ -560,5 +523,7 @@ namespace OKHOSTING.UI.CSS
 		}
 
 		public static readonly Dictionary<string, Type> ElementTypeEquivalents;
+
+		#endregion
 	}
 }

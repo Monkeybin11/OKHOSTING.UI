@@ -56,6 +56,14 @@ namespace OKHOSTING.UI.Controls
 		/// </para>
 		/// </summary>
 		Thickness Margin { get; set; }
+		
+		/// <summary>
+		/// Space that this control will set between itself and it's container
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre si mismo y su contenedor.
+		/// </para>
+		/// </summary>
+		Thickness Padding { get; set; }
 
 		/// <summary>
 		/// Background color
