@@ -275,6 +275,18 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
+		Thickness IControl.Padding
+		{
+			get
+			{
+				return Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Platform.Parse(value);
+			}
+		}
+
 		Color IControl.BackgroundColor
 		{
 			get

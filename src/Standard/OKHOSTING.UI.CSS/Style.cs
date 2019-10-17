@@ -56,7 +56,7 @@ namespace OKHOSTING.UI.CSS
 
 			foreach (var rule in ParsedStyleRules)
 			{
-				var selectedControls = Select(allControls, rule.SelectorText);
+				var selectedControls = SelectBy(allControls, rule.SelectorText);
 
 				foreach (var control in selectedControls)
 				{

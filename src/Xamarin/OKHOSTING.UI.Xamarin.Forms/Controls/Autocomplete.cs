@@ -35,21 +35,25 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <para xml:lang="es">El boton que nos envia a la busqueda</para>
 		/// </summary>
 		protected IButton GoSearchButton;
+
 		/// <summary>
 		/// The search text.
 		/// <para xml:lang="es">El texto a buscar.</para>
 		/// </summary>
 		protected ITextBox SearchText;
+		
 		/// <summary>
 		/// The search button.
 		/// <para xml:lang="es">El boton de busqueda</para>
 		/// </summary>
 		protected IButton SearchButton;
+		
 		/// <summary>
 		/// The search stack.
 		/// <para xml:lang="es">El stack donde se buscara.</para>
 		/// </summary>
 		protected IStack SearchStack;
+		
 		/// <summary>
 		/// The search page.
 		/// <para xml:lang="es">La pagina para buscar.</para>
@@ -285,14 +289,39 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's container
+		/// Gets or sets the control margin.
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
+		/// Obtiene o establece el margen del control.
 		/// </para>
 		/// </summary>
 		Thickness IControl.Margin
 		{
-			get; set;
+			get
+			{
+				return Forms.Platform.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = Forms.Platform.Parse(value);
+			}
+		}
+
+		/// <summary>
+		/// Space that this control will set between its content and its border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// </para>
+		/// </summary>
+		Thickness IControl.Padding
+		{
+			get
+			{
+				return Forms.Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>

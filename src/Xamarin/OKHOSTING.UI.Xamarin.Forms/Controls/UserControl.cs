@@ -118,7 +118,26 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.Margin
 		{
-			get; set;
+			get
+			{
+				return Forms.Platform.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = Forms.Platform.Parse(value);
+			}
+		}
+
+		/// <summary>
+		/// Space that this control will set between its content and its border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// </para>
+		/// </summary>
+		Thickness IControl.Padding
+		{
+			get;
+			set;
 		}
 
 		/// <summary>
