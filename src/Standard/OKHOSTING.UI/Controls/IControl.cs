@@ -115,6 +115,6 @@ namespace OKHOSTING.UI.Controls
 		/// Gets or sets a list of classes that define a control's style. 
 		/// Exactly the same concept as in CSS. 
 		/// </summary>
-		//string CssClass { get; set; }
+		string CssClass { get; set; }
 	}
 }

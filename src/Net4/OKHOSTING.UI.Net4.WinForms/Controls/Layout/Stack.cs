@@ -116,6 +116,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
 		#endregion
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)

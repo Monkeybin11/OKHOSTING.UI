@@ -16,6 +16,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
 		#region IGrid
+
 		/// <summary>
 		/// Gets or sets the column count.
 		/// <para xml:lang="es">Obtiene o establece el conteo de columnas del grid</para>
@@ -278,6 +279,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		#endregion
 
 		#region IControl
+
 		/// <summary>
 		/// Gets or sets the name of the Control.
 		/// <para xml:lang="es">Obtiene o establece el nommbre del control.</para>
@@ -453,6 +455,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get; set;
 		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
 
 		#endregion
 

@@ -174,6 +174,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
 		#endregion
 
 		#region ITextControl

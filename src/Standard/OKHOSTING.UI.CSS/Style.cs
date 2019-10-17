@@ -1,9 +1,13 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using AngleSharp.Dom.Css;
+﻿using AngleSharp.Dom.Css;
 using AngleSharp.Parser.Css;
+using OKHOSTING.Core;
 using OKHOSTING.UI.Controls;
+using OKHOSTING.UI.Controls.Layout;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Reflection;
 
 namespace OKHOSTING.UI.CSS
 {
@@ -28,12 +32,22 @@ namespace OKHOSTING.UI.CSS
 		{
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
-
+			
 			//get only the rules that are actually styles
 			foreach (ICssStyleRule rule in cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style))
 			{
 				ParsedStyleRules.Add(rule);
 			}
+		}
+
+		protected IEnumerable<string> SplitBySpace(string singleSelectorText)
+		{
+			return singleSelectorText.Split(' ').Select(s => s.ToLower().Trim()).Where(s => !string.IsNullOrWhiteSpace(s));
+		}
+
+		protected IEnumerable<string> SplitByCommas(string selectorText)
+		{
+			return selectorText.Split(',').Select(s => s.ToLower().Trim());
 		}
 
 		/// <summary>
@@ -55,9 +69,282 @@ namespace OKHOSTING.UI.CSS
 			string selector = "." + e.GetType().Name;
 
 			//select the correct styles using the selector, and apply
-			foreach (ICssStyleDeclaration style in ParsedStyleRules.Where(s => s.SelectorText == selector))
+			foreach (ICssStyleDeclaration style in ParsedStyleRules.Where(s => s.Selector.Text == selector))
 			{
 				Apply(style, e);
+			}
+		}
+
+		/// <summary>
+		/// Applies the corresponding styles to a recently created control
+		/// <para xml:lang="es">
+		/// Aplica los estilos correspondientes a un control creado recientemente.
+		/// </para>
+		/// </summary>
+		public void Apply(IPage page)
+		{
+			var allControls = App.GetAllChildren(page.Content);
+		}
+
+		public IEnumerable<IControl> SelectControls(IEnumerable<IControl> controls, ICssStyleRule rule)
+		{
+			var allSelectors = SplitByCommas(rule.SelectorText);
+			List<IControl> selected = controls.ToList();
+
+			foreach (var selector in allSelectors)
+			{
+				var subSelectors = SplitBySpace(selector);
+
+				foreach (var subSelector in subSelectors)
+				{
+					if (subSelector == "*")
+					{
+						//do not filter at all
+					}
+					else if (subSelector.StartsWith("#"))
+					{
+						string id = subSelector.Substring(1);
+						selected = selected.Where(c => c.Name == id).ToList();
+					}
+					else if (subSelector.StartsWith("."))
+					{
+						string className = subSelector.Substring(1);
+						selected = selected.Where(c => c.Name == className).ToList();
+					}
+					else if (subSelector.StartsWith("["))
+					{
+						string op = "=";
+
+						if (subSelector.Contains("~="))
+						{
+							op = "~=";
+						}
+						else if (subSelector.Contains("~="))
+						{
+							op = "~=";
+						}
+						else if (subSelector.Contains("|="))
+						{
+							op = "|=";
+						}
+						else if (subSelector.Contains("^="))
+						{
+							op = "^=";
+						}
+						else if (subSelector.Contains("$="))
+						{
+							op = "$=";
+						}
+						else if (subSelector.Contains("*="))
+						{
+							op = "*=";
+						}
+						else if (subSelector.Contains("="))
+						{
+							op = "=";
+						}
+
+						var opIndex = subSelector.IndexOf(op);
+						string attName = subSelector.Substring(0, opIndex);
+						string attValue = subSelector.Substring(opIndex + op.Length);
+
+						foreach (var control in selected)
+						{
+							var type = control.GetType();
+							var member = type.GetMember(attName).Where(m => m is PropertyInfo || m is FieldInfo).FirstOrDefault();
+
+							if (member == null)
+							{
+								continue;
+							}
+
+							var controlValue = Data.MemberExpression.GetValue(member, control);
+							var convertedAttValue = Data.Convert.ChangeType(attValue, Data.MemberExpression.GetReturnType(member));
+
+							switch (op)
+							{
+								case "=":
+									if (controlValue == convertedAttValue)
+									{
+
+									}
+									break;
+								default:
+									break;
+							}
+						}
+					}
+				}
+
+				foreach (var s in selected)
+				{
+					yield return s;
+				}
+			}
+		}
+
+		public IEnumerable<IControl> SelectControls(IEnumerable<IControl> controls, string selector)
+		{
+			if (selector == "*")
+			{
+				return controls;
+			}
+			else if (selector.StartsWith("#"))
+			{
+				return SelectById(controls, selector);
+			}
+			else if (selector.StartsWith("."))
+			{
+				return SelectByClass(controls, selector);
+			}
+			else if (selector.Contains("["))
+			{
+				return SelectByAttribute(controls, selector);
+			}
+			else if (selector[0].Category() == CharExtensions.CharCategory.Letter)
+			{
+				return SelectByElementType(controls, selector);
+			}
+
+			else throw new System.ArgumentOutOfRangeException(nameof(selector), "Argument is not a supported CSS selector");
+		}
+
+		/// <summary>
+		/// Selects all controls that have the specified CSS Id
+		/// </summary>
+		/// <param name="controls">List of controls to filter</param>
+		/// <param name="selector">CSS id selector, pe: #mycontrolname</param>
+		/// <returns>List of controls that have the specified Id (Name)</returns>
+		public IEnumerable<IControl> SelectById(IEnumerable<IControl> controls, string selector)
+		{
+			string id = selector.Substring(1);
+			return controls.Where(c => c.Name == id);
+		}
+
+		/// <summary>
+		/// Selects all controls that have the specified CSS class
+		/// </summary>
+		/// <param name="controls">List of controls to filter</param>
+		/// <param name="selector">CSS id selector, pe: .myclass</param>
+		/// <returns>List of controls that have the specified css class</returns>
+		public IEnumerable<IControl> SelectByClass(IEnumerable<IControl> controls, string selector)
+		{
+			string className = selector.Substring(1);
+			return controls.Where(c => c.Name == className);
+		}
+
+		/// <summary>
+		/// Selects all controls that have the specified element type
+		/// </summary>
+		/// <param name="controls">List of controls to filter</param>
+		/// <param name="selector">CSS id selector, pe: label, button, a, textbox</param>
+		/// <returns>List of controls that have the specified css class</returns>
+		public IEnumerable<IControl> SelectByElementType(IEnumerable<IControl> controls, string selector)
+		{
+			return controls.Where(c => c.GetType().Name.Equals(selector, System.StringComparison.OrdinalIgnoreCase));
+		}
+
+		public IEnumerable<IControl> SelectByAttribute(IEnumerable<IControl> controls, string selector)
+		{
+			string op = null;
+			string element = selector.Substring(0, selector.IndexOf('['));
+
+			if (selector.Contains("~="))
+			{
+				op = "~=";
+			}
+			else if (selector.Contains("|="))
+			{
+				op = "|=";
+			}
+			else if (selector.Contains("^="))
+			{
+				op = "^=";
+			}
+			else if (selector.Contains("$="))
+			{
+				op = "$=";
+			}
+			else if (selector.Contains("*="))
+			{
+				op = "*=";
+			}
+			else if (selector.Contains("="))
+			{
+				op = "=";
+			}
+
+			var opIndex = selector.IndexOf(op);
+			string attName = selector.Substring(0, opIndex).TrimStart('[');
+			string attValue = selector.Substring(opIndex + op.Length).TrimEnd(']');
+			var elementControls = controls;
+
+			if (!string.IsNullOrWhiteSpace(element))
+			{
+				elementControls = SelectByElementType(elementControls, element);
+			}
+
+			foreach (var c in elementControls)
+			{
+				var type = c.GetType();
+				var member = type.GetMember(attName).Where(m => m is PropertyInfo || m is FieldInfo).FirstOrDefault();
+
+				if (member == null)
+				{
+					continue;
+				}
+
+				var controlValue = Data.MemberExpression.GetValue(member, c);
+				var convertedAttValue = Data.Convert.ChangeType(attValue, Data.MemberExpression.GetReturnType(member));
+
+				switch (op)
+				{
+					//no operator means declaring the member is enough
+					case null:
+						yield return c;
+						break;
+
+					case "=":
+						if (controlValue == convertedAttValue)
+						{
+							yield return c;
+						}
+
+						break;
+
+					case "~=":
+					case "*=":
+						if (controlValue.ToString().Contains(convertedAttValue.ToString()))
+						{
+							yield return c;
+						}
+
+						break;
+
+					case "|=":
+						if (controlValue == convertedAttValue || controlValue.ToString() == convertedAttValue.ToString() + "-")
+						{
+							yield return c;
+						}
+
+						break;
+
+					case "^=":
+						if (controlValue.ToString().StartsWith(convertedAttValue.ToString()))
+						{
+							yield return c;
+						}
+
+						break;
+
+					case "$=":
+						if (controlValue.ToString().EndsWith(convertedAttValue.ToString()))
+						{
+							yield return c;
+						}
+
+						break;
+				}
 			}
 		}
 
@@ -241,5 +528,37 @@ namespace OKHOSTING.UI.CSS
 			//just grab the sabe vertical aligned parsed form the other mnethod
 			control.TextVerticalAlignment = control.VerticalAlignment;
 		}
+
+		static Style()
+		{
+			ElementTypeEquivalents = new Dictionary<string, Type>();
+
+			ElementTypeEquivalents.Add("a", typeof(IHyperLink));
+			ElementTypeEquivalents.Add("table", typeof(IGrid));
+			ElementTypeEquivalents.Add("input[type=button]", typeof(IButton));
+			ElementTypeEquivalents.Add("input[type=submit]", typeof(IButton));
+			ElementTypeEquivalents.Add("input[type=check]", typeof(ICheckBox));
+			ElementTypeEquivalents.Add("input[type=text]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=password]", typeof(IPasswordTextBox));
+			ElementTypeEquivalents.Add("input[type=time]", typeof(ITimeOfDayPicker));
+			ElementTypeEquivalents.Add("input[type=date]", typeof(IDatePicker));
+			ElementTypeEquivalents.Add("input[type=datetime-local ]", typeof(IDatePicker));
+			ElementTypeEquivalents.Add("input[type=email]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=month]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=number]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=range]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=search]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=tel]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=url]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=week]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("label", typeof(ILabel));
+			ElementTypeEquivalents.Add("p", typeof(ILabel));
+			ElementTypeEquivalents.Add("img", typeof(IImage));
+			ElementTypeEquivalents.Add("select", typeof(IListPicker));
+			ElementTypeEquivalents.Add("textarea", typeof(ITextArea));
+			ElementTypeEquivalents.Add("frame", typeof(IWebView));
+		}
+
+		public static readonly Dictionary<string, Type> ElementTypeEquivalents;
 	}
 }
