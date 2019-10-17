@@ -59,7 +59,6 @@
     <Compile Include="Controls\TextBoxBase.cs" />
     <Compile Include="Controls\IInputControl.cs" />
     <Compile Include="Media\OpenFile.cs" />
-    <Compile Include="ControlExtensions.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\Button.cs" />

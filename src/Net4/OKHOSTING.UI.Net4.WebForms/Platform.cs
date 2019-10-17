@@ -51,6 +51,51 @@ namespace OKHOSTING.UI.Net4.WebForms
 			throw new ArgumentOutOfRangeException("value");
 		}
 
+		public static void AddCssClass(System.Web.UI.WebControls.WebControl control, string className)
+		{
+			if (!control.CssClass.Contains(className))
+			{
+				control.CssClass = control.CssClass + " " + className;
+			}
+		}
+
+		public static void RemoveCssClass(System.Web.UI.WebControls.WebControl control, string className)
+		{
+			control.CssClass = control.CssClass.Replace(className, string.Empty).Trim();
+		}
+
+		public static void RemoveCssClassesStartingWith(System.Web.UI.WebControls.WebControl control, string className)
+		{
+			var cssClasses = control.CssClass.Split().ToList();
+
+			for (int i = 0; i < cssClasses.Count; i++)
+			{
+				if (cssClasses[i].StartsWith(className))
+				{
+					cssClasses.RemoveAt(i);
+					i--;
+				}
+			}
+
+			control.CssClass = control.CssClass.Replace(className, string.Empty).Trim();
+		}
+
+		/// <summary>
+		/// Returns all the contained controls, recursively
+		/// </summary>
+		public static IEnumerable<System.Web.UI.Control> GetAllControls(System.Web.UI.Control control)
+		{
+			foreach (System.Web.UI.Control ctr in control.Controls)
+			{
+				yield return ctr;
+
+				foreach(System.Web.UI.Control ctr2 in GetAllControls(ctr))
+				{
+					yield return ctr2;
+				}
+			}
+		}
+
 		/// <summary>
 		/// List of rules that define which controllers are attached to wich URI paths
 		/// </summary>

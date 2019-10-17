@@ -111,11 +111,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's container
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
-		/// </para>
+		/// Gets or sets the IC ontrol. margin.
+		/// <para xml:lang="es">Obtiene o establece el Margen del IControl</para>
 		/// </summary>
+		/// <value>The IC ontrol. margin.
+		/// <para xml:lang="es">El margen del IControl</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
@@ -126,18 +127,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			{
 				base.Margin = Platform.Parse(value);
 			}
-		}
-
-		/// <summary>
-		/// Space that this control will set between itself and it's own border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
-		/// </para>
-		/// </summary>
-		Thickness IControl.Padding
-		{
-			get;
-			set;
 		}
 
 		/// <summary>

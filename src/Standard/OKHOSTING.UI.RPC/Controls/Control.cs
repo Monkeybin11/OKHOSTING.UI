@@ -117,18 +117,6 @@ namespace OKHOSTING.UI.RPC.Controls
 			}
 		}
 
-		public Thickness Padding
-		{
-			get
-			{
-				return (Thickness) Get(nameof(Padding));
-			}
-			set
-			{
-				Set(nameof(Padding), value);
-			}
-		}
-
 		/// <summary>
 		/// Background color
 		/// <para xml:lang="es">

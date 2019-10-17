@@ -6,16 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Media\**" />
-    <EmbeddedResource Remove="Media\**" />
-    <None Remove="Media\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Application.cs" />
     <Compile Remove="Controls\Calendar.cs" />
     <Compile Remove="Controls\DatePicker.cs" />
-    <Compile Remove="Controls\VideoPlayer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +19,10 @@
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
     <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
     <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Media\" />
   </ItemGroup>
 
 </Project>

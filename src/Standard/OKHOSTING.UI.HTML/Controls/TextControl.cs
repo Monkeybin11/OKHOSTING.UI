@@ -20,7 +20,6 @@ namespace OKHOSTING.UI.HTML.Controls
 		public double? Width { get; set; }
 		public double? Height { get; set; }
 		public Thickness Margin { get; set; }
-		public Thickness Padding { get; set; }
 		public Color BackgroundColor { get; set; }
 		public Color BorderColor { get; set; }
 		public Thickness BorderWidth { get; set; }

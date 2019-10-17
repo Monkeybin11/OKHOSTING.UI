@@ -145,57 +145,64 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's container
+		/// Gets or sets the margin to the left, top, right and bottom the grid.
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
+		/// Obtiene o establece el margen hacia la izquierda, arriba, derecha y abajo del grid.
 		/// </para>
 		/// </summary>
+		/// <value>The margin.
+		/// <para xml:lang="es">El margen.</para>
+		/// </value>
 		Thickness IControl.Margin
 		{
 			get
 			{
-				return this.GetMargin();
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
+
+				if (double.TryParse(base.Style["margin-left"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["margin-top"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["margin-right"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["margin-bottom"], out bottom)) thickness.Bottom = bottom;
+
+				return new Thickness(left, top, right, bottom);
 			}
 			set
 			{
-				this.SetMargin(value);
+				if (value.Left.HasValue) base.Style["margin-left"] = string.Format("{0}px", value.Left);
+				if (value.Top.HasValue) base.Style["margin-top"] = string.Format("{0}px", value.Top);
+				if (value.Right.HasValue) base.Style["margin-right"] = string.Format("{0}px", value.Right);
+				if (value.Bottom.HasValue) base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's own border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
-		/// </para>
+		/// Gets or sets the width of the border of the grid.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del grid</para>
 		/// </summary>
-		Thickness IControl.Padding
-		{
-			get
-			{
-				return this.GetPadding();
-			}
-			set
-			{
-				this.SetPadding(value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the width of the control. border.
-		/// <para xml:lang="es">Obtiene o establece el ancho del borde del IControl.</para>
-		/// </summary>
-		/// <value>The width of the control. border.
-		/// <para xml:lang="es">El ancho del borde del IControl</para>
-		/// </value>
+		/// <value>The width of the border.</value>
 		Thickness IControl.BorderWidth
 		{
 			get
 			{
-				return this.GetBorderWidth();
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
+
+				//Verifies the value you get the width of the border of each side of the grid
+				if (double.TryParse(base.Style["border-left-width"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["border-top-width"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["border-right-width"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["border-bottom-width"], out bottom)) thickness.Bottom = bottom;
+
+				return new Thickness(left, top, right, bottom);
 			}
 			set
 			{
-				this.SetBorderWidth(value);
+				//Verifies y sets the value you get the width of the edge of each side of the grid
+				if (value.Left.HasValue) base.Style["border-left-width"] = string.Format("{0}px", value.Left);
+				if (value.Top.HasValue) base.Style["border-top-width"] = string.Format("{0}px", value.Top);
+				if (value.Right.HasValue) base.Style["border-right-width"] = string.Format("{0}px", value.Right);
+				if (value.Bottom.HasValue) base.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
@@ -242,8 +249,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 			set
 			{
-				this.RemoveCssClassesStartingWith("horizontal-alignment");
-				this.AddCssClass("horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -290,8 +297,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 			set
 			{
-				this.RemoveCssClassesStartingWith("vertical-alignment");
-				this.AddCssClass("vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 

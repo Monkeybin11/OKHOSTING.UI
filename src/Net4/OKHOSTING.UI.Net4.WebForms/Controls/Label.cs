@@ -156,10 +156,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				double left, top, right, bottom;
 				Thickness thickness = new Thickness();
 
-				if (double.TryParse(base.Style["margin-left"].Replace("px", null), out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["margin-top"].Replace("px", null), out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["margin-right"].Replace("px", null), out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["margin-bottom"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+				if (double.TryParse(base.Style["margin-left"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["margin-top"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["margin-right"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["margin-bottom"], out bottom)) thickness.Bottom = bottom;
 
 				return new Thickness(left, top, right, bottom);
 			}
@@ -169,35 +169,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				if (value.Top.HasValue) base.Style["margin-top"] = string.Format("{0}px", value.Top);
 				if (value.Right.HasValue) base.Style["margin-right"] = string.Format("{0}px", value.Right);
 				if (value.Bottom.HasValue) base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
-			}
-		}
-
-		/// <summary>
-		/// Space that this control will set between itself and it's own border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
-		/// </para>
-		/// </summary>
-		Thickness IControl.Padding
-		{
-			get
-			{
-				double left, top, right, bottom;
-				Thickness thickness = new Thickness();
-
-				if (double.TryParse(Style["padding-left"].Replace("px", null), out left)) thickness.Left = left;
-				if (double.TryParse(Style["padding-top"].Replace("px", null), out top)) thickness.Top = top;
-				if (double.TryParse(Style["padding-right"].Replace("px", null), out right)) thickness.Right = right;
-				if (double.TryParse(Style["padding-bottom"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
-
-				return new Thickness(left, top, right, bottom);
-			}
-			set
-			{
-				if (value.Left.HasValue) Style["padding-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) Style["padding-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) Style["padding-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
@@ -215,10 +186,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				double left, top, right, bottom;
 				Thickness thickness = new Thickness();
 
-				if (double.TryParse(base.Style["border-left-width"].Replace("px", null), out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["border-top-width"].Replace("px", null), out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["border-right-width"].Replace("px", null), out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["border-bottom-width"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+				if (double.TryParse(base.Style["border-left-width"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["border-top-width"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["border-right-width"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["border-bottom-width"], out bottom)) thickness.Bottom = bottom;
 
 				return new Thickness(left, top, right, bottom);
 			}
@@ -274,8 +245,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				this.RemoveCssClassesStartingWith("horizontal-alignment");
-				this.AddCssClass("horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "horizontal-alignment");
+				Platform.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -322,8 +293,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				this.RemoveCssClassesStartingWith("vertical-alignment");
-				this.AddCssClass("vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "vertical-alignment");
+				Platform.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -499,8 +470,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				this.RemoveCssClassesStartingWith("text-horizontal-alignment");
-				this.AddCssClass("text-horizontal-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-horizontal-alignment");
+				Platform.AddCssClass(this, "text-horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -544,8 +515,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				this.RemoveCssClassesStartingWith("text-vertical-alignment");
-				this.AddCssClass("text-vertical-alignment-" + value.ToString().ToLower());
+				Platform.RemoveCssClassesStartingWith(this, "text-vertical-alignment");
+				Platform.AddCssClass(this, "text-vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -560,10 +531,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				double left, top, right, bottom;
 				Thickness thickness = new Thickness();
 
-				if (double.TryParse(base.Style["padding-left"].Replace("px", null), out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["padding-top"].Replace("px", null), out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["padding-right"].Replace("px", null), out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["padding-bottom"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+				if (double.TryParse(base.Style["padding-left"], out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["padding-top"], out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["padding-right"], out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["padding-bottom"], out bottom)) thickness.Bottom = bottom;
 
 				return new Thickness(left, top, right, bottom);
 			}

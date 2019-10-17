@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	public class VideoPlayer : Media.IVideoPlayer
+	public class VideoPlayer : UI.Controls.IVideoPlayer
 	{
 		public Color BackgroundColor
 		{
@@ -41,29 +41,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			set;
 		}
 
-		/// <summary>
-		/// Gets or sets the control margin.
-		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
-		/// </summary>
-		Thickness IControl.Margin
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.Margin);
-			}
-			set
-			{
-				base.Margin = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Space that this control will set between itself and it's own border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
-		/// </para>
-		/// </summary>
-		Thickness IControl.Padding
+		public Thickness Margin
 		{
 			get;
 			set;
@@ -75,7 +53,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			set;
 		}
 
-		public string Source
+		public Uri Source
 		{
 			get
 			{
