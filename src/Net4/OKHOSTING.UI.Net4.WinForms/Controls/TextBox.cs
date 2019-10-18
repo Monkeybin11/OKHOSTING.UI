@@ -336,7 +336,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		private void ShowPlaceholder()
 		{
-			if (string.IsNullOrEmpty(base.Text) || base.Text == ((ITextBox) this).Placeholder)
+			var placeholder = ((ITextBox) this).Placeholder;
+
+			if (!string.IsNullOrEmpty(placeholder) && (string.IsNullOrEmpty(base.Text) || base.Text == placeholder))
 			{
 				base.Text = ((ITextBox) this).Placeholder;
 				base.ForeColor = ((ITextBox) this).PlaceholderColor;
