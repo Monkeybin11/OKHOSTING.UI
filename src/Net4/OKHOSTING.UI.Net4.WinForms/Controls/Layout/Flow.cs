@@ -58,6 +58,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Space that this control will set between itself and it's container
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre si mismo y su contenedor.
+		/// </para>
+		/// </summary>
 		Thickness IControl.Margin
 		{
 			get
@@ -70,6 +76,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Space that this control will set between itself and it's own border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// </para>
+		/// </summary>
 		Thickness IControl.Padding
 		{
 			get
@@ -121,12 +133,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 				base.Anchor = Platform.ParseAnchor(((IControl)this).HorizontalAlignment, value);
 			}
 		}
-
-		/// <summary>
-		/// Gets or sets a list of classes that define a control's style. 
-		/// Exactly the same concept as in CSS. 
-		/// </summary>
-		string IControl.CssClass { get; set; }
 
 		#endregion
 

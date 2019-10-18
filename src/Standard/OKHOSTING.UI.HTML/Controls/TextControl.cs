@@ -20,17 +20,13 @@ namespace OKHOSTING.UI.HTML.Controls
 		public double? Width { get; set; }
 		public double? Height { get; set; }
 		public Thickness Margin { get; set; }
+		public Thickness Padding { get; set; }
 		public Color BackgroundColor { get; set; }
 		public Color BorderColor { get; set; }
 		public Thickness BorderWidth { get; set; }
 		public HorizontalAlignment HorizontalAlignment { get; set; }
 		public VerticalAlignment VerticalAlignment { get; set; }
 		public object Tag { get; set; }
-		/// <summary>
-		/// Gets or sets a list of classes that define a control's style. 
-		/// Exactly the same concept as in CSS. 
-		/// </summary>
-		public string CssClass { get; set; }
 
 		public abstract void Dispose();
 	}

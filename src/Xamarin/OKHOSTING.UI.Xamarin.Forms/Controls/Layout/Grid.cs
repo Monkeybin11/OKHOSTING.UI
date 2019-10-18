@@ -16,7 +16,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
 		#region IGrid
-
 		/// <summary>
 		/// Gets or sets the column count.
 		/// <para xml:lang="es">Obtiene o establece el conteo de columnas del grid</para>
@@ -279,7 +278,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		#endregion
 
 		#region IControl
-
 		/// <summary>
 		/// Gets or sets the name of the Control.
 		/// <para xml:lang="es">Obtiene o establece el nommbre del control.</para>
@@ -362,9 +360,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Gets or sets the control margin.
+		/// Space that this control will set between itself and it's container
 		/// <para xml:lang="es">
-		/// Obtiene o establece el margen del control.
+		/// Espacio que este control se establecerá entre si mismo y su contenedor.
 		/// </para>
 		/// </summary>
 		Thickness IControl.Margin
@@ -380,9 +378,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between its content and its border
+		/// Space that this control will set between itself and it's own border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// Espacio que este control se establecerá entre si mismo y su propio borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -482,12 +480,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get; set;
 		}
-
-		/// <summary>
-		/// Gets or sets a list of classes that define a control's style. 
-		/// Exactly the same concept as in CSS. 
-		/// </summary>
-		string IControl.CssClass { get; set; }
 
 		#endregion
 

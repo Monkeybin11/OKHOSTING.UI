@@ -10,11 +10,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public Autocomplete()
 		{
 			//base.AutoCompleteCustomSource = LoadAutoComplete();
-			base.AutoCompleteMode = AutoCompleteMode.Suggest;
-			base.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-			base.TextChanged += Autocomplete_TextChanged;
-
+			AutoCompleteMode = AutoCompleteMode.Suggest;
+			AutoCompleteSource = AutoCompleteSource.CustomSource;
+			TextChanged += Autocomplete_TextChanged;
 		}
 
 		protected AutoCompleteStringCollection LoadAutoComplete()

@@ -27,6 +27,7 @@ namespace OKHOSTING.UI.Security
 		protected override void OnStart()
 		{
 			IUserControl formContainer = Core.BaitAndSwitch.Create<IUserControl>();
+			formContainer.App = Page.App;
 			Form = new Form(formContainer);
 
 			lblMessage = Core.BaitAndSwitch.Create<ILabel>();
@@ -70,7 +71,7 @@ namespace OKHOSTING.UI.Security
 		private void cmdRegister_Click(object sender, EventArgs e)
 		{
 			Finish();
-			new Register().Start();
+			new Register(Page).Start();
 		}
 
 		private void cmdLogin_Click(object sender, EventArgs e)
