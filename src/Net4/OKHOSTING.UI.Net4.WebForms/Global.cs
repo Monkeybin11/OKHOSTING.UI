@@ -17,10 +17,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 				return control;
 			}));
-
-			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.ILabel), typeof(Controls.Label));
-			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.IImage), typeof(Controls.Image));
-			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Media.IOpenFile), typeof(Media.OpenFile));
 		}
 
 		protected virtual void Session_Start(object sender, EventArgs e)
