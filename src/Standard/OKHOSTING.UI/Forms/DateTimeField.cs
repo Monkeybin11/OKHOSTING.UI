@@ -51,7 +51,10 @@ namespace OKHOSTING.UI.Forms
 		protected override void CreateValueControl()
 		{
 			DatePicker = Core.BaitAndSwitch.Create<IDatePicker>();
+			DatePicker.Width = 90;
 			TimePicker = Core.BaitAndSwitch.Create<ITimeOfDayPicker>();
+			TimePicker.Width = 40;
+
 			var flow = Core.BaitAndSwitch.Create<Controls.Layout.IFlow>();
 			flow.Children.Add(DatePicker);
 			flow.Children.Add(TimePicker);
