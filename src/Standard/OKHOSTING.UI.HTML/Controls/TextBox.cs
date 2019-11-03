@@ -24,9 +24,7 @@ namespace OKHOSTING.UI.HTML.Controls
 
 		public override string GenerateHtml()
 		{
-			var document = CreateDocument();
-
-			var input = document.CreateElement<IHtmlInputElement>();
+			var input = CreateElement<IHtmlInputElement>();
 			input.TextContent = Value;
 			input.Type = InputType.ToString().ToLower();
 			input.MaxLength = MaxLength;
