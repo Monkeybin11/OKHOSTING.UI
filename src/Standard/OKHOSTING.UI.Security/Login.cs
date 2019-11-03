@@ -36,7 +36,7 @@ namespace OKHOSTING.UI.Security
 			lblMessage.Visible = false;
 
 			StringField userName = new StringField(Form);
-			userName.Name = "userName";
+			userName.Name = "username";
 			userName.Required = true;
 			userName.MaxLenght = 100;
 			userName.CaptionControl.Text = Resources.Strings.OKHOSTING_UI_Security_LoginController_UserName;
@@ -78,7 +78,7 @@ namespace OKHOSTING.UI.Security
 		{
 			User user = new User()
 			{
-				UserName = (string) Form["userName"].Value,
+				UserName = (string) Form["username"].Value,
 				Password = (string) Form["password"].Value,
 			};
 

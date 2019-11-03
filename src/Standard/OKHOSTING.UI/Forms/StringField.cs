@@ -23,7 +23,6 @@ namespace OKHOSTING.UI.Forms
 			{
 				return (IInputControl<string>) base.ValueControl;
 			}
-
 			protected set
 			{
 				base.ValueControl = value;
