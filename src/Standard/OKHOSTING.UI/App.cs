@@ -238,5 +238,24 @@ namespace OKHOSTING.UI
 				}
 			}
 		}
+
+		/// <summary>
+		/// Gets a list of controls and subcontrols in a recursive way
+		/// </summary>
+		public static IEnumerable<Controls.IControl> GetAllChildren(IEnumerable<Controls.IControl> controls)
+		{
+			if (controls == null)
+			{
+				throw new ArgumentNullException(nameof(controls));
+			}
+
+			foreach (var control in controls)
+			{
+				foreach (var children in GetAllChildren(control))
+				{
+					yield return children;
+				}
+			}
+		}
 	}
 }

@@ -8,10 +8,6 @@ namespace OKHOSTING.UI.HTML.Controls
 	{
 		public string Text { get; set; }
 
-		public override void Dispose()
-		{
-		}
-
 		public override string GenerateHtml()
 		{
 			var label = CreateElement<IHtmlLabelElement>();

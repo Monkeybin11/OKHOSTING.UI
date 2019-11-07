@@ -12,10 +12,6 @@ namespace OKHOSTING.UI.HTML.Controls
 
 		public event EventHandler Click;
 
-		public override void Dispose()
-		{
-		}
-
 		public override string GenerateHtml()
 		{
 			var button = CreateElement<IHtmlButtonElement>();

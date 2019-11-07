@@ -17,11 +17,6 @@ namespace OKHOSTING.UI.HTML.Controls
 
 		public event EventHandler<string> ValueChanged;
 
-		public override void Dispose()
-		{
-			throw new NotImplementedException();
-		}
-
 		public override string GenerateHtml()
 		{
 			var input = CreateElement<IHtmlInputElement>();

@@ -41,5 +41,6 @@ namespace OKHOSTING.UI.HTML.Controls
 		public HorizontalAlignment HorizontalAlignment { get; set; }
 		public VerticalAlignment VerticalAlignment { get; set; }
 		public object Tag { get; set; }
+		public string CssClass { get; set; }
 	}
 }
