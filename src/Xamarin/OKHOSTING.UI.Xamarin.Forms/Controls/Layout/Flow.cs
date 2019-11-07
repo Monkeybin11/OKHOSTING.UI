@@ -141,9 +141,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's container
+		/// Gets or sets the control margin.
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
+		/// Obtiene o establece el margen del control.
 		/// </para>
 		/// </summary>
 		Thickness IControl.Margin
@@ -159,9 +159,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's own border
+		/// Space that this control will set between its content and its border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// Espacio que este control se establecerá entre su contenido y su borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -270,6 +270,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get; set;
 		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
 
 		#endregion
 	}
