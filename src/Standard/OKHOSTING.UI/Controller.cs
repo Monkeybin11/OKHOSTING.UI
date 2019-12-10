@@ -27,6 +27,18 @@ namespace OKHOSTING.UI
 		}
 
 		/// <summary>
+		/// True if the controller has already started (even if it has already finished as well)
+		/// </summary>
+		public bool IsStarted { get; protected set; }
+
+		/// <summary>
+		/// True if the controller has already finished
+		/// </summary>
+		public bool IsFinished { get; protected set; }
+
+		public event EventHandler Finished;
+
+		/// <summary>
 		/// Private page field
 		/// </summary>
 		protected IPage _Page;
@@ -68,6 +80,16 @@ namespace OKHOSTING.UI
 		}
 
 		/// <summary>
+		/// Starts the execution of this controller on the page
+		/// <para xml:lang="es">Arranca la ejecucion de este controlador en la pagina</para>
+		/// </summary>
+		public virtual void Start()
+		{
+			Page.App.StartController(this);
+			IsStarted = true;
+		}
+
+		/// <summary>
 		/// Will be executed when the controller gets the focus once again, after giving focus to another controller, or after page resize
 		/// <para xml:lang="es">
 		/// Sera ejecutado cuando el control recibe la atencion una vez mas, despues de dar atencion a otro controlador, o cuando la pagina cambia de tamaño.
@@ -86,19 +108,16 @@ namespace OKHOSTING.UI
 		protected virtual void Finish()
 		{
 			Page.App.FinishController(Page);
-		}
-
-		/// <summary>
-		/// Starts the execution of this controller on the page
-		/// <para xml:lang="es">Arranca la ejecucion de este controlador en la pagina</para>
-		/// </summary>
-		public virtual void Start()
-		{
-			Page.App.StartController(this);
+			IsFinished = true;
+			Finished?.Invoke(this, new EventArgs());
 		}
 
 		public virtual void Dispose()
 		{
+			if (!IsFinished)
+			{
+				Finish();
+			}
 		}
 	}
 }

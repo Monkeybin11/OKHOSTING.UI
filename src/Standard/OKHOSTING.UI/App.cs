@@ -41,7 +41,7 @@ namespace OKHOSTING.UI
 		/// El control que se va a inicializar
 		/// </para>
 		/// </param>
-		public virtual void StartController(Controller controller)
+		internal protected virtual void StartController(Controller controller)
 		{
 			if (controller.Page == null)
 			{
@@ -85,7 +85,7 @@ namespace OKHOSTING.UI
 		/// Elimina el controlador actual de la pila de la pagina, y recrea el estado del controlador anterior, si lo hay
 		/// </para>
 		/// </summary>
-		public virtual void FinishController(IPage page)
+		internal protected virtual void FinishController(IPage page)
 		{
 			PageState state = this[page];
 

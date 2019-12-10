@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				if (string.IsNullOrWhiteSpace(((UI.Controls.IControl) control).Name))
 				{
-					//((UI.Controls.IControl) control).Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
+					((UI.Controls.IControl) control).Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
 				}
 
 				return control;

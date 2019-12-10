@@ -181,24 +181,24 @@ namespace OKHOSTING.UI.Net4.WinForms
 		public static void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
 		{
 			//calculate the 4 points or coordinates of the border
-			System.Drawing.Point p1 = control.Bounds.Location; //top left
+			Point p1 = control.Bounds.Location; //top left
 
-			System.Drawing.Point p2 = control.Bounds.Location;
+			Point p2 = control.Bounds.Location;
 			p2.Offset(control.Width, 0); //top right
 
-			System.Drawing.Point p3 = control.Bounds.Location; //bottom left
-			p2.Offset(0, control.Height * -1); //top right
+			Point p3 = control.Bounds.Location;
+			p3.Offset(control.Width, control.Height); //bottom right
 
-			System.Drawing.Point p4 = control.Bounds.Location; //bottom right
-			p2.Offset(control.Width, control.Height * -1); //top right
+			Point p4 = control.Bounds.Location;
+			p4.Offset(0, control.Height); //bottom left
 
 			//draw custom border here
 			if (((IControl) control).BorderColor != null && ((IControl) control).BorderWidth != null)
 			{
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p4, p1); //left
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p1, p2); //top
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p2, p3); //right
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float)((IControl) control).BorderWidth.Left), p3, p4); //bottom
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Top), p1, p2); //top
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Right), p2, p3); //right
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Bottom), p3, p4); //bottom
+				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
 			}
 		}
 	}
