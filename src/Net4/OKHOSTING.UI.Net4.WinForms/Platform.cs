@@ -33,7 +33,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return new Thickness(margin.Left, margin.Top, margin.Right, margin.Bottom);
 		}
 
-		public static Tuple<HorizontalAlignment, VerticalAlignment> Parse(System.Drawing.ContentAlignment alignment)
+		public static Tuple<HorizontalAlignment, VerticalAlignment> Parse(ContentAlignment alignment)
 		{
 			switch (alignment)
 			{
@@ -66,7 +66,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			throw new ArgumentOutOfRangeException("alignment");
 		}
 
-		public static System.Drawing.ContentAlignment ParseContentAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
+		public static ContentAlignment ParseContentAlignment(HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
 		{
 			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Fill) return System.Drawing.ContentAlignment.BottomCenter;
 			if (verticalAlignment == VerticalAlignment.Bottom && horizontalAlignment == HorizontalAlignment.Center) return System.Drawing.ContentAlignment.BottomCenter;
