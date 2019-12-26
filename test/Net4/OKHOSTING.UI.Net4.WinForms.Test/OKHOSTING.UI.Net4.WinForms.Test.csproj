@@ -77,9 +77,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
       <Project>{4e26e1a3-4811-400b-8ee7-564f6d6b7399}</Project>
       <Name>OKHOSTING.Core</Name>

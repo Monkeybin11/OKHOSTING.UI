@@ -167,7 +167,8 @@ namespace OKHOSTING.UI.CSS
 			if (selector.IndexOf('.') != selector.LastIndexOf('.'))
 			{
 				var classes = selector.Split('.');
-				return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).ContainsAll(classes));
+				//return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).ContainsAll(classes));
+				return null;
 			}
 
 			string element = selector.Substring(0, selector.IndexOf('.'));
