@@ -128,6 +128,7 @@ namespace OKHOSTING.UI.Test
 			ILabelButton lblTimePicker = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblTimePicker.Text = "TimePicker";
 			lblTimePicker.Click += (object sender, EventArgs e) => new TimePickerController(){ Page = Page }.Start();
+			lblTimePicker.Name = "label1";
 			grid.SetContent(16, 0, lblTimePicker);
 
 			//TEST CALCULADORA
@@ -157,6 +158,25 @@ namespace OKHOSTING.UI.Test
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
 			Page.Content = grid;
+
+			CSS.Style style = new CSS.Style();
+			 style.Parse(
+@"
+.alerta
+{
+	font-weight: bold;
+	font-size: 20px;
+	color: red;
+}
+
+#label1
+{
+	margin: 20px;
+	color: blue;
+}
+");
+
+			style.Apply(Page);
 		}
 	 }
 }

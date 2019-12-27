@@ -61,6 +61,11 @@ namespace OKHOSTING.UI.CSS
 				foreach (var control in selectedControls)
 				{
 					Apply(rule.Style, control);
+
+					if (control is ITextControl)
+					{
+						Apply(rule.Style, (ITextControl) control);
+					}
 				}
 			}
 		}
@@ -174,7 +179,7 @@ namespace OKHOSTING.UI.CSS
 			string element = selector.Substring(0, selector.IndexOf('.'));
 			string className = selector.Substring(selector.IndexOf('.') + 1);
 
-			if (element != null)
+			if (!string.IsNullOrWhiteSpace(element))
 			{
 				return SelectByElementType(controls, element).Where(c =>  c.CssClass != null && SplitBySpace(c.CssClass).Contains(className));
 			}
@@ -322,8 +327,11 @@ namespace OKHOSTING.UI.CSS
 			bool parsed;
 
 			//background and border colors
-			color = AngleSharp.Css.Values.Color.FromHex(style.BackgroundColor);
-			control.BackgroundColor = Color.FromArgb(color.A, color.R, color.G, color.B);
+			if (!string.IsNullOrWhiteSpace(style.BackgroundColor))
+			{
+				color = AngleSharp.Css.Values.Color.FromHex(style.BackgroundColor);
+				control.BackgroundColor = Color.FromArgb(color.A, color.R, color.G, color.B);
+			}
 
 			color = AngleSharp.Css.Values.Color.FromHex(style.BorderColor);
 			control.BorderColor = Color.FromArgb(color.A, color.R, color.G, color.B);
