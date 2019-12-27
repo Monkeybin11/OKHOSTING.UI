@@ -7,14 +7,14 @@ using System.Text;
 
 namespace OKHOSTING.UI.Test
 {
-    class ConversionMonedaController : Controller
+    class CurrencyConversionController : Controller
     {
         IStack stack = Core.BaitAndSwitch.Create<IStack>();
 
-        ILabel lblResultado;
+        ILabel lblResult;
         ITextBox txtPesoMx;
-        IListPicker lstMoneda;
-        IButton btnConvertir;
+        IListPicker lstCurrencyConversion;
+        IButton btnConvert;
         IButton cmdClose;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace OKHOSTING.UI.Test
 
             //Label titule
             ILabel lblTitulo = Core.BaitAndSwitch.Create<ILabel>();
-            lblTitulo.Text = "Conversión de peso mexicano.";
+            lblTitulo.Text = "Convert of peso mexicano.";
             lblTitulo.Width = 50;
             //stack.Children.Add(lblTitulo);
             grid.SetContent(0, 0, lblTitulo);
@@ -55,24 +55,24 @@ namespace OKHOSTING.UI.Test
             grid.SetContent(1, 1, txtPesoMx);
 
             //Label for show the result
-            lblResultado = Core.BaitAndSwitch.Create<ILabel>();
-            lblResultado.Text = " ";
-            lblResultado.Width = 40;
-            //stack.Children.Add(lblResultado);
-            grid.SetContent(1, 2, lblResultado);
+            lblResult = Core.BaitAndSwitch.Create<ILabel>();
+            lblResult.Text = " ";
+            lblResult.Width = 40;
+            //stack.Children.Add(lblResult);
+            grid.SetContent(1, 2, lblResult);
 
             //ListPicker of currency type
-            lstMoneda = Core.BaitAndSwitch.Create<IListPicker>();
-            lstMoneda.Items = new string[] { "Dolar Estadounidense", "Euro", "Sol Peruano" };
-            //stack.Children.Add(lstMoneda);
-            grid.SetContent(2, 0, lstMoneda);
+            lstCurrencyConversion = Core.BaitAndSwitch.Create<IListPicker>();
+            lstCurrencyConversion.Items = new string[] { "Dolar US", "Euro", "Sol Peruano" };
+            //stack.Children.Add(lstCurrencyConversion);
+            grid.SetContent(2, 0, lstCurrencyConversion);
 
             //Button for claculate the currency type
-            btnConvertir = Core.BaitAndSwitch.Create<IButton>();
-            btnConvertir.Text = "Convertir";
-            btnConvertir.Click += btnConvertir_Click;
-            //stack.Children.Add(btnConvertir);
-            grid.SetContent(2, 1, btnConvertir);
+            btnConvert = Core.BaitAndSwitch.Create<IButton>();
+            btnConvert.Text = "Convert";
+            btnConvert.Click += btnConvert_Click;
+            //stack.Children.Add(btnConvert);
+            grid.SetContent(2, 1, btnConvert);
 
             // Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
             cmdClose = Core.BaitAndSwitch.Create<IButton>();
@@ -97,24 +97,24 @@ namespace OKHOSTING.UI.Test
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">E.</param>
 
-        private void btnConvertir_Click(object sender, EventArgs e)
+        private void btnConvert_Click(object sender, EventArgs e)
         {
-            double resultado = 0.0;
+            double result = 0.0;
 
-            if(lstMoneda.Value == "Dolar Estadounidense")
+            if(lstCurrencyConversion.Value == "Dolar US")
             {
-                resultado = double.Parse(txtPesoMx.Value) / 18.95;
-                lblResultado.Text = resultado.ToString();
+                result = double.Parse(txtPesoMx.Value) / 18.95;
+                lblResult.Text = result.ToString();
             }
-            else if (lstMoneda.Value == "Euro")
+            else if (lstCurrencyConversion.Value == "Euro")
             {
-                resultado = double.Parse(txtPesoMx.Value) / 18.95;
-                lblResultado.Text = resultado.ToString();
+                result = double.Parse(txtPesoMx.Value) / 18.95;
+                lblResult.Text = result.ToString();
             }
-            else if (lstMoneda.Value == "Sol Peruano")
+            else if (lstCurrencyConversion.Value == "Sol Peruano")
             {
-                resultado = double.Parse(txtPesoMx.Value) / 5.75;
-                lblResultado.Text = resultado.ToString();
+                result = double.Parse(txtPesoMx.Value) / 5.75;
+                lblResult.Text = result.ToString();
             }
         }
 

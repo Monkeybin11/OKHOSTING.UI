@@ -7,15 +7,15 @@ using System.Text;
 
 namespace OKHOSTING.UI.Test
 {
-    class CalculadoraController : Controller
+    class CalculatorController : Controller
     {
         ILabel lblResu;
         ITextBox txtNum1;
         ITextBox txtNum2;
-        IButton cmdSumar;
-        IButton cmdRestar;
-        IButton cmdMultiplicar;
-        IButton cmdDividir;
+        IButton cmdPlus;
+        IButton cmdSubtract;
+        IButton cmdMultiply;
+        IButton cmdDivide;
         IButton cmdClose;
 
         /// <summary>
@@ -51,29 +51,29 @@ namespace OKHOSTING.UI.Test
             txtNum2.PlaceholderColor = Color.FromArgb(255, 100, 100, 100);
             stack.Children.Add(txtNum2);
 
-            //Create the button cmdSumar with specific text with the event also click and adds it to the stack.
-            cmdSumar = Core.BaitAndSwitch.Create<IButton>();
-            cmdSumar.Text = "Sumar";
-            cmdSumar.Click += CmdSumar_Click;
-            stack.Children.Add(cmdSumar);
+            //Create the button cmdPlus with specific text with the event also click and adds it to the stack.
+            cmdPlus = Core.BaitAndSwitch.Create<IButton>();
+            cmdPlus.Text = "+";
+            cmdPlus.Click += CmdPlus_Click;
+            stack.Children.Add(cmdPlus);
 
-            //Create the button cmdRestar with specific text with the event also click and adds it to the stack.
-            cmdRestar = Core.BaitAndSwitch.Create<IButton>();
-            cmdRestar.Text = "Restar";
-            cmdRestar.Click += CmdRestar_Click;
-            stack.Children.Add(cmdRestar);
+            //Create the button cmdSubtract with specific text with the event also click and adds it to the stack.
+            cmdSubtract = Core.BaitAndSwitch.Create<IButton>();
+            cmdSubtract.Text = "-";
+            cmdSubtract.Click += CmdSubtract_Click;
+            stack.Children.Add(cmdSubtract);
 
-            //Create the button cmdMultiplar with specific text with the event also click and adds it to the stack.
-            cmdMultiplicar = Core.BaitAndSwitch.Create<IButton>();
-            cmdMultiplicar.Text = "Multiplicar";
-            cmdMultiplicar.Click += CmdMultiplicar_Click;
-            stack.Children.Add(cmdMultiplicar);
+            //Create the button cmdMultiply with specific text with the event also click and adds it to the stack.
+            cmdMultiply = Core.BaitAndSwitch.Create<IButton>();
+            cmdMultiply.Text = "*";
+            cmdMultiply.Click += CmdMultiply_Click;
+            stack.Children.Add(cmdMultiply);
 
-            //Create the button cmdDividir with specific text with the event also click and adds it to the stack.
-            cmdDividir = Core.BaitAndSwitch.Create<IButton>();
-            cmdDividir.Text = "Dividir";
-            cmdDividir.Click += CmdDividir_Click;
-            stack.Children.Add(cmdDividir);
+            //Create the button cmdDivide with specific text with the event also click and adds it to the stack.
+            cmdDivide = Core.BaitAndSwitch.Create<IButton>();
+            cmdDivide.Text = "/";
+            cmdDivide.Click += CmdDivide_Click;
+            stack.Children.Add(cmdDivide);
 
             // Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
             cmdClose = Core.BaitAndSwitch.Create<IButton>();
@@ -82,30 +82,30 @@ namespace OKHOSTING.UI.Test
             stack.Children.Add(cmdClose);
 
             // Establishes the content and title of the page.
-            Page.Title = "Test Calculadora";
+            Page.Title = "Calculator";
             Page.Content = stack;
 
         }
 
-        private void CmdSumar_Click(object sender, EventArgs e)
+        private void CmdPlus_Click(object sender, EventArgs e)
         {
             double res = double.Parse(txtNum1.Value) + double.Parse(txtNum2.Value);
             lblResu.Text = res.ToString();
         }
 
-        private void CmdRestar_Click(object sender, EventArgs e)
+        private void CmdSubtract_Click(object sender, EventArgs e)
         {
             double res = double.Parse(txtNum1.Value) - double.Parse(txtNum2.Value);
             lblResu.Text = res.ToString();
         }
 
-        private void CmdMultiplicar_Click(object sender, EventArgs e)
+        private void CmdMultiply_Click(object sender, EventArgs e)
         {
             double res = double.Parse(txtNum1.Value) * double.Parse(txtNum2.Value);
             lblResu.Text = res.ToString();
         }
 
-        private void CmdDividir_Click(object sender, EventArgs e)
+        private void CmdDivide_Click(object sender, EventArgs e)
         {
             double res = double.Parse(txtNum1.Value) / double.Parse(txtNum2.Value);
             lblResu.Text = res.ToString();

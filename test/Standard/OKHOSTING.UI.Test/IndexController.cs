@@ -26,7 +26,7 @@ namespace OKHOSTING.UI.Test
 
 			grid.ColumnCount = 1;
 
-			grid.RowCount = 21;
+			grid.RowCount = 25;
 
 
 			// Create an LabelButton that binds us to a AutocompleteController.
@@ -134,29 +134,29 @@ namespace OKHOSTING.UI.Test
 			grid.SetContent(16, 0, lblTimePicker);
 
 
-			//TEST CALCULADORA
-			ILabelButton lblCalculadora = Core.BaitAndSwitch.Create<ILabelButton>();
-			lblCalculadora.Text = "Calculadora";
-			lblCalculadora.Click += (object sender, EventArgs e) => new CalculadoraController { Page = Page }.Start();
-			grid.SetContent(17, 0, lblCalculadora);
+			//TEST CALCULATOR
+			ILabelButton lblCalcultor = Core.BaitAndSwitch.Create<ILabelButton>();
+			lblCalcultor.Text = "Calculator";
+			lblCalcultor.Click += (object sender, EventArgs e) => new CalculatorController { Page = Page }.Start();
+			grid.SetContent(17, 0, lblCalcultor);
 
-			//TEST CONVERSION DE MONEDAS
+			//TEST currency conversion
 			ILabelButton lblConversion = Core.BaitAndSwitch.Create<ILabelButton>();
-			lblConversion.Text = "Conversion de moneda mexicana";
-			lblConversion.Click += (object sender, EventArgs e) => new ConversionMonedaController { Page = Page }.Start();
+			lblConversion.Text = "Currency Conversion";
+			lblConversion.Click += (object sender, EventArgs e) => new CurrencyConversionController { Page = Page }.Start();
 			grid.SetContent(18, 0, lblConversion);
 
-			//TEST CALCULAR SUELDO
-			ILabelButton lblSueldo = Core.BaitAndSwitch.Create<ILabelButton>();
-			lblSueldo.Text = "Calcular Sueldo";
-			lblSueldo.Click += (object sender, EventArgs e) => new CalcularSueldoController { Page = Page }.Start();
-			grid.SetContent(19, 0, lblSueldo);
+			//TEST calculate salary
+			ILabelButton lblSalary = Core.BaitAndSwitch.Create<ILabelButton>();
+			lblSalary.Text = "Calculate Salary";
+			lblSalary.Click += (object sender, EventArgs e) => new CalculateSalaryController { Page = Page }.Start();
+			grid.SetContent(19, 0, lblSalary);
 
-			//Test Analizar Cadena
-			ILabelButton lblAnalizarCadena = Core.BaitAndSwitch.Create<ILabelButton>();
-			lblAnalizarCadena.Text = "Analizar Cadena";
-			lblAnalizarCadena.Click += (object sender, EventArgs e) => new AnalizarCadenaController { Page = Page }.Start();
-			grid.SetContent(20, 0, lblAnalizarCadena);
+			//Test Analize String
+			ILabelButton lblAnalizeString = Core.BaitAndSwitch.Create<ILabelButton>();
+			lblAnalizeString.Text = "Analize String";
+			lblAnalizeString.Click += (object sender, EventArgs e) => new AnalizeStringController { Page = Page }.Start();
+			grid.SetContent(20, 0, lblAnalizeString);
 
 			// Establishes the content and title of the page.
 
