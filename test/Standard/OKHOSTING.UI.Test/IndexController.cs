@@ -24,7 +24,7 @@ namespace OKHOSTING.UI.Test
 			//Create an Grid with specified columns and rows.
 			IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
 
-			grid.ColumnCount = 1;
+			grid.ColumnCount = 3;
 			grid.RowCount = 18;
 
 			// Create an LabelButton that binds us to a AutocompleteController.
@@ -128,11 +128,53 @@ namespace OKHOSTING.UI.Test
 			ILabelButton lblTimePicker = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblTimePicker.Text = "TimePicker";
 			lblTimePicker.Click += (object sender, EventArgs e) => new TimePickerController(){ Page = Page }.Start();
+			lblTimePicker.Name = "label1";
 			grid.SetContent(16, 0, lblTimePicker);
 
-			// Establishes the content and title of the page.
+			// Codigo de Febronio
+			ILabelButton labelButton1 = Core.BaitAndSwitch.Create<ILabelButton>();
+			labelButton1.Text = "Soy tu creacion";
+			labelButton1.Click += (object sender, EventArgs e) => new ButtonController() { Page = Page }.Start();
+			labelButton1.CssClass = "alerta";
+			grid.SetContent(16, 16, labelButton1);
+
+
+			// Boton de clase
+			ILabelButton BotonClass = Core.BaitAndSwitch.Create<ILabelButton>();
+			BotonClass.Text = "Mi clase";
+			BotonClass.Click += (object sender, EventArgs e) => new AplicacionPrueba() { Page = Page }.Start();
+			grid.SetContent(16, 19, BotonClass);
+
+			//Otro Controlador
+			ILabelButton CalcularEdad = Core.BaitAndSwitch.Create<ILabelButton>();
+			CalcularEdad.Text = "Invocar";
+			CalcularEdad.Click += (object sender, EventArgs e) => new CalculoEdad() { Page = Page }.Start();
+			CalcularEdad.CssClass = "alerta";
+			grid.SetContent(16, 20, CalcularEdad);
+
+
+	    	// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
 			Page.Content = grid;
+
+			CSS.Style style = new CSS.Style();
+			 style.Parse(
+@"
+.alerta
+{
+	font-weight: bold;
+	font-size: 20px;
+	color: red;
+}
+
+#label1
+{
+	margin: 20px;
+	color: blue;
+}
+");
+
+			style.Apply(Page);
 		}
 	 }
 }

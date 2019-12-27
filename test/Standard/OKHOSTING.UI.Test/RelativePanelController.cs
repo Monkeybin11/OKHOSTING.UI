@@ -47,7 +47,7 @@ namespace OKHOSTING.UI.Test
 			lblLabel.FontColor = Color.FromArgb(255, 0, 0, 255);
 			lblLabel.BackgroundColor = Color.FromArgb(255, 255, 0, 0);
 			lblLabel.Margin = new Thickness(20);
-			panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
+			panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith, lblLabel);
 
 			//Create the Label lblLabel2 with text, Fontcolor, backgroundcolor and margin specific.
 			ILabel lblLabel2 = Core.BaitAndSwitch.Create<ILabel>();
