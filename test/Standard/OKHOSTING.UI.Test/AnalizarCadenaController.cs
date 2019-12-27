@@ -40,6 +40,7 @@ namespace OKHOSTING.UI.Test
 
             //txtCadena
             txtCadena = Core.BaitAndSwitch.Create<ITextBox>();
+            txtCadena.Value = "";
             txtCadena.BorderWidth = new Thickness(1, 2, 3, 4);
             grid.SetContent(0, 1, txtCadena);
 
@@ -100,19 +101,19 @@ namespace OKHOSTING.UI.Test
             //btnBuscar
             IButton btnBuscar = Core.BaitAndSwitch.Create<IButton>();
             btnBuscar.Text = "Buscar";
-            //btnBuscar.Click += btnBuscar_Click;
+            btnBuscar.Click += btnBuscar_Click;
             grid.SetContent(7, 0, btnBuscar);
 
             //btnBorrar
             IButton btnBorrar = Core.BaitAndSwitch.Create<IButton>();
             btnBorrar.Text = "Borrar";
-            //btnBorrar.Click += btnBorrar_Click;
+            btnBorrar.Click += btnBorrar_Click;
             grid.SetContent(7, 1, btnBorrar);
 
             //btnSalir
             IButton btnSalir = Core.BaitAndSwitch.Create<IButton>();
             btnSalir.Text = "Salir";
-            //btnSalir.Click += btnSalir_Click;
+            btnSalir.Click += btnSalir_Click;
             grid.SetContent(7, 2, btnSalir);
 
             // Establishes the content and title of the page.
@@ -128,6 +129,36 @@ namespace OKHOSTING.UI.Test
 		/// <returns>The set color click.</returns>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">E.</param>
+        /// 
 
+        //Evento del botón buscar
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            int x = txtCadena.Value.Length;
+            
+            //for(int i=1; i<=x; i++)
+            //{
+
+            //}
+        }
+
+        //Evento del botón borrar
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            string limpiar = " ";
+
+            txtCadena.Value = limpiar;
+            txtLetras.Value = limpiar;
+            txtNumeros.Value = limpiar;
+            txtVocales.Value = limpiar;
+            txtMayusculas.Value = limpiar;
+            txtMinusculas.Value = limpiar;
+        }
+
+        //Evento del botón Salir
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Finish();
+        }
     }
 }
