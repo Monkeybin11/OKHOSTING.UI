@@ -15,15 +15,15 @@ namespace OKHOSTING.UI.Test
     /// 
     class CalculoEdad : Controller
     {
-        ITextBox txtfecha1;
-        ITextBox txtfecha2;
+        ITextBox txtdate1;
+        ITextBox txtdate2;
 
-        ILabel lbfechaNac;
-        ILabel lbfechaActual;
-        ILabel lbresultado;
+        ILabel lbdatebirth;
+        ILabel lbcurrentdate;
+        ILabel lboutcome;
 
-        IButton btnCalcular;
-        IButton btnsalir;
+        IButton btnCalculate;
+        IButton btnexit;
 
         /// <summary>
         /// Start this instance.
@@ -38,36 +38,36 @@ namespace OKHOSTING.UI.Test
             grid.ColumnCount = 3;
             grid.RowCount = 5;
 
-            txtfecha1 = Core.BaitAndSwitch.Create<ITextBox>();
-            txtfecha1.Value = "";
-            grid.SetContent(1, 0, txtfecha1);
+            txtdate1 = Core.BaitAndSwitch.Create<ITextBox>();
+            txtdate1.Value = "";
+            grid.SetContent(1, 0, txtdate1);
 
-            txtfecha2 = Core.BaitAndSwitch.Create<ITextBox>();
-            txtfecha2.Value = "";
-            grid.SetContent(3, 0, txtfecha2);
+            txtdate2 = Core.BaitAndSwitch.Create<ITextBox>();
+            txtdate2.Value = "";
+            grid.SetContent(3, 0, txtdate2);
 
-            lbfechaNac = Core.BaitAndSwitch.Create<ILabel>();
-            lbfechaNac.Text = "Año de Nacimiento";
-            grid.SetContent(0, 0, lbfechaNac);
+            lbdatebirth = Core.BaitAndSwitch.Create<ILabel>();
+            lbdatebirth.Text = "year of birth";
+            grid.SetContent(0, 0, lbdatebirth);
 
-            lbfechaActual = Core.BaitAndSwitch.Create<ILabel>();
-            lbfechaActual.Text = "Año Actual";
-            grid.SetContent(2, 0, lbfechaActual);
+            lbcurrentdate = Core.BaitAndSwitch.Create<ILabel>();
+            lbcurrentdate.Text = "current year";
+            grid.SetContent(2, 0, lbcurrentdate);
 
-            lbresultado = Core.BaitAndSwitch.Create<ILabel>();
-            lbresultado.Text = "";
-            grid.SetContent(4, 0, lbresultado);
+            lboutcome = Core.BaitAndSwitch.Create<ILabel>();
+            lboutcome.Text = "";
+            grid.SetContent(4, 0, lboutcome);
 
-            btnCalcular = Core.BaitAndSwitch.Create<IButton>();
-            btnCalcular.Text = "Calcular";
-            btnCalcular.Click += btnCalcular_Click;
-            grid.SetContent(0, 2, btnCalcular);
+            btnCalculate = Core.BaitAndSwitch.Create<IButton>();
+            btnCalculate.Text = "Calculate";
+            btnCalculate.Click += btnCalcular_Click;
+            grid.SetContent(0, 2, btnCalculate);
 
-            btnsalir = Core.BaitAndSwitch.Create<IButton>();
+            btnexit = Core.BaitAndSwitch.Create<IButton>();
    
-            btnsalir.Text = "Salir";
-            btnsalir.Click += btnSalir_Click;
-            grid.SetContent(1, 2, btnsalir);
+            btnexit.Text = "Exit";
+            btnexit.Click += btnSalir_Click;
+            grid.SetContent(1, 2, btnexit);
 
             Page.Content = grid;
         }
@@ -83,8 +83,8 @@ namespace OKHOSTING.UI.Test
         /// 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            int calcular = int.Parse(txtfecha1.Value) - int.Parse(txtfecha2.Value);
-            lbresultado.Text = calcular.ToString();
+            int calcular = int.Parse(txtdate1.Value) - int.Parse(txtdate2.Value);
+            lboutcome.Text = calcular.ToString();
         }
         private void btnSalir_Click(object sender, EventArgs e)
         {
