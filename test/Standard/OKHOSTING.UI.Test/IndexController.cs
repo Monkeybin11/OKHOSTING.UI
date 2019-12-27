@@ -143,7 +143,7 @@ namespace OKHOSTING.UI.Test
 			// Boton de clase
 			ILabelButton BotonClass = Core.BaitAndSwitch.Create<ILabelButton>();
 			BotonClass.Text = "My class";
-			BotonClass.Click += (object sender, EventArgs e) => new AplicacionPrueba() { Page = Page }.Start();
+			BotonClass.Click += (object sender, EventArgs e) => new AplicationCalculator() { Page = Page }.Start();
 			grid.SetContent(16, 19, BotonClass);
 
             //Otro Controlador

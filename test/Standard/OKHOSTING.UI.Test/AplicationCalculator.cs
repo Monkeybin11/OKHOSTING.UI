@@ -13,22 +13,22 @@ namespace OKHOSTING.UI.Test
 	/// </para>
 	/// </summary>
     /// 
-    public class AplicacionPrueba : Controller
+    public class AplicationCalculator : Controller
     {
         // Declare an button
-        IButton btnsumar;
-        IButton btnrestar;
-        IButton btnmultiplicar;
-        IButton btndividir;
-        IButton btnsalir;
+        IButton btnAdd;
+        IButton btnSubtract;
+        IButton btnMultiply;
+        IButton btnDivide;
+        IButton btnExit;
         // Declare an label
         ILabel lb1;
         ILabel lb2;
-        ILabel lbResultado;
+        ILabel lbResult;
         // Declare an texbox
         ITextBox txtn1;
         ITextBox txtn2;
- 
+
 
         /// <summary>
         /// Start this instance.
@@ -45,12 +45,12 @@ namespace OKHOSTING.UI.Test
             grid.RowCount = 5;
 
             lb1 = Core.BaitAndSwitch.Create<ILabel>();
-            lb1.Text = "ingrese el primer numero";
+            lb1.Text = "enter the first number";
             grid.SetContent(0, 0, lb1);
 
 
             lb2 = Core.BaitAndSwitch.Create<ILabel>();
-            lb2.Text = "ingrese el segundo numero";
+            lb2.Text = "enter the second number";
             grid.SetContent(1, 0, lb2);
 
             txtn1 = Core.BaitAndSwitch.Create<ITextBox>();
@@ -61,35 +61,35 @@ namespace OKHOSTING.UI.Test
             txtn2.Value = "";
             grid.SetContent(1, 1, txtn2);
 
-            lbResultado = Core.BaitAndSwitch.Create<ILabel>();
-            lbResultado.Text = "";
-            grid.SetContent(2, 1, lbResultado);
+            lbResult = Core.BaitAndSwitch.Create<ILabel>();
+            lbResult.Text = "";
+            grid.SetContent(2, 1, lbResult);
 
-            btnsumar = Core.BaitAndSwitch.Create<IButton>();
-            btnsumar.Text = "Sumar";
-            btnsumar.Click += btnSumar_Click;
-            grid.SetContent(0, 2, btnsumar);
+            btnAdd = Core.BaitAndSwitch.Create<IButton>();
+            btnAdd.Text = "Add";
+            btnAdd.Click += btnAdd_Click;
+            grid.SetContent(0, 2, btnAdd);
 
-            btnrestar = Core.BaitAndSwitch.Create<IButton>();
-            btnrestar.Text = "Restar";
-            btnrestar.Click += btnRestar_Click;
-            grid.SetContent(1, 2, btnrestar);
+            btnSubtract = Core.BaitAndSwitch.Create<IButton>();
+            btnSubtract.Text = "Subtract";
+            btnSubtract.Click += btnSubtract_Click;
+            grid.SetContent(1, 2, btnSubtract);
 
-            btnmultiplicar = Core.BaitAndSwitch.Create<IButton>();
-            btnmultiplicar.Text = "Multiplicar";
-            btnmultiplicar.Click += btnMultiplicar_Click;
-            grid.SetContent(2, 2, btnmultiplicar);
+            btnMultiply = Core.BaitAndSwitch.Create<IButton>();
+            btnMultiply.Text = "Multiply";
+            btnMultiply.Click += btnMultiply_Click;
+            grid.SetContent(2, 2, btnMultiply);
 
-            btndividir = Core.BaitAndSwitch.Create<IButton>();
-            btndividir.Text = "Dividir";
-            btndividir.Click += btnDividir_Click;
-            grid.SetContent(3, 2, btndividir);
+            btnDivide = Core.BaitAndSwitch.Create<IButton>();
+            btnDivide.Text = "Divide";
+            btnDivide.Click += btnDivide_Click;
+            grid.SetContent(3, 2, btnDivide);
 
 
-            btnsalir = Core.BaitAndSwitch.Create<IButton>();
-            btnsalir.Text = "Salir";
-            btnsalir.Click += btnSalir_Click;
-            grid.SetContent(4, 2, btnsalir);
+            btnExit = Core.BaitAndSwitch.Create<IButton>();
+            btnExit.Text = "Exit";
+            btnExit.Click += btnExit_Click;
+            grid.SetContent(4, 2, btnExit);
 
             Page.Content = grid;
             
@@ -106,33 +106,33 @@ namespace OKHOSTING.UI.Test
         /// 
 
 
-        private void btnSumar_Click(object sender, EventArgs e) {
+        private void btnAdd_Click(object sender, EventArgs e) {
 
             double sumar = double.Parse(txtn1.Value) + double.Parse(txtn2.Value);
-            lbResultado.Text = sumar.ToString();
+            lbResult.Text = sumar.ToString();
         }
 
-        private void btnRestar_Click(object sender, EventArgs e)
+        private void btnSubtract_Click(object sender, EventArgs e)
         {
 
             double restar = double.Parse(txtn1.Value) - double.Parse(txtn2.Value);
-            lbResultado.Text = restar.ToString();
+            lbResult.Text = restar.ToString();
         }
 
-        private void btnMultiplicar_Click(object sender, EventArgs e)
+        private void btnMultiply_Click(object sender, EventArgs e)
         {
             double multiplicar = double.Parse(txtn1.Value) * double.Parse(txtn2.Value);
-            lbResultado.Text = multiplicar.ToString();
+            lbResult.Text = multiplicar.ToString();
         }
 
-        private void btnDividir_Click(object sender, EventArgs e)
+        private void btnDivide_Click(object sender, EventArgs e)
         {
 
             double dividir = double.Parse(txtn1.Value) / double.Parse(txtn2.Value);
-            lbResultado.Text = dividir.ToString();
+            lbResult.Text = dividir.ToString();
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             this.Finish();
         }
