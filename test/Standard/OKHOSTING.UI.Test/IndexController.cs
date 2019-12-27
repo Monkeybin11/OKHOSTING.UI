@@ -11,7 +11,7 @@ namespace OKHOSTING.UI.Test
 	/// Representa la plataforma principal donde se alojan controles.
 	/// </para>
 	/// </summary>
-	public class IndexController: Controller
+	public class IndexController: Controller 
 	{
 		/// <summary>
 		/// Start this instance.
@@ -159,6 +159,7 @@ namespace OKHOSTING.UI.Test
             Page.Content = grid;
 
 
+		
 		
 
 			CSS.Style style = new CSS.Style();

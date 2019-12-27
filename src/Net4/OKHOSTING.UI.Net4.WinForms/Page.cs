@@ -27,7 +27,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 				if (value != null)
 				{
-					((System.Windows.Forms.Control) value).Dock = System.Windows.Forms.DockStyle.Fill;
+					//((System.Windows.Forms.Control) value).Dock = System.Windows.Forms.DockStyle.Fill;
 					Controls.Add((System.Windows.Forms.Control) value);
 				}
 			}
