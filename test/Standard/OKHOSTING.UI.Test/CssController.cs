@@ -23,7 +23,6 @@ namespace OKHOSTING.UI.Test
 		{
 			Page.Title = "Choose one control to test";
 
-
 			CSS.Style style = new CSS.Style();
 			style.Parse(
 			@"

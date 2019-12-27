@@ -141,17 +141,17 @@ namespace OKHOSTING.UI.Test
 
 
 			// Boton de clase
-			ILabelButton BotonClass = Core.BaitAndSwitch.Create<ILabelButton>();
-			BotonClass.Text = "My class";
-			BotonClass.Click += (object sender, EventArgs e) => new AplicationCalculator() { Page = Page }.Start();
-			grid.SetContent(16, 19, BotonClass);
+			ILabelButton ButtonClass = Core.BaitAndSwitch.Create<ILabelButton>();
+			ButtonClass.Text = "My class";
+			ButtonClass.Click += (object sender, EventArgs e) => new AplicationCalculator() { Page = Page }.Start();
+			grid.SetContent(16, 19, );
 
-            //Otro Controlador
-            ILabelButton CalcularEdad = Core.BaitAndSwitch.Create<ILabelButton>();
-            CalcularEdad.Text = "Invoke";
-            CalcularEdad.Click += (object sender, EventArgs e) => new CalculoEdad() { Page = Page }.Start();
-            CalcularEdad.CssClass = "alert";
-            grid.SetContent(16, 20, CalcularEdad);
+			//Otro Controlador
+			ILabelButton CalculationAge = Core.BaitAndSwitch.Create<ILabelButton>();
+			CalculationAge.Text = "Invoke";
+			CalculationAge.Click += (object sender, EventArgs e) => new CalculationAge() { Page = Page }.Start();
+			CalculationAge.CssClass = "alert";
+            grid.SetContent(16, 20, CalculationAge);
 
 
             // Establishes the content and title of the page.
