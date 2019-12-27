@@ -25,7 +25,9 @@ namespace OKHOSTING.UI.Test
 			IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
 
 			grid.ColumnCount = 1;
+
 			grid.RowCount = 21;
+
 
 			// Create an LabelButton that binds us to a AutocompleteController.
 			ILabelButton lblAutocomplete = Core.BaitAndSwitch.Create<ILabelButton>();
@@ -131,6 +133,7 @@ namespace OKHOSTING.UI.Test
 			lblTimePicker.Name = "label1";
 			grid.SetContent(16, 0, lblTimePicker);
 
+
 			//TEST CALCULADORA
 			ILabelButton lblCalculadora = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblCalculadora.Text = "Calculadora";
@@ -156,25 +159,49 @@ namespace OKHOSTING.UI.Test
 			grid.SetContent(20, 0, lblAnalizarCadena);
 
 			// Establishes the content and title of the page.
+
+			// Codigo de Febronio
+			ILabelButton labelButton1 = Core.BaitAndSwitch.Create<ILabelButton>();
+			labelButton1.Text = "Soy tu creacion";
+			labelButton1.Click += (object sender, EventArgs e) => new ButtonController() { Page = Page }.Start();
+			labelButton1.CssClass = "alerta";
+			grid.SetContent(17, 0, labelButton1);
+
+
+			// Boton de clase
+			ILabelButton BotonClass = Core.BaitAndSwitch.Create<ILabelButton>();
+			BotonClass.Text = "Mi clase";
+			BotonClass.Click += (object sender, EventArgs e) => new AplicacionPrueba() { Page = Page }.Start();
+			grid.SetContent(18, 0, BotonClass);
+
+			//Otro Controlador
+			ILabelButton CalcularEdad = Core.BaitAndSwitch.Create<ILabelButton>();
+			CalcularEdad.Text = "Invocar";
+			CalcularEdad.Click += (object sender, EventArgs e) => new CalculoEdad() { Page = Page }.Start();
+			CalcularEdad.CssClass = "alerta";
+			grid.SetContent(19, 0, CalcularEdad);
+
+	    	// Establishes the content and title of the page.
+
 			Page.Title = "Choose one control to test";
 			Page.Content = grid;
 
 			CSS.Style style = new CSS.Style();
 			 style.Parse(
-@"
-.alerta
-{
-	font-weight: bold;
-	font-size: 20px;
-	color: red;
-}
+				@"
+				.alerta
+				{
+					font-weight: bold;
+					font-size: 20px;
+					color: red;
+				}
 
-#label1
-{
-	margin: 20px;
-	color: blue;
-}
-");
+				#label1
+				{
+					margin: 20px;
+					color: blue;
+				}
+			");
 
 			style.Apply(Page);
 		}
