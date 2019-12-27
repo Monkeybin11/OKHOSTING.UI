@@ -40,6 +40,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Menu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TimeOfDayPicker.cs">
       <SubType>Component</SubType>
     </Compile>

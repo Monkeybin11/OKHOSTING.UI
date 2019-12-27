@@ -24,8 +24,8 @@ namespace OKHOSTING.UI.Test
 			//Create an Grid with specified columns and rows.
 			IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
 
-			grid.ColumnCount = 3;
-			grid.RowCount = 18;
+			grid.ColumnCount = 1;
+			grid.RowCount = 20;
 
 			// Create an LabelButton that binds us to a AutocompleteController.
 			ILabelButton lblAutocomplete = Core.BaitAndSwitch.Create<ILabelButton>();
@@ -136,22 +136,21 @@ namespace OKHOSTING.UI.Test
 			labelButton1.Text = "Soy tu creacion";
 			labelButton1.Click += (object sender, EventArgs e) => new ButtonController() { Page = Page }.Start();
 			labelButton1.CssClass = "alerta";
-			grid.SetContent(16, 16, labelButton1);
+			grid.SetContent(17, 0, labelButton1);
 
 
 			// Boton de clase
 			ILabelButton BotonClass = Core.BaitAndSwitch.Create<ILabelButton>();
 			BotonClass.Text = "Mi clase";
 			BotonClass.Click += (object sender, EventArgs e) => new AplicacionPrueba() { Page = Page }.Start();
-			grid.SetContent(16, 19, BotonClass);
+			grid.SetContent(18, 0, BotonClass);
 
 			//Otro Controlador
 			ILabelButton CalcularEdad = Core.BaitAndSwitch.Create<ILabelButton>();
 			CalcularEdad.Text = "Invocar";
 			CalcularEdad.Click += (object sender, EventArgs e) => new CalculoEdad() { Page = Page }.Start();
 			CalcularEdad.CssClass = "alerta";
-			grid.SetContent(16, 20, CalcularEdad);
-
+			grid.SetContent(19, 0, CalcularEdad);
 
 	    	// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
@@ -159,20 +158,20 @@ namespace OKHOSTING.UI.Test
 
 			CSS.Style style = new CSS.Style();
 			 style.Parse(
-@"
-.alerta
-{
-	font-weight: bold;
-	font-size: 20px;
-	color: red;
-}
+				@"
+				.alerta
+				{
+					font-weight: bold;
+					font-size: 20px;
+					color: red;
+				}
 
-#label1
-{
-	margin: 20px;
-	color: blue;
-}
-");
+				#label1
+				{
+					margin: 20px;
+					color: blue;
+				}
+			");
 
 			style.Apply(Page);
 		}

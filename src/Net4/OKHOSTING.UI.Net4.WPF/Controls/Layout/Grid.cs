@@ -23,11 +23,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public Grid()
 		{
-			HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-			VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+			//HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			//VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
 
-			Width = Double.NaN;
-			Height = Double.NaN;
+			//Width = Double.NaN;
+			//Height = Double.NaN;
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			foreach (System.Windows.UIElement children in base.Children)
 			{
-				if (Grid.GetRow(children) == row && Grid.GetColumn(children) == column)
+				if (GetRow(children) == row && GetColumn(children) == column)
 				{
 					return (IControl) children;
 				}
