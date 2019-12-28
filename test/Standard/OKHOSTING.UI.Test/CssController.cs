@@ -9,6 +9,7 @@ namespace OKHOSTING.UI.Test
 {
     class CssController : Controller
     {
+
 		/// <summary>
 		/// Start this instance.
 		/// <para xml:lang="es">
@@ -29,10 +30,13 @@ namespace OKHOSTING.UI.Test
 			ILabel lblOne = Core.BaitAndSwitch.Create<ILabel>();
 			lblOne.Text = "This is a CSS test";
 			lblOne.Name = "lblOne";
+			lblOne.CssClass = "container";
 			grid.SetContent(0, 0, lblOne);
 
 			IButton btnClose = Core.BaitAndSwitch.Create<IButton>();
 			btnClose.Text = "Close";
+			btnClose.Name = "btnClose";
+			btnClose.CssClass = "container";
 			btnClose.Click += btnClose_Click;
 			grid.SetContent(1, 0, btnClose);
 
@@ -49,10 +53,23 @@ namespace OKHOSTING.UI.Test
 				color: red;
 			}
 
+			.container
+			{
+				text-align: center;
+				line-height: 100%;
+				font-family: Arial;
+			}
+
 			#lblOne
 			{
 				margin: 20px;
 				color: blue;
+			}
+
+			#btnClose
+			{
+				text-align: center;
+				height: 30px;
 			}
 			");
 
