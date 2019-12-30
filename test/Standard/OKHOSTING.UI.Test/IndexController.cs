@@ -150,7 +150,7 @@ namespace OKHOSTING.UI.Test
 			//Otro Controlador
 			ILabelButton CalculationAge = Core.BaitAndSwitch.Create<ILabelButton>();
 			CalculationAge.Text = "Invoke";
-			CalculationAge.Click += (object sender, EventArgs e) => new CalculateAge() { Page = Page }.Start();
+			CalculationAge.Click += (object sender, EventArgs e) => new CalculationAge() { Page = Page }.Start();
 			CalculationAge.CssClass = "alert";
             grid.SetContent(16, 20, CalculationAge);
 
@@ -162,7 +162,7 @@ namespace OKHOSTING.UI.Test
             //Otro Controlador
             ILabelButton CalcularEdad = Core.BaitAndSwitch.Create<ILabelButton>();
             CalcularEdad.Text = "Invoke";
-            CalcularEdad.Click += (object sender, EventArgs e) => new CalculateAge() { Page = Page }.Start();
+            CalcularEdad.Click += (object sender, EventArgs e) => new CalculationAge() { Page = Page }.Start();
             CalcularEdad.CssClass = "alert";
             grid.SetContent(19, 0, CalcularEdad);
 

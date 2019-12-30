@@ -2,7 +2,9 @@
 using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
+
 
 namespace OKHOSTING.UI.Test
 {
@@ -13,7 +15,7 @@ namespace OKHOSTING.UI.Test
     /// </para>
     /// </summary>
     /// 
-    class CalculoEdad : Controller
+    class CalculationAge : Controller
     {
         ITextBox txtdate1;
         ITextBox txtdate2;
