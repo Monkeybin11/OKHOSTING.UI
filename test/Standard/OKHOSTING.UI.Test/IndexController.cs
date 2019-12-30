@@ -25,8 +25,8 @@ namespace OKHOSTING.UI.Test
 			IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
 		
 
-			grid.ColumnCount = 3;
-			grid.RowCount = 18;
+			grid.ColumnCount = 1;
+			grid.RowCount = 25;
 
 			// Create an LabelButton that binds us to a AutocompleteController.
 			ILabelButton lblAutocomplete = Core.BaitAndSwitch.Create<ILabelButton>();
@@ -137,25 +137,51 @@ namespace OKHOSTING.UI.Test
 			labelButton1.Text = "Soy tu creacion";
 			labelButton1.Click += (object sender, EventArgs e) => new ButtonController() { Page = Page }.Start();
 			labelButton1.CssClass = "alert";
-			grid.SetContent(16, 16, labelButton1);
+			grid.SetContent(17, 0, labelButton1);
 
 
 			// Boton de clase
+
 			ILabelButton ButtonClass = Core.BaitAndSwitch.Create<ILabelButton>();
 			ButtonClass.Text = "My class";
 			ButtonClass.Click += (object sender, EventArgs e) => new AplicationCalculator() { Page = Page }.Start();
-			grid.SetContent(16, 19, );
+			grid.SetContent(16, 19, ButtonClass);
 
 			//Otro Controlador
 			ILabelButton CalculationAge = Core.BaitAndSwitch.Create<ILabelButton>();
 			CalculationAge.Text = "Invoke";
-			CalculationAge.Click += (object sender, EventArgs e) => new CalculationAge() { Page = Page }.Start();
+			CalculationAge.Click += (object sender, EventArgs e) => new CalculateAge() { Page = Page }.Start();
 			CalculationAge.CssClass = "alert";
             grid.SetContent(16, 20, CalculationAge);
 
+			ILabelButton BotonClass = Core.BaitAndSwitch.Create<ILabelButton>();
+			BotonClass.Text = "My class";
+			BotonClass.Click += (object sender, EventArgs e) => new AplicationCalculator() { Page = Page }.Start();
+			grid.SetContent(18, 0, BotonClass);
 
-            // Establishes the content and title of the page.
-            Page.Title = "Choose one control to test";
+            //Otro Controlador
+            ILabelButton CalcularEdad = Core.BaitAndSwitch.Create<ILabelButton>();
+            CalcularEdad.Text = "Invoke";
+            CalcularEdad.Click += (object sender, EventArgs e) => new CalculateAge() { Page = Page }.Start();
+            CalcularEdad.CssClass = "alert";
+            grid.SetContent(19, 0, CalcularEdad);
+
+
+			//AnalizeString
+			ILabelButton AnalizeString = Core.BaitAndSwitch.Create<ILabelButton>();
+			AnalizeString.Text = "Analize String";
+			AnalizeString.Click += (object sender, EventArgs e) => new AnalizeStringController() { Page = Page }.Start();
+			grid.SetContent(20, 0, AnalizeString);
+
+			//CSSController
+			ILabelButton cssController = Core.BaitAndSwitch.Create<ILabelButton>();
+			cssController.Text = "CSS Controller";
+			cssController.Click += (object sender, EventArgs e) => new CssController() { Page = Page }.Start();
+			grid.SetContent(21, 0, cssController);
+
+
+			// Establishes the content and title of the page.
+			Page.Title = "Choose one control to test";
             Page.Content = grid;
 
 
