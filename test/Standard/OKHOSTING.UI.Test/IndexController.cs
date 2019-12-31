@@ -179,6 +179,11 @@ namespace OKHOSTING.UI.Test
 			cssController.Click += (object sender, EventArgs e) => new CssController() { Page = Page }.Start();
 			grid.SetContent(21, 0, cssController);
 
+			//ContainerTestController
+			ILabelButton TestContainer = Core.BaitAndSwitch.Create<ILabelButton>();
+			TestContainer.Text = "Test Container";
+			TestContainer.Click += (object sender, EventArgs e) => new ContainerTest() { Page = Page }.Start();
+			grid.SetContent(22, 0, TestContainer);
 
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
