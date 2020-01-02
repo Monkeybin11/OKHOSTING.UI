@@ -23,11 +23,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return (string) base.SelectedValue;
+				return (string) base.SelectedItem;
 			}
 			set
 			{
-				base.SelectedValue = value;
+				base.SelectedItem = value;
 			}
 		}
 

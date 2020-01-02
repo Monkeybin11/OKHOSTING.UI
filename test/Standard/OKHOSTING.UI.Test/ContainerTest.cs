@@ -39,13 +39,14 @@ namespace OKHOSTING.UI.Test
 
             lblResult = Core.BaitAndSwitch.Create<ILabel>();
             lblResult.Text = "Result";
-            lblResult.FontSize = 500;
-            lblResult.Width = 500;
+            lblResult.FontSize = 100;
             lblResult.Name = "lblResult";
+            lblResult.CssClass = "container";
             relativePanel.Add(lblResult, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith, lblResult);
 
             lblNumberOne = Core.BaitAndSwitch.Create<ILabel>();
             lblNumberOne.Text = "           Number one";
+            lblNumberOne.CssClass = "container";
             relativePanel.Add(lblNumberOne, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblResult);
 
             lblNumberTwo = Core.BaitAndSwitch.Create<ILabel>();
@@ -68,14 +69,14 @@ namespace OKHOSTING.UI.Test
 
             btnPlus = Core.BaitAndSwitch.Create<IButton>();
             btnPlus.Text = "+";
-            btnPlus.CssClass = "container";
+            btnPlus.CssClass = "btnContainer";
             btnPlus.Width = 20;
               btnPlus.Click += btnPlus_Click;
             relativePanel.Add(btnPlus, RelativePanelHorizontalContraint.RightWith, RelativePanelVerticalContraint.CenterWith, txtNumberOne);
 
             btnSubtraction = Core.BaitAndSwitch.Create<IButton>();
             btnSubtraction.Text = "-";
-            btnSubtraction.CssClass = "container";
+            btnSubtraction.CssClass = "btnContainer";
             btnSubtraction.Width = 20;
             btnSubtraction.Click += btnSubtraction_Click;
             relativePanel.Add(btnSubtraction, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnPlus);
@@ -83,28 +84,28 @@ namespace OKHOSTING.UI.Test
 
             btnMultiply = Core.BaitAndSwitch.Create<IButton>();
             btnMultiply.Text = "x";
-            btnMultiply.CssClass = "container";
+            btnMultiply.CssClass = "btnContainer";
             btnMultiply.Width = 20;
             btnMultiply.Click  += btnMultiply_Click;
             relativePanel.Add(btnMultiply, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnSubtraction);
 
             btnDivide = Core.BaitAndSwitch.Create<IButton>();
             btnDivide.Text = "/";
-            btnDivide.CssClass = "container";
+            btnDivide.CssClass = "btnContainer";
             btnDivide.Width = 20;
             btnDivide.Click += btnDivide_Click;
             relativePanel.Add(btnDivide, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnMultiply);
 
             btnClose = Core.BaitAndSwitch.Create<IButton>();
             btnClose.Text = "Close";
-            btnClose.CssClass = "container";
+            btnClose.CssClass = "btnContainer";
             btnClose.Width = 50;
             btnClose.Click += btnClose_Click;
             relativePanel.Add(btnClose, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtNumberTwo);
 
             btnClean = Core.BaitAndSwitch.Create<IButton>();
             btnClean.Text = "Clean";
-            btnClean.CssClass = "container";
+            btnClean.CssClass = "btnContainer";
             btnClean.Width = 50;
             btnClean.Click += btnClean_Click;
             relativePanel.Add(btnClean, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnClose);
@@ -121,11 +122,17 @@ namespace OKHOSTING.UI.Test
 
              
              #lblResult {
-             
-            text-aling: center;
              font-size:14px;
             color: black;
             background-color: #75CA38;
+            }
+
+            .container {
+            text-align: justify;
+            }
+
+            .btnContainer{
+               font-align: center;
             }
 
             ");

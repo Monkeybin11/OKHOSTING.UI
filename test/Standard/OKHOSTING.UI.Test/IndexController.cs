@@ -185,6 +185,12 @@ namespace OKHOSTING.UI.Test
 			TestContainer.Click += (object sender, EventArgs e) => new ContainerTest() { Page = Page }.Start();
 			grid.SetContent(22, 0, TestContainer);
 
+			//even or odd test
+			ILabelButton EvenOrOddController = Core.BaitAndSwitch.Create<ILabelButton>();
+			EvenOrOddController.Text = "Even or Odd";
+			EvenOrOddController.Click += (object sender, EventArgs e) => new EvenOrOddTest() { Page = Page }.Start();
+			grid.SetContent(23, 0, EvenOrOddController);
+
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
             Page.Content = grid;
