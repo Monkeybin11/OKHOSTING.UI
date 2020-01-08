@@ -15,8 +15,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 			}
 
 			App app = (App) Session["App"];
+			app.MainPage = this;
 
-			if (app.State.Count == 0)
+			if (app.State[app.MainPage].Count == 0)
 			{
 				new IndexController() { Page = this }.Start();
 			}

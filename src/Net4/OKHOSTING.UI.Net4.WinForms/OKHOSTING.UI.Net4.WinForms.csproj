@@ -117,6 +117,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Users\Okhosting\source\repos\DemoEscuela\DemoEscuela\OKHOSTING.DemoEscuela.csproj">
+      <Project>{ff11b839-0dfd-46af-8cdd-a525b102b8a8}</Project>
+      <Name>OKHOSTING.DemoEscuela</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core.Cryptography\OKHOSTING.Core.Cryptography.csproj">
+      <Project>{b084f6ec-e7ea-421b-97e3-efe95b43a895}</Project>
+      <Name>OKHOSTING.Core.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
       <Project>{6cf50275-9d06-4d23-8f5a-66efcfe8c278}</Project>
       <Name>OKHOSTING.Core</Name>
@@ -132,6 +140,46 @@
     <ProjectReference Include="..\..\..\..\OKHOSTING.Files\src\Standard\OKHOSTING.Files\OKHOSTING.Files.csproj">
       <Project>{e38c865e-2109-4743-800b-26ae5bed9765}</Project>
       <Name>OKHOSTING.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM.Cryptography\OKHOSTING.ORM.Cryptography.csproj">
+      <Project>{24cb83fb-5935-46ea-8f6a-b970d7feccaf}</Project>
+      <Name>OKHOSTING.ORM.Cryptography</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM.Security\OKHOSTING.ORM.Security.csproj">
+      <Project>{b126a467-a4ae-44e2-9a17-e6a535d568e2}</Project>
+      <Name>OKHOSTING.ORM.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM.UI\OKHOSTING.ORM.UI.csproj">
+      <Project>{3659cfd9-2014-4b87-914d-42b422a5ddf7}</Project>
+      <Name>OKHOSTING.ORM.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM\OKHOSTING.ORM.csproj">
+      <Project>{4c4ad206-5a56-404e-bb54-d90d6c85fd38}</Project>
+      <Name>OKHOSTING.ORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Security\src\Standard\OKHOSTING.Security.UI\OKHOSTING.Security.UI.csproj">
+      <Project>{3c7dc920-d4ec-4ff1-a066-cd9144477649}</Project>
+      <Name>OKHOSTING.Security.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Security\src\Standard\OKHOSTING.Security\OKHOSTING.Security.csproj">
+      <Project>{db790a54-66a1-431a-9495-76eb6f7a0dad}</Project>
+      <Name>OKHOSTING.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL.DbProviders.MySql\OKHOSTING.SQL.DbProviders.MySql.csproj">
+      <Project>{8ab91324-06b4-43c1-87cf-1e60c6a80e03}</Project>
+      <Name>OKHOSTING.SQL.DbProviders.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL.DbProviders\OKHOSTING.SQL.DbProviders.csproj">
+      <Project>{6d162eea-a814-4939-9244-edb8b8faf0c2}</Project>
+      <Name>OKHOSTING.SQL.DbProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL.UI\OKHOSTING.SQL.UI.csproj">
+      <Project>{bac33c85-cf1e-4c95-9864-2427b8f71922}</Project>
+      <Name>OKHOSTING.SQL.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL\OKHOSTING.SQL.csproj">
+      <Project>{b900ac9f-6fa4-4b3c-bf0d-9cf51fa7db79}</Project>
+      <Name>OKHOSTING.SQL</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
       <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>

@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.Core\src\Standard\OKHOSTING.Core.Cryptography\OKHOSTING.Core.Cryptography.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM.Cryptography\OKHOSTING.ORM.Cryptography.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM.Security\OKHOSTING.ORM.Security.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM.UI\OKHOSTING.ORM.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.ORM\src\Standard\OKHOSTING.ORM\OKHOSTING.ORM.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.Security\src\Standard\OKHOSTING.Security.UI\OKHOSTING.Security.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.Security\src\Standard\OKHOSTING.Security\OKHOSTING.Security.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL.DbProviders.MySql\OKHOSTING.SQL.DbProviders.MySql.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL.DbProviders\OKHOSTING.SQL.DbProviders.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL.UI\OKHOSTING.SQL.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.SQL\src\Standard\OKHOSTING.SQL\OKHOSTING.SQL.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\desarrollo\OKHOSTING.UI\src\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj" />
+    <ProjectReference Include="..\..\OKHOSTING.Terminal\OKHOSTING.Terminal.csproj" />
+  </ItemGroup>
+</Project>
