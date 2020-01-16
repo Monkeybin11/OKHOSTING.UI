@@ -568,14 +568,14 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 						break;
 
 					case RelativePanelHorizontalContraint.LeftOf:
-						throw new NotImplementedException();
+						//throw new NotImplementedException();
 
 					case RelativePanelHorizontalContraint.LeftWith:
 						SetAlignHorizontalCenterWithPanel((UIElement) control, true);
 						break;
 
 					case RelativePanelHorizontalContraint.RightOf:
-						throw new NotImplementedException();
+						//throw new NotImplementedException();
 
 					case RelativePanelHorizontalContraint.RightWith:
 						SetAlignRightWithPanel((UIElement) control, true);
@@ -585,10 +585,10 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				switch (verticalContraint)
 				{
 					case RelativePanelVerticalContraint.AboveOf:
-						throw new NotImplementedException();
+						//throw new NotImplementedException();
 
 					case RelativePanelVerticalContraint.BelowOf:
-						throw new NotImplementedException();
+						//throw new NotImplementedException();
 
 					case RelativePanelVerticalContraint.BottomWith:
 						SetAlignBottomWithPanel((UIElement) control, true);

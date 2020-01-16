@@ -259,7 +259,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 			set
 			{
-				throw new NotImplementedException();
+				//throw new NotImplementedException();
 			}
 		}
 

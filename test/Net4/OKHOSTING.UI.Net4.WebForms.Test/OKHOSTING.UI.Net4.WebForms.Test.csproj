@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -73,20 +74,21 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\General.css" />
-    <Content Include="css\images\ui-icons_444444_256x240.png" />
-    <Content Include="css\images\ui-icons_555555_256x240.png" />
-    <Content Include="css\images\ui-icons_777620_256x240.png" />
-    <Content Include="css\images\ui-icons_777777_256x240.png" />
-    <Content Include="css\images\ui-icons_cc0000_256x240.png" />
-    <Content Include="css\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="css\jquery-ui.css" />
+    <Content Include="CSS\General-backup.css" />
+    <Content Include="CSS\General.css" />
+    <Content Include="CSS\images\ui-icons_444444_256x240.png" />
+    <Content Include="CSS\images\ui-icons_555555_256x240.png" />
+    <Content Include="CSS\images\ui-icons_777620_256x240.png" />
+    <Content Include="CSS\images\ui-icons_777777_256x240.png" />
+    <Content Include="CSS\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="CSS\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="CSS\jquery-ui.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="js\jquery-ui-i18n.min.js" />
-    <Content Include="js\jquery-ui.js" />
-    <Content Include="js\jquery.js" />
-    <Content Include="js\PageSize.js" />
+    <Content Include="JS\jquery-ui-i18n.min.js" />
+    <Content Include="JS\jquery-ui.js" />
+    <Content Include="JS\jquery.js" />
+    <Content Include="JS\PageSize.js" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

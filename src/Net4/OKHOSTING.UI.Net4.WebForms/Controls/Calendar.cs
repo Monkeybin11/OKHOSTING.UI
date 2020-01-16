@@ -247,7 +247,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
-
+				
 				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{

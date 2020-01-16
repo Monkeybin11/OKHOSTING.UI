@@ -1,130 +1,51 @@
-﻿body
+﻿.horizontal-alignment-center
 {
-	margin: 0px !important;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: small;
-	color: #333000;
-}
-tbody
-{
-}
-h1
-{
-	color: #D13225;
-	margin-top: 1em;
-	margin-bottom: 1em;
-}
-h2
-{
-	margin-top: 1em;
-	margin-bottom: 1em;
+	text-align: center;
+	align-self: center;
+	display: block;
+	margin: 0 auto 0 auto;
 }
 
-a
+.horizontal-alignment-fill
 {
-	text-decoration: none;
-	color: #335980;
-}
-a:visited
-{
-	color: #071523;
-}
-a:hover
-{
-	text-decoration: underline;
-}
-a img
-{
-	border: 0;
-}
-hr
-{
-	background-color: #000000;
-}
-input, textarea
-{
-	
-}
-input[type="checkbox"] 
-{
-	width: 15px;
-}
-input[type="submit"]
-{
-	background-color: #D6E7E6;
-}
-input, select, textarea 
-{
-	width: 120px;
-	border: 1px solid #C2DCDA;
-	border-radius: 2px;
-	padding: 5px;
-	margin-right: 5px;
+	text-align: justify;
+	align-self: stretch;
 }
 
-input:hover, select:hover, textarea:hover
+.horizontal-alignment-left
 {
-	background-color: #C8C8C8;
-}
-textarea
-{
-	height: 7em;
-	width: 100%;
-}
-table 
-{
-	
-}
-td
-{
-	padding: 7px;
-	margin: 7px;
-}
-th
-{
-    font-size: 15px;
-    font-weight: bold;
-}
-#header
-{
+	text-align: left;
+	align-self: flex-start;
 }
 
-#logo
+.horizontal-alignment-right
 {
-	float: left;
-	margin-bottom: 1em;
+	text-align: right;
+	align-self: flex-end;
 }
 
-#login-status
+.vertical-alignment-center 
 {
-	float: right;
-	font-size: 0.8em;
-}
-#content
-{
-	clear: both;
+	vertical-align: middle;
 }
 
-#footer
+.vertical-alignment-fill
 {
+	vertical-align: auto;
 }
 
-.default-button
+.vertical-alignment-top
 {
-	padding: 2em;
-	background-color: #CF0F29;
-	border: 1px solid #852118;
-	margin: 2em 0em 2em 0em;
-	color: #FFFFFF;
-	font-weight: bold;
+	vertical-align: top;
 }
-.default-button:hover
+
+.vertical-alignment-bottom
 {
-	background-color: #8AB8E5;
-	color: #FFFFFF;
-	text-decoration: none;
+	vertical-align: bottom;
 }
-.default-button:visited
+
+*
 {
-	color: #FFFFFF;
+	font-family: Arial !important;
+	font-size: larger !important;
 }

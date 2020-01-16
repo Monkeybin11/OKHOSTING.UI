@@ -72,7 +72,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 			set
 			{
-				throw new NotImplementedException();
+				//throw new NotImplementedException();
 			}
 		}
 
@@ -308,7 +308,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		public void Dispose()
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 
 		public AutocompleteSearchEventArgs OnSearching(string text)

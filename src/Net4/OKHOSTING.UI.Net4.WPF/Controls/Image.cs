@@ -139,7 +139,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				throw new NotImplementedException();
+				//throw new NotImplementedException();
 				//return Platform.Parse(((System.Windows.Media.SolidColorBrush) base.Background).Color);
 			}
 			set

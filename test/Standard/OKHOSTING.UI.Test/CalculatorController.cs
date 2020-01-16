@@ -7,113 +7,185 @@ using System.Text;
 
 namespace OKHOSTING.UI.Test
 {
-    class CalculatorController : Controller
+    public class CalculatorController : Controller
     {
-        ILabel lblResu;
-        ITextBox txtNum1;
-        ITextBox txtNum2;
-        IButton cmdPlus;
-        IButton cmdSubtract;
-        IButton cmdMultiply;
-        IButton cmdDivide;
-        IButton cmdClose;
+        ILabel lblNumberOne;
+        ILabel lblNumberTwo;
+        ILabel lblResult;
 
+        ITextBox txtNumberTwo;
+        ITextBox txtNumberOne;
+
+        IButton btnClose;
+        IButton btnPlus;
+        IButton btnSubtraction;
+        IButton btnMultiply;
+        IButton btnDivide;
+        IButton btnClean;
+        
         /// <summary>
         /// Start this instance.
         /// <para xml:lang="es">
         /// Inicia una instancia de este objeto.
         /// </para>
         /// </summary>
-        protected override void OnStart()
+        /// 
+
+        protected override void OnStart() 
         {
-            //Create an Stack
-            IStack stack = Core.BaitAndSwitch.Create<IStack>();
+            //Create an RelativePanel container
+            IRelativePanel relativePanel = Core.BaitAndSwitch.Create<IRelativePanel>();
 
-            //Create an Label with text and height specific and adds it to the Stack.
-            lblResu = Core.BaitAndSwitch.Create<ILabel>();
-            lblResu.Text = "Result";
-            lblResu.Height = 30;
-            stack.Children.Add(lblResu);
+            lblResult = Core.BaitAndSwitch.Create<ILabel>();
+            lblResult.Text = "Result";
+            lblResult.FontSize = 100;
+            lblResult.Name = "lblResult";
+            lblResult.CssClass = "container";
+            relativePanel.Add(lblResult, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith, lblResult);
 
-            //Create an TextBox and adds it to the Stack
-            txtNum1 = Core.BaitAndSwitch.Create<ITextBox>();
-            txtNum1.BorderColor = Color.FromArgb(255, 255, 0, 0);
-            txtNum1.BorderWidth = new Thickness(1, 2, 3, 4);
-            txtNum1.Placeholder = "Enter some number..";
-            txtNum1.PlaceholderColor = Color.FromArgb(255, 100, 100, 100);
-            stack.Children.Add(txtNum1);
+            lblNumberOne = Core.BaitAndSwitch.Create<ILabel>();
+            lblNumberOne.Text = "           Number one";
+            lblNumberOne.CssClass = "container";
+            relativePanel.Add(lblNumberOne, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblResult);
 
-            //Create an TextBox and adds it to the Stack
-            txtNum2 = Core.BaitAndSwitch.Create<ITextBox>();
-            txtNum2.BorderColor = Color.FromArgb(255, 255, 0, 0);
-            txtNum2.BorderWidth = new Thickness(1, 2, 3, 4);
-            txtNum2.Placeholder = "Enter some number..";
-            txtNum2.PlaceholderColor = Color.FromArgb(255, 100, 100, 100);
-            stack.Children.Add(txtNum2);
+            lblNumberTwo = Core.BaitAndSwitch.Create<ILabel>();
+            lblNumberTwo.Text = "           Number Two";
+            lblNumberTwo.CssClass = "container";
+            relativePanel.Add(lblNumberTwo, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblNumberOne);
 
-            //Create the button cmdPlus with specific text with the event also click and adds it to the stack.
-            cmdPlus = Core.BaitAndSwitch.Create<IButton>();
-            cmdPlus.Text = "+";
-            cmdPlus.Click += CmdPlus_Click;
-            stack.Children.Add(cmdPlus);
+            txtNumberOne = Core.BaitAndSwitch.Create<ITextBox>();
+            txtNumberOne.Value = "";
+            txtNumberOne.CssClass = "container";
+            txtNumberOne.Width = 50;
+            relativePanel.Add(txtNumberOne, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.CenterWith, lblNumberOne);
 
-            //Create the button cmdSubtract with specific text with the event also click and adds it to the stack.
-            cmdSubtract = Core.BaitAndSwitch.Create<IButton>();
-            cmdSubtract.Text = "-";
-            cmdSubtract.Click += CmdSubtract_Click;
-            stack.Children.Add(cmdSubtract);
+            txtNumberTwo = Core.BaitAndSwitch.Create<ITextBox>();
+            txtNumberTwo.Value = "";
+            txtNumberTwo.CssClass = "container";
+            txtNumberTwo.Width = 50;
+            relativePanel.Add(txtNumberTwo, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtNumberOne);
 
-            //Create the button cmdMultiply with specific text with the event also click and adds it to the stack.
-            cmdMultiply = Core.BaitAndSwitch.Create<IButton>();
-            cmdMultiply.Text = "*";
-            cmdMultiply.Click += CmdMultiply_Click;
-            stack.Children.Add(cmdMultiply);
+            btnPlus = Core.BaitAndSwitch.Create<IButton>();
+            btnPlus.Text = "+";
+            btnPlus.CssClass = "btnContainer";
+            btnPlus.Width = 20;
+              btnPlus.Click += btnPlus_Click;
+            relativePanel.Add(btnPlus, RelativePanelHorizontalContraint.RightWith, RelativePanelVerticalContraint.CenterWith, txtNumberOne);
 
-            //Create the button cmdDivide with specific text with the event also click and adds it to the stack.
-            cmdDivide = Core.BaitAndSwitch.Create<IButton>();
-            cmdDivide.Text = "/";
-            cmdDivide.Click += CmdDivide_Click;
-            stack.Children.Add(cmdDivide);
+            btnSubtraction = Core.BaitAndSwitch.Create<IButton>();
+            btnSubtraction.Text = "-";
+            btnSubtraction.CssClass = "btnContainer";
+            btnSubtraction.Width = 20;
+            btnSubtraction.Click += btnSubtraction_Click;
+            relativePanel.Add(btnSubtraction, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnPlus);
 
-            // Creates the Button cmdClose with text specific, with the event also click and adds it to the stack.
-            cmdClose = Core.BaitAndSwitch.Create<IButton>();
-            cmdClose.Text = "Close";
-            cmdClose.Click += CmdClose_Click;
-            stack.Children.Add(cmdClose);
+
+            btnMultiply = Core.BaitAndSwitch.Create<IButton>();
+            btnMultiply.Text = "x";
+            btnMultiply.CssClass = "btnContainer";
+            btnMultiply.Width = 20;
+            btnMultiply.Click  += btnMultiply_Click;
+            relativePanel.Add(btnMultiply, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnSubtraction);
+
+            btnDivide = Core.BaitAndSwitch.Create<IButton>();
+            btnDivide.Text = "/";
+            btnDivide.CssClass = "btnContainer";
+            btnDivide.Width = 20;
+            btnDivide.Click += btnDivide_Click;
+            relativePanel.Add(btnDivide, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnMultiply);
+
+            btnClose = Core.BaitAndSwitch.Create<IButton>();
+            btnClose.Text = "Close";
+            btnClose.CssClass = "btnContainer";
+            btnClose.Width = 50;
+            btnClose.Click += btnClose_Click;
+            relativePanel.Add(btnClose, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtNumberTwo);
+
+            btnClean = Core.BaitAndSwitch.Create<IButton>();
+            btnClean.Text = "Clean";
+            btnClean.CssClass = "btnContainer";
+            btnClean.Width = 50;
+            btnClean.Click += btnClean_Click;
+            relativePanel.Add(btnClean, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnClose);
 
             // Establishes the content and title of the page.
-            Page.Title = "Calculator";
-            Page.Content = stack;
+            Page.Title = "Container Test";
+            Page.Content = relativePanel;
+
+
+
+            CSS.Style style = new CSS.Style();
+            style.Parse(
+            @"
+
+             
+             #lblResult {
+             font-size:14px;
+            color: black;
+            background-color: #75CA38;
+            }
+
+            .container {
+            text-align: justify;
+            }
+
+            .btnContainer{
+               font-align: center;
+            }
+
+            ");
+
+            style.Apply(Page);
+
 
         }
-
-        private void CmdPlus_Click(object sender, EventArgs e)
+        private void btnPlus_Click(object sender, EventArgs e)
         {
-            double res = double.Parse(txtNum1.Value) + double.Parse(txtNum2.Value);
-            lblResu.Text = res.ToString();
+            double res = double.Parse(txtNumberOne.Value) + double.Parse(txtNumberTwo.Value);
+            lblResult.Text = res.ToString();
         }
 
-        private void CmdSubtract_Click(object sender, EventArgs e)
+        private void btnSubtraction_Click(object sender, EventArgs e)
         {
-            double res = double.Parse(txtNum1.Value) - double.Parse(txtNum2.Value);
-            lblResu.Text = res.ToString();
+            double res = double.Parse(txtNumberOne.Value) - double.Parse(txtNumberTwo.Value);
+            lblResult.Text = res.ToString();
         }
 
-        private void CmdMultiply_Click(object sender, EventArgs e)
+        private void btnMultiply_Click(object sender, EventArgs e)
         {
-            double res = double.Parse(txtNum1.Value) * double.Parse(txtNum2.Value);
-            lblResu.Text = res.ToString();
+            double res = double.Parse(txtNumberOne.Value) * double.Parse(txtNumberTwo.Value);
+            lblResult.Text = res.ToString();
         }
 
-        private void CmdDivide_Click(object sender, EventArgs e)
+        private void btnDivide_Click(object sender, EventArgs e)
         {
-            double res = double.Parse(txtNum1.Value) / double.Parse(txtNum2.Value);
-            lblResu.Text = res.ToString();
+            double res = double.Parse(txtNumberOne.Value) / double.Parse(txtNumberTwo.Value);
+            lblResult.Text = res.ToString();
         }
 
-        private void CmdClose_Click(object sender, EventArgs e)
+        /// <summary>
+        /// It is the button click event cmd Color, what it does is change the background color of the stack.
+        /// <para xml:lang="es">
+        /// Es el evento clic del boton cmdColor, lo que hace es cambiar el color de fondo del stack.
+        /// </para>
+        /// </summary>
+        /// <returns>The set color click.</returns>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        /// 
+
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Finish();
         }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            string clean = " ";
+            lblResult.Text = clean;
+            txtNumberOne.Value = clean;
+            txtNumberTwo.Value = clean;
+        }
+
     }
 }

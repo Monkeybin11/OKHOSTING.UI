@@ -28,8 +28,6 @@ namespace OKHOSTING.UI.Test
 
 		protected override void OnStart()
 		{
-
-
             //Create an Grid with specified columns and rows.
             IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
             grid.ColumnCount = 3;
@@ -37,7 +35,6 @@ namespace OKHOSTING.UI.Test
 
             lblTitulo = Core.BaitAndSwitch.Create<ILabel>();
             lblTitulo.Text = " Lil Octopus";
-			lblTitulo.CssClass = "container";
 			lblTitulo.Name = "titulo";
 			grid.SetContent(0, 1, lblTitulo);
 
@@ -48,28 +45,24 @@ namespace OKHOSTING.UI.Test
  "Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Consectetur adipiscing elit duis tristique. Neque ornare aenean euismod elementum nisi quis. \n" +
  "Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. In hendrerit gravida rutrum quisque non tellus orci ac auctor. Suscipit tellus mauris a diam maecenas sed enim ut. \n";
             lblTexto.Name = "parrafo";
-            lblTexto.CssClass = "container";
             grid.SetContent(1, 1, lblTexto);
 
             imgOne = Core.BaitAndSwitch.Create<IImage>();
             imgOne.LoadFromUrl(new Uri("https://www.tekcrispy.com/wp-content/uploads/2018/05/pulpo-vida-1021x580.jpg"));
             imgOne.Height = 100;
             imgOne.Width = 100;
-			imgOne.CssClass = "container";
             grid.SetContent(2, 0, imgOne);
 
 			imgTwo = Core.BaitAndSwitch.Create<IImage>();
 			imgTwo.LoadFromUrl(new Uri("https://lithub.com/wp-content/uploads/2019/09/octopus-1.jpg"));
 			imgOne.Height = 100;
 			imgOne.Width = 100;
-			imgTwo.CssClass = "container";
 			grid.SetContent(2, 1, imgTwo);
 
 			imgTree = Core.BaitAndSwitch.Create<IImage>();
 			imgTree.LoadFromUrl(new Uri("https://octolab.tv/wp-content/uploads/2019/03/octopuses-are-alien-creatures-2-750x500.jpg"));
 			imgOne.Height = 100;
 			imgOne.Width = 100;
-			imgTree.CssClass = "container";
 			grid.SetContent(2, 2, imgTree);
 
 			//lblEnlace = Core.BaitAndSwitch.Create<ILabelButton>();
@@ -79,7 +72,6 @@ namespace OKHOSTING.UI.Test
 			IButton btnClose = Core.BaitAndSwitch.Create<IButton>();
             btnClose.Text = "Close";
             btnClose.Name = "btnClose";
-            btnClose.CssClass = "container";
             btnClose.Click += btnClose_Click;
 			grid.SetContent(3, 1, btnClose);
 
@@ -90,25 +82,19 @@ namespace OKHOSTING.UI.Test
 			CSS.Style style = new CSS.Style();
 			style.Parse(
 			@"
-             #titulo {
-             font-size: 20px; 
-			 border:3px inside;
-			 color: red;
+             #titulo 
+			{
+				 font-size: 20px; 
+				 border: 3px solid blue;
+				 color: red;
              }
            
-             #parrafo {
-             font-size: 16px;
-             border: 3px  dashed black ;
-			 color: red;
-             }
-
-
-			.alert
+             #parrafo 
 			{
-				font-weight: bold;
-				font-size: 20px;
-				color: red;
-			}
+				 font-size: 16px;
+				 border: 3px solid black;
+				 color: yellow;
+             }
 
 			.container
 			{
@@ -119,16 +105,11 @@ namespace OKHOSTING.UI.Test
 				background: #CFF6FF;
             }
 
-			#lblOne
-			{
-				margin: 20px;
-				color: blue;
-			}
-
 			#btnClose
 			{
 				text-align: center;
 				height: 30px;
+				font-family: Verdana;
 			}
 			");
 
@@ -150,6 +131,5 @@ namespace OKHOSTING.UI.Test
 		{
 			this.Finish();
 		}
-
 	}
 }

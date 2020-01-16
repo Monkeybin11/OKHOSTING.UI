@@ -23,7 +23,6 @@ namespace OKHOSTING.UI.Test
 		{
 			//Create an Grid with specified columns and rows.
 			IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
-		
 
 			grid.ColumnCount = 1;
 			grid.RowCount = 25;
@@ -132,75 +131,39 @@ namespace OKHOSTING.UI.Test
 			lblTimePicker.Name = "label1";
 			grid.SetContent(16, 0, lblTimePicker);
 
-			// Codigo de Febronio
-			ILabelButton labelButton1 = Core.BaitAndSwitch.Create<ILabelButton>();
-			labelButton1.Text = "Soy tu creacion";
-			labelButton1.Click += (object sender, EventArgs e) => new ButtonController() { Page = Page }.Start();
-			labelButton1.CssClass = "alert";
-			grid.SetContent(17, 0, labelButton1);
-
-
-			// Boton de clase
-
-			ILabelButton ButtonClass = Core.BaitAndSwitch.Create<ILabelButton>();
-			ButtonClass.Text = "My class";
-			ButtonClass.Click += (object sender, EventArgs e) => new AplicationCalculator() { Page = Page }.Start();
-			grid.SetContent(16, 19, ButtonClass);
-
-			//Otro Controlador
-			ILabelButton CalculationAge = Core.BaitAndSwitch.Create<ILabelButton>();
-			CalculationAge.Text = "Invoke";
-			CalculationAge.Click += (object sender, EventArgs e) => new CalculationAge() { Page = Page }.Start();
-			CalculationAge.CssClass = "alert";
-            grid.SetContent(16, 20, CalculationAge);
-
-			ILabelButton BotonClass = Core.BaitAndSwitch.Create<ILabelButton>();
-			BotonClass.Text = "My class";
-			BotonClass.Click += (object sender, EventArgs e) => new AplicationCalculator() { Page = Page }.Start();
-			grid.SetContent(18, 0, BotonClass);
+			//calculator
+			ILabelButton cmdCalculator = Core.BaitAndSwitch.Create<ILabelButton>();
+			cmdCalculator.Text = "Calculator with CSS";
+			cmdCalculator.Click += (object sender, EventArgs e) => new CalculatorController() { Page = Page }.Start();
+			grid.SetContent(17, 0, cmdCalculator);
 
             //Otro Controlador
             ILabelButton CalcularEdad = Core.BaitAndSwitch.Create<ILabelButton>();
-            CalcularEdad.Text = "Invoke";
-            CalcularEdad.Click += (object sender, EventArgs e) => new CalculationAge() { Page = Page }.Start();
-            CalcularEdad.CssClass = "alert";
-            grid.SetContent(19, 0, CalcularEdad);
-
+            CalcularEdad.Text = "Calculate age";
+            CalcularEdad.Click += (object sender, EventArgs e) => new CalculateAgeController() { Page = Page }.Start();
+            grid.SetContent(18, 0, CalcularEdad);
 
 			//AnalizeString
 			ILabelButton AnalizeString = Core.BaitAndSwitch.Create<ILabelButton>();
 			AnalizeString.Text = "Analize String";
 			AnalizeString.Click += (object sender, EventArgs e) => new AnalizeStringController() { Page = Page }.Start();
-			grid.SetContent(20, 0, AnalizeString);
+			grid.SetContent(19, 0, AnalizeString);
 
 			//CSSController
 			ILabelButton cssController = Core.BaitAndSwitch.Create<ILabelButton>();
 			cssController.Text = "CSS Controller";
 			cssController.Click += (object sender, EventArgs e) => new CssController() { Page = Page }.Start();
-			grid.SetContent(21, 0, cssController);
-
-			//ContainerTestController
-			ILabelButton TestContainer = Core.BaitAndSwitch.Create<ILabelButton>();
-			TestContainer.Text = "Test Container";
-			TestContainer.Click += (object sender, EventArgs e) => new ContainerTest() { Page = Page }.Start();
-			grid.SetContent(22, 0, TestContainer);
+			grid.SetContent(20, 0, cssController);
 
 			//even or odd test
 			ILabelButton EvenOrOddController = Core.BaitAndSwitch.Create<ILabelButton>();
 			EvenOrOddController.Text = "Even or Odd";
 			EvenOrOddController.Click += (object sender, EventArgs e) => new EvenOrOddTest() { Page = Page }.Start();
-			grid.SetContent(23, 0, EvenOrOddController);
+			grid.SetContent(21, 0, EvenOrOddController);
 
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
             Page.Content = grid;
-
-
-		
-		
-
-			CSS.Style style = new CSS.Style();
-            style.Apply(Page);
         }
     }
 }
