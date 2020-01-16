@@ -108,7 +108,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		public static void SetBorderWidth(this System.Web.UI.WebControls.WebControl control, Thickness value)
 		{
-			control.Style["border-style"] = "solid";
+			control.BorderStyle = System.Web.UI.WebControls.BorderStyle.Solid;
 			if (value.Left.HasValue) control.Style["border-left-width"] = string.Format("{0}px", value.Left);
 			if (value.Top.HasValue) control.Style["border-top-width"] = string.Format("{0}px", value.Top);
 			if (value.Right.HasValue) control.Style["border-right-width"] = string.Format("{0}px", value.Right);

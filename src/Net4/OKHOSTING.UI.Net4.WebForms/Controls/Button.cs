@@ -215,22 +215,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				double left, top, right, bottom;
-				Thickness thickness = new Thickness();
-
-				if (double.TryParse(base.Style["border-left-width"].Replace("px", null), out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["border-top-width"].Replace("px", null), out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["border-right-width"].Replace("px", null), out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["border-bottom-width"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
-
-				return new Thickness(left, top, right, bottom);
+				return this.GetBorderWidth();
 			}
 			set
 			{
-				if (value.Left.HasValue) base.Style["border-left-width"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["border-top-width"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["border-right-width"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
+				this.SetBorderWidth(value);
 			}
 		}
 
