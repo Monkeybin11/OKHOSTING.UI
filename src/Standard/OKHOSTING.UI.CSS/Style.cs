@@ -31,12 +31,12 @@ namespace OKHOSTING.UI.CSS
 
 		protected string[] SplitBySpace(string singleSelectorText)
 		{
-			return singleSelectorText.Split(' ').Select(s => s.ToLower().Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
+			return singleSelectorText.Split(' ').Select(s => s.Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
 		}
 
 		protected string[] SplitByCommas(string selectorText)
 		{
-			return selectorText.Split(',').Select(s => s.ToLower().Trim()).ToArray();
+			return selectorText.Split(',').Select(s => s.Trim()).ToArray();
 		}
 
 		/// <summary>
@@ -64,28 +64,28 @@ namespace OKHOSTING.UI.CSS
 						selected = App.GetAllChildren(selected);
 					}
 
-					if (selector == "*")
+					if (subSelector == "*")
 					{
 						//do not filter
 					}
-					else if (selector.StartsWith("#"))
+					else if (subSelector.StartsWith("#"))
 					{
-						selected = SelectById(selected, selector);
+						selected = SelectById(selected, subSelector);
 					}
 					else if (selector.Contains("."))
 					{
-						selected = SelectByClass(selected, selector);
+						selected = SelectByClass(selected, subSelector);
 					}
 					else if (selector.Contains("["))
 					{
-						selected = SelectByAttribute(selected, selector);
+						selected = SelectByAttribute(selected, subSelector);
 					}
 					else if (selector[0].Category() == CharExtensions.CharCategory.Letter)
 					{
-						selected = SelectByElementType(selected, selector);
+						selected = SelectByElementType(selected, subSelector);
 					}
 
-					else throw new ArgumentOutOfRangeException(nameof(selector), "Argument is not a supported CSS selector");
+					else throw new ArgumentOutOfRangeException(nameof(subSelector), "Argument is not a supported CSS selector");
 				}
 
 				foreach (var control in selected)
@@ -104,7 +104,7 @@ namespace OKHOSTING.UI.CSS
 		protected IEnumerable<IControl> SelectById(IEnumerable<IControl> controls, string selector)
 		{
 			string id = selector.Substring(1);
-			return controls.Where(c => c.Name == id);
+			return controls.Where(c => id.Equals(c.Name, StringComparison.InvariantCultureIgnoreCase));
 		}
 
 		/// <summary>
@@ -124,16 +124,15 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			string element = selector.Substring(0, selector.IndexOf('.'));
-			string className = selector.Substring(selector.IndexOf('.') + 1);
+			string className = selector.Substring(selector.IndexOf('.') + 1).ToLower();
+			IEnumerable<IControl> result = controls;
 
 			if (!string.IsNullOrWhiteSpace(element))
 			{
-				return SelectByElementType(controls, element).Where(c =>  c.CssClass != null && SplitBySpace(c.CssClass).Contains(className));
+				result = SelectByElementType(controls, element);
 			}
-			else
-			{
-				return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).Contains(className));
-			}
+
+			return result.Where(c => c.CssClass != null && SplitBySpace(c.CssClass.ToLower()).Contains(className));
 		}
 
 		/// <summary>

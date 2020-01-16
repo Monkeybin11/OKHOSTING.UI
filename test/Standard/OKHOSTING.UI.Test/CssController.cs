@@ -1,22 +1,18 @@
 ﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
 
 namespace OKHOSTING.UI.Test
 {
-    class CssController : Controller
+    public class CssController : Controller
     {
-
-		ILabel lblTitulo;
-		ILabel lblTexto;
+		ILabel lblTitle;
+		ILabel lblText1;
+		ILabel lblText2;
 		ILabelButton lblEnlace;
 		IImage imgOne;
 		IImage imgTwo;
 		IImage imgTree;
-
 
 		/// <summary>
 		/// Start this instance.
@@ -24,8 +20,6 @@ namespace OKHOSTING.UI.Test
 		/// Inicia una instancia de este objeto.
 		/// </para>
 		/// </summary>
-		/// 
-
 		protected override void OnStart()
 		{
             //Create an Grid with specified columns and rows.
@@ -33,41 +27,40 @@ namespace OKHOSTING.UI.Test
             grid.ColumnCount = 3;
             grid.RowCount = 5;
 
-            lblTitulo = Core.BaitAndSwitch.Create<ILabel>();
-            lblTitulo.Text = " Lil Octopus";
-			lblTitulo.Name = "titulo";
-			grid.SetContent(0, 1, lblTitulo);
+            lblTitle = Core.BaitAndSwitch.Create<ILabel>();
+            lblTitle.Text = "Lil Octopus";
+			lblTitle.Name = "title";
+			lblTitle.CssClass = "marginpadding";
+			grid.SetContent(0, 1, lblTitle);
 
-            lblTexto = Core.BaitAndSwitch.Create<ILabel>();
-            lblTexto.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
-                "Mi eget mauris pharetra et ultrices neque ornare. Cursus eget nunc scelerisque viverra. Pellentesque massa placerat duis ultricies lacus. \n" +
-    "Dignissim cras tincidunt lobortis feugiat vivamus at augue. Arcu risus quis varius quam quisque id diam vel quam. Morbi tempus iaculis urna id volutpat lacus laoreet. \n" +
- "Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Consectetur adipiscing elit duis tristique. Neque ornare aenean euismod elementum nisi quis. \n" +
- "Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. In hendrerit gravida rutrum quisque non tellus orci ac auctor. Suscipit tellus mauris a diam maecenas sed enim ut. \n";
-            lblTexto.Name = "parrafo";
-            grid.SetContent(1, 1, lblTexto);
+            lblText1 = Core.BaitAndSwitch.Create<ILabel>();
+            lblText1.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
+				"Mi eget mauris pharetra et ultrices neque ornare. Cursus eget nunc scelerisque viverra. Pellentesque massa placerat duis ultricies lacus. \n" +
+				"Dignissim cras tincidunt lobortis feugiat vivamus at augue. Arcu risus quis varius quam quisque id diam vel quam. Morbi tempus iaculis urna id volutpat lacus laoreet. \n" +
+				"Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Consectetur adipiscing elit duis tristique. Neque ornare aenean euismod elementum nisi quis. \n" +
+				"Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. In hendrerit gravida rutrum quisque non tellus orci ac auctor. Suscipit tellus mauris a diam maecenas sed enim ut. \n";
+            lblText1.Name = "Text1";
+			lblText1.CssClass = "fontandcolor";
+			grid.SetContent(1, 1, lblText1);
 
             imgOne = Core.BaitAndSwitch.Create<IImage>();
             imgOne.LoadFromUrl(new Uri("https://www.tekcrispy.com/wp-content/uploads/2018/05/pulpo-vida-1021x580.jpg"));
-            imgOne.Height = 100;
-            imgOne.Width = 100;
             grid.SetContent(2, 0, imgOne);
 
 			imgTwo = Core.BaitAndSwitch.Create<IImage>();
 			imgTwo.LoadFromUrl(new Uri("https://lithub.com/wp-content/uploads/2019/09/octopus-1.jpg"));
-			imgOne.Height = 100;
-			imgOne.Width = 100;
 			grid.SetContent(2, 1, imgTwo);
 
 			imgTree = Core.BaitAndSwitch.Create<IImage>();
 			imgTree.LoadFromUrl(new Uri("https://octolab.tv/wp-content/uploads/2019/03/octopuses-are-alien-creatures-2-750x500.jpg"));
-			imgOne.Height = 100;
-			imgOne.Width = 100;
 			grid.SetContent(2, 2, imgTree);
 
-			//lblEnlace = Core.BaitAndSwitch.Create<ILabelButton>();
-			//lblEnlace.Text = "http://www.pulpopedia.com/";
-			//lblEnlace.Click += http://www.pulpopedia.com/;
+			lblText2 = Core.BaitAndSwitch.Create<ILabel>();
+			lblText2.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
+				"Mi eget mauris pharetra et ultrices neque ornare. Cursus eget nunc scelerisque viverra. Pellentesque massa placerat duis ultricies lacus.";
+			lblText2.Name = "Text2";
+			lblText2.CssClass = "fontandcolor marginpadding";
+			grid.SetContent(3, 0, lblText2);
 
 			IButton btnClose = Core.BaitAndSwitch.Create<IButton>();
             btnClose.Text = "Close";
@@ -75,43 +68,62 @@ namespace OKHOSTING.UI.Test
             btnClose.Click += btnClose_Click;
 			grid.SetContent(3, 1, btnClose);
 
-			Page.Title = "Choose one control to test";
+			Page.Title = "CSS is now multiplatform";
 			Page.Content = grid;
-
 
 			CSS.Style style = new CSS.Style();
 			style.Parse(
 			@"
-             #titulo 
+            #title 
 			{
-				 font-size: 20px; 
-				 border: 3px solid blue;
-				 color: red;
+				font-size: 20px; 
+				border: 2px solid blue;
+				color: red;
+				text-align: center;
+				vertical-align: bottom;
              }
            
-             #parrafo 
+            #text1 
 			{
-				 font-size: 16px;
-				 border: 3px solid black;
-				 color: yellow;
-             }
-
-			.container
+				font-size: 16px;
+				border: 1px solid black;
+				color: yellow;
+				text-align: right;
+            }
+			
+			#text2
 			{
+				font-size: 14px;
+				border: 2px solid #336699;
+				color: orange;
+				background-color: #AABBCC;
 				text-align: justify;
-				line-height: 100%;
-				font-family: Arial;
-                color: purple;
-				background: #CFF6FF;
             }
 
+			.fontandcolor
+			{
+				font-family: Arial;
+                color: purple;
+            }
+
+			.marginpadding
+			{
+                margin: 15px;
+                padding: 30px;
+            }
+
+			image, imageButton
+			{
+				width: 100px;
+				height: 100px;
+			}
+			
 			#btnClose
 			{
 				text-align: center;
 				height: 30px;
 				font-family: Verdana;
-			}
-			");
+			}");
 
 			style.Apply(Page);
 		}
