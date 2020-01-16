@@ -26,6 +26,7 @@ namespace OKHOSTING.UI.Test
             IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
             grid.ColumnCount = 3;
             grid.RowCount = 5;
+			grid.Name = "grid";
 
             lblTitle = Core.BaitAndSwitch.Create<ILabel>();
             lblTitle.Text = "Lil Octopus";
@@ -99,6 +100,11 @@ namespace OKHOSTING.UI.Test
 				background-color: #AABBCC;
 				text-align: justify;
             }
+
+			#grid image
+			{
+				border: 1px solid #0099AA;
+			}
 
 			.fontandcolor
 			{

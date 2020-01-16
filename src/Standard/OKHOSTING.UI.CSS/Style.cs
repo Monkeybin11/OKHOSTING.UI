@@ -72,15 +72,15 @@ namespace OKHOSTING.UI.CSS
 					{
 						selected = SelectById(selected, subSelector);
 					}
-					else if (selector.Contains("."))
+					else if (subSelector.Contains("."))
 					{
 						selected = SelectByClass(selected, subSelector);
 					}
-					else if (selector.Contains("["))
+					else if (subSelector.Contains("["))
 					{
 						selected = SelectByAttribute(selected, subSelector);
 					}
-					else if (selector[0].Category() == CharExtensions.CharCategory.Letter)
+					else if (subSelector[0].Category() == CharExtensions.CharCategory.Letter)
 					{
 						selected = SelectByElementType(selected, subSelector);
 					}

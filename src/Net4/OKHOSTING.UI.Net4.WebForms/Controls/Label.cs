@@ -464,7 +464,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();

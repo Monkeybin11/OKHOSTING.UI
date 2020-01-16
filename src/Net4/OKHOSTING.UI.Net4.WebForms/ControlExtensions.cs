@@ -21,7 +21,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		public static void RemoveCssClassesStartingWith(this System.Web.UI.WebControls.WebControl control, string className)
 		{
-			var cssClasses = control.CssClass.Split().ToList();
+			var cssClasses = control.CssClass.Split(' ').ToList();
 
 			for (int i = 0; i < cssClasses.Count; i++)
 			{
@@ -32,7 +32,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 				}
 			}
 
-			control.CssClass = control.CssClass.Replace(className, string.Empty).Trim();
+			control.CssClass = string.Join(" ", cssClasses);
 		}
 
 		/// <summary>
