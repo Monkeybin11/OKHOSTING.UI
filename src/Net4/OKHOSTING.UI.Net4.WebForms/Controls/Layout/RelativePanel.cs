@@ -83,8 +83,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			string atHorizontalAnchor = "center";
 			string atVerticalAnchor = "center";
 
-			//the reference control's id
-			string of = ((NativeControl)referenceControl).ClientID;
+			Page page = (Page)System.Web.HttpContext.Current.Session["Page"];
+
+			if (string.IsNullOrWhiteSpace(control.Name))
+			{
+				control.Name = control.GetType().Name + "_" + page.ControlCounter++;
+			}
+
+			if (string.IsNullOrWhiteSpace(referenceControl.Name))
+			{
+				referenceControl.Name = referenceControl.GetType().Name + "_" + page.ControlCounter++;
+			}
 
 			//horizontal constraint
 

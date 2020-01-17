@@ -15,19 +15,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// <summary>
 		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
 		/// </summary>
-		protected int ControlCounter = 0;
+		public int ControlCounter = 0;
 		
-		/// <summary>
-		/// Adds a name to all controls created, necessary to handle postbacks
-		/// </summary>
-		protected virtual void App_ControlCreated(object sender, IControl e)
-		{
-			if (string.IsNullOrWhiteSpace(e.Name))
-			{
-				e.Name = $"ctr_{e.GetType().Name}_{ControlCounter++}";
-			}
-		}
-
 		/// <summary>
 		/// The content holder.
 		/// <para xml:lang="es">El contenido que contiene la pagina.</para>

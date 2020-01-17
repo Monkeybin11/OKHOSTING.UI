@@ -103,7 +103,7 @@ namespace OKHOSTING.UI.Test
 
 			#grid image
 			{
-				border: 1px solid #0099AA;
+				border: 3px solid #AA5500;
 			}
 
 			.fontandcolor
@@ -127,7 +127,7 @@ namespace OKHOSTING.UI.Test
 			#btnClose
 			{
 				text-align: center;
-				height: 30px;
+				height: 50px;
 				font-family: Verdana;
 			}");
 
