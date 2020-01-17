@@ -75,6 +75,11 @@ namespace OKHOSTING.UI.Test
 			CSS.Style style = new CSS.Style();
 			style.Parse(
 			@"
+			#grid image
+			{
+				border: 3px solid #AA5500;
+			}
+
             #title 
 			{
 				font-size: 20px; 
@@ -100,11 +105,6 @@ namespace OKHOSTING.UI.Test
 				background-color: #AABBCC;
 				text-align: justify;
             }
-
-			#grid image
-			{
-				border: 3px solid #AA5500;
-			}
 
 			.fontandcolor
 			{

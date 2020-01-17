@@ -195,8 +195,26 @@ namespace OKHOSTING.UI
 		/// Raised after a controller as finished
 		/// </summary>
 		public event EventHandler<Controller> ControllerFinished;
-		
+
 		#endregion
+
+		/// <summary>
+		/// Gets a list of controls and subcontrols in a recursive way, including the control itself
+		/// </summary>
+		public static IEnumerable<Controls.IControl> GetParentAndAllChildren(Controls.IControl control)
+		{
+			if (control == null)
+			{
+				throw new ArgumentNullException(nameof(control));
+			}
+
+			yield return control;
+
+			foreach (var children in GetAllChildren(control))
+			{
+				yield return children;
+			}
+		}
 
 		/// <summary>
 		/// Gets a list of controls and subcontrols in a recursive way

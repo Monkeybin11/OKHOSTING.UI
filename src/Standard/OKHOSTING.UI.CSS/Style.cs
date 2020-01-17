@@ -291,7 +291,7 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		public void Apply(IPage page)
 		{
-			var allControls = App.GetAllChildren(page.Content);
+			var allControls = App.GetParentAndAllChildren(page.Content);
 
 			foreach (var rule in ParsedStyleRules)
 			{
