@@ -523,7 +523,10 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//visibility
-			control.Visible = style.Visibility != "none" && style.Visibility != "hidden";
+			if (!string.IsNullOrWhiteSpace(style.Visibility))
+			{
+				control.Visible = style.Visibility != "none" && style.Visibility != "hidden";
+			}
 		}
 
 		/// <summary>

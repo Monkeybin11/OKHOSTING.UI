@@ -139,6 +139,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
+				return Color.Transparent;
 				//throw new NotImplementedException();
 				//return Platform.Parse(((System.Windows.Media.SolidColorBrush) base.Background).Color);
 			}

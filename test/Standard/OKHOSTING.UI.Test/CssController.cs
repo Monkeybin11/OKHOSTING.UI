@@ -14,6 +14,9 @@ namespace OKHOSTING.UI.Test
 		IImage imgTwo;
 		IImage imgTree;
 
+
+		IListPicker lstp;
+
 		/// <summary>
 		/// Start this instance.
 		/// <para xml:lang="es">
@@ -63,6 +66,12 @@ namespace OKHOSTING.UI.Test
 			lblText2.CssClass = "fontandcolor marginpadding";
 			grid.SetContent(3, 0, lblText2);
 
+			lstp = Core.BaitAndSwitch.Create<IListPicker>();
+			lstp.Items = new string[] { "Arial", "Verdana", "Times new roman", "Helvetica" };
+			//lstp.BackgroundColor = ConsoleColor.Red;
+			lstp.Name = "LPTest";
+			grid.SetContent(4, 0, lstp);
+
 			IButton btnClose = Core.BaitAndSwitch.Create<IButton>();
             btnClose.Text = "Close";
             btnClose.Name = "btnClose";
@@ -79,6 +88,13 @@ namespace OKHOSTING.UI.Test
 			{
 				border: 3px solid #AA5500;
 			}
+
+ListPicker {
+color: white;
+background: green;
+height: 20px;
+width: 20px;
+}
 
             #title 
 			{

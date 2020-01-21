@@ -8,13 +8,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Grid : System.Windows.Forms.TableLayoutPanel, IGrid
 	{
+		public Grid()
+		{
+			AutoSize = true;
+			AutoScroll = true;
+		}
+
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
 			Platform.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 
-			//AutoScroll = true;
-			AutoSize = true;
 			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 			//| System.Windows.Forms.AnchorStyles.Left)
 			//| System.Windows.Forms.AnchorStyles.Right)));

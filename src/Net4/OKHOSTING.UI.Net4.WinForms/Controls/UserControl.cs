@@ -6,6 +6,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class UserControl : System.Windows.Forms.UserControl, IUserControl
 	{
+		public UserControl()
+		{
+			AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			AutoSize = true;
+			AutoScroll = true;
+		}
+
 		#region IControl
 
 		double? IControl.Width
