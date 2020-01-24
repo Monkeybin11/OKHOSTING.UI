@@ -156,10 +156,16 @@ namespace OKHOSTING.UI.Test
 			grid.SetContent(20, 0, cssController);
 
 			//even or odd test
-			ILabelButton EvenOrOddController = Core.BaitAndSwitch.Create<ILabelButton>();
-			EvenOrOddController.Text = "Even or Odd";
-			EvenOrOddController.Click += (object sender, EventArgs e) => new EvenOrOddTest() { Page = Page }.Start();
-			grid.SetContent(21, 0, EvenOrOddController);
+			//ILabelButton EvenOrOddController = Core.BaitAndSwitch.Create<ILabelButton>();
+			//EvenOrOddController.Text = "Even or Odd";
+			//EvenOrOddController.Click += (object sender, EventArgs e) => new EvenOrOddTest() { Page = Page }.Start();
+			//grid.SetContent(21, 0, EvenOrOddController);
+
+			//Test Grid Make Responsive
+			ILabelButton GridMakeResponsive = Core.BaitAndSwitch.Create<ILabelButton>();
+			GridMakeResponsive.Text = "Grid Make Responsive";
+			GridMakeResponsive.Click += (object sender, EventArgs e) => new GridMakeResponsive() { Page = Page }.Start();
+			grid.SetContent(22, 0, GridMakeResponsive);
 
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";

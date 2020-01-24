@@ -71,10 +71,35 @@
 
 					if (content != null)
 					{
-						yield return content;
+						yield return content; 
 					}
 				}
 			}
+		}
+
+		/// <summary>
+		/// Automatically adjusts the columns and rows of the grid to fit a specific width
+		/// </summary>
+		/// <param name="grid"></param>
+		/// <param name="containerWidth"></param>
+		public static void MakeResponsive(this IGrid grid, int containerWidth)
+		{
+			grid.Width = containerWidth;
+			int rows = grid.RowCount;
+			int columns = grid.ColumnCount;
+			
+			for (int row=0; row<=rows; row++)
+			{
+				for(int column=0; column<=columns; column++)
+				{
+					if (grid.GetContent(row, column) != null)
+					{
+						grid.SetContent(grid.RowCount -1, 0, grid.GetContent(row, column));
+						grid.RowCount++;
+					}
+				}
+			}
+
 		}
 	}
 }

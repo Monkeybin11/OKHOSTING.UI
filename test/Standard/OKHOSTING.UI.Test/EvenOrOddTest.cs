@@ -59,8 +59,8 @@ namespace OKHOSTING.UI.Test
             grid.SetContent(2, 0, lblEven);
 
             chbxEven = Core.BaitAndSwitch.Create<ICheckBox>();
-            
 
+            Page.Content = grid;
         }
     }
 }
