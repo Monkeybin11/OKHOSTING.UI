@@ -87,16 +87,57 @@
 			grid.Width = containerWidth;
 			int rows = grid.RowCount;
 			int columns = grid.ColumnCount;
-			
-			for (int row=0; row<rows; row++)
+
+			//if (containerWidth > )
+			//{
+				for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < columns; column++)
+                    {
+						if (grid.GetContent(row, column) != null)
+                        {
+                            grid.SetContent(grid.RowCount - 1, 0, grid.GetContent(row, column));
+                            grid.RowCount++;
+                        }
+                    }
+                }
+			//}
+		}
+
+		/// <summary>
+		/// Change column content especific to other row especific
+		/// </summary>
+		/// <param name="grid"></param>
+		/// <param name="ColumnSender"></param>
+		/// <param name="ColumnReceiver"></param>
+		public static void ChangeColumn(this IGrid grid, int ColumnSender, int ColumnReceiver)
+		{
+			int rows = grid.RowCount;
+
+			for (int row = 0; row < rows; row++)
 			{
-				for(int column=0; column<columns; column++)
+				if (grid.GetContent(row, ColumnSender) != null)
 				{
-					if (grid.GetContent(row, column) != null)
-					{
-						grid.SetContent(grid.RowCount -1, 0, grid.GetContent(row, column));
-						grid.RowCount++;
-					}
+					grid.SetContent(row, ColumnReceiver, grid.GetContent(row, ColumnSender));
+				}
+			}
+		}
+
+		/// <summary>
+		/// Change row content especific to other especific row
+		/// </summary>
+		/// <param name="grid"></param>
+		/// <param name="RowSender"></param>
+		/// <param name="RowReceiver"></param>
+		public static void ChangeRow(this IGrid grid, int RowSender, int RowReceiver)
+		{
+			int columns = grid.ColumnCount;
+
+			for (int column = 0; column < columns; column++)
+			{
+				if(grid.GetContent(RowSender, column) != null)
+				{
+					grid.SetContent(RowReceiver, column, grid.GetContent(RowSender, column));
 				}
 			}
 		}
