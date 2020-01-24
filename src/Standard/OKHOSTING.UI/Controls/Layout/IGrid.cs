@@ -88,9 +88,9 @@
 			int rows = grid.RowCount;
 			int columns = grid.ColumnCount;
 			
-			for (int row=0; row<=rows; row++)
+			for (int row=0; row<rows; row++)
 			{
-				for(int column=0; column<=columns; column++)
+				for(int column=0; column<columns; column++)
 				{
 					if (grid.GetContent(row, column) != null)
 					{
@@ -99,7 +99,6 @@
 					}
 				}
 			}
-
 		}
 	}
 }
