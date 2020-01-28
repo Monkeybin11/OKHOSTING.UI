@@ -88,37 +88,37 @@
 			int rows = grid.RowCount;
 			int columns = grid.ColumnCount;
 
-			//if (containerWidth > )
-			//{
 				for (int row = 0; row < rows; row++)
                 {
                     for (int column = 0; column < columns; column++)
                     {
-						if (grid.GetContent(row, column) != null)
+					//posible solucion para decidir bajar contenido
+					//double CW = containerWidth - grid.GetWidth(column);
+					//if (grid.GetWidth(column) > CW) { }
+					if (grid.GetContent(row, column) != null)
                         {
-                            grid.SetContent(grid.RowCount - 1, 0, grid.GetContent(row, column));
+						grid.SetContent(grid.RowCount - 1, 0, grid.GetContent(row, column));
                             grid.RowCount++;
                         }
                     }
                 }
-			//}
 		}
 
 		/// <summary>
-		/// Change column content especific to other row especific
+		/// Change column content especific to other especific column
 		/// </summary>
 		/// <param name="grid"></param>
-		/// <param name="ColumnSender"></param>
-		/// <param name="ColumnReceiver"></param>
-		public static void ChangeColumn(this IGrid grid, int ColumnSender, int ColumnReceiver)
+		/// <param name="columnSender"></param>
+		/// <param name="columnReceiver"></param>
+		public static void ChangeColumn(this IGrid grid, int columnSender, int columnReceiver)
 		{
 			int rows = grid.RowCount;
 
 			for (int row = 0; row < rows; row++)
 			{
-				if (grid.GetContent(row, ColumnSender) != null)
+				if (grid.GetContent(row, columnSender) != null)
 				{
-					grid.SetContent(row, ColumnReceiver, grid.GetContent(row, ColumnSender));
+						grid.SetContent(row, columnReceiver, grid.GetContent(row, columnSender));
 				}
 			}
 		}
@@ -127,19 +127,55 @@
 		/// Change row content especific to other especific row
 		/// </summary>
 		/// <param name="grid"></param>
-		/// <param name="RowSender"></param>
-		/// <param name="RowReceiver"></param>
-		public static void ChangeRow(this IGrid grid, int RowSender, int RowReceiver)
+		/// <param name="rowSender"></param>
+		/// <param name="rowReceiver"></param>
+		public static void ChangeRow(this IGrid grid, int rowSender, int rowReceiver)
 		{
 			int columns = grid.ColumnCount;
 
 			for (int column = 0; column < columns; column++)
 			{
-				if(grid.GetContent(RowSender, column) != null)
+				if(grid.GetContent(rowSender, column) != null)
 				{
-					grid.SetContent(RowReceiver, column, grid.GetContent(RowSender, column));
+					grid.SetContent(rowReceiver, column, grid.GetContent(rowSender, column));
 				}
 			}
+		}
+
+		/// <summary>
+		/// Change column content especific to other especific column but verify if the column receiver contain it
+		/// </summary>
+		/// <param name="grid"></param>
+		/// <param name="columnSender"></param>
+		/// <param name="columnReceiver"></param>
+		public static void InsertColumn(this IGrid grid, int columnSender, int columnReceiver)
+		{
+            int columns = grid.ColumnCount;
+            grid.ColumnCount++;
+
+            for (int column = columns; column > columnReceiver; column--)
+            {
+                ChangeColumn(grid, column - 1, column);
+            }
+            ChangeColumn(grid, columnSender, columnReceiver);
+        }
+
+		/// <summary>
+		/// Change row content especific to other especific row but verify if the row receiver contain it
+		/// </summary>
+		/// <param name="grid"></param>
+		/// <param name="rowSender"></param>
+		/// <param name="rowReceiver"></param>
+		public static void InsertRow(this IGrid grid, int rowSender, int rowReceiver)
+		{
+			int rows = grid.RowCount;
+			grid.RowCount++;
+
+			for (int row = rows; row > rowReceiver; row--)
+			{
+				ChangeRow(grid, row - 1, row);
+			}
+			ChangeRow(grid, rowSender, rowReceiver);
 		}
 	}
 }
