@@ -39,13 +39,16 @@ namespace OKHOSTING.UI.Controls.Layout
 
        public IGrid GetGrid(double pageWidth)
         {
-            foreach (var grid in Layouts.Keys)
+            int ky = 0;
+            foreach (var key in Layouts.Keys)
             {
-                if (pageWidth == grid)
+                if (key >= pageWidth)
                 {
-                    
+                    ky = key;
                 }
             }
+
+            return Layouts[ky];
         }
     }
 }
