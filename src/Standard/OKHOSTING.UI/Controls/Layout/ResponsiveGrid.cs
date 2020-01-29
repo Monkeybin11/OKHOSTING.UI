@@ -41,9 +41,9 @@ namespace OKHOSTING.UI.Controls.Layout
         {
             foreach (var grid in Layouts.Keys)
             {
-                if (pageWidth )
+                if (pageWidth == grid)
                 {
-
+                    
                 }
             }
         }
