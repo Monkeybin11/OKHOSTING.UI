@@ -42,7 +42,7 @@ namespace OKHOSTING.UI.Controls.Layout
             int ky = 0;
             foreach (var key in Layouts.Keys)
             {
-                if (key >= pageWidth)
+                if (key <= pageWidth && key >= ky)
                 {
                     ky = key;
                 }
