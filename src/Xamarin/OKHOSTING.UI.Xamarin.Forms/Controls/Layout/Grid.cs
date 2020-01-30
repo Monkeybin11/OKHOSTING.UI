@@ -127,8 +127,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// <param name="content">Content.</param>
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
-			global::Xamarin.Forms.Grid.SetRow((global::Xamarin.Forms.View) content, row);
-			global::Xamarin.Forms.Grid.SetColumn((global::Xamarin.Forms.View) content, column);
+			if (row > RowDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(row));
+			}
+
+			if (column > ColumnDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(column));
+			}
+
+			SetRow((global::Xamarin.Forms.View) content, row);
+			SetColumn((global::Xamarin.Forms.View) content, column);
 
 			//remove previous content, if any
 			var currentContent = ((IGrid) this).GetContent(row, column);

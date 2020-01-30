@@ -1,5 +1,5 @@
-﻿using AngleSharp.Dom.Css;
-using AngleSharp.Parser.Css;
+﻿using AngleSharp.Css.Dom;
+using AngleSharp.Css.Parser;
 using OKHOSTING.Core;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
@@ -27,7 +27,7 @@ namespace OKHOSTING.UI.CSS
 		/// Un cache de estilos analizados para una mejor rendimiento.
 		/// </para>
 		/// </summary>
-		protected readonly List<ICssStyleRule> ParsedStyleRules = new List<ICssStyleRule>();
+		protected readonly List<ICssRule> ParsedStyleRules = new List<ICssRule>();
 
 		protected string[] SplitBySpace(string singleSelectorText)
 		{
@@ -274,10 +274,10 @@ namespace OKHOSTING.UI.CSS
 		public void Parse(string styleSheet)
 		{
 			CssParser parser = new CssParser();
-			ICssStyleSheet cssStylesSheet = parser.ParseStylesheet(styleSheet);
-
+			ICssStyleSheet cssStylesSheet = parser.ParseStyleSheet(styleSheet);
+			
 			//get only the rules that are actually styles
-			foreach (ICssStyleRule rule in cssStylesSheet.Rules.Where(rule => rule.Type == CssRuleType.Style))
+			foreach (var rule in cssStylesSheet.Rules)
 			{
 				ParsedStyleRules.Add(rule);
 			}
@@ -293,19 +293,57 @@ namespace OKHOSTING.UI.CSS
 		{
 			var allControls = App.GetParentAndAllChildren(page.Content);
 
-			foreach (var rule in ParsedStyleRules)
+			foreach (ICssRule rule in ParsedStyleRules)
 			{
-				var selectedControls = SelectBy(allControls, rule.SelectorText);
+				if (rule is ICssStyleRule)
+				{
+					Apply((ICssStyleRule) rule);
+				}
+				else if (rule is ICssMediaRule)
+				{
+					var mediaRule = (ICssMediaRule) rule;
+					bool mediaApplies = false;
+
+					foreach (var media in mediaRule.Media)
+					{
+						if (media.Constraints.Contains("max-width"))
+						{
+							var maxWidth = media.Constraints.Trim('(', ')').Replace("max-width", null).Replace(":", null).Trim();
+
+							if (Length.TryParse(maxWidth, out Length maxWidthLength))
+							{
+								if (maxWidthLength.ToPixel() > page.Width)
+								{
+									mediaApplies = true;
+									break;
+								}
+							}
+						}
+					}
+
+					if (mediaApplies)
+					{
+						foreach (ICssStyleRule rule2 in mediaRule.Rules.Where(r => r.Type == CssRuleType.Style))
+						{
+							Apply(rule2);
+						}
+					}
+				}
+			}
+
+			void Apply(ICssStyleRule style)
+			{
+				var selectedControls = SelectBy(allControls, style.SelectorText);
 
 				foreach (var control in selectedControls)
 				{
 					if (control is ITextControl)
 					{
-						Apply(rule.Style, (ITextControl) control);
+						Style.Apply(style.Style, (ITextControl) control);
 					}
 					else
 					{
-						Apply(rule.Style, control);
+						Style.Apply(style.Style, control);
 					}
 				}
 			}
@@ -323,24 +361,24 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		public static void Apply(ICssStyleDeclaration style, IControl control)
 		{
-			AngleSharp.Css.Values.Length lenght;
+			Length lenght;
 			bool parsed;
 
 			//background and border colors
-			if (!string.IsNullOrWhiteSpace(style.BackgroundColor))
+			if (!string.IsNullOrWhiteSpace(style.GetBackgroundColor()))
 			{
-				control.BackgroundColor = ParseColor(style.BackgroundColor);
+				control.BackgroundColor = ParseColor(style.GetBackgroundColor());
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.BorderColor))
+			if (!string.IsNullOrWhiteSpace(style.GetBorderColor()))
 			{
-				control.BorderColor = ParseColor(style.BorderColor);
+				control.BorderColor = ParseColor(style.GetBorderColor());
 			}
 			
 			//horizontal alignment http://www.w3schools.com/css/css_align.asp
 
 			//horizontal alignment using float
-			switch (style.Float)
+			switch (style.GetFloat())
 			{
 				case "left":
 					control.HorizontalAlignment = HorizontalAlignment.Left;
@@ -352,35 +390,35 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//horizontal alignment using position
-			if (!string.IsNullOrWhiteSpace(style.Left))
+			if (!string.IsNullOrWhiteSpace(style.GetLeft()))
 			{
-				parsed = AngleSharp.Css.Values.Length.TryParse(style.Left, out lenght);
+				parsed = Length.TryParse(style.GetLeft(), out lenght);
 
-				if (parsed && style.Position == "absolute" && lenght.ToPixel() == 0)
+				if (parsed && style.GetPosition() == "absolute" && lenght.ToPixel() == 0)
 				{
 					control.HorizontalAlignment = HorizontalAlignment.Left;
 				}
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.Right))
+			if (!string.IsNullOrWhiteSpace(style.GetRight()))
 			{
-				parsed = AngleSharp.Css.Values.Length.TryParse(style.Right, out lenght);
-				if (parsed && style.Position == "absolute" && lenght.ToPixel() == 0)
+				parsed = Length.TryParse(style.GetRight(), out lenght);
+				if (parsed && style.GetPosition() == "absolute" && lenght.ToPixel() == 0)
 				{
 					control.HorizontalAlignment = HorizontalAlignment.Right;
 				}
 			}
 
 			//horizontal alignment using margin
-			if (style.Margin == "auto" || (style.MarginLeft == "auto" && style.MarginRight == "auto"))
+			if (style.GetMargin() == "auto" || (style.GetMarginLeft() == "auto" && style.GetMarginRight() == "auto"))
 			{
 				control.HorizontalAlignment = HorizontalAlignment.Center;
 			}
 
 			//horizontal alignment using text align, online for inline elements
-			if (style.Display == "inline")
+			if (style.GetDisplay() == "inline")
 			{
-				switch (style.TextAlign)
+				switch (style.GetTextAlign())
 				{
 					case "left":
 						control.HorizontalAlignment = HorizontalAlignment.Left;
@@ -401,7 +439,7 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//vertical alignment
-			switch (style.VerticalAlign)
+			switch (style.GetVerticalAlign())
 			{
 				case "top":
 					control.VerticalAlignment = VerticalAlignment.Top;
@@ -417,40 +455,40 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//height and width
-			if (!string.IsNullOrWhiteSpace(style.Height))
+			if (!string.IsNullOrWhiteSpace(style.GetHeight()))
 			{
-				if (AngleSharp.Css.Values.Length.TryParse(style.Height, out lenght)) control.Height = lenght.ToPixel();
+				if (Length.TryParse(style.GetHeight(), out lenght)) control.Height = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.Width))
+			if (!string.IsNullOrWhiteSpace(style.GetWidth()))
 			{
-				if (AngleSharp.Css.Values.Length.TryParse(style.Width, out lenght)) control.Width = lenght.ToPixel();
+				if (Length.TryParse(style.GetWidth(), out lenght)) control.Width = lenght.ToPixel();
 			}
 
 			//border
 			Thickness borderWidth = new Thickness();
 
-			if (!string.IsNullOrWhiteSpace(style.BorderTopWidth))
+			if (!string.IsNullOrWhiteSpace(style.GetBorderTopWidth()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.BorderTopWidth, out lenght);
+				Length.TryParse(style.GetBorderTopWidth(), out lenght);
 				borderWidth.Top = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.BorderRightWidth))
+			if (!string.IsNullOrWhiteSpace(style.GetBorderRightWidth()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.BorderRightWidth, out lenght);
+				Length.TryParse(style.GetBorderRightWidth(), out lenght);
 				borderWidth.Right = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.BorderBottomWidth))
+			if (!string.IsNullOrWhiteSpace(style.GetBorderBottomWidth()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.BorderBottomWidth, out lenght);
+				Length.TryParse(style.GetBorderBottomWidth(), out lenght);
 				borderWidth.Bottom = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.BorderLeftWidth))
+			if (!string.IsNullOrWhiteSpace(style.GetBorderLeftWidth()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.BorderLeftWidth, out lenght);
+				Length.TryParse(style.GetBorderLeftWidth(), out lenght);
 				borderWidth.Left = lenght.ToPixel();
 			}
 
@@ -461,27 +499,27 @@ namespace OKHOSTING.UI.CSS
 
 			//margin
 			Thickness margin = new Thickness();
-			if (!string.IsNullOrWhiteSpace(style.MarginTop))
+			if (!string.IsNullOrWhiteSpace(style.GetMarginTop()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.MarginTop, out lenght);
+				Length.TryParse(style.GetMarginTop(), out lenght);
 				margin.Top = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.MarginRight))
+			if (!string.IsNullOrWhiteSpace(style.GetMarginRight()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.MarginRight, out lenght);
+				Length.TryParse(style.GetMarginRight(), out lenght);
 				margin.Right = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.MarginBottom))
+			if (!string.IsNullOrWhiteSpace(style.GetMarginBottom()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.MarginBottom, out lenght);
+				Length.TryParse(style.GetMarginBottom(), out lenght);
 				margin.Bottom = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.MarginLeft))
+			if (!string.IsNullOrWhiteSpace(style.GetMarginLeft()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.MarginLeft, out lenght);
+				Length.TryParse(style.GetMarginLeft(), out lenght);
 				margin.Left = lenght.ToPixel();
 			}
 
@@ -493,27 +531,27 @@ namespace OKHOSTING.UI.CSS
 			//padding
 			Thickness padding = new Thickness();
 
-			if (!string.IsNullOrWhiteSpace(style.PaddingTop))
+			if (!string.IsNullOrWhiteSpace(style.GetPaddingTop()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.PaddingTop, out lenght);
+				Length.TryParse(style.GetPaddingTop(), out lenght);
 				padding.Top = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.PaddingRight))
+			if (!string.IsNullOrWhiteSpace(style.GetPaddingRight()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.PaddingRight, out lenght);
+				Length.TryParse(style.GetPaddingRight(), out lenght);
 				padding.Right = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.PaddingBottom))
+			if (!string.IsNullOrWhiteSpace(style.GetPaddingBottom()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.PaddingBottom, out lenght);
+				Length.TryParse(style.GetPaddingBottom(), out lenght);
 				padding.Bottom = lenght.ToPixel();
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.PaddingLeft))
+			if (!string.IsNullOrWhiteSpace(style.GetPaddingLeft()))
 			{
-				AngleSharp.Css.Values.Length.TryParse(style.PaddingLeft, out lenght);
+				Length.TryParse(style.GetPaddingLeft(), out lenght);
 				padding.Left = lenght.ToPixel();
 			}
 
@@ -523,9 +561,9 @@ namespace OKHOSTING.UI.CSS
 			}
 
 			//visibility
-			if (!string.IsNullOrWhiteSpace(style.Visibility))
+			if (!string.IsNullOrWhiteSpace(style.GetVisibility()))
 			{
-				control.Visible = style.Visibility != "none" && style.Visibility != "hidden";
+				control.Visible = style.GetVisibility() != "none" && style.GetVisibility() != "hidden";
 			}
 		}
 
@@ -537,35 +575,32 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		public static void Apply(ICssStyleDeclaration style, ITextControl control)
 		{
-			//first parse as IControl
-			Apply(style, (IControl) control);
-
 			//now for ITextControl properties
-			control.Bold = style.FontWeight == "bold";
-			control.Italic = style.FontStyle == "italic";
-			control.Underline = style.TextDecoration == "underline";
+			control.Bold = style.GetFontWeight() == "bold";
+			control.Italic = style.GetFontStyle() == "italic";
+			control.Underline = style.GetTextDecoration() == "underline";
 
-			if (!string.IsNullOrWhiteSpace(style.Color))
+			if (!string.IsNullOrWhiteSpace(style.GetColor()))
 			{
-				control.FontColor = ParseColor(style.Color);
+				control.FontColor = ParseColor(style.GetColor());
 			}
 
-			if (!string.IsNullOrWhiteSpace(style.FontFamily))
+			if (!string.IsNullOrWhiteSpace(style.GetFontFamily()))
 			{
-				control.FontFamily = style.FontFamily;
+				control.FontFamily = style.GetFontFamily();
 			}
 
-			AngleSharp.Css.Values.Length lenght;
+			Length lenght;
 
-			if (!string.IsNullOrWhiteSpace(style.FontSize))
+			if (!string.IsNullOrWhiteSpace(style.GetFontSize()))
 			{
-				if (AngleSharp.Css.Values.Length.TryParse(style.FontSize, out lenght))
+				if (Length.TryParse(style.GetFontSize(), out lenght))
 				{
 					control.FontSize = lenght.ToPixel();
 				}
 			}
 
-			switch (style.TextAlign)
+			switch (style.GetTextAlign())
 			{
 				case "left":
 					control.TextHorizontalAlignment = HorizontalAlignment.Left;
@@ -590,14 +625,15 @@ namespace OKHOSTING.UI.CSS
 
 		public static Color ParseColor(string rgbColor)
 		{
-			rgbColor = rgbColor.Replace("rgb(", string.Empty);
-			rgbColor = rgbColor.Replace(")", string.Empty);
+			rgbColor = rgbColor.Replace("rgba(", null);
+			rgbColor = rgbColor.Replace(")", null);
 			var colors = rgbColor.Split(',');
-			int r = int.Parse(colors[0]);
-			int g = int.Parse(colors[1]);
-			int b = int.Parse(colors[2]);
+			int a = int.Parse(colors[0]);
+			int r = int.Parse(colors[1]);
+			int g = int.Parse(colors[2]);
+			int b = int.Parse(colors[3]);
 
-			return Color.FromArgb(r, g, b);
+			return Color.FromArgb(a, r, g, b);
 		}
 
 		static Style()

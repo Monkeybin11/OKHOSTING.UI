@@ -541,7 +541,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		void IGrid.SetRowSpan(int rowSpan, IControl content)
 		{
-			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
+			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell) ((System.Web.UI.WebControls.WebControl) content).Parent;
 			cell.RowSpan = rowSpan;
 		}
 

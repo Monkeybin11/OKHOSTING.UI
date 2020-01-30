@@ -84,17 +84,76 @@ namespace OKHOSTING.UI.Test
 			CSS.Style style = new CSS.Style();
 			style.Parse(
 			@"
-			#grid image
+
+			body 
+			{ 
+				display: grid;
+				grid-template-areas: 
+				""header header header""
+				""nav article ads""
+				""footer footer footer"";
+				grid-template-rows: 80px 1fr 70px;  
+				grid-template-columns: 20% 1fr 15%;
+				grid-row-gap: 10px;
+				grid-column-gap: 10px;
+				height: 100vh;
+				margin: 0;
+			}  
+			
+			/* Stack the layout on small devices/viewports. */
+			@media all and (max-width: 675px) 
 			{
-				border: 3px solid #AA5500;
+				body 
+				{ 
+					grid-template-areas: 
+					""header""
+					""article""
+					""ads""
+					""nav""
+					""footer"";
+					grid-template-rows: 80px 1fr 70px 1fr 70px;  
+					grid-template-columns: 1fr;
+				}
 			}
 
-ListPicker {
-color: white;
-background: green;
-height: 20px;
-width: 20px;
-}
+			header, footer, article, nav, div 
+			{
+				padding: 1.2em;
+				background: gold;
+			}
+			
+			#pageHeader 
+			{
+				grid-area: header;
+			}
+
+			#pageFooter 
+			{
+				grid-area: footer;
+			}
+
+			#mainArticle 
+			{ 
+				grid-area: article;      
+			}
+			
+			#mainNav 
+			{ 
+				grid-area: nav; 
+			}
+
+			#siteAds 
+			{ 
+				grid-area: ads; 
+			} 
+
+			ListPicker 
+			{
+				color: white;
+				background: green;
+				height: 20px;
+				width: 20px;
+			}
 
             #title 
 			{

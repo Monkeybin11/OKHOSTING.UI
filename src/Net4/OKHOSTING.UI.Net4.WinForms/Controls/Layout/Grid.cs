@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using OKHOSTING.UI.Controls;
@@ -31,6 +32,16 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
+			if (row > RowCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(row));
+			}
+
+			if (column > ColumnCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(column));
+			}
+
 			var currentControl = ((IGrid) this).GetContent(row, column);
 
 			if (currentControl != null)

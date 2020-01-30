@@ -150,6 +150,16 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
+			if (row > RowDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(row));
+			}
+
+			if (column > ColumnDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(column));
+			}
+
 			var currentControl = ((IGrid) this).GetContent(row, column);
 
 			if (currentControl != null)
@@ -160,7 +170,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			SetRow((System.Windows.UIElement) content, row);
 			SetColumn((System.Windows.UIElement) content, column);
 			Children.Add((System.Windows.UIElement) content);
-		
 		}
 
 		/// <summary>
