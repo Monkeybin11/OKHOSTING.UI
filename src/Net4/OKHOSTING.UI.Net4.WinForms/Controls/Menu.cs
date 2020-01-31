@@ -108,6 +108,17 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		/// </summary>
 		string IControl.CssClass { get; set; }
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl)base.Parent;
+			}
+		}
+
 		#endregion
 
 		#region ITextControl

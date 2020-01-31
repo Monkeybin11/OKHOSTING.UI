@@ -231,6 +231,17 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			throw new NotImplementedException();
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl)base.Parent;
+			}
+		}
+
 		#endregion
 
 		Uri _Source;

@@ -13,8 +13,6 @@ namespace OKHOSTING.UI.Test
 		IImage imgOne;
 		IImage imgTwo;
 		IImage imgTree;
-
-
 		IListPicker lstp;
 
 		/// <summary>
@@ -85,14 +83,17 @@ namespace OKHOSTING.UI.Test
 			style.Parse(
 			@"
 
-			body 
+			#title
 			{ 
 				display: grid;
 				grid-template-areas: 
-				""header header header""
+				""title title .""
+				""title title .""
 				""nav article ads""
+				""nav article ads""
+				""footer footer footer""
 				""footer footer footer"";
-				grid-template-rows: 80px 1fr 70px;  
+				grid-template-rows: 80px 1fr 2fr;  
 				grid-template-columns: 20% 1fr 15%;
 				grid-row-gap: 10px;
 				grid-column-gap: 10px;
@@ -103,7 +104,19 @@ namespace OKHOSTING.UI.Test
 			/* Stack the layout on small devices/viewports. */
 			@media all and (max-width: 675px) 
 			{
-				body 
+				#pageHeader 
+				{ 
+					grid-template-areas: 
+					""header""
+					""article""
+					""ads""
+					""nav""
+					""footer"";
+					grid-template-rows: 80px 1fr 70px 1fr 70px;  
+					grid-template-columns: 1fr;
+				}
+
+				div2
 				{ 
 					grid-template-areas: 
 					""header""
@@ -122,31 +135,6 @@ namespace OKHOSTING.UI.Test
 				background: gold;
 			}
 			
-			#pageHeader 
-			{
-				grid-area: header;
-			}
-
-			#pageFooter 
-			{
-				grid-area: footer;
-			}
-
-			#mainArticle 
-			{ 
-				grid-area: article;      
-			}
-			
-			#mainNav 
-			{ 
-				grid-area: nav; 
-			}
-
-			#siteAds 
-			{ 
-				grid-area: ads; 
-			} 
-
 			ListPicker 
 			{
 				color: white;

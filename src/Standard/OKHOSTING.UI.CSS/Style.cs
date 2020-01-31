@@ -364,6 +364,41 @@ namespace OKHOSTING.UI.CSS
 			Length lenght;
 			bool parsed;
 
+			//this is a CSS grid
+			if (style.GetDisplay() == "grid")
+			{
+				var gridTemplateColumns = style.GetProperty("grid-template-columns");
+				var grid = (IGrid) control;
+
+				if (gridTemplateColumns != null)
+				{
+					var rows = gridTemplateColumns.Value.Split(' ');
+
+					for (int i = 0; i < rows.Length; i++)
+					{
+						double lengthPixels = 0;
+
+						if (Length.TryParse(rows[i], out Length length))
+						{
+							if (length.Type == Length.Unit.Percent)
+							{
+								lengthPixels = length.Value / 100 * control.Parent.Width.Value;
+							}
+							else if (length.Type == Length.Unit.Px)
+							{
+								lengthPixels = length.Value;
+							}
+							else if (length.IsAbsolute)
+							{ 
+								lengthPixels = length.ToPixel();
+							}
+
+							grid.SetWidth(i, lengthPixels);
+						}
+					}
+				}
+			}
+
 			//background and border colors
 			if (!string.IsNullOrWhiteSpace(style.GetBackgroundColor()))
 			{
@@ -575,6 +610,8 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		public static void Apply(ICssStyleDeclaration style, ITextControl control)
 		{
+			Apply(style, (IControl) control);
+
 			//now for ITextControl properties
 			control.Bold = style.GetFontWeight() == "bold";
 			control.Italic = style.GetFontStyle() == "italic";

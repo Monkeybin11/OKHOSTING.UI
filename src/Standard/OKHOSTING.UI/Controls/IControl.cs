@@ -124,5 +124,10 @@ namespace OKHOSTING.UI.Controls
 		/// Exactly the same concept as in CSS. 
 		/// </summary>
 		string CssClass { get; set; }
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl Parent { get; }
 	}
 }

@@ -243,6 +243,17 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		string IControl.CssClass { get; set; }
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl)base.Parent;
+			}
+		}
+
 		#endregion
 
 		#region ITextControl

@@ -211,6 +211,17 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		}
 
 		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl)base.Parent;
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets wether the control is visible or not
 		/// <para xml:lang="es">
 		/// Obtiene o establece si el control es visible o no.
