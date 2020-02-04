@@ -412,6 +412,7 @@ namespace OKHOSTING.UI.CSS
 				if (gridTemplateRows != null)
 				{
 					var rows = gridTemplateRows.Value.Split(' ');
+					double rowsWidth = 0;
 
 					for (int i = 0; i < rows.Length; i++)
 					{
@@ -429,8 +430,8 @@ namespace OKHOSTING.UI.CSS
 							}
 							else if (length.Type == Length.Unit.Fr)
 							{
-								lengthPixels = (control.Parent.Width.Value - columnsWidth) / length.Value;
-								columnsWidth += lengthPixels;
+								lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
+								rowsWidth += lengthPixels;
 							}
 							else if (length.IsAbsolute)
 							{
