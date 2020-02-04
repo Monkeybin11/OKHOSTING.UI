@@ -373,6 +373,7 @@ namespace OKHOSTING.UI.CSS
 				if (gridTemplateColumns != null)
 				{
 					var columns = gridTemplateColumns.Value.Split(' ');
+					double columnsWidth = 0;
 
 					for (int i = 0; i < columns.Length; i++)
 					{
@@ -383,14 +384,22 @@ namespace OKHOSTING.UI.CSS
 							if (length.Type == Length.Unit.Percent)
 							{
 								lengthPixels = length.Value / 100 * control.Parent.Width.Value;
+								columnsWidth += lengthPixels;
 							}
 							else if (length.Type == Length.Unit.Px)
 							{
 								lengthPixels = length.Value;
+								columnsWidth += lengthPixels;
+							}
+							else if (length.Type == Length.Unit.Fr)
+							{
+								lengthPixels = (control.Parent.Width.Value - columnsWidth) / length.Value;
+								columnsWidth += lengthPixels;
 							}
 							else if (length.IsAbsolute)
 							{
 								lengthPixels = length.ToPixel();
+								columnsWidth += lengthPixels;
 							}
 
 							grid.SetWidth(i, lengthPixels);
@@ -417,6 +426,11 @@ namespace OKHOSTING.UI.CSS
 							else if (length.Type == Length.Unit.Px)
 							{
 								lengthPixels = length.Value;
+							}
+							else if (length.Type == Length.Unit.Fr)
+							{
+								lengthPixels = (control.Parent.Width.Value - columnsWidth) / length.Value;
+								columnsWidth += lengthPixels;
 							}
 							else if (length.IsAbsolute)
 							{
