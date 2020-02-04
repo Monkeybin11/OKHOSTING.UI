@@ -413,6 +413,7 @@ namespace OKHOSTING.UI.CSS
 				{
 					var rows = gridTemplateRows.Value.Split(' ');
 					double rowsWidth = 0;
+					int frQuantility = 0;
 
 					for (int i = 0; i < rows.Length; i++)
 					{
@@ -432,8 +433,7 @@ namespace OKHOSTING.UI.CSS
 							}
 							else if (length.Type == Length.Unit.Fr)
 							{
-								lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
-								rowsWidth += lengthPixels;
+								frQuantility++;
 							}
 							else if (length.IsAbsolute)
 							{
@@ -444,66 +444,85 @@ namespace OKHOSTING.UI.CSS
 							grid.SetHeight(i, lengthPixels);
 						}
 					}
+
+					//Just for Fr
+					for (int i = 0; i < rows.Length; i++)
+					{
+						double lengthPixels = 0;
+
+						if (Length.TryParse(rows[i], out Length length))
+						{
+							if (length.Type == Length.Unit.Fr)
+							{
+								lengthPixels = ((control.Parent.Width.Value - rowsWidth) / frQuantility) * length.Value;
+							}
+						}
+					}
 				}
 
 				var gridTemplate = style.GetProperty("grid-template");
 
 				if (gridTemplate != null)
 				{
+					//var rowsColumns = gridTemplate.Value.Split('/');
 					var rowsColumns = gridTemplate.Value.Split(' ');
-
+					var separator = "/";
 					for (int i = 0; i < rowsColumns.Length; i++)
 					{
-						if (rowsColumns[i] == "/")
-						{
-							
-						}
-					}
+                        if (Length.TryParse(rowsColumns[i], out Length length))
+                        {
+							string value = length.Value.ToString();
+                            switch (rowsColumns)
+                            {//diferenciar filas de columnas
+                                case value[i] == separator:
+
+                                    break;
+                            }
+                        }
+                    }
+
+					
+
 				}
 
 				var gridRowGap = style.GetProperty("grid-row-gap");
 
-				if (gridRowGap != null)
-				{
-						double lengthPixels = 0;
+                if (gridRowGap != null)
+                {
+                    var rows = gridRowGap.Value.Split(' ');
+                    double lengthPixels = 0;
 
-					for (int i = 0; i < grid.RowCount; i++)
-					{
+                    if (Length.TryParse(rows[0], out Length length))
+                    {
+                        if (length.Type == Length.Unit.Percent)
+                        {
+                            lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+                        }
+                        else if (length.Type == Length.Unit.Px)
+                        {
+                            lengthPixels = length.Value;
 
-						Length length = new Length();
+                        }
+                        //else if (length.Type == Length.Unit.Fr)
+                        //{
+                        //	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
+                        //}
+                        else if (length.IsAbsolute)
+                        {
+                            lengthPixels = length.ToPixel();
+                        }
 
-						//if (Length.TryParse(rows[i], out Length length))
-						//{
-							if (length.Type == Length.Unit.Percent)
-							{
-								lengthPixels = length.Value / 100 * control.Parent.Height.Value;
-							}
-							else if (length.Type == Length.Unit.Px)
-							{
-								lengthPixels = length.Value;
-							
-							}
-							//else if (length.Type == Length.Unit.Fr)
-							//{
-							//	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
-							//}
-							else if (length.IsAbsolute)
-							{
-								lengthPixels = length.ToPixel();
-							}
+                        grid.CellMargin.Bottom = lengthPixels;
+                    }
+                }
 
-						grid.CellMargin.Bottom = lengthPixels; 
-						//}
-					}		
-				}
+                var gridColumnGap = style.GetProperty("grid-column-gap");
 
-				var gridColumGap = style.GetProperty("grid-colum-gap");
-
-				if (gridColumGap != null)
+				if (gridColumnGap != null)
 				{
 					double lengthPixels = 0;
 
-					for (int i = 0; i < grid.RowCount; i++)
+					for (int i = 0; i < grid.ColumnCount; i++)
 					{
 
 						Length length = new Length();
