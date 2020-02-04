@@ -499,7 +499,7 @@ namespace OKHOSTING.UI.CSS
 
 				var gridColumGap = style.GetProperty("grid-colum-gap");
 
-				if (gridRowGap != null)
+				if (gridColumGap != null)
 				{
 					double lengthPixels = 0;
 
