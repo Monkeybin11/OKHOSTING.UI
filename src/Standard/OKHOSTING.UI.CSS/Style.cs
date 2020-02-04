@@ -423,10 +423,12 @@ namespace OKHOSTING.UI.CSS
 							if (length.Type == Length.Unit.Percent)
 							{
 								lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+								rowsWidth += lengthPixels;
 							}
 							else if (length.Type == Length.Unit.Px)
 							{
 								lengthPixels = length.Value;
+								rowsWidth += lengthPixels;
 							}
 							else if (length.Type == Length.Unit.Fr)
 							{
@@ -436,6 +438,7 @@ namespace OKHOSTING.UI.CSS
 							else if (length.IsAbsolute)
 							{
 								lengthPixels = length.ToPixel();
+								rowsWidth += lengthPixels;
 							}
 
 							grid.SetHeight(i, lengthPixels);
@@ -453,8 +456,80 @@ namespace OKHOSTING.UI.CSS
 					{
 						if (rowsColumns[i] == "/")
 						{
-							//Filas
+							
 						}
+					}
+				}
+
+				var gridRowGap = style.GetProperty("grid-row-gap");
+
+				if (gridRowGap != null)
+				{
+						double lengthPixels = 0;
+
+					for (int i = 0; i < grid.RowCount; i++)
+					{
+
+						Length length = new Length();
+
+						//if (Length.TryParse(rows[i], out Length length))
+						//{
+							if (length.Type == Length.Unit.Percent)
+							{
+								lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+							}
+							else if (length.Type == Length.Unit.Px)
+							{
+								lengthPixels = length.Value;
+							
+							}
+							//else if (length.Type == Length.Unit.Fr)
+							//{
+							//	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
+							//}
+							else if (length.IsAbsolute)
+							{
+								lengthPixels = length.ToPixel();
+							}
+
+						grid.CellMargin.Bottom = lengthPixels; 
+						//}
+					}		
+				}
+
+				var gridColumGap = style.GetProperty("grid-colum-gap");
+
+				if (gridRowGap != null)
+				{
+					double lengthPixels = 0;
+
+					for (int i = 0; i < grid.RowCount; i++)
+					{
+
+						Length length = new Length();
+
+						//if (Length.TryParse(rows[i], out Length length))
+						//{
+						if (length.Type == Length.Unit.Percent)
+						{
+							lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+						}
+						else if (length.Type == Length.Unit.Px)
+						{
+							lengthPixels = length.Value;
+
+						}
+						//else if (length.Type == Length.Unit.Fr)
+						//{
+						//	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
+						//}
+						else if (length.IsAbsolute)
+						{
+							lengthPixels = length.ToPixel();
+						}
+
+						grid.CellMargin.Right = lengthPixels;
+						//}
 					}
 				}
 			}
