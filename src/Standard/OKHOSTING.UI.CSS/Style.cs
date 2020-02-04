@@ -368,17 +368,17 @@ namespace OKHOSTING.UI.CSS
 			if (style.GetDisplay() == "grid")
 			{
 				var gridTemplateColumns = style.GetProperty("grid-template-columns");
-				var grid = (IGrid) control;
+				var grid = (IGrid)control;
 
 				if (gridTemplateColumns != null)
 				{
-					var rows = gridTemplateColumns.Value.Split(' ');
+					var columns = gridTemplateColumns.Value.Split(' ');
 
-					for (int i = 0; i < rows.Length; i++)
+					for (int i = 0; i < columns.Length; i++)
 					{
 						double lengthPixels = 0;
 
-						if (Length.TryParse(rows[i], out Length length))
+						if (Length.TryParse(columns[i], out Length length))
 						{
 							if (length.Type == Length.Unit.Percent)
 							{
@@ -389,11 +389,56 @@ namespace OKHOSTING.UI.CSS
 								lengthPixels = length.Value;
 							}
 							else if (length.IsAbsolute)
-							{ 
+							{
 								lengthPixels = length.ToPixel();
 							}
 
 							grid.SetWidth(i, lengthPixels);
+						}
+					}
+				}
+
+				var gridTemplateRows = style.GetProperty("grid-template-rows");
+
+				if (gridTemplateRows != null)
+				{
+					var rows = gridTemplateRows.Value.Split(' ');
+
+					for (int i = 0; i < rows.Length; i++)
+					{
+						double lengthPixels = 0;
+
+						if (Length.TryParse(rows[i], out Length length))
+						{
+							if (length.Type == Length.Unit.Percent)
+							{
+								lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+							}
+							else if (length.Type == Length.Unit.Px)
+							{
+								lengthPixels = length.Value;
+							}
+							else if (length.IsAbsolute)
+							{
+								lengthPixels = length.ToPixel();
+							}
+
+							grid.SetHeight(i, lengthPixels);
+						}
+					}
+				}
+
+				var gridTemplate = style.GetProperty("grid-template");
+
+				if (gridTemplate != null)
+				{
+					var rowsColumns = gridTemplate.Value.Split(' ');
+
+					for (int i = 0; i < rowsColumns.Length; i++)
+					{
+						if (rowsColumns[i] == "/")
+						{
+							//Filas
 						}
 					}
 				}

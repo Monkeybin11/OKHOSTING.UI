@@ -265,6 +265,7 @@ namespace OKHOSTING.UI.CSS
 				case "vmin": return Unit.Vmin;
 				case "vw": return Unit.Vw;
 				case "%": return Unit.Percent;
+				case "fr": return Unit.Fr;
 				default: return Unit.None;
 			}
 		}
@@ -401,7 +402,12 @@ namespace OKHOSTING.UI.CSS
 			/// The value is relative to a fixed (external) value, that is context
 			/// dependent. 1% = 1/100 of the external value.
 			/// </summary>
-			Percent
+			Percent,
+			/// <summary>
+			/// The value is relative to a dynamic (external) value, that is context
+			/// dependent. 1fr = Total of the free space left. 2fr = Half of the free space left
+			/// </summary>
+			Fr,
 		}
 
 		#endregion

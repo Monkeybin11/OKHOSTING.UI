@@ -6,14 +6,7 @@ namespace OKHOSTING.UI.Test
 {
     public class CssController : Controller
     {
-		ILabel lblTitle;
-		ILabel lblText1;
-		ILabel lblText2;
-		ILabelButton lblEnlace;
-		IImage imgOne;
-		IImage imgTwo;
-		IImage imgTree;
-		IListPicker lstp;
+		
 
 		/// <summary>
 		/// Start this instance.
@@ -29,7 +22,16 @@ namespace OKHOSTING.UI.Test
             grid.RowCount = 5;
 			grid.Name = "grid";
 
-            lblTitle = Core.BaitAndSwitch.Create<ILabel>();
+			ILabel lblTitle;
+			ILabel lblText1;
+			ILabel lblText2;
+			ILabelButton lblEnlace;
+			IImage imgOne;
+			IImage imgTwo;
+			IImage imgTree;
+			IListPicker lstp;
+
+			lblTitle = Core.BaitAndSwitch.Create<ILabel>();
             lblTitle.Text = "Lil Octopus";
 			lblTitle.Name = "title";
 			lblTitle.CssClass = "marginpadding";
@@ -83,7 +85,7 @@ namespace OKHOSTING.UI.Test
 			style.Parse(
 			@"
 
-			#title
+			#grid
 			{ 
 				display: grid;
 				grid-template-areas: 
@@ -93,8 +95,9 @@ namespace OKHOSTING.UI.Test
 				""nav article ads""
 				""footer footer footer""
 				""footer footer footer"";
-				grid-template-rows: 80px 1fr 2fr;  
-				grid-template-columns: 20% 1fr 15%;
+				/* grid-template-rows: 80px 1fr 2fr;   */
+				/* grid-template-columns: 20px 100px 15px; */
+				grid-template: 80px 10px 50px 100px / 20px 10px 100px;
 				grid-row-gap: 10px;
 				grid-column-gap: 10px;
 				height: 100vh;
