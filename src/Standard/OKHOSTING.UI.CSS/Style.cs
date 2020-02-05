@@ -487,18 +487,110 @@ namespace OKHOSTING.UI.CSS
 				{
 					var rowsColumns = gridTemplate.Value.Split('/');
 					int count = 0;
+					double rowsWidth = 0;
+					double columnsWidth = 0;
+					int frQuantility = 0;
 
 					foreach (var rowcolumn in rowsColumns)
 					{
+						//For rows
 						if (count == 0)
 						{
-							var row = rowcolumn.Split(' ');
-							
-						}
+							var rows = rowcolumn.Split(' ');
+							for (int i = 0; i < rows.Length; i++)
+							{
+								double lengthPixels = 0;
 
-						if (count == 1)
+								if (Length.TryParse(rows[i], out Length length))
+								{
+									if (length.Type == Length.Unit.Percent)
+									{
+										lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+										rowsWidth += lengthPixels;
+									}
+									else if (length.Type == Length.Unit.Px)
+									{
+										lengthPixels = length.Value;
+										rowsWidth += lengthPixels;
+									}
+									else if (length.Type == Length.Unit.Fr)
+									{
+										frQuantility++;
+									}
+									else if (length.IsAbsolute)
+									{
+										lengthPixels = length.ToPixel();
+										rowsWidth += lengthPixels;
+									}
+
+									grid.SetHeight(i, lengthPixels);
+								}
+							}
+							//Just for Fr
+							for (int i = 0; i < rows.Length; i++)
+							{
+								double lengthPixels = 0;
+
+								if (Length.TryParse(rows[i], out Length length))
+								{
+									if (length.Type == Length.Unit.Fr)
+									{
+										lengthPixels = ((control.Parent.Width.Value - rowsWidth) / frQuantility) * length.Value;
+									}
+									grid.SetHeight(i, lengthPixels);
+								}
+							}
+						}
+						//for columns
+						else if (count == 1)
 						{
-							var column = rowcolumn.Split(' ');
+							var columns = rowcolumn.Split(' ');
+
+							for (int i = 0; i < columns.Length; i++)
+							{
+								double lengthPixels = 0;
+
+								if (Length.TryParse(columns[i], out Length length))
+								{
+									if (length.Type == Length.Unit.Percent)
+									{
+										lengthPixels = length.Value / 100 * control.Parent.Width.Value;
+										columnsWidth += lengthPixels;
+									}
+									else if (length.Type == Length.Unit.Px)
+									{
+										lengthPixels = length.Value;
+										columnsWidth += lengthPixels;
+									}
+									else if (length.Type == Length.Unit.Fr)
+									{
+										frQuantility++;
+									}
+									else if (length.IsAbsolute)
+									{
+										lengthPixels = length.ToPixel();
+										columnsWidth += lengthPixels;
+									}
+
+									grid.SetWidth(i, lengthPixels);
+								}
+							}
+
+							//Just for Fr
+							for (int i = 0; i < columns.Length; i++)
+							{
+								double lengthPixels = 0;
+
+								if (Length.TryParse(columns[i], out Length length))
+								{
+									if (length.Type == Length.Unit.Fr)
+									{
+										lengthPixels = ((control.Parent.Width.Value - columnsWidth) / frQuantility) * length.Value;
+									}
+									grid.SetWidth(i, lengthPixels);
+								}
+							}
+
 						}
 
 						count++;
