@@ -464,59 +464,46 @@ namespace OKHOSTING.UI.CSS
 
 				if (gridTemplate != null)
 				{
-					//var rowsColumns = gridTemplate.Value.Split('/');
-					var rowsColumns = gridTemplate.Value.Split(' ');
-					var separator = "/";
-					for (int i = 0; i < rowsColumns.Length; i++)
+					var rowsColumns = gridTemplate.Value.Split('/');
+
+					foreach (var rc in rowsColumns)
 					{
-                        if (Length.TryParse(rowsColumns[i], out Length length))
-                        {
-							string value = length.Value.ToString();
-                            switch (rowsColumns)
-                            {//diferenciar filas de columnas
-                                case value[i] == separator:
-
-                                    break;
-                            }
-                        }
-                    }
-
-					
-
+						var r = rc.Split(' ');
+					}
 				}
 
 				var gridRowGap = style.GetProperty("grid-row-gap");
 
-                if (gridRowGap != null)
-                {
-                    var rows = gridRowGap.Value.Split(' ');
-                    double lengthPixels = 0;
+				if (gridRowGap != null)
+				{
+					var rows = gridRowGap.Value.Split(' ');
+					double lengthPixels = 0;
 
-                    if (Length.TryParse(rows[0], out Length length))
-                    {
-                        if (length.Type == Length.Unit.Percent)
-                        {
-                            lengthPixels = length.Value / 100 * control.Parent.Height.Value;
-                        }
-                        else if (length.Type == Length.Unit.Px)
-                        {
-                            lengthPixels = length.Value;
+					if (Length.TryParse(rows[0], out Length length))
+					{
+						if (length.Type == Length.Unit.Percent)
+						{
+							lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+						}
+						else if (length.Type == Length.Unit.Px)
+						{
+							lengthPixels = length.Value;
 
-                        }
-                        //else if (length.Type == Length.Unit.Fr)
-                        //{
-                        //	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
-                        //}
-                        else if (length.IsAbsolute)
-                        {
-                            lengthPixels = length.ToPixel();
-                        }
+						}
+						//else if (length.Type == Length.Unit.Fr)
+						//{
+						//	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
+						//}
+						else if (length.IsAbsolute)
+						{
+							lengthPixels = length.ToPixel();
+						}
 
-                        grid.CellMargin.Bottom = lengthPixels;
-                    }
-                }
+						grid.CellMargin.Bottom = lengthPixels;
+					}
+				}
 
-                var gridColumnGap = style.GetProperty("grid-column-gap");
+				var gridColumnGap = style.GetProperty("grid-column-gap");
 
 				if (gridColumnGap != null)
 				{
@@ -552,6 +539,9 @@ namespace OKHOSTING.UI.CSS
 					}
 				}
 			}
+
+				
+			
 
 			//background and border colors
 			if (!string.IsNullOrWhiteSpace(style.GetBackgroundColor()))
