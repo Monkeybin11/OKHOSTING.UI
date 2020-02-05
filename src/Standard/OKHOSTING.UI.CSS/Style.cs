@@ -255,33 +255,63 @@ namespace OKHOSTING.UI.CSS
 				}
 			}
 		}
-
-		protected void cssGridSet (IGrid grid, Length length, int position)
+		 
+		/// <summary>
+		/// This is a method for setter the width column with css grid
+		/// </summary>
+		/// <param name="control"></param>
+		/// <param name="columns"></param>
+		protected void CssGridColumnWidth(IControl control, String[] columns)
 		{
-			double rowsWidth = 0;
-			double lengthPixels = 0;
+			var grid = (IGrid)control;
 			int frQuantility = 0;
+			double columnsWidth = 0;
 
-			if (length.Type == Length.Unit.Percent)
+			for (int i = 0; i < columns.Length; i++)
 			{
-				//lengthPixels = length.Value / 100 * control.Parent.Height.Value;
-				rowsWidth += lengthPixels;
+				double lengthPixels = 0;
+
+				if (Length.TryParse(columns[i], out Length length))
+				{
+					if (length.Type == Length.Unit.Percent)
+					{
+						lengthPixels = length.Value / 100 * control.Parent.Width.Value;
+						columnsWidth += lengthPixels;
+					}
+					else if (length.Type == Length.Unit.Px)
+					{
+						lengthPixels = length.Value;
+						columnsWidth += lengthPixels;
+					}
+					else if (length.Type == Length.Unit.Fr)
+					{
+						frQuantility++;
+					}
+					else if (length.IsAbsolute)
+					{
+						lengthPixels = length.ToPixel();
+						columnsWidth += lengthPixels;
+					}
+
+					grid.SetWidth(i, lengthPixels);
+				}
 			}
-			else if (length.Type == Length.Unit.Px)
+
+			//Just for Fr
+			for (int i = 0; i < columns.Length; i++)
 			{
-				lengthPixels = length.Value;
-				rowsWidth += lengthPixels;
+				double lengthPixels = 0;
+
+				if (Length.TryParse(columns[i], out Length length))
+				{
+					if (length.Type == Length.Unit.Fr)
+					{
+						lengthPixels = ((control.Parent.Width.Value - columnsWidth) / frQuantility) * length.Value;
+					}
+					grid.SetWidth(i, lengthPixels);
+				}
 			}
-			else if (length.Type == Length.Unit.Fr)
-			{
-				frQuantility++;
-			}
-			else if (length.IsAbsolute)
-			{
-				lengthPixels = length.ToPixel();
-				rowsWidth += lengthPixels;
-			}
-		} 
+		}
 
 		#endregion
 
