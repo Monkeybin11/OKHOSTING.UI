@@ -88,47 +88,36 @@ namespace OKHOSTING.UI.Test
 			#grid
 			{ 
 				display: grid;
-				grid-template-areas: 
-				""title title .""
-				""title title .""
-				""nav article ads""
-				""nav article ads""
-				""footer footer footer""
-				""footer footer footer"";
-				/* grid-template-rows: 80px 50px 10px; */
-				/* grid-template-columns: 20px 100px 15px; */
-				/* grid-template: 80px 10px 50px 100px / 20px 10px 100px; */
-				grid-row-gap: 10px;
-				grid-column-gap: 10px;
+				grid-template-rows: 80px 500px 10px 100px 250px;
 				height: 100vh;
 				margin: 0;
-			}  
+			}   
 			
 			/* Stack the layout on small devices/viewports. */
 			@media all and (max-width: 675px) 
 			{
 				#pageHeader 
 				{ 
-					grid-template-areas: 
+					/* grid-template-areas: 
 					""header""
 					""article""
 					""ads""
 					""nav""
-					""footer"";
-					grid-template-rows: 80px 1fr 70px 1fr 70px;  
-					grid-template-columns: 1fr;
+					""footer""; */
+					/* grid-template-rows: 80px 1fr 70px 1fr 70px; */
+					/* grid-template-columns: 1fr; */
 				}
 
 				div2
 				{ 
-					grid-template-areas: 
+					/* grid-template-areas: 
 					""header""
 					""article""
 					""ads""
 					""nav""
-					""footer"";
-					grid-template-rows: 80px 1fr 70px 1fr 70px;  
-					grid-template-columns: 1fr;
+					""footer""; */
+					/* grid-template-rows: 80px 1fr 70px 1fr 70px; */
+					/* grid-template-columns: 1fr; */
 				}
 			}
 

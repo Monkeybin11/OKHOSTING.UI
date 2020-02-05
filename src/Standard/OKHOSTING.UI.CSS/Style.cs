@@ -256,6 +256,33 @@ namespace OKHOSTING.UI.CSS
 			}
 		}
 
+		protected void cssGridSet (IGrid grid, Length length, int position)
+		{
+			double rowsWidth = 0;
+			double lengthPixels = 0;
+			int frQuantility = 0;
+
+			if (length.Type == Length.Unit.Percent)
+			{
+				lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+				rowsWidth += lengthPixels;
+			}
+			else if (length.Type == Length.Unit.Px)
+			{
+				lengthPixels = length.Value;
+				rowsWidth += lengthPixels;
+			}
+			else if (length.Type == Length.Unit.Fr)
+			{
+				frQuantility++;
+			}
+			else if (length.IsAbsolute)
+			{
+				lengthPixels = length.ToPixel();
+				rowsWidth += lengthPixels;
+			}
+		} 
+
 		#endregion
 
 		#region Public
@@ -370,7 +397,7 @@ namespace OKHOSTING.UI.CSS
 				//Begin grid-template-columns
 				var gridTemplateColumns = style.GetProperty("grid-template-columns");
 				var grid = (IGrid)control;
-
+				
 				if (gridTemplateColumns != null)
 				{
 					var columns = gridTemplateColumns.Value.Split(' ');
