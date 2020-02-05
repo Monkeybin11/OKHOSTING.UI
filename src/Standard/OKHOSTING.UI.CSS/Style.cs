@@ -486,10 +486,22 @@ namespace OKHOSTING.UI.CSS
 				if (gridTemplate != null)
 				{
 					var rowsColumns = gridTemplate.Value.Split('/');
+					int count = 0;
 
-					foreach (var rc in rowsColumns)
+					foreach (var rowcolumn in rowsColumns)
 					{
-						var r = rc.Split(' ');
+						if (count == 0)
+						{
+							var row = rowcolumn.Split(' ');
+							
+						}
+
+						if (count == 1)
+						{
+							var column = rowcolumn.Split(' ');
+						}
+
+						count++;
 					}
 				}
 				//End grid-template
