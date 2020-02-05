@@ -95,9 +95,9 @@ namespace OKHOSTING.UI.Test
 				""nav article ads""
 				""footer footer footer""
 				""footer footer footer"";
-				grid-template-rows: 80px 1fr 2fr 50px 10px;
+				/* grid-template-rows: 80px 50px 10px; */
 				/* grid-template-columns: 20px 100px 15px; */
-				grid-template: 80px 10px 50px 100px / 20px 10px 100px;
+				/* grid-template: 80px 10px 50px 100px / 20px 10px 100px; */
 				grid-row-gap: 10px;
 				grid-column-gap: 10px;
 				height: 100vh;
