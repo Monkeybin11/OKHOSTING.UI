@@ -18,12 +18,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 		public int ControlCounter = 0;
 		
 		/// <summary>
-		/// The content holder.
-		/// <para xml:lang="es">El contenido que contiene la pagina.</para>
-		/// </summary>
-		protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
-
-		/// <summary>
 		/// Raises the Resized event
 		/// </summary>
 		protected internal void OnResized()
@@ -40,14 +34,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			Session["Page"] = this;
 
 			base.OnLoad(e);
-
-			//create placeholder for content
-			if (ContentHolder == null)
-			{
-				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				ContentHolder.ID = "ContentHolder";
-				base.Form.Controls.Add(ContentHolder);
-			}
 
 			//load javascript dependencies
 			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
@@ -250,20 +236,20 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (ContentHolder.Controls.Count == 0)
+				if (Form.Controls.Count == 0)
 				{
 					return null;
 				}
 
-				return (IControl) ContentHolder.Controls[0];
+				return (IControl) Form.Controls[0];
 			}
 			set
 			{
-				ContentHolder.Controls.Clear();
+				Form.Controls.Clear();
 
 				if (value != null)
 				{
-					ContentHolder.Controls.Add((System.Web.UI.Control) value);
+					Form.Controls.Add((System.Web.UI.Control) value);
 				}
 			}
 		}
