@@ -367,12 +367,14 @@ namespace OKHOSTING.UI.CSS
 			//this is a CSS grid
 			if (style.GetDisplay() == "grid")
 			{
+				//Begin grid-template-columns
 				var gridTemplateColumns = style.GetProperty("grid-template-columns");
 				var grid = (IGrid)control;
 
 				if (gridTemplateColumns != null)
 				{
 					var columns = gridTemplateColumns.Value.Split(' ');
+					int frQuantility = 0;
 					double columnsWidth = 0;
 
 					for (int i = 0; i < columns.Length; i++)
@@ -393,8 +395,7 @@ namespace OKHOSTING.UI.CSS
 							}
 							else if (length.Type == Length.Unit.Fr)
 							{
-								lengthPixels = (control.Parent.Width.Value - columnsWidth) / length.Value;
-								columnsWidth += lengthPixels;
+								frQuantility++;
 							}
 							else if (length.IsAbsolute)
 							{
@@ -405,8 +406,25 @@ namespace OKHOSTING.UI.CSS
 							grid.SetWidth(i, lengthPixels);
 						}
 					}
-				}
 
+					//Just for Fr
+					for (int i = 0; i < columns.Length; i++)
+					{
+						double lengthPixels = 0;
+
+						if (Length.TryParse(columns[i], out Length length))
+						{
+							if (length.Type == Length.Unit.Fr)
+							{
+								lengthPixels = ((control.Parent.Width.Value - columnsWidth) / frQuantility) * length.Value;
+							}
+							grid.SetWidth(i, lengthPixels);
+						}
+					}
+				}
+				//End grid-template-columns
+
+				//Begin grid-template-rows
 				var gridTemplateRows = style.GetProperty("grid-template-rows");
 
 				if (gridTemplateRows != null)
@@ -456,10 +474,13 @@ namespace OKHOSTING.UI.CSS
 							{
 								lengthPixels = ((control.Parent.Width.Value - rowsWidth) / frQuantility) * length.Value;
 							}
+							grid.SetHeight(i, lengthPixels);
 						}
 					}
 				}
+				//End grid-template-rows
 
+				//Begin grid-template
 				var gridTemplate = style.GetProperty("grid-template");
 
 				if (gridTemplate != null)
@@ -471,7 +492,9 @@ namespace OKHOSTING.UI.CSS
 						var r = rc.Split(' ');
 					}
 				}
+				//End grid-template
 
+				//Begin grid-row-gap
 				var gridRowGap = style.GetProperty("grid-row-gap");
 
 				if (gridRowGap != null)
@@ -490,10 +513,6 @@ namespace OKHOSTING.UI.CSS
 							lengthPixels = length.Value;
 
 						}
-						//else if (length.Type == Length.Unit.Fr)
-						//{
-						//	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
-						//}
 						else if (length.IsAbsolute)
 						{
 							lengthPixels = length.ToPixel();
@@ -502,7 +521,9 @@ namespace OKHOSTING.UI.CSS
 						grid.CellMargin.Bottom = lengthPixels;
 					}
 				}
+				//End grid-row-gap
 
+				//Begin grid-column-gap
 				var gridColumnGap = style.GetProperty("grid-column-gap");
 
 				if (gridColumnGap != null)
@@ -538,10 +559,11 @@ namespace OKHOSTING.UI.CSS
 						//}
 					}
 				}
+				//End grid-column-gap
 			}
 
-				
-			
+
+
 
 			//background and border colors
 			if (!string.IsNullOrWhiteSpace(style.GetBackgroundColor()))
