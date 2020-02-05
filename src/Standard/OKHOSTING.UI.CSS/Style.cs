@@ -307,8 +307,65 @@ namespace OKHOSTING.UI.CSS
 					if (length.Type == Length.Unit.Fr)
 					{
 						lengthPixels = ((control.Parent.Width.Value - columnsWidth) / frQuantility) * length.Value;
+						grid.SetWidth(i, lengthPixels);
 					}
-					grid.SetWidth(i, lengthPixels);
+				}
+			}
+		}
+
+		/// <summary>
+		/// This is a method for setter the height row height css grid
+		/// </summary>
+		/// <param name="control"></param>
+		/// <param name="columns"></param>
+		protected static void CssGridRowHeight(IControl control, String[] rows)
+		{
+			var grid = (IGrid)control;
+			int frQuantility = 0;
+			double rowsWidth = 0;
+
+			for (int i = 0; i < rows.Length; i++)
+			{
+				double lengthPixels = 0;
+
+				if (Length.TryParse(rows[i], out Length length))
+				{
+					if (length.Type == Length.Unit.Percent)
+					{
+						lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+						rowsWidth += lengthPixels;
+					}
+					else if (length.Type == Length.Unit.Px)
+					{
+						lengthPixels = length.Value;
+						rowsWidth += lengthPixels;
+					}
+					else if (length.Type == Length.Unit.Fr)
+					{
+						frQuantility++;
+					}
+					else if (length.IsAbsolute)
+					{
+						lengthPixels = length.ToPixel();
+						rowsWidth += lengthPixels;
+					}
+
+					grid.SetHeight(i, lengthPixels);
+				}
+			}
+
+			//Just for Fr
+			for (int i = 0; i < rows.Length; i++)
+			{
+				double lengthPixels = 0;
+
+				if (Length.TryParse(rows[i], out Length length))
+				{
+					if (length.Type == Length.Unit.Fr)
+					{
+						lengthPixels = ((control.Parent.Width.Value - rowsWidth) / frQuantility) * length.Value;
+						grid.SetHeight(i, lengthPixels);
+					}
 				}
 			}
 		}
@@ -445,53 +502,55 @@ namespace OKHOSTING.UI.CSS
 				if (gridTemplateRows != null)
 				{
 					var rows = gridTemplateRows.Value.Split(' ');
-					double rowsWidth = 0;
-					int frQuantility = 0;
+					//double rowsWidth = 0;
+					//int frQuantility = 0;
 
-					for (int i = 0; i < rows.Length; i++)
-					{
-						double lengthPixels = 0;
+					CssGridRowHeight(control, rows);
 
-						if (Length.TryParse(rows[i], out Length length))
-						{
-							if (length.Type == Length.Unit.Percent)
-							{
-								lengthPixels = length.Value / 100 * control.Parent.Height.Value;
-								rowsWidth += lengthPixels;
-							}
-							else if (length.Type == Length.Unit.Px)
-							{
-								lengthPixels = length.Value;
-								rowsWidth += lengthPixels;
-							}
-							else if (length.Type == Length.Unit.Fr)
-							{
-								frQuantility++;
-							}
-							else if (length.IsAbsolute)
-							{
-								lengthPixels = length.ToPixel();
-								rowsWidth += lengthPixels;
-							}
+					//for (int i = 0; i < rows.Length; i++)
+					//{
+					//	double lengthPixels = 0;
 
-							grid.SetHeight(i, lengthPixels);
-						}
-					}
+					//	if (Length.TryParse(rows[i], out Length length))
+					//	{
+					//		if (length.Type == Length.Unit.Percent)
+					//		{
+					//			lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+					//			rowsWidth += lengthPixels;
+					//		}
+					//		else if (length.Type == Length.Unit.Px)
+					//		{
+					//			lengthPixels = length.Value;
+					//			rowsWidth += lengthPixels;
+					//		}
+					//		else if (length.Type == Length.Unit.Fr)
+					//		{
+					//			frQuantility++;
+					//		}
+					//		else if (length.IsAbsolute)
+					//		{
+					//			lengthPixels = length.ToPixel();
+					//			rowsWidth += lengthPixels;
+					//		}
 
-					//Just for Fr
-					for (int i = 0; i < rows.Length; i++)
-					{
-						double lengthPixels = 0;
+					//		grid.SetHeight(i, lengthPixels);
+					//	}
+					//}
 
-						if (Length.TryParse(rows[i], out Length length))
-						{
-							if (length.Type == Length.Unit.Fr)
-							{
-								lengthPixels = ((control.Parent.Width.Value - rowsWidth) / frQuantility) * length.Value;
-							}
-							grid.SetHeight(i, lengthPixels);
-						}
-					}
+					////Just for Fr
+					//for (int i = 0; i < rows.Length; i++)
+					//{
+					//	double lengthPixels = 0;
+
+					//	if (Length.TryParse(rows[i], out Length length))
+					//	{
+					//		if (length.Type == Length.Unit.Fr)
+					//		{
+					//			lengthPixels = ((control.Parent.Width.Value - rowsWidth) / frQuantility) * length.Value;
+					//		}
+					//		grid.SetHeight(i, lengthPixels);
+					//	}
+					//}
 				}
 				//End grid-template-rows
 
@@ -503,7 +562,7 @@ namespace OKHOSTING.UI.CSS
 					var rowsColumns = gridTemplate.Value.Split('/');
 					int count = 0;
 					double rowsWidth = 0;
-					double columnsWidth = 0;
+					//double columnsWidth = 0;
 					int frQuantility = 0;
 
 					foreach (var rowcolumn in rowsColumns)
