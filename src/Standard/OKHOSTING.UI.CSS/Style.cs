@@ -264,7 +264,7 @@ namespace OKHOSTING.UI.CSS
 
 			if (length.Type == Length.Unit.Percent)
 			{
-				lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+				//lengthPixels = length.Value / 100 * control.Parent.Height.Value;
 				rowsWidth += lengthPixels;
 			}
 			else if (length.Type == Length.Unit.Px)
