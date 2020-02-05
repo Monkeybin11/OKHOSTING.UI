@@ -89,6 +89,7 @@ namespace OKHOSTING.UI.Test
 			{ 
 				display: grid;
 				grid-template-rows: 80px 500px 10px 100px 250px;
+				grid-template-columns: 20px 100px 15px;
 				margin: 0;
 			}   
 			
