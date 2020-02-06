@@ -50,6 +50,7 @@ namespace OKHOSTING.UI.Test
             imgOne = Core.BaitAndSwitch.Create<IImage>();
             imgOne.LoadFromUrl(new Uri("https://www.tekcrispy.com/wp-content/uploads/2018/05/pulpo-vida-1021x580.jpg"));
             grid.SetContent(2, 0, imgOne);
+			
 
 			imgTwo = Core.BaitAndSwitch.Create<IImage>();
 			imgTwo.LoadFromUrl(new Uri("https://lithub.com/wp-content/uploads/2019/09/octopus-1.jpg"));

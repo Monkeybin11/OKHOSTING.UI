@@ -261,7 +261,7 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		/// <param name="control"></param>
 		/// <param name="columns"></param>
-		protected static void CssGridColumnWidth(IControl control, String[] columns)
+		protected static void SetColumnWidth(IControl control, String[] columns)
 		{
 			var grid = (IGrid)control;
 			int frQuantility = 0;
@@ -318,7 +318,7 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		/// <param name="control"></param>
 		/// <param name="columns"></param>
-		protected static void CssGridRowHeight(IControl control, String[] rows)
+		protected static void SetRowHeight(IControl control, String[] rows)
 		{
 			var grid = (IGrid)control;
 			int frQuantility = 0;
@@ -492,7 +492,7 @@ namespace OKHOSTING.UI.CSS
 					//double columnsWidth = 0;
 
 
-					CssGridColumnWidth(control, columns);
+					SetColumnWidth(control, columns);
 				}
 				//End grid-template-columns
 
@@ -505,7 +505,7 @@ namespace OKHOSTING.UI.CSS
 					//double rowsWidth = 0;
 					//int frQuantility = 0;
 
-					CssGridRowHeight(control, rows);
+					SetRowHeight(control, rows);
 				}
 				//End grid-template-rows
 
@@ -524,15 +524,15 @@ namespace OKHOSTING.UI.CSS
 					{
 						if (count == 0)
 						{
-							var rows = rowcolumn.Split(' ');
+							var rows = rowcolumn.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 							
-							CssGridRowHeight(control, rows);
+							SetRowHeight(control, rows);
 						}
 						else if (count == 1)
 						{
 							var columns = rowcolumn.Split(' ');
 
-							CssGridColumnWidth(control, columns);
+							SetColumnWidth(control, columns);
 
 						}
 
@@ -898,6 +898,19 @@ namespace OKHOSTING.UI.CSS
 			int b = int.Parse(colors[3]);
 
 			return Color.FromArgb(a, r, g, b);
+		}
+
+		public static IEnumerable<Length> ParseLengths(string lenghts)
+		{
+			foreach (var l in lenghts.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)))
+			{
+				Length parsed;
+				
+				if (Length.TryParse(l, out parsed))
+				{
+					yield return parsed;
+				}
+			}
 		}
 
 		static Style()
