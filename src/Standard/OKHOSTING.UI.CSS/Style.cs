@@ -318,55 +318,53 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		/// <param name="control"></param>
 		/// <param name="columns"></param>
-		protected static void SetRowHeight(IControl control, String[] rows)
+		protected static void SetRowHeight(IGrid grid, IEnumerable<Length> rows)
 		{
-			var grid = (IGrid)control;
+			//var grid = (IGrid)control;
 			int frQuantility = 0;
 			double rowsWidth = 0;
+			int r = 0;
+			//rows.ToArray();
 
-			for (int i = 0; i < rows.Length; i++)
+			foreach (var row in rows)
 			{
 				double lengthPixels = 0;
 
-				if (Length.TryParse(rows[i], out Length length))
-				{
-					if (length.Type == Length.Unit.Percent)
+					if (row.Type == Length.Unit.Percent)
 					{
-						lengthPixels = length.Value / 100 * control.Parent.Height.Value;
+						lengthPixels = row.Value / 100 * grid.Width.Value;
 						rowsWidth += lengthPixels;
 					}
-					else if (length.Type == Length.Unit.Px)
+					else if (row.Type == Length.Unit.Px)
 					{
-						lengthPixels = length.Value;
+						lengthPixels = row.Value;
 						rowsWidth += lengthPixels;
 					}
-					else if (length.Type == Length.Unit.Fr)
+					else if (row.Type == Length.Unit.Fr)
 					{
 						frQuantility++;
 					}
-					else if (length.IsAbsolute)
+					else if (row.IsAbsolute)
 					{
-						lengthPixels = length.ToPixel();
+						lengthPixels = row.ToPixel();
 						rowsWidth += lengthPixels;
 					}
 
-					grid.SetHeight(i, lengthPixels);
-				}
+					//grid.SetHeight(r, lengthPixels);
+					grid.SetHeight(r, lengthPixels);
+					r++;
 			}
 
 			//Just for Fr
-			for (int i = 0; i < rows.Length; i++)
+			foreach (var row in rows)
 			{
 				double lengthPixels = 0;
 
-				if (Length.TryParse(rows[i], out Length length))
-				{
-					if (length.Type == Length.Unit.Fr)
+					if (row.Type == Length.Unit.Fr)
 					{
-						lengthPixels = ((control.Parent.Width.Value - rowsWidth) / frQuantility) * length.Value;
-						grid.SetHeight(i, lengthPixels);
+						lengthPixels = ((grid.Width.Value - rowsWidth) / frQuantility) * row.Value;
+						grid.SetHeight(row, lengthPixels);
 					}
-				}
 			}
 		}
 
@@ -505,7 +503,7 @@ namespace OKHOSTING.UI.CSS
 					//double rowsWidth = 0;
 					//int frQuantility = 0;
 
-					SetRowHeight(control, rows);
+					//SetRowHeight(control, rows);
 				}
 				//End grid-template-rows
 
@@ -524,8 +522,8 @@ namespace OKHOSTING.UI.CSS
 					{
 						if (count == 0)
 						{
-							var rows = rowcolumn.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
-							
+							//var rows = rowcolumn.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+							var rows = ParseLengths(rowcolumn);
 							SetRowHeight(control, rows);
 						}
 						else if (count == 1)
