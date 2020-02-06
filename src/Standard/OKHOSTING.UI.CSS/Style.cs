@@ -351,7 +351,7 @@ namespace OKHOSTING.UI.CSS
 					}
 
 					//grid.SetHeight(r, lengthPixels);
-					grid.SetHeight(r, lengthPixels);
+					//grid.SetHeight(row, lengthPixels);
 					r++;
 			}
 
@@ -363,7 +363,7 @@ namespace OKHOSTING.UI.CSS
 					if (row.Type == Length.Unit.Fr)
 					{
 						lengthPixels = ((grid.Width.Value - rowsWidth) / frQuantility) * row.Value;
-						grid.SetHeight(row, lengthPixels);
+						//grid.SetHeight(row, lengthPixels);
 					}
 			}
 		}
@@ -524,7 +524,7 @@ namespace OKHOSTING.UI.CSS
 						{
 							//var rows = rowcolumn.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 							var rows = ParseLengths(rowcolumn);
-							SetRowHeight(control, rows);
+							SetRowHeight(grid, rows);
 						}
 						else if (count == 1)
 						{
