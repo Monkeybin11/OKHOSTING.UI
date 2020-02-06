@@ -88,8 +88,16 @@ namespace OKHOSTING.UI.Test
 			#grid
 			{ 
 				display: grid;
-				grid-template-rows: 80px 500px 10px 100px 250px;
-				grid-template-columns: 20px 100px 15px;
+				grid-template-areas: 
+				""title title .""
+				""title title .""
+				""nav article ads""
+				""nav article ads""
+				""footer footer footer""
+				""footer footer footer"";
+				/* grid-template-rows: 80px 500px 10px 100px 250px; */
+				/* grid-template-columns: 20px 100px 15px; */
+				grid-template: 80px 500px 10px 100px 250px/20px 100px 15px;
 				margin: 0;
 			}   
 			

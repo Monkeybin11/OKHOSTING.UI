@@ -522,14 +522,12 @@ namespace OKHOSTING.UI.CSS
 
 					foreach (var rowcolumn in rowsColumns)
 					{
-						//For rows
 						if (count == 0)
 						{
 							var rows = rowcolumn.Split(' ');
-
+							
 							CssGridRowHeight(control, rows);
 						}
-						//for columns
 						else if (count == 1)
 						{
 							var columns = rowcolumn.Split(' ');
@@ -584,8 +582,6 @@ namespace OKHOSTING.UI.CSS
 
 						Length length = new Length();
 
-						//if (Length.TryParse(rows[i], out Length length))
-						//{
 						if (length.Type == Length.Unit.Percent)
 						{
 							lengthPixels = length.Value / 100 * control.Parent.Height.Value;
@@ -605,10 +601,25 @@ namespace OKHOSTING.UI.CSS
 						}
 
 						grid.CellMargin.Right = lengthPixels;
-						//}
 					}
 				}
 				//End grid-column-gap
+
+				//Begin grid-template-areas
+				var gridTemplateAreas = style.GetProperty("grid-template-areas");
+
+				if (gridTemplateAreas != null)
+				{
+					double lengthPixels = 0;
+					var r = gridTemplateAreas.Value.Split('"');
+
+					foreach (var rows in r)
+					{
+						var row = rows.Split('"');
+					}
+				}
+				//end grid-template-areas
+
 			}
 			//End css grid
 
