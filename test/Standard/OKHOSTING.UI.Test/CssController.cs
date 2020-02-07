@@ -37,6 +37,10 @@ namespace OKHOSTING.UI.Test
 			lblTitle.CssClass = "marginpadding";
 			grid.SetContent(0, 1, lblTitle);
 
+			ILabel lblsubtitle = Core.BaitAndSwitch.Create<ILabel>();
+			lblsubtitle.Text = "Subtitulo";
+			lblsubtitle.Name = "LblSubtitle";
+
             lblText1 = Core.BaitAndSwitch.Create<ILabel>();
             lblText1.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
 				"Mi eget mauris pharetra et ultrices neque ornare. Cursus eget nunc scelerisque viverra. Pellentesque massa placerat duis ultricies lacus. \n" +
@@ -47,17 +51,23 @@ namespace OKHOSTING.UI.Test
 			lblText1.CssClass = "fontandcolor";
 			grid.SetContent(1, 1, lblText1);
 
+			ITextBox TxtNombre = Core.BaitAndSwitch.Create<ITextBox>();
+			TxtNombre.Value = "Nombre";
+			TxtNombre.Name = "TxtNombre";
+
             imgOne = Core.BaitAndSwitch.Create<IImage>();
             imgOne.LoadFromUrl(new Uri("https://www.tekcrispy.com/wp-content/uploads/2018/05/pulpo-vida-1021x580.jpg"));
+			imgOne.Name = "ImgOne";
             grid.SetContent(2, 0, imgOne);
 			
-
 			imgTwo = Core.BaitAndSwitch.Create<IImage>();
 			imgTwo.LoadFromUrl(new Uri("https://lithub.com/wp-content/uploads/2019/09/octopus-1.jpg"));
+			imgTwo.Name = "Imgtwo";
 			grid.SetContent(2, 1, imgTwo);
 
 			imgTree = Core.BaitAndSwitch.Create<IImage>();
 			imgTree.LoadFromUrl(new Uri("https://octolab.tv/wp-content/uploads/2019/03/octopuses-are-alien-creatures-2-750x500.jpg"));
+			imgTree.Name = "ImgTree";
 			grid.SetContent(2, 2, imgTree);
 
 			lblText2 = Core.BaitAndSwitch.Create<ILabel>();
@@ -79,6 +89,25 @@ namespace OKHOSTING.UI.Test
             btnClose.Click += btnClose_Click;
 			grid.SetContent(3, 1, btnClose);
 
+			ITimeOfDayPicker CTime = Core.BaitAndSwitch.Create<ITimeOfDayPicker>();
+			CTime.Name = "Calendar";
+
+			ITextArea txtArea = Core.BaitAndSwitch.Create<ITextArea>();
+			txtArea.Value = "Apellido";
+			txtArea.Name = "txtApellido";
+
+			ILabel LblA = Core.BaitAndSwitch.Create<ILabel>();
+			LblA.Name = "A";
+			LblA.Text = "lblA";
+
+			ILabelButton LblB = Core.BaitAndSwitch.Create<ILabelButton>();
+			LblB.Text = "B";
+			LblB.Name = "lblB";
+
+			ITextBox txtA = Core.BaitAndSwitch.Create<ITextBox>();
+			txtA.Name = "txtA";
+			txtA.Value = "txtA";
+
 			Page.Title = "CSS is now multiplatform";
 			Page.Content = grid;
 
@@ -90,12 +119,11 @@ namespace OKHOSTING.UI.Test
 			{ 
 				display: grid;
 				grid-template-areas: 
-				""title title .""
-				""title title .""
-				""nav article ads""
-				""nav article ads""
-				""footer footer footer""
-				""footer footer footer"";
+				""title LblSubtitle ImgOne""
+				""Text1 Imgtwo ImgTree ""
+				""Text2 LPTest Nombre""
+				""btnClose txtApellido lblA""
+				""footer lblB txtA"";
 				grid-template-rows: 80px 500px 10px 100px 250px;
 				grid-template-columns: 20px 100px 15px;
 				/* grid-template: 80px 500px 10px 100px 250px/20px 100px 15px; */

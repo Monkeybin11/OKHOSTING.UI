@@ -594,12 +594,11 @@ namespace OKHOSTING.UI.CSS
 
 				if (gridTemplateAreas != null)
 				{
-					double lengthPixels = 0;
-					var r = gridTemplateAreas.Value.Split('"');
+					var r = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
 
-					foreach (var rows in r)
+					foreach (var columns in r)
 					{
-						var row = rows.Split('"');
+						var column = ParseLengths(columns);
 					}
 				}
 				//end grid-template-areas
