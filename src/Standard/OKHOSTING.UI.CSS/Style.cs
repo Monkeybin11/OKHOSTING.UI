@@ -482,7 +482,7 @@ namespace OKHOSTING.UI.CSS
 				
 				if (gridTemplateColumns != null)
 				{
-					var columns = ParseLengths(gridTemplateColumns.ToString());
+					var columns = ParseLengths(gridTemplateColumns.Value);
 					SetColumnWidth(grid, columns);
 				}
 				//End grid-template-columns
@@ -492,7 +492,7 @@ namespace OKHOSTING.UI.CSS
 
 				if (gridTemplateRows != null)
 				{
-					var rows = ParseLengths(gridTemplateRows.ToString());
+					var rows = ParseLengths(gridTemplateRows.Value);
 					SetRowHeight(grid, rows);
 				}
 				//End grid-template-rows
@@ -504,9 +504,6 @@ namespace OKHOSTING.UI.CSS
 				{
 					var rowsColumns = gridTemplate.Value.Split('/');
 					int count = 0;
-					//double rowsWidth = 0;
-					//double columnsWidth = 0;
-					//int frQuantility = 0;
 
 					foreach (var rowcolumn in rowsColumns)
 					{
