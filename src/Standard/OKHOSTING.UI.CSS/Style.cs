@@ -482,12 +482,8 @@ namespace OKHOSTING.UI.CSS
 				
 				if (gridTemplateColumns != null)
 				{
-					var columns = gridTemplateColumns.Value.Split(' ');
-					//int frQuantility = 0;
-					//double columnsWidth = 0;
-
-
-					SetColumnWidth(control, columns);
+					var columns = ParseLengths(gridTemplateColumns.ToString());
+					SetColumnWidth(grid, columns);
 				}
 				//End grid-template-columns
 
@@ -496,11 +492,8 @@ namespace OKHOSTING.UI.CSS
 
 				if (gridTemplateRows != null)
 				{
-					var rows = gridTemplateRows.Value.Split(' ');
-					//double rowsWidth = 0;
-					//int frQuantility = 0;
-
-					//SetRowHeight(control, rows);
+					var rows = ParseLengths(gridTemplateRows.ToString());
+					SetRowHeight(grid, rows);
 				}
 				//End grid-template-rows
 
@@ -519,15 +512,14 @@ namespace OKHOSTING.UI.CSS
 					{
 						if (count == 0)
 						{
-							//var rows = rowcolumn.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 							var rows = ParseLengths(rowcolumn);
 							SetRowHeight(grid, rows);
 						}
 						else if (count == 1)
 						{
-							var columns = rowcolumn.Split(' ');
+							var columns = ParseLengths(rowcolumn);
 
-							SetColumnWidth(control, columns);
+							SetColumnWidth(grid, columns);
 
 						}
 
