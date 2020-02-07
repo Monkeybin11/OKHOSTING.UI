@@ -261,54 +261,51 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		/// <param name="control"></param>
 		/// <param name="columns"></param>
-		protected static void SetColumnWidth(IControl control, String[] columns)
+		protected static void SetColumnWidth(IGrid grid, IEnumerable<Length> columns)
 		{
-			var grid = (IGrid)control;
 			int frQuantility = 0;
 			double columnsWidth = 0;
+			int c = 0;
 
-			for (int i = 0; i < columns.Length; i++)
+			foreach (var column in columns)
 			{
 				double lengthPixels = 0;
 
-				if (Length.TryParse(columns[i], out Length length))
+				if (column.Type == Length.Unit.Percent)
 				{
-					if (length.Type == Length.Unit.Percent)
-					{
-						lengthPixels = length.Value / 100 * control.Parent.Width.Value;
-						columnsWidth += lengthPixels;
-					}
-					else if (length.Type == Length.Unit.Px)
-					{
-						lengthPixels = length.Value;
-						columnsWidth += lengthPixels;
-					}
-					else if (length.Type == Length.Unit.Fr)
-					{
-						frQuantility++;
-					}
-					else if (length.IsAbsolute)
-					{
-						lengthPixels = length.ToPixel();
-						columnsWidth += lengthPixels;
-					}
-
-					grid.SetWidth(i, lengthPixels);
+					lengthPixels = column.Value / 100 * grid.Width.Value;
+					columnsWidth += lengthPixels;
 				}
+				else if (column.Type == Length.Unit.Px)
+				{
+					lengthPixels = column.Value;
+					columnsWidth += lengthPixels;
+				}
+				else if (column.Type == Length.Unit.Fr)
+				{
+					frQuantility++;
+				}
+				else if (column.IsAbsolute)
+				{
+					lengthPixels = column.ToPixel();
+					columnsWidth += lengthPixels;
+				}
+
+				grid.SetHeight(c, lengthPixels);
+				c++;
 			}
 
 			//Just for Fr
-			for (int i = 0; i < columns.Length; i++)
+			c = 0;
+			foreach (var column in columns)
 			{
 				double lengthPixels = 0;
 
-				if (Length.TryParse(columns[i], out Length length))
+				if (column.Type == Length.Unit.Fr)
 				{
-					if (length.Type == Length.Unit.Fr)
-					{
-						lengthPixels = ((control.Parent.Width.Value - columnsWidth) / frQuantility) * length.Value;
-						grid.SetWidth(i, lengthPixels);
-					}
+					lengthPixels = ((grid.Width.Value - columnsWidth) / frQuantility) * column.Value;
+					grid.SetHeight(c, lengthPixels);
+					c++;
 				}
 			}
 		}
@@ -320,11 +317,10 @@ namespace OKHOSTING.UI.CSS
 		/// <param name="columns"></param>
 		protected static void SetRowHeight(IGrid grid, IEnumerable<Length> rows)
 		{
-			//var grid = (IGrid)control;
 			int frQuantility = 0;
 			double rowsWidth = 0;
 			int r = 0;
-			//rows.ToArray();
+			
 
 			foreach (var row in rows)
 			{
@@ -350,12 +346,12 @@ namespace OKHOSTING.UI.CSS
 						rowsWidth += lengthPixels;
 					}
 
-					//grid.SetHeight(r, lengthPixels);
-					//grid.SetHeight(row, lengthPixels);
-					r++;
+				grid.SetHeight(r, lengthPixels);
+				r++;
 			}
 
 			//Just for Fr
+			r = 0;
 			foreach (var row in rows)
 			{
 				double lengthPixels = 0;
@@ -363,7 +359,8 @@ namespace OKHOSTING.UI.CSS
 					if (row.Type == Length.Unit.Fr)
 					{
 						lengthPixels = ((grid.Width.Value - rowsWidth) / frQuantility) * row.Value;
-						//grid.SetHeight(row, lengthPixels);
+					grid.SetHeight(r, lengthPixels);
+					r++;
 					}
 			}
 		}
