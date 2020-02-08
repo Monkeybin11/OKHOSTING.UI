@@ -35,11 +35,12 @@ namespace OKHOSTING.UI.Test
             lblTitle.Text = "Lil Octopus";
 			lblTitle.Name = "title";
 			lblTitle.CssClass = "marginpadding";
-			grid.SetContent(0, 1, lblTitle);
+			grid.SetContent(0, 0, lblTitle);
 
 			ILabel lblsubtitle = Core.BaitAndSwitch.Create<ILabel>();
 			lblsubtitle.Text = "Subtitulo";
 			lblsubtitle.Name = "LblSubtitle";
+			grid.SetContent(0, 1, lblsubtitle);
 
             lblText1 = Core.BaitAndSwitch.Create<ILabel>();
             lblText1.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
@@ -49,64 +50,70 @@ namespace OKHOSTING.UI.Test
 				"Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. In hendrerit gravida rutrum quisque non tellus orci ac auctor. Suscipit tellus mauris a diam maecenas sed enim ut. \n";
             lblText1.Name = "Text1";
 			lblText1.CssClass = "fontandcolor";
-			grid.SetContent(1, 1, lblText1);
+			grid.SetContent(0, 2, lblText1);
 
 			ITextBox TxtNombre = Core.BaitAndSwitch.Create<ITextBox>();
 			TxtNombre.Value = "Nombre";
 			TxtNombre.Name = "TxtNombre";
+			grid.SetContent(1, 0, TxtNombre);
 
-            imgOne = Core.BaitAndSwitch.Create<IImage>();
+			imgOne = Core.BaitAndSwitch.Create<IImage>();
             imgOne.LoadFromUrl(new Uri("https://www.tekcrispy.com/wp-content/uploads/2018/05/pulpo-vida-1021x580.jpg"));
 			imgOne.Name = "ImgOne";
-            grid.SetContent(2, 0, imgOne);
+            grid.SetContent(1, 1, imgOne);
 			
 			imgTwo = Core.BaitAndSwitch.Create<IImage>();
 			imgTwo.LoadFromUrl(new Uri("https://lithub.com/wp-content/uploads/2019/09/octopus-1.jpg"));
 			imgTwo.Name = "Imgtwo";
-			grid.SetContent(2, 1, imgTwo);
+			grid.SetContent(1, 2, imgTwo);
 
 			imgTree = Core.BaitAndSwitch.Create<IImage>();
 			imgTree.LoadFromUrl(new Uri("https://octolab.tv/wp-content/uploads/2019/03/octopuses-are-alien-creatures-2-750x500.jpg"));
 			imgTree.Name = "ImgTree";
-			grid.SetContent(2, 2, imgTree);
+			grid.SetContent(2, 0, imgTree);
 
 			lblText2 = Core.BaitAndSwitch.Create<ILabel>();
 			lblText2.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
 				"Mi eget mauris pharetra et ultrices neque ornare. Cursus eget nunc scelerisque viverra. Pellentesque massa placerat duis ultricies lacus.";
 			lblText2.Name = "Text2";
 			lblText2.CssClass = "fontandcolor marginpadding";
-			grid.SetContent(3, 0, lblText2);
+			grid.SetContent(2, 1, lblText2);
 
 			lstp = Core.BaitAndSwitch.Create<IListPicker>();
 			lstp.Items = new string[] { "Arial", "Verdana", "Times new roman", "Helvetica" };
 			//lstp.BackgroundColor = ConsoleColor.Red;
 			lstp.Name = "LPTest";
-			grid.SetContent(4, 0, lstp);
+			grid.SetContent(2, 2, lstp);
 
 			IButton btnClose = Core.BaitAndSwitch.Create<IButton>();
             btnClose.Text = "Close";
             btnClose.Name = "btnClose";
             btnClose.Click += btnClose_Click;
-			grid.SetContent(3, 1, btnClose);
+			grid.SetContent(3, 0, btnClose);
 
 			ITimeOfDayPicker CTime = Core.BaitAndSwitch.Create<ITimeOfDayPicker>();
 			CTime.Name = "Calendar";
+			grid.SetContent(3, 1, CTime);
 
 			ITextArea txtArea = Core.BaitAndSwitch.Create<ITextArea>();
 			txtArea.Value = "Apellido";
 			txtArea.Name = "txtApellido";
+			grid.SetContent(3, 2, txtArea);
 
 			ILabel LblA = Core.BaitAndSwitch.Create<ILabel>();
 			LblA.Name = "A";
 			LblA.Text = "lblA";
+			grid.SetContent(4, 0, LblA);
 
 			ILabelButton LblB = Core.BaitAndSwitch.Create<ILabelButton>();
 			LblB.Text = "B";
 			LblB.Name = "lblB";
+			grid.SetContent(4, 1, LblB);
 
 			ITextBox txtA = Core.BaitAndSwitch.Create<ITextBox>();
 			txtA.Name = "txtA";
 			txtA.Value = "txtA";
+			grid.SetContent(4, 2, txtA);
 
 			Page.Title = "CSS is now multiplatform";
 			Page.Content = grid;
