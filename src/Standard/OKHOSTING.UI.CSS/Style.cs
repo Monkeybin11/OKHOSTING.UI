@@ -622,7 +622,7 @@ namespace OKHOSTING.UI.CSS
 							int colspan = 1;
 							int currentColumn = column;
 
-							for (; currentColumn < columns.Length; colspan++, currentColumn++)
+							for (; currentColumn < columns.Length - 1; colspan++, currentColumn++)
 							{
 								if (columns[currentColumn + 1] != columns[currentColumn])
 								{
