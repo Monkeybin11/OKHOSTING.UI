@@ -592,54 +592,54 @@ namespace OKHOSTING.UI.CSS
 				//Begin grid-template-areas
 				var gridTemplateAreas = style.GetProperty("grid-template-areas");
 
+
 				if (gridTemplateAreas != null)
 				{
 					var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
 					var rowsArray = rows.ToArray();
-					int rowCounter = 0;
+					int columnCounter = 0;
 
 					var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
 
 					for (int row = 0; row < rowsArray.Length; row++)
 					{
-						var columns = rowsArray[row].Split(' ');
-
-						for (int column = 0; column < columns.Length; column++)
+						 var columns = rowsArray[row].Split(' ');
+						for (columnCounter = 0; columnCounter < columns.Length; columnCounter++)
 						{
-							areas[row, column] = columns[column];
+							areas[row, columnCounter] = columns[columnCounter];
 						}
 					}
 
 					var controlArray = App.GetParentAndAllChildren(control).ToArray();
+					
 
-					foreach (var row in rowsArray)
+					for (int row = 0; row < rowsArray.Length; row++ )
 					{
-						var columns = row.Split(' ');
-						
-						for (int column = 0; column < columns.Length; column ++)
+									
+						for (int column = 0; column < columnCounter; column ++)
 						{
 							//empty cell
-							if (columns[column] == ".")
+							if (areas[row, column] == ".")
 							{
-								grid.SetContent(rowCounter, column, null);
+								grid.SetContent(row, column, null);
 								continue;
 							}
 
-							var controlToPosition = controlArray.Where(c => c.Name == columns[column]).SingleOrDefault();
+							var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
 
 							//Set of controller
 							if (controlToPosition != null)
 							{
-								grid.SetContent(rowCounter, column, controlToPosition);
+								grid.SetContent(row, column, controlToPosition);
 							}
 
 							int colspan = 1;
 							int currentColumn = column;
 
 							//Begin ColumnSpan
-							for (; currentColumn < columns.Length - 1; colspan++, currentColumn++, column++)
+							for (; currentColumn < column - 1; colspan++, currentColumn++, column++)
 							{
-								if (columns[currentColumn + 1] != columns[currentColumn])
+								if (areas[row, currentColumn + 1] != areas[row, currentColumn])
 								{
 									break;
 								}
@@ -653,8 +653,9 @@ namespace OKHOSTING.UI.CSS
 
 						//Begin Row Span
 
-						int rowspan = 1;
-                        int currenRow 
+						//int rowspan = 1;
+							//int currenRow = ro;
+
 
 
 
@@ -666,8 +667,6 @@ namespace OKHOSTING.UI.CSS
 						//End Span
 
 						}
-
-						rowCounter++;
 					}
 				}
 				//end grid-template-areas
