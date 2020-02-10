@@ -621,7 +621,7 @@ namespace OKHOSTING.UI.CSS
 
 							int colspan;
 
-							for (colspan = 1; colspan < columns.Length; colspan++)
+							for (colspan = 1; column < columns.Length; colspan++)
 							{
 								if (columns[column + 1] != columns[column])
 								{
