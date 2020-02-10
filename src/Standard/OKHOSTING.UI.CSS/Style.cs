@@ -655,7 +655,7 @@ namespace OKHOSTING.UI.CSS
 							int rowspan = 1;
 							int currentRow = row;
 
-							for (; currentRow < rowsArray.Length; rowspan++, currentRow++, row++)
+							for (; currentRow < rowsArray.Length -1; rowspan++, currentRow++, row++)
 							{
 								if (areas[currentRow + 1, column] != areas[currentRow, column])
 								{
