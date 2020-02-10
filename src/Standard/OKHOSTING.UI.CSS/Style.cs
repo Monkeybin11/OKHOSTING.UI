@@ -597,7 +597,7 @@ namespace OKHOSTING.UI.CSS
 				{
 					var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
 					var rowsArray = rows.ToArray();
-					int columnCounter = 0;
+					int columnCounter;
 
 					var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
 
@@ -616,7 +616,7 @@ namespace OKHOSTING.UI.CSS
 					for (int row = 0; row < rowsArray.Length; row++ )
 					{
 									
-						for (int column = 0; column < columnCounter; column ++)
+						for (int column = 0; column < 3; column ++)
 						{
 							//empty cell
 							if (areas[row, column] == ".")
@@ -637,7 +637,7 @@ namespace OKHOSTING.UI.CSS
 							int currentColumn = column;
 
 							//Begin ColumnSpan
-							for (; currentColumn < column - 1; colspan++, currentColumn++, column++)
+							for (; currentColumn < 3 - 1; colspan++, currentColumn++, column++)
 							{
 								if (areas[row, currentColumn + 1] != areas[row, currentColumn])
 								{
@@ -651,20 +651,23 @@ namespace OKHOSTING.UI.CSS
 							}
 							//End ColumnSpan
 
-						//Begin Row Span
+							//Begin Row Span
+							int rowspan = 1;
+							int currentRow = row;
 
-						//int rowspan = 1;
-							//int currenRow = ro;
+							for (; currentRow < rowsArray.Length; rowspan++, currentRow++, row++)
+							{
+								if (areas[currentRow + 1, column] != areas[currentRow, column])
+								{
+									break;
+								}
+							}
 
-
-
-
-
-
-
-
-
-						//End Span
+							if (rowspan > 1)
+							{
+								grid.SetRowSpan(rowspan, controlToPosition);
+							}
+							//End Span
 
 						}
 					}

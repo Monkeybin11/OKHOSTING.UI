@@ -33,7 +33,7 @@ namespace OKHOSTING.UI.Test
 
 			lblTitle = Core.BaitAndSwitch.Create<ILabel>();
             lblTitle.Text = "Lil Octopus";
-			lblTitle.Name = "title";
+			lblTitle.Name = "Title";
 			lblTitle.CssClass = "marginpadding";
 			grid.SetContent(0, 0, lblTitle);
 
@@ -126,7 +126,7 @@ namespace OKHOSTING.UI.Test
 			{ 
 				display: grid;
 				grid-template-areas: 
-				"". LblSubtitle ImgOne""
+				""Title LblSubtitle ImgOne""
 				""Text1 ImgTree ImgTree""
 				""Text2 LPTest Nombre""
 				""btnClose txtApellido lblA""
