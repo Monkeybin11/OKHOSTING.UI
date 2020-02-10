@@ -605,6 +605,13 @@ namespace OKHOSTING.UI.CSS
 						
 						for (int column = 0; column < columns.Length; column ++)
 						{
+							//empty cell
+							if (columns[column] == ".")
+							{
+								grid.SetContent(rowCounter, column, null);
+								continue;
+							}
+
 							var controlToPosition = controlArray.Where(c => c.Name == columns[column]).SingleOrDefault();
 
 							if (controlToPosition != null)
