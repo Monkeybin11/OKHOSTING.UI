@@ -602,20 +602,17 @@ namespace OKHOSTING.UI.CSS
 					foreach (var row in rowsArray)
 					{
 						var columns = row.Split(' ');
-						//var columnsArray = columns.ToArray();
 						
 						for (int column = 0; column < columns.Length; column ++)
 						{
-							for (int i = 0; i < controlArray.Length; i++)
+							var controlToPosition = controlArray.Where(c => c.Name == columns[column]).SingleOrDefault();
+
+							if (controlToPosition != null)
 							{
-								var columnValue = columns.GetValue(column).ToString();
-								if (controlArray[i].Name.ToString() == columnValue)
-								{
-									grid.SetContent(rowCounter, column, controlArray[i]);
-								}
+								grid.SetContent(rowCounter, column, controlToPosition);
 							}
-							
 						}
+
 						rowCounter++;
 					}
 				}
