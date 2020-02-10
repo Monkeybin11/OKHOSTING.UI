@@ -618,6 +618,21 @@ namespace OKHOSTING.UI.CSS
 							{
 								grid.SetContent(rowCounter, column, controlToPosition);
 							}
+
+							int colspan;
+
+							for (colspan = 1; colspan < columns.Length; colspan++)
+							{
+								if (columns[column + 1] != columns[column])
+								{
+									break;
+								}
+							}
+
+							if (colspan > 1)
+							{
+								grid.SetColumnSpan(colspan, controlToPosition);
+							}
 						}
 
 						rowCounter++;
