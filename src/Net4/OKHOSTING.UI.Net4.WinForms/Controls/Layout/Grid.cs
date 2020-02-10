@@ -15,43 +15,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			AutoScroll = true;
 		}
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
-		{
-			Platform.DrawBorders(this, pevent);
-			base.OnPaint(pevent);
-
-			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			//| System.Windows.Forms.AnchorStyles.Left)
-			//| System.Windows.Forms.AnchorStyles.Right)));
-		}
-
-		IControl IGrid.GetContent(int row, int column)
-		{
-			return base.GetControlFromPosition(column, row) as IControl;
-		}
-
-		void IGrid.SetContent(int row, int column, IControl content)
-		{
-			if (row > RowCount)
-			{
-				throw new ArgumentOutOfRangeException(nameof(row));
-			}
-
-			if (column > ColumnCount)
-			{
-				throw new ArgumentOutOfRangeException(nameof(column));
-			}
-
-			var currentControl = ((IGrid) this).GetContent(row, column);
-
-			if (currentControl != null)
-			{
-				base.Controls.Remove((System.Windows.Forms.Control) currentControl);
-			}
-
-			base.Controls.Add((System.Windows.Forms.Control) content, column, row);
-		}
-
 		Thickness IGrid.CellMargin
 		{
 			get;
@@ -115,6 +78,46 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 				}
 
 				base.RowCount = value;
+			}
+		}
+
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		{
+			Platform.DrawBorders(this, pevent);
+			base.OnPaint(pevent);
+
+			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			//| System.Windows.Forms.AnchorStyles.Left)
+			//| System.Windows.Forms.AnchorStyles.Right)));
+		}
+
+		IControl IGrid.GetContent(int row, int column)
+		{
+			return base.GetControlFromPosition(column, row) as IControl;
+		}
+
+		void IGrid.SetContent(int row, int column, IControl content)
+		{
+			if (row > RowCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(row));
+			}
+
+			if (column > ColumnCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(column));
+			}
+
+			var currentControl = ((IGrid) this).GetContent(row, column);
+
+			if (currentControl != null)
+			{
+				base.Controls.Remove((System.Windows.Forms.Control) currentControl);
+			}
+
+			if (content != null)
+			{
+				base.Controls.Add((System.Windows.Forms.Control)content, column, row);
 			}
 		}
 

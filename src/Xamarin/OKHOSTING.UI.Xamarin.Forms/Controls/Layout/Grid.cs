@@ -148,7 +148,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				base.Children.Remove((global::Xamarin.Forms.View) currentContent);
 			}
 
-			base.Children.Add((global::Xamarin.Forms.View) content);
+			if (content != null)
+			{
+				base.Children.Add((global::Xamarin.Forms.View)content);
+			}
 		}
 
 		/// <summary>

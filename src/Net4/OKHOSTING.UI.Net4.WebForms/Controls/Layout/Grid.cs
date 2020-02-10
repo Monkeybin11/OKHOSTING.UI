@@ -502,7 +502,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 
 			Rows[row].Cells[column].Controls.Clear();
-			Rows[row].Cells[column].Controls.Add((System.Web.UI.Control)content);
+
+			if (content != null)
+			{
+				Rows[row].Cells[column].Controls.Add((System.Web.UI.Control)content);
+			}
 		}
 
 		/// <summary>

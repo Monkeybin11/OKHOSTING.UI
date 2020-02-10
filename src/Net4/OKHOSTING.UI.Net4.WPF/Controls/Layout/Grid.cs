@@ -167,9 +167,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				base.Children.Remove((System.Windows.UIElement) currentControl);
 			}
 
-			SetRow((System.Windows.UIElement) content, row);
-			SetColumn((System.Windows.UIElement) content, column);
-			Children.Add((System.Windows.UIElement) content);
+			if (content != null)
+			{
+				SetRow((System.Windows.UIElement)content, row);
+				SetColumn((System.Windows.UIElement)content, column);
+				Children.Add((System.Windows.UIElement)content);
+			}
 		}
 
 		/// <summary>
