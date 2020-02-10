@@ -597,6 +597,19 @@ namespace OKHOSTING.UI.CSS
 					var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
 					var rowsArray = rows.ToArray();
 					int rowCounter = 0;
+
+					var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
+
+					for (int row = 0; row < rowsArray.Length; row++)
+					{
+						var columns = rowsArray[row].Split(' ');
+
+						for (int column = 0; column < columns.Length; column++)
+						{
+							areas[row, column] = columns[column];
+						}
+					}
+
 					var controlArray = App.GetParentAndAllChildren(control).ToArray();
 
 					foreach (var row in rowsArray)
@@ -637,6 +650,21 @@ namespace OKHOSTING.UI.CSS
 								grid.SetColumnSpan(colspan, controlToPosition);
 							}
 							//End ColumnSpan
+
+						//Begin Row Span
+
+						int rowspan = 1;
+                        int currenRow 
+
+
+
+
+
+
+
+
+						//End Span
+
 						}
 
 						rowCounter++;
