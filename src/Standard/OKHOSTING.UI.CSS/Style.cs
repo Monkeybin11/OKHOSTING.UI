@@ -597,19 +597,24 @@ namespace OKHOSTING.UI.CSS
 					var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
 					var rowsArray = rows.ToArray();
 					int rowCounter = 0;
+					var controlArray = App.GetParentAndAllChildren(control).ToArray();
 
 					foreach (var row in rowsArray)
 					{
 						var columns = row.Split(' ');
-
+						//var columnsArray = columns.ToArray();
+						
 						for (int column = 0; column < columns.Length; column ++)
 						{
-							var cntrl = App.GetParentAndAllChildren(control);
-
-							if (cntrl.ToArray()[column].Name == columns.ToArray()[column])
+							for (int i = 0; i < controlArray.Length; i++)
 							{
-								grid.SetContent(rowCounter, column, cntrl.ToArray()[column].GetType());
+								var columnValue = columns.GetValue(column).ToString();
+								if (controlArray[i].Name.ToString() == columnValue)
+								{
+									grid.SetContent(rowCounter, column, controlArray[i]);
+								}
 							}
+							
 						}
 						rowCounter++;
 					}
