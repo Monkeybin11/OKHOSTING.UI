@@ -169,9 +169,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 			if (content != null)
 			{
-				SetRow((System.Windows.UIElement)content, row);
-				SetColumn((System.Windows.UIElement)content, column);
-				Children.Add((System.Windows.UIElement)content);
+				SetRow((System.Windows.UIElement) content, row);
+				SetColumn((System.Windows.UIElement) content, column);
+				Children.Add((System.Windows.UIElement) content);
 			}
 		}
 

@@ -468,7 +468,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 				return null;
 			}
 
-			return (IControl) Rows[row].Cells[column].Controls[0];
+			if (Rows[row].Cells[column].Controls.Count > 0)
+			{
+				return (IControl)Rows[row].Cells[column].Controls[0];
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 		/// <summary>
