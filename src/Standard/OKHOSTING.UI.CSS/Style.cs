@@ -597,13 +597,13 @@ namespace OKHOSTING.UI.CSS
 				{
 					var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
 					var rowsArray = rows.ToArray();
-					int columnCounter=0;
+					int columnCounter = 0;
 
 					var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
 
 					for (int row = 0; row < rowsArray.Length; row++)
 					{
-						 var columns = rowsArray[row].Split(' ');
+						var columns = rowsArray[row].Split(' ');
 						for (columnCounter = 0; columnCounter < columns.Length; columnCounter++)
 						{
 							areas[row, columnCounter] = columns[columnCounter];
@@ -611,67 +611,68 @@ namespace OKHOSTING.UI.CSS
 					}
 
 					var controlArray = App.GetParentAndAllChildren(control).ToArray();
-					
 
-					for (int row = 0; row < rowsArray.Length; row++ )
-					{
-									
-						for (int column = 0; column < columnCounter; column ++)
-						{
-							//empty cell
-							if (areas[row, column] == ".")
-							{
-								grid.SetContent(row, column, null);
-								continue;
-							}
+                    if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
+                    {
+                        for (int row = 0; row < rowsArray.Length; row++)
+                        {
+                            for (int column = 0; column < columnCounter; column++)
+                            {
+                                //empty cell
+                                if (areas[row, column] == ".")
+                                {
+                                    grid.SetContent(row, column, null);
+                                    continue;
+                                }
 
-							var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
+                                var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
 
-							//Set of controller
-							if (controlToPosition != null)
-							{
-								grid.SetContent(row, column, controlToPosition);
-							}
+                                //Set of controller
+                                if (controlToPosition != null)
+                                {
+                                    grid.SetContent(row, column, controlToPosition);
+                                }
 
-							int colspan = 1;
-							int currentColumn = column;
+                                int colspan = 1;
+                                int currentColumn = column;
 
-							//Begin ColumnSpan
-							for (; currentColumn < columnCounter - 1; colspan++, currentColumn++, column++)
-							{
-								if (areas[row, currentColumn + 1] != areas[row, currentColumn])
-								{
-									break;
-								}
-							}
+                                //Begin ColumnSpan
+                                for (; currentColumn < columnCounter - 1; colspan++, currentColumn++, column++)
+                                {
+                                    if (areas[row, currentColumn + 1] != areas[row, currentColumn])
+                                    {
+                                        break;
+                                    }
+                                }
 
-							if (colspan > 1)
-							{
-								grid.SetColumnSpan(colspan, controlToPosition);
-							}
-							//End ColumnSpan
+                                if (colspan > 1)
+                                {
+                                    grid.SetColumnSpan(colspan, controlToPosition);
+                                }
+                                //End ColumnSpan
 
-							//Begin Row Span
-							int rowspan = 1;
-							int currentRow = row;
+                                //Begin Row Span
+                                int rowspan = 1;
+                                int currentRow = row;
 
-							for (; currentRow < rowsArray.Length -1; rowspan++, currentRow++, row++)
-							{
-								if (areas[currentRow + 1, column] != areas[currentRow, column])
-								{
-									break;
-								}
-							}
+                                for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++, row++)
+                                {
+                                    if (areas[currentRow + 1, column] != areas[currentRow, column])
+                                    {
+                                        break;
+                                    }
+                                }
 
-							if (rowspan > 1)
-							{
-								grid.SetRowSpan(rowspan, controlToPosition);
-							}
-							//End Span
+                                if (rowspan > 1)
+                                {
+                                    grid.SetRowSpan(rowspan, controlToPosition);
+                                }
+                                //End Span
 
-						}
-					}
-				}
+                            }
+                        }
+                    }
+                }
 				//end grid-template-areas
 
 			}
