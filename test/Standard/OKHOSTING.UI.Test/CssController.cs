@@ -128,9 +128,9 @@ namespace OKHOSTING.UI.Test
 				grid-template-areas: 
 				""Title LblSubtitle ImgOne""
 				""Text1 ImgTree ImgTree""
-				""Text1 LPTest Nombre""
-				""btnClose txtApellido lblA""
-				""footer lblB txtA"";
+				""Text1 . Nombre""
+				""lblB lblB lblB""
+				""lblB lblB lblB"";
 				grid-template-rows: 80px 500px 10px 100px 250px;
 				grid-template-columns: 20px 100px 15px;
 				/* grid-template: 80px 500px 10px 100px 250px/20px 100px 15px; */
