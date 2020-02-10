@@ -126,8 +126,8 @@ namespace OKHOSTING.UI.Test
 			{ 
 				display: grid;
 				grid-template-areas: 
-				""title LblSubtitle ImgOne""
-				""Text1 Imgtwo ImgTree ""
+				"". LblSubtitle ImgOne""
+				""Text1 ImgTree ImgTree""
 				""Text2 LPTest Nombre""
 				""btnClose txtApellido lblA""
 				""footer lblB txtA"";

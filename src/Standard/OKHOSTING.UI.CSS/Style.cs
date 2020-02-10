@@ -614,6 +614,7 @@ namespace OKHOSTING.UI.CSS
 
 							var controlToPosition = controlArray.Where(c => c.Name == columns[column]).SingleOrDefault();
 
+							//Set of controller
 							if (controlToPosition != null)
 							{
 								grid.SetContent(rowCounter, column, controlToPosition);
@@ -622,6 +623,7 @@ namespace OKHOSTING.UI.CSS
 							int colspan = 1;
 							int currentColumn = column;
 
+							//Begin ColumnSpan
 							for (; currentColumn < columns.Length - 1; colspan++, currentColumn++, column++)
 							{
 								if (columns[currentColumn + 1] != columns[currentColumn])
@@ -634,6 +636,7 @@ namespace OKHOSTING.UI.CSS
 							{
 								grid.SetColumnSpan(colspan, controlToPosition);
 							}
+							//End ColumnSpan
 						}
 
 						rowCounter++;
