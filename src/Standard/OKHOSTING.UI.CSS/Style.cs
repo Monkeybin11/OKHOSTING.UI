@@ -624,7 +624,7 @@ namespace OKHOSTING.UI.CSS
 
 							for (; currentColumn < columns.Length; colspan++, currentColumn++)
 							{
-								if (columns[column + 1] != columns[column])
+								if (columns[currentColumn + 1] != columns[currentColumn])
 								{
 									break;
 								}
