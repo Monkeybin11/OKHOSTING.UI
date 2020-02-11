@@ -502,7 +502,19 @@ namespace OKHOSTING.UI.CSS
 
 				if (gridAutoRows != null)
 				{
-
+					double lengthPixels = 0;
+					var autoRows = gridAutoRows.Value.Split(' ');
+					for(int row = 0; row < grid.RowCount; row++)
+					{
+                        if (grid.GetHeight(row) == null)
+                        {
+                            for (int r = row; r < grid.RowCount; r++)
+							{
+								
+								grid.SetHeight(r, lengthPixels);
+							}
+                        }
+                    }
 				}
 				//Endgrid-auto-rows
 
