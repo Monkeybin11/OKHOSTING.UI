@@ -167,6 +167,11 @@ namespace OKHOSTING.UI.Test
 			GridMakeResponsive.Click += (object sender, EventArgs e) => new GridMakeResponsive() { Page = Page }.Start();
 			grid.SetContent(22, 0, GridMakeResponsive);
 
+			ILabelButton URLCssGrid = Core.BaitAndSwitch.Create<ILabelButton>();
+			URLCssGrid.Text = "URL CssGrid Click Mee";
+			URLCssGrid.Click += (object sender, EventArgs e) => new CssGrid() { Page = Page }.Start();
+			grid.SetContent(23, 0, URLCssGrid);
+
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
             Page.Content = grid;
