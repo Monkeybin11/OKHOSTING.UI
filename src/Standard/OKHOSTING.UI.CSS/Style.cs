@@ -506,11 +506,10 @@ namespace OKHOSTING.UI.CSS
 					var autoRows = gridAutoRows.Value.Split(' ');
 					for(int row = 0; row < grid.RowCount; row++)
 					{
-                        if (grid.GetHeight(row) == null)
+						if (grid.GetHeight(row) == 0)
                         {
                             for (int r = row; r < grid.RowCount; r++)
 							{
-								
 								grid.SetHeight(r, lengthPixels);
 							}
                         }
