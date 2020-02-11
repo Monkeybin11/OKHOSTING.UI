@@ -96,7 +96,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 			set
 			{
-				base.BackColor = value;
+				base.BackColor = Platform.RemoveAlpha(value);
 			}
 		}
 

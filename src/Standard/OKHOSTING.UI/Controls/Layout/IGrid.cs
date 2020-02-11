@@ -177,5 +177,69 @@
 			}
 			ChangeRow(grid, rowSender, rowReceiver);
 		}
+
+		/// <summary>
+		/// Removes a specific row and moves up all rows below
+		/// </summary>
+		/// <param name="rowIndex">Zero based index of he row to be deleted</param>
+		public static void RemoveRow(this IGrid grid, int rowIndex)
+		{
+			if (rowIndex >= grid.RowCount)
+			{
+				return;
+			}
+
+			//delete all controls of row that we want to delete
+			for (int column = 0; column < grid.ColumnCount; column++)
+			{
+				var control = grid.GetContent(column, rowIndex);
+
+				if (control != null)
+				{
+					grid.Children.Remove(control);
+				}
+			}
+
+			//move up row controls that comes after row we want to remove
+			for (int row = rowIndex + 1; row < grid.RowCount; row++)
+			{
+				grid.ChangeRow(row, row - 1);
+			}
+
+			//remove last row
+			grid.RowCount--;
+		}
+
+		/// <summary>
+		/// Removes a specific column and moves left all columns on right
+		/// </summary>
+		/// <param name="columnIndex">Zero based index of he column to be deleted</param>
+		public static void RemoveColumn(this IGrid grid, int columnIndex)
+		{
+			if (columnIndex >= grid.ColumnCount)
+			{
+				return;
+			}
+
+			//delete all controls of column that we want to delete
+			for (int row = 0; row < grid.RowCount; row++)
+			{
+				var control = grid.GetContent(columnIndex, row);
+				
+				if (control != null)
+				{
+					grid.Children.Remove(control);
+				}
+			}
+
+			//move left column controls that comes after the column we want to remove
+			for (int column = columnIndex + 1; column < grid.ColumnCount; column++)
+			{
+				grid.ChangeColumn(column, column - 1);
+			}
+
+			//remove last column
+			grid.ColumnCount--;
+		}
 	}
 }

@@ -192,14 +192,21 @@ namespace OKHOSTING.UI.Net4.WinForms
 			Point p4 = control.Bounds.Location;
 			p4.Offset(0, control.Height); //bottom left
 
+			var color = Platform.RemoveAlpha(((IControl) control).BorderColor);
+
 			//draw custom border here
-			if (((IControl) control).BorderColor != null && ((IControl) control).BorderWidth != null)
+			if (color != null && ((IControl) control).BorderWidth != null)
 			{
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Top), p1, p2); //top
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Right), p2, p3); //right
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Bottom), p3, p4); //bottom
-				pevent.Graphics.DrawLine(new Pen(((IControl) control).BorderColor, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
+				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Top), p1, p2); //top
+				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Right), p2, p3); //right
+				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Bottom), p3, p4); //bottom
+				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
 			}
+		}
+
+		public static Color RemoveAlpha(Color color)
+		{
+			return Color.FromArgb(255, color.R, color.G, color.B);
 		}
 	}
 }

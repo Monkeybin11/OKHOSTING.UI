@@ -291,7 +291,7 @@ namespace OKHOSTING.UI.CSS
 					columnsWidth += lengthPixels;
 				}
 
-				grid.SetHeight(c, lengthPixels);
+				grid.SetWidth(c, lengthPixels);
 				c++;
 			}
 
@@ -304,7 +304,7 @@ namespace OKHOSTING.UI.CSS
 				if (column.Type == Length.Unit.Fr)
 				{
 					lengthPixels = ((grid.Width.Value - columnsWidth) / frQuantility) * column.Value;
-					grid.SetHeight(c, lengthPixels);
+					grid.SetWidth(c, lengthPixels);
 					c++;
 				}
 			}
@@ -318,7 +318,7 @@ namespace OKHOSTING.UI.CSS
 		protected static void SetRowHeight(IGrid grid, IEnumerable<Length> rows)
 		{
 			int frQuantility = 0;
-			double rowsWidth = 0;
+			double rowsHeight = 0;
 			int r = 0;
 			
 
@@ -329,12 +329,12 @@ namespace OKHOSTING.UI.CSS
 					if (row.Type == Length.Unit.Percent)
 					{
 						lengthPixels = row.Value / 100 * grid.Width.Value;
-						rowsWidth += lengthPixels;
+						rowsHeight += lengthPixels;
 					}
 					else if (row.Type == Length.Unit.Px)
 					{
 						lengthPixels = row.Value;
-						rowsWidth += lengthPixels;
+						rowsHeight += lengthPixels;
 					}
 					else if (row.Type == Length.Unit.Fr)
 					{
@@ -343,7 +343,7 @@ namespace OKHOSTING.UI.CSS
 					else if (row.IsAbsolute)
 					{
 						lengthPixels = row.ToPixel();
-						rowsWidth += lengthPixels;
+						rowsHeight += lengthPixels;
 					}
 
 				grid.SetHeight(r, lengthPixels);
@@ -356,12 +356,12 @@ namespace OKHOSTING.UI.CSS
 			{
 				double lengthPixels = 0;
 
-					if (row.Type == Length.Unit.Fr)
-					{
-						lengthPixels = ((grid.Width.Value - rowsWidth) / frQuantility) * row.Value;
+				if (row.Type == Length.Unit.Fr)
+				{
+					lengthPixels = ((grid.Width.Value - rowsHeight) / frQuantility) * row.Value;
 					grid.SetHeight(r, lengthPixels);
 					r++;
-					}
+				}
 			}
 		}
 
@@ -549,6 +549,11 @@ namespace OKHOSTING.UI.CSS
 							lengthPixels = length.ToPixel();
 						}
 
+						if (grid.CellMargin == null)
+						{
+							grid.CellMargin = new Thickness();
+						}
+
 						grid.CellMargin.Bottom = lengthPixels;
 					}
 				}
@@ -582,6 +587,11 @@ namespace OKHOSTING.UI.CSS
 						else if (length.IsAbsolute)
 						{
 							lengthPixels = length.ToPixel();
+						}
+
+						if (grid.CellMargin == null)
+						{
+							grid.CellMargin = new Thickness();
 						}
 
 						grid.CellMargin.Right = lengthPixels;
@@ -632,11 +642,11 @@ namespace OKHOSTING.UI.CSS
                                 {
                                     grid.SetContent(row, column, controlToPosition);
                                 }
-
+								
+								//Begin ColumnSpan
                                 int colspan = 1;
                                 int currentColumn = column;
 
-                                //Begin ColumnSpan
                                 for (; currentColumn < columnCounter - 1; colspan++, currentColumn++, column++)
                                 {
                                     if (areas[row, currentColumn + 1] != areas[row, currentColumn])

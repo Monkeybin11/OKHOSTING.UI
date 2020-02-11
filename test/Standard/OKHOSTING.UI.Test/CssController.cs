@@ -126,15 +126,16 @@ namespace OKHOSTING.UI.Test
 			{ 
 				display: grid;
 				grid-template-areas: 
-				""Title LblSubtitle ImgOne""
-				""Text1 ImgTree ImgTree""
-				""Text1 . Nombre""
-				""lblB lblB lblB""
-				""lblB lblB lblB"";
+				""ImgTwo . LblSubtitle""
+				""Text1 . ImgTree""
+				""Text2 LPTest Nombre""
+				""btnClose txtApellido lblA""
+				""footer lblB txtA"";
 				grid-template-rows: 80px 500px 10px 100px 250px;
-				grid-template-columns: 20px 100px 15px;
+				grid-template-columns: 20px 100px 30px;
 				/* grid-template: 80px 500px 10px 100px 250px/20px 100px 15px; */
-				margin: 0;
+				grid-row-gap: 10px;
+				grid-column-gap: 10px;
 			}   
 			
 			/* Stack the layout on small devices/viewports. */

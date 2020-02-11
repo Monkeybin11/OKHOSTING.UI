@@ -115,7 +115,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.BackColor = value;
+				base.BackColor = Platform.RemoveAlpha(value);
 			}
 		}
 
@@ -168,21 +168,15 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#region ITextControl
 
-		/// <summary>
-		/// Private member to store the FontColor
-		/// </summary>
-		private Color _FontColor;
-
 		Color ITextControl.FontColor
 		{
 			get
 			{
-				return _FontColor;
+				return base.ForeColor;
 			}
 			set
 			{
-				_FontColor = value;
-				base.ForeColor = value;
+				base.ForeColor = Platform.RemoveAlpha(value);
 			}
 		}
 
