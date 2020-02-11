@@ -45,7 +45,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel Label1 = Core.BaitAndSwitch.Create<ILabel>();
             Label1.Text = "Welcome";
-            Label1.Name = "label1";
+            Label1.Name = "Label1";
             grid.SetContent(1, 2, Label1);
 
             ILabelButton labelbutton = Core.BaitAndSwitch.Create<ILabelButton>();
@@ -71,10 +71,16 @@ namespace OKHOSTING.UI.Test
                 #grid 
                 {
                     display: grid;
-                }
-
-
-            ");
+                    grid-template-areas: 
+                    "". Close Close""
+                    "". Calendar Label1""
+                    "". labelButton Label2"";
+                    grid-template-rows: 100px 150px 200px;
+                    grid-template-columns: 150px;
+                    grid-auto-rows: 200px;
+               }"
+                 );
+            style.Apply(Page);
         }
     }
 }
