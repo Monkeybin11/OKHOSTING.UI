@@ -162,10 +162,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				double left, top, right, bottom;
 				Thickness thickness = new Thickness();
 
-				if (double.TryParse(base.Style["margin-left"].Replace("px", null), out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["margin-top"].Replace("px", null), out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["margin-right"].Replace("px", null), out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["margin-bottom"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+				if (double.TryParse(base.Style["margin-left"]?.Replace("px", null), out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["margin-top"]?.Replace("px", null), out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["margin-right"]?.Replace("px", null), out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["margin-bottom"]?.Replace("px", null), out bottom)) thickness.Bottom = bottom;
 
 				return new Thickness(left, top, right, bottom);
 			}
@@ -191,10 +191,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				double left, top, right, bottom;
 				Thickness thickness = new Thickness();
 
-				if (double.TryParse(Style["padding-left"].Replace("px", null), out left)) thickness.Left = left;
-				if (double.TryParse(Style["padding-top"].Replace("px", null), out top)) thickness.Top = top;
-				if (double.TryParse(Style["padding-right"].Replace("px", null), out right)) thickness.Right = right;
-				if (double.TryParse(Style["padding-bottom"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+				if (double.TryParse(Style["padding-left"]?.Replace("px", null), out left)) thickness.Left = left;
+				if (double.TryParse(Style["padding-top"]?.Replace("px", null), out top)) thickness.Top = top;
+				if (double.TryParse(Style["padding-right"]?.Replace("px", null), out right)) thickness.Right = right;
+				if (double.TryParse(Style["padding-bottom"]?.Replace("px", null), out bottom)) thickness.Bottom = bottom;
 
 				return new Thickness(left, top, right, bottom);
 			}

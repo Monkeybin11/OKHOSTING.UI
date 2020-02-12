@@ -177,7 +177,7 @@ namespace OKHOSTING.UI.Test
                 {
                     display: grid;
                     grid-column-gap: 25px;
-                    grid-row-gap: 70px;
+                    grid-row-gap: 50px;
                     grid-template-areas:
                     ""txtdate1 txtdate2 lbdatebirth""
                     ""lbcurrentdate lboutcome btnCalculate""

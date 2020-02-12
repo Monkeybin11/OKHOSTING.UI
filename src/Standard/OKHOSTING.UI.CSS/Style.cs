@@ -902,7 +902,15 @@ namespace OKHOSTING.UI.CSS
 
 					for (int i = 0; i < controlArray.Length - 1; i++ )
 					{
-						controlArray[i].Margin = new Thickness(0, 0, 0, lengthPixels);
+						double marginRightValue = controlArray[i].Margin.Right.Value;
+						if (marginRightValue == 0)
+						{
+							controlArray[i].Margin = new Thickness(0, 0, 0, lengthPixels);
+						}
+						else
+						{
+							controlArray[i].Margin = new Thickness(0, 0, marginRightValue, lengthPixels);
+						}
 					}
 				}
             }
@@ -915,7 +923,7 @@ namespace OKHOSTING.UI.CSS
             {
                 double lengthPixels = 0;
 
-				if (Length.TryParse(gridRowGap.Value, out Length length))
+				if (Length.TryParse(gridColumnGap.Value, out Length length))
 				{
 					if (length.Type == Length.Unit.Percent)
 					{
@@ -940,7 +948,15 @@ namespace OKHOSTING.UI.CSS
 
 					for (int i = 0; i < controlArray.Length - 1; i++)
 					{
-						controlArray[i].Margin = new Thickness(0, 0, lengthPixels, 0);
+						double marginBottonValue = controlArray[i].Margin.Bottom.Value;
+						if (marginBottonValue == 0)
+						{
+							controlArray[i].Margin = new Thickness(0, 0, lengthPixels, 0);
+						}
+						else
+						{
+							controlArray[i].Margin = new Thickness(0, 0, lengthPixels, marginBottonValue);
+						}
 					}
 				}
 			}
