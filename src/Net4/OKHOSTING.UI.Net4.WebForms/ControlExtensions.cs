@@ -56,10 +56,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			double left, top, right, bottom;
 			Thickness thickness = new Thickness();
 
-			if (double.TryParse(control.Style["margin-left"].Replace("px", null), out left)) thickness.Left = left;
-			if (double.TryParse(control.Style["margin-top"].Replace("px", null), out top)) thickness.Top = top;
-			if (double.TryParse(control.Style["margin-right"].Replace("px", null), out right)) thickness.Right = right;
-			if (double.TryParse(control.Style["margin-bottom"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+			if (double.TryParse(control.Style["margin-left"]?.Replace("px", null), out left)) thickness.Left = left;
+			if (double.TryParse(control.Style["margin-top"]?.Replace("px", null), out top)) thickness.Top = top;
+			if (double.TryParse(control.Style["margin-right"]?.Replace("px", null), out right)) thickness.Right = right;
+			if (double.TryParse(control.Style["margin-bottom"]?.Replace("px", null), out bottom)) thickness.Bottom = bottom;
 
 			return new Thickness(left, top, right, bottom);
 		}
@@ -77,10 +77,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			double left, top, right, bottom;
 			Thickness thickness = new Thickness();
 
-			if (double.TryParse(control.Style["padding-left"].Replace("px", null), out left)) thickness.Left = left;
-			if (double.TryParse(control.Style["padding-top"].Replace("px", null), out top)) thickness.Top = top;
-			if (double.TryParse(control.Style["padding-right"].Replace("px", null), out right)) thickness.Right = right;
-			if (double.TryParse(control.Style["padding-bottom"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+			if (double.TryParse(control.Style["padding-left"]?.Replace("px", null), out left)) thickness.Left = left;
+			if (double.TryParse(control.Style["padding-top"]?.Replace("px", null), out top)) thickness.Top = top;
+			if (double.TryParse(control.Style["padding-right"]?.Replace("px", null), out right)) thickness.Right = right;
+			if (double.TryParse(control.Style["padding-bottom"]?.Replace("px", null), out bottom)) thickness.Bottom = bottom;
 
 			return new Thickness(left, top, right, bottom);
 		}
@@ -98,10 +98,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			double left, top, right, bottom;
 			Thickness thickness = new Thickness();
 
-			if (double.TryParse(control.Style["border-left-width"].Replace("px", null), out left)) thickness.Left = left;
-			if (double.TryParse(control.Style["border-top-width"].Replace("px", null), out top)) thickness.Top = top;
-			if (double.TryParse(control.Style["border-right-width"].Replace("px", null), out right)) thickness.Right = right;
-			if (double.TryParse(control.Style["border-bottom-width"].Replace("px", null), out bottom)) thickness.Bottom = bottom;
+			if (double.TryParse(control.Style["border-left-width"]?.Replace("px", null), out left)) thickness.Left = left;
+			if (double.TryParse(control.Style["border-top-width"]?.Replace("px", null), out top)) thickness.Top = top;
+			if (double.TryParse(control.Style["border-right-width"]?.Replace("px", null), out right)) thickness.Right = right;
+			if (double.TryParse(control.Style["border-bottom-width"]?.Replace("px", null), out bottom)) thickness.Bottom = bottom;
 
 			return new Thickness(left, top, right, bottom);
 		}

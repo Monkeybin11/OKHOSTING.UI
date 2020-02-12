@@ -769,54 +769,67 @@ namespace OKHOSTING.UI.CSS
                 var rows = ParseLengths(gridTemplateRows.Value);
                 SetRowHeight(grid, rows);
             }
-            //end grid-template-rows
+			//end grid-template-rows
 
-            //begin grid-auto-rows
-            var gridAutoRows = style.GetProperty("grid-auto-rows");
+			//begin grid-auto-rows
+			//var gridAutoRows = style.GetProperty("grid-auto-rows");
+			//string gridAutoRowsValue = null;
 
-            if (gridAutoRows != null)
-            {
-                double lengthPixels = 0;
-                var rows = ParseLengths(gridAutoRows.Value).ToArray();
+			//try
+			//{
+			//	gridAutoRowsValue = gridAutoRows?.Value;
+			//}
+			//catch (NullReferenceException) { }
 
-                for (int row = 0; row < grid.RowCount; row++)
-                {
-                    if (grid.GetHeight(row) == 0)
-                    {
-                        for (int r = row; r <= grid.RowCount - 1; r++)
-                        {
-                            lengthPixels = rows[0].Value;
-                            grid.SetHeight(r, lengthPixels);
-                        }
-                    }
-                }
-            }
-            //end grid-auto-rows
+			//if (gridAutoRowsValue != null)
+			//{
+			//	double lengthPixels = 0;
+			//	var rows = ParseLengths(gridAutoRows.Value).ToArray();
 
-            //begin grid-auto-columns
-            var gridAutoColumns = style.GetProperty("grid-auto-columns");
+			//	for (int row = 0; row < grid.RowCount; row++)
+			//	{
+			//		if (grid.GetHeight(row) == 0)
+			//		{
+			//			for (int r = row; r <= grid.RowCount - 1; r++)
+			//			{
+			//				lengthPixels = rows[0].Value;
+			//				grid.SetHeight(r, lengthPixels);
+			//			}
+			//		}
+			//	}
+			//}
+			//end grid-auto-rows
 
-            if (gridAutoColumns != null)
-            {
-                double lengthPixels = 0;
-                var columns = ParseLengths(gridAutoColumns.Value).ToArray();
+			//begin grid-auto-columns
+			//var gridAutoColumns = style.GetProperty("grid-auto-columns");
+			//string gridAutoColumnsValue = null;
 
-                for (int column = 0; column < grid.ColumnCount; column++)
-                {
-                    if (grid.GetWidth(column) == 0)
-                    {
-                        for (int c = column; c <= grid.ColumnCount - 1; c++)
-                        {
-                            lengthPixels = columns[0].Value;
-                            grid.SetWidth(c, lengthPixels);
-                        }
-                    }
-                }
-            }
-            //end grid-auto-columns
+			//try
+			//{
+			//	gridAutoColumnsValue = gridAutoRows?.Value;
+			//}
+			//catch (NullReferenceException) { }
+			//if (gridAutoColumnsValue != null)
+			//{
+			//	double lengthPixels = 0;
+			//	var columns = ParseLengths(gridAutoColumns.Value).ToArray();
 
-            //begin grid-template
-            var gridTemplate = style.GetProperty("grid-template");
+			//	for (int column = 0; column < grid.ColumnCount; column++)
+			//	{
+			//		if (grid.GetWidth(column) == 0)
+			//		{
+			//			for (int c = column; c <= grid.ColumnCount - 1; c++)
+			//			{
+			//				lengthPixels = columns[0].Value;
+			//				grid.SetWidth(c, lengthPixels);
+			//			}
+			//		}
+			//	}
+			//}
+			//end grid-auto-columns
+
+			//begin grid-template
+			var gridTemplate = style.GetProperty("grid-template");
             string gridTemplateValue = null;
 
             try
@@ -862,8 +875,8 @@ namespace OKHOSTING.UI.CSS
                 //parsear con try parse gridRowGap
                 //var rows = gridRowGap.Value.Split(' ');
                 double lengthPixels = 0;
+			
 
-                //quitar rows y split
                 if (Length.TryParse(gridRowGap.Value, out Length length))
                 {
                     if (length.Type == Length.Unit.Percent)
@@ -885,8 +898,13 @@ namespace OKHOSTING.UI.CSS
                         grid.CellMargin = new Thickness();
                     }
 
-                    grid.CellMargin.Bottom = lengthPixels;
-                }
+					var controlArray = App.GetParentAndAllChildren(grid).ToArray();
+
+					for (int i = 0; i < controlArray.Length - 1; i++ )
+					{
+						controlArray[i].Margin = new Thickness(0, 0, 0, lengthPixels);
+					}
+				}
             }
             //end grid-row-gap
 
@@ -897,121 +915,126 @@ namespace OKHOSTING.UI.CSS
             {
                 double lengthPixels = 0;
 
-                for (int i = 0; i < grid.ColumnCount; i++)
-                {
+				if (Length.TryParse(gridRowGap.Value, out Length length))
+				{
+					if (length.Type == Length.Unit.Percent)
+					{
+						lengthPixels = length.Value / 100 * grid.Parent.Height.Value;
+					}
+					else if (length.Type == Length.Unit.Px)
+					{
+						lengthPixels = length.Value;
 
-                    if (Length.TryParse(gridColumnGap.Value, out Length length))
-                    {
-                        if (length.Type == Length.Unit.Percent)
-                        {
-                            lengthPixels = length.Value / 100 * grid.Parent.Width.Value;
-                        }
-                        else if (length.Type == Length.Unit.Px)
-                        {
-                            lengthPixels = length.Value;
+					}
+					else if (length.IsAbsolute)
+					{
+						lengthPixels = length.ToPixel();
+					}
 
-                        }
-                        //else if (length.Type == Length.Unit.Fr)
-                        //{
-                        //	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
-                        //}
-                        else if (length.IsAbsolute)
-                        {
-                            lengthPixels = length.ToPixel();
-                        }
+					if (grid.CellMargin == null)
+					{
+						grid.CellMargin = new Thickness();
+					}
 
-                        if (grid.CellMargin == null)
-                        {
-                            grid.CellMargin = new Thickness();
-                        }
-                    }
-                    grid.CellMargin.Right = lengthPixels;
-                }
-            }
-            //end grid-column-gap
+					var controlArray = App.GetParentAndAllChildren(grid).ToArray();
 
-            //begin grid-template-areas
-            var gridTemplateAreas = style.GetProperty("grid-template-areas");
+					for (int i = 0; i < controlArray.Length - 1; i++)
+					{
+						controlArray[i].Margin = new Thickness(0, 0, lengthPixels, 0);
+					}
+				}
+			}
+			//end grid-column-gap
 
-            if (gridTemplateAreas?.Value != null)
-            {
-                var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
-                var rowsArray = rows.ToArray();
-                int columnCounter = 0;
+			//begin grid-template-areas
+			var gridTemplateAreas = style.GetProperty("grid-template-areas");
+			string gridTemplateAreasValue = null;
 
-                var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
+			try
+			{
+				gridTemplateAreasValue = gridTemplateAreas?.Value;
+			}
+			catch (NullReferenceException) { }
 
-                for (int row = 0; row < rowsArray.Length; row++)
-                {
-                    var columns = rowsArray[row].Split(' ');
-                    for (columnCounter = 0; columnCounter < columns.Length; columnCounter++)
-                    {
-                        areas[row, columnCounter] = columns[columnCounter];
-                    }
-                }
+			if (gridTemplateAreasValue != null)
+			{
+				var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
+				var rowsArray = rows.ToArray();
+				int columnCounter = 0;
 
-                var controlArray = App.GetParentAndAllChildren(grid).ToArray();
+				var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
 
-                if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
-                {
-                    for (int row = 0; row < rowsArray.Length; row++)
-                    {
-                        for (int column = 0; column < columnCounter; column++)
-                        {
-                            //empty cell
-                            if (areas[row, column] == ".")
-                            {
-                                grid.SetContent(row, column, null);
-                                continue;
-                            }
+				for (int row = 0; row < rowsArray.Length; row++)
+				{
+					var columns = rowsArray[row].Split(' ');
+					for (columnCounter = 0; columnCounter < columns.Length; columnCounter++)
+					{
+						areas[row, columnCounter] = columns[columnCounter];
+					}
+				}
 
-                            var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
+				var controlArray = App.GetParentAndAllChildren(grid).ToArray();
 
-                            //Set of controller
-                            if (controlToPosition != null)
-                            {
-                                grid.SetContent(row, column, controlToPosition);
-                            }
+				if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
+				{
+					for (int row = 0; row < rowsArray.Length; row++)
+					{
+						for (int column = 0; column < columnCounter; column++)
+						{
+							//empty cell
+							if (areas[row, column] == ".")
+							{
+								grid.SetContent(row, column, null);
+								continue;
+							}
 
-                            //begin ColumnSpan
-                            int colspan = 1;
-                            int currentColumn = column;
+							var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
 
-                            for (; currentColumn < columnCounter - 1; colspan++, currentColumn++, column++)
-                            {
-                                if (areas[row, currentColumn + 1] != areas[row, currentColumn])
-                                {
-                                    break;
-                                }
-                            }
+							//Set of controller
+							if (controlToPosition != null)
+							{
+								grid.SetContent(row, column, controlToPosition);
+							}
 
-                            if (colspan > 1)
-                            {
-                                grid.SetColumnSpan(colspan, controlToPosition);
-                            }
-                            //end ColumnSpan
+							//begin ColumnSpan
+							int colspan = 1;
+							int currentColumn = column;
 
-                            //begin Row Span
-                            int rowspan = 1;
-                            int currentRow = row;
+							for (; currentColumn < columnCounter - 1; colspan++, currentColumn++, column++)
+							{
+								if (areas[row, currentColumn + 1] != areas[row, currentColumn])
+								{
+									break;
+								}
+							}
 
-                            for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++, row++)
-                            {
-                                if (areas[currentRow + 1, column] != areas[currentRow, column])
-                                {
-                                    break;
-                                }
-                            }
+							if (colspan > 1)
+							{
+								grid.SetColumnSpan(colspan, controlToPosition);
+							}
+							//end ColumnSpan
 
-                            if (rowspan > 1)
-                            {
-                                grid.SetRowSpan(rowspan, controlToPosition);
-                            }//end rowspan
-                        }
-                    }
-                }
-            }//end grid-template-areas
-        }
+							//begin Row Span
+							int rowspan = 1;
+							int currentRow = row;
+
+							for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++, row++)
+							{
+								if (areas[currentRow + 1, column] != areas[currentRow, column])
+								{
+									break;
+								}
+							}
+
+							if (rowspan > 1)
+							{
+								grid.SetRowSpan(rowspan, controlToPosition);
+							}//end rowspan
+						}
+					}
+				}
+			}//end grid-template-areas
+		}
 
         public static Color ParseColor(string rgbColor)
 		{
