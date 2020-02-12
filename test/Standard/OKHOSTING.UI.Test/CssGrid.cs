@@ -75,9 +75,9 @@ namespace OKHOSTING.UI.Test
                     ""DatePicker Close ListP""
                     ""Button Calendar Label1""
                     ""Listpicker labelButton Label2"";
-                    grid-template-rows: 100px;
+                    /* grid-template-rows: 100px; */
                     grid-auto-rows:200px;
-                    grid-template-columns: 150px;
+                    /* grid-template-columns: 150px; */
                     grid-auto-columns: 300px;
                }"
                  );
