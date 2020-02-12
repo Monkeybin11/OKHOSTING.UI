@@ -476,7 +476,7 @@ namespace OKHOSTING.UI.CSS
 			//this is a CSS grid
 			if (style.GetDisplay() == "grid")
 			{
-				//Begin grid-template-columns
+				//begin grid-template-columns
 				var gridTemplateColumns = style.GetProperty("grid-template-columns");
 				var grid = (IGrid)control;
 				
@@ -485,9 +485,9 @@ namespace OKHOSTING.UI.CSS
 					var columns = ParseLengths(gridTemplateColumns.Value);
 					SetColumnWidth(grid, columns);
 				}
-				//End grid-template-columns
+				//end grid-template-columns
 
-				//Begin grid-template-rows
+				//begin grid-template-rows
 				var gridTemplateRows = style.GetProperty("grid-template-rows");
 
 				if (gridTemplateRows != null)
@@ -495,9 +495,9 @@ namespace OKHOSTING.UI.CSS
 					var rows = ParseLengths(gridTemplateRows.Value);
 					SetRowHeight(grid, rows);
 				}
-				//End grid-template-rows
+				//end grid-template-rows
 
-				//Begin grid-auto-rows
+				//begin grid-auto-rows
 				var gridAutoRows = style.GetProperty("grid-auto-rows");
 
 				if (gridAutoRows != null)
@@ -517,9 +517,9 @@ namespace OKHOSTING.UI.CSS
                         }
 					}
 				}
-				//End grid-auto-rows
+				//end grid-auto-rows
 
-				//Begin grid-auto-columns
+				//begin grid-auto-columns
 				var gridAutoColumns = style.GetProperty("grid-auto-columns");
 
 				if (gridAutoColumns != null)
@@ -539,41 +539,48 @@ namespace OKHOSTING.UI.CSS
 						}
 					}
 				}
-				//End grid-auto-columns
+				//end grid-auto-columns
 
-				//Begin grid-template
-				//var gridTemplate = style.GetProperty("grid-template");
+				//begin grid-template
+				var gridTemplate = style.GetProperty("grid-template");
+				string gridTemplateValue;
 
-				//if (gridTemplate?.Value != null)
-				//{
-				//	var rowsColumns = gridTemplate.Value.Split('/');
-				//	int count = 0;
+				try
+				{
+					gridTemplateValue = gridTemplate?.Value;
+				}
+				catch (NullReferenceException) { }
+				
+				if (gridTemplateValue != null)
+				{
+					var rowsColumns = gridTemplate.Value.Split('/');
+					int count = 0;
 
-				//	foreach (var rowcolumn in rowsColumns)
-				//	{
-				//		if (count == 0)
-				//		{
-				//			var rows = ParseLengths(rowcolumn);
-				//			SetRowHeight(grid, rows);
-				//		}
-				//		else if (count == 1)
-				//		{
-				//			var columns = ParseLengths(rowcolumn);
+					foreach (var rowcolumn in rowsColumns)
+					{
+						if (count == 0)
+						{
+							var rows = ParseLengths(rowcolumn);
+							SetRowHeight(grid, rows);
+						}
+						else if (count == 1)
+						{
+							var columns = ParseLengths(rowcolumn);
 
-				//			SetColumnWidth(grid, columns);
+							SetColumnWidth(grid, columns);
 
-				//		}
-				//		else if (count == 2)
-				//		{
-				//			//this place is the same at grid-template-areas
-				//		}
+						}
+						else if (count == 2)
+						{
+							//this place is the same at grid-template-areas
+						}
 
-				//		count++;
-				//	}
-				//}
-				//End grid-template
+						count++;
+					}
+				}
+				//end grid-template
 
-				//Begin grid-row-gap
+				//begin grid-row-gap
 				var gridRowGap = style.GetProperty("grid-row-gap");
 
 				if (gridRowGap?.Value != null)
@@ -605,9 +612,9 @@ namespace OKHOSTING.UI.CSS
 						grid.CellMargin.Bottom = lengthPixels;
 					}
 				}
-				//End grid-row-gap
+				//end grid-row-gap
 
-				//Begin grid-column-gap
+				//begin grid-column-gap
 				var gridColumnGap = style.GetProperty("grid-column-gap");
 
 				if (gridColumnGap?.Value != null)
@@ -645,9 +652,9 @@ namespace OKHOSTING.UI.CSS
 						grid.CellMargin.Right = lengthPixels;
 					}
 				}
-				//End grid-column-gap
+				//end grid-column-gap
 
-				//Begin grid-template-areas
+				//begin grid-template-areas
 				var gridTemplateAreas = style.GetProperty("grid-template-areas");
 
 				if (gridTemplateAreas?.Value != null)
@@ -690,7 +697,7 @@ namespace OKHOSTING.UI.CSS
 									grid.SetContent(row, column, controlToPosition);
 								}
 
-								//Begin ColumnSpan
+								//begin ColumnSpan
 								int colspan = 1;
 								int currentColumn = column;
 
@@ -706,9 +713,9 @@ namespace OKHOSTING.UI.CSS
 								{
 									grid.SetColumnSpan(colspan, controlToPosition);
 								}
-								//End ColumnSpan
+								//end ColumnSpan
 
-								//Begin Row Span
+								//begin Row Span
 								int rowspan = 1;
 								int currentRow = row;
 
@@ -723,20 +730,12 @@ namespace OKHOSTING.UI.CSS
 								if (rowspan > 1)
 								{
 									grid.SetRowSpan(rowspan, controlToPosition);
-								}
-								//End Span
-
+								}//end rowspan
 							}
 						}
 					}
-				}
-				//end grid-template-areas
-
-			}
-			//End css grid
-
-
-
+				}//end grid-template-areas
+			}//end css grid
 
 			//background and border colors
 			if (!string.IsNullOrWhiteSpace(style.GetBackgroundColor()))
