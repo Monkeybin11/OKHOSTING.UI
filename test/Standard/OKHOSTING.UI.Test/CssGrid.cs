@@ -76,7 +76,7 @@ namespace OKHOSTING.UI.Test
                     "". Calendar Label1""
                     "". labelButton Label2"";
                     grid-template-rows: 100px;
-                    grid-auto-rows: 200px;
+                    grid-auto-rows:200px;
                     grid-template-columns: 150px 200px 100px;
                }"
                  );

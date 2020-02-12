@@ -503,15 +503,17 @@ namespace OKHOSTING.UI.CSS
 				if (gridAutoRows != null)
 				{
 					double lengthPixels = 0;
-					var autoRows = gridAutoRows.Value.Split(' ');
+					var rows = gridAutoRows.Value.Split(' ');
 					for(int row = 0; row < grid.RowCount; row++)
 					{
 						if (grid.GetHeight(row) == 0)
                         {
-                            for (int r = row; r < grid.RowCount; r++)
+							for (int r = row; r < grid.RowCount - 1; r++ )
 							{
+								lengthPixels = double.Parse(gridAutoRows.Value);
 								grid.SetHeight(r, lengthPixels);
 							}
+							continue;
                         }
                     }
 				}
