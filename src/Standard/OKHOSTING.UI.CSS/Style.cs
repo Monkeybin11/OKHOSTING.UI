@@ -900,37 +900,37 @@ namespace OKHOSTING.UI.CSS
 				{
 					double lengthPixels = 0;
 
-					for (int i = 0; i < grid.ColumnCount; i++)
-					{
+                    for (int i = 0; i < grid.ColumnCount; i++)
+                    {
 
-						Length length = new Length();
+                        if (Length.TryParse(gridColumnGap.Value, out Length length))
+                        {
+                            if (length.Type == Length.Unit.Percent)
+                            {
+                                lengthPixels = length.Value / 100 * grid.Parent.Width.Value;
+                            }
+                            else if (length.Type == Length.Unit.Px)
+                            {
+                                lengthPixels = length.Value;
 
-						if (length.Type == Length.Unit.Percent)
-						{
-							lengthPixels = length.Value / 100 * grid.Parent.Width.Value;
-						}
-						else if (length.Type == Length.Unit.Px)
-						{
-							lengthPixels = length.Value;
+                            }
+                            //else if (length.Type == Length.Unit.Fr)
+                            //{
+                            //	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
+                            //}
+                            else if (length.IsAbsolute)
+                            {
+                                lengthPixels = length.ToPixel();
+                            }
 
-						}
-						//else if (length.Type == Length.Unit.Fr)
-						//{
-						//	lengthPixels = (control.Parent.Width.Value - rowsWidth) / length.Value;
-						//}
-						else if (length.IsAbsolute)
-						{
-							lengthPixels = length.ToPixel();
-						}
-
-						if (grid.CellMargin == null)
-						{
-							grid.CellMargin = new Thickness();
-						}
-
-						grid.CellMargin.Right = lengthPixels;
-					}
-				}
+                            if (grid.CellMargin == null)
+                            {
+                                grid.CellMargin = new Thickness();
+                            }
+                        }
+                        grid.CellMargin.Right = lengthPixels;
+                    }
+                }
 				//end grid-column-gap
 
 				//begin grid-template-areas
