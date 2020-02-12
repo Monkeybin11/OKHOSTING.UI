@@ -34,14 +34,14 @@ namespace OKHOSTING.UI.Test
             Pdate.Name = "DatePicker";
             grid.SetContent(0, 2, Pdate);
 
-            ILabelButton ListP = Core.BaitAndSwitch.Create<ILabelButton>();
-            ListP.Text = "ListPicker";
+            IListPicker ListP = Core.BaitAndSwitch.Create<IListPicker>();
+            ListP.Name = "ListP";
             grid.SetContent(1, 0, ListP);
 
-            IButton Image = Core.BaitAndSwitch.Create<IButton>();
-            Image.Name = "Picture";
-            Image.Text = "texto";
-            grid.SetContent(1, 1, Image);
+            IButton Button = Core.BaitAndSwitch.Create<IButton>();
+            Button.Name = "Button";
+            Button.Text = "Button";
+            grid.SetContent(1, 1, Button);
 
             ILabel Label1 = Core.BaitAndSwitch.Create<ILabel>();
             Label1.Text = "Welcome";
@@ -54,7 +54,7 @@ namespace OKHOSTING.UI.Test
             grid.SetContent(2, 0, labelbutton);
 
             IListPicker picker = Core.BaitAndSwitch.Create<IListPicker>();
-            picker.Name = "picker";
+            picker.Name = "Listpicker";
             grid.SetContent(2, 1, picker);
 
             ILabel label2 = Core.BaitAndSwitch.Create<ILabel>();
@@ -72,12 +72,13 @@ namespace OKHOSTING.UI.Test
                 {
                     display: grid;
                     grid-template-areas: 
-                    "". Close Close""
-                    "". Calendar Label1""
-                    "". labelButton Label2"";
+                    ""DatePicker Close ListP""
+                    ""Button Calendar Label1""
+                    ""Listpicker labelButton Label2"";
                     grid-template-rows: 100px;
                     grid-auto-rows:200px;
-                    grid-template-columns: 150px 200px 100px;
+                    grid-template-columns: 150px;
+                    grid-auto-columns: 300px;
                }"
                  );
             style.Apply(Page);

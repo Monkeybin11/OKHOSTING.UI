@@ -515,10 +515,31 @@ namespace OKHOSTING.UI.CSS
 								grid.SetHeight(r, lengthPixels);
 							}
                         }
-						continue;
 					}
 				}
-				//Endgrid-auto-rows
+				//End grid-auto-rows
+
+				//Begin grid-auto-columns
+				var gridAutoColumns = style.GetProperty("grid-auto-columns");
+
+				if (gridAutoColumns != null)
+				{
+					double lengthPixels = 0;
+					var columns = ParseLengths(gridAutoColumns.Value).ToArray();
+
+					for (int column = 0; column < grid.ColumnCount; column++)
+					{
+						if (grid.GetWidth(column) == 0)
+						{
+							for (int c = column; c <= grid.ColumnCount - 1; c++)
+							{
+								lengthPixels = columns[0].Value;
+								grid.SetWidth(c, lengthPixels);
+							}
+						}
+					}
+				}
+				//End grid-auto-columns
 
 				//Begin grid-template
 				//var gridTemplate = style.GetProperty("grid-template");
