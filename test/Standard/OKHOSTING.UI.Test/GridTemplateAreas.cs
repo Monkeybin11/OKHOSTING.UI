@@ -97,7 +97,7 @@ namespace OKHOSTING.UI.Test
               {
                Display: grid;
                grid-template-areas: 
-               ""lbl1 lbl1 lbl1 lbl1""
+               ""bl1 lbl1 lbl1 lbl1""
                ""lbl1 lbl1 lbl1 lbl1""
                ""txt3 . . txt4""
                ""btn1 btn2 btn3 btn4"";
