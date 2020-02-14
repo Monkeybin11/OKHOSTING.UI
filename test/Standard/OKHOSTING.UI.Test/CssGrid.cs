@@ -43,6 +43,11 @@ namespace OKHOSTING.UI.Test
 			gridTemplate.Click += (object sender, EventArgs e) => new gridTemplateController() { Page = Page }.Start();
 			stack.Children.Add(gridTemplate);
 
+			ILabelButton gridAutoRowAndgridAutoColumn = Core.BaitAndSwitch.Create<ILabelButton>();
+			gridAutoRowAndgridAutoColumn.Text = "grid-auto-row and grid-auto-column";
+			gridAutoRowAndgridAutoColumn.Margin = new Thickness(0, 0, 0, 50);
+			gridAutoRowAndgridAutoColumn.Click += (object sender, EventArgs e) => new Auto_Colum_Auto_Row() { Page = Page }.Start();
+			stack.Children.Add(gridAutoRowAndgridAutoColumn);
 
 			IButton btnExit = Core.BaitAndSwitch.Create<IButton>();
 			btnExit.Text = "Exit";

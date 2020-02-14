@@ -781,32 +781,35 @@ namespace OKHOSTING.UI.CSS
             //end grid-template-rows
 
             //begin grid-auto-rows
-            //var gridAutoRows = style.GetProperty("grid-auto-rows");
-            //string gridAutoRowsValue = null;
+            var gridAutoRows = style.GetProperty("grid-auto-rows");
+            string gridAutoRowsValue = null;
 
-            //try
-            //{
-            //	gridAutoRowsValue = gridAutoRows?.Value;
-            //}
-            //catch (NullReferenceException) { }
+            try
+            {
+                gridAutoRowsValue = gridAutoRows?.Value;
+            }
+            catch (NullReferenceException) { }
 
-            //if (gridAutoRowsValue != null)
-            //{
-            //	double lengthPixels = 0;
-            //	var rows = ParseLengths(gridAutoRows.Value).ToArray();
+            if (gridAutoRowsValue != null)
+            {
+                double lengthPixels = 0;
+                var rows = ParseLengths(gridAutoRows.Value).ToArray();
 
-            //	for (int row = 0; row < grid.RowCount; row++)
-            //	{
-            //		if (grid.GetHeight(row) == 0)
-            //		{
-            //			for (int r = row; r <= grid.RowCount - 1; r++)
-            //			{
-            //				lengthPixels = rows[0].Value;
-            //				grid.SetHeight(r, lengthPixels);
-            //			}
-            //		}
-            //	}
-            //}
+                if (rows.Length == 1)
+                {
+                    for (int row = 0; row < grid.RowCount; row++)
+                    {
+                        if (grid.GetHeight(row) == 0)
+                        {
+                            for (int r = row; r <= grid.RowCount - 1; r++)
+                            {
+                                lengthPixels = rows[0].Value;
+                                grid.SetHeight(r, lengthPixels);
+                            }
+                        }
+                    }
+                }
+            }
             //end grid-auto-rows
 
             //begin grid-auto-columns
@@ -815,25 +818,25 @@ namespace OKHOSTING.UI.CSS
 
             //try
             //{
-            //	gridAutoColumnsValue = gridAutoRows?.Value;
+            //    gridAutoColumnsValue = gridAutoRows?.Value;
             //}
             //catch (NullReferenceException) { }
             //if (gridAutoColumnsValue != null)
             //{
-            //	double lengthPixels = 0;
-            //	var columns = ParseLengths(gridAutoColumns.Value).ToArray();
+            //    double lengthPixels = 0;
+            //    var columns = ParseLengths(gridAutoColumns.Value).ToArray();
 
-            //	for (int column = 0; column < grid.ColumnCount; column++)
-            //	{
-            //		if (grid.GetWidth(column) == 0)
-            //		{
-            //			for (int c = column; c <= grid.ColumnCount - 1; c++)
-            //			{
-            //				lengthPixels = columns[0].Value;
-            //				grid.SetWidth(c, lengthPixels);
-            //			}
-            //		}
-            //	}
+            //    for (int column = 0; column < grid.ColumnCount; column++)
+            //    {
+            //        if (grid.GetWidth(column) == 0)
+            //        {
+            //            for (int c = column; c <= grid.ColumnCount - 1; c++)
+            //            {
+            //                lengthPixels = columns[0].Value;
+            //                grid.SetWidth(c, lengthPixels);
+            //            }
+            //        }
+            //    }
             //}
             //end grid-auto-columns
 

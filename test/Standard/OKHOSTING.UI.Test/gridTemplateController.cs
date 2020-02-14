@@ -87,6 +87,9 @@ namespace OKHOSTING.UI.Test
             btn4.Text = "Cuarto botn";
             GridTemplateOne.SetContent(3, 3, btn4);
 
+            
+
+
             Page.Title = "grid-template";
             Page.Content = stackPpal;
 
