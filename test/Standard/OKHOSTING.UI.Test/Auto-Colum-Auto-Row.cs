@@ -232,7 +232,7 @@ namespace OKHOSTING.UI.Test
                 #AutoRow
                     {
                         display: grid;
-                        grid-template-rows: 40px;
+                        
                         grid-auto-rows: 50px;
                         
                     }
