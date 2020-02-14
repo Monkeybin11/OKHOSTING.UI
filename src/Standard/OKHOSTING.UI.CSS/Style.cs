@@ -979,106 +979,106 @@ namespace OKHOSTING.UI.CSS
             //end grid-column-gap
 
             //begin grid-template-areas
-            var gridTemplateAreas = style.GetProperty("grid-template-areas");
-            string gridTemplateAreasValue = null;
+            //var gridTemplateAreas = style.GetProperty("grid-template-areas");
+            //string gridTemplateAreasValue = null;
 
-            try
-            {
-                gridTemplateAreasValue = gridTemplateAreas?.Value;
-            }
-            catch (NullReferenceException) { }
+            //try
+            //{
+            //    gridTemplateAreasValue = gridTemplateAreas?.Value;
+            //}
+            //catch (NullReferenceException) { }
 
-            if (gridTemplateAreasValue != null)
-            {
-                var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
-                var rowsArray = rows.ToArray();
-                int columnCounter = 0;
+            //if (gridTemplateAreasValue != null)
+            //{
+            //    var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
+            //    var rowsArray = rows.ToArray();
+            //    int columnCounter = 0;
 
-                var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
+            //    var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
 
-                for (int row = 0; row < rowsArray.Length; row++)
-                {
-                    var columns = rowsArray[row].Split(' ');
-                    for (columnCounter = 0; columnCounter < columns.Length; columnCounter++)
-                    {
-                        areas[row, columnCounter] = columns[columnCounter];
-                    }
-                }
+            //    for (int row = 0; row < rowsArray.Length; row++)
+            //    {
+            //        var columns = rowsArray[row].Split(' ');
+            //        for (columnCounter = 0; columnCounter < columns.Length; columnCounter++)
+            //        {
+            //            areas[row, columnCounter] = columns[columnCounter];
+            //        }
+            //    }
 
-                var controlArray = App.GetParentAndAllChildren(grid).ToArray();
+            //    var controlArray = App.GetParentAndAllChildren(grid).ToArray();
 
-                if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
-                {
-                    for (int row = 0; row < rowsArray.Length; row++)
-                    {
-                        for (int column = 0; column < columnCounter; column++)
-                        {
-                            //empty cell
+            //    if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
+            //    {
+            //        for (int row = 0; row < rowsArray.Length; row++)
+            //        {
+            //            for (int column = 0; column < columnCounter; column++)
+            //            {
+            //                //empty cell
 
-                            if (areas[row, column] == ".")
-                            {
-                                grid.SetContent(row, column, null);
-                                continue;
-                            }
+            //                if (areas[row, column] == ".")
+            //                {
+            //                    grid.SetContent(row, column, null);
+            //                    continue;
+            //                }
 
-                            var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
+            //                var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
 
-                            //Set of controller
-                            if (controlToPosition != null)
-                            {
-                                grid.SetContent(row, column, controlToPosition);
+            //                //Set of controller
+            //                if (controlToPosition != null)
+            //                {
+            //                    grid.SetContent(row, column, controlToPosition);
 
 
-                                //begin ColumnSpan
-                                int colspan = 1;
-                                int currentColumn = column;
-                                //int ColumnCurrent = column;
+            //                    //begin ColumnSpan
+            //                    int colspan = 1;
+            //                    int currentColumn = column;
+            //                    //int ColumnCurrent = column;
 
-                                for (; currentColumn < columnCounter - 1; colspan++, currentColumn++)
-                                {
-                                    if (grid.GetColumnSpan(controlToPosition) == 0)
-                                    {
-                                        if (areas[row, currentColumn + 1] != areas[row, currentColumn])
-                                        {
-                                            break;
-                                        }
-                                    }
-                                }
+            //                    for (; currentColumn < columnCounter - 1; colspan++, currentColumn++)
+            //                    {
+            //                        if (grid.GetColumnSpan(controlToPosition) == 0)
+            //                        {
+            //                            if (areas[row, currentColumn + 1] != areas[row, currentColumn])
+            //                            {
+            //                                break;
+            //                            }
+            //                        }
+            //                    }
 
-                                if (colspan > 1)
-                                {
-                                    grid.SetColumnSpan(colspan, controlToPosition);
-                                    //column = ColumnCurrent;
-                                }
-                                //end ColumnSpan
+            //                    if (colspan > 1)
+            //                    {
+            //                        grid.SetColumnSpan(colspan, controlToPosition);
+            //                        //column = ColumnCurrent;
+            //                    }
+            //                    //end ColumnSpan
 
-                                //begin Row Span
-                                int rowspan = 1;
-                                int currentRow = row;
-                                //int RowCurrent = row;
+            //                    //begin Row Span
+            //                    int rowspan = 1;
+            //                    int currentRow = row;
+            //                    //int RowCurrent = row;
 
-                                for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++)
-                                {
-                                    if (grid.GetRowSpan(controlToPosition) == 0)
-                                    {
-                                        if (areas[currentRow + 1, column] != areas[currentRow, column])
-                                        {
-                                            break;
-                                        }
-                                    }
-                                }
+            //                    for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++)
+            //                    {
+            //                        if (grid.GetRowSpan(controlToPosition) == 0)
+            //                        {
+            //                            if (areas[currentRow + 1, column] != areas[currentRow, column])
+            //                            {
+            //                                break;
+            //                            }
+            //                        }
+            //                    }
 
-                                if (rowspan > 1)
-                                {
-                                    grid.SetRowSpan(rowspan, controlToPosition);
-                                    //row = RowCurrent;
-                                }//end rowspan
+            //                    if (rowspan > 1)
+            //                    {
+            //                        grid.SetRowSpan(rowspan, controlToPosition);
+            //                        //row = RowCurrent;
+            //                    }//end rowspan
 
-                            }
-                        }
-                    }
-                }
-            }//end grid-template-areas
+            //                }
+            //            }
+            //        }
+            //    }
+            //}//end grid-template-areas
         }
 
         public static Color ParseColor(string rgbColor)
