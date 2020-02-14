@@ -240,8 +240,8 @@ namespace OKHOSTING.UI.Test
                 #AutoColumn
                     {
                         display: grid;
-                        grid-template-columns: 90px 90px 90px;
-                        grid-auto-columns: 150px;
+                        
+                        grid-auto-columns: 25;
                     }
                 
             ");
