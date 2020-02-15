@@ -16,6 +16,11 @@ namespace OKHOSTING.UI.Test
             lblGridAutorow.Text = "***************grid-auto-rows ***************";
             StackPrincipal.Children.Add(lblGridAutorow);
 
+            IButton btnExit = Core.BaitAndSwitch.Create<IButton>();
+            btnExit.Text = "Exit";
+            btnExit.Click += btnExit_Click;
+            StackPrincipal.Children.Add(btnExit);
+
             IGrid AutoRow = Core.BaitAndSwitch.Create<IGrid>();
             AutoRow.Name = "AutoRow";
             AutoRow.ColumnCount = 4;
@@ -232,7 +237,7 @@ namespace OKHOSTING.UI.Test
                 #AutoRow
                     {
                         display: grid;
-                        grid-template-rows: 40px 40px 40px 40px;
+                        grid-template-rows: 40px 40px 40px;
                         grid-auto-rows: 50px;
                         
                     }
@@ -240,12 +245,27 @@ namespace OKHOSTING.UI.Test
                 #AutoColumn
                     {
                         display: grid;
-                        
-                        grid-auto-columns: 25;
+                        grid-template-columns: 80px 80px;
+                        grid-auto-columns: 120px;
+                    }
+
+                #AutoColumnAndAutoRow
+                    {  
+                        display: grid;
+                        grid-template-rows: 40px 40px 40px;
+                        grid-auto-rows: 50px;
+                        grid-template-columns: 80px 80px;
+                        grid-auto-columns: 120px;
                     }
                 
             ");
             style.Apply(Page);
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Finish();
+        }
+
     }
 }

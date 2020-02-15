@@ -172,6 +172,11 @@ namespace OKHOSTING.UI.Test
 			URLCssGrid.Click += (object sender, EventArgs e) => new CssGrid() { Page = Page }.Start();
 			grid.SetContent(23, 0, URLCssGrid);
 
+			ILabelButton ArrobaMedia = Core.BaitAndSwitch.Create<ILabelButton>();
+			ArrobaMedia.Text = "@media controller";
+			ArrobaMedia.Click += (object sender, EventArgs e) => new ArrobaMediaController() { Page = Page }.Start();
+			grid.SetContent(24, 0, ArrobaMedia);
+
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
             Page.Content = grid;
