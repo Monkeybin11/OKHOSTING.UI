@@ -1042,9 +1042,9 @@ namespace OKHOSTING.UI.CSS
                                     int currentColumn = column;
                                     //int ColumnCurrent = column;
 
-                                    for (; currentColumn < columnCounter - 1; colspan++, currentColumn++)
+                                    if (grid.GetColumnSpan(controlToPosition) == 0)
                                     {
-                                        if (grid.GetColumnSpan(controlToPosition) == 0)
+                                        for (; currentColumn < columnCounter - 1; colspan++, currentColumn++)
                                         {
                                             if (areas[row, currentColumn + 1] != areas[row, currentColumn])
                                             {
@@ -1065,9 +1065,10 @@ namespace OKHOSTING.UI.CSS
                                     int currentRow = row;
                                     //int RowCurrent = row;
 
-                                    for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++)
+
+                                    if (grid.GetRowSpan(controlToPosition) == 0)
                                     {
-                                        if (grid.GetRowSpan(controlToPosition) == 0)
+                                        for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++)
                                         {
                                             if (areas[currentRow + 1, column] != areas[currentRow, column])
                                             {
