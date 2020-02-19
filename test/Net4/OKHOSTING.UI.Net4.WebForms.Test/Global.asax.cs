@@ -2,41 +2,7 @@
 
 namespace OKHOSTING.UI.Net4.WebForms.Test
 {
-	public class Global : System.Web.HttpApplication
+	public class Global : WebForms.Global
 	{
-
-		protected void Application_Start(object sender, EventArgs e)
-		{
-		}
-
-		protected void Session_Start(object sender, EventArgs e)
-		{
-			Session["App"] = new App();
-		}
-
-		protected void Application_BeginRequest(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Application_AuthenticateRequest(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Application_Error(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Session_End(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void Application_End(object sender, EventArgs e)
-		{
-
-		}
 	}
 }

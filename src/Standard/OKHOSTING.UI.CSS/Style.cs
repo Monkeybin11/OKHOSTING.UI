@@ -36,7 +36,7 @@ namespace OKHOSTING.UI.CSS
 
         protected string[] SplitByCommas(string selectorText)
         {
-            return selectorText.Split(',').Select(s => s.Trim()).ToArray();
+            return selectorText.Split(',').Select(s => s.Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
         }
 
         /// <summary>
@@ -752,17 +752,15 @@ namespace OKHOSTING.UI.CSS
 
             //begin grid-template-columns
             var gridTemplateColumns = style.GetProperty("grid-template-columns");
-            //var grid = (IGrid)control;
 
             if (gridTemplateColumns != null && !string.IsNullOrWhiteSpace(gridTemplateColumns?.Value))
             {
-
                 var columns = ParseLengths(gridTemplateColumns.Value);
+
                 if (columns.ToArray().Length <= grid.ColumnCount)
                 {
                     SetColumnWidth(grid, columns);
                 }
-
             }
             //end grid-template-columns
 
@@ -809,7 +807,7 @@ namespace OKHOSTING.UI.CSS
             //begin grid-auto-columns
             var gridAutoColumns = style.GetProperty("grid-auto-columns");
             
-                if (gridAutoColumns != null && !string.IsNullOrWhiteSpace(gridAutoColumns?.Value))
+            if (gridAutoColumns != null && !string.IsNullOrWhiteSpace(gridAutoColumns?.Value))
             {
                 double lengthPixels = 0;
                 var columns = ParseLengths(gridAutoColumns.Value).ToArray();

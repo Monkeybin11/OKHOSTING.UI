@@ -184,6 +184,9 @@
 			grid.RowCount--;
 		}
 
+		/// <summary>
+		/// Makes all cells empty (with no content)
+		/// </summary>
         public static void EmtpyAllCells(this IGrid grid)
         {
             for (int r = 0; r < grid.RowCount; r++)

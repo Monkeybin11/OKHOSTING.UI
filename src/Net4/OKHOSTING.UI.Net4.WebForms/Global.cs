@@ -5,7 +5,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 	public class Global : System.Web.HttpApplication
 	{
 		protected static int ControlCounter = 0;
-
+		
 		protected virtual void Application_Start(object sender, EventArgs e)
 		{
 			Core.BaitAndSwitch.PlatformSpecificModifiers.Add(new Tuple<Type, Func<object, object>>(typeof(UI.Controls.IControl), control =>
