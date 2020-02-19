@@ -189,10 +189,16 @@
 		/// </summary>
 		/// <param name="columnIndex">Zero based index of he column to be deleted</param>
 
-		public static void EmtpyAllCells(this IGrid grid, int columnSender, int rowReceiver)
+		public static void EmtpyAllCells(this IGrid grid,int column, int row)
 		{
-			for () ;
-		
+			for (int r = 0; r < grid.RowCount; r++) {
+
+			for (int c = 0; c < grid.ColumnCount; c++)
+				{
+					grid.SetContent(r, c, null);
+
+				}
+			}
 		}
 
 
