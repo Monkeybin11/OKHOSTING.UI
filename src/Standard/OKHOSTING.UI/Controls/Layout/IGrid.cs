@@ -77,32 +77,6 @@
 			}
 		}
 
-		/// <summary>
-		/// Automatically adjusts the columns and rows of the grid to fit a specific width
-		/// </summary>
-		/// <param name="grid"></param>
-		/// <param name="containerWidth"></param>
-		public static void MakeResponsive(this IGrid grid, int containerWidth)
-		{
-			grid.Width = containerWidth;
-			int rows = grid.RowCount;
-			int columns = grid.ColumnCount;
-
-				for (int row = 0; row < rows; row++)
-                {
-                    for (int column = 0; column < columns; column++)
-                    {
-					//posible solucion para decidir bajar contenido
-					//double CW = containerWidth - grid.GetWidth(column);
-					//if (grid.GetWidth(column) > CW) { }
-					if (grid.GetContent(row, column) != null)
-                        {
-						grid.SetContent(grid.RowCount - 1, 0, grid.GetContent(row, column));
-                            grid.RowCount++;
-                        }
-                    }
-                }
-		}
 
 		/// <summary>
 		/// Change column content especific to other especific column
@@ -209,6 +183,18 @@
 			//remove last row
 			grid.RowCount--;
 		}
+
+		/// <summary>
+		/// Removes a specific column and moves left all columns on right
+		/// </summary>
+		/// <param name="columnIndex">Zero based index of he column to be deleted</param>
+
+		public static void EmtpyAllCells(this IGrid grid, int columnSender, int rowReceiver)
+		{
+			for () ;
+		
+		}
+
 
 		/// <summary>
 		/// Removes a specific column and moves left all columns on right
