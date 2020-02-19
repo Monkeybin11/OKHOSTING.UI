@@ -145,9 +145,9 @@ namespace OKHOSTING.UI.Test
             Page.Content = grid;
 
             CSS.Style style = new CSS.Style();
-            style.Parse(
-                         @"
-            #grid
+
+			style.Parse(@"
+				#grid
                 {
                     display: grid;
                     grid-template-columns: 40px 60px 80px;
@@ -159,11 +159,10 @@ namespace OKHOSTING.UI.Test
                    #grid 
                     {
                         display: grid;
-                        grid-template-columns: 40px 100px;
+                        grid-template-columns: 100px 80px;
                     }
-                }
+                }");
 
-");
             style.Apply(Page);
         }
 

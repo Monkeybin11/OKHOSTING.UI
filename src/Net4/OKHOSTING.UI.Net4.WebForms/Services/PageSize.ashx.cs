@@ -38,8 +38,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 				page.OnResized();
 			}
 
-
-
 			context.Response.Write(output);
 		}
 
