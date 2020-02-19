@@ -184,29 +184,23 @@
 			grid.RowCount--;
 		}
 
-		/// <summary>
-		/// Removes a specific column and moves left all columns on right
-		/// </summary>
-		/// <param name="columnIndex">Zero based index of he column to be deleted</param>
+        public static void EmtpyAllCells(this IGrid grid)
+        {
+            for (int r = 0; r < grid.RowCount; r++)
+            {
 
-		public static void EmtpyAllCells(this IGrid grid,int column, int row)
-		{
-			for (int r = 0; r < grid.RowCount; r++) {
+                for (int c = 0; c < grid.ColumnCount; c++)
+                {
+                    grid.SetContent(r, c, null);
+                }
+            }
+        }
 
-			for (int c = 0; c < grid.ColumnCount; c++)
-				{
-					grid.SetContent(r, c, null);
-
-				}
-			}
-		}
-
-
-		/// <summary>
-		/// Removes a specific column and moves left all columns on right
-		/// </summary>
-		/// <param name="columnIndex">Zero based index of he column to be deleted</param>
-		public static void RemoveColumn(this IGrid grid, int columnIndex)
+        /// <summary>
+        /// Removes a specific column and moves left all columns on right
+        /// </summary>
+        /// <param name="columnIndex">Zero based index of he column to be deleted</param>
+        public static void RemoveColumn(this IGrid grid, int columnIndex)
 		{
 			if (columnIndex >= grid.ColumnCount)
 			{

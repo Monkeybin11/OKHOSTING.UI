@@ -37,6 +37,7 @@ namespace OKHOSTING.UI.Test
             ILabel lblVowels = Core.BaitAndSwitch.Create<ILabel>();
             ILabel lblUpperCase = Core.BaitAndSwitch.Create<ILabel>();
             ILabel lblLowerCase = Core.BaitAndSwitch.Create<ILabel>();
+            ILabel lblwhitpage = Core.BaitAndSwitch.Create<ILabel>();
 
             //In Variables
             ITextBox txtString = Core.BaitAndSwitch.Create<ITextBox>();
@@ -50,24 +51,30 @@ namespace OKHOSTING.UI.Test
 
 
             grid.Name = "grid";
-            grid.ColumnCount = 3;
+            grid.ColumnCount = 4;
             grid.RowCount = 15;
+
+
+            //whit page
+            lblwhitpage.Text = "************************* Whith";
+            lblwhitpage.Name = "Ancho de pagina";
+            grid.SetContent(0, 0, lblwhitpage);
 
             //lblString
             lblString.Text = "String";
             lblString.Name = "lblString";
-            grid.SetContent(0, 0, lblString);
+            grid.SetContent(0, 1, lblString);
 
             //txtString
             txtString.Value = "";
             txtString.Name = "txtString";
             txtString.BorderWidth = new Thickness(1, 2, 3, 4);
-            grid.SetContent(0, 1, txtString);
+            grid.SetContent(0, 2, txtString);
 
             //lblLetters
             lblLetters.Text = "Number of Letters";
             lblLetters.Name = "lblLetters";
-            grid.SetContent(0, 2, lblLetters);
+            grid.SetContent(0, 3, lblLetters);
 
             //txtLetters
             txtLetters.Enabled = false;
@@ -427,45 +434,16 @@ namespace OKHOSTING.UI.Test
             #grid
                 {
                     display: grid;
-                    grid-template-columns: 
-                        ""lblString . .""
-                        ""txtString . .""
-                        ""lblLetters . .""
-                        ""txtLetters . .""
-                        ""lblNumbers . .""
-                        ""txtNumbers . .""
-                        ""lblVowels . .""
-                        ""txtVowels . .""
-                        ""lblUpperCase . .""
-                        ""txtUpperCase . .""
-                        ""lblLowerCase . .""
-                        ""txtLowerCase . .""
-                        ""btnSearch . .""
-                        ""btnClean . .""
-                        ""btnExit . ."";
+                    grid-template-columns: 40px 60px 80px;
+                        
                 }
 
-                @media only screen and (min-width: 300px)
+                @media only screen and (max-width: 10px)
                 {
-                    #grid
+                   #grid 
                     {
                         display: grid;
-                        grid-template-columns:  
-                        ""lblString . .""
-                        ""txtString . .""
-                        ""lblLetters . .""
-                        ""txtLetters . .""
-                        ""lblNumbers . .""
-                        ""txtNumbers . .""
-                        ""lblVowels . .""
-                        ""txtVowels . .""
-                        ""lblUpperCase . .""
-                        ""txtUpperCase . .""
-                        ""lblLowerCase . .""
-                        ""txtLowerCase . .""
-                        ""btnSearch . .""
-                        ""btnClean . .""
-                        ""btnExit . ."";
+                        grid-template-columns: 40px 100px;
                     }
                 }
 

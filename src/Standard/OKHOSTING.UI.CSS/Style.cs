@@ -748,7 +748,7 @@ namespace OKHOSTING.UI.CSS
         /// </summary>
         public static void Apply(ICssStyleDeclaration style, IGrid grid)
         {
-            Apply(style, (IControl)grid);
+            Apply(style, (IControl) grid);
 
             //begin grid-template-columns
             var gridTemplateColumns = style.GetProperty("grid-template-columns");
@@ -1013,7 +1013,8 @@ namespace OKHOSTING.UI.CSS
                         }
                     }
 
-                    var controlArray = App.GetParentAndAllChildren(grid).ToArray();
+                    var allGridControls = App.GetParentAndAllChildren(grid).ToArray();
+                    grid.EmtpyAllCells();
 
                     if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
                     {
@@ -1022,14 +1023,13 @@ namespace OKHOSTING.UI.CSS
                             for (int column = 0; column < columnCounter; column++)
                             {
                                 //empty cell
-
                                 if (areas[row, column] == ".")
                                 {
                                     grid.SetContent(row, column, null);
                                     continue;
                                 }
 
-                                var controlToPosition = controlArray.Where(c => c.Name == areas[row, column]).SingleOrDefault();
+                                var controlToPosition = allGridControls.Where(c => c.Name == areas[row, column]).SingleOrDefault();
 
                                 //Set of controller
                                 if (controlToPosition != null)
