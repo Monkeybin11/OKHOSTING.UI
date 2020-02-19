@@ -448,11 +448,11 @@ namespace OKHOSTING.UI.CSS
                 {
                     if (control is ITextControl)
                     {
-                        Style.Apply(style.Style, (ITextControl)control);
+                        Style.Apply(style.Style, (ITextControl) control);
                     }
                     else if (control is IGrid)
                     {
-                        Style.Apply(style.Style, (IGrid)control);
+                        Style.Apply(style.Style, (IGrid) control);
                     }
                     else
                     {
@@ -754,7 +754,7 @@ namespace OKHOSTING.UI.CSS
             var gridTemplateColumns = style.GetProperty("grid-template-columns");
             //var grid = (IGrid)control;
 
-            if (gridTemplateColumns != null)
+            if (gridTemplateColumns != null && !string.IsNullOrWhiteSpace(gridTemplateColumns?.Value))
             {
 
                 var columns = ParseLengths(gridTemplateColumns.Value);
@@ -769,7 +769,7 @@ namespace OKHOSTING.UI.CSS
             //begin grid-template-rows
             var gridTemplateRows = style.GetProperty("grid-template-rows");
 
-            if (gridTemplateRows != null)
+            if (gridTemplateRows != null && !string.IsNullOrWhiteSpace(gridTemplateRows?.Value))
             {
                 var rows = ParseLengths(gridTemplateRows.Value);
                 if (rows.ToArray().Length <= grid.RowCount)
@@ -782,15 +782,9 @@ namespace OKHOSTING.UI.CSS
 
             //begin grid-auto-rows
             var gridAutoRows = style.GetProperty("grid-auto-rows");
-            string gridAutoRowsValue = null;
+            
+            if (gridAutoRows != null && !string.IsNullOrWhiteSpace(gridAutoRows?.Value))
 
-            try
-            {
-                gridAutoRowsValue = gridAutoRows?.Value;
-            }
-            catch (NullReferenceException) { }
-
-            if (gridAutoRowsValue != null)
             {
                 double lengthPixels = 0;
                 var rows = ParseLengths(gridAutoRows.Value).ToArray();
@@ -814,14 +808,8 @@ namespace OKHOSTING.UI.CSS
 
             //begin grid-auto-columns
             var gridAutoColumns = style.GetProperty("grid-auto-columns");
-            string gridAutoColumnsValue = null;
-
-            try
-            {
-                gridAutoColumnsValue = gridAutoRows?.Value;
-            }
-            catch (NullReferenceException) { }
-            if (gridAutoColumnsValue != null)
+            
+                if (gridAutoColumns != null && !string.IsNullOrWhiteSpace(gridAutoColumns?.Value))
             {
                 double lengthPixels = 0;
                 var columns = ParseLengths(gridAutoColumns.Value).ToArray();
@@ -845,15 +833,10 @@ namespace OKHOSTING.UI.CSS
 
             //begin grid-template
             var gridTemplate = style.GetProperty("grid-template");
-            string gridTemplateValue = null;
 
-            try
-            {
-                gridTemplateValue = gridTemplate?.Value;
-            }
-            catch (NullReferenceException) { }
+          
+            if (gridAutoColumns != null && !string.IsNullOrWhiteSpace(gridAutoColumns?.Value))
 
-            if (gridTemplateValue != null)
             {
                 var rowsColumns = gridTemplate.Value.Split('/');
                 int count = 0;
@@ -892,7 +875,7 @@ namespace OKHOSTING.UI.CSS
             //begin grid-row-gap
             var gridRowGap = style.GetProperty("grid-row-gap");
 
-            if (gridRowGap?.Value != null)
+            if (gridRowGap?.Value != null && !string.IsNullOrWhiteSpace(gridRowGap?.Value))
             {
                 //parsear con try parse gridRowGap
                 //var rows = gridRowGap.Value.Split(' ');
@@ -941,7 +924,7 @@ namespace OKHOSTING.UI.CSS
             //begin grid-column-gap
             var gridColumnGap = style.GetProperty("grid-column-gap");
 
-            if (gridColumnGap?.Value != null)
+            if (gridColumnGap?.Value != null && !string.IsNullOrWhiteSpace(gridColumnGap?.Value))
             {
                 double lengthPixels = 0;
 
@@ -986,15 +969,9 @@ namespace OKHOSTING.UI.CSS
 
             //begin grid-template-areas
             var gridTemplateAreas = style.GetProperty("grid-template-areas");
-            string gridTemplateAreasValue = null;
+   
 
-            try
-            {
-                gridTemplateAreasValue = gridTemplateAreas?.Value;
-            }
-            catch (NullReferenceException) { }
-
-            if (gridTemplateAreasValue != null)
+            if (gridTemplateAreas != null && !string.IsNullOrWhiteSpace(gridTemplateAreas?.Value)) 
             {
                 var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
                 var rowsArray = rows.ToArray();
