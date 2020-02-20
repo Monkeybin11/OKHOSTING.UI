@@ -97,10 +97,10 @@ namespace OKHOSTING.UI.Test
               {
                Display: grid;
                grid-template-areas: 
-               ""bl1 lbl1 lbl1 lbl1""
-               ""lbl1 lbl1 lbl1 lbl1""
-               ""txt3 . . txt4""
-               ""btn1 btn2 btn3 btn4"";
+               ""lbl1 txt1 lbl2 btn1""
+               ""lbl1 txt2 lbl2 btn2""
+               ""lbl1 txt3 lbl2 btn3""
+               ""lbl1 txt4 lbl2 btn4"";
               }
 
 

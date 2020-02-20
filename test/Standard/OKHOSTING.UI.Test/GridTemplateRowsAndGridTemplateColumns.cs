@@ -44,7 +44,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtNameR = Core.BaitAndSwitch.Create<ITextBox>();
             txtNameR.Value = "";
             txtNameR.FontSize = 20;
-            txtNameR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRows.SetContent(1, 1, txtNameR);
 
             //lblHourSalary
@@ -57,7 +56,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtHourSalaryR = Core.BaitAndSwitch.Create<ITextBox>();
             txtHourSalaryR.Value = "";
             txtHourSalaryR.FontSize = 20;
-            txtHourSalaryR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRows.SetContent(2, 1, txtHourSalaryR);
 
             //lblWorkHours
@@ -70,7 +68,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtWorkHoursR = Core.BaitAndSwitch.Create<ITextBox>();
             txtWorkHoursR.Value = "";
             txtWorkHoursR.FontSize = 20;
-            txtWorkHoursR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRows.SetContent(3, 1, txtWorkHoursR);
 
             //lblExtraHours
@@ -83,7 +80,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtExtraHoursR = Core.BaitAndSwitch.Create<ITextBox>();
             txtExtraHoursR.Value = "";
             txtExtraHoursR.FontSize = 20;
-            txtExtraHoursR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRows.SetContent(4, 1, txtExtraHoursR);
 
             //lblResultado
@@ -103,7 +99,6 @@ namespace OKHOSTING.UI.Test
             txtSalaryR.Value = "";
             txtSalaryR.FontSize = 20;
             txtSalaryR.Enabled = false;
-            txtSalaryR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRows.SetContent(7, 1, txtSalaryR);
 
             //lblTaxes
@@ -117,7 +112,6 @@ namespace OKHOSTING.UI.Test
             txtTaxesR.Value = "";
             txtTaxesR.FontSize = 20;
             txtTaxesR.Enabled = false;
-            txtTaxesR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRows.SetContent(8, 1, txtTaxesR);
 
             //lblNetSalary
@@ -131,7 +125,6 @@ namespace OKHOSTING.UI.Test
             txtNetSalaryR.Value = "";
             txtNetSalaryR.FontSize = 20;
             txtNetSalaryR.Enabled = false;
-            txtNetSalaryR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRows.SetContent(9, 1, txtNetSalaryR);
 
             //btnCalcular
@@ -179,7 +172,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtNameC = Core.BaitAndSwitch.Create<ITextBox>();
             txtNameC.Value = "";
             txtNameC.FontSize = 20;
-            txtNameC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateColumns.SetContent(1, 1, txtNameC);
 
             //lblHourSalary
@@ -192,7 +184,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtHourSalaryC = Core.BaitAndSwitch.Create<ITextBox>();
             txtHourSalaryC.Value = "";
             txtHourSalaryC.FontSize = 20;
-            txtHourSalaryC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateColumns.SetContent(2, 1, txtHourSalaryC);
 
             //lblWorkHours
@@ -205,7 +196,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtWorkHoursC = Core.BaitAndSwitch.Create<ITextBox>();
             txtWorkHoursC.Value = "";
             txtWorkHoursC.FontSize = 20;
-            txtWorkHoursC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateColumns.SetContent(3, 1, txtWorkHoursC);
 
             //lblExtraHours
@@ -218,7 +208,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtExtraHoursC = Core.BaitAndSwitch.Create<ITextBox>();
             txtExtraHoursC.Value = "";
             txtExtraHoursC.FontSize = 20;
-            txtExtraHoursC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateColumns.SetContent(4, 1, txtExtraHoursC);
 
             //lblResultado
@@ -238,7 +227,6 @@ namespace OKHOSTING.UI.Test
             txtSalaryC.Value = "";
             txtSalaryC.FontSize = 20;
             txtSalaryC.Enabled = false;
-            txtSalaryC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateColumns.SetContent(7, 1, txtSalaryC);
 
             //lblTaxes
@@ -252,7 +240,6 @@ namespace OKHOSTING.UI.Test
             txtTaxesC.Value = "";
             txtTaxesC.FontSize = 20;
             txtTaxesC.Enabled = false;
-            txtTaxesC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateColumns.SetContent(8, 1, txtTaxesC);
 
             //lblNetSalary
@@ -266,7 +253,6 @@ namespace OKHOSTING.UI.Test
             txtNetSalaryC.Value = "";
             txtNetSalaryC.FontSize = 20;
             txtNetSalaryC.Enabled = false;
-            txtNetSalaryC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateColumns.SetContent(9, 1, txtNetSalaryC);
 
             //btnCalcular
@@ -314,7 +300,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtNameRC = Core.BaitAndSwitch.Create<ITextBox>();
             txtNameRC.Value = "";
             txtNameRC.FontSize = 20;
-            txtNameRC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRowsAndColumns.SetContent(1, 1, txtNameRC);
 
             //lblHourSalary
@@ -327,7 +312,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtHourSalaryRC = Core.BaitAndSwitch.Create<ITextBox>();
             txtHourSalaryRC.Value = "";
             txtHourSalaryRC.FontSize = 20;
-            txtHourSalaryRC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRowsAndColumns.SetContent(2, 1, txtHourSalaryRC);
 
             //lblWorkHours
@@ -340,7 +324,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtWorkHoursRC = Core.BaitAndSwitch.Create<ITextBox>();
             txtWorkHoursRC.Value = "";
             txtWorkHoursRC.FontSize = 20;
-            txtWorkHoursRC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRowsAndColumns.SetContent(3, 1, txtWorkHoursRC);
 
             //lblExtraHours
@@ -353,7 +336,6 @@ namespace OKHOSTING.UI.Test
             ITextBox txtExtraHoursRC = Core.BaitAndSwitch.Create<ITextBox>();
             txtExtraHoursRC.Value = "";
             txtExtraHoursRC.FontSize = 20;
-            txtExtraHoursRC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRowsAndColumns.SetContent(4, 1, txtExtraHoursRC);
 
             //lblResultado
@@ -373,7 +355,6 @@ namespace OKHOSTING.UI.Test
             txtSalaryRC.Value = "";
             txtSalaryRC.FontSize = 20;
             txtSalaryRC.Enabled = false;
-            txtSalaryR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRowsAndColumns.SetContent(7, 1, txtSalaryRC);
 
             //lblTaxes
@@ -387,7 +368,6 @@ namespace OKHOSTING.UI.Test
             txtTaxesRC.Value = "";
             txtTaxesRC.FontSize = 20;
             txtTaxesRC.Enabled = false;
-            txtTaxesR.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRowsAndColumns.SetContent(8, 1, txtTaxesRC);
 
             //lblNetSalary
@@ -401,7 +381,6 @@ namespace OKHOSTING.UI.Test
             txtNetSalaryRC.Value = "";
             txtNetSalaryRC.FontSize = 20;
             txtNetSalaryRC.Enabled = false;
-            txtNetSalaryRC.BorderWidth = new Thickness(1, 2, 3, 4);
             gridTemplateRowsAndColumns.SetContent(9, 1, txtNetSalaryRC);
 
             //btnCalcular

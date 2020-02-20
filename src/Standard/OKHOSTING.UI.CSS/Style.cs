@@ -421,13 +421,32 @@ namespace OKHOSTING.UI.CSS
 
                             if (Length.TryParse(maxWidth, out Length maxWidthLength))
                             {
-                                if (maxWidthLength.ToPixel() > page.Width)
+                                if (maxWidthLength.ToPixel() > page.Width) //code line original
+                               // if (maxWidthLength.ToPixel() < page.Width) //test of @media
                                 {
                                     mediaApplies = true;
                                     break;
                                 }
                             }
                         }
+                        
+                        //TEST
+                        if (media.Constraints.Contains("min-width"))
+                        {
+                            var minWidth = media.Constraints.Trim('(', ')').Replace("min-width", null).Replace(":", null).Trim();
+
+                            if (Length.TryParse(minWidth, out Length minWidthLength))
+                            {
+                                if (minWidthLength.ToPixel() < page.Width) //code line original
+                                // if (maxWidthLength.ToPixel() < page.Width) //test of @media
+                                {
+                                    mediaApplies = true;
+                                    break;
+                                }
+                            }
+                        }
+                        //TEST
+
                     }
 
                     if (mediaApplies)
@@ -967,9 +986,9 @@ namespace OKHOSTING.UI.CSS
 
             //begin grid-template-areas
             var gridTemplateAreas = style.GetProperty("grid-template-areas");
-   
 
-            if (gridTemplateAreas != null && !string.IsNullOrWhiteSpace(gridTemplateAreas?.Value)) 
+
+            if (gridTemplateAreas != null && !string.IsNullOrWhiteSpace(gridTemplateAreas?.Value))
             {
                 var rows = gridTemplateAreas.Value.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
                 var rowsArray = rows.ToArray();
@@ -1006,27 +1025,25 @@ namespace OKHOSTING.UI.CSS
 
                                 var controlToPosition = allGridControls.Where(c => c.Name == areas[row, column]).SingleOrDefault();
 
-                                //Set of controller
                                 if (controlToPosition != null)
                                 {
                                     grid.SetContent(row, column, controlToPosition);
-
 
                                     //begin ColumnSpan
                                     int colspan = 1;
                                     int currentColumn = column;
                                     //int ColumnCurrent = column;
 
-                                    if (grid.GetColumnSpan(controlToPosition) == 0)
+                                    //if (grid.GetColumnSpan(controlToPosition) == 1)
+                                    //{
+                                    for (; currentColumn < columnCounter - 1; colspan++, currentColumn++, column++)
                                     {
-                                        for (; currentColumn < columnCounter - 1; colspan++, currentColumn++)
+                                        if (areas[row, currentColumn + 1] != areas[row, currentColumn])
                                         {
-                                            if (areas[row, currentColumn + 1] != areas[row, currentColumn])
-                                            {
-                                                break;
-                                            }
+                                            break;
                                         }
                                     }
+                                    //}
 
                                     if (colspan > 1)
                                     {
@@ -1038,24 +1055,24 @@ namespace OKHOSTING.UI.CSS
                                     //begin Row Span
                                     int rowspan = 1;
                                     int currentRow = row;
-                                    //int RowCurrent = row;
+                                    int RowCurrent = row;
 
 
-                                    if (grid.GetRowSpan(controlToPosition) == 0)
+                                    //if (grid.GetRowSpan(controlToPosition) == 0)
+                                    //{
+                                    for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++, row++)
                                     {
-                                        for (; currentRow < rowsArray.Length - 1; rowspan++, currentRow++)
+                                        if (areas[currentRow + 1, column] != areas[currentRow, column])
                                         {
-                                            if (areas[currentRow + 1, column] != areas[currentRow, column])
-                                            {
-                                                break;
-                                            }
+                                            break;
                                         }
                                     }
+                                    //}
 
                                     if (rowspan > 1)
                                     {
                                         grid.SetRowSpan(rowspan, controlToPosition);
-                                        //row = RowCurrent;
+                                        row = RowCurrent;
                                     }//end rowspan
 
                                 }

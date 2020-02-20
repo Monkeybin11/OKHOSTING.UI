@@ -81,7 +81,6 @@ namespace OKHOSTING.UI.Test
             //txtString
             ITextBox txtString = Core.BaitAndSwitch.Create<ITextBox>();
             txtString.Value = "";
-            txtString.BorderWidth = new Thickness(1, 2, 3, 4);
             gridRowGap.SetContent(0, 1, txtString);
 
             //lblLetters
@@ -92,7 +91,6 @@ namespace OKHOSTING.UI.Test
             //txtLetters
             ITextBox txtLetters = Core.BaitAndSwitch.Create<ITextBox>();
             txtLetters.Enabled = false;
-            txtLetters.BorderWidth = new Thickness(1, 2, 3, 4);
             gridRowGap.SetContent(1, 1, txtLetters);
 
             //lblNumbers
@@ -103,7 +101,6 @@ namespace OKHOSTING.UI.Test
             //txtNumbers
             ITextBox txtNumbers = Core.BaitAndSwitch.Create<ITextBox>();
             txtNumbers.Enabled = false;
-            txtNumbers.BorderWidth = new Thickness(1, 2, 3, 4);
             gridRowGap.SetContent(2, 1, txtNumbers);
 
             //lblVowels
@@ -114,7 +111,6 @@ namespace OKHOSTING.UI.Test
             //txtVowels
             ITextBox txtVowels = Core.BaitAndSwitch.Create<ITextBox>();
             txtVowels.Enabled = false;
-            txtVowels.BorderWidth = new Thickness(1, 2, 3, 4);
             gridRowGap.SetContent(3, 1, txtVowels);
 
             //lblUpperCase
@@ -125,7 +121,6 @@ namespace OKHOSTING.UI.Test
             //txtUpperCase
             ITextBox txtUpperCase = Core.BaitAndSwitch.Create<ITextBox>();
             txtUpperCase.Enabled = false;
-            txtUpperCase.BorderWidth = new Thickness(1, 2, 3, 4);
             gridRowGap.SetContent(4, 1, txtUpperCase);
 
             //lblLowerCase
@@ -167,7 +162,6 @@ namespace OKHOSTING.UI.Test
 
             ITextBox txttree = Core.BaitAndSwitch.Create<ITextBox>();
             txttree.Enabled = false;
-            txttree.BorderWidth = new Thickness(1, 2, 3, 4);
             ColumnandRowGap.SetContent(1, 1, txttree);
 
             //lblNumbers
@@ -178,7 +172,6 @@ namespace OKHOSTING.UI.Test
             //txtNumbers
             ITextBox txtnombre = Core.BaitAndSwitch.Create<ITextBox>();
             txtnombre.Enabled = false;
-            txtnombre.BorderWidth = new Thickness(1, 2, 3, 4);
             ColumnandRowGap.SetContent(2, 1, txtnombre);
 
             //lblVowels

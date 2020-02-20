@@ -68,7 +68,6 @@ namespace OKHOSTING.UI.Test
             //txtString
             txtString.Value = "";
             txtString.Name = "txtString";
-            txtString.BorderWidth = new Thickness(1, 2, 3, 4);
             grid.SetContent(0, 2, txtString);
 
             //lblLetters
@@ -79,7 +78,6 @@ namespace OKHOSTING.UI.Test
             //txtLetters
             txtLetters.Enabled = false;
             txtLetters.Name = "txtLetters";
-            txtLetters.BorderWidth = new Thickness(1, 2, 3, 4);
             grid.SetContent(1, 0, txtLetters);
 
             //lblNumbers
@@ -90,7 +88,6 @@ namespace OKHOSTING.UI.Test
             //txtNumbers
             txtNumbers.Enabled = false;
             txtNumbers.Name = "txtNumbers";
-            txtNumbers.BorderWidth = new Thickness(1, 2, 3, 4);
             grid.SetContent(1, 2, txtNumbers);
 
             //lblVowels
@@ -101,7 +98,6 @@ namespace OKHOSTING.UI.Test
             //txtVowels
             txtVowels.Enabled = false;
             txtVowels.Name = "txtVowels";
-            txtVowels.BorderWidth = new Thickness(1, 2, 3, 4);
             grid.SetContent(2, 1, txtVowels);
 
             //lblUpperCase
@@ -112,7 +108,6 @@ namespace OKHOSTING.UI.Test
             //txtUpperCase
             txtUpperCase.Enabled = false;
             txtUpperCase.Name = "txtUpperCase";
-            txtUpperCase.BorderWidth = new Thickness(1, 2, 3, 4);
             grid.SetContent(3, 0, txtUpperCase);
 
             //lblLowerCase
@@ -146,20 +141,23 @@ namespace OKHOSTING.UI.Test
 
             CSS.Style style = new CSS.Style();
 
+            //Le pongo ese valor para testear y ver que pasa.
+
 			style.Parse(@"
 				#grid
                 {
                     display: grid;
-                    grid-template-columns: 40px 60px 80px;
+                      grid-template: 100px 80px 120px / 100px 100px 100px 100px;
+                 
                         
                 }
 
-                @media only screen and (max-width: 500px)
+                @media all and (max-width: 675px)
                 {
                    #grid 
                     {
                         display: grid;
-                        grid-template-columns: 100px 80px;
+                        grid-template: 30px 30px 30px / 50px 50px 50px 50px; 
                     }
                 }");
 
