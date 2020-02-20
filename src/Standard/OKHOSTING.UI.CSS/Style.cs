@@ -1012,6 +1012,8 @@ namespace OKHOSTING.UI.CSS
 
                     if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
                     {
+                        bool GTA = true;
+
                         for (int row = 0; row < rowsArray.Length; row++)
                         {
                             for (int column = 0; column < columnCounter; column++)
@@ -1027,12 +1029,15 @@ namespace OKHOSTING.UI.CSS
 
                                 if (controlToPosition != null)
                                 {
-                                    grid.SetContent(row, column, controlToPosition);
-
+                                    if(GTA == true)
+                                    {
+                                        grid.SetContent(row, column, controlToPosition);
+                                    }
+                                    
                                     //begin ColumnSpan
                                     int colspan = 1;
                                     int currentColumn = column;
-                                    //int ColumnCurrent = column;
+                                    int ColumnCurrent = column;
 
                                     //if (grid.GetColumnSpan(controlToPosition) == 1)
                                     //{
@@ -1048,7 +1053,8 @@ namespace OKHOSTING.UI.CSS
                                     if (colspan > 1)
                                     {
                                         grid.SetColumnSpan(colspan, controlToPosition);
-                                        //column = ColumnCurrent;
+                                        column = ColumnCurrent;
+                                        GTA = false;
                                     }
                                     //end ColumnSpan
 
@@ -1073,7 +1079,16 @@ namespace OKHOSTING.UI.CSS
                                     {
                                         grid.SetRowSpan(rowspan, controlToPosition);
                                         row = RowCurrent;
+                                        GTA = false;
                                     }//end rowspan
+
+                                    //var test = grid.GetRowSpan(controlToPosition);
+                                    //var test1 = grid.GetColumnSpan(controlToPosition);
+
+                                    if (areas[row + 1, column] != areas[row, column] && areas[row, column + 1] != areas[row, column])
+                                    {
+                                        GTA = true;
+                                    }
 
                                 }
                             }

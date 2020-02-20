@@ -97,18 +97,15 @@ namespace OKHOSTING.UI.Test
               {
                Display: grid;
                grid-template-areas: 
-               ""lbl1 txt1 lbl2 btn1""
-               ""lbl1 txt2 lbl2 btn2""
-               ""lbl1 txt3 lbl2 btn3""
-               ""lbl1 txt4 lbl2 btn4"";
+               ""lbl1 lbl1 lbl2 btn1""
+               "". txt2 lbl2 btn2""
+               "". txt3 lbl2 btn3""
+               "". txt4 lbl2 btn4"";
               }
-
-
-       
             ");
             style.Apply(Page);
-
         }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Finish();
