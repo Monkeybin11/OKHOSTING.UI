@@ -1022,6 +1022,7 @@ namespace OKHOSTING.UI.CSS
                                 if (areas[row, column] == ".")
                                 {
                                     grid.SetContent(row, column, null);
+                                    GTA = true;
                                     continue;
                                 }
 
@@ -1029,11 +1030,11 @@ namespace OKHOSTING.UI.CSS
 
                                 if (controlToPosition != null)
                                 {
-                                    if(GTA == true)
+                                    if (GTA == true)
                                     {
                                         grid.SetContent(row, column, controlToPosition);
                                     }
-                                    
+
                                     //begin ColumnSpan
                                     int colspan = 1;
                                     int currentColumn = column;
@@ -1079,17 +1080,21 @@ namespace OKHOSTING.UI.CSS
                                     {
                                         grid.SetRowSpan(rowspan, controlToPosition);
                                         row = RowCurrent;
-                                        GTA = false;
+                                        //GTA = false;
                                     }//end rowspan
 
-                                    //var test = grid.GetRowSpan(controlToPosition);
-                                    //var test1 = grid.GetColumnSpan(controlToPosition);
+                                    //var rs = grid.GetRowSpan(controlToPosition);
+                                    //var cs = grid.GetColumnSpan(grid.GetContent(row, column));
+                                    //var cs1  = grid.GetColumnSpan(grid.GetContent(row, column + 1));
 
-                                    if (areas[row + 1, column] != areas[row, column] && areas[row, column + 1] != areas[row, column])
+                                    //if ((areas[row + 1, column] != areas[row, column] || areas[row, column + 1] != areas[row, column]) && (grid.GetColumnSpan(controlToPosition) > 0 || grid.GetRowSpan(controlToPosition) > 0))
+                                    if (column + 1 < columnCounter)
                                     {
-                                        GTA = true;
+                                        if (areas[row, column + 1] != areas[row, column])
+                                        {
+                                            GTA = true;
+                                        }
                                     }
-
                                 }
                             }
                         }
