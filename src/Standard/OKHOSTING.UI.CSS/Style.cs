@@ -1030,7 +1030,14 @@ namespace OKHOSTING.UI.CSS
 
                                 if (controlToPosition != null)
                                 {
-                                    if (GTA == true)
+                                    if(row - 1 >= 0 && areas[row - 1, column] != areas[row, column])
+                                    {
+                                        if (GTA == true)
+                                        {
+                                            grid.SetContent(row, column, controlToPosition);
+                                        }
+                                    }
+                                    if (row == 0 && GTA == true)
                                     {
                                         grid.SetContent(row, column, controlToPosition);
                                     }
@@ -1080,7 +1087,7 @@ namespace OKHOSTING.UI.CSS
                                     {
                                         grid.SetRowSpan(rowspan, controlToPosition);
                                         row = RowCurrent;
-                                        //GTA = false;
+                                        GTA = false;
                                     }//end rowspan
 
                                     //var rs = grid.GetRowSpan(controlToPosition);

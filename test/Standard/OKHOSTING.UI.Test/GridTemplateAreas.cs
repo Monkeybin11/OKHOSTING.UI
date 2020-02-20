@@ -99,7 +99,7 @@ namespace OKHOSTING.UI.Test
                grid-template-areas: 
                ""lbl1 lbl1 lbl2 lbl2""
                "". txt2 txt2 btn2""
-               "". txt3 lbl4 btn3""
+               "". txt3 btn1 btn3""
                "". txt4 btn1 btn4"";
               }
             ");
