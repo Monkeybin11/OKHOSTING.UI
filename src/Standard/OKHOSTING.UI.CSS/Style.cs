@@ -1090,16 +1090,12 @@ namespace OKHOSTING.UI.CSS
                                         GTA = false;
                                     }//end rowspan
 
-                                    //var rs = grid.GetRowSpan(controlToPosition);
-                                    //var cs = grid.GetColumnSpan(grid.GetContent(row, column));
-                                    //var cs1  = grid.GetColumnSpan(grid.GetContent(row, column + 1));
-
                                     //if ((areas[row + 1, column] != areas[row, column] || areas[row, column + 1] != areas[row, column]) && (grid.GetColumnSpan(controlToPosition) > 0 || grid.GetRowSpan(controlToPosition) > 0))
                                     if (column + 1 < columnCounter && areas[row, column + 1] != areas[row, column])
                                     {
                                             GTA = true;
                                     }
-                                    else if (row + 1 < rowsArray.Length && areas[row + 1, 0] != areas[row, 0])
+                                    if (row + 1 == rowsArray.Length - 1 && areas[row + 1, 0] != areas[row, 0])
                                     {
                                         GTA = true;
                                     }
