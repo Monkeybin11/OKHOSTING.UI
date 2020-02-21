@@ -1062,6 +1062,10 @@ namespace OKHOSTING.UI.CSS
                                         validator = false;
                                     }
                                     //end ColumnSpan
+                                    else if (colspan > 1)
+                                    {
+                                        column = ColumnCurrent;
+                                    }
 
                                     //begin Row Span
                                     int rowspan = 1;
@@ -1086,6 +1090,10 @@ namespace OKHOSTING.UI.CSS
                                         row = RowCurrent;
                                         validator = false;
                                     }//end rowspan
+                                    else if (rowspan > 1)
+                                    {
+                                        row = RowCurrent;
+                                    }
 
                                     //if ((areas[row + 1, column] != areas[row, column] || areas[row, column + 1] != areas[row, column]) && (grid.GetColumnSpan(controlToPosition) > 0 || grid.GetRowSpan(controlToPosition) > 0))
                                     if (column + 1 < columnCounter && areas[row, column + 1] != areas[row, column])
