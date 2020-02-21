@@ -1012,7 +1012,7 @@ namespace OKHOSTING.UI.CSS
 
                     if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
                     {
-                        bool GTA = true;
+                        bool validator = true;
 
                         for (int row = 0; row < rowsArray.Length; row++)
                         {
@@ -1022,7 +1022,7 @@ namespace OKHOSTING.UI.CSS
                                 if (areas[row, column] == ".")
                                 {
                                     grid.SetContent(row, column, null);
-                                    GTA = true;
+                                    validator = true;
                                     continue;
                                 }
 
@@ -1030,14 +1030,11 @@ namespace OKHOSTING.UI.CSS
 
                                 if (controlToPosition != null)
                                 {
-                                    if(row - 1 >= 0 && areas[row - 1, column] != areas[row, column])
+                                    if (row - 1 >= 0 && areas[row - 1, column] != areas[row, column] && validator == true)
                                     {
-                                        if (GTA == true)
-                                        {
-                                            grid.SetContent(row, column, controlToPosition);
-                                        }
+                                        grid.SetContent(row, column, controlToPosition);
                                     }
-                                    if (row == 0 && GTA == true)
+                                    if (row == 0 && validator == true)
                                     {
                                         grid.SetContent(row, column, controlToPosition);
                                     }
@@ -1058,11 +1055,11 @@ namespace OKHOSTING.UI.CSS
                                     }
                                     //}
 
-                                    if (colspan > 1)
+                                    if (colspan > 1 && (grid.GetColumnSpan(controlToPosition) == 0 || grid.GetColumnSpan(controlToPosition) == 1))
                                     {
                                         grid.SetColumnSpan(colspan, controlToPosition);
                                         column = ColumnCurrent;
-                                        GTA = false;
+                                        validator = false;
                                     }
                                     //end ColumnSpan
 
@@ -1083,21 +1080,21 @@ namespace OKHOSTING.UI.CSS
                                     }
                                     //}
 
-                                    if (rowspan > 1)
+                                    if (rowspan > 1 && (grid.GetRowSpan(controlToPosition) == 0 || grid.GetRowSpan(controlToPosition) == 1))
                                     {
                                         grid.SetRowSpan(rowspan, controlToPosition);
                                         row = RowCurrent;
-                                        GTA = false;
+                                        validator = false;
                                     }//end rowspan
 
                                     //if ((areas[row + 1, column] != areas[row, column] || areas[row, column + 1] != areas[row, column]) && (grid.GetColumnSpan(controlToPosition) > 0 || grid.GetRowSpan(controlToPosition) > 0))
                                     if (column + 1 < columnCounter && areas[row, column + 1] != areas[row, column])
                                     {
-                                            GTA = true;
+                                            validator = true;
                                     }
                                     if (row + 1 == rowsArray.Length - 1 && areas[row + 1, 0] != areas[row, 0])
                                     {
-                                        GTA = true;
+                                        validator = true;
                                     }
                                 }
                             }

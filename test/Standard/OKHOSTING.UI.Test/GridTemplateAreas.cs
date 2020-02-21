@@ -87,7 +87,7 @@ namespace OKHOSTING.UI.Test
 
             IButton btn4 = Core.BaitAndSwitch.Create<IButton>();
             btn4.Name = "btn4";
-            btn4.Text = "Cuarto botn";
+            btn4.Text = "Cuarto boton";
             GridOne.SetContent(2, 3, btn4);
 
             CSS.Style style = new CSS.Style();
@@ -97,10 +97,10 @@ namespace OKHOSTING.UI.Test
               {
                Display: grid;
                grid-template-areas: 
-               ""lbl1 lbl1 lbl2 lbl2""
-               "". . . .""
-               "". . . .""
-               "". . . ."";
+               ""lbl1 txt1 lbl2 lbl2""
+               ""lbl1 txt2 . .""
+               ""lbl1 txt3 . .""
+               ""lbl1 txt4 . ."";
               }
             ");
             style.Apply(Page);
