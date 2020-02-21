@@ -565,6 +565,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell) ((System.Web.UI.WebControls.WebControl) content).Parent;
 			cell.RowSpan = rowSpan;
+			
+			//reset cells
+			((IGrid) this).RowCount= ((IGrid) this).RowCount;
 		}
 
 		/// <summary>

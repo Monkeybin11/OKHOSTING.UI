@@ -1010,7 +1010,19 @@ namespace OKHOSTING.UI.CSS
                     var allGridControls = App.GetParentAndAllChildren(grid).ToArray();
                     grid.EmtpyAllCells();
 
-                    if (columnCounter <= grid.ColumnCount && rowsArray.Length <= grid.RowCount)
+                    bool validationColSpanRowSpan = true;
+                    for (int r = 0; r < rowsArray.Length; r++)
+                    {
+                        for (int c = 0; c < grid.ColumnCount; c++)
+                        {
+                            if (r + 1 <rowsArray.Length && r - 1 >= 0 && c + 1 < grid.ColumnCount && c - 1 >= 0 && areas[r,c] != "." && ((areas[r,c] == areas[r, c + 1] && areas[r, c] == areas[r + 1, c]) || (areas[r, c] == areas[r, c - 1] && areas[r, c] == areas[r - 1, c])))
+                            {
+                                validationColSpanRowSpan = false;
+                            }
+                        }
+                    }
+
+                    if (columnCounter == grid.ColumnCount && rowsArray.Length == grid.RowCount && validationColSpanRowSpan == true)
                     {
                         bool validator = true;
 
