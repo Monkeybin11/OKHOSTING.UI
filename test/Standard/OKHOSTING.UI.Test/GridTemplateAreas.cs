@@ -97,10 +97,10 @@ namespace OKHOSTING.UI.Test
               {
                Display: grid;
                grid-template-areas: 
-               ""lbl1 lbl1 . .""
-               ""lbl1 lbl1 txt2 .""
-               ""lbl1 lbl1 txt3 .""
-               ""lbl1 lbl1 txt4 ."";
+               ""txt1 lbl2 txt3 .""
+               ""txt1 lbl2 txt3 .""
+               ""txt1 lbl1 txt3 .""
+               ""txt1 lbl1 txt3 ."";
               }
             ");
             style.Apply(Page);
@@ -110,7 +110,5 @@ namespace OKHOSTING.UI.Test
         {
             this.Finish();
         }
-
-
-    }
+   }
 }

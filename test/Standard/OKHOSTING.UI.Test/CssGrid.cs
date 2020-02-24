@@ -49,6 +49,7 @@ namespace OKHOSTING.UI.Test
 			gridAutoRowAndgridAutoColumn.Click += (object sender, EventArgs e) => new Auto_Colum_Auto_Row() { Page = Page }.Start();
 			stack.Children.Add(gridAutoRowAndgridAutoColumn);
 
+		
 			IButton btnExit = Core.BaitAndSwitch.Create<IButton>();
 			btnExit.Text = "Exit";
 			btnExit.Click += btnExit_Click;
