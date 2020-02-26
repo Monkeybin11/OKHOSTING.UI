@@ -469,7 +469,7 @@ namespace OKHOSTING.UI.Test
             GridSeven.SetContent(0, 1, label002b);
 
             ILabel label003b = Core.BaitAndSwitch.Create<ILabel>();
-            label003b.Name = "label003a";
+            label003b.Name = "label003b";
             label003b.Text = "Tercer label";
             GridSeven.SetContent(0, 2, label003b);
 
@@ -737,10 +737,62 @@ namespace OKHOSTING.UI.Test
                 #GridTemplate
                 {
                     display: grid;
-                    grid-template-rows: 100px 150px 200px 250px;
+                    grid-row-gap: 50px;
                 }
 
-              
+                #GridTemplate2
+                {
+                    display: grid;
+                    grid-row-gap: 90px;
+                }
+
+                #GridTemplate3
+                {
+                    display: grid;
+                    grid-row-gap: 80px;
+                }
+
+                #GridTemplate4
+                {
+                    display: grid;
+                    grid-row-gap: 100px;
+                }
+
+                #GridTemplate5
+                {
+                    display: grid;
+                    grid-row-gap: 110px;
+                }
+
+                #GridTemplate6
+                {
+                    display: grid;
+                    grid-row-gap: 50 px;
+                }
+
+                #GridTemplate7
+                {
+                    display: grid;
+                    grid-row-gap: 50px ;
+                }
+
+                #GridTemplate8
+                {
+                    display: grid;
+                    grid-row-gap: 50px  ;
+                }
+
+                #GridTemplate9
+                {
+                    display: grid;
+                    grid-row-gap: 60px;
+                }
+
+                #GridTemplate10
+                {
+                    display: grid;
+                    grid-row-gap: 25px;
+                }
 
             ");
             style.Apply(Page);

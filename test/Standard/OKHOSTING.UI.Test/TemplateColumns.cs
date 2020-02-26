@@ -175,62 +175,62 @@ namespace OKHOSTING.UI.Test
             ILabel label1 = Core.BaitAndSwitch.Create<ILabel>();
             label1.Name = "label1";
             label1.Text = "Primer Label";
-            GridTwo.SetContent(0, 0, lbel1);
+            GridTree.SetContent(0, 0, lbel1);
 
             ILabel label2 = Core.BaitAndSwitch.Create<ILabel>();
             label2.Name = "label2";
             label2.Text = "Segundo label";
-            GridTwo.SetContent(0, 1, label2);
+            GridTree.SetContent(0, 1, label2);
 
             ILabel label3 = Core.BaitAndSwitch.Create<ILabel>();
             label3.Name = "label3";
             label3.Text = "Tercer label";
-            GridTwo.SetContent(0, 2, label3);
+            GridTree.SetContent(0, 2, label3);
 
             ILabel label4 = Core.BaitAndSwitch.Create<ILabel>();
             label4.Name = "label4";
             label4.Text = "Cuarto label";
-            GridTwo.SetContent(0, 3, label4);
+            GridTree.SetContent(0, 3, label4);
 
             ITextBox texte1 = Core.BaitAndSwitch.Create<ITextBox>();
             texte1.Name = "texte1";
             texte1.Value = "Primer textbox";
-            GridTwo.SetContent(1, 0, texte1);
+            GridTree.SetContent(1, 0, texte1);
 
             ITextBox texte2 = Core.BaitAndSwitch.Create<ITextBox>();
             texte2.Name = "texte2";
             texte2.Value = "Segudo textbox";
-            GridTwo.SetContent(1, 1, texte2);
+            GridTree.SetContent(1, 1, texte2);
 
             ITextBox texte3 = Core.BaitAndSwitch.Create<ITextBox>();
             texte3.Name = "texte3";
             texte3.Value = "Tercer textbox";
-            GridTwo.SetContent(1, 2, texte3);
+            GridTree.SetContent(1, 2, texte3);
 
             ITextBox texte4 = Core.BaitAndSwitch.Create<ITextBox>();
             texte4.Name = "texte4";
             texte4.Value = "cuarto textbox";
-            GridTwo.SetContent(1, 3, texte4);
+            GridTree.SetContent(1, 3, texte4);
 
             IButton boton1 = Core.BaitAndSwitch.Create<IButton>();
             boton1.Name = "boton1";
             boton1.Text = "Primer boton";
-            GridTwo.SetContent(2, 0, boton1);
+            GridTree.SetContent(2, 0, boton1);
 
             IButton boton2 = Core.BaitAndSwitch.Create<IButton>();
             boton2.Name = "boton2";
             boton2.Text = "Segundo boton";
-            GridTwo.SetContent(2, 1, boton2);
+            GridTree.SetContent(2, 1, boton2);
 
             IButton boton3 = Core.BaitAndSwitch.Create<IButton>();
             boton3.Name = "boton3";
             boton3.Text = "Tercer boton";
-            GridTwo.SetContent(2, 2, boton3);
+            GridTree.SetContent(2, 2, boton3);
 
             IButton boton4 = Core.BaitAndSwitch.Create<IButton>();
             boton4.Name = "boton4";
             boton4.Text = "Cuarto boton";
-            GridTwo.SetContent(2, 3, boton4);
+            GridTree.SetContent(2, 3, boton4);
 
             ILabel lblSeparator4 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator4.Name = "Separator4";
@@ -736,7 +736,66 @@ namespace OKHOSTING.UI.Test
             CSS.Style style = new CSS.Style();
             style.Parse(@"
              
-          
+                 #GridTemplate
+                {
+                    display: grid;
+                    grid-template-rows: 100px 150px 200px 250px;
+                }
+
+                #GridTemplate2
+                {
+                    display: grid;
+                    grid-template-rows: 25px 50 px 75px 100px;
+                }
+                
+                #GridTemplate3
+                {
+                    display: grid;
+                    grid-template-rows: 10px  20px 10px 20px;
+                }
+
+                #GridTemplate4
+                {
+                    display: grid;
+                    grid-template-rows: 40px 40px 40px 40px 40px;
+                }
+
+                #GridTemplate5
+                {
+                    display: grid;
+                    grid-template-rows: 30px 30px 30px 30px;
+                }
+
+                #GridTemplate6
+                {
+                    display: grid;
+                    grid-template-rows: 20px 20px;
+                }
+
+                #GridTemplate7
+                {
+                    display: grid;
+                    grid-template-rows: 50px 50px 50px 50px 50px;
+                }
+
+                #GridTemplate8
+                {
+                    display: grid;
+                    grid-template-rows: 70px 90px 110px 130px;
+                }
+
+                #GridTemplate9
+                {
+                    display: grid;
+                    grid-template-rows: 65px 50px 65px 50px;
+                }
+
+                #GridTemplate10
+                {
+                    display: grid;
+                    grid-template-rows: 80px 80px 80px 80px;
+                }
+
 
             ");
             style.Apply(Page);

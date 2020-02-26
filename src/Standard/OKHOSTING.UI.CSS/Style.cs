@@ -922,7 +922,7 @@ namespace OKHOSTING.UI.CSS
 
                     var controlArray = App.GetParentAndAllChildren(grid).ToArray();
 
-                    for (int i = 0; i < controlArray.Length - 1; i++)
+                    for (int i = 0; i <= controlArray.Length - 1; i++)
                     {
                         double marginRightValue = controlArray[i].Margin.Right.Value;
                         if (marginRightValue == 0)
@@ -968,7 +968,7 @@ namespace OKHOSTING.UI.CSS
 
                     var controlArray = App.GetParentAndAllChildren(grid).ToArray();
 
-                    for (int i = 0; i < controlArray.Length - 1; i++)
+                    for (int i = 0; i <= controlArray.Length - 1; i++)
                     {
                         double marginBottonValue = controlArray[i].Margin.Bottom.Value;
                         if (marginBottonValue == 0)

@@ -42,6 +42,16 @@ namespace OKHOSTING.UI.Test
 			TemplateRows.Click += (object sender, EventArgs e) => new TemplateRows() { Page = Page }.Start();
 			stack.Children.Add(TemplateRows);
 
+			ILabelButton RowGap = Core.BaitAndSwitch.Create<ILabelButton>();
+			RowGap.Text = "Row Gap";
+			RowGap.Click += (object sender, EventArgs e) => new RowGap() { Page = Page }.Start();
+			stack.Children.Add(RowGap);
+
+			ILabelButton ColumnGap = Core.BaitAndSwitch.Create<ILabelButton>();
+			ColumnGap.Text = "Column Gap";
+			ColumnGap.Click += (object sender, EventArgs e) => new ColumnGap() { Page = Page }.Start();
+			stack.Children.Add(ColumnGap);
+
 			IButton btnExit = Core.BaitAndSwitch.Create<IButton>();
 			btnExit.Text = "Exit";
 			btnExit.Click += btnExit_Click;

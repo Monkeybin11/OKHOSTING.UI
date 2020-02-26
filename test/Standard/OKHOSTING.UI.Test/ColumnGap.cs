@@ -469,7 +469,7 @@ namespace OKHOSTING.UI.Test
             GridSeven.SetContent(0, 1, label002b);
 
             ILabel label003b = Core.BaitAndSwitch.Create<ILabel>();
-            label003b.Name = "label003a";
+            label003b.Name = "label003b";
             label003b.Text = "Tercer label";
             GridSeven.SetContent(0, 2, label003b);
 
@@ -737,7 +737,7 @@ namespace OKHOSTING.UI.Test
                 #GridTemplate
                 {
                     display: grid;
-                    grid-template-rows: 100px 150px 200px 250px;
+                    grid-template-rows: 50px;
                 }
 
               

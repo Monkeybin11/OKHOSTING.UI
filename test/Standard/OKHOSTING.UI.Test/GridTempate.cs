@@ -739,13 +739,61 @@ namespace OKHOSTING.UI.Test
               {
                Display: grid;
                grid-template: 10px 40px 30px 50px / 20px 50px 10px 30px;
-                   }          
+              }          
 
                #GridTemplate2
               {
                Display: grid;
                grid-template: 100px 40px 30px 500px/20px 50px 10px 30px;
-                   }
+              }
+
+               #GridTemplate3
+              {
+               Display: grid;
+               grid-template: 50px 50px 50px 50px/100px 100px 100px 100px;
+              }
+
+               #GridTemplate4
+              {
+               Display: grid;
+               grid-template: 100px 40px 30px 500px 80px/20px 50px 10px 30px;
+              }
+
+               #GridTemplate5
+              {
+               Display: grid;
+               grid-template: 100px 40px 30px 500px/20px 50px 10px 30px 50px;
+              }
+
+               #GridTemplate6
+              {
+               Display: grid;
+               grid-template: 50px 50px 60px 60px/80px 80px  80px 80px;
+              }
+
+               #GridTemplate7
+              {
+               Display: grid;
+               grid-template: 100px 40px  30px 500px/20px 50px 10px 30px;
+              }
+
+               #GridTemplate8
+              {
+               Display: grid;
+               grid-template: 30px 30px 30px 30px  /75px 75px 75px 75px;
+              }
+
+               #GridTemplate9
+              {
+               Display: grid;
+               grid-template: 30 px 30px 30px 30px/20px 50px 10px 30px;
+              }
+
+               #GridTemplate10
+              {
+               Display: grid;
+               grid-template: 30px 30px 30px 30px/20px 50 px 10px 30px;
+              }
 
             ");
             style.Apply(Page);
