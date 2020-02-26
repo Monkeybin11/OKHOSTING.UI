@@ -737,25 +737,25 @@ namespace OKHOSTING.UI.Test
                 #GridTemplate
                 {
                     display: grid;
-                    grid-row-gap: 50px;
+                    grid-row-gap: 50px 30px;
                 }
 
                 #GridTemplate2
                 {
                     display: grid;
-                    grid-row-gap: 90px;
+                    grid-row-gap: 90 px;
                 }
 
                 #GridTemplate3
                 {
                     display: grid;
-                    grid-row-gap: 80px;
+                    grid-row-gap:80px;
                 }
 
                 #GridTemplate4
                 {
                     display: grid;
-                    grid-row-gap: 100px;
+                    grid-row-gap: 10.21px;
                 }
 
                 #GridTemplate5
@@ -773,7 +773,7 @@ namespace OKHOSTING.UI.Test
                 #GridTemplate7
                 {
                     display: grid;
-                    grid-row-gap: 50px ;
+                    grid-row-gap: 5 0px ;
                 }
 
                 #GridTemplate8
@@ -785,13 +785,13 @@ namespace OKHOSTING.UI.Test
                 #GridTemplate9
                 {
                     display: grid;
-                    grid-row-gap: 60px;
+                    grid-row-gap: 60 px;
                 }
 
                 #GridTemplate10
                 {
                     display: grid;
-                    grid-row-gap: 25px;
+                    grid-row-gap: 2 5px;
                 }
 
             ");

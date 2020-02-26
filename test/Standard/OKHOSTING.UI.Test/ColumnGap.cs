@@ -755,7 +755,7 @@ namespace OKHOSTING.UI.Test
                 #GridTemplate4
                 {
                     display: grid;
-                    grid-column-gap: 50px;
+                    grid-column-gap: 50px 20px;
                 }
 
                 #GridTemplate5

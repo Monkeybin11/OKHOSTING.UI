@@ -342,45 +342,36 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
                 _ColumnCount = value;
 
+				var totalCellsPerRow = new int[Rows.Count];
 
-
-                if (((IGrid)this).RowCount > 0)
-                {
-					var allGridControls = App.GetParentAndAllChildren((IGrid)this).ToArray();
-
-					var rows = new int[Rows.Count, _ColumnCount];
-
-                    for (int r = 0; r < Rows.Count; r++)
-                    {
-						for (int c = 0; c < _ColumnCount; c++)
-						{
-							rows[r, c] = ((IGrid)this).GetRowSpan(allGridControls[c]);
-						}
-                        //rows[i] = _ColumnCount;
-                    }
-                }
-
-
-                foreach (System.Web.UI.WebControls.TableRow row in Rows)
+                for (int i = 0; i < Rows.Count; i++)
 				{
-					int totalCells = 0;
+					var row = Rows[i];
 					
 					foreach (System.Web.UI.WebControls.TableCell cell in row.Cells)
 					{
-						totalCells += cell.ColumnSpan;
+						totalCellsPerRow[i] += cell.ColumnSpan;
+
+						for (int r = 1; r < cell.RowSpan; r++)
+						{
+							if (i + r < Rows.Count)
+							{
+								totalCellsPerRow[i + r]++;
+							}
+						}
 					}
 
-					while (totalCells > value)
+					while (totalCellsPerRow[i] > value)
 					{
 						var cell = row.Cells[row.Cells.Count - 1];
 						row.Cells.Remove(cell);
-						totalCells -= cell.ColumnSpan;
+						totalCellsPerRow[i] -= cell.ColumnSpan;
 					}
 
-					while (totalCells < value)
+					while (totalCellsPerRow[i] < value)
 					{
 						row.Cells.Add(new System.Web.UI.WebControls.TableCell() { ColumnSpan = 1 });
-						totalCells++;
+						totalCellsPerRow[i]++;
 					}
 				}
 			}
