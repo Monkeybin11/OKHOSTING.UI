@@ -340,9 +340,28 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 			set
 			{
-				_ColumnCount = value;
+                _ColumnCount = value;
 
-				foreach (System.Web.UI.WebControls.TableRow row in Rows)
+
+
+                if (((IGrid)this).RowCount > 0)
+                {
+					var allGridControls = App.GetParentAndAllChildren((IGrid)this).ToArray();
+
+					var rows = new int[Rows.Count, _ColumnCount];
+
+                    for (int r = 0; r < Rows.Count; r++)
+                    {
+						for (int c = 0; c < _ColumnCount; c++)
+						{
+							rows[r, c] = ((IGrid)this).GetRowSpan(allGridControls[c]);
+						}
+                        //rows[i] = _ColumnCount;
+                    }
+                }
+
+
+                foreach (System.Web.UI.WebControls.TableRow row in Rows)
 				{
 					int totalCells = 0;
 					

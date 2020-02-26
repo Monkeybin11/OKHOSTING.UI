@@ -737,10 +737,62 @@ namespace OKHOSTING.UI.Test
                 #GridTemplate
                 {
                     display: grid;
-                    grid-template-rows: 50px;
+                    grid-column-gap: 50px;
                 }
 
-              
+                #GridTemplate2
+                {
+                    display: grid;
+                    grid-column-gap: 50 px;
+                }
+
+                #GridTemplate3
+                {
+                    display: grid;
+                    grid-column-gap: 50px  ;
+                }
+
+                #GridTemplate4
+                {
+                    display: grid;
+                    grid-column-gap: 50px;
+                }
+
+                #GridTemplate5
+                {
+                    display: grid;
+                    grid-column-gap: 80px;
+                }
+
+                #GridTemplate6
+                {
+                    display: grid;
+                    grid-column-gap: 100px;
+                }
+
+                #GridTemplate7
+                {
+                    display: grid;
+                    grid-column-gap: 25px;
+                }
+
+                #GridTemplate8
+                {
+                    display: grid;
+                    grid-column-gap: 75px;
+                }
+
+                #GridTemplate9
+                {
+                    display: grid;
+                    grid-column-gap: 60px;
+                }
+
+                #GridTemplate10
+                {
+                    display: grid;
+                    grid-column-gap: 90px;
+                }
 
             ");
             style.Apply(Page);

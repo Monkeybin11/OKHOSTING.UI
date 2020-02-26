@@ -735,7 +735,9 @@ namespace OKHOSTING.UI.Test
             CSS.Style style = new CSS.Style();
             style.Parse(@"
              
-           
+            #GridTemplate{
+}
+           grid-template-areas
 
             ");
             style.Apply(Page);

@@ -176,7 +176,7 @@ namespace OKHOSTING.UI.Test
             ILabel label1 = Core.BaitAndSwitch.Create<ILabel>();
             label1.Name = "label1";
             label1.Text = "Primer Label";
-            GridTree.SetContent(0, 0, lbel1);
+            GridTree.SetContent(0, 0, label1);
 
             ILabel label2 = Core.BaitAndSwitch.Create<ILabel>();
             label2.Name = "label2";
