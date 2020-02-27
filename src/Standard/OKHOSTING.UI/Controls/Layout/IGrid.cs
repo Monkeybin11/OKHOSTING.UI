@@ -191,7 +191,6 @@
         {
             for (int r = 0; r < grid.RowCount; r++)
             {
-
                 for (int c = 0; c < grid.ColumnCount; c++)
                 {
                     grid.SetContent(r, c, null);
