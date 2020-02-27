@@ -29,16 +29,6 @@ namespace OKHOSTING.UI.CSS
         /// </summary>
         protected readonly List<ICssRule> ParsedStyleRules = new List<ICssRule>();
 
-        protected string[] SplitBySpace(string singleSelectorText)
-        {
-            return singleSelectorText.Split(' ').Select(s => s.Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
-        }
-
-        protected string[] SplitByCommas(string selectorText)
-        {
-            return selectorText.Split(',').Select(s => s.Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
-        }
-
         /// <summary>
         /// Selects all controls that match the specified CSS selector
         /// </summary>
@@ -47,12 +37,12 @@ namespace OKHOSTING.UI.CSS
         /// <returns>List of controls that have the specified Id (Name)</returns>
         protected IEnumerable<IControl> SelectBy(IEnumerable<IControl> controls, string selector)
         {
-            var allSelectors = SplitByCommas(selector);
+            var allSelectors = Split(selector, ',');
 
             foreach (var s in allSelectors)
             {
                 IEnumerable<IControl> selected = controls;
-                var subSelectors = SplitBySpace(s);
+                var subSelectors = Split(s, ' ');
 
                 for (int i = 0; i < subSelectors.Length; i++)
                 {
@@ -118,9 +108,8 @@ namespace OKHOSTING.UI.CSS
             //support .class1.class2 selector that means to select all items that have BOTH classes declared
             if (selector.IndexOf('.') != selector.LastIndexOf('.'))
             {
-                var classes = selector.Split('.');
-                //return controls.Where(c => c.CssClass != null && SplitBySpace(c.CssClass).ContainsAll(classes));
-                return null;
+                var classes = Split(selector, '.');
+                return controls.Where(c => c.CssClass != null && Split(c.CssClass, ' ').ContainsAll(classes));
             }
 
             string element = selector.Substring(0, selector.IndexOf('.'));
@@ -132,7 +121,7 @@ namespace OKHOSTING.UI.CSS
                 result = SelectByElementType(controls, element);
             }
 
-            return result.Where(c => c.CssClass != null && SplitBySpace(c.CssClass.ToLower()).Contains(className));
+            return result.Where(c => c.CssClass != null && Split(c.CssClass.ToLower(), ' ').Contains(className));
         }
 
         /// <summary>
@@ -480,17 +469,47 @@ namespace OKHOSTING.UI.CSS
             }
         }
 
-        #endregion
+		#endregion
 
-        #region Static
+		#region Static
 
-        /// <summary>
-        /// Applies a CSS style to a IControl
-        /// <para xml:lang="es">
-        /// Aplica un estilo CSS a un Control.
-        /// </para>
-        /// </summary>
-        public static void Apply(ICssStyleDeclaration style, IControl control)
+		static Style()
+		{
+			ElementTypeEquivalents = new Dictionary<string, Type>();
+
+			ElementTypeEquivalents.Add("a", typeof(IHyperLink));
+			ElementTypeEquivalents.Add("table", typeof(IGrid));
+			ElementTypeEquivalents.Add("input[type=button]", typeof(IButton));
+			ElementTypeEquivalents.Add("input[type=submit]", typeof(IButton));
+			ElementTypeEquivalents.Add("input[type=check]", typeof(ICheckBox));
+			ElementTypeEquivalents.Add("input[type=text]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=password]", typeof(IPasswordTextBox));
+			ElementTypeEquivalents.Add("input[type=time]", typeof(ITimeOfDayPicker));
+			ElementTypeEquivalents.Add("input[type=date]", typeof(IDatePicker));
+			ElementTypeEquivalents.Add("input[type=datetime-local ]", typeof(IDatePicker));
+			ElementTypeEquivalents.Add("input[type=email]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=month]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=number]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=range]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=search]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=tel]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=url]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("input[type=week]", typeof(ITextBox));
+			ElementTypeEquivalents.Add("label", typeof(ILabel));
+			ElementTypeEquivalents.Add("p", typeof(ILabel));
+			ElementTypeEquivalents.Add("img", typeof(IImage));
+			ElementTypeEquivalents.Add("select", typeof(IListPicker));
+			ElementTypeEquivalents.Add("textarea", typeof(ITextArea));
+			ElementTypeEquivalents.Add("frame", typeof(IWebView));
+		}
+
+		/// <summary>
+		/// Applies a CSS style to a IControl
+		/// <para xml:lang="es">
+		/// Aplica un estilo CSS a un Control.
+		/// </para>
+		/// </summary>
+		public static void Apply(ICssStyleDeclaration style, IControl control)
         {
             Length lenght;
             bool parsed;
@@ -844,7 +863,7 @@ namespace OKHOSTING.UI.CSS
 
             if (!string.IsNullOrWhiteSpace(gridTemplate))
             {
-                var rowsColumns = gridTemplate.Split('/');
+                var rowsColumns = Split(gridTemplate, '/');
                 int count = 0;
 
                 foreach (var rowcolumn in rowsColumns)
@@ -878,7 +897,7 @@ namespace OKHOSTING.UI.CSS
 
             var gridRowGap = style.GetProperty("grid-row-gap")?.Value;
 
-            if (string.IsNullOrWhiteSpace(gridRowGap))
+            if (!string.IsNullOrWhiteSpace(gridRowGap))
             {
                 double lengthPixels = 0;
 
@@ -950,17 +969,17 @@ namespace OKHOSTING.UI.CSS
 
             if (!string.IsNullOrWhiteSpace(gridTemplateAreas))
             {
-                var rows = gridTemplateAreas.Split('"').Where(x => !string.IsNullOrWhiteSpace(x));
+                var rows = Split(gridTemplateAreas, '"');
                 var rowsArray = rows.ToArray();
                 int columnCounter = 0;
 
                 if (rowsArray.Length > 0)
                 {
-                    var areas = new string[rowsArray.Length, rowsArray[0].Split(' ').Length];
+                    var areas = new string[rowsArray.Length, Split(rowsArray[0], ' ').Length];
 
                     for (int row = 0; row < rowsArray.Length; row++)
                     {
-                        var columns = rowsArray[row].Split(' ');
+                        var columns = Split(rowsArray[row], ' ');
 
                         for (columnCounter = 0; columnCounter < columns.Length; columnCounter++)
                         {
@@ -1045,7 +1064,7 @@ namespace OKHOSTING.UI.CSS
         {
             rgbColor = rgbColor.Replace("rgba(", null);
             rgbColor = rgbColor.Replace(")", null);
-            var colors = rgbColor.Split(',');
+            var colors = Split(rgbColor, ',');
             int a = int.Parse(colors[0]);
             int r = int.Parse(colors[1]);
             int g = int.Parse(colors[2]);
@@ -1056,7 +1075,7 @@ namespace OKHOSTING.UI.CSS
 
         public static IEnumerable<Length> ParseLengths(string lenghts)
         {
-            foreach (var l in lenghts.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)))
+            foreach (var l in Split(lenghts, ' '))
             {
                 Length parsed;
 
@@ -1067,38 +1086,13 @@ namespace OKHOSTING.UI.CSS
             }
         }
 
-        static Style()
-        {
-            ElementTypeEquivalents = new Dictionary<string, Type>();
-
-            ElementTypeEquivalents.Add("a", typeof(IHyperLink));
-            ElementTypeEquivalents.Add("table", typeof(IGrid));
-            ElementTypeEquivalents.Add("input[type=button]", typeof(IButton));
-            ElementTypeEquivalents.Add("input[type=submit]", typeof(IButton));
-            ElementTypeEquivalents.Add("input[type=check]", typeof(ICheckBox));
-            ElementTypeEquivalents.Add("input[type=text]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=password]", typeof(IPasswordTextBox));
-            ElementTypeEquivalents.Add("input[type=time]", typeof(ITimeOfDayPicker));
-            ElementTypeEquivalents.Add("input[type=date]", typeof(IDatePicker));
-            ElementTypeEquivalents.Add("input[type=datetime-local ]", typeof(IDatePicker));
-            ElementTypeEquivalents.Add("input[type=email]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=month]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=number]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=range]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=search]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=tel]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=url]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("input[type=week]", typeof(ITextBox));
-            ElementTypeEquivalents.Add("label", typeof(ILabel));
-            ElementTypeEquivalents.Add("p", typeof(ILabel));
-            ElementTypeEquivalents.Add("img", typeof(IImage));
-            ElementTypeEquivalents.Add("select", typeof(IListPicker));
-            ElementTypeEquivalents.Add("textarea", typeof(ITextArea));
-            ElementTypeEquivalents.Add("frame", typeof(IWebView));
-        }
-
         public static readonly Dictionary<string, Type> ElementTypeEquivalents;
 
-        #endregion
-    }
+		protected static string[] Split(string singleSelectorText, char c)
+		{
+			return singleSelectorText.Split(c).Select(s => s.Trim()).Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
+		}
+
+		#endregion
+	}
 }

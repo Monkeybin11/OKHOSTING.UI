@@ -643,15 +643,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 					//add cell to row
 					var cell = new System.Web.UI.WebControls.TableCell();
 					Rows[row].Cells.Add(cell);
-					Cells[(row, column)] = cell;
-
-					//content
-					var content = ((IGrid) this).GetContent(row, column);
-
-					if (content != null)
-					{
-						cell.Controls.Add((System.Web.UI.Control) content);
-					}
 
 					//column width
 					if (ColumnWidths.ContainsKey(column))
@@ -659,25 +650,46 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 						cell.Width = new System.Web.UI.WebControls.Unit(ColumnWidths[column], System.Web.UI.WebControls.UnitType.Pixel);
 					}
 
-					//colspan
-					if (content != null && ColumnSpans.ContainsKey(content))
-					{
-						cell.ColumnSpan = ColumnSpans[content];
+					//content
+					var content = ((IGrid)this).GetContent(row, column);
 
-						for (int c2 = 1; c2 < ColumnSpans[content]; c2++)
+					if (content != null)
+					{
+						//add content
+						cell.Controls.Add((System.Web.UI.Control) content);
+
+						//colspan
+						int colspan = 1;
+						int rowspan = 1;
+
+						if (ColumnSpans.ContainsKey(content))
+						{
+							colspan = ColumnSpans[content];
+						}
+
+						if (RowSpans.ContainsKey(content))
+						{
+							rowspan = RowSpans[content];
+						}
+
+						if (colspan > 1)
+						{
+							cell.ColumnSpan = colspan;
+						}
+
+						if (rowspan > 1)
+						{
+							cell.RowSpan = rowspan;
+						}
+
+						for (int c2 = 0; c2 < colspan; c2++)
 						{
 							Cells[(row, column + c2)] = cell;
-						}
-					}
 
-					//rowspan
-					if (content != null && RowSpans.ContainsKey(content))
-					{
-						cell.RowSpan = RowSpans[content];
-
-						for (int r2 = 1; r2 < RowSpans[content]; r2++)
-						{
-							Cells[(row + r2, column)] = cell;
+							for (int r2 = 1; r2 < rowspan; r2++)
+							{
+								Cells[(row + r2, column + c2)] = cell;
+							}
 						}
 					}
 				}

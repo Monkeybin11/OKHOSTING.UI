@@ -102,15 +102,17 @@ namespace OKHOSTING.UI.Test
 				background-color: #445588;
 			}
 
-             #GridTemplateAreas
-             {
-               Display: grid;
-               grid-template-areas: 
-               ""txt1 lbl2 txt3 .""
-               ""txt1 lbl2 txt3 .""
-               ""txt1 lbl1 txt3 .""
-               ""txt1 lbl1 txt3 ."";
-             }
+            #GridTemplateAreas
+            {
+				Display: grid;
+				grid-template-areas: 
+				""txt1 txt1 txt3 .""
+				"" .   lbl2 txt3 .""
+				""lbl1 lbl1 txt3 .""
+				""lbl1 lbl1 txt3 ."";
+				grid-auto-columns: 200px;
+				grid-auto-rows: 200px;
+            }
             ");
             style.Apply(Page);
         }
