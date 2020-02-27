@@ -94,15 +94,23 @@ namespace OKHOSTING.UI.Test
             CSS.Style style = new CSS.Style();
             style.Parse(@"
              
+			#GridTemplateAreas *
+			{
+				width: 100px;
+				height: 100px;
+				border: 1px solid black;
+				background-color: #445588;
+			}
+
              #GridTemplateAreas
-              {
+             {
                Display: grid;
                grid-template-areas: 
                ""txt1 lbl2 txt3 .""
                ""txt1 lbl2 txt3 .""
                ""txt1 lbl1 txt3 .""
                ""txt1 lbl1 txt3 ."";
-              }
+             }
             ");
             style.Apply(Page);
         }

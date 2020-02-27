@@ -23,8 +23,6 @@ namespace OKHOSTING.UI.Test
 		{
 			//Create an Grid with specified columns and rows.
 			IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
-
-			
 			grid.RowCount = 26;
 			grid.ColumnCount = 1;
 
