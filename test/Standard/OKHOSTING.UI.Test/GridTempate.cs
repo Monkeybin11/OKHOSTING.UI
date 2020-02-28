@@ -756,25 +756,25 @@ namespace OKHOSTING.UI.Test
                #GridTemplate4
               {
                Display: grid;
-               grid-template: 100px 40px 30px 500px 80px/20px 50px 10px 30px;
+               grid-template: 30px 40px 30px 40px 30px/20px 50px 10px 30px;
               }
 
                #GridTemplate5
               {
                Display: grid;
-               grid-template: 100px 40px 30px 500px/20px 50px 10px 30px 50px;
+               grid-template: 30px 40px 30px 40px/20px 50px 10px 30px 50px;
               }
 
                #GridTemplate6
               {
                Display: grid;
-               grid-template: 50px 50px 60px 60px/80px 80px  80px 80px;
+               grid-template: 75px 90px 75px 90px/150px 150px;
               }
 
                #GridTemplate7
               {
                Display: grid;
-               grid-template: 100px 40px  30px 500px/20px 50px 10px 30px;
+               grid-template: 80px 100px/60px 60px 60px;
               }
 
                #GridTemplate8
@@ -792,7 +792,7 @@ namespace OKHOSTING.UI.Test
                #GridTemplate10
               {
                Display: grid;
-               grid-template: 30px 30px 30px 30px/20px 50 px 10px 30px;
+               grid-template: 50px/75px;
               }
 
             ");
