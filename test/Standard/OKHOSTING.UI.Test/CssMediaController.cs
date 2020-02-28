@@ -6,9 +6,8 @@ using OKHOSTING.UI.Controls.Layout;
 
 namespace OKHOSTING.UI.Test
 {
-    public class ArrobaMediaController : Controller
+    public class CssMediaController : Controller
     {
-       
         protected override void OnStart()
         {
             Refresh();
@@ -49,11 +48,9 @@ namespace OKHOSTING.UI.Test
             ITextBox txtUpperCase = Core.BaitAndSwitch.Create<ITextBox>();
             ITextBox txtLowerCase = Core.BaitAndSwitch.Create<ITextBox>();
 
-
             grid.Name = "grid";
             grid.ColumnCount = 4;
             grid.RowCount = 15;
-
 
             //whit page
             lblwhitpage.Text = "************************* Whith";
@@ -147,22 +144,19 @@ namespace OKHOSTING.UI.Test
 				#grid
                 {
                     display: grid;
-                      grid-template: 100px 80px 120px / 100px 100px 100px 100px;
-                 
-                        
+                    grid-template: 100px 80px 120px / 100px 100px 100px 100px;
+                    background-color: blue; 
                 }
 
                 @media all and (max-width: 675px)
                 {
                    #grid 
                     {
-                        display: grid;
-                        grid-template: 30px 30px 30px / 50px 50px 50px 50px; 
+                        background-color: green; 
                     }
                 }");
 
             style.Apply(Page);
         }
-
     }
 }

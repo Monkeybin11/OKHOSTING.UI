@@ -166,7 +166,7 @@ namespace OKHOSTING.UI.Test
 
 			ILabelButton ArrobaMedia = Core.BaitAndSwitch.Create<ILabelButton>();
 			ArrobaMedia.Text = "CSS with @media";
-			ArrobaMedia.Click += (object sender, EventArgs e) => new ArrobaMediaController() { Page = Page }.Start();
+			ArrobaMedia.Click += (object sender, EventArgs e) => new CssMediaController() { Page = Page }.Start();
 			grid.SetContent(23, 0, ArrobaMedia);
 
 			// Establishes the content and title of the page.

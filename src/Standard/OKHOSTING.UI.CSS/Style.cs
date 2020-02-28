@@ -394,7 +394,7 @@ namespace OKHOSTING.UI.CSS
             {
                 if (rule is ICssStyleRule)
                 {
-                    Apply((ICssStyleRule)rule);
+                    Apply((ICssStyleRule) rule);
                 }
                 else if (rule is ICssMediaRule)
                 {
@@ -409,8 +409,7 @@ namespace OKHOSTING.UI.CSS
 
                             if (Length.TryParse(maxWidth, out Length maxWidthLength))
                             {
-                                if (maxWidthLength.ToPixel() > page.Width) //code line original
-                               // if (maxWidthLength.ToPixel() < page.Width) //test of @media
+                                if (maxWidthLength.ToPixel() > page.Width)
                                 {
                                     mediaApplies = true;
                                     break;
@@ -513,8 +512,6 @@ namespace OKHOSTING.UI.CSS
         {
             Length lenght;
             bool parsed;
-
-
 
             //background and border colors
             if (!string.IsNullOrWhiteSpace(style.GetBackgroundColor()))
