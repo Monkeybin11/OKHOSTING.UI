@@ -175,7 +175,7 @@ namespace OKHOSTING.UI.Test
             ILabel label1 = Core.BaitAndSwitch.Create<ILabel>();
             label1.Name = "label1";
             label1.Text = "Primer Label";
-            GridTree.SetContent(0, 0, label1);
+            GridTree.SetContent(0, 0, lbel1);
 
             ILabel label2 = Core.BaitAndSwitch.Create<ILabel>();
             label2.Name = "label2";
@@ -338,7 +338,7 @@ namespace OKHOSTING.UI.Test
             ITextBox texte001 = Core.BaitAndSwitch.Create<ITextBox>();
             texte001.Name = "texte001";
             texte001.Value = "Primer textbox";
-            GridFive.SetContent(1, 0, texte001);
+            GridFive.SetContent(1, 0, texte01);
 
             ITextBox texte002 = Core.BaitAndSwitch.Create<ITextBox>();
             texte002.Name = "texte002";
@@ -405,7 +405,7 @@ namespace OKHOSTING.UI.Test
             ILabel label004a = Core.BaitAndSwitch.Create<ILabel>();
             label004a.Name = "label004a";
             label004a.Text = "Cuarto label";
-            GridSix.SetContent(0, 3, label004a);
+            GridSix.SetContent(0, 3, label004);
 
             ITextBox texte001a = Core.BaitAndSwitch.Create<ITextBox>();
             texte001a.Name = "texte001a";
@@ -420,7 +420,7 @@ namespace OKHOSTING.UI.Test
             ITextBox texte003a = Core.BaitAndSwitch.Create<ITextBox>();
             texte003a.Name = "texte003a";
             texte003a.Value = "Tercer textbox";
-            GridSix.SetContent(1, 2, texte003a);
+            GridSix.SetContent(1, 2, texte003);
 
             ITextBox texte004a = Core.BaitAndSwitch.Create<ITextBox>();
             texte004a.Name = "texte004a";
@@ -435,7 +435,7 @@ namespace OKHOSTING.UI.Test
             IButton boton002a = Core.BaitAndSwitch.Create<IButton>();
             boton002a.Name = "boton002a";
             boton002a.Text = "Segundo boton";
-            GridSix.SetContent(2, 1, boton002a);
+            GridSix.SetContent(2, 1, boton002);
 
             IButton boton003a = Core.BaitAndSwitch.Create<IButton>();
             boton003a.Name = "boton003a";
@@ -654,7 +654,7 @@ namespace OKHOSTING.UI.Test
             IButton boton003d = Core.BaitAndSwitch.Create<IButton>();
             boton003d.Name = "boton003d";
             boton003d.Text = "Tercer boton";
-            GridNine.SetContent(2, 2, boton003d);
+            GridNine.SetContent(2, 2, boton003c);
 
             IButton boton004d = Core.BaitAndSwitch.Create<IButton>();
             boton004d.Name = "boton004d";
