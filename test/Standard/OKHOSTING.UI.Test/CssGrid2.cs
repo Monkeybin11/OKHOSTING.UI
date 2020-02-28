@@ -1,23 +1,17 @@
 ﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OKHOSTING.UI.Test
 {
-	public class MenuRules : Controller
-
+	public class CssGrid2 : Controller
 	{
-
 		/// <summary>
 		/// Start this instance.
 		/// <para xml:lang="es">.
 		/// Inicia la instancia de este objeto.
 		/// </para>
 		/// </summary>
-
-
 		protected override void OnStart()
 		{
 			IStack stack = Core.BaitAndSwitch.Create<IStack>();

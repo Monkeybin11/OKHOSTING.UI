@@ -1,22 +1,19 @@
 ﻿using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OKHOSTING.UI.Test
 {
 	public class CssGrid : Controller
 	{
-			/// <summary>
-			/// Start this instance.
-			/// <para xml:lang="es">.
-			/// Inicia la instancia de este objeto.
-			/// </para>
-			/// </summary>
-			protected override void OnStart()
-			{
-
+		/// <summary>
+		/// Start this instance.
+		/// <para xml:lang="es">.
+		/// Inicia la instancia de este objeto.
+		/// </para>
+		/// </summary>
+		protected override void OnStart()
+		{
 			IStack stack = Core.BaitAndSwitch.Create<IStack>();
 
 			ILabelButton GridRowGapAndColumnGapController = Core.BaitAndSwitch.Create<ILabelButton>();
@@ -39,7 +36,7 @@ namespace OKHOSTING.UI.Test
 
 			ILabelButton gridTemplate = Core.BaitAndSwitch.Create<ILabelButton>();
 			gridTemplate.Text = "Grid-Template";
-			gridTemplate.Margin = new Thickness(0, 0, 0, 50); 
+			gridTemplate.Margin = new Thickness(0, 0, 0, 50);
 			gridTemplate.Click += (object sender, EventArgs e) => new gridTemplateController() { Page = Page }.Start();
 			stack.Children.Add(gridTemplate);
 
@@ -49,7 +46,6 @@ namespace OKHOSTING.UI.Test
 			gridAutoRowAndgridAutoColumn.Click += (object sender, EventArgs e) => new Auto_Colum_Auto_Row() { Page = Page }.Start();
 			stack.Children.Add(gridAutoRowAndgridAutoColumn);
 
-		
 			IButton btnExit = Core.BaitAndSwitch.Create<IButton>();
 			btnExit.Text = "Exit";
 			btnExit.Click += btnExit_Click;
@@ -58,10 +54,9 @@ namespace OKHOSTING.UI.Test
 			Page.Content = stack;
 		}
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Finish();
-        }
-
-    }
+		private void btnExit_Click(object sender, EventArgs e)
+		{
+			this.Finish();
+		}
+	}
 }

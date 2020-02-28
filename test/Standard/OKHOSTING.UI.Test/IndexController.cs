@@ -150,37 +150,24 @@ namespace OKHOSTING.UI.Test
 
 			//CSSController
 			ILabelButton cssController = Core.BaitAndSwitch.Create<ILabelButton>();
-			cssController.Text = "CSS Controller";
+			cssController.Text = "CSS";
 			cssController.Click += (object sender, EventArgs e) => new CssController() { Page = Page }.Start();
 			grid.SetContent(20, 0, cssController);
 
-			//even or odd test
-			//ILabelButton EvenOrOddController = Core.BaitAndSwitch.Create<ILabelButton>();
-			//EvenOrOddController.Text = "Even or Odd";
-			//EvenOrOddController.Click += (object sender, EventArgs e) => new EvenOrOddTest() { Page = Page }.Start();
-			//grid.SetContent(21, 0, EvenOrOddController);
-
-			//Test Grid Make Responsive
-			ILabelButton GridMakeResponsive = Core.BaitAndSwitch.Create<ILabelButton>();
-			GridMakeResponsive.Text = "Grid Make Responsive";
-			GridMakeResponsive.Click += (object sender, EventArgs e) => new GridMakeResponsive() { Page = Page }.Start();
-			grid.SetContent(22, 0, GridMakeResponsive);
-
 			ILabelButton URLCssGrid = Core.BaitAndSwitch.Create<ILabelButton>();
-			URLCssGrid.Text = "URL CssGrid Click Mee";
+			URLCssGrid.Text = "Css Grid";
 			URLCssGrid.Click += (object sender, EventArgs e) => new CssGrid() { Page = Page }.Start();
-			grid.SetContent(23, 0, URLCssGrid);
-
-			ILabelButton ArrobaMedia = Core.BaitAndSwitch.Create<ILabelButton>();
-			ArrobaMedia.Text = "@media controller";
-			ArrobaMedia.Click += (object sender, EventArgs e) => new ArrobaMediaController() { Page = Page }.Start();
-			grid.SetContent(24, 0, ArrobaMedia);
+			grid.SetContent(21, 0, URLCssGrid);
 
 			ILabelButton ManyControladores = Core.BaitAndSwitch.Create<ILabelButton>();
-			ManyControladores.Text = "Varios Controladores";
-			ManyControladores.Click += (object sender, EventArgs e) => new MenuRules () { Page = Page }.Start();
-			grid.SetContent(25, 0, ManyControladores);
+			ManyControladores.Text = "CSS Grid 2";
+			ManyControladores.Click += (object sender, EventArgs e) => new CssGrid2 () { Page = Page }.Start();
+			grid.SetContent(22, 0, ManyControladores);
 
+			ILabelButton ArrobaMedia = Core.BaitAndSwitch.Create<ILabelButton>();
+			ArrobaMedia.Text = "CSS with @media";
+			ArrobaMedia.Click += (object sender, EventArgs e) => new ArrobaMediaController() { Page = Page }.Start();
+			grid.SetContent(23, 0, ArrobaMedia);
 
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control to test";
