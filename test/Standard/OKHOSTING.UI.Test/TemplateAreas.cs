@@ -735,96 +735,95 @@ namespace OKHOSTING.UI.Test
             CSS.Style style = new CSS.Style();
             style.Parse(@"
              
-            #GridTemplate{             
-            
-            display: grid;    
-           grid-template-areas:
-            ""lbl1 lbl2 lbl3 lbl4""
-            ""txt1 txt2 txt3 txt4""
-            ""btn1 btn2 btn3 btn4""
-            ""btn4 btn4 btn4 btn4""  ;
+            #GridTemplate{
+                display: grid;    
+                grid-template-areas:
+                    ""lbl1 lbl2 lbl3 lbl4""
+                    ""txt1 txt2 txt3 txt4""
+                    ""btn1 btn2 btn3 btn4""
+                    ""btn1 btn2 btn3 btn4"";
              }
 
-             #GridTamplate2{    
-             display: grid;
-            #grid-template-areas:
-             ""lbel1 txte1 botn1""
-             ""botn2 txte1 botn3""
-             ""botn2 txte2 lbel2""
-             ""botn4 botn4 botn4"";
+             #GridTemplate2{    
+                display: grid;
+                grid-template-areas:
+                    ""lbel1 txte1 botn1""
+                    ""botn2 txte1 botn3""
+                    ""botn2 txte2 lbel2""
+                    ""botn4 botn4 botn4"";
              }
 
-            #GridTamplate3{    
-             display: grid;
-            #grid-template-areas:
-             ""label1 texte1 boton1 boton1""
-             ""label1 texte1 boton1 boton1""
-             ""label1 label2 label2 label2""
-             ""texte3 texte3 texte4 texte4"";
+            #GridTemplate3{    
+                display: grid;
+                grid-template-areas:
+                    ""label1 texte1 boton1 boton1""
+                    ""label1 texte1 boton1 boton1""
+                    ""label1 label2 label2 label2""
+                    ""texte3 texte3 texte4 texte4"";
              }
 
              
-                #GridTamplate4{    
-             display: grid;
-            #grid-template-areas:
-             ""label01 label02""
-             """"
-             ""boton3 boton4 boton1""
-             """";
+            #GridTamplate4{    
+                display: grid;
+                grid-template-areas:
+                    ""label01 label02""
+                    """"
+                    ""boton3 boton4 boton1""
+                    """";
              }
 
-               #GridTamplate5{    
-             display: grid;
-            #grid-template-areas:
-             ""label004 . . boton002""
-             "". . . label003 ""
-             "". . . .""
-             ""boton003 boton004 boton001 ."";
+            #GridTamplate5{    
+                display: grid;
+                grid-template-areas:
+                    ""label004 . . boton002""
+                    "". . . label003 ""
+                    "". . . .""
+                    ""boton003 boton004 boton001 ."";
              }
 
              #GridTamplate6{    
-             display: grid;
-            #grid-template-areas:
-             ""boton001a . . .""
-             "". . . label003a""
-             ""boton002a . . .""
-             "". . . label001a"";
+                display: grid;
+                grid-template-areas:
+                    ""boton001a . . .""
+                    "". . . label003a""
+                    ""boton002a . . .""
+                    "". . . label001a"";
               }  
 
              #GridTamplate7{    
-             display: grid;
-            #grid-template-areas:
-             ""boton001b boton001b label001b label001b .""
-             ""label002b label002b boton002b boton002b ""
-             ""boton003b boton003b texte001b texte001b""
-             ""texte003b texte003b label004b label004b"";            
+                display: grid;
+                grid-template-areas:
+                    ""boton001b boton001b label001b label001b .""
+                    ""label002b label002b boton002b boton002b ""
+                    ""boton003b boton003b texte001b texte001b""
+                    ""texte003b texte003b label004b label004b"";            
              }
 
             #GridTamplate8{    
-             display: grid;
-            #grid-template-areas:
-             ""boton001c . . .""
-             "". boton001c . .""
-             "". . boton001c .""
-             "". . . boton001c"";
+                display: grid;
+                grid-template-areas:
+                    ""boton001c . . .""
+                    "". boton001c . .""
+                    "". . boton001c .""
+                    "". . . boton001c"";
              }
 
             #GridTamplate9{    
-             display: grid;
-            #grid-template-areas:
-             ""boton001d boton001d boton001d boton001d""
-             "". . . .""
-             "". . . .""
-             ""boton001d boton001d boton001d boton001d"";
+                display: grid;
+                grid-template-areas:
+                    ""boton001d boton001d boton001d boton001d""
+                    "". . . .""
+                    "". . . .""
+                    ""boton001d boton001d boton001d boton001d"";
              }
 
             #GridTamplate10{    
-             display: grid;
-            #grid-template-areas:
-             ""label003e label003 . .""
-             "". . label004e label004e""
-             ""texte003e texte003e texte003e .""
-             "". boton003e boton003e ."";
+                display: grid;
+                grid-template-areas:
+                    ""label003e label003 . .""
+                    "". . label004e label004e""
+                    ""texte003e texte003e texte003e .""
+                    "". boton003e boton003e ."";
              }
 
 
