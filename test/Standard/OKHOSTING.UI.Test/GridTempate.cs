@@ -22,7 +22,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator.Name = "Separator";
-            lblSeparator.Text = "templateRows*****************************************";
+            lblSeparator.Text = "template*****************************************";
             StackPrincipal.Children.Add(lblSeparator);
 
             IGrid GridOne = Core.BaitAndSwitch.Create<IGrid>();
@@ -93,7 +93,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator2 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator2.Name = "Separator2";
-            lblSeparator2.Text = "TemplateRows Example2*****************************************";
+            lblSeparator2.Text = "Template Example2*****************************************";
             StackPrincipal.Children.Add(lblSeparator2);
 
             IGrid GridTwo = Core.BaitAndSwitch.Create<IGrid>();
@@ -164,7 +164,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator3 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator3.Name = "Separator3";
-            lblSeparator3.Text = "TemplateRows Example3*****************************************";
+            lblSeparator3.Text = "Template Example3*****************************************";
             StackPrincipal.Children.Add(lblSeparator3);
 
             IGrid GridTree = Core.BaitAndSwitch.Create<IGrid>();
@@ -235,7 +235,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator4 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator4.Name = "Separator4";
-            lblSeparator4.Text = "TemplateRows Example4*****************************************";
+            lblSeparator4.Text = "Template Example4*****************************************";
             StackPrincipal.Children.Add(lblSeparator4);
 
             IGrid GridFour = Core.BaitAndSwitch.Create<IGrid>();
@@ -307,7 +307,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator5 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator5.Name = "Separator5";
-            lblSeparator5.Text = "TemplateRows Example5*****************************************";
+            lblSeparator5.Text = "Template Example5*****************************************";
             StackPrincipal.Children.Add(lblSeparator5);
 
             IGrid GridFive = Core.BaitAndSwitch.Create<IGrid>();
@@ -378,7 +378,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator6 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator6.Name = "Separator6";
-            lblSeparator6.Text = "TemplateRows Example6*****************************************";
+            lblSeparator6.Text = "Template Example6*****************************************";
             StackPrincipal.Children.Add(lblSeparator6);
 
             IGrid GridSix = Core.BaitAndSwitch.Create<IGrid>();
@@ -449,7 +449,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator7 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator7.Name = "Separator7";
-            lblSeparator7.Text = "TemplateRows Example7*****************************************";
+            lblSeparator7.Text = "Template Example7*****************************************";
             StackPrincipal.Children.Add(lblSeparator7);
 
             IGrid GridSeven = Core.BaitAndSwitch.Create<IGrid>();
@@ -520,7 +520,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator8 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator8.Name = "Separator8";
-            lblSeparator8.Text = "TemplateRows Example8*****************************************";
+            lblSeparator8.Text = "Template Example8*****************************************";
             StackPrincipal.Children.Add(lblSeparator8);
 
             IGrid GridEight = Core.BaitAndSwitch.Create<IGrid>();
@@ -591,7 +591,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator9 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator9.Name = "Separator9";
-            lblSeparator9.Text = "TemplateRows Example9*****************************************";
+            lblSeparator9.Text = "Template Example9*****************************************";
             StackPrincipal.Children.Add(lblSeparator9);
 
             IGrid GridNine = Core.BaitAndSwitch.Create<IGrid>();
@@ -662,7 +662,7 @@ namespace OKHOSTING.UI.Test
 
             ILabel lblSeparator10 = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator10.Name = "Separator10";
-            lblSeparator10.Text = "TemplateRows Example10*****************************************";
+            lblSeparator10.Text = "Template Example10*****************************************";
             StackPrincipal.Children.Add(lblSeparator10);
 
             IGrid GridTe = Core.BaitAndSwitch.Create<IGrid>();
