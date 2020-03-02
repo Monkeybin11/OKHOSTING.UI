@@ -12,20 +12,21 @@ namespace OKHOSTING.UI.Test
         {
             IStack StackPrincipal = Core.BaitAndSwitch.Create<IStack>();
 
+            Page.Title = "Grid-template-columns";
             Page.Content = StackPrincipal;
 
             IButton Salir = Core.BaitAndSwitch.Create<IButton>();
             Salir.Text = "Exit";
             Salir.Click += btnExit_Click;
             StackPrincipal.Children.Add(Salir);
-
+            
             ILabel lblSeparator = Core.BaitAndSwitch.Create<ILabel>();
             lblSeparator.Name = "Separator";
             lblSeparator.Text = "TemplateColums*****************************************";
             StackPrincipal.Children.Add(lblSeparator);
 
             IGrid GridOne = Core.BaitAndSwitch.Create<IGrid>();
-            GridOne.Name = "GridTemplate";
+            GridOne.Name = "GridTemplateA";
             GridOne.ColumnCount = 4;
             GridOne.RowCount = 4;
             StackPrincipal.Children.Add(GridOne);
@@ -96,7 +97,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator2);
 
             IGrid GridTwo = Core.BaitAndSwitch.Create<IGrid>();
-            GridTwo.Name = "GridTemplate2";
+            GridTwo.Name = "GridTemplateB";
             GridTwo.ColumnCount = 4;
             GridTwo.RowCount = 4;
             StackPrincipal.Children.Add(GridTwo);
@@ -167,7 +168,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator3);
 
             IGrid GridTree = Core.BaitAndSwitch.Create<IGrid>();
-            GridTree.Name = "GridTemplate3";
+            GridTree.Name = "GridTemplateC";
             GridTree.ColumnCount = 4;
             GridTree.RowCount = 4;
             StackPrincipal.Children.Add(GridTree);
@@ -238,7 +239,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator4);
 
             IGrid GridFour = Core.BaitAndSwitch.Create<IGrid>();
-            GridFour.Name = "GridTemplate4";
+            GridFour.Name = "GridTemplateD";
             GridFour.ColumnCount = 4;
             GridFour.RowCount = 4;
             StackPrincipal.Children.Add(GridFour);
@@ -310,7 +311,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator5);
 
             IGrid GridFive = Core.BaitAndSwitch.Create<IGrid>();
-            GridFive.Name = "GridTemplate5";
+            GridFive.Name = "GridTemplateE";
             GridFive.ColumnCount = 4;
             GridFive.RowCount = 4;
             StackPrincipal.Children.Add(GridFive);
@@ -381,7 +382,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator6);
 
             IGrid GridSix = Core.BaitAndSwitch.Create<IGrid>();
-            GridSix.Name = "GridTemplate6";
+            GridSix.Name = "GridTemplateF";
             GridSix.ColumnCount = 4;
             GridSix.RowCount = 4;
             StackPrincipal.Children.Add(GridSix);
@@ -453,7 +454,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator7);
 
             IGrid GridSeven = Core.BaitAndSwitch.Create<IGrid>();
-            GridSeven.Name = "GridTemplate7";
+            GridSeven.Name = "GridTemplateG";
             GridSeven.ColumnCount = 4;
             GridSeven.RowCount = 4;
             StackPrincipal.Children.Add(GridSeven);
@@ -524,7 +525,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator8);
 
             IGrid GridEight = Core.BaitAndSwitch.Create<IGrid>();
-            GridEight.Name = "GridTemplate8";
+            GridEight.Name = "GridTemplateH";
             GridEight.ColumnCount = 4;
             GridEight.RowCount = 4;
             StackPrincipal.Children.Add(GridEight);
@@ -595,7 +596,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator9);
 
             IGrid GridNine = Core.BaitAndSwitch.Create<IGrid>();
-            GridNine.Name = "GridTemplate9";
+            GridNine.Name = "GridTemplateI";
             GridNine.ColumnCount = 4;
             GridNine.RowCount = 4;
             StackPrincipal.Children.Add(GridNine);
@@ -666,7 +667,7 @@ namespace OKHOSTING.UI.Test
             StackPrincipal.Children.Add(lblSeparator10);
 
             IGrid GridTe = Core.BaitAndSwitch.Create<IGrid>();
-            GridTe.Name = "GridTemplate10";
+            GridTe.Name = "GridTemplateJ";
             GridTe.ColumnCount = 4;
             GridTe.RowCount = 4;
             StackPrincipal.Children.Add(GridTe);
@@ -736,64 +737,64 @@ namespace OKHOSTING.UI.Test
             CSS.Style style = new CSS.Style();
             style.Parse(@"
              
-                 #GridTemplate
+                 #GridTemplateA
                 {
                     display: grid;
-                    grid-template-rows: 100px 150px 200px 250px;
+                    grid-template-columns: 100px 150px 200px 250px;
                 }
 
-                #GridTemplate2
+                #GridTemplateB
                 {
                     display: grid;
-                    grid-template-rows: 25px 50 px 75px 100px;
+                    grid-template-columns: 25px 50 px 75px 100px;
                 }
                 
-                #GridTemplate3
+                #GridTemplateC
                 {
                     display: grid;
-                    grid-template-rows: 10px  20px 10px 20px;
+                    grid-template-columns: 10px  20px 10px 20px;
                 }
 
-                #GridTemplate4
+                #GridTemplateD
                 {
                     display: grid;
-                    grid-template-rows: 40px 40px 40px 40px 40px;
+                    grid-template-columns: 40px 40px 40px 40px 40px;
                 }
 
-                #GridTemplate5
+                #GridTemplateE
                 {
                     display: grid;
-                    grid-template-rows: 30px 30px 30px 30px;
+                    grid-template-columns: 30px 30px 30px 30px;
                 }
 
-                #GridTemplate6
+                #GridTemplateF
                 {
                     display: grid;
-                    grid-template-rows: 20px 20px;
+                    grid-template-columns: 20px 20px;
                 }
 
-                #GridTemplate7
+                #GridTemplateG
                 {
                     display: grid;
-                    grid-template-rows: 50px 50px 50px 50px 50px;
+                    grid-template-columns: 50px 50px 50px 50px 50px;
                 }
 
-                #GridTemplate8
+                #GridTemplateH
                 {
                     display: grid;
-                    grid-template-rows: 70px 90px 110px 130px;
+                    grid-template-columns: 70px 90px 110px 130px;
                 }
 
-                #GridTemplate9
+                #GridTemplateI
                 {
                     display: grid;
-                    grid-template-rows: 65px 50px 65px 50px;
+                    grid-template-columns: 65px 50px 65px 50px;
                 }
 
-                #GridTemplate10
+                #GridTemplateJ
                 {
                     display: grid;
-                    grid-template-rows: 80px 80px 80px 80px;
+                    grid-template-columns: 80px 80px 80px 80px;
                 }
 
 
