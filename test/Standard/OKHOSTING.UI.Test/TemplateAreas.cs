@@ -763,16 +763,16 @@ namespace OKHOSTING.UI.Test
              }
 
              
-            #GridTamplate4{    
+            #GridTemplate4{    
                 display: grid;
                 grid-template-areas:
-                    ""label01 label02""
-                    """"
-                    ""boton3 boton4 boton1""
-                    """";
+                    ""label01 label02 . .""
+                    "". . . .""
+                    ""boton3 boton4 boton1 .""
+                    "". . . ."";
              }
 
-            #GridTamplate5{    
+            #GridTemplate5{    
                 display: grid;
                 grid-template-areas:
                     ""label004 . . boton002""
@@ -781,16 +781,16 @@ namespace OKHOSTING.UI.Test
                     ""boton003 boton004 boton001 ."";
              }
 
-             #GridTamplate6{    
+             #GridTemplate6{    
                 display: grid;
                 grid-template-areas:
-                    ""boton001a . . .""
-                    "". . . label003a""
-                    ""boton002a . . .""
-                    "". . . label001a"";
+                    ""boton001a boton001a boton002a boton002a""
+                    ""label001a label001a label002a label002a""
+                    ""boton003a boton003a boton004a boton004a""
+                    ""label003a label003a label003a label004a"";
               }  
 
-             #GridTamplate7{    
+             #GridTemplate7{    
                 display: grid;
                 grid-template-areas:
                     ""boton001b boton001b label001b label001b .""
@@ -799,7 +799,7 @@ namespace OKHOSTING.UI.Test
                     ""texte003b texte003b label004b label004b"";            
              }
 
-            #GridTamplate8{    
+            #GridTemplate8{    
                 display: grid;
                 grid-template-areas:
                     ""boton001c . . .""
@@ -808,16 +808,16 @@ namespace OKHOSTING.UI.Test
                     "". . . boton001c"";
              }
 
-            #GridTamplate9{    
+            #GridTemplate9{    
                 display: grid;
                 grid-template-areas:
                     ""boton001d boton001d boton001d boton001d""
                     "". . . .""
                     "". . . .""
-                    ""boton001d boton001d boton001d boton001d"";
+                    ""boton002d boton002d boton002d boton002d"";
              }
 
-            #GridTamplate10{    
+            #GridTemplate10{    
                 display: grid;
                 grid-template-areas:
                     ""label003e label003 . .""
