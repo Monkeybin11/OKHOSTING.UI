@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Media\VideoPlayer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\OKHOSTING.RPC\src\Standard\OKHOSTING.RPC\OKHOSTING.RPC.csproj" />
     <ProjectReference Include="..\..\..\..\OKHOSTING.Security\src\Standard\OKHOSTING.Security\OKHOSTING.Security.csproj" />
     <ProjectReference Include="..\OKHOSTING.UI\OKHOSTING.UI.csproj" />
