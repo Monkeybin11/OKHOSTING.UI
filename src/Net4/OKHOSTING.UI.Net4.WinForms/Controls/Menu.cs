@@ -6,6 +6,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Menu : System.Windows.Forms.MenuStrip, IMenu
 	{
+		public Menu()
+		{
+			base.ItemClicked += Menu_ItemClicked;
+		}
+
 		#region IControl
 
 		double? IControl.Width
@@ -228,7 +233,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		ICollection<MenuItem> IMenu.Items { get; set; }
+		ICollection<IMenuItem> IMenu.Items { get; set; }
+
+		private void Menu_ItemClicked(object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
+		{
+			
+		}
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
@@ -236,14 +246,14 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			base.OnPaint(e);
 		}
 
-		protected System.Windows.Forms.ToolStripMenuItem Parse(MenuItem item)
+		protected System.Windows.Forms.ToolStripMenuItem Parse(IMenuItem item)
 		{
 			var nativeItem = new System.Windows.Forms.ToolStripMenuItem(item.Text, null, (sender, e) => item.Click(sender, e));
 			nativeItem.Font = Font;
 			nativeItem.BackColor = BackColor;
 			nativeItem.ForeColor = ForeColor;
 			nativeItem.TextAlign = Platform.ParseContentAlignment(((ITextControl)this).TextHorizontalAlignment, ((ITextControl)this).VerticalAlignment);
-
+			
 			foreach (var child in item.Children)
 			{
 				nativeItem.DropDownItems.Add(Parse(child));
@@ -256,7 +266,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			base.Items.Clear();
 
-			foreach (var item in ((IMenu)this).Items)
+			foreach (var item in ((IMenu) this).Items)
 			{
 				base.Items.Add(Parse(item));
 			}

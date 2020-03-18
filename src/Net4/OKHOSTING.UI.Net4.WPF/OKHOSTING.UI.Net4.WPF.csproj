@@ -83,6 +83,7 @@
     <Compile Include="Controls\Layout\RelativePanel.cs" />
     <Compile Include="Controls\Layout\Flow.cs" />
     <Compile Include="Controls\Layout\Stack.cs" />
+    <Compile Include="Controls\Menu.cs" />
     <Compile Include="Controls\Slider.cs" />
     <Compile Include="Controls\UserControl.cs" />
     <Compile Include="Controls\TimeOfDayPicker.xaml.cs">
