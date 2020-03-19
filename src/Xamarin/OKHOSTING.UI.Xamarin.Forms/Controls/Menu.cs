@@ -391,20 +391,4 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		#endregion
 	}
-
-	public class MenuItem : global::Xamarin.Forms.MenuItem, IMenuItem
-	{
-		public ICollection<IMenuItem> Children
-		{
-			get
-			{
-
-			}
-			set
-			{
-			}
-		}
-
-		public event EventHandler Click;
-	}
 }

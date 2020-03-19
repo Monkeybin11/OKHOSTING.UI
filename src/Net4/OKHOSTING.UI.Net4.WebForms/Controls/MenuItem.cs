@@ -18,7 +18,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				Text = Text,
 			};
-
+			
 			foreach (MenuItem item in Children)
 			{
 				item.DataBind();
