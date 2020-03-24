@@ -239,32 +239,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		bool ITextControl.Underline
 		{
-			get
-			{
-				if (base.Content is string)
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
-			}
-			set
-			{
-				if (value)
-				{
-					var block = new System.Windows.Controls.TextBlock();
-					block.Text = Text;
-					block.TextDecorations = System.Windows.TextDecorations.Underline;
-
-					base.Content = block;
-				}
-				else
-				{
-					base.Content = Text;
-				}
-			}
+			get;
+			set;
 		}
 
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
