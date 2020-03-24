@@ -327,7 +327,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 
@@ -578,12 +578,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		ICollection<IMenuItem> IMenu.Items { get; set; }
+		ICollection<MenuItem> IMenu.Items { get; set; }
 
 		private void Menu_MenuItemClick(object sender, System.Web.UI.WebControls.MenuEventArgs e)
 		{
-			var item = (MenuItem) ((IMenu) this).Items.Where(i => i.GetHashCode().ToString() == e.Item.Value).Single();
-			item.OnClick();
+			var item = ((IMenu) this).Items.Where(i => i.GetHashCode().ToString() == e.Item.Value).Single();
+			item.OnClick(e);
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -604,7 +604,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			var nativeItem = new System.Web.UI.WebControls.MenuItem(item.Text);
 			nativeItem.Text = item.Text;
 			nativeItem.Value = item.GetHashCode().ToString();
-
+			
 			foreach (MenuItem child in item.Children)
 			{
 				nativeItem.ChildItems.Add(Parse(child));

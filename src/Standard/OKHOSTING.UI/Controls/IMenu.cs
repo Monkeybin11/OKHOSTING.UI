@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Controls
 {
@@ -7,6 +8,29 @@ namespace OKHOSTING.UI.Controls
 	/// </summary>
 	public interface IMenu : ITextControl
 	{
-		ICollection<IMenuItem> Items { get; set; }
+		ICollection<MenuItem> Items { get; set; }
+	}
+
+	/// <summary>
+	/// An item on a menu, that can have subitems
+	/// </summary>
+	public class MenuItem
+	{
+		/// <summary>
+		/// Text of the item
+		/// </summary>
+		public string Text { get; set; }
+
+		public ICollection<MenuItem> Children { get; set; }
+
+		/// <summary>
+		/// Raised after the user clicks on the item
+		/// </summary>
+		public event EventHandler Click;
+
+		public void OnClick(EventArgs e)
+		{
+			Click?.Invoke(this, e);
+		}
 	}
 }

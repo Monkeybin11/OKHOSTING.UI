@@ -226,7 +226,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 

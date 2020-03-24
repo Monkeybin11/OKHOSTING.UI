@@ -339,7 +339,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 

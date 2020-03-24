@@ -1,8 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
@@ -33,14 +31,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool IControl.Visible
 		{
-			get
-			{
-				return base.IsVisible;
-			}
-			set
-			{
-				base.IsVisible = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -51,14 +43,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool IControl.Enabled
 		{
-			get
-			{
-				return base.IsEnabled;
-			}
-			set
-			{
-				base.IsEnabled = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -69,17 +55,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		double? IControl.Width
 		{
-			get
-			{
-				return base.WidthRequest;
-			}
-			set
-			{
-				if (value.HasValue)
-				{
-					base.WidthRequest = value.Value;
-				}
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -90,17 +67,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		double? IControl.Height
 		{
-			get
-			{
-				return base.HeightRequest;
-			}
-			set
-			{
-				if (value.HasValue)
-				{
-					base.HeightRequest = value.Value;
-				}
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -111,14 +79,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.Margin
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.Margin);
-			}
-			set
-			{
-				base.Margin = Forms.Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -141,14 +103,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color IControl.BackgroundColor
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.BackgroundColor);
-			}
-			set
-			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -181,14 +137,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
-			}
-			set
-			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -199,14 +149,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		VerticalAlignment IControl.VerticalAlignment
 		{
-			get
-			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
-			}
-			set
-			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -239,7 +183,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 
@@ -261,14 +205,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		string ITextControl.FontFamily
 		{
-			get
-			{
-				return base.FontFamily;
-			}
-			set
-			{
-				base.FontFamily = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -279,14 +217,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color ITextControl.FontColor
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.TextColor);
-			}
-			set
-			{
-				base.TextColor = Forms.Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -297,14 +229,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Bold
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -315,14 +241,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Italic
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -345,14 +265,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get
-			{
-				return Forms.Platform.Parse(base.HorizontalTextAlignment);
-			}
-			set
-			{
-				base.HorizontalTextAlignment = Forms.Platform.ParseTextAlignment(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -363,14 +277,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get
-			{
-				return Forms.Platform.ParseVerticalTextAlignment(base.VerticalTextAlignment);
-			}
-			set
-			{
-				base.VerticalTextAlignment = Forms.Platform.ParseTextAlignment(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -383,12 +291,36 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			set;
 		}
 
-		ICollection<IMenuItem> IMenu.Items { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		#endregion
+
+		ICollection<MenuItem> IMenu.Items { get; set; }
 
 		public void Dispose()
 		{
 		}
 
-		#endregion
+		protected global::Xamarin.Forms.MenuItem Parse(MenuItem item)
+		{
+			var native = new global::Xamarin.Forms.MenuItem();
+			native.Text = item.Text;
+			native.Clicked += NativeItem_Clicked;
+			native.BindingContext = item;
+
+			foreach (var child in item.Children)
+			{
+				var nativeChild = Parse(child);
+				nativeChild.Parent = native;
+			}
+
+			return native;
+		}
+
+		private void NativeItem_Clicked(object sender, System.EventArgs e)
+		{
+			var native = (global::Xamarin.Forms.MenuItem) sender;
+			var item = (MenuItem) native.BindingContext;
+
+			item.OnClick(e);
+		}
 	}
 }

@@ -284,7 +284,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 

@@ -67,7 +67,6 @@ namespace OKHOSTING.UI.Forms
 		{
 			//the grid that will actually be displayed to the user and contain all the fields
 			IGrid content = BaitAndSwitch.Create<IGrid>();
-            content.Name = "Filtros";
 
 			//column counter
 			int currentColumn = 0;

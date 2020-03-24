@@ -486,7 +486,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 

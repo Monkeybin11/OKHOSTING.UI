@@ -305,7 +305,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Media
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 

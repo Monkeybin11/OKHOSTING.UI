@@ -8,7 +8,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Menu()
 		{
-			base.ItemClicked += Menu_ItemClicked;
 		}
 
 		#region IControl
@@ -120,7 +119,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			get
 			{
-				return (IControl)base.Parent;
+				return (IControl) base.Parent;
 			}
 		}
 
@@ -233,11 +232,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		ICollection<IMenuItem> IMenu.Items { get; set; }
+		ICollection<MenuItem> IMenu.Items { get; set; }
 
-		private void Menu_ItemClicked(object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
+		protected void MenuItem_Clicked(object sender, System.EventArgs e)
 		{
-			
+			MenuItem item = (MenuItem) ((System.Windows.Forms.ToolStripMenuItem) sender).Tag;
+			item.OnClick(e);
 		}
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
@@ -246,22 +246,24 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			base.OnPaint(e);
 		}
 
-		protected System.Windows.Forms.ToolStripMenuItem Parse(IMenuItem item)
+		protected System.Windows.Forms.ToolStripMenuItem Parse(MenuItem item)
 		{
-			var nativeItem = new System.Windows.Forms.ToolStripMenuItem(item.Text, null, (sender, e) => item.Click(sender, e));
-			nativeItem.Font = Font;
-			nativeItem.BackColor = BackColor;
-			nativeItem.ForeColor = ForeColor;
-			nativeItem.TextAlign = Platform.ParseContentAlignment(((ITextControl)this).TextHorizontalAlignment, ((ITextControl)this).VerticalAlignment);
-			
+			var native = new System.Windows.Forms.ToolStripMenuItem(item.Text, null, MenuItem_Clicked);
+			native.Font = Font;
+			native.BackColor = BackColor;
+			native.ForeColor = ForeColor;
+			native.TextAlign = Platform.ParseContentAlignment(((ITextControl) this).TextHorizontalAlignment, ((ITextControl) this).VerticalAlignment);
+			native.Tag = item;
+
 			foreach (var child in item.Children)
 			{
-				nativeItem.DropDownItems.Add(Parse(child));
+				native.DropDownItems.Add(Parse(child));
 			}
 
-			return nativeItem;
+			return native;
 		}
 
+		
 		protected void DataBind()
 		{
 			base.Items.Clear();

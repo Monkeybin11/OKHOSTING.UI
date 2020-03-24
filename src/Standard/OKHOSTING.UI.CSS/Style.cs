@@ -984,7 +984,7 @@ namespace OKHOSTING.UI.CSS
                         }
                     }
 
-                    grid.EmtpyAllCells();
+                    grid.ClearContent();
 
                     for (int row = 0; row < rowsArray.Length; row++)
                     {
