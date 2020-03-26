@@ -41,19 +41,19 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// Change column content especific to other especific column
 		/// </summary>
 		/// <param name="grid"></param>
-		/// <param name="columnSender"></param>
-		/// <param name="columnReceiver"></param>
-		public static void MoveColumnContent(this IGrid grid, int columnSender, int columnReceiver)
+		/// <param name="fromColumn"></param>
+		/// <param name="toColumn"></param>
+		public static void MoveColumnContent(this IGrid grid, int fromColumn, int toColumn)
 		{
 			int rows = grid.RowCount;
 
 			for (int row = 0; row < rows; row++)
 			{
-				var content = grid.GetContent(row, columnSender);
+				var content = grid.GetContent(row, fromColumn);
 
 				if (content != null)
 				{
-					grid.SetContent(row, columnReceiver, content);
+					grid.SetContent(row, toColumn, content);
 				}
 			}
 		}
@@ -62,19 +62,19 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// Change row content especific to other especific row
 		/// </summary>
 		/// <param name="grid"></param>
-		/// <param name="rowSender"></param>
-		/// <param name="rowReceiver"></param>
-		public static void MoveRowContent(this IGrid grid, int rowSender, int rowReceiver)
+		/// <param name="fromRow"></param>
+		/// <param name="toRow"></param>
+		public static void MoveRowContent(this IGrid grid, int fromRow, int toRow)
 		{
 			int columns = grid.ColumnCount;
 
 			for (int column = 0; column < columns; column++)
 			{
-				var content = grid.GetContent(rowSender, column);
+				var content = grid.GetContent(fromRow, column);
 
 				if (content != null)
 				{
-					grid.SetContent(rowReceiver, column, content);
+					grid.SetContent(toRow, column, content);
 				}
 			}
 		}
@@ -284,6 +284,56 @@ namespace OKHOSTING.UI.Controls.Layout
 			for (int i = 0; i < grid.ColumnCount; i++)
 			{
 				grid.SetWidth(i, width);
+			}
+		}
+
+		/// <summary>
+		/// Sets the same width to all columns in the grid
+		/// </summary>
+		public static void SetWidths(this IGrid grid, double width)
+		{
+			for (int i = 0; i < grid.ColumnCount; i++)
+			{
+				grid.SetWidth(i, width);
+			}
+		}
+
+		/// <summary>
+		/// Sets a respective width to each column in the grid
+		/// </summary>
+		public static void SetWidths(this IGrid grid, IEnumerable<double> widths)
+		{
+			int i = 0;
+
+			foreach (var width in widths)
+			{
+				grid.SetWidth(i, width);
+				i++;
+			}
+		}
+
+		/// <summary>
+		/// Sets the same width to all columns in the grid
+		/// </summary>
+		public static void SetHeights(this IGrid grid, double height)
+		{
+			for (int i = 0; i < grid.RowCount; i++)
+			{
+				grid.SetHeight(i, height);
+			}
+		}
+
+		/// <summary>
+		/// Sets a respective height to each column in the grid
+		/// </summary>
+		public static void SetHeights(this IGrid grid, IEnumerable<double> heights)
+		{
+			int i = 0;
+
+			foreach (var height in heights)
+			{
+				grid.SetHeight(i, height);
+				i++;
 			}
 		}
 	}

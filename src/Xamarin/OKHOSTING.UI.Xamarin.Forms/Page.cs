@@ -11,9 +11,31 @@ namespace OKHOSTING.UI.Xamarin.Forms
 	public class Page : global::Xamarin.Forms.ContentPage, IPage
 	{
 		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		public event EventHandler Resized;
+
+		/// <summary>
 		/// App that is running on this page
 		/// </summary>
 		public App App { get; set; }
+
+		/// <summary>
+		/// Gets or sets the content.
+		/// <para xml:lang="es">Obtiene o establece el contenido de la pagina actual.</para>
+		/// </summary>
+		/// <value>The content.</value>
+		public new IControl Content
+		{
+			get
+			{
+				return (IControl)Scroll.Content;
+			}
+			set
+			{
+				Scroll.Content = (global::Xamarin.Forms.View)value;
+			}
+		}
 
 		double? IPage.Width
 		{
@@ -46,25 +68,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			Scroll = new global::Xamarin.Forms.ScrollView();
 			base.Content = Scroll;
 		}
-
-		/// <summary>
-		/// Gets or sets the content.
-		/// <para xml:lang="es">Obtiene o establece el contenido de la pagina actual.</para>
-		/// </summary>
-		/// <value>The content.</value>
-		public new IControl Content
-		{
-			get
-			{
-				return (IControl) Scroll.Content;
-			}
-			set
-			{
-				Scroll.Content = (global::Xamarin.Forms.View) value;
-			}
-		}
-
-		public event EventHandler Resized;
 
 		/// <summary>
 		/// Ons the size allocated.

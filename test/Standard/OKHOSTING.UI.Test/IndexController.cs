@@ -169,8 +169,13 @@ namespace OKHOSTING.UI.Test
 			ArrobaMedia.Click += (object sender, EventArgs e) => new CssMediaController() { Page = Page }.Start();
 			grid.SetContent(23, 0, ArrobaMedia);
 
+			ILabelButton dragDrop = Core.BaitAndSwitch.Create<ILabelButton>();
+			dragDrop.Text = "Drag and drop";
+			dragDrop.Click += (object sender, EventArgs e) => new DragDropController() { Page = Page }.Start();
+			grid.SetContent(24, 0, dragDrop);
+
 			// Establishes the content and title of the page.
-			Page.Title = "Choose one control to test";
+			Page.Title = "Choose one control/feature to test";
             Page.Content = grid;
         }
     }

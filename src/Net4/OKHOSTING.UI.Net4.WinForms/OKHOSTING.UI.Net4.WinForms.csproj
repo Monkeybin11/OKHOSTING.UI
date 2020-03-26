@@ -67,6 +67,7 @@
     <Compile Include="Controls\WebView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DragDrop.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>

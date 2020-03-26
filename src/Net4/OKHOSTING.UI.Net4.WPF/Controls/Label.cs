@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
@@ -20,8 +21,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		void IDisposable.Dispose()
 		{
+			
 		}
-
+		
 		#region IControl
 
 		bool IControl.Visible

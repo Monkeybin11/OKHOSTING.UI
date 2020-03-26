@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Windows.Forms;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms
 {
-	public class Page : System.Windows.Forms.Form, IPage
+	public class Page : Form, IPage
 	{
+		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		public event EventHandler Resized;
+
 		/// <summary>
 		/// App that is running on this page
 		/// </summary>
@@ -28,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 				if (value != null)
 				{
 					//((System.Windows.Forms.Control) value).Dock = System.Windows.Forms.DockStyle.Fill;
-					Controls.Add((System.Windows.Forms.Control) value);
+					Controls.Add((Control) value);
 				}
 			}
 		}
@@ -60,8 +66,6 @@ namespace OKHOSTING.UI.Net4.WinForms
 				return Height;
 			}
 		}
-
-		public event EventHandler Resized;
 
 		protected override void OnResize(EventArgs e)
 		{

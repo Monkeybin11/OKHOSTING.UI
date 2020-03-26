@@ -8,6 +8,11 @@ namespace OKHOSTING.UI.Net4.WPF
 	/// </summary>
 	public partial class Page : System.Windows.Window, IPage
 	{
+		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		public event EventHandler Resized;
+
 		protected readonly System.Windows.Controls.ScrollViewer Scroller;
 
 		public Page()
@@ -27,19 +32,6 @@ namespace OKHOSTING.UI.Net4.WPF
 		/// App that is running on this page
 		/// </summary>
 		public App App { get; set; }
-
-		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
-		/// <summary>
-		/// Raises the Resized event
-		/// </summary>
-		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
-		{
-			Resized?.Invoke(this, null);
-		}
 
 		/// <summary>
 		/// Each Page only contains one main view, which can optionally be a container and contain more views
@@ -81,9 +73,12 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 		}
 
-		//void IDisposable.Dispose()
-		//{
-		//	Content.Dispose();
-		//}
+		/// <summary>
+		/// Raises the Resized event
+		/// </summary>
+		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+		{
+			Resized?.Invoke(this, null);
+		}
 	}
 }

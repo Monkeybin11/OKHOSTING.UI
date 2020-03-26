@@ -205,7 +205,7 @@ namespace OKHOSTING.UI
 		{
 			if (control == null)
 			{
-				throw new ArgumentNullException(nameof(control));
+				yield break;
 			}
 
 			yield return control;
@@ -223,7 +223,7 @@ namespace OKHOSTING.UI
 		{
 			if (control == null)
 			{
-				throw new ArgumentNullException(nameof(control));
+				yield break;
 			}
 
 			if (control is Controls.IUserControl)
@@ -264,7 +264,7 @@ namespace OKHOSTING.UI
 		{
 			if (controls == null)
 			{
-				throw new ArgumentNullException(nameof(controls));
+				yield break;
 			}
 
 			foreach (var control in controls)

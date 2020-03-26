@@ -89,6 +89,7 @@
     <Compile Include="Controls\TimeOfDayPicker.xaml.cs">
       <DependentUpon>TimeOfDayPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DragDrop.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Calendar.cs" />

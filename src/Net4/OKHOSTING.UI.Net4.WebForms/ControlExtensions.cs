@@ -35,22 +35,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			control.CssClass = string.Join(" ", cssClasses);
 		}
 
-		/// <summary>
-		/// Returns all the contained controls, recursively
-		/// </summary>
-		public static IEnumerable<System.Web.UI.Control> GetAllControls(this System.Web.UI.Control control)
-		{
-			foreach (System.Web.UI.Control ctr in control.Controls)
-			{
-				yield return ctr;
-
-				foreach(System.Web.UI.Control ctr2 in GetAllControls(ctr))
-				{
-					yield return ctr2;
-				}
-			}
-		}
-
 		public static Thickness GetMargin(this System.Web.UI.WebControls.WebControl control)
 		{
 			double left, top, right, bottom;

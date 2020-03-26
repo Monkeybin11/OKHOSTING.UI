@@ -51,6 +51,7 @@
     <Compile Include="Controls\IClickable.cs" />
     <Compile Include="Controls\Menu.cs" />
     <Compile Include="Controls\UserControl.cs" />
+    <Compile Include="DragDrop.cs" />
     <Compile Include="Media\VideoPlayer.cs" />
     <Compile Include="Controls\TimeOfDayPicker.cs" />
     <Compile Include="Controls\DatePicker.cs" />
@@ -99,6 +100,7 @@
     <Content Include="JS\images\ui-icons_cc0000_256x240.png" />
     <Content Include="JS\images\ui-icons_ffffff_256x240.png" />
     <Content Include="JS\jquery-ui-i18n.min.js" />
+    <Content Include="JS\DragDrop.js" />
     <Content Include="Services\PageSize.ashx" />
   </ItemGroup>
   <ItemGroup>
