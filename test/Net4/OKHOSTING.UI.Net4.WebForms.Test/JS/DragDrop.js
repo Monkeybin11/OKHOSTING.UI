@@ -11,7 +11,6 @@ function OnDragOver(e)
 function OnDrop(e)
 {
 	e.preventDefault();
-	console.log("OnDrop: " + e.target.id);
 
 	var dragged = e.dataTransfer.getData("text");
 	var dropped = e.target.id;
@@ -28,9 +27,6 @@ function OnDrop(e)
 
 	document.forms[0].appendChild(dragdrop_dragged);
 	document.forms[0].appendChild(dragdrop_dropped);
-
-	console.log(dragged);
-	console.log(dropped);
 
 	document.forms[0].submit();
 
