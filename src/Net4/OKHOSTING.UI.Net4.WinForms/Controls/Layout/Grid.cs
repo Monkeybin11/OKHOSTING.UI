@@ -13,6 +13,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		{
 			AutoSize = true;
 			AutoScroll = true;
+			VScroll = true;
+			HScroll = true;
 		}
 
 		Thickness IGrid.CellMargin
@@ -23,14 +25,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		Thickness IGrid.CellPadding
 		{
-			get
-			{
-				return Platform.Parse(base.Padding);
-			}
-			set
-			{
-				base.Padding = Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		int IGrid.ColumnCount
@@ -91,14 +87,26 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool IGrid.ShowGridLines
 		{
-			Platform.DrawBorders(this, pevent);
-			base.OnPaint(pevent);
-
-			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			//| System.Windows.Forms.AnchorStyles.Left)
-			//| System.Windows.Forms.AnchorStyles.Right)));
+			get
+			{
+				return CellBorderStyle == System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+			}
+			set
+			{
+				if (value)
+				{
+					CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+				}
+				else
+				{
+					CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
+				}
+			}
 		}
 
 		IControl IGrid.GetContent(int row, int column)
@@ -293,5 +301,15 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		}
 
 		#endregion
+
+
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		{
+			Platform.DrawBorders(this, pevent);
+			base.OnPaint(pevent);
+			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			//| System.Windows.Forms.AnchorStyles.Left)
+			//| System.Windows.Forms.AnchorStyles.Right)));
+		}
 	}
 }

@@ -207,7 +207,7 @@ namespace OKHOSTING.UI.Controls.Layout
 			{
 				for (int column = 0; column < grid.ColumnCount; column++)
 				{
-					var control = allControls[(row * column) + column];
+					var control = allControls[(row * grid.ColumnCount) + column];
 					grid.SetContent(row, column, control);
 				}
 			}
@@ -284,6 +284,19 @@ namespace OKHOSTING.UI.Controls.Layout
 			for (int i = 0; i < grid.ColumnCount; i++)
 			{
 				grid.SetWidth(i, width);
+			}
+		}
+
+		/// <summary>
+		/// Distributes all columns with equal width each so they fill up all the grid's total width
+		/// </summary>
+		public static void DistributeHeight(this IGrid grid)
+		{
+			double height = grid.Height.Value / grid.RowCount;
+
+			for (int i = 0; i < grid.RowCount; i++)
+			{
+				grid.SetHeight(i, height);
 			}
 		}
 

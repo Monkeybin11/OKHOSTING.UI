@@ -12,8 +12,6 @@ namespace OKHOSTING.UI.Net4.WPF.Test
 		{
 			base.OnStartup(e);
 
-			Core.BaitAndSwitch.PlatformSpecificTypes.Add(typeof(UI.Controls.Layout.IStack), typeof(Controls.Layout.Stack));
-
 			var page = new Page();
 			page.App = new UI.App();
 			new IndexController() { Page = page }.Start();

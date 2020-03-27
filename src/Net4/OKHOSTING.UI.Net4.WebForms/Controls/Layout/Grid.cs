@@ -357,6 +357,27 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			set;
 		}
 
+		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool IGrid.ShowGridLines
+		{
+			get
+			{
+				return base.GridLines == System.Web.UI.WebControls.GridLines.Both;
+			}
+			set
+			{
+				if (value)
+				{
+					base.GridLines = System.Web.UI.WebControls.GridLines.Both;
+				}
+				else
+				{
+					base.GridLines = System.Web.UI.WebControls.GridLines.None;
+				}
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the cell margin.
@@ -651,7 +672,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 					}
 
 					//content
-					var content = ((IGrid)this).GetContent(row, column);
+					var content = ((IGrid) this).GetContent(row, column);
 
 					if (content != null)
 					{

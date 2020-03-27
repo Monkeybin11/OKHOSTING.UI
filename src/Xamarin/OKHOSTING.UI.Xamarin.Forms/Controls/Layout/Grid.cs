@@ -88,6 +88,15 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool IGrid.ShowGridLines
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Gets the controls conetent the grid
 		/// <para xml:lang="es">Obtiene los controles que contiene del grid</para>
 		/// </summary>

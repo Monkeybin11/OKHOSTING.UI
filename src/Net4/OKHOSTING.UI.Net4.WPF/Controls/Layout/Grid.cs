@@ -108,6 +108,21 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool IGrid.ShowGridLines
+		{
+			get
+			{
+				return base.ShowGridLines;
+			}
+			set
+			{
+				base.ShowGridLines = value;
+			}
+		}
+
+		/// <summary>
 		/// Gets the number of rows and columns of the grid
 		/// <para xml:alng="es">Obtiene el numero de filas y columnas del grid</para>
 		/// </summary>

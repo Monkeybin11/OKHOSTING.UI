@@ -8,8 +8,28 @@
 	/// </summary>
 	public interface IGrid : IContainer
 	{
+		/// <summary>
+		/// Gets or sets the number of columns that will contain the grid.
+		/// <para xml:lang="es">Obtiene o establece el numero de columnas que contendra el grid.</para>
+		/// </summary>
+		/// <value>The column count.
+		/// <para xml:lang="es">El numero de columnas.</para>
+		/// </value>
 		int ColumnCount { get; set; }
+
+		/// <summary>
+		/// Gets or sets the row count.
+		/// <para xml:lang="es">Obtiene o establece el numero de filas que contiene el grid.</para>
+		/// </summary>
+		/// <value>The row count.
+		/// <para xml:lang="es">El numero de filas.</para>
+		/// </value>
 		int RowCount { get; set; }
+
+		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool ShowGridLines { get; set; }
 
 		IControl GetContent(int row, int column);
 		void SetContent(int row, int column, IControl content);

@@ -61,7 +61,7 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				return Width;
+				return base.Width;
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				return Height;
+				return base.Height;
 			}
 		}
 

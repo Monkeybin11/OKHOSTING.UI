@@ -192,7 +192,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			Point p4 = control.Bounds.Location;
 			p4.Offset(0, control.Height); //bottom left
 
-			var color = Platform.RemoveAlpha(((IControl) control).BorderColor);
+			var color = RemoveAlpha(((IControl) control).BorderColor);
 
 			//draw custom border here
 			if (color != null && ((IControl) control).BorderWidth != null)
