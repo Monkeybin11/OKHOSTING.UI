@@ -54,6 +54,8 @@ namespace OKHOSTING.UI
 					{
 						State.Add(_MainPage, new Stack<PageState>());
 					}
+
+					_MainPage.App = this;
 				}
 			}
 		}
