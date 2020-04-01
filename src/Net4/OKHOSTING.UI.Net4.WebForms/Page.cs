@@ -122,7 +122,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			base.OnLoad(e);
 
-			Session["Page"] = this;
+			App = Platform.CurrentApp;
+			Platform.CurrentPage = this;
 
 			//initialize javascript
 			InitJavaScript();
@@ -133,7 +134,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//check usage of friendly urls
 			InitRouting();
 
-			//there is no controller assigned, exit
+			//if there is no controller assigned, exit
 			if (App[this]?.Controller == null)
 			{
 				return;
@@ -262,6 +263,9 @@ namespace OKHOSTING.UI.Net4.WebForms
 			var state = App[this];
 			Title = state?.Title;
 			Content = state?.Content;
+
+			//set this as the main page since web apps are 1 page only
+			App.MainPage = this;
 		}
 
 		/// <summary>

@@ -23,8 +23,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			var app = Core.BaitAndSwitch.Create<App>();
 			Platform.EnableUrlRewrite(app);
-
-			Session.Add("App", app);
+			Platform.CurrentApp = app;
 		}
 
 		protected virtual void Application_BeginRequest(object sender, EventArgs e)

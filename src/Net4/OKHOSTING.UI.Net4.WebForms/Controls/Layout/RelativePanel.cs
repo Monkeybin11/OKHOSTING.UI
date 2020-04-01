@@ -83,7 +83,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			string atHorizontalAnchor = "center";
 			string atVerticalAnchor = "center";
 
-			Page page = (Page)System.Web.HttpContext.Current.Session["Page"];
+			Page page = Platform.CurrentPage;
 
 			if (string.IsNullOrWhiteSpace(control.Name))
 			{

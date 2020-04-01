@@ -32,6 +32,55 @@ namespace OKHOSTING.UI
 			}
 		}
 
+		IPage _MainPage;
+
+		/// <summary>
+		/// The main page of the app. This page will be used if no other page is specified
+		/// when starting a controller
+		/// </summary>
+		public IPage MainPage
+		{
+			get
+			{
+				return _MainPage;
+			}
+			set
+			{
+				_MainPage = value;
+
+				if (_MainPage != null)
+				{
+					if (!State.ContainsKey(_MainPage))
+					{
+						State.Add(_MainPage, new Stack<PageState>());
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Exits and closes the current app. Use this to dispose objects and release memory
+		/// <para xml:lang="es">
+		/// Se sale y cierra la aplicacion actual. Use esto para desechar objetos y liberar la memoria.
+		/// </para>
+		/// </summary>
+		public virtual void Finish()
+		{
+			foreach (IPage page in State.Keys)
+			{
+				while (State[page].Count > 0)
+				{
+					FinishController(page);
+				}
+			}
+		}
+
+		public virtual void Dispose()
+		{
+			Finish();
+			State.Clear();
+		}
+
 		/// <summary>
 		/// Start the contoller specified
 		/// <para xml:lang="es">Inicializa el control especificado.</para>
@@ -133,44 +182,6 @@ namespace OKHOSTING.UI
 			{
 				state.Controller.Page.Title = state.Title;
 				state.Controller.Page.Content = state.Content;
-			}
-		}
-
-		/// <summary>
-		/// Exits and closes the current app. Use this to dispose objects and release memory
-		/// <para xml:lang="es">
-		/// Se sale y cierra la aplicacion actual. Use esto para desechar objetos y liberar la memoria.
-		/// </para>
-		/// </summary>
-		public virtual void Finish()
-		{
-			foreach (IPage page in State.Keys)
-			{
-				while (State[page].Count > 0)
-				{
-					FinishController(page);
-				}
-			}
-		}
-
-		public virtual void Dispose()
-		{
-			Finish();
-			State.Clear();
-		}
-
-		public IPage MainPage
-		{
-			get
-			{
-				return State.Keys.Where(p => !(p is Controls.IUserControl)).FirstOrDefault();
-			}
-			set
-			{
-				if (!State.ContainsKey(value))
-				{
-					State.Add(value, new Stack<PageState>());
-				}
 			}
 		}
 
