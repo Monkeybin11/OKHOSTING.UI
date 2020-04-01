@@ -98,5 +98,21 @@ namespace OKHOSTING.UI.Net4.WebForms
 			if (value.Right.HasValue) control.Style["border-right-width"] = string.Format("{0}px", value.Right);
 			if (value.Bottom.HasValue) control.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
 		}
+
+		/// <summary>
+		/// Returns all the contained controls, recursively
+		/// </summary>
+		public static IEnumerable<System.Web.UI.Control> GetAllControls(this System.Web.UI.Control control)
+		{
+			foreach (System.Web.UI.Control ctr in control.Controls)
+			{
+				yield return ctr;
+
+				foreach (System.Web.UI.Control ctr2 in GetAllControls(ctr))
+				{
+					yield return ctr2;
+				}
+			}
+		}
 	}
 }
