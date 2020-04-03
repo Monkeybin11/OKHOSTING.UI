@@ -1,32 +1,29 @@
-﻿function OnDragStart(e)
-{
+﻿function OnDragStart(e) {
 	e.dataTransfer.setData("text", e.target.id);
 }
 
-function OnDragOver(e)
-{
+function OnDragOver(e) {
 	e.preventDefault();
 }
 
-function OnDrop(e)
-{
+function OnDrop(e) {
 	e.preventDefault();
 
 	var dragged = e.dataTransfer.getData("text");
-	var dropped = e.target.id;
+	var droppedOn = e.target.id;
 
-	var dragdrop_dragged = document.createElement("input");
-	dragdrop_dragged.setAttribute("type", "hidden");
-	dragdrop_dragged.setAttribute("name", "dragdrop_dragged");
-	dragdrop_dragged.setAttribute("value", dragged);
+	var draggedInput = document.createElement("input");
+	draggedInput.setAttribute("type", "hidden");
+	draggedInput.setAttribute("name", "dragdrop_dragged");
+	draggedInput.setAttribute("value", dragged);
 
-	var dragdrop_dropped = document.createElement("input");
-	dragdrop_dropped.setAttribute("type", "hidden");
-	dragdrop_dropped.setAttribute("name", "dragdrop_dropped");
-	dragdrop_dropped.setAttribute("value", dropped);
+	var droppedOnInput = document.createElement("input");
+	droppedOnInput.setAttribute("type", "hidden");
+	droppedOnInput.setAttribute("name", "dragdrop_droppedOn");
+	droppedOnInput.setAttribute("value", droppedOn);
 
-	document.forms[0].appendChild(dragdrop_dragged);
-	document.forms[0].appendChild(dragdrop_dropped);
+	document.forms[0].appendChild(draggedInput);
+	document.forms[0].appendChild(droppedOnInput);
 
 	document.forms[0].submit();
 

@@ -180,6 +180,18 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 		public static void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
 		{
+			if (((IControl)control).BorderWidth == null)
+			{
+				return;
+			}
+
+			var color = RemoveAlpha(((IControl) control).BorderColor);
+
+			if (color == null)
+			{
+				return;
+			}
+
 			//calculate the 4 points or coordinates of the border
 			Point p1 = control.Bounds.Location; //top left
 
@@ -192,16 +204,11 @@ namespace OKHOSTING.UI.Net4.WinForms
 			Point p4 = control.Bounds.Location;
 			p4.Offset(0, control.Height); //bottom left
 
-			var color = RemoveAlpha(((IControl) control).BorderColor);
-
 			//draw custom border here
-			if (color != null && ((IControl) control).BorderWidth != null)
-			{
-				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Top), p1, p2); //top
-				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Right), p2, p3); //right
-				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Bottom), p3, p4); //bottom
-				pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
-			}
+			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Top), p1, p2); //top
+			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Right), p2, p3); //right
+			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Bottom), p3, p4); //bottom
+			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
 		}
 
 		public static Color RemoveAlpha(Color color)

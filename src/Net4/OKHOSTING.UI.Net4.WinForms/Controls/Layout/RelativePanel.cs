@@ -60,7 +60,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 					break;
 
 				case RelativePanelHorizontalContraint.RightOf:
-					location.X = nativeReference.Location.X + nativeReference.Width + nativeControl.Width;
+					location.X = nativeReference.Location.X + nativeReference.Width;
 					break;
 
 				case RelativePanelHorizontalContraint.RightWith:
@@ -93,7 +93,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 					break;
 			}
 
-			((NativeControl)control).Location = location;
+			((NativeControl) control).Location = location;
 			base.Controls.Add((NativeControl) control);
 		}
 

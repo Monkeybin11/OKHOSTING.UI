@@ -29,10 +29,17 @@ namespace OKHOSTING.UI.Test
 		/// </summary>
 		protected override void OnStart()
 		{
-			
+			Refresh();
+		}
+
+		public override void Refresh()
+		{
+			base.Refresh();
 
 			// Create an RelativePanel.
 			IRelativePanel panel = Core.BaitAndSwitch.Create<IRelativePanel>();
+			panel.Width = Page.Width;
+			panel.Height = Page.Height;
 
 			//should be a background image
 			BackgroundImage = Core.BaitAndSwitch.Create<IImage>();
@@ -46,6 +53,8 @@ namespace OKHOSTING.UI.Test
 			lblLabel.Text = "This label is centered";
 			lblLabel.FontColor = Color.FromArgb(255, 0, 0, 255);
 			lblLabel.BackgroundColor = Color.FromArgb(255, 255, 0, 0);
+			lblLabel.Width = 200;
+			lblLabel.Height = 100;
 			lblLabel.Margin = new Thickness(20);
 			panel.Add(lblLabel, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith);
 
@@ -55,6 +64,8 @@ namespace OKHOSTING.UI.Test
 			lblLabel2.FontColor = Color.FromArgb(255, 0, 0, 255);
 			lblLabel2.BackgroundColor = Color.FromArgb(255, 0, 255, 0);
 			lblLabel2.Margin = new Thickness(10);
+			lblLabel2.Width = 250;
+			lblLabel2.Height = 150;
 			panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel);
 
 			//Creates the Button cmdClose with text, fontcolor, backgroundcolor and margin specific, with the event also click and adds it to the stack.
@@ -64,6 +75,8 @@ namespace OKHOSTING.UI.Test
 			cmdClose.FontColor = Color.FromArgb(255, 0, 0, 0);
 			cmdClose.BackgroundColor = Color.FromArgb(255, 0, 255, 255);
 			cmdClose.Margin = new Thickness(10);
+			cmdClose.Width = 100;
+			cmdClose.Height = 100;
 			panel.Add(cmdClose, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.AboveOf, lblLabel);
 
 			// Establishes the content and title of the page.

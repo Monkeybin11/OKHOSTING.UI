@@ -33,9 +33,9 @@ namespace OKHOSTING.UI.Net4.WebForms
 			CurrentDragDrops[control] = this;
 		}
 
-		protected void OnDropped(IControl dragged, IControl dropped)
+		protected void OnDropped(IControl dragged, IControl droppedOn)
 		{
-			ControlDropped?.Invoke(dragged, dropped);
+			ControlDropped?.Invoke(dragged, droppedOn);
 		}
 
 		protected static Dictionary<IControl, DragDrop> CurrentDragDrops
@@ -56,10 +56,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
-		internal static void RaiseDropped(IControl dragged, IControl dropped)
+		internal static void RaiseDropped(IControl dragged, IControl droppedOn)
 		{
-			var dragDrop = CurrentDragDrops[dropped];
-			dragDrop.OnDropped(dragged, dropped);
+			var dragDrop = CurrentDragDrops[droppedOn];
+			dragDrop.OnDropped(dragged, droppedOn);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
+using System.Collections.Generic;
 
 namespace OKHOSTING.UI.Net4.WPF
 {
@@ -8,6 +9,8 @@ namespace OKHOSTING.UI.Net4.WPF
 	/// </summary>
 	public class DragDrop: IDragDrop
 	{
+		readonly Dictionary<string, IControl> Draggables = new Dictionary<string, IControl>();
+		
 		/// <summary>
 		/// Raised when a control has been dragged and dropped
 		/// </summary>
@@ -37,7 +40,10 @@ namespace OKHOSTING.UI.Net4.WPF
 		private void control_MouseDown(object sender, System.Windows.Input.MouseEventArgs e)
 		{
 			var native = (System.Windows.FrameworkElement) sender;
-			System.Windows.DragDrop.DoDragDrop(native, native, System.Windows.DragDropEffects.Copy | System.Windows.DragDropEffects.Move);
+			var data = native.GetHashCode().ToString();
+			Draggables[data] = (IControl) native;
+
+			System.Windows.DragDrop.DoDragDrop(native, data, System.Windows.DragDropEffects.Move);
 		}
 
 		private void control_DragEnter(object sender, System.Windows.DragEventArgs e)
@@ -47,7 +53,10 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		private void control_DragDrop(object sender, System.Windows.DragEventArgs e)
 		{
-			ControlDropped?.Invoke(e.Data.GetData(typeof(IControl)), (IControl) sender);
+			var data = (string)e.Data.GetData(System.Windows.DataFormats.Text);
+			IControl dragged = Draggables[data];
+
+			ControlDropped?.Invoke(dragged, (IControl)sender);
 		}
 	}
 }

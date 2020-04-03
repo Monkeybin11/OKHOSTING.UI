@@ -343,13 +343,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// </summary>
 		protected virtual void HandleDragDrop()
 		{
-			if (Request.Form.AllKeys.Contains("dragdrop_dragged") && Request.Form.AllKeys.Contains("dragdrop_dropped"))
+			if (Request.Form.AllKeys.Contains("dragdrop_dragged") && Request.Form.AllKeys.Contains("dragdrop_droppedOn"))
 			{
 				var allControls = App.GetAllChildren(Content);
 				var dragged = allControls.Where(c => c.Name == Request.Form["dragdrop_dragged"]).Single();
-				var dropped = allControls.Where(c => c.Name == Request.Form["dragdrop_dropped"]).Single();
+				var droppedOn = allControls.Where(c => c.Name == Request.Form["dragdrop_droppedOn"]).Single();
 
-				DragDrop.RaiseDropped(dragged, dropped);
+				DragDrop.RaiseDropped(dragged, droppedOn);
 			}
 		}
 
