@@ -163,7 +163,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 					{{
 						my: '{1} {2}',
 						at: '{3} {4}',
-						of: '#{5}'
+						of: '#{5}',
+						collision: 'none'
 					}}
 				);", 
 				((NativeControl) control).ClientID, myHorizontalAnchor, myVerticalAnchor, atHorizontalAnchor, atVerticalAnchor, ((NativeControl) referenceControl).ClientID

@@ -39,7 +39,7 @@ namespace OKHOSTING.UI.Test
 			// Create an RelativePanel.
 			IRelativePanel panel = Core.BaitAndSwitch.Create<IRelativePanel>();
 			panel.Width = Page.Width;
-			panel.Height = Page.Height;
+			panel.Height = Page.Height + 500;
 
 			//should be a background image
 			BackgroundImage = Core.BaitAndSwitch.Create<IImage>();
@@ -67,6 +67,17 @@ namespace OKHOSTING.UI.Test
 			lblLabel2.Width = 250;
 			lblLabel2.Height = 150;
 			panel.Add(lblLabel2, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblLabel);
+
+
+			//Create the Label lblLabel2 with text, Fontcolor, backgroundcolor and margin specific.
+			ILabel lblLabel3 = Core.BaitAndSwitch.Create<ILabel>();
+			lblLabel3.Text = "This label is at the bottom right";
+			lblLabel3.FontColor = Color.FromArgb(255, 0, 255, 0);
+			lblLabel3.BackgroundColor = Color.FromArgb(255, 255, 255, 0);
+			lblLabel3.Margin = new Thickness(10);
+			lblLabel3.Width = 100;
+			lblLabel3.Height = 100;
+			panel.Add(lblLabel3, RelativePanelHorizontalContraint.RightWith, RelativePanelVerticalContraint.BottomWith);
 
 			//Creates the Button cmdClose with text, fontcolor, backgroundcolor and margin specific, with the event also click and adds it to the stack.
 			IButton cmdClose = Core.BaitAndSwitch.Create<IButton>();
