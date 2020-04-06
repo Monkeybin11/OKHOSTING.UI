@@ -44,7 +44,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			{
 				if (value.HasValue)
 				{
-					base.Width = (int)value;
+					base.Width = (int) value;
 				}
 			}
 		}
@@ -59,7 +59,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			{
 				if (value.HasValue)
 				{
-					base.Height = (int)value;
+					base.Height = (int) value;
 				}
 			}
 		}
