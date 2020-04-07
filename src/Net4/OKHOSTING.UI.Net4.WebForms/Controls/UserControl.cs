@@ -404,6 +404,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Threading.Tasks.Task.Run(action);
+		}
+
 		#endregion
 	}
 }

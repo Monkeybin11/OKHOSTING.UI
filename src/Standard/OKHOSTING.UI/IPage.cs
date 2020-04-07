@@ -51,5 +51,7 @@ namespace OKHOSTING.UI
 		/// Raised when the page is resized
 		/// </summary>
 		event EventHandler Resized;
+
+		void InvokeOnMainThread(Action action);
 	}
 }

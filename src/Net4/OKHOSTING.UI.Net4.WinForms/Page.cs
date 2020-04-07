@@ -25,7 +25,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 		/// </summary>
 		public App App { get; set; }
 
-		private readonly Panel Container;
+		private readonly new Panel Container;
 
 		public IControl Content
 		{
@@ -81,6 +81,11 @@ namespace OKHOSTING.UI.Net4.WinForms
 		protected override void OnResize(EventArgs e)
 		{
 			Resized?.Invoke(this, null);
+		}
+
+		public void InvokeOnMainThread(Action action)
+		{
+			BeginInvoke(action);
 		}
 	}
 }

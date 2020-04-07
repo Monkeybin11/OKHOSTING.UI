@@ -179,6 +179,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		public event EventHandler Resized;
 
+		public void InvokeOnMainThread(Action action)
+		{
+			BeginInvoke(action);
+		}
+
 		#endregion
 	}
 }

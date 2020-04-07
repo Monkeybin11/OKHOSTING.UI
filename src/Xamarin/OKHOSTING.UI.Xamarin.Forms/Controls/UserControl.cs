@@ -291,7 +291,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
-
 		/// <summary>
 		/// Gets or sets the width of the control.
 		/// <para xml:lang="es">
@@ -318,6 +317,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			{
 				return base.HeightRequest;
 			}
+		}
+
+		public void InvokeOnMainThread(Action action)
+		{
+			global::Xamarin.Forms.Device.BeginInvokeOnMainThread(action);
 		}
 
 		#endregion

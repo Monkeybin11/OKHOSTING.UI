@@ -80,5 +80,10 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			Resized?.Invoke(this, null);
 		}
+
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(action);
+		}
 	}
 }

@@ -81,5 +81,10 @@ namespace OKHOSTING.UI.Xamarin.Forms
 			base.OnSizeAllocated(width, height);
 			Resized?.Invoke(this, null);
 		}
+
+		public void InvokeOnMainThread(Action action)
+		{
+			global::Xamarin.Forms.Device.BeginInvokeOnMainThread(action);
+		}
 	}
 }

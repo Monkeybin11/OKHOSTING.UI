@@ -186,6 +186,40 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		#region IPage
 
 		/// <summary>
+		/// Each Page only contains one main view, which can optionally be a container and contain more views
+		/// <para xml:lang="es">
+		/// Cada ventana solo contiene una vista principal, que puede ser opcionalmente un contenedor y contener mas vistas.
+		/// </para>
+		/// </summary>
+		IControl IPage.Content
+		{
+			get
+			{
+				return (IControl) base.Content;
+			}
+			set
+			{
+				base.Content = value;
+			}
+		}
+
+		double? IPage.Width
+		{
+			get
+			{
+				return base.Width;
+			}
+		}
+
+		double? IPage.Height
+		{
+			get
+			{
+				return base.Height;
+			}
+		}
+
+		/// <summary>
 		/// App that is running on this page
 		/// </summary>
 		public App App { get; set; }
@@ -209,27 +243,14 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		/// <summary>
-		/// Each Page only contains one main view, which can optionally be a container and contain more views
-		/// <para xml:lang="es">
-		/// Cada ventana solo contiene una vista principal, que puede ser opcionalmente un contenedor y contener mas vistas.
-		/// </para>
-		/// </summary>
-		IControl IPage.Content
-		{
-			get
-			{
-				return (IControl) base.Content;
-			}
-			set
-			{
-				base.Content = value;
-			}
-		}
-
-		/// <summary>
 		/// Raised when the page is resized
 		/// </summary>
 		public event EventHandler Resized;
+
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(action);
+		}
 
 		/// <summary>
 		/// Raises the Resized event
@@ -238,22 +259,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			base.OnRenderSizeChanged(sizeInfo);
 			Resized?.Invoke(this, new EventArgs());
-		}
-
-		double? IPage.Width
-		{
-			get
-			{
-				return base.Width;
-			}
-		}
-
-		double? IPage.Height
-		{
-			get
-			{
-				return base.Height;
-			}
 		}
 
 		#endregion

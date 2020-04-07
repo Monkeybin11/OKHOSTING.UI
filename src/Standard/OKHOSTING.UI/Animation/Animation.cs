@@ -14,6 +14,11 @@ namespace OKHOSTING.UI.Animation
 	public class Animation
 	{
 		/// <summary>
+		/// Page where this animation will be running
+		/// </summary>
+		public IPage Page { get; set; }
+		
+		/// <summary>
 		/// Specifies a delay before the animation will start
 		/// </summary>
 		public TimeSpan Delay { get; set; }
@@ -21,7 +26,7 @@ namespace OKHOSTING.UI.Animation
 		/// <summary>
 		/// Specifies whether or not the animation should play in reverse on alternate cycles
 		/// </summary>
-		public Direction Direction { get; set; }
+		public Direction Direction { get; set; } = Direction.Forward;
 
 		/// <summary>
 		/// Specifies how much time an animation takes to complete
@@ -31,12 +36,12 @@ namespace OKHOSTING.UI.Animation
 		/// <summary>
 		/// Specifies how many times an animation should be played
 		/// </summary>
-		public int Iterations { get; set; }
+		public int Iterations { get; set; } = 1;
 
 		/// <summary>
 		/// Specifies what values are applied by the animation outside the time it is executing
 		/// </summary>
-		public FillMode FillMode { get; set; }
+		public FillMode FillMode { get; set; } = FillMode.Initial;
 
 		/// <summary>
 		/// Specifies the speed curve of the animation
@@ -53,19 +58,34 @@ namespace OKHOSTING.UI.Animation
 		/// <summary>
 		/// Apply the animation on a control at this moment
 		/// </summary>
-		public async void Start(IControl control)
+		public async Task Start(IControl control, IPage page)
 		{
-			await Task.Delay(Delay);
-
 			int counter = 0;
+			var frames = KeyFrames.ToArray();
 
 			while (counter < Iterations || Iterations == -1)
 			{
-				foreach (var frame in KeyFrames)
+				await Task.Delay(Delay);
+
+				for (int i = 0; i < frames.Length; i++)
 				{
-					frame.Member.SetValue(control, frame.Value);
-					await Task.Delay(frame.Percentage * (int) Duration.TotalMilliseconds);
+					var frame = frames[i];
+
+					foreach (var change in frame.Changes)
+					{
+						page.InvokeOnMainThread(() => change.Key.SetValue(control, change.Value));
+					}
+
+					if (i < frames.Length - 1)
+					{
+						var nextFrame = frames[i + 1];
+						double percentageDiff = nextFrame.Percentage - frame.Percentage;
+
+						await Task.Delay((int) (percentageDiff / 100 * Duration.TotalMilliseconds));
+					}
 				}
+
+				counter++;
 			}
 		}
 
@@ -91,10 +111,11 @@ namespace OKHOSTING.UI.Animation
 
 			while (step < to)
 			{
-				var easingValue = Core.Math.Easings.Interpolate(normalizedStep, TimingFunction);
-				var denormalizedEasingValue = stepValue * easingValue;
+				//var easingValue = Core.Math.Easings.Interpolate(normalizedStep, TimingFunction);
+				//var denormalizedEasingValue = stepValue * easingValue;
 
-				yield return step * denormalizedEasingValue;
+				//yield return step * denormalizedEasingValue;
+				yield return step;
 
 				step += stepValue;
 				normalizedStep += normalizedStepValue;

@@ -101,6 +101,11 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Threading.Tasks.Task.Run(action);
+		}
+
 		/// <summary>
 		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
 		/// </summary>

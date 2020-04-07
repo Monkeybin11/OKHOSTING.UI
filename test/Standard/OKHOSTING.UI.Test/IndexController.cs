@@ -41,6 +41,12 @@ namespace OKHOSTING.UI.Test
 			lblMisc.Click += (object sender, EventArgs e) => new Misc.IndexController() { Page = Page }.Start();
 			stack.Children.Add(lblMisc);
 
+			// animation
+			ILabelButton lblAnimation = Core.BaitAndSwitch.Create<ILabelButton>();
+			lblAnimation.Text = "Animation";
+			lblAnimation.Click += (object sender, EventArgs e) => new Animation.IndexController() { Page = Page }.Start();
+			stack.Children.Add(lblAnimation);
+
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control/feature to test";
             Page.Content = stack;
