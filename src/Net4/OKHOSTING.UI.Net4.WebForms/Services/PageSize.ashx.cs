@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			var output = json.Serialize(new { Refresh = resized });
 
 			//save new page size in session
-			context.Session[typeof(Page) + ".Width"] = width;
+			context.Session[typeof(Page) + ".Width"] = width - 8; //rest some for the scrollbar
 			context.Session[typeof(Page) + ".Height"] = height;
 
 			if (resized)

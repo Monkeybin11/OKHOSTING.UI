@@ -13,6 +13,7 @@ namespace OKHOSTING.UI.Net4.WPF
 		public Page()
 		{
 			base.SizeChanged += Page_SizeChanged;
+			base.StateChanged += Page_StateChanged;
 
 			//allows for automatic vertical scrolling
 			Scroller = new System.Windows.Controls.ScrollViewer();
@@ -79,6 +80,19 @@ namespace OKHOSTING.UI.Net4.WPF
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
 			App?[this]?.Controller?.Refresh();
+		}
+
+		/// <summary>
+		/// For some reason, when maximized, base.Width and base.Height do not update on time, 
+		/// so we need to do it here manually
+		/// </summary>
+		private void Page_StateChanged(object sender, EventArgs e)
+		{
+			if (this.WindowState == System.Windows.WindowState.Maximized)
+			{
+				Width = System.Windows.SystemParameters.WorkArea.Width;
+				Height = System.Windows.SystemParameters.WorkArea.Height;
+			}
 		}
 	}
 }

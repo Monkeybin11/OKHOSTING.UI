@@ -18,7 +18,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 	public class RelativePanel: System.Web.UI.WebControls.Panel, IRelativePanel
 	{
 		protected readonly ControlList _Children;
-		protected readonly Dictionary<string, string> ClientScripts = new Dictionary<string, string>();
+		protected readonly List<string> ClientScripts = new List<string>();
 
 		/// <summary>
 		/// Initializes a new instance of the RelativePanel class.
@@ -175,12 +175,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 				Platform.CurrentPage.NameControl(control);
 			}
 
-			ClientScripts[control.Name] = positionJS;
+			ClientScripts.Add(positionJS);
 		}
 
 		protected override void OnPreRender(EventArgs e)
 		{
 			base.OnPreRender(e);
+
+			if (ClientScripts.Count == 0)
+			{
+				return;
+			}
 
 			string positionJS = string.Format
 			(
@@ -194,10 +199,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 						}}
 					);
 				</script>"
-			, string.Join(Environment.NewLine, ClientScripts.Values)
+			, string.Join(Environment.NewLine, ClientScripts)
 			);
 
 			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
+			//ClientScripts.Clear();
 		}
 
 		#region IControl
