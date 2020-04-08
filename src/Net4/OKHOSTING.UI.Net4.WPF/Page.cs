@@ -8,11 +8,6 @@ namespace OKHOSTING.UI.Net4.WPF
 	/// </summary>
 	public partial class Page : System.Windows.Window, IPage
 	{
-		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
 		protected readonly System.Windows.Controls.ScrollViewer Scroller;
 
 		public Page()
@@ -73,17 +68,17 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 		}
 
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(action);
+		}
+
 		/// <summary>
 		/// Raises the Resized event
 		/// </summary>
 		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
-			Resized?.Invoke(this, null);
-		}
-
-		public void InvokeOnMainThread(Action action)
-		{
-			System.Windows.Application.Current.Dispatcher.Invoke(action);
+			App?[this]?.Controller?.Refresh();
 		}
 	}
 }

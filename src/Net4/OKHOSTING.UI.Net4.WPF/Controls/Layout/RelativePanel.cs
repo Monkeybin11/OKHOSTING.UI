@@ -582,7 +582,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 						throw new NotImplementedException();
 
 					case RelativePanelHorizontalContraint.LeftWith:
-						SetAlignHorizontalCenterWithPanel((UIElement) control, true);
+						SetAlignLeftWithPanel((UIElement) control, true);
 						break;
 
 					case RelativePanelHorizontalContraint.RightOf:

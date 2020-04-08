@@ -13,11 +13,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 	public partial class Page : System.Web.UI.Page, IPage
 	{
 		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
-		/// <summary>
 		/// App that is running on this page
 		/// </summary>
 		public virtual App App
@@ -110,14 +105,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
 		/// </summary>
 		protected internal int ControlCounter = 0;
-
-		/// <summary>
-		/// Raises the Resized event
-		/// </summary>
-		protected internal void OnResized()
-		{
-			Resized?.Invoke(this, null);
-		}
 
 		/// <summary>
 		/// Restores Page state (content & title) and launch events

@@ -11,11 +11,6 @@ namespace OKHOSTING.UI.Xamarin.Forms
 	public class Page : global::Xamarin.Forms.ContentPage, IPage
 	{
 		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
-		/// <summary>
 		/// App that is running on this page
 		/// </summary>
 		public App App { get; set; }
@@ -79,7 +74,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			base.OnSizeAllocated(width, height);
-			Resized?.Invoke(this, null);
+			App?[this]?.Controller?.Refresh();
 		}
 
 		public void InvokeOnMainThread(Action action)

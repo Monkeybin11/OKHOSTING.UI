@@ -34,7 +34,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 
 			if (resized)
 			{
-				page.OnResized();
+				page.App?[page]?.Controller?.Refresh();
 			}
 
 			context.Response.Write(output);
