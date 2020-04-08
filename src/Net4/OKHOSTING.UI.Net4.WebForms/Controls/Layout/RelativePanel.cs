@@ -18,7 +18,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 	public class RelativePanel: System.Web.UI.WebControls.Panel, IRelativePanel
 	{
 		protected readonly ControlList _Children;
-		protected readonly List<string> ClientScripts = new List<string>();
+		protected readonly Dictionary<string, string> ClientScripts = new Dictionary<string, string>();
 
 		/// <summary>
 		/// Initializes a new instance of the RelativePanel class.
@@ -170,7 +170,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 				((NativeControl) control).ClientID, myHorizontalAnchor, myVerticalAnchor, atHorizontalAnchor, atVerticalAnchor, ((NativeControl) referenceControl).ClientID
 			);
 
-			ClientScripts.Add(positionJS);
+			if (string.IsNullOrWhiteSpace(control.Name))
+			{
+				Platform.CurrentPage.NameControl(control);
+			}
+
+			ClientScripts[control.Name] = positionJS;
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -189,7 +194,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 						}}
 					);
 				</script>"
-			, string.Join(Environment.NewLine, ClientScripts)
+			, string.Join(Environment.NewLine, ClientScripts.Values)
 			);
 
 			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
@@ -684,7 +689,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
 				if (Contains(item))
 				{
-					ContainerPanel.Controls.Remove((NativeControl)item);
+					ContainerPanel.Controls.Remove((NativeControl) item);
+					ContainerPanel.ClientScripts.Remove(item.Name);
+
 					return true;
 				}
 				else

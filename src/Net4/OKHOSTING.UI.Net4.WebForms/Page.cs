@@ -43,7 +43,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 					return null;
 				}
 
-				return (IControl)Form.Controls[0];
+				return (IControl) Form.Controls[0];
 			}
 			set
 			{
@@ -51,7 +51,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 				if (value != null)
 				{
-					Form.Controls.Add((System.Web.UI.Control)value);
+					Form.Controls.Add((System.Web.UI.Control) value);
 				}
 			}
 		}
@@ -99,6 +99,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 		public void InvokeOnMainThread(Action action)
 		{
 			System.Threading.Tasks.Task.Run(action);
+		}
+
+		/// <summary>
+		/// Automatically assigns a name to a control, usefull in web to identify postback events
+		/// </summary>
+		public void NameControl(IControl control)
+		{
+			control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
 		}
 
 		/// <summary>
@@ -166,7 +174,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			{
 				if (string.IsNullOrWhiteSpace(control.Name))
 				{
-					control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
+					NameControl(control);
 				}
 			}
 
