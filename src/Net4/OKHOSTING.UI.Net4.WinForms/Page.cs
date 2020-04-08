@@ -16,6 +16,11 @@ namespace OKHOSTING.UI.Net4.WinForms
 		}
 
 		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		public event EventHandler Resized;
+
+		/// <summary>
 		/// App that is running on this page
 		/// </summary>
 		public App App { get; set; }
@@ -73,14 +78,14 @@ namespace OKHOSTING.UI.Net4.WinForms
 			}
 		}
 
+		protected override void OnResize(EventArgs e)
+		{
+			Resized?.Invoke(this, null);
+		}
+
 		public void InvokeOnMainThread(Action action)
 		{
 			BeginInvoke(action);
-		}
-
-		protected override void OnResize(EventArgs e)
-		{
-			App?[this]?.Controller?.Refresh();
 		}
 	}
 }

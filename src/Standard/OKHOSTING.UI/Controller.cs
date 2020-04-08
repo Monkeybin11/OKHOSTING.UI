@@ -39,13 +39,44 @@ namespace OKHOSTING.UI
 		public event EventHandler Finished;
 
 		/// <summary>
+		/// Private page field
+		/// </summary>
+		protected IPage _Page;
+
+		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		protected void Page_Resized(object sender, EventArgs e)
+		{
+			Refresh();
+		}
+
+		/// <summary>
+		/// Will be executed when this controller "executes" at first
+		/// <para xml:lang="es">Se produce cuando este controlador "ejecuta" un primer metodo.</para>
+		/// </summary>
+		internal protected abstract void OnStart();
+
+		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
 		/// <para xml:lang="es">Obtiene la pagina que actualmente se esta mostrando al usuario</para>
 		/// </summary>
 		public virtual IPage Page
 		{
-			get;
-			set;
+			get
+			{
+				return _Page;
+			}
+			set
+			{
+				_Page = value;
+
+				if (_Page != null)
+				{
+					_Page.Resized -= Page_Resized;
+					_Page.Resized += Page_Resized;
+				}
+			}
 		}
 
 		/// <summary>
@@ -68,6 +99,19 @@ namespace OKHOSTING.UI
 		{
 		}
 
+		/// <summary>
+		/// Finishes the execution of this controller
+		/// <para xml:lang="es">
+		/// Finaliza la ejecucion de este controlador
+		/// </para>
+		/// </summary>
+		protected virtual void Finish()
+		{
+			Page.App.FinishController(Page);
+			IsFinished = true;
+			Finished?.Invoke(this, new EventArgs());
+		}
+
 		public virtual void Dispose()
 		{
 			if (!IsFinished)
@@ -75,24 +119,5 @@ namespace OKHOSTING.UI
 				Finish();
 			}
 		}
-
-		/// <summary>
-		/// Finishes the execution of this controller
-		/// <para xml:lang="es">
-		/// Finaliza la ejecucion de este controlador
-		/// </para>
-		/// </summary>
-		public virtual void Finish()
-		{
-			Page.App.FinishController(Page);
-			IsFinished = true;
-			Finished?.Invoke(this, new EventArgs());
-		}
-
-		/// <summary>
-		/// Will be executed when this controller "executes" at first
-		/// <para xml:lang="es">Se produce cuando este controlador "ejecuta" un primer metodo.</para>
-		/// </summary>
-		internal protected abstract void OnStart();
 	}
 }

@@ -47,6 +47,11 @@ namespace OKHOSTING.UI
 		/// </summary>
 		double? Height { get; }
 
+		/// <summary>
+		/// Raised when the page is resized
+		/// </summary>
+		event EventHandler Resized;
+
 		void InvokeOnMainThread(Action action);
 	}
 }

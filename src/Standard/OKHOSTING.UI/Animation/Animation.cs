@@ -58,7 +58,7 @@ namespace OKHOSTING.UI.Animation
 		/// <summary>
 		/// Apply the animation on a control at this moment
 		/// </summary>
-		public virtual async Task Start(IControl control, IPage page)
+		public async Task Start(IControl control, IPage page)
 		{
 			int counter = 0;
 			var frames = KeyFrames.ToArray();
