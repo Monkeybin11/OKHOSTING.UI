@@ -44,8 +44,8 @@
 	vertical-align: bottom;
 }
 
-*
+body
 {
-	font-family: Arial !important;
-	font-size: larger !important;
+	margin: 0;
+	padding: 0;
 }
