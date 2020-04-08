@@ -203,7 +203,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			);
 
 			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
-			//ClientScripts.Clear();
 		}
 
 		#region IControl

@@ -49,8 +49,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		public RelativePanel()
 		{
 			_Children = new ControlList(base.Children);
-			VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-			HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 
 		}
 
@@ -246,14 +244,24 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		protected override System.Windows.Size ArrangeOverride(System.Windows.Size finalSize)
 		{
 			Dictionary<string, UIElement> elements = new Dictionary<string, UIElement>();
+			int controlCounter = 0;
+
 			foreach (var child in Children.OfType<FrameworkElement>().Where(c => c.Name != null))
 			{
+				if (string.IsNullOrWhiteSpace(child.Name))
+				{
+					child.Name = $"ctr_{child.GetType().Name}_{controlCounter++}";
+				}
+
 				elements[child.Name] = child;
 			}
+
 			//List of margins for each element between the element and panel (left, top, right, bottom)
 			List<double[]> arranges = new List<double[]>(Children.Count);
+			
 			//First pass aligns all sides that aren't constrained by other elements
 			int arrangedCount = 0;
+
 			foreach (var child in Children.OfType<UIElement>())
 			{
 				//NaN means the arrange value is not constrained yet for that side
@@ -327,6 +335,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 					!double.IsNaN(rect[2]) && !double.IsNaN(rect[3]))
 					arrangedCount++;
 			}
+
 			int i = 0;
 			//Run iterative layout passes
 			while (arrangedCount < Children.Count)
