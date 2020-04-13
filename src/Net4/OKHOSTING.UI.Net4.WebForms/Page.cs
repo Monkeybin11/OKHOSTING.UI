@@ -170,7 +170,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 			ControlCounter = 0;
 
-			foreach (var control in GetAllControls())
+			foreach (var control in App.GetParentAndAllChildren(Content))
 			{
 				if (string.IsNullOrWhiteSpace(control.Name))
 				{
@@ -317,7 +317,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			List<IInputControl> updatedInputControls = new List<IInputControl>();
 
 			//handle posted values
-			foreach (IInputControl control in GetAllControls().Where(c => c is IInputControl))
+			foreach (IInputControl control in App.GetParentAndAllChildren(Content).Where(c => c is IInputControl))
 			{
 				if (control.HandlePostBack())
 				{
@@ -332,7 +332,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//raise button click events
-			foreach (Controls.IClickable control in GetAllControls().Where(c => c is Controls.IClickable))
+			foreach (Controls.IClickable control in App.GetParentAndAllChildren(Content).Where(c => c is Controls.IClickable))
 			{
 				control.RaiseClick();
 			}
@@ -350,14 +350,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 				var droppedOn = allControls.Where(c => c.Name == Request.Form["dragdrop_droppedOn"]).Single();
 
 				DragDrop.RaiseDropped(dragged, droppedOn);
-			}
-		}
-
-		protected IEnumerable<IControl> GetAllControls()
-		{
-			foreach (IControl ctr in ControlExtensions.GetAllControls(this).Where(c => c is IControl))
-			{
-				yield return ctr;
 			}
 		}
 	}

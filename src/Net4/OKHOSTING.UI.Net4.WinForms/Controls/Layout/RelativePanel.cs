@@ -95,6 +95,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 			((NativeControl) control).Location = location;
 			base.Controls.Add((NativeControl) control);
+
+			//as soon as a new control is added, we need to rearrange
+			arranged = false;
 		}
 
 		protected bool arranged = false;
@@ -104,8 +107,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			//invert child index of controls so they are shown in the order which they where added
 			if (!arranged)
 			{
-				foreach (NativeControl control in base.Controls)
+				for(int i = 0; i < base.Controls.Count; i++)
 				{
+					NativeControl control = base.Controls[i];
+
 					control.BringToFront();
 				}
 

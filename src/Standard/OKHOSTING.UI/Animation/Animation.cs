@@ -111,10 +111,10 @@ namespace OKHOSTING.UI.Animation
 
 			while (step < to)
 			{
-				//var easingValue = Core.Math.Easings.Interpolate(normalizedStep, TimingFunction);
-				//var denormalizedEasingValue = stepValue * easingValue;
+				var easingValue = Core.Math.Easings.Interpolate(normalizedStep, TimingFunction);
+				var denormalizedEasingValue = stepValue * easingValue;
 
-				//yield return step * denormalizedEasingValue;
+				yield return step * denormalizedEasingValue;
 				yield return step;
 
 				step += stepValue;

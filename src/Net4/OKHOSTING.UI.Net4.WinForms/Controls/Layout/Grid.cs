@@ -11,10 +11,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 	{
 		public Grid()
 		{
-			AutoSize = true;
-			AutoScroll = true;
-			VScroll = true;
-			HScroll = true;
 		}
 
 		Thickness IGrid.CellMargin

@@ -29,7 +29,7 @@ namespace OKHOSTING.UI.Test.Animation
 			UI.Animation.Animation animation = new UI.Animation.Animation();
 			animation.Iterations = 10;
 			animation.Delay = TimeSpan.FromSeconds(1);
-			animation.Duration = TimeSpan.FromSeconds(5);
+			animation.Duration = TimeSpan.FromSeconds(6);
 			animation.KeyFrames = new List<UI.Animation.KeyFrame>()
 			{
 				new UI.Animation.KeyFrame(0, member, Color.FromArgb(255, 255, 0, 0)),
