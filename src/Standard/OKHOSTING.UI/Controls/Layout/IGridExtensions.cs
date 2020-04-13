@@ -207,7 +207,15 @@ namespace OKHOSTING.UI.Controls.Layout
 			{
 				for (int column = 0; column < grid.ColumnCount; column++)
 				{
-					var control = allControls[(row * grid.ColumnCount) + column];
+					int nextIndex = (row * grid.ColumnCount) + column;
+
+					//did we finish?
+					if (nextIndex >= allControls.Length)
+					{
+						return;
+					}
+
+					var control = allControls[nextIndex];
 					grid.SetContent(row, column, control);
 				}
 			}
