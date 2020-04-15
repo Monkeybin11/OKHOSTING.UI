@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Controls\IClickable.cs" />
     <Compile Include="Controls\Menu.cs" />
+    <Compile Include="Controls\MenuItem.cs" />
     <Compile Include="Controls\UserControl.cs" />
     <Compile Include="DragDrop.cs" />
     <Compile Include="Media\VideoPlayer.cs" />

@@ -20,7 +20,6 @@
     <Compile Remove="Controls\Alert.cs" />
     <Compile Remove="Controls\Chart.cs" />
     <Compile Remove="Controls\ColorPicker.cs" />
-    <Compile Remove="Controls\IMenuItem.cs" />
     <Compile Remove="Controls\UserControl.cs" />
     <Compile Remove="Session.cs" />
   </ItemGroup>

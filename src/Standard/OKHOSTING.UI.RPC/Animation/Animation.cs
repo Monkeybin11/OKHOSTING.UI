@@ -154,7 +154,7 @@ namespace OKHOSTING.UI.RPC.Animation
 		/// </param>
 		public IEnumerable<double> GetGradient(float from, float to, ulong steps)
 		{
-			return (IEnumerable<double>) Invoke(nameof(GetGradient), from, to, steps));
+			return (IEnumerable<double>) Invoke(nameof(GetGradient), from, to, steps);
 		}
 
 
@@ -169,7 +169,7 @@ namespace OKHOSTING.UI.RPC.Animation
 		/// </param>
 		public IEnumerable<Color> GetGradients(Color start, Color end, int steps)
 		{
-			return (IEnumerable<Color>) Invoke(nameof(GetGradients), start, end, steps));
+			return (IEnumerable<Color>) Invoke(nameof(GetGradients), start, end, steps);
 		}
 	}
 }

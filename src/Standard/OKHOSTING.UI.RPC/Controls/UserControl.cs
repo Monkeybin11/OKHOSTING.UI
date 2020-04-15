@@ -56,5 +56,10 @@ namespace OKHOSTING.UI.RPC.Controls
 				RemoveHybridEventHandler(nameof(Resized), value);
 			}
 		}
+
+		public void InvokeOnMainThread(Action action)
+		{
+			Invoke(nameof(InvokeOnMainThread), action);
+		}
 	}
 }

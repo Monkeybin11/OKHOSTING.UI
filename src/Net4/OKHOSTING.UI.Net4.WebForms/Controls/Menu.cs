@@ -3,16 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class Menu: System.Web.UI.WebControls.Menu, IMenu
+	public class Menu: System.Web.UI.WebControls.Menu, IMenu, IClickable
 	{
 		public Menu()
 		{
-			base.MenuItemClick += Menu_MenuItemClick;
+			Items = new List<IMenuItem>();
 		}
 
 		#region IControl
@@ -578,28 +576,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		ICollection<MenuItem> IMenu.Items { get; set; }
+		public new ICollection<IMenuItem> Items { get; protected set; }
 
-		private void Menu_MenuItemClick(object sender, System.Web.UI.WebControls.MenuEventArgs e)
-		{
-			var item = ((IMenu) this).Items.Where(i => i.GetHashCode().ToString() == e.Item.Value).Single();
-			item.OnClick(e);
-		}
+		public event EventHandler Click;
 
 		protected override void OnPreRender(EventArgs e)
 		{
 			//create menu items here
 			base.Items.Clear();
 
-			foreach (MenuItem item in ((IMenu) this).Items)
+			foreach (IMenuItem item in ((IMenu) this).Items)
 			{
-				Items.Add(Parse(item));
+				base.Items.Add(Parse(item));
 			}
 
 			base.OnPreRender(e);
 		}
 
-		protected System.Web.UI.WebControls.MenuItem Parse(MenuItem item)
+		protected System.Web.UI.WebControls.MenuItem Parse(IMenuItem item)
 		{
 			var nativeItem = new System.Web.UI.WebControls.MenuItem(item.Text);
 			nativeItem.Text = item.Text;
@@ -611,6 +605,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 
 			return nativeItem;
+		}
+
+		public void RaiseClick()
+		{
+			if (Page.Request.Form["__EVENTTARGET"] == ClientID)
+			{
+				var argument = Page.Request.Form["__EVENTARGUMENT"];
+				argument = argument.Split('/', '\\').Last();
+
+				var item = (MenuItem) this.GetAllItems().Where(i => i.GetHashCode().ToString() == argument).Single();
+				item.OnClick(new EventArgs());
+
+				Click?.Invoke(this, new EventArgs());
+			}
 		}
 	}
 }

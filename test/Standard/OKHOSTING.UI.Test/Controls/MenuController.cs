@@ -1,4 +1,5 @@
-﻿using OKHOSTING.UI.Controls;
+﻿using OKHOSTING.Core;
+using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Collections.Generic;
@@ -12,63 +13,66 @@ namespace OKHOSTING.UI.Test.Controls
 
 		protected override void OnStart()
 		{
-			Label = Core.BaitAndSwitch.Create<ILabel>();
+			Label = BaitAndSwitch.Create<ILabel>();
 			Label.Text = "Click on a menu item";
 
-			var menu = Core.BaitAndSwitch.Create<IMenu>();
-			var stack = Core.BaitAndSwitch.Create<IStack>();
+			var menu = BaitAndSwitch.Create<IMenu>();
+			var stack = BaitAndSwitch.Create<IStack>();
 
-			var home = new MenuItem("Home", menuItem_Click);
-			var services= new MenuItem("Services", menuItem_Click);
-			var products = new MenuItem("Products", menuItem_Click);
-			var aboutus = new MenuItem("About us", menuItem_Click);
-			var contact = new MenuItem("Contact us", menuItem_Click);
+			var home = BaitAndSwitch.Create<IMenuItem>("Home");
+			var services= BaitAndSwitch.Create<IMenuItem>("Services");
+			var products = BaitAndSwitch.Create<IMenuItem>("Products");
+			var aboutus = BaitAndSwitch.Create<IMenuItem>("About us");
+			var contact = BaitAndSwitch.Create<IMenuItem>("Contact us");
 
-			home.Children = new List<MenuItem>()
-			{
-				services,
-				products,
-				aboutus,
-				contact
-			};
+			home.Children.Add(services);
+			home.Children.Add(products);
+			home.Children.Add(aboutus);
+			home.Children.Add(contact);
 
-			var hosting = new MenuItem("Hosting", menuItem_Click);
-			var design = new MenuItem("Design", menuItem_Click);
-			var development = new MenuItem("Development", menuItem_Click);
-			var marketing = new MenuItem("Marketing", menuItem_Click);
+			var hosting = BaitAndSwitch.Create<IMenuItem>("Hosting");
+			var design = BaitAndSwitch.Create<IMenuItem>("Design");
+			var development = BaitAndSwitch.Create<IMenuItem>("Development");
+			var marketing = BaitAndSwitch.Create<IMenuItem>("Marketing");
 
-			services.Children = new List<MenuItem>()
-			{
-				hosting,
-				design,
-				development,
-				marketing
-			};
+			services.Children.Add(hosting);
+			services.Children.Add(design);
+			services.Children.Add(development);
+			services.Children.Add(marketing);
 
-			var shared = new MenuItem("Shared hosting", menuItem_Click);
-			var dedicated = new MenuItem("Dedicated servers", menuItem_Click);
-			var free = new MenuItem("Free hosting", menuItem_Click);
+			var shared = BaitAndSwitch.Create<IMenuItem>("Shared hosting");
+			var dedicated = BaitAndSwitch.Create<IMenuItem>("Dedicated servers");
+			var free = BaitAndSwitch.Create<IMenuItem>("Free hosting");
 
-			hosting.Children = new List<MenuItem>()
-			{
-				shared,
-				dedicated,
-				free,
-			};
+			hosting.Children.Add(shared);
+			hosting.Children.Add(dedicated);
+			hosting.Children.Add(free);
 
-			var domains = new MenuItem("domains", menuItem_Click);
-			var templates = new MenuItem("Templates", menuItem_Click);
+			var domains = BaitAndSwitch.Create<IMenuItem>("domains");
+			var templates = BaitAndSwitch.Create<IMenuItem>("Templates");
 
-			products.Children = new List<MenuItem>()
-			{
-				domains,
-				templates,
-			};
+			products.Children.Add(domains);
+			products.Children.Add(templates);
 
-			menu.Items = new List<MenuItem>()
-			{
-				home,
-			};
+			menu.Items.Add(home);
+
+			home.Click += menuItem_Click;
+			services.Click += menuItem_Click;
+			products.Click += menuItem_Click;
+			aboutus.Click += menuItem_Click;
+			contact.Click += menuItem_Click;
+
+			hosting.Click += menuItem_Click;
+			design.Click += menuItem_Click;
+			development.Click += menuItem_Click;
+			marketing.Click += menuItem_Click;
+
+			shared.Click += menuItem_Click;
+			dedicated.Click += menuItem_Click;
+			free.Click += menuItem_Click;
+
+			domains.Click += menuItem_Click;
+			templates.Click += menuItem_Click;
 
 			stack.Children.Add(Label);
 			stack.Children.Add(menu);
@@ -78,7 +82,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 		private void menuItem_Click(object sender, EventArgs e)
 		{
-			MenuItem item = (MenuItem) sender;
+			IMenuItem item = (IMenuItem) sender;
 			Label.Text = $"You clicked: {item.Text}";
 		}
 	}

@@ -8,44 +8,45 @@ namespace OKHOSTING.UI.Controls
 	/// </summary>
 	public interface IMenu : ITextControl
 	{
-		ICollection<MenuItem> Items { get; set; }
+		ICollection<IMenuItem> Items { get; }
 	}
 
-	/// <summary>
-	/// An item on a menu, that can have subitems
-	/// </summary>
-	public class MenuItem
+	public static class IMenuExtensions
 	{
-		public MenuItem()
+		public static IEnumerable<IMenuItem> GetAllItems(this IMenu menu)
 		{
+			if (menu?.Items == null)
+			{
+				yield break;
+			}
+
+			foreach (var item in menu.Items)
+			{
+				yield return item;
+
+				foreach (var subItem in item.GetAllItems())
+				{
+					yield return subItem;
+				}
+			}
 		}
 
-		public MenuItem(string text)
+		public static IEnumerable<IMenuItem> GetAllItems(this IMenuItem item)
 		{
-			Text = text;
-		}
+			if (item?.Children == null)
+			{
+				yield break;
+			}
 
-		public MenuItem(string text, EventHandler onClick)
-		{
-			Text = text;
-			Click += onClick;
-		}
+			foreach (var child in item.Children)
+			{
+				yield return child;
 
-		/// <summary>
-		/// Text of the item
-		/// </summary>
-		public string Text { get; set; }
-
-		public ICollection<MenuItem> Children { get; set; }
-
-		/// <summary>
-		/// Raised after the user clicks on the item
-		/// </summary>
-		public event EventHandler Click;
-
-		public void OnClick(EventArgs e)
-		{
-			Click?.Invoke(this, e);
+				foreach (var subChild in child.GetAllItems())
+				{
+					yield return subChild;
+				}
+			}
 		}
 	}
 }

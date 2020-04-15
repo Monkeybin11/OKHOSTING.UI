@@ -122,5 +122,17 @@ namespace OKHOSTING.UI.RPC.Controls.Layout
 				Set(nameof(CellPadding), value);
 			}
 		}
+
+		public bool ShowGridLines
+		{
+			get
+			{
+				return (bool) Get(nameof(ShowGridLines));
+			}
+			set
+			{
+				Set(nameof(ShowGridLines), value);
+			}
+		}
 	}
 }

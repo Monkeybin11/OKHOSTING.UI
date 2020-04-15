@@ -8,6 +8,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	{
 		public Menu()
 		{
+			Items = new MenuItemList(base.Items);
 		}
 
 		#region IControl
@@ -293,34 +294,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		#endregion
 
-		ICollection<MenuItem> IMenu.Items { get; set; }
-
 		public void Dispose()
 		{
 		}
 
-		protected global::Xamarin.Forms.MenuItem Parse(MenuItem item)
-		{
-			var native = new global::Xamarin.Forms.MenuItem();
-			native.Text = item.Text;
-			native.Clicked += NativeItem_Clicked;
-			native.BindingContext = item;
-			
-			foreach (var child in item.Children)
-			{
-				var nativeChild = Parse(child);
-				nativeChild.Parent = native;
-			}
+		public new ICollection<IMenuItem> Items { get; protected set; }
 
-			return native;
-		}
-
-		private void NativeItem_Clicked(object sender, System.EventArgs e)
-		{
-			var native = (global::Xamarin.Forms.MenuItem) sender;
-			var item = (MenuItem) native.BindingContext;
-
-			item.OnClick(e);
-		}
 	}
 }

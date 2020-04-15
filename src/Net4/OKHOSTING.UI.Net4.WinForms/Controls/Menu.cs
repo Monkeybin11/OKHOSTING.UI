@@ -8,6 +8,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public Menu()
 		{
+			_Items = new MenuItemList(base.Items);
 		}
 
 		#region IControl
@@ -232,44 +233,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		ICollection<MenuItem> IMenu.Items { get; set; }
+		protected readonly MenuItemList _Items;
 
-		protected void MenuItem_Clicked(object sender, System.EventArgs e)
+		public new ICollection<IMenuItem> Items
 		{
-			MenuItem item = (MenuItem) ((System.Windows.Forms.ToolStripMenuItem) sender).Tag;
-			item.OnClick(e);
-		}
-
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
-		{
-			DataBind();
-			base.OnPaint(e);
-		}
-
-		protected System.Windows.Forms.ToolStripMenuItem Parse(MenuItem item)
-		{
-			var native = new System.Windows.Forms.ToolStripMenuItem(item.Text, null, MenuItem_Clicked);
-			native.Font = Font;
-			native.BackColor = BackColor;
-			native.ForeColor = ForeColor;
-			native.TextAlign = Platform.ParseContentAlignment(((ITextControl) this).TextHorizontalAlignment, ((ITextControl) this).VerticalAlignment);
-			native.Tag = item;
-
-			foreach (var child in item.Children)
+			get
 			{
-				native.DropDownItems.Add(Parse(child));
-			}
-
-			return native;
-		}
-		
-		protected void DataBind()
-		{
-			base.Items.Clear();
-
-			foreach (var item in ((IMenu) this).Items)
-			{
-				base.Items.Add(Parse(item));
+				return _Items;
 			}
 		}
 	}

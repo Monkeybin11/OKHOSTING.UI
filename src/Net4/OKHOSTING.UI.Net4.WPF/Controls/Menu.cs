@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 	{
 		public Menu()
 		{
-			
+			_Items = new MenuItemList(base.Items);
 		}
 
 		#region IControl
@@ -281,47 +281,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		#endregion
 
-		ICollection<MenuItem> IMenu.Items { get; set; }
+		protected readonly MenuItemList _Items;
+
+		public new ICollection<IMenuItem> Items
+		{
+			get
+			{
+				return _Items;
+			}
+		}
 
 		public void Dispose()
 		{
-		}
-
-		public override void BeginInit()
-		{
-			base.BeginInit();
-
-			base.Items.Clear();
-
-			foreach (var item in ((IMenu) this).Items)
-			{
-				base.Items.Add(Parse(item));
-			}
-		}
-
-		public System.Windows.Controls.MenuItem Parse(MenuItem item)
-		{
-			System.Windows.Controls.MenuItem native = new System.Windows.Controls.MenuItem();
-			native.Header = item.Text;
-			native.Tag = item;
-			native.Click += Native_Click;
-			native.FontFamily = FontFamily;
-			native.FontSize = FontSize;
-			native.FontStyle = FontStyle;
-			native.FontWeight = FontWeight;
-
-			foreach (var child in item.Children)
-			{
-				native.Items.Add(Parse(child));
-			}
-
-			return native;
-		}
-
-		private void Native_Click(object sender, System.Windows.RoutedEventArgs e)
-		{
-			MenuItem item = (MenuItem) ((System.Windows.Controls.MenuItem) sender).Tag;
-			item.OnClick(e);
 		}
 	}
 }
