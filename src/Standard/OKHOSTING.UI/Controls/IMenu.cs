@@ -16,6 +16,21 @@ namespace OKHOSTING.UI.Controls
 	/// </summary>
 	public class MenuItem
 	{
+		public MenuItem()
+		{
+		}
+
+		public MenuItem(string text)
+		{
+			Text = text;
+		}
+
+		public MenuItem(string text, EventHandler onClick)
+		{
+			Text = text;
+			Click += onClick;
+		}
+
 		/// <summary>
 		/// Text of the item
 		/// </summary>

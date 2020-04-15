@@ -305,7 +305,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			native.Text = item.Text;
 			native.Clicked += NativeItem_Clicked;
 			native.BindingContext = item;
-
+			
 			foreach (var child in item.Children)
 			{
 				var nativeChild = Parse(child);

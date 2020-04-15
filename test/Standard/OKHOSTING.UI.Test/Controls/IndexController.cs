@@ -102,8 +102,12 @@ namespace OKHOSTING.UI.Test.Controls
 			ILabelButton lblTimePicker = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblTimePicker.Text = "TimePicker";
 			lblTimePicker.Click += (object sender, EventArgs e) => new TimePickerController() { Page = Page }.Start();
-			lblTimePicker.Name = "label1";
 			stack.Children.Add(lblTimePicker);
+
+			ILabelButton lblMenu = Core.BaitAndSwitch.Create<ILabelButton>();
+			lblMenu.Text = "Menu";
+			lblMenu.Click += (object sender, EventArgs e) => new MenuController() { Page = Page }.Start();
+			stack.Children.Add(lblMenu);
 
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control/feature to test";
