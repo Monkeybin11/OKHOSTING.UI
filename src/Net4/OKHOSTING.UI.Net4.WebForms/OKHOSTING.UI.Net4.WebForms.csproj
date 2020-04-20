@@ -122,14 +122,6 @@
       <Project>{3b08e5e9-6279-44a3-8c01-f11f8e518d31}</Project>
       <Name>OKHOSTING.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Files\src\Standard\OKHOSTING.Files.UI\OKHOSTING.Files.UI.csproj">
-      <Project>{5a6a157f-3b17-43de-9d4f-3504df36308b}</Project>
-      <Name>OKHOSTING.Files.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\OKHOSTING.Files\src\Standard\OKHOSTING.Files\OKHOSTING.Files.csproj">
-      <Project>{e38c865e-2109-4743-800b-26ae5bed9765}</Project>
-      <Name>OKHOSTING.Files</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
       <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
