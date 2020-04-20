@@ -102,14 +102,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 		}
 
 		/// <summary>
-		/// Automatically assigns a name to a control, usefull in web to identify postback events
-		/// </summary>
-		public void NameControl(IControl control)
-		{
-			control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
-		}
-
-		/// <summary>
 		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
 		/// </summary>
 		protected internal int ControlCounter = 0;
@@ -167,16 +159,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 			//allow friendly urls on forms
 			Form.Action = Request.RawUrl;
-
-			ControlCounter = 0;
-
-			foreach (var control in App.GetParentAndAllChildren(Content))
-			{
-				if (string.IsNullOrWhiteSpace(control.Name))
-				{
-					NameControl(control);
-				}
-			}
 
 			base.OnPreRender(e);
 		}

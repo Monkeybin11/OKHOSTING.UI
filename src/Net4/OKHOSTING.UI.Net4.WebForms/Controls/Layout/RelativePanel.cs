@@ -170,11 +170,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 				((NativeControl) control).ClientID, myHorizontalAnchor, myVerticalAnchor, atHorizontalAnchor, atVerticalAnchor, ((NativeControl) referenceControl).ClientID
 			);
 
-			if (string.IsNullOrWhiteSpace(control.Name))
-			{
-				Platform.CurrentPage.NameControl(control);
-			}
-
 			ClientScripts.Add(positionJS);
 		}
 
