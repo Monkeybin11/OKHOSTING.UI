@@ -329,11 +329,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
-		/// <summary>
 		/// Gets or sets the content.
 		/// <para xml:lang="es">Obtiene o establece el contenido.</para>
 		/// </summary>

@@ -294,11 +294,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		#endregion
 
+		public new ICollection<IMenuItem> Items { get; protected set; }
+
 		public void Dispose()
 		{
 		}
-
-		public new ICollection<IMenuItem> Items { get; protected set; }
-
 	}
 }

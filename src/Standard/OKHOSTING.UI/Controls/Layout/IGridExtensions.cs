@@ -287,6 +287,11 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// </summary>
 		public static void DistributeWidth(this IGrid grid)
 		{
+			if (grid.Width == null || double.IsNaN(grid.Width.Value))
+			{
+				return;
+			}
+
 			double width = grid.Width.Value / grid.ColumnCount;
 
 			for (int i = 0; i < grid.ColumnCount; i++)
@@ -300,6 +305,11 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// </summary>
 		public static void DistributeHeight(this IGrid grid)
 		{
+			if (grid.Height == null || double.IsNaN(grid.Height.Value))
+			{
+				return;
+			}
+
 			double height = grid.Height.Value / grid.RowCount;
 
 			for (int i = 0; i < grid.RowCount; i++)
