@@ -47,6 +47,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 			set
 			{
+				if (value < 0)
+				{
+					throw new ArgumentOutOfRangeException("Value must be greater or equal to zero");
+				}
+
 				//remove all controls from rows to be removed
 				for (int i = 0; i < base.Children.Count; i++)
 				{
@@ -84,6 +89,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 			set
 			{
+				if (value < 0)
+				{
+					throw new ArgumentOutOfRangeException("Value must be greater or equal to zero");
+				}
+
 				//remove all controls from rows to be removed
 				for (int i = 0; i < base.Children.Count; i++)
 				{

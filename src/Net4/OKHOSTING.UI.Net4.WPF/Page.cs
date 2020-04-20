@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF
@@ -12,13 +13,13 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		public Page()
 		{
-			base.SizeChanged += Page_SizeChanged;
-			base.StateChanged += Page_StateChanged;
-
 			//allows for automatic vertical scrolling
 			Scroller = new System.Windows.Controls.ScrollViewer();
 			Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
-			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Visible;
+			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+			Scroller.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			Scroller.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+
 			SizeToContent = System.Windows.SizeToContent.Manual;
 
 			base.Content = Scroller;
@@ -57,7 +58,14 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				return base.Width;
+				if (this.WindowState == System.Windows.WindowState.Maximized)
+				{
+					return System.Windows.SystemParameters.WorkArea.Width;
+				}
+				else
+				{
+					return base.Width;
+				}
 			}
 		}
 
@@ -65,7 +73,14 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				return base.Height;
+				if (this.WindowState == System.Windows.WindowState.Maximized)
+				{
+					return System.Windows.SystemParameters.WorkArea.Height;
+				}
+				else
+				{
+					return base.Height;
+				}
 			}
 		}
 
@@ -74,25 +89,9 @@ namespace OKHOSTING.UI.Net4.WPF
 			System.Windows.Application.Current.Dispatcher.Invoke(action);
 		}
 
-		/// <summary>
-		/// Raises the Resized event
-		/// </summary>
-		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+		protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
 		{
 			App?[this]?.Controller?.Refresh();
-		}
-
-		/// <summary>
-		/// For some reason, when maximized, base.Width and base.Height do not update on time, 
-		/// so we need to do it here manually
-		/// </summary>
-		private void Page_StateChanged(object sender, EventArgs e)
-		{
-			if (this.WindowState == System.Windows.WindowState.Maximized)
-			{
-				Width = System.Windows.SystemParameters.WorkArea.Width;
-				Height = System.Windows.SystemParameters.WorkArea.Height;
-			}
 		}
 	}
 }

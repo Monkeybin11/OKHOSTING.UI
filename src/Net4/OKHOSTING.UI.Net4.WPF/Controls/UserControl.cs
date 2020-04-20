@@ -7,6 +7,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class UserControl : System.Windows.Controls.UserControl, IUserControl
 	{
+		protected readonly System.Windows.Controls.ScrollViewer Scroller;
+
+		public UserControl()
+		{
+			//allows for automatic vertical scrolling
+			Scroller = new System.Windows.Controls.ScrollViewer();
+			Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+
+			base.Content = Scroller;
+		}
+
 		void IDisposable.Dispose()
 		{
 		}
@@ -195,11 +207,17 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return (IControl) base.Content;
+				return (IControl) Scroller.Content;
 			}
 			set
 			{
-				base.Content = value;
+				//if (value != null)
+				//{
+				//	value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
+				//	value.VerticalAlignment = UI.VerticalAlignment.Fill;
+				//}
+				
+				Scroller.Content = value;
 			}
 		}
 
@@ -207,7 +225,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return base.Width;
+				return base.Width - 30;
 			}
 		}
 
@@ -242,11 +260,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
 		public void InvokeOnMainThread(Action action)
 		{
 			System.Windows.Application.Current.Dispatcher.Invoke(action);
@@ -258,7 +271,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
 		{
 			base.OnRenderSizeChanged(sizeInfo);
-			Resized?.Invoke(this, new EventArgs());
+			App?[this]?.Controller?.Refresh();
 		}
 
 		#endregion
