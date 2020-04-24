@@ -317,7 +317,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IClickable.RaiseClick()
 		{
-			string postedValue = Page.Request.Form[ID + ".x"];
+			string postedValue = Page?.Request.Form[ID + ".x"];
 
 			//is this an image button?
 			if (postedValue != null)

@@ -71,7 +71,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		bool IInputControl.HandlePostBack()
 		{
 			DateTime date = DateTime.MinValue;
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page?.Request.Form[ID];
 
 			if (base.Text != postedValue)
 			{

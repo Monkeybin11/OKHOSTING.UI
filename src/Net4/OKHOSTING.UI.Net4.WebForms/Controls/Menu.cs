@@ -609,9 +609,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		public void RaiseClick()
 		{
-			if (Page.Request.Form["__EVENTTARGET"] == ClientID)
+			if (Page?.Request.Form["__EVENTTARGET"] == ClientID)
 			{
-				var argument = Page.Request.Form["__EVENTARGUMENT"];
+				var argument = Page?.Request.Form["__EVENTARGUMENT"];
 				argument = argument.Split('/', '\\').Last();
 
 				var item = (MenuItem) this.GetAllItems().Where(i => i.GetHashCode().ToString() == argument).Single();

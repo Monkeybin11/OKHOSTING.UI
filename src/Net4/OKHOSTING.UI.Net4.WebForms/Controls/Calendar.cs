@@ -586,12 +586,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		bool IInputControl.HandlePostBack()
 		{
-			if (Page.Request.Form["__EVENTTARGET"] != ID)
+			if (Page?.Request.Form["__EVENTTARGET"] != ID)
 			{
 				return false;
 			}
 
-			var arg = Page.Request.Form["__EVENTARGUMENT"];
+			var arg = Page?.Request.Form["__EVENTARGUMENT"];
 
 			if (!int.TryParse(arg, out int i))
 			{
