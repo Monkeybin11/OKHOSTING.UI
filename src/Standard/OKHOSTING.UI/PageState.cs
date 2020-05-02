@@ -55,6 +55,6 @@
 		/// Gets or sets the content.
 		/// <para xml:lang="es">Obtiene o establece el contenido de la pagina.</para>
 		/// </summary>
-		public Controls.IControl Content { get; set; }
+		public IControl Content { get; set; }
 	}
 }

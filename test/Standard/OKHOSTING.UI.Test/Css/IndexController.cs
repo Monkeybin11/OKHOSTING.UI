@@ -47,7 +47,7 @@ namespace OKHOSTING.UI.Test.Css
 
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control/feature to test";
-            Page.Content = stack;
-        }
-    }
+			Page.Content = stack;
+		}
+	}
 }

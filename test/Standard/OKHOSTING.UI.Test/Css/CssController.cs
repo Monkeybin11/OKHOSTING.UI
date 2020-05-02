@@ -4,8 +4,8 @@ using System;
 
 namespace OKHOSTING.UI.Test.Css
 {
-    public class CssController : Controller
-    {
+	public class CssController : Controller
+	{
 		
 
 		/// <summary>
@@ -16,10 +16,10 @@ namespace OKHOSTING.UI.Test.Css
 		/// </summary>
 		protected override void OnStart()
 		{
-            //Create an Grid with specified columns and rows.
-            IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
-            grid.ColumnCount = 3;
-            grid.RowCount = 5;
+			//Create an Grid with specified columns and rows.
+			IGrid grid = Core.BaitAndSwitch.Create<IGrid>();
+			grid.ColumnCount = 3;
+			grid.RowCount = 5;
 			grid.Name = "grid";
 
 			ILabel lblTitle;
@@ -32,7 +32,7 @@ namespace OKHOSTING.UI.Test.Css
 			IListPicker lstp;
 
 			lblTitle = Core.BaitAndSwitch.Create<ILabel>();
-            lblTitle.Text = "Lil Octopus";
+			lblTitle.Text = "Lil Octopus";
 			lblTitle.Name = "Title";
 			lblTitle.CssClass = "marginpadding";
 			grid.SetContent(0, 0, lblTitle);
@@ -42,13 +42,13 @@ namespace OKHOSTING.UI.Test.Css
 			lblsubtitle.Name = "LblSubtitle";
 			grid.SetContent(0, 1, lblsubtitle);
 
-            lblText1 = Core.BaitAndSwitch.Create<ILabel>();
-            lblText1.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
+			lblText1 = Core.BaitAndSwitch.Create<ILabel>();
+			lblText1.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n" +
 				"Mi eget mauris pharetra et ultrices neque ornare. Cursus eget nunc scelerisque viverra. Pellentesque massa placerat duis ultricies lacus. \n" +
 				"Dignissim cras tincidunt lobortis feugiat vivamus at augue. Arcu risus quis varius quam quisque id diam vel quam. Morbi tempus iaculis urna id volutpat lacus laoreet. \n" +
 				"Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Consectetur adipiscing elit duis tristique. Neque ornare aenean euismod elementum nisi quis. \n" +
 				"Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. In hendrerit gravida rutrum quisque non tellus orci ac auctor. Suscipit tellus mauris a diam maecenas sed enim ut. \n";
-            lblText1.Name = "Text1";
+			lblText1.Name = "Text1";
 			lblText1.CssClass = "fontandcolor";
 			grid.SetContent(0, 2, lblText1);
 
@@ -58,9 +58,9 @@ namespace OKHOSTING.UI.Test.Css
 			grid.SetContent(1, 0, TxtNombre);
 
 			imgOne = Core.BaitAndSwitch.Create<IImage>();
-            imgOne.LoadFromUrl(new Uri("https://www.tekcrispy.com/wp-content/uploads/2018/05/pulpo-vida-1021x580.jpg"));
+			imgOne.LoadFromUrl(new Uri("https://www.tekcrispy.com/wp-content/uploads/2018/05/pulpo-vida-1021x580.jpg"));
 			imgOne.Name = "ImgOne";
-            grid.SetContent(1, 1, imgOne);
+			grid.SetContent(1, 1, imgOne);
 			
 			imgTwo = Core.BaitAndSwitch.Create<IImage>();
 			imgTwo.LoadFromUrl(new Uri("https://lithub.com/wp-content/uploads/2019/09/octopus-1.jpg"));
@@ -86,9 +86,9 @@ namespace OKHOSTING.UI.Test.Css
 			grid.SetContent(2, 2, lstp);
 
 			IButton btnClose = Core.BaitAndSwitch.Create<IButton>();
-            btnClose.Text = "Close";
-            btnClose.Name = "btnClose";
-            btnClose.Click += btnClose_Click;
+			btnClose.Text = "Close";
+			btnClose.Name = "btnClose";
+			btnClose.Click += btnClose_Click;
 			grid.SetContent(3, 0, btnClose);
 
 			ITimeOfDayPicker CTime = Core.BaitAndSwitch.Create<ITimeOfDayPicker>();
@@ -180,22 +180,22 @@ namespace OKHOSTING.UI.Test.Css
 				width: 20px;
 			}
 
-            #title 
+			#title 
 			{
 				font-size: 20px; 
 				border: 2px solid blue;
 				color: red;
 				text-align: center;
 				vertical-align: bottom;
-             }
-           
-            #text1 
+			 }
+		   
+			#text1 
 			{
 				font-size: 16px;
 				border: 1px solid black;
 				color: yellow;
 				text-align: right;
-            }
+			}
 			
 			#text2
 			{
@@ -204,19 +204,19 @@ namespace OKHOSTING.UI.Test.Css
 				color: orange;
 				background-color: #AABBCC;
 				text-align: justify;
-            }
+			}
 
 			.fontandcolor
 			{
 				font-family: Arial;
-                color: purple;
-            }
+				color: purple;
+			}
 
 			.marginpadding
 			{
-                margin: 15px;
-                padding: 30px;
-            }
+				margin: 15px;
+				padding: 30px;
+			}
 
 			image, imageButton
 			{

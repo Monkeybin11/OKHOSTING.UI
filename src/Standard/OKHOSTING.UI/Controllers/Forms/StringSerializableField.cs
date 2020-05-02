@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// A field for IStringSerialized values

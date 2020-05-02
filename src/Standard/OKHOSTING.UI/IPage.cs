@@ -29,7 +29,7 @@ namespace OKHOSTING.UI
 		/// Cada ventana solo contiene una vista principal, que puede ser opcionalmente un contenedor y contener mas vistas.
 		/// </para>
 		/// </summary>
-		Controls.IControl Content { get; set; }
+		IControl Content { get; set; }
 
 		/// <summary>
 		/// Width of the page, in density independent pixels

@@ -7,185 +7,185 @@ using System.Text;
 
 namespace OKHOSTING.UI.Test.Misc
 {
-    public class CalculatorController : Controller
-    {
-        ILabel lblNumberOne;
-        ILabel lblNumberTwo;
-        ILabel lblResult;
+	public class CalculatorController : Controller
+	{
+		ILabel lblNumberOne;
+		ILabel lblNumberTwo;
+		ILabel lblResult;
 
-        ITextBox txtNumberTwo;
-        ITextBox txtNumberOne;
+		ITextBox txtNumberTwo;
+		ITextBox txtNumberOne;
 
-        IButton btnClose;
-        IButton btnPlus;
-        IButton btnSubtraction;
-        IButton btnMultiply;
-        IButton btnDivide;
-        IButton btnClean;
-        
-        /// <summary>
-        /// Start this instance.
-        /// <para xml:lang="es">
-        /// Inicia una instancia de este objeto.
-        /// </para>
-        /// </summary>
-        /// 
+		IButton btnClose;
+		IButton btnPlus;
+		IButton btnSubtraction;
+		IButton btnMultiply;
+		IButton btnDivide;
+		IButton btnClean;
+		
+		/// <summary>
+		/// Start this instance.
+		/// <para xml:lang="es">
+		/// Inicia una instancia de este objeto.
+		/// </para>
+		/// </summary>
+		/// 
 
-        protected override void OnStart() 
-        {
-            //Create an RelativePanel container
-            IRelativePanel relativePanel = Core.BaitAndSwitch.Create<IRelativePanel>();
+		protected override void OnStart() 
+		{
+			//Create an RelativePanel container
+			IRelativePanel relativePanel = Core.BaitAndSwitch.Create<IRelativePanel>();
 
-            lblResult = Core.BaitAndSwitch.Create<ILabel>();
-            lblResult.Text = "Result";
-            lblResult.FontSize = 100;
-            lblResult.Name = "lblResult";
-            lblResult.CssClass = "container";
-            relativePanel.Add(lblResult, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith, lblResult);
+			lblResult = Core.BaitAndSwitch.Create<ILabel>();
+			lblResult.Text = "Result";
+			lblResult.FontSize = 100;
+			lblResult.Name = "lblResult";
+			lblResult.CssClass = "container";
+			relativePanel.Add(lblResult, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.CenterWith, lblResult);
 
-            lblNumberOne = Core.BaitAndSwitch.Create<ILabel>();
-            lblNumberOne.Text = "           Number one";
-            lblNumberOne.CssClass = "container";
-            relativePanel.Add(lblNumberOne, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblResult);
+			lblNumberOne = Core.BaitAndSwitch.Create<ILabel>();
+			lblNumberOne.Text = "		   Number one";
+			lblNumberOne.CssClass = "container";
+			relativePanel.Add(lblNumberOne, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblResult);
 
-            lblNumberTwo = Core.BaitAndSwitch.Create<ILabel>();
-            lblNumberTwo.Text = "           Number Two";
-            lblNumberTwo.CssClass = "container";
-            relativePanel.Add(lblNumberTwo, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblNumberOne);
+			lblNumberTwo = Core.BaitAndSwitch.Create<ILabel>();
+			lblNumberTwo.Text = "		   Number Two";
+			lblNumberTwo.CssClass = "container";
+			relativePanel.Add(lblNumberTwo, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, lblNumberOne);
 
-            txtNumberOne = Core.BaitAndSwitch.Create<ITextBox>();
-            txtNumberOne.Value = "";
-            txtNumberOne.CssClass = "container";
-            txtNumberOne.Width = 50;
-            relativePanel.Add(txtNumberOne, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.CenterWith, lblNumberOne);
+			txtNumberOne = Core.BaitAndSwitch.Create<ITextBox>();
+			txtNumberOne.Value = "";
+			txtNumberOne.CssClass = "container";
+			txtNumberOne.Width = 50;
+			relativePanel.Add(txtNumberOne, RelativePanelHorizontalContraint.RightOf, RelativePanelVerticalContraint.CenterWith, lblNumberOne);
 
-            txtNumberTwo = Core.BaitAndSwitch.Create<ITextBox>();
-            txtNumberTwo.Value = "";
-            txtNumberTwo.CssClass = "container";
-            txtNumberTwo.Width = 50;
-            relativePanel.Add(txtNumberTwo, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtNumberOne);
+			txtNumberTwo = Core.BaitAndSwitch.Create<ITextBox>();
+			txtNumberTwo.Value = "";
+			txtNumberTwo.CssClass = "container";
+			txtNumberTwo.Width = 50;
+			relativePanel.Add(txtNumberTwo, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtNumberOne);
 
-            btnPlus = Core.BaitAndSwitch.Create<IButton>();
-            btnPlus.Text = "+";
-            btnPlus.CssClass = "btnContainer";
-            btnPlus.Width = 20;
-              btnPlus.Click += btnPlus_Click;
-            relativePanel.Add(btnPlus, RelativePanelHorizontalContraint.RightWith, RelativePanelVerticalContraint.CenterWith, txtNumberOne);
+			btnPlus = Core.BaitAndSwitch.Create<IButton>();
+			btnPlus.Text = "+";
+			btnPlus.CssClass = "btnContainer";
+			btnPlus.Width = 20;
+			  btnPlus.Click += btnPlus_Click;
+			relativePanel.Add(btnPlus, RelativePanelHorizontalContraint.RightWith, RelativePanelVerticalContraint.CenterWith, txtNumberOne);
 
-            btnSubtraction = Core.BaitAndSwitch.Create<IButton>();
-            btnSubtraction.Text = "-";
-            btnSubtraction.CssClass = "btnContainer";
-            btnSubtraction.Width = 20;
-            btnSubtraction.Click += btnSubtraction_Click;
-            relativePanel.Add(btnSubtraction, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnPlus);
-
-
-            btnMultiply = Core.BaitAndSwitch.Create<IButton>();
-            btnMultiply.Text = "x";
-            btnMultiply.CssClass = "btnContainer";
-            btnMultiply.Width = 20;
-            btnMultiply.Click  += btnMultiply_Click;
-            relativePanel.Add(btnMultiply, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnSubtraction);
-
-            btnDivide = Core.BaitAndSwitch.Create<IButton>();
-            btnDivide.Text = "/";
-            btnDivide.CssClass = "btnContainer";
-            btnDivide.Width = 20;
-            btnDivide.Click += btnDivide_Click;
-            relativePanel.Add(btnDivide, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnMultiply);
-
-            btnClose = Core.BaitAndSwitch.Create<IButton>();
-            btnClose.Text = "Close";
-            btnClose.CssClass = "btnContainer";
-            btnClose.Width = 50;
-            btnClose.Click += btnClose_Click;
-            relativePanel.Add(btnClose, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtNumberTwo);
-
-            btnClean = Core.BaitAndSwitch.Create<IButton>();
-            btnClean.Text = "Clean";
-            btnClean.CssClass = "btnContainer";
-            btnClean.Width = 50;
-            btnClean.Click += btnClean_Click;
-            relativePanel.Add(btnClean, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnClose);
-
-            // Establishes the content and title of the page.
-            Page.Title = "Container Test";
-            Page.Content = relativePanel;
+			btnSubtraction = Core.BaitAndSwitch.Create<IButton>();
+			btnSubtraction.Text = "-";
+			btnSubtraction.CssClass = "btnContainer";
+			btnSubtraction.Width = 20;
+			btnSubtraction.Click += btnSubtraction_Click;
+			relativePanel.Add(btnSubtraction, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnPlus);
 
 
+			btnMultiply = Core.BaitAndSwitch.Create<IButton>();
+			btnMultiply.Text = "x";
+			btnMultiply.CssClass = "btnContainer";
+			btnMultiply.Width = 20;
+			btnMultiply.Click  += btnMultiply_Click;
+			relativePanel.Add(btnMultiply, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnSubtraction);
 
-            CSS.Style style = new CSS.Style();
-            style.Parse(
-            @"
+			btnDivide = Core.BaitAndSwitch.Create<IButton>();
+			btnDivide.Text = "/";
+			btnDivide.CssClass = "btnContainer";
+			btnDivide.Width = 20;
+			btnDivide.Click += btnDivide_Click;
+			relativePanel.Add(btnDivide, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnMultiply);
 
-             
-             #lblResult {
-             font-size:14px;
-            color: black;
-            background-color: #75CA38;
-            }
+			btnClose = Core.BaitAndSwitch.Create<IButton>();
+			btnClose.Text = "Close";
+			btnClose.CssClass = "btnContainer";
+			btnClose.Width = 50;
+			btnClose.Click += btnClose_Click;
+			relativePanel.Add(btnClose, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, txtNumberTwo);
 
-            .container {
-            text-align: justify;
-            }
+			btnClean = Core.BaitAndSwitch.Create<IButton>();
+			btnClean.Text = "Clean";
+			btnClean.CssClass = "btnContainer";
+			btnClean.Width = 50;
+			btnClean.Click += btnClean_Click;
+			relativePanel.Add(btnClean, RelativePanelHorizontalContraint.CenterWith, RelativePanelVerticalContraint.BelowOf, btnClose);
 
-            .btnContainer{
-               font-align: center;
-            }
-
-            ");
-
-            style.Apply(Page);
+			// Establishes the content and title of the page.
+			Page.Title = "Container Test";
+			Page.Content = relativePanel;
 
 
-        }
-        private void btnPlus_Click(object sender, EventArgs e)
-        {
-            double res = double.Parse(txtNumberOne.Value) + double.Parse(txtNumberTwo.Value);
-            lblResult.Text = res.ToString();
-        }
 
-        private void btnSubtraction_Click(object sender, EventArgs e)
-        {
-            double res = double.Parse(txtNumberOne.Value) - double.Parse(txtNumberTwo.Value);
-            lblResult.Text = res.ToString();
-        }
+			CSS.Style style = new CSS.Style();
+			style.Parse(
+			@"
 
-        private void btnMultiply_Click(object sender, EventArgs e)
-        {
-            double res = double.Parse(txtNumberOne.Value) * double.Parse(txtNumberTwo.Value);
-            lblResult.Text = res.ToString();
-        }
+			 
+			 #lblResult {
+			 font-size:14px;
+			color: black;
+			background-color: #75CA38;
+			}
 
-        private void btnDivide_Click(object sender, EventArgs e)
-        {
-            double res = double.Parse(txtNumberOne.Value) / double.Parse(txtNumberTwo.Value);
-            lblResult.Text = res.ToString();
-        }
+			.container {
+			text-align: justify;
+			}
 
-        /// <summary>
-        /// It is the button click event cmd Color, what it does is change the background color of the stack.
-        /// <para xml:lang="es">
-        /// Es el evento clic del boton cmdColor, lo que hace es cambiar el color de fondo del stack.
-        /// </para>
-        /// </summary>
-        /// <returns>The set color click.</returns>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        /// 
+			.btnContainer{
+			   font-align: center;
+			}
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Finish();
-        }
+			");
 
-        private void btnClean_Click(object sender, EventArgs e)
-        {
-            string clean = " ";
-            lblResult.Text = clean;
-            txtNumberOne.Value = clean;
-            txtNumberTwo.Value = clean;
-        }
+			style.Apply(Page);
 
-    }
+
+		}
+		private void btnPlus_Click(object sender, EventArgs e)
+		{
+			double res = double.Parse(txtNumberOne.Value) + double.Parse(txtNumberTwo.Value);
+			lblResult.Text = res.ToString();
+		}
+
+		private void btnSubtraction_Click(object sender, EventArgs e)
+		{
+			double res = double.Parse(txtNumberOne.Value) - double.Parse(txtNumberTwo.Value);
+			lblResult.Text = res.ToString();
+		}
+
+		private void btnMultiply_Click(object sender, EventArgs e)
+		{
+			double res = double.Parse(txtNumberOne.Value) * double.Parse(txtNumberTwo.Value);
+			lblResult.Text = res.ToString();
+		}
+
+		private void btnDivide_Click(object sender, EventArgs e)
+		{
+			double res = double.Parse(txtNumberOne.Value) / double.Parse(txtNumberTwo.Value);
+			lblResult.Text = res.ToString();
+		}
+
+		/// <summary>
+		/// It is the button click event cmd Color, what it does is change the background color of the stack.
+		/// <para xml:lang="es">
+		/// Es el evento clic del boton cmdColor, lo que hace es cambiar el color de fondo del stack.
+		/// </para>
+		/// </summary>
+		/// <returns>The set color click.</returns>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		/// 
+
+		private void btnClose_Click(object sender, EventArgs e)
+		{
+			this.Finish();
+		}
+
+		private void btnClean_Click(object sender, EventArgs e)
+		{
+			string clean = " ";
+			lblResult.Text = clean;
+			txtNumberOne.Value = clean;
+			txtNumberTwo.Value = clean;
+		}
+
+	}
 }

@@ -2,7 +2,7 @@
 using System;
 using static OKHOSTING.Core.StringExtensions;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// Field for binary values (byte[])

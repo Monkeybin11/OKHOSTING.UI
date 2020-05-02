@@ -1,7 +1,7 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// Field for string values

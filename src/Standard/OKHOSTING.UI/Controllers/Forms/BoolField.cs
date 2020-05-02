@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// A field for boolean values

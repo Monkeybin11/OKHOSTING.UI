@@ -297,7 +297,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		}
 
 		/// <summary>
-		///     Gets the screen coordinates from top left corner.
+		///	 Gets the screen coordinates from top left corner.
 		/// </summary>
 		/// <returns>The screen coordinates.</returns>
 		public static (double X, double Y) GetScreenCoordinates(this global::Xamarin.Forms.VisualElement view)

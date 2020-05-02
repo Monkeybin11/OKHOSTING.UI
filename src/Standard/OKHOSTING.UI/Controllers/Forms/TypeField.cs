@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// Field for selecting a DataType

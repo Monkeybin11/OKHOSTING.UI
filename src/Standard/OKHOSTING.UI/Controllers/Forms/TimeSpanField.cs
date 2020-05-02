@@ -3,7 +3,7 @@ using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Collections.Generic;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// A field for selecting a date

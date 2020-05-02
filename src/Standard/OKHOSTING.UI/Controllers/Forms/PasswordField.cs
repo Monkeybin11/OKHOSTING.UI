@@ -1,15 +1,17 @@
-﻿using OKHOSTING.UI.Controls;
-using System;
+﻿using System;
+using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
-	/// A read-only field
-	/// <para xml:lang="es">Un campo de solo lectura.</para>
+	/// Field for string values
+	/// <para xml:lang="es">
+	/// Un campo para valores de cadena.
+	/// </para>
 	/// </summary>
-	public class ReadOnlyField : FormField
+	public class PasswordField : FormField
 	{
-		public ReadOnlyField(Form form) : base(form)
+		public PasswordField(Form form) : base(form)
 		{
 		}
 
@@ -19,11 +21,11 @@ namespace OKHOSTING.UI.Forms
 		/// Obtiene o establece el valor del control.
 		/// </para>
 		/// </summary>
-		public new ILabel ValueControl
+		public new IPasswordTextBox ValueControl
 		{
 			get
 			{
-				return (ILabel) base.ValueControl;
+				return (IPasswordTextBox) base.ValueControl;
 			}
 			protected set
 			{
@@ -37,23 +39,25 @@ namespace OKHOSTING.UI.Forms
 		/// Obtiene o establece el valor del campo.
 		/// </para>
 		/// </summary>
+		/// <value>The value.</value>
 		public override object Value
 		{
 			get
 			{
-				return ValueControl.Text;
+				return ValueControl.Value;
 			}
 			set
 			{
-				ValueControl.Text = value?.ToString();
+				ValueControl.Value = (string) value;
 			}
 		}
 
 		/// <summary>
 		/// Gets the type of the value.
-		/// <para xml:lang="es">Obtiene el tipo del valor.</para>
+		/// <para xml:lang="es">
+		/// Obtiene el tipo del valor.
+		/// </para>
 		/// </summary>
-		/// <value>The type of the value.</value>
 		public override Type ValueType
 		{
 			get
@@ -61,14 +65,14 @@ namespace OKHOSTING.UI.Forms
 				return typeof(string);
 			}
 		}
-
+		
 		/// <summary>
-		/// Creates a read only value cell
-		/// <para xml:lang="es">Crea una celda con valor de solo lectura.</para>
+		/// Creates the controls for displaying the field
+		/// <para xml:lang="es">Crea los controles para visualizar el campo.</para>
 		/// </summary>
 		protected override void CreateValueControl()
 		{
-			ValueControl = Core.BaitAndSwitch.Create<ILabel>();
+			ValueControl = Core.BaitAndSwitch.Create<IPasswordTextBox>();
 		}
 	}
 }

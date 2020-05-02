@@ -2,7 +2,7 @@
 
 namespace OKHOSTING.UI.Media
 {
-	public interface IVideoPlayer : Controls.IControl
+	public interface IVideoPlayer : IControl
 	{
 		string Source { get; set; }
 		void Play();

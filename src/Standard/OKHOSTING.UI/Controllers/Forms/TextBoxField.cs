@@ -1,6 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// Base class for all fields that uses a single TextBox as ValueControl

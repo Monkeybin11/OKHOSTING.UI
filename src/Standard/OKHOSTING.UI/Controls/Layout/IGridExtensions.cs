@@ -83,36 +83,34 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// Change column content especific to other especific column but verify if the column receiver contain it
 		/// </summary>
 		/// <param name="grid"></param>
-		/// <param name="columnSender"></param>
+		/// <param name="position"></param>
 		/// <param name="columnReceiver"></param>
-		public static void InsertColumn(this IGrid grid, int columnSender, int columnReceiver)
+		public static void InsertColumn(this IGrid grid, int position)
 		{
 			int columns = grid.ColumnCount;
 			grid.ColumnCount++;
 
-			for (int column = columns; column > columnReceiver; column--)
+			for (int column = columns; column > position; column--)
 			{
 				MoveColumnContent(grid, column - 1, column);
 			}
-			MoveColumnContent(grid, columnSender, columnReceiver);
 		}
 
 		/// <summary>
 		/// Change row content especific to other especific row but verify if the row receiver contain it
 		/// </summary>
 		/// <param name="grid"></param>
-		/// <param name="rowSender"></param>
+		/// <param name="position"></param>
 		/// <param name="rowReceiver"></param>
-		public static void InsertRow(this IGrid grid, int rowSender, int rowReceiver)
+		public static void InsertRow(this IGrid grid, int position)
 		{
 			int rows = grid.RowCount;
 			grid.RowCount++;
 
-			for (int row = rows; row > rowReceiver; row--)
+			for (int row = rows; row > position; row--)
 			{
 				MoveRowContent(grid, row - 1, row);
 			}
-			MoveRowContent(grid, rowSender, rowReceiver);
 		}
 
 		/// <summary>

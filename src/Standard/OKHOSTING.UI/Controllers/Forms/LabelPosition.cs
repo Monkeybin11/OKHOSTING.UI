@@ -1,4 +1,4 @@
-﻿namespace OKHOSTING.UI.Forms
+﻿namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// Determines wether the labels will be shown at the right or the top of each value.

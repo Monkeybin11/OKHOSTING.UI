@@ -10,16 +10,16 @@ namespace OKHOSTING.UI
 		/// <summary>
 		/// Raised when a control has been dragged and dropped
 		/// </summary>
-		event EventHandler<Controls.IControl> ControlDropped;
+		event EventHandler<IControl> ControlDropped;
 
 		/// <summary>
 		/// Allows a control to be dragged
 		/// </summary>
-		void AllowDrag(Controls.IControl control);
+		void AllowDrag(IControl control);
 
 		/// <summary>
 		/// Allows a control to receive controls that have been dragged into it
 		/// </summary>
-		void AllowDrop(Controls.IControl control);
+		void AllowDrop(IControl control);
 	}
 }

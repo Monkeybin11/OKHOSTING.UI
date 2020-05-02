@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Reflection;
-using System.Linq;
 using System.Xml.Serialization;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// A field for Xml values.
@@ -11,7 +9,7 @@ namespace OKHOSTING.UI.Forms
 	/// Un campo para valores Xml.
 	/// </para>
 	/// </summary>
-	public class XmlSerializableField : StringField
+	public class JsonField : StringField
 	{
 		/// <summary>
 		/// The type of the xml serializable.
@@ -19,7 +17,7 @@ namespace OKHOSTING.UI.Forms
 		/// El tipo del xml serializable.
 		/// </para>
 		/// </summary>
-		public readonly Type XmlSerializableType;
+		public readonly Type SerializableType;
 
 		/// <summary>
 		/// Initializes a new instance of the XmlSerializableField class.
@@ -28,19 +26,19 @@ namespace OKHOSTING.UI.Forms
 		/// </para>
 		/// </summary>
 		/// <param name="xmlSerializableType">Xml serializable type.</param>
-		public XmlSerializableField(Form form, Type xmlSerializableType) : base(form)
+		public JsonField(Form form, Type serializableType) : base(form)
 		{
-			if (xmlSerializableType == null)
+			if (form == null)
 			{
-				throw new ArgumentNullException("xmlSerializableType");
+				throw new ArgumentNullException(nameof(form));
 			}
 
-			if (!xmlSerializableType.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IXmlSerializable)))
+			if (serializableType == null)
 			{
-				throw new ArgumentOutOfRangeException("xmlSerializableType", "Type does not implement IXmlSerializable interface");
+				throw new ArgumentNullException(nameof(serializableType));
 			}
 
-			XmlSerializableType = xmlSerializableType;
+			SerializableType = serializableType;
 		}
 
 		/// <summary>
@@ -53,11 +51,11 @@ namespace OKHOSTING.UI.Forms
 		{
 			get
 			{
-				return Data.Convert.FromXml(ValueControl.Value);
+				return Newtonsoft.Json.JsonConvert.DeserializeObject(ValueControl.Value, SerializableType);
 			}
 			set
 			{
-				ValueControl.Value = Data.Convert.ToXml((IXmlSerializable) value);
+				ValueControl.Value = Newtonsoft.Json.JsonConvert.SerializeObject(value);
 			}
 		}
 
@@ -71,7 +69,7 @@ namespace OKHOSTING.UI.Forms
 		{
 			get
 			{
-				return XmlSerializableType;
+				return SerializableType;
 			}
 		}
 

@@ -3,7 +3,7 @@ using OKHOSTING.Data.Validation;
 using OKHOSTING.UI.Controls;
 using System;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// An item that will be displayed in the dataform

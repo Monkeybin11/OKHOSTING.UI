@@ -39,7 +39,7 @@ namespace OKHOSTING.UI.Test.Animation
 
 			// Establishes the content and title of the page.
 			Page.Title = "Animation simple test";
-            Page.Content = stack;
+			Page.Content = stack;
 
 			animation.Start(lblColor, Page);
 		}

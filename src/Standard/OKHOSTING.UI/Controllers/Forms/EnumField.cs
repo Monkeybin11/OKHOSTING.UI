@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OKHOSTING.UI.Forms
+namespace OKHOSTING.UI.Controllers.Forms
 {
 	/// <summary>
 	/// Field for enum values

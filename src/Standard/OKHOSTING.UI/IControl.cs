@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace OKHOSTING.UI.Controls
+namespace OKHOSTING.UI
 {
 	/// <summary>
 	/// Base interface for all user controls

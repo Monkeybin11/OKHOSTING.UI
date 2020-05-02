@@ -18,7 +18,7 @@ namespace OKHOSTING.UI.Test.Animation
 			
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one feature to test";
-            Page.Content = stack;
-        }
-    }
+			Page.Content = stack;
+		}
+	}
 }

@@ -15,13 +15,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Test.UWP
 {
-    public sealed partial class MainPage
-    {
-        public MainPage()
-        {
-            this.InitializeComponent();
+	public sealed partial class MainPage
+	{
+		public MainPage()
+		{
+			this.InitializeComponent();
 
-            LoadApplication(new OKHOSTING.UI.Xamarin.Forms.Test.App());
-        }
-    }
+			LoadApplication(new OKHOSTING.UI.Xamarin.Forms.Test.App());
+		}
+	}
 }

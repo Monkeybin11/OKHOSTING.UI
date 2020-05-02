@@ -155,7 +155,7 @@ namespace OKHOSTING.UI
 			}
 
 			//finish controllers and pages ised in UserControls
-			foreach (Controls.IControl children in GetAllChildren(state.Content))
+			foreach (IControl children in GetAllChildren(state.Content))
 			{
 				//found a user control
 				if (children is IPage)
@@ -214,7 +214,7 @@ namespace OKHOSTING.UI
 		/// <summary>
 		/// Gets a list of controls and subcontrols in a recursive way, including the control itself
 		/// </summary>
-		public static IEnumerable<Controls.IControl> GetParentAndAllChildren(Controls.IControl control)
+		public static IEnumerable<IControl> GetParentAndAllChildren(IControl control)
 		{
 			if (control == null)
 			{
@@ -232,7 +232,7 @@ namespace OKHOSTING.UI
 		/// <summary>
 		/// Gets a list of controls and subcontrols in a recursive way
 		/// </summary>
-		public static IEnumerable<Controls.IControl> GetAllChildren(Controls.IControl control)
+		public static IEnumerable<IControl> GetAllChildren(IControl control)
 		{
 			if (control == null)
 			{
@@ -273,7 +273,7 @@ namespace OKHOSTING.UI
 		/// <summary>
 		/// Gets a list of controls and subcontrols in a recursive way
 		/// </summary>
-		public static IEnumerable<Controls.IControl> GetAllChildren(IEnumerable<Controls.IControl> controls)
+		public static IEnumerable<IControl> GetAllChildren(IEnumerable<IControl> controls)
 		{
 			if (controls == null)
 			{

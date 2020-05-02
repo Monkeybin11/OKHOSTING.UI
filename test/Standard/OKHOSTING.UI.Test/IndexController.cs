@@ -49,7 +49,7 @@ namespace OKHOSTING.UI.Test
 
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control/feature to test";
-            Page.Content = stack;
-        }
-    }
+			Page.Content = stack;
+		}
+	}
 }
