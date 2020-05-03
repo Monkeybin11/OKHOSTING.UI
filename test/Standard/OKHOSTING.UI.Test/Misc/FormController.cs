@@ -2,7 +2,7 @@
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System.IO;
-using OKHOSTING.UI.Forms;
+using OKHOSTING.UI.Controllers.Forms;
 
 namespace OKHOSTING.UI.Test.Misc
 {
