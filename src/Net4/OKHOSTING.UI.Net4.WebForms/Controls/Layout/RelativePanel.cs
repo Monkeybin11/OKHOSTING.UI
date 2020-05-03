@@ -83,8 +83,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			string atHorizontalAnchor = "center";
 			string atVerticalAnchor = "center";
 
-			//the reference control's id
-			string of = ((NativeControl)referenceControl).ClientID;
+			Page page = Platform.CurrentPage;
+
+			if (string.IsNullOrWhiteSpace(control.Name))
+			{
+				control.Name = control.GetType().Name + "_" + page.ControlCounter++;
+			}
+
+			if (string.IsNullOrWhiteSpace(referenceControl.Name))
+			{
+				referenceControl.Name = referenceControl.GetType().Name + "_" + page.ControlCounter++;
+			}
 
 			//horizontal constraint
 
@@ -154,7 +163,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 					{{
 						my: '{1} {2}',
 						at: '{3} {4}',
-						of: '#{5}'
+						of: '#{5}',
+						collision: 'none'
 					}}
 				);", 
 				((NativeControl) control).ClientID, myHorizontalAnchor, myVerticalAnchor, atHorizontalAnchor, atVerticalAnchor, ((NativeControl) referenceControl).ClientID
@@ -166,6 +176,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		protected override void OnPreRender(EventArgs e)
 		{
 			base.OnPreRender(e);
+
+			if (ClientScripts.Count == 0)
+			{
+				return;
+			}
 
 			string positionJS = string.Format
 			(
@@ -470,6 +485,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			get; set;
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		/// <summary>
@@ -663,7 +689,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
 				if (Contains(item))
 				{
-					ContainerPanel.Controls.Remove((NativeControl)item);
+					ContainerPanel.Controls.Remove((NativeControl) item);
+					ContainerPanel.ClientScripts.Remove(item.Name);
+
 					return true;
 				}
 				else

@@ -13,10 +13,12 @@
 		},
 		contentType: "application/json; charset=utf-8",
 		dataType: "json"
-	}).success(function (data) {
-		if (data.Refresh) {
+	}).success(function (data)
+	{
+		if (data.Refresh)
+		{
 			window.location = window.location;
-		};
+		}
 	}).error(function (xhr) {
 		console.log("Problem to retrieve browser size");
 	});

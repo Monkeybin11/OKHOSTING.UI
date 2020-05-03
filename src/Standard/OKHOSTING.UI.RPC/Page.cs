@@ -104,9 +104,9 @@ namespace OKHOSTING.UI.RPC
 			}
 		}
 
-		public virtual void CopyTo(IPage page)
+		public void InvokeOnMainThread(Action action)
 		{
-			Invoke(nameof(CopyTo), new[] { page });
+			Invoke(nameof(InvokeOnMainThread), action);
 		}
 	}
 }

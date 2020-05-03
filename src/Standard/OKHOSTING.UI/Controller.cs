@@ -27,23 +27,16 @@ namespace OKHOSTING.UI
 		}
 
 		/// <summary>
-		/// Private page field
+		/// True if the controller has already started (even if it has already finished as well)
 		/// </summary>
-		protected IPage _Page;
+		public bool IsStarted { get; protected set; }
 
 		/// <summary>
-		/// Raised when the page is resized
+		/// True if the controller has already finished
 		/// </summary>
-		protected void Page_Resized(object sender, EventArgs e)
-		{
-			Refresh();
-		}
+		public bool IsFinished { get; protected set; }
 
-		/// <summary>
-		/// Will be executed when this controller "executes" at first
-		/// <para xml:lang="es">Se produce cuando este controlador "ejecuta" un primer metodo.</para>
-		/// </summary>
-		internal protected abstract void OnStart();
+		public event EventHandler Finished;
 
 		/// <summary>
 		/// Gets the Page that is currently being displayed to the user
@@ -51,20 +44,18 @@ namespace OKHOSTING.UI
 		/// </summary>
 		public virtual IPage Page
 		{
-			get
-			{
-				return _Page;
-			}
-			set
-			{
-				_Page = value;
+			get;
+			set;
+		}
 
-				if (_Page != null)
-				{
-					_Page.Resized -= Page_Resized;
-					_Page.Resized += Page_Resized;
-				}
-			}
+		/// <summary>
+		/// Starts the execution of this controller on the page
+		/// <para xml:lang="es">Arranca la ejecucion de este controlador en la pagina</para>
+		/// </summary>
+		public virtual void Start()
+		{
+			Page.App.StartController(this);
+			IsStarted = true;
 		}
 
 		/// <summary>
@@ -77,28 +68,31 @@ namespace OKHOSTING.UI
 		{
 		}
 
+		public virtual void Dispose()
+		{
+			if (!IsFinished)
+			{
+				Finish();
+			}
+		}
+
 		/// <summary>
 		/// Finishes the execution of this controller
 		/// <para xml:lang="es">
 		/// Finaliza la ejecucion de este controlador
 		/// </para>
 		/// </summary>
-		protected virtual void Finish()
+		public virtual void Finish()
 		{
 			Page.App.FinishController(Page);
+			IsFinished = true;
+			Finished?.Invoke(this, new EventArgs());
 		}
 
 		/// <summary>
-		/// Starts the execution of this controller on the page
-		/// <para xml:lang="es">Arranca la ejecucion de este controlador en la pagina</para>
+		/// Will be executed when this controller "executes" at first
+		/// <para xml:lang="es">Se produce cuando este controlador "ejecuta" un primer metodo.</para>
 		/// </summary>
-		public virtual void Start()
-		{
-			Page.App.StartController(this);
-		}
-
-		public virtual void Dispose()
-		{
-		}
+		internal protected abstract void OnStart();
 	}
 }

@@ -247,7 +247,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get
 			{
 				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("vertical-alignment")).SingleOrDefault();
-
+				
 				//if not vertical alignment is provided, the alignment back to the top.
 				if (string.IsNullOrWhiteSpace(cssClass))
 				{
@@ -294,6 +294,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		object IControl.Tag
 		{
 			get; set;
+		}
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
 		}
 
 		#endregion
@@ -575,12 +586,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		bool IInputControl.HandlePostBack()
 		{
-			if (Page.Request.Form["__EVENTTARGET"] != ID)
+			if (Page?.Request.Form["__EVENTTARGET"] != ID)
 			{
 				return false;
 			}
 
-			var arg = Page.Request.Form["__EVENTARGUMENT"];
+			var arg = Page?.Request.Form["__EVENTARGUMENT"];
 
 			if (!int.TryParse(arg, out int i))
 			{

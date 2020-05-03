@@ -11,8 +11,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 		public void ProcessRequest(HttpContext context)
 		{
 			context.Response.ContentType = "application/json";
-			App app = (App) HttpContext.Current.Session["App"];
-			Page page = (Page) HttpContext.Current.Session["Page"];
 
 			//get provided page size
 			var term = context.Request["term"];
@@ -23,7 +21,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 
 			//search on the main Page only (not on user controls)
 
-			Controls.Autocomplete autocomplete = (Controls.Autocomplete) page.FindControl(controlId);
+			Controls.Autocomplete autocomplete = (Controls.Autocomplete) Platform.CurrentPage.FindControl(controlId);
 			var e = ((UI.Controls.IAutocomplete) autocomplete).OnSearching(term);
 			context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(e.SearchResult));
 		}

@@ -31,6 +31,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// <param name="value">The value to set. (The element to position this element above.)</param>
 		public static void SetAbove(DependencyObject obj, object value)
 		{
+			obj.ClearValue(AlignBottomWithProperty);
 			obj.SetValue(AboveProperty, value);
 		}
 
@@ -127,6 +128,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		public static void SetAlignHorizontalCenterWithPanel(DependencyObject obj, bool value)
 		{
+			obj.ClearValue(AlignHorizontalCenterWithProperty);
 			obj.SetValue(AlignHorizontalCenterWithPanelProperty, value);
 		}
 
@@ -374,6 +376,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		public static void SetAlignVerticalCenterWithPanel(DependencyObject obj, bool value)
 		{
+			obj.ClearValue(AlignVerticalCenterWithProperty);
 			obj.SetValue(AlignVerticalCenterWithPanelProperty, value);
 		}
 
@@ -429,6 +432,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// <param name="value">The value to set. (The element to position this element below.)</param>
 		public static void SetBelow(DependencyObject obj, object value)
 		{
+			obj.ClearValue(AlignTopWithProperty);
 			obj.SetValue(BelowProperty, value);
 		}
 
@@ -458,6 +462,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// <param name="value">The value to set. (The element to position this element to the left of.)</param>
 		public static void SetLeftOf(DependencyObject obj, object value)
 		{
+			obj.ClearValue(AlignRightWithProperty);
 			obj.SetValue(LeftOfProperty, value);
 		}
 
@@ -487,6 +492,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// <param name="value">The value to set. (The element to position this element to the right of.)</param>
 		public static void SetRightOf(DependencyObject obj, object value)
 		{
+			obj.ClearValue(AlignLeftWithProperty);
 			obj.SetValue(RightOfProperty, value);
 		}
 

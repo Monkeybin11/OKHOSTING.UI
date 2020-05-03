@@ -32,6 +32,57 @@ namespace OKHOSTING.UI
 			}
 		}
 
+		IPage _MainPage;
+
+		/// <summary>
+		/// The main page of the app. This page will be used if no other page is specified
+		/// when starting a controller
+		/// </summary>
+		public IPage MainPage
+		{
+			get
+			{
+				return _MainPage;
+			}
+			set
+			{
+				_MainPage = value;
+
+				if (_MainPage != null)
+				{
+					if (!State.ContainsKey(_MainPage))
+					{
+						State.Add(_MainPage, new Stack<PageState>());
+					}
+
+					_MainPage.App = this;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Exits and closes the current app. Use this to dispose objects and release memory
+		/// <para xml:lang="es">
+		/// Se sale y cierra la aplicacion actual. Use esto para desechar objetos y liberar la memoria.
+		/// </para>
+		/// </summary>
+		public virtual void Finish()
+		{
+			foreach (IPage page in State.Keys)
+			{
+				while (State[page].Count > 0)
+				{
+					FinishController(page);
+				}
+			}
+		}
+
+		public virtual void Dispose()
+		{
+			Finish();
+			State.Clear();
+		}
+
 		/// <summary>
 		/// Start the contoller specified
 		/// <para xml:lang="es">Inicializa el control especificado.</para>
@@ -41,7 +92,7 @@ namespace OKHOSTING.UI
 		/// El control que se va a inicializar
 		/// </para>
 		/// </param>
-		public virtual void StartController(Controller controller)
+		internal protected virtual void StartController(Controller controller)
 		{
 			if (controller.Page == null)
 			{
@@ -85,7 +136,7 @@ namespace OKHOSTING.UI
 		/// Elimina el controlador actual de la pila de la pagina, y recrea el estado del controlador anterior, si lo hay
 		/// </para>
 		/// </summary>
-		public virtual void FinishController(IPage page)
+		internal protected virtual void FinishController(IPage page)
 		{
 			PageState state = this[page];
 
@@ -104,7 +155,7 @@ namespace OKHOSTING.UI
 			}
 
 			//finish controllers and pages ised in UserControls
-			foreach (Controls.IControl children in GetAllChildren(state.Content))
+			foreach (IControl children in GetAllChildren(state.Content))
 			{
 				//found a user control
 				if (children is IPage)
@@ -136,44 +187,6 @@ namespace OKHOSTING.UI
 			}
 		}
 
-		/// <summary>
-		/// Exits and closes the current app. Use this to dispose objects and release memory
-		/// <para xml:lang="es">
-		/// Se sale y cierra la aplicacion actual. Use esto para desechar objetos y liberar la memoria.
-		/// </para>
-		/// </summary>
-		public virtual void Finish()
-		{
-			foreach (IPage page in State.Keys)
-			{
-				while (State[page].Count > 0)
-				{
-					FinishController(page);
-				}
-			}
-		}
-
-		public virtual void Dispose()
-		{
-			Finish();
-			State.Clear();
-		}
-
-		public IPage MainPage
-		{
-			get
-			{
-				return State.Keys.Where(p => !(p is Controls.IUserControl)).FirstOrDefault();
-			}
-			set
-			{
-				if (!State.ContainsKey(value))
-				{
-					State.Add(value, new Stack<PageState>());
-				}
-			}
-		}
-
 		#region Events
 
 		/// <summary>
@@ -195,17 +208,35 @@ namespace OKHOSTING.UI
 		/// Raised after a controller as finished
 		/// </summary>
 		public event EventHandler<Controller> ControllerFinished;
-		
+
 		#endregion
+
+		/// <summary>
+		/// Gets a list of controls and subcontrols in a recursive way, including the control itself
+		/// </summary>
+		public static IEnumerable<IControl> GetParentAndAllChildren(IControl control)
+		{
+			if (control == null)
+			{
+				yield break;
+			}
+
+			yield return control;
+
+			foreach (var children in GetAllChildren(control))
+			{
+				yield return children;
+			}
+		}
 
 		/// <summary>
 		/// Gets a list of controls and subcontrols in a recursive way
 		/// </summary>
-		public static IEnumerable<Controls.IControl> GetAllChildren(Controls.IControl control)
+		public static IEnumerable<IControl> GetAllChildren(IControl control)
 		{
 			if (control == null)
 			{
-				throw new ArgumentNullException(nameof(control));
+				yield break;
 			}
 
 			if (control is Controls.IUserControl)
@@ -235,6 +266,25 @@ namespace OKHOSTING.UI
 				foreach (var subChildren in GetAllChildren(children))
 				{
 					yield return subChildren;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets a list of controls and subcontrols in a recursive way
+		/// </summary>
+		public static IEnumerable<IControl> GetAllChildren(IEnumerable<IControl> controls)
+		{
+			if (controls == null)
+			{
+				yield break;
+			}
+
+			foreach (var control in controls)
+			{
+				foreach (var children in GetAllChildren(control))
+				{
+					yield return children;
 				}
 			}
 		}

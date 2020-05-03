@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using OKHOSTING.UI.Controls;
@@ -8,33 +9,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Grid : System.Windows.Forms.TableLayoutPanel, IGrid
 	{
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		public Grid()
 		{
-			Platform.DrawBorders(this, pevent);
-			base.OnPaint(pevent);
-
-			//AutoScroll = true;
-			AutoSize = true;
-			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			//| System.Windows.Forms.AnchorStyles.Left)
-			//| System.Windows.Forms.AnchorStyles.Right)));
-		}
-
-		IControl IGrid.GetContent(int row, int column)
-		{
-			return base.GetControlFromPosition(column, row) as IControl;
-		}
-
-		void IGrid.SetContent(int row, int column, IControl content)
-		{
-			var currentControl = ((IGrid) this).GetContent(row, column);
-
-			if (currentControl != null)
-			{
-				base.Controls.Remove((System.Windows.Forms.Control) currentControl);
-			}
-
-			base.Controls.Add((System.Windows.Forms.Control) content, column, row);
 		}
 
 		Thickness IGrid.CellMargin
@@ -45,14 +21,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		Thickness IGrid.CellPadding
 		{
-			get
-			{
-				return Platform.Parse(base.Padding);
-			}
-			set
-			{
-				base.Padding = Platform.Parse(value);
-			}
+			get;
+			set;
 		}
 
 		int IGrid.ColumnCount
@@ -63,6 +33,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 			set
 			{
+				for (int column = base.ColumnCount; column < value; column++)
+				{
+					base.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+				}
+
 				//remove all controls from columns to be removed
 				for (int column = base.ColumnCount - 1; column >= value; column--)
 				{
@@ -72,7 +47,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 						base.Controls.Remove(control);
 					}
 
-					//base.ColumnStyles.RemoveAt(column);
+					base.ColumnStyles.RemoveAt(column);
 				}
 
 				base.ColumnCount = value;
@@ -87,6 +62,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 			set
 			{
+				for (int row = base.RowCount; row < value; row++)
+				{ 
+					base.RowStyles.Add(new System.Windows.Forms.RowStyle());
+				}
+
 				//remove all controls from rows to be removed
 				for (int row = base.RowCount - 1; row >= value; row--)
 				{
@@ -96,7 +76,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 						base.Controls.Remove(control);
 					}
 
-					//base.RowStyles.RemoveAt(row);
+					base.RowStyles.RemoveAt(row);
 				}
 
 				base.RowCount = value;
@@ -104,77 +84,55 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Removes a specific row and moves up all rows below
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
 		/// </summary>
-		/// <param name="rowIndex">Zero based index of he row to be deleted</param>
-		public void RemoveRow(int rowIndex)
+		bool IGrid.ShowGridLines
 		{
-			if (rowIndex >= base.RowCount)
+			get
 			{
-				return;
+				return CellBorderStyle == System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
 			}
-
-			//delete all controls of row that we want to delete
-			for (int column = 0; column < base.ColumnCount; column++)
+			set
 			{
-				var control = base.GetControlFromPosition(column, rowIndex);
-				base.Controls.Remove(control);
-			}
-
-			//move up row controls that comes after row we want to remove
-			for (int row = rowIndex + 1; row < base.RowCount; row++)
-			{
-				for (int column = 0; column < base.ColumnCount; column++)
+				if (value)
 				{
-					var control = base.GetControlFromPosition(column, row);
-
-					if (control != null)
-					{
-						base.SetRow(control, row - 1);
-					}
+					CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+				}
+				else
+				{
+					CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
 				}
 			}
-
-			//remove last row
-			//base.RowStyles.RemoveAt(base.RowCount - 1);
-			base.RowCount--;
 		}
 
-		/// <summary>
-		/// Removes a specific column and moves left all columns on right
-		/// </summary>
-		/// <param name="columnIndex">Zero based index of he column to be deleted</param>
-		public void RemoveColumn(int columnIndex)
+		IControl IGrid.GetContent(int row, int column)
 		{
-			if (columnIndex >= base.ColumnCount)
+			return base.GetControlFromPosition(column, row) as IControl;
+		}
+
+		void IGrid.SetContent(int row, int column, IControl content)
+		{
+			if (row > RowCount)
 			{
-				return;
+				throw new ArgumentOutOfRangeException(nameof(row));
 			}
 
-			//delete all controls of column that we want to delete
-			for (int row = 0; row < base.RowCount; row++)
+			if (column > ColumnCount)
 			{
-				var control = base.GetControlFromPosition(columnIndex, row);
-				base.Controls.Remove(control);
+				throw new ArgumentOutOfRangeException(nameof(column));
 			}
 
-			//move left column controls that comes after the column we want to remove
-			for (int column = columnIndex + 1; column < base.ColumnCount; column++)
-			{
-				for (int row = 0; row < base.RowCount; row++)
-				{
-					var control = base.GetControlFromPosition(column, row);
+			var currentControl = ((IGrid) this).GetContent(row, column);
 
-					if (control != null)
-					{
-						base.SetColumn(control, column - 1);
-					}
-				}
+			if (currentControl != null)
+			{
+				base.Controls.Remove((System.Windows.Forms.Control) currentControl);
 			}
 
-			//remove last column
-			//base.ColumnStyles.RemoveAt(base.ColumnCount - 1);
-			base.ColumnCount--;
+			if (content != null)
+			{
+				base.Controls.Add((System.Windows.Forms.Control)content, column, row);
+			}
 		}
 
 		void IGrid.SetColumnSpan(int columnSpan, IControl content)
@@ -225,6 +183,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
 		#region IControl
 
 		double? IControl.Width
@@ -237,7 +201,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			{
 				if (value.HasValue)
 				{
-					base.Width = (int)value;
+					base.Width = (int) value;
 				}
 			}
 		}
@@ -252,17 +216,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			{
 				if (value.HasValue)
 				{
-					base.Height = (int)value;
+					base.Height = (int) value;
 				}
 			}
 		}
 
-		/// <summary>
-		/// Space that this control will set between itself and it's container
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
-		/// </para>
-		/// </summary>
 		Thickness IControl.Margin
 		{
 			get
@@ -275,12 +233,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
-		/// <summary>
-		/// Space that this control will set between itself and it's own border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
-		/// </para>
-		/// </summary>
 		Thickness IControl.Padding
 		{
 			get
@@ -301,7 +253,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 			set
 			{
-				base.BackColor = value;
+				base.BackColor = Platform.RemoveAlpha(value);
 			}
 		}
 
@@ -333,6 +285,27 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
+
+
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		{
+			Platform.DrawBorders(this, pevent);
+			base.OnPaint(pevent);
+			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			//| System.Windows.Forms.AnchorStyles.Left)
+			//| System.Windows.Forms.AnchorStyles.Right)));
+		}
 	}
 }

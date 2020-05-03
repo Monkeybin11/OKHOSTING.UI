@@ -242,5 +242,25 @@ namespace OKHOSTING.UI.RPC.Controls
 				Set(nameof(Tag), value);
 			}
 		}
+
+		public string CssClass
+		{
+			get
+			{
+				return (string) Get(nameof(CssClass));
+			}
+			set
+			{
+				Set(nameof(CssClass), value);
+			}
+		}
+
+		public IControl Parent
+		{
+			get
+			{
+				return (IControl) Get(nameof(Parent));
+			}
+		}
 	}
 }

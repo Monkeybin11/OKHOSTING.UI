@@ -15,7 +15,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 	/// </summary>
 	public class Grid : System.Web.UI.WebControls.Table, IGrid
 	{
-		protected int _ColumnCount = 0;
+		protected Dictionary<int, double> ColumnWidths = new Dictionary<int, double>();
+		protected Dictionary<int, double> RowHeights = new Dictionary<int, double>();
+
+		protected Dictionary<IControl, int> RowSpans = new Dictionary<IControl, int>();
+		protected Dictionary<IControl, int> ColumnSpans = new Dictionary<IControl, int>();
+		protected Dictionary<(int, int), IControl> Content = new Dictionary<(int, int), IControl>();
+		protected Dictionary<(int, int), System.Web.UI.WebControls.TableCell> Cells = new Dictionary<(int, int), System.Web.UI.WebControls.TableCell>();
 
 		#region IControl
 
@@ -312,6 +318,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			get; set;
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		/// <summary>
@@ -323,37 +340,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </value>
 		int IGrid.ColumnCount
 		{
-			get
-			{
-				return _ColumnCount;
-			}
-			set
-			{
-				_ColumnCount = value;
-
-				foreach (System.Web.UI.WebControls.TableRow row in Rows)
-				{
-					int totalCells = 0;
-					
-					foreach (System.Web.UI.WebControls.TableCell cell in row.Cells)
-					{
-						totalCells += cell.ColumnSpan;
-					}
-
-					while (totalCells > value)
-					{
-						var cell = row.Cells[row.Cells.Count - 1];
-						row.Cells.Remove(cell);
-						totalCells -= cell.ColumnSpan;
-					}
-
-					while (totalCells < value)
-					{
-						row.Cells.Add(new System.Web.UI.WebControls.TableCell() { ColumnSpan = 1 });
-						totalCells++;
-					}
-				}
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -365,24 +353,29 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </value>
 		int IGrid.RowCount
 		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool IGrid.ShowGridLines
+		{
 			get
 			{
-				return Rows.Count;
+				return base.GridLines == System.Web.UI.WebControls.GridLines.Both;
 			}
 			set
 			{
-				while (Rows.Count < value)
+				if (value)
 				{
-					Rows.Add(new System.Web.UI.WebControls.TableRow());
+					base.GridLines = System.Web.UI.WebControls.GridLines.Both;
 				}
-
-				while (Rows.Count > value)
+				else
 				{
-					Rows.RemoveAt(Rows.Count - 1);
+					base.GridLines = System.Web.UI.WebControls.GridLines.None;
 				}
-
-				//re-set columns
-				((IGrid) this).ColumnCount = _ColumnCount;
 			}
 		}
 
@@ -447,17 +440,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		IControl IGrid.GetContent(int row, int column)
 		{
-			if (Rows.Count < row + 1 || Rows[row].Cells.Count < column + 1)
+			if (Content.ContainsKey((row, column)))
 			{
-				return null;
+				return Content[(row, column)];
 			}
 
-			if (Rows[row].Cells[column].Controls.Count == 0)
-			{
-				return null;
-			}
-
-			return (IControl) Rows[row].Cells[column].Controls[0];
+			else return null;
 		}
 
 		/// <summary>
@@ -475,23 +463,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
-			if (row > Rows.Count)
+			if (row > ((IGrid) this).RowCount)
 			{
 				throw new ArgumentOutOfRangeException(nameof(row));
 			}
 
-			if (column > _ColumnCount)
+			if (column > ((IGrid) this).ColumnCount)
 			{
 				throw new ArgumentOutOfRangeException(nameof(column));
 			}
 
-			while (Rows[row].Cells.Count < _ColumnCount)
+			if (content == null && Content.ContainsKey((row, column)))
 			{
-				Rows[row].Cells.Add(new System.Web.UI.WebControls.TableCell());
+				Content.Remove((row, column));
 			}
-
-			Rows[row].Cells[column].Controls.Clear();
-			Rows[row].Cells[column].Controls.Add((System.Web.UI.Control)content);
+			else
+			{
+				Content[(row, column)] = content;
+			}
 		}
 
 		/// <summary>
@@ -506,11 +495,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		void IGrid.SetColumnSpan(int columnSpan, IControl content)
 		{
-			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell) ((System.Web.UI.WebControls.WebControl) content).Parent;
-			cell.ColumnSpan = columnSpan;
+			if(columnSpan == 0)
+			{
+				columnSpan = 1;
+			}
 
-			//reset cells
-			((IGrid) this).ColumnCount = ((IGrid) this).ColumnCount;
+			ColumnSpans[content] = columnSpan;
 		}
 
 		/// <summary>
@@ -525,8 +515,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		int IGrid.GetColumnSpan(IControl content)
 		{
-			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
-			return cell.ColumnSpan;
+			if (ColumnSpans.ContainsKey(content))
+			{
+				return ColumnSpans[content];
+			}
+
+			else return 1;
 		}
 
 		/// <summary>
@@ -541,8 +535,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		void IGrid.SetRowSpan(int rowSpan, IControl content)
 		{
-			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
-			cell.RowSpan = rowSpan;
+			if (rowSpan == 0)
+			{
+				rowSpan = 1;
+			}
+
+			RowSpans[content] = rowSpan;
 		}
 
 		/// <summary>
@@ -557,8 +555,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		int IGrid.GetRowSpan(IControl content)
 		{
-			System.Web.UI.WebControls.TableCell cell = (System.Web.UI.WebControls.TableCell)((System.Web.UI.WebControls.WebControl)content).Parent;
-			return cell.RowSpan;
+			if (RowSpans.ContainsKey(content))
+			{
+				return RowSpans[content];
+			}
+
+			else return 1;
 		}
 
 		/// <summary>
@@ -573,10 +575,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		void IGrid.SetWidth(int column, double width)
 		{
-			foreach (System.Web.UI.WebControls.TableRow row in base.Rows)
-			{
-				row.Cells[column].Width = new System.Web.UI.WebControls.Unit(width, System.Web.UI.WebControls.UnitType.Pixel);
-			}
+			ColumnWidths[column] = width;
 		}
 
 		/// <summary>
@@ -591,12 +590,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		double IGrid.GetWidth(int column)
 		{
-			if (base.Rows.Count == 0)
+			if (ColumnWidths.ContainsKey(column))
 			{
-				return 0;
+				return ColumnWidths[column];
 			}
 
-			return base.Rows[0].Cells[column].Width.Value;
+			else return 0;
 		}
 
 		/// <summary>
@@ -611,7 +610,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		void IGrid.SetHeight(int row, double height)
 		{
-			base.Rows[row].Height = new System.Web.UI.WebControls.Unit(height, System.Web.UI.WebControls.UnitType.Pixel);
+			RowHeights[row] = height;
 		}
 
 		/// <summary>
@@ -626,7 +625,102 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		/// </param>
 		double IGrid.GetHeight(int row)
 		{
-			return base.Rows[row].Height.Value;
+			if (RowHeights.ContainsKey(row))
+			{
+				return RowHeights[row];
+			}
+
+			else return 0;
+		}
+
+		protected void RebuildGrid()
+		{
+			Rows.Clear();
+			Cells.Clear();
+
+			//add rows
+			while (Rows.Count < ((IGrid) this).RowCount)
+			{
+				Rows.Add(new System.Web.UI.WebControls.TableRow());
+			}
+
+			for (int row = 0; row < Rows.Count; row++)
+			{
+				//row height
+				if (RowHeights.ContainsKey(row))
+				{
+					Rows[row].Height = new System.Web.UI.WebControls.Unit(RowHeights[row], System.Web.UI.WebControls.UnitType.Pixel);
+				}
+
+				//add cells
+				for (int column = 0; column < ((IGrid) this).ColumnCount; column++)
+				{
+					//there is already a cell in this position, because of rowspan or columnspan
+					if (Cells.ContainsKey((row, column)))
+					{
+						continue;
+					}
+
+					//add cell to row
+					var cell = new System.Web.UI.WebControls.TableCell();
+					Rows[row].Cells.Add(cell);
+
+					//column width
+					if (ColumnWidths.ContainsKey(column))
+					{
+						cell.Width = new System.Web.UI.WebControls.Unit(ColumnWidths[column], System.Web.UI.WebControls.UnitType.Pixel);
+					}
+
+					//content
+					var content = ((IGrid) this).GetContent(row, column);
+
+					if (content != null)
+					{
+						//add content
+						cell.Controls.Add((System.Web.UI.Control) content);
+
+						//colspan
+						int colspan = 1;
+						int rowspan = 1;
+
+						if (ColumnSpans.ContainsKey(content))
+						{
+							colspan = ColumnSpans[content];
+						}
+
+						if (RowSpans.ContainsKey(content))
+						{
+							rowspan = RowSpans[content];
+						}
+
+						if (colspan > 1)
+						{
+							cell.ColumnSpan = colspan;
+						}
+
+						if (rowspan > 1)
+						{
+							cell.RowSpan = rowspan;
+						}
+
+						for (int c2 = 0; c2 < colspan; c2++)
+						{
+							Cells[(row, column + c2)] = cell;
+
+							for (int r2 = 1; r2 < rowspan; r2++)
+							{
+								Cells[(row + r2, column + c2)] = cell;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			RebuildGrid();
+			base.OnPreRender(e);
 		}
 	}
 }

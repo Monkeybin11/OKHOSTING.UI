@@ -8,8 +8,28 @@
 	/// </summary>
 	public interface IGrid : IContainer
 	{
+		/// <summary>
+		/// Gets or sets the number of columns that will contain the grid.
+		/// <para xml:lang="es">Obtiene o establece el numero de columnas que contendra el grid.</para>
+		/// </summary>
+		/// <value>The column count.
+		/// <para xml:lang="es">El numero de columnas.</para>
+		/// </value>
 		int ColumnCount { get; set; }
+
+		/// <summary>
+		/// Gets or sets the row count.
+		/// <para xml:lang="es">Obtiene o establece el numero de filas que contiene el grid.</para>
+		/// </summary>
+		/// <value>The row count.
+		/// <para xml:lang="es">El numero de filas.</para>
+		/// </value>
 		int RowCount { get; set; }
+
+		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool ShowGridLines { get; set; }
 
 		IControl GetContent(int row, int column);
 		void SetContent(int row, int column, IControl content);
@@ -43,38 +63,5 @@
 		Thickness CellPadding { get; set; }
 	}
 
-	/// <summary>
-	/// Returns all controls inside the grid.
-	/// <para xml:lang="es">
-	/// Devuelve todos los controles que hay dentro del grid.
-	/// </para>
-	/// </summary>
-	public static class IGridExtensions
-	{
-		/// <summary>
-		/// Gets all controlls.
-		/// <para xml:lang="es">
-		/// Obtenemos todos los controles que contiene el grid.
-		/// </para>
-		/// </summary>
-		/// <returns>The all controlls.
-		/// <para xml:lang="es">Todos los controles.</para>
-		/// </returns>
-		/// <param name="grid">Grid.</param>
-		public static System.Collections.Generic.IEnumerable<IControl> GetAllControlls(this IGrid grid)
-		{
-			for (int row = 0; row < grid.RowCount; row++)
-			{
-				for (int column = 0; column < grid.ColumnCount; column++)
-				{
-					var content = grid.GetContent(row, column);
-
-					if (content != null)
-					{
-						yield return content;
-					}
-				}
-			}
-		}
-	}
+	
 }

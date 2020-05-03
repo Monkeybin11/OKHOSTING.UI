@@ -55,7 +55,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		bool IInputControl.HandlePostBack()
 		{
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page?.Request.Form[ID];
 
 			if (postedValue != ((ITextBox) this).Value)
 			{

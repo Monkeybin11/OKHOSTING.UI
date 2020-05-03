@@ -294,13 +294,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get; set;
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		#region IInputControl
 
 		bool IInputControl.HandlePostBack()
 		{
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page?.Request.Form[ID];
 			bool value = postedValue == "on";
 
 			if (value != ((ICheckBox) this).Value)

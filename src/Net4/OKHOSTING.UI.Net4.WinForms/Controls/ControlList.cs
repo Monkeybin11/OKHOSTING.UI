@@ -1,8 +1,8 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
 using System.Collections.Generic;
-using Native = global::System.Windows.Forms;
 using System.Collections;
+using Native = System.Windows.Forms;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {

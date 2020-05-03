@@ -58,7 +58,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				if (value.HasValue)
 				{
-					base.Width = (int)value;
+					base.Width = (int) value;
 				}
 			}
 		}
@@ -73,17 +73,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				if (value.HasValue)
 				{
-					base.Height = (int)value;
+					base.Height = (int) value;
 				}
 			}
 		}
 
-		/// <summary>
-		/// Space that this control will set between itself and it's container
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
-		/// </para>
-		/// </summary>
 		Thickness IControl.Margin
 		{
 			get
@@ -96,12 +90,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		/// <summary>
-		/// Space that this control will set between itself and it's own border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
-		/// </para>
-		/// </summary>
 		Thickness IControl.Padding
 		{
 			get
@@ -122,7 +110,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.BackColor = value;
+				base.BackColor = Platform.RemoveAlpha(value);
 			}
 		}
 
@@ -151,6 +139,23 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			set
 			{
 				base.Anchor = Platform.ParseAnchor(((IControl)this).HorizontalAlignment, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
 			}
 		}
 

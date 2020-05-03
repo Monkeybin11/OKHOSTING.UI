@@ -14,20 +14,5 @@ namespace OKHOSTING.UI.HTML.Controls
 		public HorizontalAlignment TextHorizontalAlignment { get; set; }
 		public VerticalAlignment TextVerticalAlignment { get; set; }
 		public Thickness TextPadding { get; set; }
-		public string Name { get; set; }
-		public bool Visible { get; set; }
-		public bool Enabled { get; set; }
-		public double? Width { get; set; }
-		public double? Height { get; set; }
-		public Thickness Margin { get; set; }
-		public Thickness Padding { get; set; }
-		public Color BackgroundColor { get; set; }
-		public Color BorderColor { get; set; }
-		public Thickness BorderWidth { get; set; }
-		public HorizontalAlignment HorizontalAlignment { get; set; }
-		public VerticalAlignment VerticalAlignment { get; set; }
-		public object Tag { get; set; }
-
-		public abstract void Dispose();
 	}
 }

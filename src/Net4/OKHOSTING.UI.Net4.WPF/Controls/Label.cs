@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
@@ -12,7 +13,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			{
 				return (string) base.Content;
 			}
-
 			set
 			{
 				base.Content = value;
@@ -21,8 +21,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		void IDisposable.Dispose()
 		{
+			
 		}
-
+		
 		#region IControl
 
 		bool IControl.Visible
@@ -99,9 +100,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's own border
+		/// Space that this control will set between its content and its border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// Espacio que este control se establecerá entre su contenido y su borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -176,6 +177,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
 		#endregion
 
 		#region ITextControl
@@ -232,11 +250,29 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		{
 			get
 			{
-				return false;
+				if (base.Content is string)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
 			}
 			set
 			{
-				throw new NotImplementedException();
+				if (value)
+				{
+					var block = new System.Windows.Controls.TextBlock();
+					block.Text = Text;
+					block.TextDecorations = System.Windows.TextDecorations.Underline;
+
+					base.Content = block;
+				}
+				else
+				{
+					base.Content = Text;
+				}
 			}
 		}
 

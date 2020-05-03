@@ -304,6 +304,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		{
 			get; set;
 		}
+		
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
 
 		#endregion
 
@@ -352,7 +363,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		bool IInputControl.HandlePostBack()
 		{
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page?.Request.Form[ID];
 
 			if (postedValue != ((IPasswordTextBox) this).Value)
 			{

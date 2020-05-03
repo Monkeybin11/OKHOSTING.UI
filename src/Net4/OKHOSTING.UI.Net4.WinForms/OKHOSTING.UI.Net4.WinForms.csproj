@@ -40,6 +40,13 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\MenuItemList.cs" />
+    <Compile Include="Controls\Menu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TimeOfDayPicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -64,6 +71,7 @@
     <Compile Include="Controls\WebView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DragDrop.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Controls\Autocomplete.cs">
       <SubType>Component</SubType>
@@ -122,10 +130,19 @@
       <Project>{3b08e5e9-6279-44a3-8c01-f11f8e518d31}</Project>
       <Name>OKHOSTING.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Security\src\Standard\OKHOSTING.Security\OKHOSTING.Security.csproj">
+      <Project>{db790a54-66a1-431a-9495-76eb6f7a0dad}</Project>
+      <Name>OKHOSTING.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj">
       <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Page.resx">
+      <DependentUpon>Page.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

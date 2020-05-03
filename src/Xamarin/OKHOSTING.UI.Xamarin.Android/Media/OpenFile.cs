@@ -7,7 +7,7 @@ namespace OKHOSTING.UI.Xamarin.Android.Media
 		public void Open(string fullPath)
 		{
 			var intent = new Intent();
-			var mime = Data.MimeTypeMap.GetMimeType(fullPath);
+			var mime = Core.MimeTypes.GetMimeType(fullPath);
 
 			intent.SetAction(Intent.ActionView);
 			intent.SetDataAndType(global::Android.Net.Uri.Parse(fullPath), mime);

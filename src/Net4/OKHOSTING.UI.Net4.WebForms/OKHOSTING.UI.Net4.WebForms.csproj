@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\OKHOSTING.Inside\src\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,7 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\IClickable.cs" />
+    <Compile Include="Controls\Menu.cs" />
+    <Compile Include="Controls\MenuItem.cs" />
     <Compile Include="Controls\UserControl.cs" />
+    <Compile Include="DragDrop.cs" />
     <Compile Include="Media\VideoPlayer.cs" />
     <Compile Include="Controls\TimeOfDayPicker.cs" />
     <Compile Include="Controls\DatePicker.cs" />
@@ -90,26 +93,25 @@
     <Compile Include="UrlRewriteRule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="General.css" />
-    <Content Include="js\images\ui-icons_444444_256x240.png" />
-    <Content Include="js\images\ui-icons_555555_256x240.png" />
-    <Content Include="js\images\ui-icons_777620_256x240.png" />
-    <Content Include="js\images\ui-icons_777777_256x240.png" />
-    <Content Include="js\images\ui-icons_cc0000_256x240.png" />
-    <Content Include="js\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="js\jquery-ui-i18n.min.js" />
+    <Content Include="CSS\General.css" />
+    <Content Include="CSS\jquery-ui.css" />
+    <Content Include="JS\images\ui-icons_444444_256x240.png" />
+    <Content Include="JS\images\ui-icons_555555_256x240.png" />
+    <Content Include="JS\images\ui-icons_777620_256x240.png" />
+    <Content Include="JS\images\ui-icons_777777_256x240.png" />
+    <Content Include="JS\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="JS\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="JS\jquery-ui-i18n.min.js" />
+    <Content Include="JS\DragDrop.js" />
     <Content Include="Services\PageSize.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="js\jquery-ui.js" />
-    <Content Include="js\jquery.js" />
-    <Content Include="js\PageSize.js" />
+    <Content Include="JS\jquery-ui.js" />
+    <Content Include="JS\jquery.js" />
+    <Content Include="JS\PageSize.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Services\Autocomplete.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
@@ -124,6 +126,12 @@
       <Project>{e4f4f9c9-9c6f-46c7-8dcd-7fdec0d11cca}</Project>
       <Name>OKHOSTING.UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Custom\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

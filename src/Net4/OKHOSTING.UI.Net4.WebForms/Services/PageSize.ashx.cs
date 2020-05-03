@@ -11,8 +11,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 		public void ProcessRequest(HttpContext context)
 		{
 			context.Response.ContentType = "application/json";
-			App app = (App) HttpContext.Current.Session["App"];
-			Page page = (Page) HttpContext.Current.Session["Page"];
+			Page page = Platform.CurrentPage;
 
 			if (page == null)
 			{
@@ -30,12 +29,18 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			var output = json.Serialize(new { Refresh = resized });
 
 			//save new page size in session
-			context.Session[typeof(Page) + ".Width"] = width;
+			context.Session[typeof(Page) + ".Width"] = width - 8; //rest some for the scrollbar
 			context.Session[typeof(Page) + ".Height"] = height;
 
 			if (resized)
 			{
-				page.OnResized();
+				page.App?[page]?.Controller?.Refresh();
+
+				if (page.App[page] != null)
+				{
+					page.App[page].Title = page.Title;
+					page.App[page].Content = page.Content;
+				}
 			}
 
 			context.Response.Write(output);

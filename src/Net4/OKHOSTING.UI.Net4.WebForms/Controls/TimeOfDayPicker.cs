@@ -58,7 +58,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		bool IInputControl.HandlePostBack()
 		{
 			TimeSpan span = TimeSpan.Zero;
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page?.Request.Form[ID];
 
 			if (TimeSpan.TryParse(postedValue, out span) && span != ((ITimeOfDayPicker) this).Value)
 			{

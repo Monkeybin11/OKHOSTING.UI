@@ -297,6 +297,18 @@ namespace OKHOSTING.UI.Net4.WebForms.Media
 			get; set;
 		}
 
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		private string _Source;

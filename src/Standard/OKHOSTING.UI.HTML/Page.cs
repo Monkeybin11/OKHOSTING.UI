@@ -14,5 +14,10 @@ namespace OKHOSTING.UI.HTML
 		public double? Height => throw new NotImplementedException();
 
 		public event EventHandler Resized;
+
+		public void InvokeOnMainThread(Action action)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -1,34 +1,46 @@
 ﻿using System;
+using System.Windows.Forms;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WinForms
 {
-	public class Page : System.Windows.Forms.Form, IPage
+	public class Page : Form, IPage
 	{
+		public Page()
+		{
+			Container = new Panel();
+			Container.Dock = DockStyle.Fill;
+			Container.AutoScroll = true;
+			Controls.Add(Container);
+			BackColor = System.Drawing.Color.White;
+		}
+
 		/// <summary>
 		/// App that is running on this page
 		/// </summary>
 		public App App { get; set; }
 
+		private readonly new Panel Container;
+
 		public IControl Content
 		{
 			get
 			{
-				if (base.Controls.Count == 0)
+				if (Container.Controls.Count == 0)
 				{
 					return null;
 				}
 
-				return (IControl) Controls[0];
+				return (IControl) Container.Controls[0];
 			}
 			set
 			{
-				Controls.Clear();
+				Container.Controls.Clear();
 
 				if (value != null)
 				{
-					((System.Windows.Forms.Control) value).Dock = System.Windows.Forms.DockStyle.Fill;
-					Controls.Add((System.Windows.Forms.Control) value);
+					//((System.Windows.Forms.Control) value).Dock = System.Windows.Forms.DockStyle.Fill;
+					Container.Controls.Add((Control) value);
 				}
 			}
 		}
@@ -49,7 +61,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			get
 			{
-				return Width;
+				return Width - 30;
 			}
 		}
 
@@ -57,15 +69,18 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			get
 			{
-				return Height;
+				return Height - 30;
 			}
 		}
 
-		public event EventHandler Resized;
+		public void InvokeOnMainThread(Action action)
+		{
+			BeginInvoke(action);
+		}
 
 		protected override void OnResize(EventArgs e)
 		{
-			Resized?.Invoke(this, null);
+			App?[this]?.Controller?.Refresh();
 		}
 	}
 }

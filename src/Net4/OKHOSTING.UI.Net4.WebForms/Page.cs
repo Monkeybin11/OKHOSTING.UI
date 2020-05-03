@@ -13,34 +13,98 @@ namespace OKHOSTING.UI.Net4.WebForms
 	public partial class Page : System.Web.UI.Page, IPage
 	{
 		/// <summary>
-		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
+		/// App that is running on this page
 		/// </summary>
-		protected int ControlCounter = 0;
-		
-		/// <summary>
-		/// Adds a name to all controls created, necessary to handle postbacks
-		/// </summary>
-		protected virtual void App_ControlCreated(object sender, IControl e)
+		public virtual App App
 		{
-			if (string.IsNullOrWhiteSpace(e.Name))
+			get
 			{
-				e.Name = $"ctr_{e.GetType().Name}_{ControlCounter++}";
+				return (App)Session["App"];
+			}
+			set
+			{
+				Session["App"] = value;
 			}
 		}
 
 		/// <summary>
-		/// The content holder.
-		/// <para xml:lang="es">El contenido que contiene la pagina.</para>
+		/// Gets or sets the content.
+		/// <para xml:lang="es">Obtiene o establece el contenido.</para>
 		/// </summary>
-		protected System.Web.UI.WebControls.PlaceHolder ContentHolder;
+		/// <value>The content.
+		/// <para xml:lang="es">El contenido.</para>
+		/// </value>
+		public IControl Content
+		{
+			get
+			{
+				if (Form.Controls.Count == 0)
+				{
+					return null;
+				}
+
+				return (IControl) Form.Controls[0];
+			}
+			set
+			{
+				Form.Controls.Clear();
+
+				if (value != null)
+				{
+					Form.Controls.Add((System.Web.UI.Control) value);
+				}
+			}
+		}
 
 		/// <summary>
-		/// Raises the Resized event
+		/// Gets the width.
+		/// <para xml:lang="es">Obtiene el ancho de la pagina.</para>
 		/// </summary>
-		protected internal void OnResized()
+		/// <value>The width.
+		/// <para xml:lang="es">El ancho.</para>
+		/// </value>
+		public double? Width
 		{
-			Resized?.Invoke(this, null);
+			get
+			{
+				if (Session[typeof(Page) + ".Width"] == null)
+				{
+					Session[typeof(Page) + ".Width"] = (double)0;
+				}
+
+				return (double)Session[typeof(Page) + ".Width"];
+			}
 		}
+
+		/// <summary>
+		/// Gets the height.
+		/// <para xml:lang="es">Obtiene la altura de la pagina.</para>
+		/// </summary>
+		/// <value>The height.
+		/// <para xml:lang="es">La altura</para>
+		/// </value>
+		public double? Height
+		{
+			get
+			{
+				if (Session[typeof(Page) + ".Height"] == null)
+				{
+					Session[typeof(Page) + ".Height"] = (double)0;
+				}
+
+				return (double)Session[typeof(Page) + ".Height"];
+			}
+		}
+
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Threading.Tasks.Task.Run(action);
+		}
+
+		/// <summary>
+		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
+		/// </summary>
+		protected internal int ControlCounter = 0;
 
 		/// <summary>
 		/// Restores Page state (content & title) and launch events
@@ -48,23 +112,80 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// </summary>
 		protected override void OnLoad(EventArgs e)
 		{
-			Session["Page"] = this;
-
 			base.OnLoad(e);
 
-			//create placeholder for content
-			if (ContentHolder == null)
+			App = Platform.CurrentApp;
+			Platform.CurrentPage = this;
+
+			//initialize javascript
+			InitJavaScript();
+
+			//initialize the page state
+			InitState();
+			
+			//check usage of friendly urls
+			InitRouting();
+
+			//if there is no controller assigned, exit
+			if (App[this]?.Controller == null)
 			{
-				ContentHolder = new System.Web.UI.WebControls.PlaceHolder();
-				ContentHolder.ID = "ContentHolder";
-				base.Form.Controls.Add(ContentHolder);
+				return;
 			}
 
+			//handle postback events
+			if (IsPostBack)
+			{
+				HandleEvents();
+				HandleDragDrop();
+			}
+		}
+
+		/// <summary>
+		/// Ons the pre render.
+		/// <para xml:lang="es">Hace todos los pasos previos a la representacion.</para>
+		/// </summary>
+		/// <returns>The pre render.</returns>
+		/// <param name="e">E.</param>
+		protected override void OnPreRender(EventArgs e)
+		{
+			//save page state
+			var state = App[this];
+
+			if (state != null)
+			{
+				state.Title = Title;
+				state.Content = Content;
+			}
+
+			//allow friendly urls on forms
+			Form.Action = Request.RawUrl;
+
+			base.OnPreRender(e);
+		}
+
+		/// <summary>
+		/// Performs the steps of initialization and configuration required to create a page.
+		/// <para xml:lang="es">Realiza las etapas de inicializacion y configuracion requeridas para crear una pagina.</para>
+		/// </summary>
+		/// <returns>The init.</returns>
+		/// <param name="e">E.</param>
+		protected override void OnInit(EventArgs e)
+		{
+			base.OnInit(e);
+			EnsureChildControls();
+		}
+
+		/// <summary>
+		/// Append the basic javascript references
+		/// </summary>
+		protected virtual void InitJavaScript()
+		{
 			//load javascript dependencies
-			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/js/jquery.js"));
-			Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/js/jquery-ui.js"));
-			Page.ClientScript.RegisterClientScriptInclude("jquery-ui-i18n", ResolveUrl("~/js/jquery-ui-i18n.min.js"));
-			Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/js/PageSize.js"));
+			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/JS/jquery.js"));
+			Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/JS/jquery-ui.js"));
+			Page.ClientScript.RegisterClientScriptInclude("jquery-ui-i18n", ResolveUrl("~/JS/jquery-ui-i18n.min.js"));
+			Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/JS/PageSize.js"));
+			Page.ClientScript.RegisterClientScriptInclude("DragDrop", ResolveUrl("~/JS/DragDrop.js"));
 
 			//if this is the first request, get page size and finish
 			if (Width == 0 && Height == 0)
@@ -85,10 +206,14 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 				return;
 			}
+		}
 
-			//search for a rewrite rule for this uri
-			var rule = Platform.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
-
+		/// <summary>
+		/// Replace old Pages with the current one in the App.State,
+		/// since webforms pages are by default recycled among requests
+		/// </summary>
+		protected virtual void InitState()
+		{
 			//replace old page with current one
 			var pages = App.State.Keys.Where(p => p is Page);
 
@@ -116,6 +241,25 @@ namespace OKHOSTING.UI.Net4.WebForms
 				}
 			}
 
+			//get title and content from the state, in case it has a different Page instance
+			var state = App[this];
+			Title = state?.Title;
+			Content = state?.Content;
+
+			//set this as the main page since web apps are 1 page only
+			App.MainPage = this;
+		}
+
+		/// <summary>
+		/// Checks if a friendly URL is being used and if so,
+		/// shows the controller that corresponds to that URL
+		/// </summary>
+		protected virtual void InitRouting()
+		{
+			//search for a rewrite rule for this uri
+			var rule = Platform.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
+
+			
 			var state = App[this];
 
 			//should we start a different controller than the current one?
@@ -136,7 +280,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 						startNew = true;
 					}
 				}
-				
+
 				if (startNew)
 				{
 					var newController = rule.GetController(new Uri(Request.RawUrl, UriKind.Relative));
@@ -144,27 +288,18 @@ namespace OKHOSTING.UI.Net4.WebForms
 					newController.Start();
 				}
 			}
+		}
 
-			//get title and content from the state, in case it has a different Page instance
-			Title = state?.Title;
-			Content = state?.Content;
-
-			//there is no controller assigned, exit
-			if (state?.Controller == null)
-			{
-				return;
-			}
-
-			if (!IsPostBack)
-			{
-				return;
-			}
-
+		/// <summary>
+		/// Raises ValueChanged and Click events
+		/// </summary>
+		protected virtual void HandleEvents()
+		{
 			//keep track of wich IInputControls had their value updated so we can reaise IInputControl.OnValueChanged
 			List<IInputControl> updatedInputControls = new List<IInputControl>();
 
 			//handle posted values
-			foreach (IInputControl control in GetAllControls().Where(c => c is IInputControl))
+			foreach (IInputControl control in App.GetParentAndAllChildren(Content).Where(c => c is IInputControl))
 			{
 				if (control.HandlePostBack())
 				{
@@ -179,151 +314,24 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//raise button click events
-			foreach (Controls.IClickable control in GetAllControls().Where(c => c is Controls.IClickable))
+			foreach (Controls.IClickable control in App.GetParentAndAllChildren(Content).Where(c => c is Controls.IClickable))
 			{
 				control.RaiseClick();
 			}
 		}
 
 		/// <summary>
-		/// Ons the pre render.
-		/// <para xml:lang="es">Hace todos los pasos previos a la representacion.</para>
+		/// Raises the DragDrop.ControlDropped event
 		/// </summary>
-		/// <returns>The pre render.</returns>
-		/// <param name="e">E.</param>
-		protected override void OnPreRender(EventArgs e)
+		protected virtual void HandleDragDrop()
 		{
-			//save page state
-			var state = App[this];
-
-			if (state != null)
+			if (Request.Form.AllKeys.Contains("dragdrop_dragged") && Request.Form.AllKeys.Contains("dragdrop_droppedOn"))
 			{
-				state.Title = Title;
-				state.Content = Content;
-			}
+				var allControls = App.GetAllChildren(Content);
+				var dragged = allControls.Where(c => c.Name == Request.Form["dragdrop_dragged"]).Single();
+				var droppedOn = allControls.Where(c => c.Name == Request.Form["dragdrop_droppedOn"]).Single();
 
-			//allow friendly urls on forms
-			Form.Action = Request.RawUrl;
-
-			ControlCounter = 0;
-
-			foreach (var control in GetAllControls())
-			{
-				if (string.IsNullOrWhiteSpace(control.Name))
-				{
-					control.Name = $"ctr_{control.GetType().Name}_{ControlCounter++}";
-				}
-			}
-
-			base.OnPreRender(e);
-		}
-
-		/// <summary>
-		/// Performs the steps of initialization and configuration required to create a page.
-		/// <para xml:lang="es">Realiza las etapas de inicializacion y configuracion requeridas para crear una pagina.</para>
-		/// </summary>
-		/// <returns>The init.</returns>
-		/// <param name="e">E.</param>
-		protected override void OnInit(EventArgs e)
-		{
-			base.OnInit(e);
-			EnsureChildControls();
-		}
-
-		/// <summary>
-		/// App that is running on this page
-		/// </summary>
-		public virtual App App
-		{
-			get
-			{
-				return (App) Session["App"];
-			}
-			set
-			{
-				Session["App"] = value;
-			}
-		}
-
-		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
-		/// <summary>
-		/// Gets or sets the content.
-		/// <para xml:lang="es">Obtiene o establece el contenido.</para>
-		/// </summary>
-		/// <value>The content.
-		/// <para xml:lang="es">El contenido.</para>
-		/// </value>
-		public IControl Content
-		{
-			get
-			{
-				if (ContentHolder.Controls.Count == 0)
-				{
-					return null;
-				}
-
-				return (IControl) ContentHolder.Controls[0];
-			}
-			set
-			{
-				ContentHolder.Controls.Clear();
-
-				if (value != null)
-				{
-					ContentHolder.Controls.Add((System.Web.UI.Control) value);
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets the width.
-		/// <para xml:lang="es">Obtiene el ancho de la pagina.</para>
-		/// </summary>
-		/// <value>The width.
-		/// <para xml:lang="es">El ancho.</para>
-		/// </value>
-		public double? Width
-		{
-			get
-			{
-				if (Session[typeof(Page) + ".Width"] == null)
-				{
-					Session[typeof(Page) + ".Width"] = (double) 0;
-				}
-
-				return (double) Session[typeof(Page) + ".Width"];
-			}
-		}
-
-		/// <summary>
-		/// Gets the height.
-		/// <para xml:lang="es">Obtiene la altura de la pagina.</para>
-		/// </summary>
-		/// <value>The height.
-		/// <para xml:lang="es">La altura</para>
-		/// </value>
-		public double? Height
-		{
-			get
-			{
-				if (Session[typeof(Page) + ".Height"] == null)
-				{
-					Session[typeof(Page) + ".Height"] = (double) 0;
-				}
-
-				return (double) Session[typeof(Page) + ".Height"];
-			}
-		}
-
-		public IEnumerable<IControl> GetAllControls()
-		{
-			foreach (IControl ctr in ControlExtensions.GetAllControls(this).Where(c => c is IControl))
-			{
-				yield return ctr;
+				DragDrop.RaiseDropped(dragged, droppedOn);
 			}
 		}
 	}

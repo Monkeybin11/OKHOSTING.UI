@@ -16,6 +16,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
 		#region IGrid
+
 		/// <summary>
 		/// Gets or sets the column count.
 		/// <para xml:lang="es">Obtiene o establece el conteo de columnas del grid</para>
@@ -87,6 +88,15 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool IGrid.ShowGridLines
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Gets the controls conetent the grid
 		/// <para xml:lang="es">Obtiene los controles que contiene del grid</para>
 		/// </summary>
@@ -126,8 +136,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// <param name="content">Content.</param>
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
-			global::Xamarin.Forms.Grid.SetRow((global::Xamarin.Forms.View) content, row);
-			global::Xamarin.Forms.Grid.SetColumn((global::Xamarin.Forms.View) content, column);
+			if (row > RowDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(row));
+			}
+
+			if (column > ColumnDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(column));
+			}
+
+			SetRow((global::Xamarin.Forms.View) content, row);
+			SetColumn((global::Xamarin.Forms.View) content, column);
 
 			//remove previous content, if any
 			var currentContent = ((IGrid) this).GetContent(row, column);
@@ -137,7 +157,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				base.Children.Remove((global::Xamarin.Forms.View) currentContent);
 			}
 
-			base.Children.Add((global::Xamarin.Forms.View) content);
+			if (content != null)
+			{
+				base.Children.Add((global::Xamarin.Forms.View)content);
+			}
 		}
 
 		/// <summary>
@@ -205,7 +228,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// <param name="content">Content.</param>
 		void IGrid.SetRowSpan(int rowSpan, IControl content)
 		{
-            SetRowSpan((global::Xamarin.Forms.BindableObject) content, rowSpan);
+			SetRowSpan((global::Xamarin.Forms.BindableObject) content, rowSpan);
 		}
 
 		/// <summary>
@@ -278,6 +301,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		#endregion
 
 		#region IControl
+
 		/// <summary>
 		/// Gets or sets the name of the Control.
 		/// <para xml:lang="es">Obtiene o establece el nommbre del control.</para>
@@ -360,9 +384,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's container
+		/// Gets or sets the control margin.
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
+		/// Obtiene o establece el margen del control.
 		/// </para>
 		/// </summary>
 		Thickness IControl.Margin
@@ -378,9 +402,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's own border
+		/// Space that this control will set between its content and its border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// Espacio que este control se establecerá entre su contenido y su borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -479,6 +503,23 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		object IControl.Tag
 		{
 			get; set;
+		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
 		}
 
 		#endregion

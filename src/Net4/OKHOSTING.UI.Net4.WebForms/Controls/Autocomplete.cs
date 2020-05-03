@@ -32,24 +32,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			//set a default id so we ensure the extender's TargetControlID is set
 			InnerTextBox = (TextBox) Core.BaitAndSwitch.Create<ITextBox>();
 			((ITextBox) InnerTextBox).Placeholder = "Search";
+
 			base.Controls.Add(InnerTextBox);
-
-			////ajax autocompleter
-			//InnerAutoCompleteExtender = new AjaxControlToolkit.AutoCompleteExtender();
-			//InnerAutoCompleteExtender.ID = InnerTextBox.ID + "_AutoCompleteExtender";
-			//InnerAutoCompleteExtender.TargetControlID = InnerTextBox.ID;
-			//InnerAutoCompleteExtender.UseContextKey = true;
-			//InnerAutoCompleteExtender.ServiceMethod = "Search";
-			//InnerAutoCompleteExtender.ServicePath = "/Services/AutoCompleteService.asmx";
-			////InnerAutoCompleteExtender.CompletionListCssClass = "AutoComplete_List";
-			////InnerAutoCompleteExtender.CompletionListItemCssClass = "AutoComplete_ListItem";
-			//InnerAutoCompleteExtender.EnableCaching = false;
-			//base.Controls.Add(InnerAutoCompleteExtender);
-
-			////add a unique id to session so we can invoke OnSearching from a ashx page
-			//SessionId = "Autocomplete_" + Guid.NewGuid().ToString().Replace('-', '_');
-			//Session.Current[SessionId] = this;
-			//InnerAutoCompleteExtender.ContextKey = SessionId;
 		}
 
 		/// <summary>
@@ -447,6 +431,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get; set;
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		#region ITextControl
@@ -708,7 +703,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		bool IInputControl.HandlePostBack()
 		{
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page?.Request.Form[InnerTextBox.ID];
 
 			if (postedValue != ((IAutocomplete) this).Value)
 			{

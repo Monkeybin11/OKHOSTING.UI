@@ -298,6 +298,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get; set;
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		#region IPage
@@ -316,11 +327,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				System.Web.HttpContext.Current.Session["App"] = value;
 			}
 		}
-
-		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
 
 		/// <summary>
 		/// Gets or sets the content.
@@ -391,6 +397,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				base.ToolTip = value;
 			}
+		}
+
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Threading.Tasks.Task.Run(action);
 		}
 
 		#endregion

@@ -19,7 +19,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IClickable.RaiseClick()
 		{
-			if (Page.Request.Form["__EVENTTARGET"] == ClientID)
+			if (Page?.Request.Form["__EVENTTARGET"] == ClientID)
 			{
 				Click?.Invoke(this, new EventArgs());
 			}
@@ -308,6 +308,17 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		object IControl.Tag
 		{
 			get; set;
+		}
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
 		}
 
 		#endregion

@@ -89,6 +89,30 @@ namespace OKHOSTING.UI.Net4.WebForms
 			return UriMap.Where(r => r.ControllerType.Equals(controllerType) || r.ControllerType.IsSubclassOf(controllerType)).FirstOrDefault();
 		}
 
+		public static App CurrentApp
+		{
+			get
+			{
+				return (App) System.Web.HttpContext.Current.Session["App"];
+			}
+			internal set
+			{
+				System.Web.HttpContext.Current.Session["App"] = value;
+			}
+		}
+
+		public static Page CurrentPage
+		{
+			get
+			{
+				return (Page) System.Web.HttpContext.Current.Session["Page"];
+			}
+			internal set
+			{
+				System.Web.HttpContext.Current.Session["Page"] = value;
+			}
+		}
+
 		private static void App_ControllerStarted(object sender, Controller controller)
 		{
 			var rule = GetUrlRewriteRuleFor(controller.GetType());

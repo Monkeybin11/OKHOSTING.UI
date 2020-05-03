@@ -12,21 +12,9 @@ namespace OKHOSTING.UI.HTML.Controls
 
 		public event EventHandler Click;
 
-		public override void Dispose()
-		{
-		}
-
 		public override string GenerateHtml()
 		{
-			var config = Configuration.Default;
-
-			//Create a new context for evaluating webpages with the given config
-			var context = BrowsingContext.New(config);
-
-			//Parse the document from the content of a response to a virtual request
-			var document = context.OpenNewAsync().Result;
-
-			var button = document.CreateElement<IHtmlButtonElement>();
+			var button = CreateElement<IHtmlButtonElement>();
 			button.TextContent = Text;
 			button.Title = Text;
 

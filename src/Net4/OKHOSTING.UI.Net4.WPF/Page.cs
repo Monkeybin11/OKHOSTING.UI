@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF
@@ -12,12 +13,13 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		public Page()
 		{
-			base.SizeChanged += Page_SizeChanged;
-
 			//allows for automatic vertical scrolling
 			Scroller = new System.Windows.Controls.ScrollViewer();
 			Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
-			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Visible;
+			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+			Scroller.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			Scroller.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+
 			SizeToContent = System.Windows.SizeToContent.Manual;
 
 			base.Content = Scroller;
@@ -27,19 +29,6 @@ namespace OKHOSTING.UI.Net4.WPF
 		/// App that is running on this page
 		/// </summary>
 		public App App { get; set; }
-
-		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
-
-		/// <summary>
-		/// Raises the Resized event
-		/// </summary>
-		private void Page_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
-		{
-			Resized?.Invoke(this, null);
-		}
 
 		/// <summary>
 		/// Each Page only contains one main view, which can optionally be a container and contain more views
@@ -55,11 +44,11 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 			set
 			{
-				if (value != null)
-				{
-					value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
-					value.VerticalAlignment = UI.VerticalAlignment.Fill;
-				}
+				//if (value != null)
+				//{
+				//	value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
+				//	value.VerticalAlignment = UI.VerticalAlignment.Fill;
+				//}
 				
 				Scroller.Content = value;
 			}
@@ -69,7 +58,14 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				return Width;
+				if (this.WindowState == System.Windows.WindowState.Maximized)
+				{
+					return System.Windows.SystemParameters.WorkArea.Width;
+				}
+				else
+				{
+					return base.Width;
+				}
 			}
 		}
 
@@ -77,13 +73,25 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				return Height;
+				if (this.WindowState == System.Windows.WindowState.Maximized)
+				{
+					return System.Windows.SystemParameters.WorkArea.Height;
+				}
+				else
+				{
+					return base.Height;
+				}
 			}
 		}
 
-		//void IDisposable.Dispose()
-		//{
-		//	Content.Dispose();
-		//}
+		public void InvokeOnMainThread(Action action)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(action);
+		}
+
+		protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+		{
+			App?[this]?.Controller?.Refresh();
+		}
 	}
 }

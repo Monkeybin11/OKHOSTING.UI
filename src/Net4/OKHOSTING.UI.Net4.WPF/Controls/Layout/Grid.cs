@@ -23,11 +23,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public Grid()
 		{
-			HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-			VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+			//HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			//VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
 
-			Width = Double.NaN;
-			Height = Double.NaN;
+			//Width = Double.NaN;
+			//Height = Double.NaN;
 		}
 
 		/// <summary>
@@ -47,6 +47,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 			set
 			{
+				if (value < 0)
+				{
+					throw new ArgumentOutOfRangeException("Value must be greater or equal to zero");
+				}
+
 				//remove all controls from rows to be removed
 				for (int i = 0; i < base.Children.Count; i++)
 				{
@@ -84,6 +89,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 			set
 			{
+				if (value < 0)
+				{
+					throw new ArgumentOutOfRangeException("Value must be greater or equal to zero");
+				}
+
 				//remove all controls from rows to be removed
 				for (int i = 0; i < base.Children.Count; i++)
 				{
@@ -108,6 +118,21 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		/// <summary>
+		/// When set to true, shows all the cell borders inside the grid, when false, no cell border is shown
+		/// </summary>
+		bool IGrid.ShowGridLines
+		{
+			get
+			{
+				return base.ShowGridLines;
+			}
+			set
+			{
+				base.ShowGridLines = value;
+			}
+		}
+
+		/// <summary>
 		/// Gets the number of rows and columns of the grid
 		/// <para xml:alng="es">Obtiene el numero de filas y columnas del grid</para>
 		/// </summary>
@@ -124,7 +149,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			foreach (System.Windows.UIElement children in base.Children)
 			{
-				if (Grid.GetRow(children) == row && Grid.GetColumn(children) == column)
+				if (GetRow(children) == row && GetColumn(children) == column)
 				{
 					return (IControl) children;
 				}
@@ -150,6 +175,16 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </param>
 		void IGrid.SetContent(int row, int column, IControl content)
 		{
+			if (row > RowDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(row));
+			}
+
+			if (column > ColumnDefinitions.Count)
+			{
+				throw new ArgumentOutOfRangeException(nameof(column));
+			}
+
 			var currentControl = ((IGrid) this).GetContent(row, column);
 
 			if (currentControl != null)
@@ -157,9 +192,16 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				base.Children.Remove((System.Windows.UIElement) currentControl);
 			}
 
-			SetRow((System.Windows.UIElement) content, row);
-			SetColumn((System.Windows.UIElement) content, column);
-			Children.Add((System.Windows.UIElement) content);
+			if (content != null)
+			{
+				SetRow((System.Windows.UIElement) content, row);
+				SetColumn((System.Windows.UIElement) content, column);
+
+				if (!Children.Contains((System.Windows.UIElement) content))
+				{
+					Children.Add((System.Windows.UIElement) content);
+				}
+			}
 		}
 
 		/// <summary>
@@ -406,9 +448,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's container
+		/// Gets or sets the margin to the left, top, right and bottom the grid.
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
+		/// Obtiene o establece el margen hacia la izquierda, arriba, derecha y abajo del grid.
 		/// </para>
 		/// </summary>
 		Thickness IControl.Margin
@@ -424,9 +466,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's own border
+		/// Space that this control will set between its content and its border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// Espacio que este control se establecerá entre su contenido y su borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -531,6 +573,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		Thickness IGrid.CellPadding
 		{
 			get; set;
+		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
 		}
 
 		#endregion

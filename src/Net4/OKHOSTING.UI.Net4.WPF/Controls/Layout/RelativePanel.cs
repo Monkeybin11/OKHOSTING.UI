@@ -49,8 +49,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		public RelativePanel()
 		{
 			_Children = new ControlList(base.Children);
-			VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-			HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 
 		}
 
@@ -122,13 +120,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				}
 			}
 		}
-		
-		/// <summary>
-		/// Space that this control will set between itself and it's container
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su contenedor.
-		/// </para>
-		/// </summary>
+
 		Thickness IControl.Margin
 		{
 			get
@@ -142,9 +134,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's own border
+		/// Space that this control will set between its content and its border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// Espacio que este control se establecerá entre su contenido y su borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -198,7 +190,24 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				base.VerticalAlignment = Platform.Parse(value);
 			}
 		}
-		
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		/// <summary>
@@ -235,14 +244,24 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		protected override System.Windows.Size ArrangeOverride(System.Windows.Size finalSize)
 		{
 			Dictionary<string, UIElement> elements = new Dictionary<string, UIElement>();
+			int controlCounter = 0;
+
 			foreach (var child in Children.OfType<FrameworkElement>().Where(c => c.Name != null))
 			{
+				if (string.IsNullOrWhiteSpace(child.Name))
+				{
+					child.Name = $"ctr_{child.GetType().Name}_{controlCounter++}";
+				}
+
 				elements[child.Name] = child;
 			}
+
 			//List of margins for each element between the element and panel (left, top, right, bottom)
 			List<double[]> arranges = new List<double[]>(Children.Count);
+			
 			//First pass aligns all sides that aren't constrained by other elements
 			int arrangedCount = 0;
+
 			foreach (var child in Children.OfType<UIElement>())
 			{
 				//NaN means the arrange value is not constrained yet for that side
@@ -316,6 +335,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 					!double.IsNaN(rect[2]) && !double.IsNaN(rect[3]))
 					arrangedCount++;
 			}
+
 			int i = 0;
 			//Run iterative layout passes
 			while (arrangedCount < Children.Count)
@@ -571,7 +591,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 						throw new NotImplementedException();
 
 					case RelativePanelHorizontalContraint.LeftWith:
-						SetAlignHorizontalCenterWithPanel((UIElement) control, true);
+						SetAlignLeftWithPanel((UIElement) control, true);
 						break;
 
 					case RelativePanelHorizontalContraint.RightOf:

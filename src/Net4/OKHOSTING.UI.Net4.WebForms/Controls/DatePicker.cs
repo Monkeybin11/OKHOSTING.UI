@@ -12,9 +12,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	{
 		public DatePicker()
 		{
-            //Attributes["pattern"] = @"(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}";
-            //Attributes["pattern"] = @"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d";
-            Attributes["placeholder"] = @"mm/dd/yyyy";
+			//Attributes["pattern"] = @"(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}";
+			//Attributes["pattern"] = @"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d";
+			Attributes["placeholder"] = @"mm/dd/yyyy";
 		}
 
 		#region IInputControl
@@ -71,7 +71,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		bool IInputControl.HandlePostBack()
 		{
 			DateTime date = DateTime.MinValue;
-			string postedValue = Page.Request.Form[ID];
+			string postedValue = Page?.Request.Form[ID];
 
 			if (base.Text != postedValue)
 			{

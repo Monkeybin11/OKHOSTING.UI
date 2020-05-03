@@ -7,6 +7,18 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 {
 	public class UserControl : System.Windows.Controls.UserControl, IUserControl
 	{
+		protected readonly System.Windows.Controls.ScrollViewer Scroller;
+
+		public UserControl()
+		{
+			//allows for automatic vertical scrolling
+			Scroller = new System.Windows.Controls.ScrollViewer();
+			Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
+
+			base.Content = Scroller;
+		}
+
 		void IDisposable.Dispose()
 		{
 		}
@@ -87,9 +99,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		/// <summary>
-		/// Space that this control will set between itself and it's own border
+		/// Space that this control will set between its content and its border
 		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// Espacio que este control se establecerá entre su contenido y su borde
 		/// </para>
 		/// </summary>
 		Thickness IControl.Padding
@@ -164,9 +176,66 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		#region IPage
+
+		/// <summary>
+		/// Each Page only contains one main view, which can optionally be a container and contain more views
+		/// <para xml:lang="es">
+		/// Cada ventana solo contiene una vista principal, que puede ser opcionalmente un contenedor y contener mas vistas.
+		/// </para>
+		/// </summary>
+		IControl IPage.Content
+		{
+			get
+			{
+				return (IControl) Scroller.Content;
+			}
+			set
+			{
+				//if (value != null)
+				//{
+				//	value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
+				//	value.VerticalAlignment = UI.VerticalAlignment.Fill;
+				//}
+				
+				Scroller.Content = value;
+			}
+		}
+
+		double? IPage.Width
+		{
+			get
+			{
+				return base.Width - 30;
+			}
+		}
+
+		double? IPage.Height
+		{
+			get
+			{
+				return base.Height;
+			}
+		}
 
 		/// <summary>
 		/// App that is running on this page
@@ -191,28 +260,10 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
-		/// <summary>
-		/// Each Page only contains one main view, which can optionally be a container and contain more views
-		/// <para xml:lang="es">
-		/// Cada ventana solo contiene una vista principal, que puede ser opcionalmente un contenedor y contener mas vistas.
-		/// </para>
-		/// </summary>
-		IControl IPage.Content
+		public void InvokeOnMainThread(Action action)
 		{
-			get
-			{
-				return (IControl) base.Content;
-			}
-			set
-			{
-				base.Content = value;
-			}
+			System.Windows.Application.Current.Dispatcher.Invoke(action);
 		}
-
-		/// <summary>
-		/// Raised when the page is resized
-		/// </summary>
-		public event EventHandler Resized;
 
 		/// <summary>
 		/// Raises the Resized event
@@ -220,23 +271,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
 		{
 			base.OnRenderSizeChanged(sizeInfo);
-			Resized?.Invoke(this, new EventArgs());
-		}
-
-		double? IPage.Width
-		{
-			get
-			{
-				return base.Width;
-			}
-		}
-
-		double? IPage.Height
-		{
-			get
-			{
-				return base.Height;
-			}
+			App?[this]?.Controller?.Refresh();
 		}
 
 		#endregion
