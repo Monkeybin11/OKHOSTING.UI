@@ -226,6 +226,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 			}
 		}
 
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
+		}
+
 		#endregion
 
 		#region ITextControl

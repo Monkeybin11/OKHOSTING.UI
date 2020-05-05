@@ -321,6 +321,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
+		}
+
 		#endregion
 
 		#region ITextControl

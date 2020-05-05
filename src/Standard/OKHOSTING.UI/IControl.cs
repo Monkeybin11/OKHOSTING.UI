@@ -7,7 +7,7 @@ namespace OKHOSTING.UI
 	/// Base interface for all user controls
 	/// <para xml:lang="es">Interfaz base para todos los controles de usuario.</para>
 	/// </summary>
-	public interface IControl: IDisposable
+	public interface IControl: IDisposable, ICloneable
 	{
 		/// <summary>
 		/// Friendly programming name (or id) of the control. A simple view should not contain 2 controls with the same name.

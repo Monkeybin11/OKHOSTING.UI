@@ -319,6 +319,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
+		}
+
 		#endregion
 
 		#region ITextControl

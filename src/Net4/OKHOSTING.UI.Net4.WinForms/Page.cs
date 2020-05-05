@@ -35,6 +35,8 @@ namespace OKHOSTING.UI.Net4.WinForms
 			}
 			set
 			{
+				SuspendLayout();
+
 				Container.Controls.Clear();
 
 				if (value != null)
@@ -42,6 +44,8 @@ namespace OKHOSTING.UI.Net4.WinForms
 					//((System.Windows.Forms.Control) value).Dock = System.Windows.Forms.DockStyle.Fill;
 					Container.Controls.Add((Control) value);
 				}
+
+				ResumeLayout();
 			}
 		}
 

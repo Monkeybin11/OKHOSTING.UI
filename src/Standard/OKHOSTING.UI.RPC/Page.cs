@@ -49,11 +49,11 @@ namespace OKHOSTING.UI.RPC
 		/// Cada ventana solo contiene una vista principal, que puede ser opcionalmente un contenedor y contener mas vistas.
 		/// </para>
 		/// </summary>
-		public UI.Controls.IControl Content
+		public IControl Content
 		{
 			get
 			{
-				return (UI.Controls.IControl) Get(nameof(Content));
+				return (IControl) Get(nameof(Content));
 			}
 			set
 			{

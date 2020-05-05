@@ -1,6 +1,5 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
-using System.Drawing;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {

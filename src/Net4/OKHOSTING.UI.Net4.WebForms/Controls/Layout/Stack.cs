@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
+using System;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 {
@@ -316,6 +317,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
 				return (IControl) base.Parent;
 			}
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		#endregion

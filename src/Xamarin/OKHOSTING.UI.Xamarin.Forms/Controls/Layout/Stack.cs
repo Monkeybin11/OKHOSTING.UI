@@ -51,6 +51,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		#region IControl
+
 		/// <summary>
 		/// Friendly programming name (or id) of the control. A simple view should not contain 2 controls with the same name.
 		/// <para xml:lang="es">
@@ -286,6 +287,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			{
 				return (IControl) base.Parent;
 			}
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		#endregion

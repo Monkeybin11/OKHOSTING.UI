@@ -262,5 +262,10 @@ namespace OKHOSTING.UI.RPC.Controls
 				return (IControl) Get(nameof(Parent));
 			}
 		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }

@@ -44,5 +44,10 @@ namespace OKHOSTING.UI.HTML.Controls
 		public string CssClass { get; set; }
 
 		public IControl Parent { get; protected set; }
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }

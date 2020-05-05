@@ -1,4 +1,5 @@
 ﻿using OKHOSTING.UI.Controls;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -186,6 +187,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			{
 				return (IControl) base.Parent;
 			}
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		#endregion

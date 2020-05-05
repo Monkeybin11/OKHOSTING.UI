@@ -297,7 +297,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Media
 			get; set;
 		}
 
-
 		/// <summary>
 		/// Control that contains this control, like a grid, or stack
 		/// </summary>
@@ -307,6 +306,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Media
 			{
 				return (IControl) base.Parent;
 			}
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		#endregion

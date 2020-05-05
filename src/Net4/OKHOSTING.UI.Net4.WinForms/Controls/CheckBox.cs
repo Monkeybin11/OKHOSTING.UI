@@ -159,6 +159,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
+		}
+
 		#endregion
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)

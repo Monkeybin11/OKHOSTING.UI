@@ -1,16 +1,16 @@
-﻿using OKHOSTING.UI;
+﻿using OKHOSTING.Core;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OKHOSTING.UI.Controllers
 {
 	public class TreeGridController : Controller
 	{
 		IGrid Grid;
+		int controlCounter = 0;
 
 		/// <summary>
 		/// The controls that will be placed at the top of the grid, almost always displaying the column names
@@ -22,6 +22,16 @@ namespace OKHOSTING.UI.Controllers
 		/// </summary>
 		public IEnumerable<Row> Rows { get; set; }
 
+		/// <summary>
+		/// The kind of control that will be clicked to expand a collapsed row
+		/// </summary>
+		public IClickable ExpandButtonTemplate { get; set; }
+
+		/// <summary>
+		/// The kind of control that will be clicked to collapse an expanded row
+		/// </summary>
+		public IClickable CollapseButtonTemplate { get; set; }
+
 		public TreeGridController()
 		{
 		}
@@ -32,12 +42,29 @@ namespace OKHOSTING.UI.Controllers
 
 		protected internal override void OnStart()
 		{
-			Grid = Core.BaitAndSwitch.Create<IGrid>();
+			Grid = BaitAndSwitch.Create<IGrid>();
+
+			if (ExpandButtonTemplate == null)
+			{
+				var label = BaitAndSwitch.Create<ILabelButton>();
+				label.Text = "+";
+				ExpandButtonTemplate = label;
+			}
+
+			if (CollapseButtonTemplate == null)
+			{
+				var label = BaitAndSwitch.Create<ILabelButton>();
+				label.Text = "-";
+				CollapseButtonTemplate = label;
+			}
+
 			Refresh();
 		}
 
 		public override void Refresh()
 		{
+			Page.Content = null;
+
 			IControl[] headers = Header.ToArray();
 
 			Grid.ClearContent();
@@ -78,15 +105,15 @@ namespace OKHOSTING.UI.Controllers
 			if (row.Children != null && row.Children.Any())
 			{
 				//create expand/collapse button and put it on the first cell
-				var cmdExpand = Core.BaitAndSwitch.Create<ILabelButton>();
+				IClickable cmdExpand;
 
 				if (row.Collapsed)
 				{
-					cmdExpand.Text = "+";
+					cmdExpand = CreateExpandButton();
 				}
 				else
 				{
-					cmdExpand.Text = "-";
+					cmdExpand = CreateCollapseButton();
 				}
 
 				cmdExpand.Tag = row;
@@ -120,6 +147,26 @@ namespace OKHOSTING.UI.Controllers
 			//reverse value
 			row.Collapsed = !row.Collapsed;
 			Refresh();
+		}
+
+		protected IClickable CreateExpandButton()
+		{
+			var xml = Data.Convert.ToXml(ExpandButtonTemplate);
+			var control = Data.Convert.FromXml<IClickable>(xml);
+			control.Name = $"ctrlExpand_{controlCounter}";
+			controlCounter++;
+
+			return control;
+		}
+
+		protected IClickable CreateCollapseButton()
+		{
+			var xml = Data.Convert.ToXml(CollapseButtonTemplate);
+			var control = Data.Convert.FromXml<IClickable>(xml);
+			control.Name = $"ctrlExpand_{controlCounter}";
+			controlCounter++;
+
+			return control;
 		}
 
 		/// <summary>

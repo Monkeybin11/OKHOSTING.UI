@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
@@ -143,6 +143,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			{
 				return (IControl) base.Parent;
 			}
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		#endregion

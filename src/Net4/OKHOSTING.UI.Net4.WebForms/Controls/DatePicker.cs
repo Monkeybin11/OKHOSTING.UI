@@ -1,6 +1,5 @@
 ﻿using System;
 using OKHOSTING.UI.Controls;
-using NativeControl = System.Web.UI.Control;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {

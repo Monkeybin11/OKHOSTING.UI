@@ -187,7 +187,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			set;
 		}
 
-
 		/// <summary>
 		/// Gets or sets the color of the Control background.
 		/// <para xml:lang="es">
@@ -313,6 +312,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			{
 				return (IControl) base.Parent;
 			}
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		#endregion

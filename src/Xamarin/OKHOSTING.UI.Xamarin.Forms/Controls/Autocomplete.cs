@@ -434,6 +434,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		string IControl.CssClass { get; set; }
 
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
+		}
+
 		#endregion
 
 		#region ITextControl

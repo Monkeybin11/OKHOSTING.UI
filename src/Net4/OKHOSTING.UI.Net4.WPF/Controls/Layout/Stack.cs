@@ -265,6 +265,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 		}
 
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
+		}
+
 		#endregion
 	}
 }
