@@ -24,7 +24,6 @@ namespace OKHOSTING.UI.Test.Controls
 		protected override void OnStart()
 		{
 			
-
 			//Create an Stack
 			IStack stack = Core.BaitAndSwitch.Create<IStack>();
 

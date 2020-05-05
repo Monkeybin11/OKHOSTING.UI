@@ -30,65 +30,44 @@ namespace OKHOSTING.UI.Controllers
 		{
 		}
 
+		protected internal override void OnStart()
+		{
+			Grid = Core.BaitAndSwitch.Create<IGrid>();
+			Refresh();
+		}
+
 		public override void Refresh()
 		{
-			var headers = Header.ToArray();
-			
-			Grid = Core.BaitAndSwitch.Create<IGrid>();
+			IControl[] headers = Header.ToArray();
+
+			Grid.ClearContent();
 			Grid.ColumnCount = headers.Length + 1; //always add a 0 column that will display the +- icons to open and collapse the children rows
 			Grid.RowCount = 1;
+			Grid.ShowGridLines = true;
+			
+			Row[] rows = Rows.ToArray();
 
 			//set headers
-			for (int column = 1; column < headers.Length; column++)
+			for (int column = 1; column <= headers.Length; column++)
 			{
-				Grid.SetContent(0, column, headers[column]);
+				Grid.SetContent(0, column, headers[column - 1]);
 			}
 
 			//set rows
-			int rowIndex = 0;
-
-			foreach (Row row in Rows)
+			for (int rowIndex = 0; rowIndex < rows.Length; rowIndex++)
 			{
-				Grid.RowCount++;
-
-				var content = row.Content.ToArray();
-
-				//set content of the row, excepto for expand button
-				for (int column = 1; column < Grid.ColumnCount; column++)
-				{
-					Grid.SetContent(rowIndex, column, content[column - 1]);
-				}
-
-				//now we set the expand button and the children if the row is not collapsed
-				if (row.Children.Any())
-				{
-					var cmdExpand = Core.BaitAndSwitch.Create<ILabelButton>();
-
-					if (row.Collapsed)
-					{
-						cmdExpand.Text = "+";
-					}
-					else
-					{
-						cmdExpand.Text = "-";
-					}
-
-					cmdExpand.Tag = row;
-					cmdExpand.Click += cmdExpand_Click;
-
-					Grid.SetContent(rowIndex, 0, cmdExpand);
-					AddChildren(row);
-				}
-
-				rowIndex++;
+				AddRow(rows, rowIndex);
 			}
+
+			Page.Content = Grid;
 		}
 
-		protected void AddChildren(Row row)
+		protected void AddRow(Row[] rows, int rowIndex)
 		{
+			Row row = rows[rowIndex];
 			Grid.RowCount++;
 
-			//set content of the row, excepto for expand button
+			//set content of the row, except for expand button
 			var content = row.Content.ToArray();
 			
 			for (int column = 1; column < Grid.ColumnCount; column++)
@@ -96,17 +75,41 @@ namespace OKHOSTING.UI.Controllers
 				Grid.SetContent(Grid.RowCount - 1, column, content[column - 1]);
 			}
 
-			var firstcell = Grid.GetContent(Grid.RowCount - 1, 1);
-
-			foreach (var children in row.Children)
+			if (row.Children != null && row.Children.Any())
 			{
-				AddChildren(children);
-			}
-		}
+				//create expand/collapse button and put it on the first cell
+				var cmdExpand = Core.BaitAndSwitch.Create<ILabelButton>();
 
-		protected internal override void OnStart()
-		{
-			Refresh();
+				if (row.Collapsed)
+				{
+					cmdExpand.Text = "+";
+				}
+				else
+				{
+					cmdExpand.Text = "-";
+				}
+
+				cmdExpand.Tag = row;
+				cmdExpand.Click += cmdExpand_Click;
+
+				Grid.SetContent(Grid.RowCount - 1, 0, cmdExpand);
+
+				//show children only if the row is not collapsed
+				if (!row.Collapsed)
+				{
+					var childrenMargin = content[0].Margin ?? new Thickness(0);
+					childrenMargin = new Thickness(childrenMargin.Left + 20, childrenMargin.Top, childrenMargin.Right, childrenMargin.Bottom);
+
+					var children = row.Children.ToArray();
+
+					for (int childrenIndex = 0; childrenIndex < children.Length; childrenIndex++)
+					{
+						children[childrenIndex].Content.First().Margin = childrenMargin;
+
+						AddRow(children, childrenIndex);
+					}
+				}
+			}
 		}
 
 		private void cmdExpand_Click(object sender, EventArgs e)

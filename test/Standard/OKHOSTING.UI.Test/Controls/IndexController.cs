@@ -109,6 +109,11 @@ namespace OKHOSTING.UI.Test.Controls
 			lblMenu.Click += (object sender, EventArgs e) => new MenuController() { Page = Page }.Start();
 			stack.Children.Add(lblMenu);
 
+			ILabelButton lblTreeGrid = Core.BaitAndSwitch.Create<ILabelButton>();
+			lblTreeGrid.Text = "TreeGrid";
+			lblTreeGrid.Click += (object sender, EventArgs e) => new TreeGridTest() { Page = Page }.Start();
+			stack.Children.Add(lblTreeGrid);
+
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control/feature to test";
 			Page.Content = stack;
