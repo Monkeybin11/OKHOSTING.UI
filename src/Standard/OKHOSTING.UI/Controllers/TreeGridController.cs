@@ -10,7 +10,6 @@ namespace OKHOSTING.UI.Controllers
 	public class TreeGridController : Controller
 	{
 		IGrid Grid;
-		int controlCounter = 0;
 
 		/// <summary>
 		/// The controls that will be placed at the top of the grid, almost always displaying the column names
@@ -21,16 +20,6 @@ namespace OKHOSTING.UI.Controllers
 		/// The rows of this grid
 		/// </summary>
 		public IEnumerable<Row> Rows { get; set; }
-
-		/// <summary>
-		/// The kind of control that will be clicked to expand a collapsed row
-		/// </summary>
-		public IClickable ExpandButtonTemplate { get; set; }
-
-		/// <summary>
-		/// The kind of control that will be clicked to collapse an expanded row
-		/// </summary>
-		public IClickable CollapseButtonTemplate { get; set; }
 
 		public TreeGridController()
 		{
@@ -43,21 +32,6 @@ namespace OKHOSTING.UI.Controllers
 		protected internal override void OnStart()
 		{
 			Grid = BaitAndSwitch.Create<IGrid>();
-
-			if (ExpandButtonTemplate == null)
-			{
-				var label = BaitAndSwitch.Create<ILabelButton>();
-				label.Text = "+";
-				ExpandButtonTemplate = label;
-			}
-
-			if (CollapseButtonTemplate == null)
-			{
-				var label = BaitAndSwitch.Create<ILabelButton>();
-				label.Text = "-";
-				CollapseButtonTemplate = label;
-			}
-
 			Refresh();
 		}
 
@@ -117,7 +91,6 @@ namespace OKHOSTING.UI.Controllers
 				}
 
 				cmdExpand.Tag = row;
-				cmdExpand.Click += cmdExpand_Click;
 
 				Grid.SetContent(Grid.RowCount - 1, 0, cmdExpand);
 
@@ -151,20 +124,18 @@ namespace OKHOSTING.UI.Controllers
 
 		protected IClickable CreateExpandButton()
 		{
-			var xml = Data.Convert.ToXml(ExpandButtonTemplate);
-			var control = Data.Convert.FromXml<IClickable>(xml);
-			control.Name = $"ctrlExpand_{controlCounter}";
-			controlCounter++;
+			var control = BaitAndSwitch.Create<ILabelButton>();
+			control.Text = "+";
+			control.Click += cmdExpand_Click;
 
 			return control;
 		}
 
 		protected IClickable CreateCollapseButton()
 		{
-			var xml = Data.Convert.ToXml(CollapseButtonTemplate);
-			var control = Data.Convert.FromXml<IClickable>(xml);
-			control.Name = $"ctrlExpand_{controlCounter}";
-			controlCounter++;
+			var control = BaitAndSwitch.Create<ILabelButton>();
+			control.Text = "-";
+			control.Click += cmdExpand_Click;
 
 			return control;
 		}
