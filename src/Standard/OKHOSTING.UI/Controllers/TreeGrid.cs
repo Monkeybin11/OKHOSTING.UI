@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Controllers
 {
-	public class TreeGridController : Controller
+	public class TreeGrid : Controller
 	{
 		IGrid Grid;
 
@@ -21,11 +21,11 @@ namespace OKHOSTING.UI.Controllers
 		/// </summary>
 		public IEnumerable<Row> Rows { get; set; }
 
-		public TreeGridController()
+		public TreeGrid()
 		{
 		}
 
-		public TreeGridController(IPage page) : base(page)
+		public TreeGrid(IPage page) : base(page)
 		{
 		}
 

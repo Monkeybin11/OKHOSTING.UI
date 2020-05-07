@@ -23,7 +23,7 @@ namespace OKHOSTING.UI.Test.Controls
 			var container = Core.BaitAndSwitch.Create<IUserControl>();
 			container.App = Page.App;
 
-			var treeGrid = new Controllers.TreeGridController(container);
+			var treeGrid = new Controllers.TreeGrid(container);
 			var headers = new IControl[Columns];
 
 			for (int column = 0; column < Columns; column++)
@@ -36,7 +36,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 			treeGrid.Header = headers;
 
-			var rows = new List<Controllers.TreeGridController.Row>();
+			var rows = new List<Controllers.TreeGrid.Row>();
 
 			for (int rowIndex = 0; rowIndex < 10; rowIndex++)
 			{
@@ -45,7 +45,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				if (rowIndex % 4 == 0)
 				{
-					var children = new List<Controllers.TreeGridController.Row>();
+					var children = new List<Controllers.TreeGrid.Row>();
 					
 					for (int childRowIndex = 0; childRowIndex < 3; childRowIndex++)
 					{
@@ -55,7 +55,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 						if (rowIndex % 2 == 0)
 						{
-							var children2 = new List<Controllers.TreeGridController.Row>();
+							var children2 = new List<Controllers.TreeGrid.Row>();
 
 							for (int childRowIndex2 = 0; childRowIndex2 < 2; childRowIndex2++)
 							{
@@ -86,9 +86,9 @@ namespace OKHOSTING.UI.Test.Controls
 			Page.Content = stack;
 		}
 
-		protected Controllers.TreeGridController.Row CreateRow(string text)
+		protected Controllers.TreeGrid.Row CreateRow(string text)
 		{
-			var row = new Controllers.TreeGridController.Row();
+			var row = new Controllers.TreeGrid.Row();
 			var content = new IControl[Columns];
 
 			for (int column = 0; column < Columns; column++)

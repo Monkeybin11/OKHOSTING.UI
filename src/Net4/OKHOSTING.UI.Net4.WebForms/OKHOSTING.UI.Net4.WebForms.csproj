@@ -35,6 +35,9 @@
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DiffPlex">
+      <HintPath>..\..\..\..\..\Users\david\Downloads\diffplex-master\DiffPlex\bin\Release\netstandard1.0\DiffPlex.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -103,6 +106,7 @@
     <Content Include="JS\images\ui-icons_ffffff_256x240.png" />
     <Content Include="JS\jquery-ui-i18n.min.js" />
     <Content Include="JS\DragDrop.js" />
+    <Content Include="JS\AjaxPostback.js" />
     <Content Include="Services\PageSize.ashx" />
   </ItemGroup>
   <ItemGroup>

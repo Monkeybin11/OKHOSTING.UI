@@ -322,10 +322,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IClickable.RaiseClick()
 		{
-			string postedValue = Page?.Request.Form[ID + ".x"];
-
-			//is this an image button?
-			if (postedValue != null)
+			if (Page?.Request.Form["__EVENTTARGET"] == ClientID)
 			{
 				Click?.Invoke(this, new EventArgs());
 			}
@@ -384,6 +381,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public void LoadFromBytes(byte[] bytes)
 		{
 			LoadFromStream(new MemoryStream(bytes));
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			base.OnClientClick = $"javascript:__doPostBack('{ClientID}','')";
+			base.OnPreRender(e);
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Net4.WebForms.Controls;
 using System.Collections.Generic;
+using DiffPlex;
 
 namespace OKHOSTING.UI.Net4.WebForms
 {
@@ -96,6 +97,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 		}
 
+		/// <summary>
+		/// If set to true, all postbacks will be sent with AJAX instead of normal POST.
+		/// This is not compatible with friendly URLs since we stay at the same URL all the
+		/// </summary>
+		public bool AjaxPostback { get; set; }
+
 		public void InvokeOnMainThread(Action action)
 		{
 			System.Threading.Tasks.Task.Run(action);
@@ -171,6 +178,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// <param name="e">E.</param>
 		protected override void OnInit(EventArgs e)
 		{
+			EnableViewState = false;
 			base.OnInit(e);
 			EnsureChildControls();
 		}
@@ -181,11 +189,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected virtual void InitJavaScript()
 		{
 			//load javascript dependencies
-			Page.ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/JS/jquery.js"));
-			Page.ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/JS/jquery-ui.js"));
-			Page.ClientScript.RegisterClientScriptInclude("jquery-ui-i18n", ResolveUrl("~/JS/jquery-ui-i18n.min.js"));
-			Page.ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/JS/PageSize.js"));
-			Page.ClientScript.RegisterClientScriptInclude("DragDrop", ResolveUrl("~/JS/DragDrop.js"));
+			ClientScript.RegisterClientScriptInclude("jquery", ResolveUrl("~/JS/jquery.js"));
+			ClientScript.RegisterClientScriptInclude("PageSize", ResolveUrl("~/JS/PageSize.js"));
 
 			//if this is the first request, get page size and finish
 			if (Width == 0 && Height == 0)
@@ -205,6 +210,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 				Page.ClientScript.RegisterStartupScript(GetType(), "SetPageSize", pageSizeJS);
 
 				return;
+			}
+
+			ClientScript.RegisterClientScriptInclude("jquery-ui", ResolveUrl("~/JS/jquery-ui.js"));
+			ClientScript.RegisterClientScriptInclude("jquery-ui-i18n", ResolveUrl("~/JS/jquery-ui-i18n.min.js"));
+			ClientScript.RegisterClientScriptInclude("DragDrop", ResolveUrl("~/JS/DragDrop.js"));
+			ClientScript.GetPostBackEventReference(this, string.Empty);
+
+			if (AjaxPostback)
+			{
+				ClientScript.RegisterClientScriptInclude("AjaxPostback", ResolveUrl("~/JS/AjaxPostback.js"));
 			}
 		}
 
@@ -259,7 +274,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//search for a rewrite rule for this uri
 			var rule = Platform.GetUrlRewriteRuleFor(new Uri(Request.RawUrl, UriKind.Relative));
 
-			
 			var state = App[this];
 
 			//should we start a different controller than the current one?

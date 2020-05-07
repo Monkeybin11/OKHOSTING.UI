@@ -7,6 +7,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 	{
 		protected override void OnLoad(EventArgs e)
 		{
+			AjaxPostback = true;
+
 			base.OnLoad(e);
 
 			if (Width == 0 && Height == 0)

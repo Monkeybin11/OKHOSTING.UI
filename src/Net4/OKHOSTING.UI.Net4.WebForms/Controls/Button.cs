@@ -19,12 +19,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IClickable.RaiseClick()
 		{
-			string postedValue = Page?.Request.Form[ClientID];
-
-			if (postedValue == Text)
+			if (Page?.Request.Form["__EVENTTARGET"] == ClientID)
 			{
 				Click?.Invoke(this, new EventArgs());
 			}
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			base.OnClientClick = $"javascript:__doPostBack('{ClientID}','')";
+			base.OnPreRender(e);
 		}
 
 		#region IControl

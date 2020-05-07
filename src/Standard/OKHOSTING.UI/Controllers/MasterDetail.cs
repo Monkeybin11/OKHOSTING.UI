@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Controllers
 	/// Controller that allows child classes to easily create master-detail
 	/// views that allow for compact mode in small screens
 	/// </summary>
-	public abstract class MasterDetailController : Controller
+	public abstract class MasterDetail : Controller
 	{
 		/// <summary>
 		/// Container for the master view
@@ -38,11 +38,11 @@ namespace OKHOSTING.UI.Controllers
 		/// </summary>
 		public bool CompactMode { get; set; }
 
-		public MasterDetailController()
+		public MasterDetail()
 		{
 		}
 
-		public MasterDetailController(IPage page) : base(page)
+		public MasterDetail(IPage page) : base(page)
 		{
 		}
 
