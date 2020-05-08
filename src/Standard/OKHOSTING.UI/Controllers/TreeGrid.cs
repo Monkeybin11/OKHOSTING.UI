@@ -7,9 +7,13 @@ using System.Linq;
 
 namespace OKHOSTING.UI.Controllers
 {
+	/// <summary>
+	/// A grid that has rows with child rows, and the child rows are shown when the customer
+	/// clicks the "expand" button on the parent row
+	/// </summary>
 	public class TreeGrid : Controller
 	{
-		IGrid Grid;
+		public IGrid Grid { get; protected set; }
 
 		/// <summary>
 		/// The controls that will be placed at the top of the grid, almost always displaying the column names
@@ -29,12 +33,6 @@ namespace OKHOSTING.UI.Controllers
 		{
 		}
 
-		protected internal override void OnStart()
-		{
-			Grid = BaitAndSwitch.Create<IGrid>();
-			Refresh();
-		}
-
 		public override void Refresh()
 		{
 			Page.Content = null;
@@ -45,7 +43,7 @@ namespace OKHOSTING.UI.Controllers
 			Grid.ColumnCount = headers.Length + 1; //always add a 0 column that will display the +- icons to open and collapse the children rows
 			Grid.RowCount = 1;
 			Grid.ShowGridLines = true;
-			
+
 			Row[] rows = Rows.ToArray();
 
 			//set headers
@@ -61,6 +59,12 @@ namespace OKHOSTING.UI.Controllers
 			}
 
 			Page.Content = Grid;
+		}
+
+		protected internal override void OnStart()
+		{
+			Grid = BaitAndSwitch.Create<IGrid>();
+			Refresh();
 		}
 
 		protected void AddRow(Row[] rows, int rowIndex)
@@ -112,7 +116,7 @@ namespace OKHOSTING.UI.Controllers
 			}
 		}
 
-		private void cmdExpand_Click(object sender, EventArgs e)
+		protected void cmdExpand_Click(object sender, EventArgs e)
 		{
 			var cmdExpand = (ILabelButton) sender;
 			var row = (Row) cmdExpand.Tag;
@@ -141,7 +145,7 @@ namespace OKHOSTING.UI.Controllers
 		}
 
 		/// <summary>
-		/// Represents a row in a TreeGrid, with optional parent and children rows
+		/// Represents a row in a TreeGrid, with optional children rows
 		/// </summary>
 		public class Row
 		{

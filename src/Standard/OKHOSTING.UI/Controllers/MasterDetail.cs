@@ -14,23 +14,23 @@ namespace OKHOSTING.UI.Controllers
 		/// <summary>
 		/// Container for the master view
 		/// </summary>
-		IUserControl Master { get; set; }
+		public IUserControl Master { get; protected set; }
 
 		/// <summary>
 		/// Container for the detail view
 		/// </summary>
-		IUserControl Detail { get; set; }
+		public IUserControl Detail { get; protected set; }
 
 		/// <summary>
 		/// Grid that contains both master and detail views. Only used when
 		/// CompactMode is false
 		/// </summary>
-		IGrid Grid { get; set; }
+		public IGrid Grid { get; protected set; }
 
 		/// <summary>
 		/// Curently runnig controller on the Detail, if any
 		/// </summary>
-		Controller DetailController { get; set; }
+		public Controller DetailController { get; protected set; }
 
 		/// <summary>
 		/// If true, both master and detail are shown in the same page,
