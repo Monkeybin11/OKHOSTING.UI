@@ -109,7 +109,7 @@ namespace OKHOSTING.UI.Controllers.Forms
 			{
 				try
 				{
-					IStringSerializable instance = (IStringSerializable) Value;
+					var instance = Value;
 				}
 				catch
 				{

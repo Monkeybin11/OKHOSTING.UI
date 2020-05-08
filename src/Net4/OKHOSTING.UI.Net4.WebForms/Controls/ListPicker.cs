@@ -63,7 +63,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				if(Items.FindByValue(value) == null)
+				if (Items.FindByValue(value) == null)
 				{
 					DataBind();
 				}
