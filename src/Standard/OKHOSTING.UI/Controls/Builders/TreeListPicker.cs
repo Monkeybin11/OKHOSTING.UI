@@ -4,18 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OKHOSTING.UI.Controllers
+namespace OKHOSTING.UI.Controls.Builders
 {
-	public class TreeListPicker: Controller
+	public class TreeListPicker
 	{
-		public IListPicker ListPicker { get; protected set; }
+		public readonly IListPicker ListPicker = BaitAndSwitch.Create<IListPicker>();
 
 		/// <summary>
 		/// The items of this list picker
 		/// </summary>
-		public IEnumerable<Item> Items { get; set; }
+		public readonly IEnumerable<Item> Items;
 
-		public string Value 
+		public TreeListPicker(IEnumerable<Item> items)
+		{
+			Items = items;
+
+			if (items == null)
+			{
+				return;
+			}
+
+			Init();
+		}
+
+		public string Value
 		{ 
 			get 
 			{
@@ -28,10 +40,8 @@ namespace OKHOSTING.UI.Controllers
 			} 
 		}
 		
-		public override void Refresh()
+		protected void Init()
 		{
-			Page.Content = null;
-
 			ListPicker.Items = null;
 
 			Item[] items = Items.ToArray();
@@ -41,14 +51,6 @@ namespace OKHOSTING.UI.Controllers
 			{
 				AddRow(items, itemIndex);
 			}
-
-			Page.Content = ListPicker;
-		}
-
-		protected internal override void OnStart()
-		{
-			ListPicker = BaitAndSwitch.Create<IListPicker>();
-			Refresh();
 		}
 
 		protected void AddRow(Item[] items, int itemIndex)

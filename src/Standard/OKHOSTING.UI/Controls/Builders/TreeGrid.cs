@@ -5,38 +5,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OKHOSTING.UI.Controllers
+namespace OKHOSTING.UI.Controls.Builders
 {
 	/// <summary>
 	/// A grid that has rows with child rows, and the child rows are shown when the customer
 	/// clicks the "expand" button on the parent row
 	/// </summary>
-	public class TreeGrid : Controller
+	public class TreeGrid: IBuilder<IGrid>
 	{
-		public IGrid Grid { get; protected set; }
+		protected readonly IGrid Grid = BaitAndSwitch.Create<IGrid>();
 
 		/// <summary>
 		/// The controls that will be placed at the top of the grid, almost always displaying the column names
 		/// </summary>
-		public IEnumerable<IControl> Header { get; set; }
-		
+		public readonly IEnumerable<IControl> Header;
+
 		/// <summary>
 		/// The rows of this grid
 		/// </summary>
-		public IEnumerable<Row> Rows { get; set; }
+		public readonly IEnumerable<Row> Rows;
 
-		public TreeGrid()
+		public TreeGrid(IEnumerable<IControl> header, IEnumerable<Row> rows)
 		{
+			Header = header;
+			Rows = rows;
+			Init();
 		}
 
-		public TreeGrid(IPage page) : base(page)
+		public void Init()
 		{
-		}
-
-		public override void Refresh()
-		{
-			Page.Content = null;
-
 			IControl[] headers = Header.ToArray();
 
 			Grid.ClearContent();
@@ -57,14 +54,14 @@ namespace OKHOSTING.UI.Controllers
 			{
 				AddRow(rows, rowIndex);
 			}
-
-			Page.Content = Grid;
 		}
-
-		protected internal override void OnStart()
+		
+		IGrid IBuilder<IGrid>.Content
 		{
-			Grid = BaitAndSwitch.Create<IGrid>();
-			Refresh();
+			get
+			{
+				return Grid;
+			}
 		}
 
 		protected void AddRow(Row[] rows, int rowIndex)
@@ -123,7 +120,7 @@ namespace OKHOSTING.UI.Controllers
 
 			//reverse value
 			row.Collapsed = !row.Collapsed;
-			Refresh();
+			Init();
 		}
 
 		protected IClickable CreateExpandButton()
