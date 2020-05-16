@@ -5,9 +5,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 {
 	public partial class Default : Page
 	{
-		public override void OnAppStart()
+		protected override void OnInit(EventArgs e)
 		{
 			AjaxPostback = true;
+			base.OnInit(e);
+		}
+
+		public override void OnAppStart()
+		{
 			new IndexController() { Page = this }.Start();
 		}
 	}
