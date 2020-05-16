@@ -11,7 +11,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 	/// It represents a page of a form
 	/// <para xml:lang="es">Representa una pagina de un formulario.</para>
 	/// </summary>
-	public partial class Page : System.Web.UI.Page, IPage
+	public abstract partial class Page : System.Web.UI.Page, IPage
 	{
 		/// <summary>
 		/// App that is running on this page
@@ -20,11 +20,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				return (App)Session["App"];
+				if (Session[$"{nameof(Page)}.{nameof(App)}"] == null)
+				{
+					Session[$"{nameof(Page)}.{nameof(App)}"] = Core.BaitAndSwitch.Create<App>();
+				}
+
+				return (App) Session[$"{nameof(Page)}.{nameof(App)}"];
 			}
 			set
 			{
-				Session["App"] = value;
+				Session[$"{nameof(Platform)}.{nameof(App)}"] = value;
 			}
 		}
 
@@ -39,21 +44,23 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (Form.Controls.Count == 0)
-				{
-					return null;
-				}
-
-				return (IControl) Form.Controls[0];
+				return (IControl) Session[$"{nameof(Page)}.{nameof(Content)}"];
 			}
 			set
 			{
-				Form.Controls.Clear();
+				Session[$"{nameof(Page)}.{nameof(Content)}"] = value;
+			}
+		}
 
-				if (value != null)
-				{
-					Form.Controls.Add((System.Web.UI.Control) value);
-				}
+		string IPage.Title
+		{
+			get
+			{
+				return (string) Session[$"{nameof(Page)}.{nameof(Title)}"];
+			}
+			set
+			{
+				Session[$"{nameof(Page)}.{nameof(Title)}"] = value;
 			}
 		}
 
@@ -68,12 +75,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (Session[typeof(Page) + ".Width"] == null)
+				if (Session[$"{nameof(Page)}.{nameof(Width)}"] == null)
 				{
-					Session[typeof(Page) + ".Width"] = (double)0;
+					Session[$"{nameof(Page)}.{nameof(Width)}"] = (double) 0;
 				}
 
-				return (double)Session[typeof(Page) + ".Width"];
+				return (double) Session[$"{nameof(Page)}.{nameof(Width)}"];
 			}
 		}
 
@@ -88,12 +95,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			get
 			{
-				if (Session[typeof(Page) + ".Height"] == null)
+				if (Session[$"{nameof(Page)}.{nameof(Height)}"] == null)
 				{
-					Session[typeof(Page) + ".Height"] = (double)0;
+					Session[$"{nameof(Page)}.{nameof(Height)}"] = (double) 0;
 				}
 
-				return (double)Session[typeof(Page) + ".Height"];
+				return (double) Session[$"{nameof(Page)}.{nameof(Height)}"];
 			}
 		}
 
@@ -109,6 +116,12 @@ namespace OKHOSTING.UI.Net4.WebForms
 		}
 
 		/// <summary>
+		/// This will be executed only once at the begining of every new user session.
+		/// You should override this in your Net4.WebForms.Page and start a controller or do something
+		/// </summary>
+		public abstract void OnAppStart();
+
+		/// <summary>
 		/// Assign a name to all controls created, using a unique counter (per user session) to avoid duplicate names
 		/// </summary>
 		protected internal int ControlCounter = 0;
@@ -121,11 +134,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			base.OnLoad(e);
 
-			App = Platform.CurrentApp;
 			Platform.CurrentPage = this;
 
 			//initialize javascript
 			InitJavaScript();
+
+			//if this is the first load, exit and wait for page size on the second load
+			if (Width == 0 && Height == 0)
+			{
+				return;
+			}
 
 			//initialize the page state
 			InitState();
@@ -155,14 +173,15 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// <param name="e">E.</param>
 		protected override void OnPreRender(EventArgs e)
 		{
-			//save page state
-			var state = App[this];
+			//refresh content from session
+			Form.Controls.Clear();
 
-			if (state != null)
+			if (Content != null)
 			{
-				state.Title = Title;
-				state.Content = Content;
+				Form.Controls.Add((System.Web.UI.Control) Content);
 			}
+
+			Title = ((IPage) this).Title;
 
 			//allow friendly urls on forms
 			Form.Action = Request.RawUrl;
@@ -230,39 +249,47 @@ namespace OKHOSTING.UI.Net4.WebForms
 		protected virtual void InitState()
 		{
 			//replace old page with current one
-			var pages = App.State.Keys.Where(p => p is Page);
+			//var pages = App.State.Keys.Where(p => p is Page);
 
-			if (pages.Any())
-			{
-				Stack<PageState> newState = new Stack<PageState>();
+			//if (pages.Any())
+			//{
+			//	Stack<PageState> newState = new Stack<PageState>();
 
-				foreach (var page in pages.ToArray())
-				{
-					var stateStack = App.State[page];
+			//	foreach (var page in pages.ToArray())
+			//	{
+			//		var stateStack = App.State[page];
 
-					foreach (var item in stateStack.Reverse())
-					{
-						newState.Push(item);
-					}
+			//		foreach (var item in stateStack.Reverse())
+			//		{
+			//			newState.Push(item);
+			//		}
 
-					App.State.Remove(page);
-				}
+			//		App.State.Remove(page);
+			//	}
 
-				App.State.Add(this, newState);
+			//	App.State.Add(this, newState);
 
-				foreach (PageState st in newState)
-				{
-					st.Controller.Page = this;
-				}
-			}
-
-			//get title and content from the state, in case it has a different Page instance
-			var state = App[this];
-			Title = state?.Title;
-			Content = state?.Content;
+			//	foreach (PageState st in newState)
+			//	{
+			//		st.Controller.Page = this;
+			//	}
+			//}
 
 			//set this as the main page since web apps are 1 page only
 			App.MainPage = this;
+
+			//this is the first load of the app, we need to run a controller overriding OnAppStart
+			if (!App.State[this].Any())
+			{
+				OnAppStart();
+			}
+			else
+			{
+				//get title and content from the state, in case it has a different Page instance
+				//var state = App[this];
+				//Title = state?.Title;
+				//Content = state?.Content;
+			}
 		}
 
 		/// <summary>
@@ -311,9 +338,15 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 			//keep track of wich IInputControls had their value updated so we can reaise IInputControl.OnValueChanged
 			List<IInputControl> updatedInputControls = new List<IInputControl>();
+			var allControls = App.GetParentAndAllChildren(Content).ToArray();
+
+			foreach (var control in allControls)
+			{
+				((System.Web.UI.Control) control).Page = this;
+			}
 
 			//handle posted values
-			foreach (IInputControl control in App.GetParentAndAllChildren(Content).Where(c => c is IInputControl))
+			foreach (IInputControl control in allControls.Where(c => c is IInputControl))
 			{
 				if (control.HandlePostBack())
 				{
@@ -328,7 +361,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//raise button click events
-			foreach (Controls.IClickable control in App.GetParentAndAllChildren(Content).Where(c => c is Controls.IClickable))
+			foreach (Controls.IClickable control in allControls.Where(c => c is Controls.IClickable))
 			{
 				control.RaiseClick();
 			}
@@ -346,6 +379,23 @@ namespace OKHOSTING.UI.Net4.WebForms
 				var droppedOn = allControls.Where(c => c.Name == Request.Form["dragdrop_droppedOn"]).Single();
 
 				DragDrop.RaiseDropped(dragged, droppedOn);
+			}
+		}
+
+		public override int GetHashCode()
+		{
+			return Session?.SessionID.GetHashCode() ?? base.GetHashCode();
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Page)
+			{
+				return Page.Session.SessionID.Equals(Session.SessionID);
+			}
+			else
+			{
+				return base.Equals(obj);
 			}
 		}
 	}

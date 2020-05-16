@@ -17,7 +17,7 @@ namespace OKHOSTING.UI.Controls
 		ITextBoxInputType InputType { get; set; }
 
 		/// <summary>
-		/// Maximum length allowed for the string Value. Zero means no limit.
+		/// Maximum lenght allowed for the string Value. Zero means no limit.
 		/// <para xml:lang="es">
 		/// Longitud maxima permitida para el valor de cadena. Cero significa que no hay limite.
 		/// </para>

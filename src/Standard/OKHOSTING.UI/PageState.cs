@@ -56,5 +56,10 @@
 		/// <para xml:lang="es">Obtiene o establece el contenido de la pagina.</para>
 		/// </summary>
 		public IControl Content { get; set; }
+
+		public override string ToString()
+		{
+			return Title ?? base.ToString();
+		}
 	}
 }

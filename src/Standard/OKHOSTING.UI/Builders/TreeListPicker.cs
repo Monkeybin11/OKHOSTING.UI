@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OKHOSTING.UI.Controls.Builders
+namespace OKHOSTING.UI.Builders
 {
-	public class TreeListPicker
+	public class TreeListPicker: IBuilder<IListPicker>
 	{
-		public readonly IListPicker ListPicker = BaitAndSwitch.Create<IListPicker>();
+		protected readonly IListPicker ListPicker = BaitAndSwitch.Create<IListPicker>();
 
 		/// <summary>
 		/// The items of this list picker
@@ -39,7 +39,23 @@ namespace OKHOSTING.UI.Controls.Builders
 				ListPicker.Value = item;
 			} 
 		}
-		
+
+		IControl IBuilder.Control
+		{
+			get
+			{
+				return ListPicker;
+			}
+		}
+
+		public IListPicker Control
+		{
+			get
+			{
+				return ListPicker;
+			}
+		}
+
 		protected void Init()
 		{
 			ListPicker.Items = null;

@@ -50,19 +50,8 @@ var waitForFinalEvent = function ()
 
 $(document).ready
 (
-	function ()
-	{
-		$(window).resize(function ()
-		{
-			waitForFinalEvent
-			(
-				function ()
-				{
-					SetPageSize();
-				},
-				500,
-				"window.resize"
-			);
-		});
-	}
+	window.addEventListener('resize', function (event) {
+		console.log('aqui estamos SetPageSize');
+		SetPageSize();
+	})
 );

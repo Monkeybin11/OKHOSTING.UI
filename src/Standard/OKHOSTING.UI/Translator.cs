@@ -75,6 +75,16 @@ namespace OKHOSTING.UI
 		}
 
 		/// <summary>
+		/// Translate the specified parameter.
+		/// </summary>
+		/// <param name="parameter">The parameter to translate (it's name).</param>
+		public static string Translate(ParameterInfo parameter)
+		{
+			return GetString(parameter.Member.DeclaringType, RemoveSpecialChars($"{parameter.Member.GetFriendlyFullName()}.{parameter.Name}")) ?? parameter.Name;
+		}
+
+
+		/// <summary>
 		/// Translate the specified enumValue.
 		/// </summary>
 		/// <param name="enumValue">Enum value.</param>

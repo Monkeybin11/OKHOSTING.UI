@@ -49,7 +49,6 @@ namespace OKHOSTING.UI.Net4.WPF
 				//	value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
 				//	value.VerticalAlignment = UI.VerticalAlignment.Fill;
 				//}
-				
 				Scroller.Content = value;
 			}
 		}

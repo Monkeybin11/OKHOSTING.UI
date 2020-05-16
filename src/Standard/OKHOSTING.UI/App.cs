@@ -117,10 +117,6 @@ namespace OKHOSTING.UI
 			PageState currentState = new PageState(controller);
 			State[controller.Page].Push(currentState);
 
-			//reset page
-			controller.Page.Title = string.Empty;
-			controller.Page.Content = null;
-
 			controller.OnStart();
 
 			//save state
@@ -161,7 +157,7 @@ namespace OKHOSTING.UI
 				if (children is IPage)
 				{
 					//finish all controllers
-					while (State[(IPage) children].Count > 0)
+					while (State.ContainsKey((IPage) children) && State[(IPage) children].Count > 0)
 					{
 						FinishController((IPage) children);
 					}
@@ -177,13 +173,17 @@ namespace OKHOSTING.UI
 			//raise event
 			ControllerFinished?.Invoke(this, state.Controller);
 
+			//empty content
+			page.Title = string.Empty;
+			page.Content = null;
+
 			state = this[page];
 
 			//is there still a controller and a page state? recreate that state
 			if (state != null)
 			{
-				state.Controller.Page.Title = state.Title;
-				state.Controller.Page.Content = state.Content;
+				page.Title = state.Title;
+				page.Content = state.Content;
 			}
 		}
 

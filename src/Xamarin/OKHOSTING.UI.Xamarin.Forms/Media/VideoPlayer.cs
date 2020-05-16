@@ -265,5 +265,10 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		{
 			base.Pause();
 		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 	}
 }

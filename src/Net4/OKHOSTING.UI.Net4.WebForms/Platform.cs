@@ -89,27 +89,15 @@ namespace OKHOSTING.UI.Net4.WebForms
 			return UriMap.Where(r => r.ControllerType.Equals(controllerType) || r.ControllerType.IsSubclassOf(controllerType)).FirstOrDefault();
 		}
 
-		public static App CurrentApp
-		{
-			get
-			{
-				return (App) System.Web.HttpContext.Current.Session["App"];
-			}
-			internal set
-			{
-				System.Web.HttpContext.Current.Session["App"] = value;
-			}
-		}
-
 		public static Page CurrentPage
 		{
 			get
 			{
-				return (Page) System.Web.HttpContext.Current.Session["Page"];
+				return (Page) System.Web.HttpContext.Current.Session[$"{nameof(Platform)}.{nameof(CurrentPage)}"];
 			}
 			internal set
 			{
-				System.Web.HttpContext.Current.Session["Page"] = value;
+				System.Web.HttpContext.Current.Session[$"{nameof(Platform)}.{nameof(CurrentPage)}"] = value;
 			}
 		}
 

@@ -1,4 +1,4 @@
-﻿namespace OKHOSTING.UI.Controllers.Forms
+﻿namespace OKHOSTING.UI.Builders.Forms
 {
 	/// <summary>
 	/// Determines wether the field's caption will be shown at the left or the top of the field's value
@@ -17,4 +17,5 @@
 		/// </summary>
 		Top = 2,
 	}
+
 }

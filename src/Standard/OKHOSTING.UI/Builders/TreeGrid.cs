@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OKHOSTING.UI.Controls.Builders
+namespace OKHOSTING.UI.Builders
 {
 	/// <summary>
 	/// A grid that has rows with child rows, and the child rows are shown when the customer
@@ -55,8 +55,16 @@ namespace OKHOSTING.UI.Controls.Builders
 				AddRow(rows, rowIndex);
 			}
 		}
-		
-		IGrid IBuilder<IGrid>.Content
+
+		IControl IBuilder.Control
+		{
+			get
+			{
+				return Grid;
+			}
+		}
+
+		public IGrid Control
 		{
 			get
 			{

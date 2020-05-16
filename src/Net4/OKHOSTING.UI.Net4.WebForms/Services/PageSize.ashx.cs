@@ -29,18 +29,18 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			var output = json.Serialize(new { Refresh = resized });
 
 			//save new page size in session
-			context.Session[typeof(Page) + ".Width"] = width - 8; //rest some for the scrollbar
-			context.Session[typeof(Page) + ".Height"] = height;
+			context.Session[$"{nameof(Page)}.{nameof(Page.Width)}"] = width - 8; //rest some for the scrollbar
+			context.Session[$"{nameof(Page)}.{nameof(Page.Height)}"] = height;
 
 			if (resized)
 			{
 				page.App?[page]?.Controller?.Refresh();
 
-				if (page.App[page] != null)
-				{
-					page.App[page].Title = page.Title;
-					page.App[page].Content = page.Content;
-				}
+				//if (page.App[page] != null)
+				//{
+				//	page.App[page].Title = page.Title;
+				//	page.App[page].Content = page.Content;
+				//}
 			}
 
 			context.Response.Write(output);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OKHOSTING.UI.Builders;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -20,10 +21,6 @@ namespace OKHOSTING.UI.Test.Controls
 		/// </summary>
 		protected override void OnStart()
 		{
-			var container = Core.BaitAndSwitch.Create<IUserControl>();
-			container.App = Page.App;
-
-			var treeGrid = new Controllers.TreeGrid(container);
 			var headers = new IControl[Columns];
 
 			for (int column = 0; column < Columns; column++)
@@ -34,9 +31,7 @@ namespace OKHOSTING.UI.Test.Controls
 				headers[column] = label;
 			}
 
-			treeGrid.Header = headers;
-
-			var rows = new List<Controllers.TreeGrid.Row>();
+			var rows = new List<TreeGrid.Row>();
 
 			for (int rowIndex = 0; rowIndex < 10; rowIndex++)
 			{
@@ -45,7 +40,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				if (rowIndex % 4 == 0)
 				{
-					var children = new List<Controllers.TreeGrid.Row>();
+					var children = new List<TreeGrid.Row>();
 					
 					for (int childRowIndex = 0; childRowIndex < 3; childRowIndex++)
 					{
@@ -55,7 +50,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 						if (rowIndex % 2 == 0)
 						{
-							var children2 = new List<Controllers.TreeGrid.Row>();
+							var children2 = new List<TreeGrid.Row>();
 
 							for (int childRowIndex2 = 0; childRowIndex2 < 2; childRowIndex2++)
 							{
@@ -70,15 +65,14 @@ namespace OKHOSTING.UI.Test.Controls
 				}
 			}
 
-			treeGrid.Rows = rows;
-			treeGrid.Start();
+			var treeGrid = new TreeGrid(headers, rows);
 
 			var cmdClose = Core.BaitAndSwitch.Create<IButton>();
 			cmdClose.Text = "Close";
 			cmdClose.Click += cmdClose_Click;
 
 			var stack = Core.BaitAndSwitch.Create<IStack>();
-			stack.Children.Add(container);
+			stack.Children.Add(treeGrid.Control);
 			stack.Children.Add(cmdClose);
 
 			// Establishes the content and title of the page.
@@ -86,9 +80,9 @@ namespace OKHOSTING.UI.Test.Controls
 			Page.Content = stack;
 		}
 
-		protected Controllers.TreeGrid.Row CreateRow(string text)
+		protected TreeGrid.Row CreateRow(string text)
 		{
-			var row = new Controllers.TreeGrid.Row();
+			var row = new TreeGrid.Row();
 			var content = new IControl[Columns];
 
 			for (int column = 0; column < Columns; column++)

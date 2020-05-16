@@ -1,7 +1,8 @@
 ﻿using OKHOSTING.Core;
+using OKHOSTING.UI.Controls;
 using System;
 
-namespace OKHOSTING.UI.Controls.Builders
+namespace OKHOSTING.UI.Builders
 {
 	public class Chronometer: IBuilder<ILabel>
 	{
@@ -13,7 +14,15 @@ namespace OKHOSTING.UI.Controls.Builders
 
 		public readonly bool ShowMilliseconds;
 
-		ILabel IBuilder<ILabel>.Content
+		IControl IBuilder.Control
+		{
+			get
+			{
+				return Display;
+			}
+		}
+
+		public ILabel Control
 		{
 			get 
 			{
