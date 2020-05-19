@@ -6,6 +6,15 @@
 	/// </summary>
 	public class ReadOnlyEditor : Editor<Controls.ILabel, string>
 	{
+		public ReadOnlyEditor()
+		{ 
+		}
+
+		public ReadOnlyEditor(string value)
+		{
+			SetValue(value);
+		}
+
 		/// <summary>
 		/// Actually gets the value out of the editor Control
 		/// </summary>

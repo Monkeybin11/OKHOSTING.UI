@@ -54,7 +54,7 @@ namespace OKHOSTING.UI.Builders.Editors
 		/// <returns></returns>
 		protected override object GetValue()
 		{
-			return Control.Value;
+			return Data.Convert.ChangeType<TValue>(Control.Value);
 		}
 
 		/// <summary>

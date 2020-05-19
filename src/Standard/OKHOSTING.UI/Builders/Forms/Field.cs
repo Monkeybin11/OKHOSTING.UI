@@ -18,18 +18,18 @@ namespace OKHOSTING.UI.Builders.Forms
 		/// En una misma instancia no deve contener dos campos con el mismo nombre.
 		/// </para>
 		/// </summary>
-		public string Name;
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Editor that will allow display/update of a value
 		/// </summary>
-		public Editor Editor;
+		public Editor Editor { get; set; }
 
 		/// <summary>
 		/// Caption to be placed on top or besides the editor to signal to the user
 		/// the field that this editor represents
 		/// </summary>
-		public ILabel Caption = BaitAndSwitch.Create<ILabel>();
+		public ILabel Caption { get; set; } = BaitAndSwitch.Create<ILabel>();
 
 		/// <summary>
 		/// If set to true, this field must be set to 100% of the form's width and use a complete row for itself
@@ -37,7 +37,7 @@ namespace OKHOSTING.UI.Builders.Forms
 		/// Si es verdadero, este campo deve estar ajustado al 100% del ancho del formulario y el uso de una fila, completada por si misma.
 		/// </para>
 		/// </summary>
-		public bool TableWide;
+		public bool TableWide { get; set; }
 
 		/// <summary>
 		/// Category of the field. Used for grouping fields in the DataForm
@@ -45,7 +45,7 @@ namespace OKHOSTING.UI.Builders.Forms
 		/// Categoria del campo. Se utiliza para agrupar campos en el DataForm.
 		/// </para>
 		/// </summary>
-		public string Category;
+		public string Category { get; set; }
 
 		/// <summary>
 		/// Gets or sets a value that defines the order in which fields appear on the DataForm
@@ -53,12 +53,12 @@ namespace OKHOSTING.UI.Builders.Forms
 		/// Obtiene o establece un valor que define el orden en el que apareceran los campos en el DataForm.
 		/// </para>
 		/// </summary>
-		public int SortOrder;
+		public int SortOrder { get; set; }
 
 		/// <summary>
 		/// Container form
 		/// <para xml:lang="es">Form contenedor.</para>
 		/// </summary>
-		public Form Container;
+		public Form Container { get; set; }
 	}
 }

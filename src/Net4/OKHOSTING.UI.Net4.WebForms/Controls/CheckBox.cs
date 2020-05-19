@@ -317,7 +317,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		bool IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID];
-			bool value = postedValue == "on";
+			bool value = postedValue?.Contains("on") ?? false;
 
 			if (value != ((ICheckBox) this).Value)
 			{

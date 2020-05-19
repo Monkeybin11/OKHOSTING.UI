@@ -9,11 +9,11 @@ namespace OKHOSTING.UI.Builders.Editors
 	/// Un campo para valores de cadena serializados.
 	/// </para>
 	/// </summary>
-	public class StringSerializableField : TextBoxEditor<IStringSerializable>
+	public class StringSerializableEditor : TextBoxEditor<IStringSerializable>
 	{
 		public readonly Type SerializableType;
 
-		public StringSerializableField(Type serializableType)
+		public StringSerializableEditor(Type serializableType)
 		{
 			if (serializableType == null)
 			{

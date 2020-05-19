@@ -77,7 +77,7 @@ namespace OKHOSTING.UI.Builders.Editors
 			//String serializable
 			else if (type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(Data.IStringSerializable)))
 			{
-				return new StringSerializableField(type);
+				return new StringSerializableEditor(type);
 			}
 
 			//XML
@@ -95,7 +95,13 @@ namespace OKHOSTING.UI.Builders.Editors
 			//String
 			else if (type.Equals(typeof(string)))
 			{
-				return new StringEditor();
+				return new TextBoxEditor<string>();
+			}
+
+			//guid
+			else if (type.Equals(typeof(Guid)))
+			{
+				return new TextBoxEditor<Guid>();
 			}
 
 			//byte[]
@@ -140,7 +146,7 @@ namespace OKHOSTING.UI.Builders.Editors
 
 					if (maxLenght == 0)
 					{
-						editor = new TextBoxEditor<string>();
+						editor = new LongStringEditor();
 					}
 					else
 					{

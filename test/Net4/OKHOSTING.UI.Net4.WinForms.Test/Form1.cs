@@ -14,18 +14,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Test
 		{
 			base.OnLoad(e);
 
-			if (App == null)
-			{
-				App = new App();
-				App.MainPage = this;
-			}
-
-			if (App.State[App.MainPage].Count == 0)
-			{
-				var index = new IndexController();
-				index.Page = this;
-				index.Start();
-			}
+			App = new App();
+			App.MainPage = this;
+			
+			var index = new IndexController();
+			index.Page = this;
+			index.Start();
 		}
 	}
 }
