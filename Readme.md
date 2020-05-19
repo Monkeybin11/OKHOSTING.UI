@@ -78,8 +78,8 @@ A Page is an interface that is implemented as:
 You can set page properties like this:
 
 ```csharp
-Platform.Current.Page.Title = "Choose one control to test";
-Platform.Current.Page.Content = grid;
+Page.Title = "Choose one control to test";
+Page.Content = grid;
 ```
 
 ### Controllers
@@ -91,57 +91,55 @@ For example take a look a this IndexController:
 ```csharp
 public class IndexController: Controller
 {
-	public override void Start()
+	protected override void OnStart()
 	{
-		base.Start();
-
-		IGrid grid = Platform.Current.Create<IGrid>();
+		IGrid grid = BaitAndSwitch.Create<IGrid>();
 		grid.ColumnCount = 1;
 		grid.RowCount = 20;
 
-		ILabelButton lblAutocomplete = Platform.Current.Create<ILabelButton>();
+		ILabelButton lblAutocomplete = BaitAndSwitch.Create<ILabelButton>();
 		lblAutocomplete.Text = "Autocomplete";
-		lblAutocomplete.Click += (object sender, EventArgs e) => new AutocompleteController().Start();
+		lblAutocomplete.Click += (object sender, EventArgs e) => new AutocompleteController(Page).Start();
 		grid.SetContent(0, 0, lblAutocomplete);
 
-		ILabelButton lblLabel = Platform.Current.Create<ILabelButton>();
+		ILabelButton lblLabel = BaitAndSwitch.Create<ILabelButton>();
 		lblLabel.Text = "Label";
-		lblLabel.Click += (object sender, EventArgs e) => new LabelController().Start();
+		lblLabel.Click += (object sender, EventArgs e) => new LabelController(Page).Start();
 		grid.SetContent(1, 0, lblLabel);
 
-		ILabelButton lblLabelButton = Platform.Current.Create<ILabelButton>();
+		ILabelButton lblLabelButton = BaitAndSwitch.Create<ILabelButton>();
 		lblLabelButton.Text = "Label Button";
-		lblLabelButton.Click += (object sender, EventArgs e) => new LabelButtonController().Start();
+		lblLabelButton.Click += (object sender, EventArgs e) => new LabelButtonController(Page).Start();
 		grid.SetContent(2, 0, lblLabelButton);
 
-        ILabelButton lblButton = Platform.Current.Create<ILabelButton>();
+        ILabelButton lblButton = BaitAndSwitch.Create<ILabelButton>();
         lblButton.Text = "Button";
-        lblButton.Click += (object sender, EventArgs e) => new ButtonController().Start();
+        lblButton.Click += (object sender, EventArgs e) => new ButtonController(Page).Start();
         grid.SetContent(3, 0, lblButton);
 
-        ILabelButton lblHyperLink = Platform.Current.Create<ILabelButton>();
+        ILabelButton lblHyperLink = BaitAndSwitch.Create<ILabelButton>();
         lblHyperLink.Text = "HyperLink";
-        //lblHyperLink.Click += (object sender, EventArgs e) => new HyperLinkController().Start();
+        //lblHyperLink.Click += (object sender, EventArgs e) => new HyperLinkController(Page).Start();
         grid.SetContent(4, 0, lblHyperLink);
             
 
-        ILabelButton lblCheckbox = Platform.Current.Create<ILabelButton>();
+        ILabelButton lblCheckbox = BaitAndSwitch.Create<ILabelButton>();
         lblCheckbox.Text = "Checkbox";
-        lblCheckbox.Click += (object sender, EventArgs e) => new CheckboxController().Start();
+        lblCheckbox.Click += (object sender, EventArgs e) => new CheckboxController(Page).Start();
         grid.SetContent(5, 0, lblCheckbox);
 
-        ILabelButton lblImage = Platform.Current.Create<ILabelButton>();
+        ILabelButton lblImage = BaitAndSwitch.Create<ILabelButton>();
         lblImage.Text = "Image";
-        lblImage.Click += (object sender, EventArgs e) => new ImageController().Start();
+        lblImage.Click += (object sender, EventArgs e) => new ImageController(Page).Start();
         grid.SetContent(6, 0, lblImage);
 
-        ILabelButton lblImageButton = Platform.Current.Create<ILabelButton>();
+        ILabelButton lblImageButton = BaitAndSwitch.Create<ILabelButton>();
         lblImageButton.Text = "ImageButton";
-        lblImageButton.Click += (object sender, EventArgs e) => new ImageButtonController().Start();
+        lblImageButton.Click += (object sender, EventArgs e) => new ImageButtonController(Page).Start();
         grid.SetContent(7, 0, lblImageButton);
 
-        Platform.Current.Page.Title = "Choose one control to test";
-		Platform.Current.Page.Content = grid;
+        Page.Title = "Choose one control to test";
+		Page.Content = grid;
 	}
 }
 ```
@@ -162,32 +160,30 @@ public class ButtonController: Controller
     IButton cmdShow;
     ILabel lbltext;
 
-    public override void Start()
+    protected override void OnStart()
 	{
-        base.Start();
+		IStack stack = BaitAndSwitch.Create<IStack>();
 
-		IStack stack = Platform.Current.Create<IStack>();
-
-        cmdShow = Platform.Current.Create<IButton>();
+        cmdShow = BaitAndSwitch.Create<IButton>();
         cmdShow.Text = "Show/Hide";
         cmdShow.Click += CmdShow_Click;
         cmdShow.BackgroundColor = new Color(1, 255, 0, 0);
         cmdShow.FontColor = new Color(1, 255, 255, 255);
         stack.Children.Add(cmdShow);
 
-        lbltext = Platform.Current.Create<ILabel>();
+        lbltext = BaitAndSwitch.Create<ILabel>();
         lbltext.Text = "I'm visible, i want an ice-cream";
         lbltext.Visible = false;
 			
 		stack.Children.Add(lbltext);
 
-        IButton cmdClose = Platform.Current.Create<IButton>();
+        IButton cmdClose = BaitAndSwitch.Create<IButton>();
         cmdClose.Text = "Close";
         cmdClose.Click += CmdClose_Click;
         stack.Children.Add(cmdClose);
 
-        Platform.Current.Page.Title = "Test label";
-		Platform.Current.Page.Content = stack;
+        Page.Title = "Test label";
+		Page.Content = stack;
 	}
 
     private void CmdShow_Click(object sender, EventArgs e)
@@ -217,34 +213,32 @@ public class CheckboxController: Controller
     ICheckBox cbxColor;
     ILabel lblLabel;
 
-    public override void Start()
+    protected override void OnStart()
 	{
-		base.Start();
+		IStack stack = BaitAndSwitch.Create<IStack>();
 
-		IStack stack = Platform.Current.Create<IStack>();
-
-		lblLabel = Platform.Current.Create<ILabel>();
+		lblLabel = BaitAndSwitch.Create<ILabel>();
 		lblLabel.Text = "This is a label";
 		lblLabel.Height = 30;
 		stack.Children.Add(lblLabel);
 
-        cbxColor = Platform.Current.Create<ICheckBox>();
+        cbxColor = BaitAndSwitch.Create<ICheckBox>();
         cbxColor.Name = "color";
         cbxColor.Value = true;
         stack.Children.Add(cbxColor);
 
-        IButton cmdChange = Platform.Current.Create<IButton>();
+        IButton cmdChange = BaitAndSwitch.Create<IButton>();
         cmdChange.Text = "Change";
         cmdChange.Click += CmdChange_Click;
         stack.Children.Add(cmdChange);
 
-        IButton cmdClose = Platform.Current.Create<IButton>();
+        IButton cmdClose = BaitAndSwitch.Create<IButton>();
         cmdClose.Text = "Close";
         cmdClose.Click += CmdClose_Click;
         stack.Children.Add(cmdClose);
 
-        Platform.Current.Page.Title = "Test label";
-		Platform.Current.Page.Content = stack;
+        Page.Title = "Test label";
+		Page.Content = stack;
 	}
 
     private void CmdChange_Click(object sender, EventArgs e)
@@ -271,30 +265,28 @@ public class CheckboxController: Controller
 ```csharp
 public class HyperLinkController: Controller
 {
-	public override void Start()
+	protected override void OnStart()
 	{
-		base.Start();
+		IStack stack = BaitAndSwitch.Create<IStack>();
 
-		IStack stack = Platform.Current.Create<IStack>();
-
-		ILabel lblLabel = Platform.Current.Create<ILabel>();
+		ILabel lblLabel = BaitAndSwitch.Create<ILabel>();
 		lblLabel.Text = "Visit";
 		lblLabel.Height = 30;
 		stack.Children.Add(lblLabel);
 
-        IHyperLink hplUrl = Platform.Current.Create<IHyperLink>();
+        IHyperLink hplUrl = BaitAndSwitch.Create<IHyperLink>();
         hplUrl.Text = "http://www.okhosting.com";
         hplUrl.Uri = new Uri("http://www.okhosting.com");
         hplUrl.Name = "okhosting.com";
         stack.Children.Add(hplUrl);
 
-        IButton cmdClose = Platform.Current.Create<IButton>();
+        IButton cmdClose = BaitAndSwitch.Create<IButton>();
         cmdClose.Text = "Close";
         cmdClose.Click += CmdClose_Click;
         stack.Children.Add(cmdClose);
 
-        Platform.Current.Page.Title = "Test label";
-		Platform.Current.Page.Content = stack;
+        Page.Title = "Test label";
+		Page.Content = stack;
 	}
 
     private void CmdClose_Click(object sender, EventArgs e)
@@ -309,30 +301,28 @@ public class HyperLinkController: Controller
 ```csharp
 public class ImageController: Controller
 {
-    public override void Start()
+    protected override void OnStart()
     {
-        base.Start();
+        IStack stack = BaitAndSwitch.Create<IStack>();
 
-        IStack stack = Platform.Current.Create<IStack>();
-
-        ILabel lblLabel = Platform.Current.Create<ILabel>();
+        ILabel lblLabel = BaitAndSwitch.Create<ILabel>();
         lblLabel.Text = "View an image from Url";
         lblLabel.Height = 30;
         stack.Children.Add(lblLabel);
 
-        IImage imgPicture = Platform.Current.Create<IImage>();
+        IImage imgPicture = BaitAndSwitch.Create<IImage>();
         imgPicture.LoadFromUrl(new Uri("http://www.patycantu.com/wp-content/uploads/2014/07/91.jpg"));
         imgPicture.Height = 250;
         imgPicture.Width = 600;
         stack.Children.Add(imgPicture);
 
-        IButton cmdClose = Platform.Current.Create<IButton>();
+        IButton cmdClose = BaitAndSwitch.Create<IButton>();
         cmdClose.Text = "Close";
         cmdClose.Click += CmdClose_Click;
         stack.Children.Add(cmdClose);
 
-        Platform.Current.Page.Title = "Test label";
-		Platform.Current.Page.Content = stack;
+        Page.Title = "Test label";
+		Page.Content = stack;
 	}
 
     private void CmdClose_Click(object sender, EventArgs e)
