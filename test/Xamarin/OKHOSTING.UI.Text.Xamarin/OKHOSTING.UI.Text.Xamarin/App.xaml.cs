@@ -12,6 +12,7 @@ namespace OKHOSTING.UI.Text.Xamarin
             page.App = new UI.App();
             var index = new IndexController();
             index.Page = page;
+            MainPage = page;
 
             index.Start();
         }
