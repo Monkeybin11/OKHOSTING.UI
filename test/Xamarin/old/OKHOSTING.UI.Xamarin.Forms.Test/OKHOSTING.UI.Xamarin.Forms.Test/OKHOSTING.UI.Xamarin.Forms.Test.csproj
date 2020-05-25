@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Xamarin\OKHOSTING.UI.Xamarin.Forms\OKHOSTING.UI.Xamarin.Forms.csproj" />
+    <ProjectReference Include="..\..\..\Standard\OKHOSTING.UI.Test\OKHOSTING.UI.Test.csproj" />
+  </ItemGroup>
+</Project>

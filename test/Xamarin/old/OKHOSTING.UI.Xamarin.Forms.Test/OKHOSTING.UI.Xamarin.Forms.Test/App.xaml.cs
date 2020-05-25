@@ -1,4 +1,6 @@
-﻿namespace OKHOSTING.UI.Xamarin.Forms.Test
+﻿using OKHOSTING.UI.Test;
+
+namespace OKHOSTING.UI.Xamarin.Forms.Test
 {
 	public partial class App : global::Xamarin.Forms.Application
 	{
@@ -8,6 +10,8 @@
 
 			var page = new Page();
 			MainPage = page;
+
+			page.App = new UI.App();
 
 			new UI.Test.IndexController(page).Start();
 		}
