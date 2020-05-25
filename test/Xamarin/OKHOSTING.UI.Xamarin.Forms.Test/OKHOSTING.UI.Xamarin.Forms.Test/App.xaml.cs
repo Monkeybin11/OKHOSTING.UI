@@ -1,16 +1,15 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace OKHOSTING.UI.Xamarin.Forms.Test
+﻿namespace OKHOSTING.UI.Xamarin.Forms.Test
 {
-	public partial class App : Application
+	public partial class App : global::Xamarin.Forms.Application
 	{
 		public App()
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+			var page = new Page();
+			MainPage = page;
+
+			new UI.Test.IndexController(page).Start();
 		}
 
 		protected override void OnStart()

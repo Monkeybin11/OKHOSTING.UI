@@ -13,6 +13,10 @@ namespace OKHOSTING.UI.Test
 	/// </summary>
 	public class IndexController: Controller 
 	{
+		public IndexController(IPage page) : base(page)
+		{
+		}
+
 		/// <summary>
 		/// Start this instance.
 		/// <para xml:lang="es">.

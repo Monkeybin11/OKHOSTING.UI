@@ -11,7 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Xamarin\OKHOSTING.UI.Xamarin.Forms\OKHOSTING.UI.Xamarin.Forms.csproj" />
+    <ProjectReference Include="..\..\..\Standard\OKHOSTING.UI.Test\OKHOSTING.UI.Test.csproj" />
   </ItemGroup>
 </Project>
