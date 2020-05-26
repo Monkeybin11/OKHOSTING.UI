@@ -1,11 +1,20 @@
 ﻿using OKHOSTING.Core;
 using OKHOSTING.Data.Validation;
+using OKHOSTING.UI.Controls;
 using System;
 
 namespace OKHOSTING.UI.Builders.Editors
 {
 	public abstract class Editor : IDisposable, IBuilder
 	{
+		/// <summary>
+		/// Raises after the value has changed by the user. Chages made in code will not raise this event.
+		/// <para xml:lang="es">
+		/// Se lanza despues de que el valor fue cambiado por el usuario. Los cambios realizados en el código no lanzaran este evento.
+		/// </para>
+		/// </summary>
+		public event EventHandler<object> ValueChanged;
+
 		public virtual IControl Control { get; protected set; }
 
 		/// <summary>
@@ -68,6 +77,14 @@ namespace OKHOSTING.UI.Builders.Editors
 		/// Sets the editor control with the given value
 		/// </summary>
 		protected abstract void SetValue(object value);
+
+		/// <summary>
+		/// Raises the ValueChanged event
+		/// </summary>
+		protected void OnValueChanged(object sender, object e)
+		{
+			ValueChanged?.Invoke(sender, e);
+		}
 	}
 
 	/// <summary>
@@ -79,6 +96,11 @@ namespace OKHOSTING.UI.Builders.Editors
 		public Editor()
 		{
 			base.Control = BaitAndSwitch.Create<TControl>();
+
+			if (base.Control is IInputControl<TValue>)
+			{
+				((IInputControl<TValue>) base.Control).ValueChanged += (sender, e) => OnValueChanged(sender, new EventArgs());
+			}
 		}
 
 		public new TControl Control

@@ -24,10 +24,12 @@ namespace OKHOSTING.UI.Builders.Editors
 		{
 			txtValue = Core.BaitAndSwitch.Create<ITextBox>();
 			txtValue.InputType = ITextBoxInputType.Number;
+			txtValue.ValueChanged += (sender, e) => OnValueChanged(sender, new EventArgs());
 			txtValue.Value = "0";
 			
 			lstUnit = Core.BaitAndSwitch.Create<IListPicker>();
 			lstUnit.Items = new List<string>();
+			lstUnit.ValueChanged += lstUnit_ValueChanged;
 
 			foreach (Enum unit in Enum.GetValues(typeof(Core.TimeUnit.Unit)))
 			{
@@ -38,6 +40,13 @@ namespace OKHOSTING.UI.Builders.Editors
 			Control.Children.Add(lstUnit);
 		}
 
+		private void lstUnit_ValueChanged(object sender, string e)
+		{
+			if (txtValue.Value != "0")
+			{
+				OnValueChanged(sender, new EventArgs());
+			}
+		}
 
 		/// <summary>
 		/// Gets the is valid.

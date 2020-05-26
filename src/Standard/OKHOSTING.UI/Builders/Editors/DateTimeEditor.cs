@@ -13,8 +13,11 @@ namespace OKHOSTING.UI.Builders.Editors
 		{
 			DatePicker = Core.BaitAndSwitch.Create<IDatePicker>();
 			DatePicker.Width = 90;
+			DatePicker.ValueChanged += (sender, e) => OnValueChanged(sender, new EventArgs());
+
 			TimePicker = Core.BaitAndSwitch.Create<ITimeOfDayPicker>();
 			TimePicker.Width = 40;
+			TimePicker.ValueChanged += (sender, e) => OnValueChanged(sender, new EventArgs());
 
 			Control.Children.Add(DatePicker);
 			Control.Children.Add(TimePicker);

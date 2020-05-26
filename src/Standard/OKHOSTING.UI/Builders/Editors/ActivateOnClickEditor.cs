@@ -26,19 +26,29 @@ namespace OKHOSTING.UI.Builders.Editors
 
 			//make real editor invisible until the label is clicked
 			RealEditor.Control.Visible = false;
+			RealEditor.ValueChanged += realEditor_ValueChanged;
 
 			//add both controls to the stack
 			Control.Children.Add(LabelButton);
 			Control.Children.Add(RealEditor.Control);
 		}
 
+		private void realEditor_ValueChanged(object sender, object e)
+		{
+			LabelButton.Visible = true;
+			RealEditor.Control.Visible = false;
+
+			OnValueChanged(sender, e);
+		}
+
 		/// <summary>
 		/// Makes labelButton invisible and the real editor si shown
 		/// </summary>
-		private void labelButton_Click(object sender, System.EventArgs e)
+		private void labelButton_Click(object sender, EventArgs e)
 		{
 			LabelButton.Visible = false;
 			RealEditor.Control.Visible = true;
+			RealEditor.Control.Focus();
 		}
 
 		/// <summary>
