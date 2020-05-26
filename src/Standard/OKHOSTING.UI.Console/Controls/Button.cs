@@ -8,8 +8,11 @@ namespace OKHOSTING.UI.Console.Controls
 {
 	public class Button : Terminal.Gui.Button, IButton
 	{
+		public Button(): base(0, 0, null)
+		{ }
+
 		public string FontFamily { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public Color FontColor { get => base.; set => throw new NotImplementedException(); }
+		public Color FontColor { get => base.ColorScheme.Normal; set => throw new NotImplementedException(); }
 		public double FontSize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		public bool Bold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		public bool Italic { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

@@ -129,5 +129,11 @@ namespace OKHOSTING.UI
 		/// Control that contains this control, like a grid, or stack
 		/// </summary>
 		IControl Parent { get; }
+
+		/// <summary>
+		/// Sets the user input focus on this control
+		/// </summary>
+		/// <returns>True if focus was succesfull</returns>
+		bool Focus();
 	}
 }

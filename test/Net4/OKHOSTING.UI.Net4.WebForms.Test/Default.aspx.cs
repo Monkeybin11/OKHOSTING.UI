@@ -13,7 +13,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Test
 
 		public override void OnAppStart()
 		{
-			new IndexController() { Page = this }.Start();
+			new IndexController(this).Start();
 		}
 	}
 }

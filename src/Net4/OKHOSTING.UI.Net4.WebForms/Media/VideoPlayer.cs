@@ -308,6 +308,12 @@ namespace OKHOSTING.UI.Net4.WebForms.Media
 			}
 		}
 
+		bool IControl.Focus()
+		{
+			base.Focus();
+			return true;
+		}
+
 		object ICloneable.Clone()
 		{
 			return MemberwiseClone();

@@ -189,6 +189,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		bool IControl.Focus()
+		{
+			return false;
+		}
+
 		object ICloneable.Clone()
 		{
 			return MemberwiseClone();

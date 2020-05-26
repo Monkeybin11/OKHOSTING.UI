@@ -263,6 +263,11 @@ namespace OKHOSTING.UI.RPC.Controls
 			}
 		}
 
+		bool IControl.Focus()
+		{
+			return (bool) Invoke(nameof(IControl.Focus));
+		}
+
 		public object Clone()
 		{
 			return MemberwiseClone();

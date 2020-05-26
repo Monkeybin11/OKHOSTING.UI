@@ -14,7 +14,7 @@ namespace OKHOSTING.UI.Net4.WPF.Test
 
 			var page = new Page();
 			page.App = new UI.App();
-			new IndexController() { Page = page }.Start();
+			new IndexController(page).Start();
 
 			page.Show();
 		}

@@ -8,8 +8,8 @@ using System.Linq;
 namespace OKHOSTING.UI.Builders.Forms
 {
 	/// <summary>
-	/// It represents a form to store content.
-	/// <para xml:lang="es">Representa un formulario para almacenar contenido.</para>
+	/// Creates a form with fields that allow you to easily display
+	/// and capture information from the user in a organized grid
 	/// </summary>
 	public class Form: IBuilder<IGrid>, IDisposable
 	{
@@ -129,9 +129,9 @@ namespace OKHOSTING.UI.Builders.Forms
 					BuildWithCaptionNone();
 					break;
 			}
-
-			#endregion
 		}
+		
+		#endregion
 
 		/// <summary>
 		/// Searches for a field with the specified Id

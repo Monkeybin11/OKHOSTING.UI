@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using AngleSharp;
 using AngleSharp.Dom;
-using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.HTML.Controls
 {
@@ -44,6 +43,11 @@ namespace OKHOSTING.UI.HTML.Controls
 		public string CssClass { get; set; }
 
 		public IControl Parent { get; protected set; }
+
+		bool IControl.Focus()
+		{
+			return false;
+		}
 
 		public object Clone()
 		{

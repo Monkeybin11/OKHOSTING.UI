@@ -17,8 +17,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Test
 			App = new App();
 			App.MainPage = this;
 			
-			var index = new IndexController();
-			index.Page = this;
+			var index = new IndexController(this);
 			index.Start();
 		}
 	}

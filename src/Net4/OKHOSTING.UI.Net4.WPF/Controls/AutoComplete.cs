@@ -16,7 +16,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		public IEnumerable GetSuggestions(string filter)
 		{
 			var e = this.OnSearching(filter);
-
+			
 			return e.SearchResult;
 		}
 
