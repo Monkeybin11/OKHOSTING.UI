@@ -23,6 +23,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			Click += onClick;
 		}
 
+		/// <summary>
+		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">
+		/// Obtiene o establece un objeto de valor arbitrario que se puede usar para almacenar informacion personalizada sobre este elemento.
+		/// </para>
+		/// </summary>
+		public object Tag { get; set; }
+
 		public ICollection<IMenuItem> Children
 		{
 			get;

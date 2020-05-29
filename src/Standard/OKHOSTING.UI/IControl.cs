@@ -111,12 +111,6 @@ namespace OKHOSTING.UI
 		/// Obtiene o establece un objeto de valor arbitrario que se puede usar para almacenar informacion personalizada sobre este elemento.
 		/// </para>
 		/// </summary>
-		/// <remarks>
-		/// Returns the intended value. This property has no default value.
-		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
-		/// </para>
-		/// </remarks>
 		object Tag { get; set; }
 
 		/// <summary>

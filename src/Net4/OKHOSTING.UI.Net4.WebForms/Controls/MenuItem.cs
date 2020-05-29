@@ -32,6 +32,14 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		public string Text { get; set; }
 
 		/// <summary>
+		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">
+		/// Obtiene o establece un objeto de valor arbitrario que se puede usar para almacenar informacion personalizada sobre este elemento.
+		/// </para>
+		/// </summary>
+		public object Tag { get; set; }
+
+		/// <summary>
 		/// The sub items of this menu item
 		/// </summary>
 		public ICollection<IMenuItem> Children { get; protected set; }
