@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Console.Controls
 		{ }
 
 		public string FontFamily { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public Color FontColor { get => base.ColorScheme.Normal; set => throw new NotImplementedException(); }
+		public Color FontColor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		public double FontSize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		public bool Bold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		public bool Italic { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -47,6 +47,11 @@ namespace OKHOSTING.UI.Console.Controls
 		}
 
 		public void Dispose()
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool Focus()
 		{
 			throw new NotImplementedException();
 		}
