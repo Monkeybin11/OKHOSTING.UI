@@ -373,38 +373,63 @@ namespace OKHOSTING.UI.CSS
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStyleSheet(styleSheet);
 
-			var properties = Split(styleSheet, ';').ToArray();
-			string[] colorProperty = new string[properties.Length];
+			//var properties = Split(styleSheet, ';').ToArray();
+			//string[] colorProperty = new string[properties.Length];
 
-			for (int i = 0; i < properties.Length; i++)
-			{
-				if (properties[i].Replace("color:", null) != properties[i] && properties[i].Replace("-color:", null) == properties[i])
-				{
-					colorProperty[i] = properties[i];
-				}
-				else if (properties[i].Replace("-color:", null) != properties[i])
-				{
-					var _colorProperty = Split(properties[i], '-').ToArray();
-
-					for (int j = 0; j < _colorProperty.Length; j++)
-					{
-						if (_colorProperty[j].Replace("color:", null) != _colorProperty[j])
-						{
-							colorProperty[i] = _colorProperty[j];
-						}
-					}
-				}
-			}
-
-			//var propertyCSS = "";
-			//foreach (var propertiesCss in cssStylesSheet.Rules.ToString())
+			////Get the property color from styleSheet
+			//for (int i = 0; i < properties.Length; i++)
 			//{
-			//	propertyCSS = Split(propertiesCss, ';');
-			//}
-			
+			//	if (properties[i].Replace("color:", null) != properties[i] && properties[i].Replace("-color:", null) == properties[i])
+			//	{
+			//		colorProperty[i] = properties[i];
+			//	}
+			//	else if (properties[i].Replace("-color:", null) != properties[i])
+			//	{
+			//		var _colorProperty = Split(properties[i], '-').ToArray();
 
-			//get only the rules that are actually styles
-			foreach (var rule in cssStylesSheet.Rules)
+			//		for (int j = 0; j < _colorProperty.Length; j++)
+			//		{
+			//			if (_colorProperty[j].Replace("color:", null) != _colorProperty[j])
+			//			{
+			//				colorProperty[i] = _colorProperty[j];
+			//			}
+			//		}
+			//	}
+			//}
+
+			//string[] ColorPropertiesCSS = new string[cssStylesSheet.Rules.Length];
+
+			////get the property color from cssStyleSheet
+			//foreach (var rule in cssStylesSheet.Rules)
+			//{
+			//	var propertiesCSS = Split(rule.CssText, ';').ToArray();
+
+			//	for (int i = 0; i < propertiesCSS.Length; i++)
+			//	{
+			//		propertiesCSS[i] = propertiesCSS[i].Replace("}", null);
+
+			//		if (propertiesCSS[i].Replace("color:", null) != propertiesCSS[i] && propertiesCSS[i].Replace("-color:", null) == propertiesCSS[i])
+			//		{
+			//			ColorPropertiesCSS[i] = propertiesCSS[i];
+			//		}
+			//		else if (propertiesCSS[i].Replace("-color:", null) != propertiesCSS[i])
+			//		{
+			//			var _colorProperty = Split(propertiesCSS[i], '-').ToArray();
+
+			//			for (int j = 0; j < _colorProperty.Length; j++)
+			//			{
+			//				if (_colorProperty[j].Replace("color:", null) != _colorProperty[j])
+			//				{
+			//					ColorPropertiesCSS[i] = _colorProperty[j];
+			//				}
+			//			}
+			//		}
+			//	}
+			//}
+
+
+				//get only the rules that are actually styles
+				foreach (var rule in cssStylesSheet.Rules)
 			{
 				ParsedStyleRules.Add(rule);
 			}
