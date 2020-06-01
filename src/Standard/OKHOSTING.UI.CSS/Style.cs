@@ -373,6 +373,36 @@ namespace OKHOSTING.UI.CSS
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStyleSheet(styleSheet);
 
+			var properties = Split(styleSheet, ';').ToArray();
+			string[] colorProperty = new string[properties.Length];
+
+			for (int i = 0; i < properties.Length; i++)
+			{
+				if (properties[i].Replace("color:", null) != properties[i] && properties[i].Replace("-color:", null) == properties[i])
+				{
+					colorProperty[i] = properties[i];
+				}
+				else if (properties[i].Replace("-color:", null) != properties[i])
+				{
+					var _colorProperty = Split(properties[i], '-').ToArray();
+
+					for (int j = 0; j < _colorProperty.Length; j++)
+					{
+						if (_colorProperty[j].Replace("color:", null) != _colorProperty[j])
+						{
+							colorProperty[i] = _colorProperty[j];
+						}
+					}
+				}
+			}
+
+			//var propertyCSS = "";
+			//foreach (var propertiesCss in cssStylesSheet.Rules.ToString())
+			//{
+			//	propertyCSS = Split(propertiesCss, ';');
+			//}
+			
+
 			//get only the rules that are actually styles
 			foreach (var rule in cssStylesSheet.Rules)
 			{
