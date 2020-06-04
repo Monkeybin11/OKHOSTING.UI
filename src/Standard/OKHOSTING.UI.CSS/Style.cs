@@ -1062,12 +1062,12 @@ namespace OKHOSTING.UI.CSS
 			rgbColor = rgbColor.Replace("rgba(", null);
 			rgbColor = rgbColor.Replace(")", null);
 			var colors = Split(rgbColor, ',');
-			int a = int.Parse(colors[0]);
-			int r = int.Parse(colors[1]);
-			int g = int.Parse(colors[2]);
-			int b = int.Parse(colors[3]);
+			decimal r = decimal.Parse(colors[0]);
+			decimal g = decimal.Parse(colors[1]);
+			decimal b = decimal.Parse(colors[2]);
+			decimal a = decimal.Parse(colors[3]);
 
-			return Color.FromArgb(a, r, g, b);
+			return Color.FromArgb((int) a, (int) r, (int) g, (int) b);
 		}
 
 		public static IEnumerable<Length> ParseLengths(string lenghts)
