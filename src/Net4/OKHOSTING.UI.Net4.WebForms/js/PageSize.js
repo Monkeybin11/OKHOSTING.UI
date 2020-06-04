@@ -6,7 +6,7 @@
 	$.ajax
 	({
 		async: true,
-		url: "Services/PageSize.ashx",
+		url: "/Services/PageSize.ashx",
 		data:
 		{
 			'Height': height,
@@ -48,10 +48,10 @@ var waitForFinalEvent = function ()
 	};
 };
 
-$(document).ready
-(
-	window.addEventListener('resize', function (event) {
-		console.log('aqui estamos SetPageSize');
+$(document).ready(function ()
+{
+	window.addEventListener('resize', function (event)
+	{
 		SetPageSize();
 	})
-);
+});
