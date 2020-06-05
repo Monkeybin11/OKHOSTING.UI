@@ -6,7 +6,7 @@ using Native = System.Windows.Forms;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
-	public class ControlList : IList<IControl>
+	public class ControlList : Data.ListBase<IControl>, IList<IControl>
 	{
 		public ControlList(Native.Control.ControlCollection innerList)
 		{
@@ -20,7 +20,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		protected readonly Native.Control.ControlCollection InnerList;
 
-		public IControl this[int index]
+		public override IControl this[int index]
 		{
 			get
 			{
@@ -32,7 +32,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		public int Count
+		public override int Count
 		{
 			get
 			{
@@ -40,7 +40,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		public bool IsReadOnly
+		public override bool IsReadOnly
 		{
 			get
 			{
@@ -48,28 +48,23 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		public void Add(IControl item)
+		public override void Add(IControl item)
 		{
 			InnerList.Add((Native.Control) item);
 		}
 
-		public void Clear()
+		public override void Clear()
 		{
 			InnerList.Clear();
 
 		}
 
-		public bool Contains(IControl item)
+		public override bool Contains(IControl item)
 		{
 			return InnerList.Contains((Native.Control) item);
 		}
 
-		public void CopyTo(IControl[] array, int arrayIndex)
-		{
-			InnerList.CopyTo((Native.Control[]) array, arrayIndex);
-		}
-
-		public IEnumerator<IControl> GetEnumerator()
+		public override IEnumerator<IControl> GetEnumerator()
 		{
 			foreach (Native.Control view in InnerList)
 			{
@@ -77,24 +72,24 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 		}
 
-		public int IndexOf(IControl item)
+		public override int IndexOf(IControl item)
 		{
 			return InnerList.IndexOf((Native.Control) item);
 		}
 
-		public void Insert(int index, IControl item)
+		public override void Insert(int index, IControl item)
 		{
 			((IList) InnerList).Insert(index, (Native.Control) item);
 		}
 
-		public bool Remove(IControl item)
+		public override bool Remove(IControl item)
 		{
 			InnerList.Remove((Native.Control) item);
 
 			return true;
 		}
 
-		public void RemoveAt(int index)
+		public override void RemoveAt(int index)
 		{
 			InnerList.RemoveAt(index);
 		}

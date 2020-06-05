@@ -35,10 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.13.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>..\..\..\src\packages\AngleSharp.0.13.0\lib\net46\AngleSharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\src\packages\AngleSharp.0.14.0\lib\netstandard2.0\AngleSharp.dll</HintPath>
     </Reference>
     <Reference Include="AngleSharp.Css, Version=0.13.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>..\..\..\src\packages\AngleSharp.Css.0.13.0\lib\net46\AngleSharp.Css.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\src\packages\AngleSharp.Css.0.14.1\lib\netstandard2.0\AngleSharp.Css.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,6 +71,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +122,15 @@
       <Project>{b9f98db9-8957-45d8-88ac-54d771c23c60}</Project>
       <Name>OKHOSTING.UI.Test</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="octopuses-are-alien-creatures-2-750x500.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

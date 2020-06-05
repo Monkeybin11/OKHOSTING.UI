@@ -21,11 +21,12 @@ namespace OKHOSTING.UI.Test.Css
 			grid.ColumnCount = 3;
 			grid.RowCount = 5;
 			grid.Name = "grid";
+			grid.Width = Page.Width;
+			grid.Height = Page.Height;
 
 			ILabel lblTitle;
 			ILabel lblText1;
 			ILabel lblText2;
-			ILabelButton lblEnlace;
 			IImage imgOne;
 			IImage imgTwo;
 			IImage imgTree;

@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 	/// Representa una lista de controles en Xamarin:Forms
 	/// </para>
 	/// </summary>
-	public class ControlList : IList<IControl>
+	public class ControlList : Data.ListBase<IControl>
 	{
 		/// <summary>
 		/// Initializes a new instance of the ControlList class.
@@ -49,7 +49,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <returns>The control.
 		/// <para xml:lang="es">El control.</para>
 		/// </returns>
-		public IControl this[int index]
+		public override IControl this[int index]
 		{
 			get
 			{
@@ -67,7 +67,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// Obtiene el conteo de los controles.
 		/// </para>
 		/// </summary>
-		public int Count
+		public override int Count
 		{
 			get
 			{
@@ -81,7 +81,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// Determina si es de solo lectura.
 		/// </para>
 		/// </summary>
-		public bool IsReadOnly
+		public override bool IsReadOnly
 		{
 			get
 			{
@@ -98,7 +98,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <param name="item">The item specific
 		/// <para xml:lang="es">El elemento especificado.</para>
 		/// </param>
-		public void Add(IControl item)
+		public override void Add(IControl item)
 		{
 			InnerList.Add((System.Windows.FrameworkElement) item);
 		}
@@ -109,7 +109,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// Limpia esta instancia.
 		/// </para>
 		/// </summary>
-		public void Clear()
+		public override void Clear()
 		{
 			InnerList.Clear();
 		}
@@ -129,26 +129,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// Verdadero si existe el control especificado, de lo contrario es falso.
 		/// </para>
 		/// </returns>
-		public bool Contains(IControl item)
+		public override bool Contains(IControl item)
 		{
 			return InnerList.Contains((System.Windows.FrameworkElement) item);
-		}
-
-		/// <summary>
-		/// Copies to.
-		/// <para xml:lang="es">
-		/// Copia el control especificado al indice especificado del arreglo.
-		/// </para>
-		/// </summary>
-		/// <param name="array">Array
-		/// <para xml:lang="es">El arreglo</para>
-		/// </param>
-		/// <param name="arrayIndex">Array index
-		/// <para xml:lang="es">El indice del arreglo.</para>
-		/// </param>
-		public void CopyTo(IControl[] array, int arrayIndex)
-		{
-			InnerList.CopyTo((System.Windows.FrameworkElement[]) array, arrayIndex);
 		}
 
 		/// <summary>
@@ -158,7 +141,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// </para>
 		/// </summary>
 		/// <returns>The enumerator</returns>
-		public IEnumerator<IControl> GetEnumerator()
+		public override IEnumerator<IControl> GetEnumerator()
 		{
 			foreach (System.Windows.FrameworkElement view in InnerList)
 			{
@@ -178,7 +161,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <returns>The of.
 		/// <para xml:lang="es">El indice</para>
 		/// </returns>
-		public int IndexOf(IControl item)
+		public override int IndexOf(IControl item)
 		{
 			return InnerList.IndexOf((System.Windows.FrameworkElement) item);
 		}
@@ -195,7 +178,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <param name="item">Item.
 		/// <para xml:lang="es">El elemento.</para>
 		/// </param>
-		public void Insert(int index, IControl item)
+		public override void Insert(int index, IControl item)
 		{
 			InnerList.Insert(index, (System.Windows.FrameworkElement) item);
 		}
@@ -210,7 +193,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <para xml:lang="es">El elemento.</para>
 		/// </param>
 		/// <returns>True.</returns>
-		public bool Remove(IControl item)
+		public override bool Remove(IControl item)
 		{
 			InnerList.Remove((System.Windows.FrameworkElement) item);
 
@@ -226,21 +209,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// <param name="index">Index
 		/// <para xml:lang="es">El indice.</para>
 		/// </param>
-		public void RemoveAt(int index)
+		public override void RemoveAt(int index)
 		{
 			InnerList.RemoveAt(index);
-		}
-
-		/// <summary>
-		/// The collections IEnumerable. get enumerator.
-		/// <para xml:lang="es">
-		/// Devuelve la coleccion que jay en la enumeracion.
-		/// </para>
-		/// </summary>
-		/// <returns>The collections IEnumerable get enumerator.</returns>
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
 		}
 	}
 }

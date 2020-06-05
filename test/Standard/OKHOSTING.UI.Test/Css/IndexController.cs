@@ -45,6 +45,11 @@ namespace OKHOSTING.UI.Test.Css
 			ArrobaMedia.Click += (object sender, EventArgs e) => new CssMediaController() { Page = Page }.Start();
 			stack.Children.Add(ArrobaMedia);
 
+			ILabelButton backgroundImage = Core.BaitAndSwitch.Create<ILabelButton>();
+			backgroundImage.Text = "Background image";
+			backgroundImage.Click += (object sender, EventArgs e) => new BackgroundImageController(Page).Start();
+			stack.Children.Add(backgroundImage);
+
 			// Establishes the content and title of the page.
 			Page.Title = "Choose one control/feature to test";
 			Page.Content = stack;

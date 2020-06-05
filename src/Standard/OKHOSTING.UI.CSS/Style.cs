@@ -448,7 +448,7 @@ namespace OKHOSTING.UI.CSS
 
 			void Apply(ICssStyleRule style)
 			{
-				var selectedControls = SelectBy(allControls, style.SelectorText);
+				var selectedControls = SelectBy(allControls, style.SelectorText).ToArray();
 
 				foreach (var control in selectedControls)
 				{
@@ -714,6 +714,81 @@ namespace OKHOSTING.UI.CSS
 			{
 				control.Visible = style.GetVisibility() != "none" && style.GetVisibility() != "hidden";
 			}
+
+			//background image
+			if (!string.IsNullOrWhiteSpace(style.GetBackgroundImage()))
+			{
+				//get source of the image
+				var src = style.GetBackgroundImage();
+				src = src.Replace("url(", string.Empty).Replace("file:///", string.Empty).TrimEnd(')', ';').Trim('\"');
+				var image = BaitAndSwitch.Create<IImage>();
+				image.LoadFromUrl(new Uri(src));
+
+				//get size TODO
+				var size = style.GetBackgroundSize();
+
+				//get repeat TODO
+				var repeat = style.GetBackgroundRepeat();
+
+				//get position
+				int positionX = 0;
+				int positionY = 0;
+				
+				int.TryParse(style.GetBackgroundPositionX(), out positionX);
+				int.TryParse(style.GetBackgroundPositionY(), out positionY);
+				
+				image.Margin = new Thickness(positionY, positionX, 0, 0);
+
+				//macke control's background transparent so the image is visible
+				control.BackgroundColor = Color.FromArgb(0, control.BackgroundColor.R, control.BackgroundColor.G, control.BackgroundColor.B);
+
+				//create a relative panel, put the image on the back and the control on front
+				var panel = BaitAndSwitch.Create<IRelativePanel>();
+				panel.Add(image, RelativePanelHorizontalContraint.LeftWith, RelativePanelVerticalContraint.TopWith);
+
+				//now put the panel in place of the control
+				if (control.Parent is IGrid)
+				{
+					//if this is a grid, put the container in the exact same position
+					var parent = (IGrid)control.Parent;
+					var position = parent.GetPosition(control);
+					var rowspan = parent.GetRowSpan(control);
+					var columnspan = parent.GetColumnSpan(control);
+
+					parent.SetContent(position.row, position.column, null);
+
+					panel.Add(control, RelativePanelHorizontalContraint.LeftWith, RelativePanelVerticalContraint.TopWith);
+					parent.SetContent(position.row, position.column, panel);
+					parent.SetColumnSpan(columnspan, panel);
+					parent.SetRowSpan(rowspan, panel);
+				}
+				else if (control.Parent is IContainer)
+				{
+					//if this is a stack or a flow, put in in the same position as well
+					var parent = (IContainer)control.Parent;
+					var children = parent.Children.ToArray();
+
+					//clear children
+					parent.Children.Clear();
+					panel.Add(control, RelativePanelHorizontalContraint.LeftWith, RelativePanelVerticalContraint.TopWith);
+
+					foreach (var child in children)
+					{
+						if (control.Equals(child))
+						{
+							parent.Children.Add(panel);
+						}
+						else
+						{
+							parent.Children.Add(child);
+						}
+					}
+				}
+				else
+				{
+					throw new ArgumentOutOfRangeException(nameof(control), "Control.Parent is not IContainer, therefore we can't stablish backgound-image");
+				}
+			}
 		}
 
 		/// <summary>
@@ -724,7 +799,7 @@ namespace OKHOSTING.UI.CSS
 		/// </summary>
 		public static void Apply(ICssStyleDeclaration style, ITextControl control)
 		{
-			Apply(style, (IControl)control);
+			Apply(style, (IControl) control);
 
 			//now for ITextControl properties
 			control.Bold = style.GetFontWeight() == "bold";

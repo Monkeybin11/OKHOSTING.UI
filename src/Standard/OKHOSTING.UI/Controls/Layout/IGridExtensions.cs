@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OKHOSTING.UI.Controls.Layout
@@ -364,6 +365,35 @@ namespace OKHOSTING.UI.Controls.Layout
 				grid.SetHeight(i, height);
 				i++;
 			}
+		}
+
+		/// <summary>
+		/// Returns the row and column where a control is positioned inside a grid. 
+		/// If the control is not inside the grid, an exception is thrown
+		/// </summary>
+		/// <param name="content"></param>
+		/// <returns></returns>
+		public static (int row, int column) GetPosition(this IGrid grid, IControl control)
+		{
+			if (control == null)
+			{
+				throw new ArgumentNullException(nameof(control));
+			}
+
+			for (int row = 0; row < grid.RowCount; row++)
+			{
+				for (int column = 0; column < grid.RowCount; column++)
+				{
+					var gridContent = grid.GetContent(row, column);
+
+					if (control.Equals(gridContent))
+					{
+						return (row, column);
+					}
+				}
+			}
+
+			throw new ArgumentOutOfRangeException(nameof(control), "This control is contained directly on this grid");
 		}
 	}
 }
