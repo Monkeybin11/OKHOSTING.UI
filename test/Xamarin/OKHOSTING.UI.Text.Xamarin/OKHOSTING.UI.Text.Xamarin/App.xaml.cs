@@ -1,5 +1,5 @@
 ﻿
-using OKHOSTING.UI.Test.Misc;
+using OKHOSTING.UI.Test;
 
 namespace OKHOSTING.UI.Text.Xamarin
 {
@@ -10,8 +10,8 @@ namespace OKHOSTING.UI.Text.Xamarin
             InitializeComponent();
             var page = new UI.Xamarin.Forms.Page();
             page.App = new UI.App();
-            var index = new IndexController();
-            index.Page = page;
+            var index = new IndexController(page);
+            //index.Page = page;
             MainPage = page;
 
             index.Start();
