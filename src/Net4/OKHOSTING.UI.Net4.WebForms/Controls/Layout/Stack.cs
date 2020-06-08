@@ -346,6 +346,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 		}
 
+		private IImage _BackgroundImage;
+
+		public IImage BackgroundImage 
+		{ 
+			get 
+			{
+				return _BackgroundImage;
+			} 
+			set 
+			{
+				_BackgroundImage = value;
+				var url = ((System.Web.UI.WebControls.Image) value).ImageUrl;
+				url = $"url('{url}')";
+
+				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
+			} 
+		}
+
 		/// <summary>
 		/// Control list.
 		/// <para xml:lang="es">Lista de controles</para>

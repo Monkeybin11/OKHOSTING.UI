@@ -4,6 +4,7 @@ using OKHOSTING.UI.Controls.Layout;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using View = global::Xamarin.Forms.View;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
@@ -15,6 +16,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// </summary>
 	public class Grid : global::Xamarin.Forms.Grid, IGrid
 	{
+		private IImage _BackgroundImage;
+		
 		#region IGrid
 
 		/// <summary>
@@ -43,7 +46,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 						if (currentContent != null)
 						{
-							base.Children.Remove((global::Xamarin.Forms.View) currentContent);
+							base.Children.Remove((View) currentContent);
 						}
 					}
 
@@ -78,7 +81,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 						if (currentContent != null)
 						{
-							base.Children.Remove((global::Xamarin.Forms.View) currentContent);
+							base.Children.Remove((View) currentContent);
 						}
 					}
 
@@ -109,7 +112,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// </param>
 		IControl IGrid.GetContent(int row, int column)
 		{
-			foreach (global::Xamarin.Forms.View children in base.Children)
+			foreach (View children in base.Children)
 			{
 				if (global::Xamarin.Forms.Grid.GetRow(children) == row && global::Xamarin.Forms.Grid.GetColumn(children) == column)
 				{
@@ -146,20 +149,20 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				throw new ArgumentOutOfRangeException(nameof(column));
 			}
 
-			SetRow((global::Xamarin.Forms.View) content, row);
-			SetColumn((global::Xamarin.Forms.View) content, column);
+			SetRow((View) content, row);
+			SetColumn((View) content, column);
 
 			//remove previous content, if any
 			var currentContent = ((IGrid) this).GetContent(row, column);
 
 			if (currentContent != null)
 			{
-				base.Children.Remove((global::Xamarin.Forms.View) currentContent);
+				base.Children.Remove((View) currentContent);
 			}
 
 			if (content != null)
 			{
-				base.Children.Add((global::Xamarin.Forms.View)content);
+				base.Children.Add((View) content);
 			}
 		}
 
@@ -534,6 +537,33 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			get
 			{
 				return IGridExtensions.GetAllControlls(this).ToList();
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+
+				if (value != null)
+				{
+					//remove old background
+					if (_BackgroundImage != null & base.Children.Contains((View) _BackgroundImage))
+					{
+						base.Children.Remove((View) _BackgroundImage);
+					}
+
+					((global::Xamarin.Forms.Image) value).Aspect = global::Xamarin.Forms.Aspect.AspectFill;
+					((global::Xamarin.Forms.Image) value).HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
+					((global::Xamarin.Forms.Image) value).VerticalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
+					
+					base.Children.Add((View) value);
+				}
 			}
 		}
 

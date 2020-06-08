@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
 namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Stack : System.Windows.Forms.FlowLayoutPanel, IStack
 	{
+		private readonly ControlList _Children;
+		private IImage _BackgroundImage;
+		
 		public Stack()
 		{
 
@@ -22,13 +26,24 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			//| System.Windows.Forms.AnchorStyles.Right)));
 		}
 
-		protected readonly ControlList _Children;
-
-		public ICollection<IControl> Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
 				return _Children;
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get 
+			{
+				return _BackgroundImage;
+			}
+			set 
+			{ 
+				_BackgroundImage = value;
+				base.BackgroundImage = ((System.Windows.Forms.PictureBox) value)?.Image;
 			}
 		}
 

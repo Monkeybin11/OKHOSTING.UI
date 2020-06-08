@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
@@ -46,13 +45,14 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 	/// </remarks>
 	public partial class RelativePanel : Panel, IRelativePanel
 	{
+		private IImage _BackgroundImage;
+		private readonly ControlList _Children;
+
 		public RelativePanel()
 		{
 			_Children = new ControlList(base.Children);
 
 		}
-
-		protected readonly ControlList _Children;
 
 		// Dependency property for storing intermediate arrange state on the children
 		private static readonly DependencyProperty ArrangeStateProperty =
@@ -568,11 +568,28 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			throw new ArgumentException("RelativePanel error: Value must be of type UIElement");
 		}
 
-		ICollection<IControl> UI.Controls.IContainer.Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
 				return _Children;
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+
+				if (value != null)
+				{
+					base.Background = new System.Windows.Media.ImageBrush(((System.Windows.Controls.Image) value).Source);
+				}
 			}
 		}
 
@@ -686,9 +703,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 		}
 
-		public class VisualStateUwp : VisualState, ISupportInitialize
+		public class VisualStateUwp : VisualState, System.ComponentModel.ISupportInitialize
 		{
-			[EditorBrowsable(EditorBrowsableState.Never)]
+			[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
 			public class SetterBaseCollection : ObservableCollection<Setter> { }
 			private SetterBaseCollection _setters;
 			private ObservableCollection<StateTriggerBase> _triggers;
@@ -777,12 +794,12 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			}
 			private bool _isInitializing;
 
-			void ISupportInitialize.BeginInit()
+			void System.ComponentModel.ISupportInitialize.BeginInit()
 			{
 				_isInitializing = true;
 			}
 
-			void ISupportInitialize.EndInit()
+			void System.ComponentModel.ISupportInitialize.EndInit()
 			{
 				_isInitializing = false;
 				afterInit?.Invoke();

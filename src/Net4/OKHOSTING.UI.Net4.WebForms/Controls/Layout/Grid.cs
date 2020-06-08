@@ -644,6 +644,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			else return 0;
 		}
 
+		private IImage _BackgroundImage;
+
+		public IImage BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+				var url = ((System.Web.UI.WebControls.Image) value).ImageUrl;
+				url = $"url('{url}')";
+
+				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
+			}
+		}
+
 		protected void RebuildGrid()
 		{
 			Rows.Clear();

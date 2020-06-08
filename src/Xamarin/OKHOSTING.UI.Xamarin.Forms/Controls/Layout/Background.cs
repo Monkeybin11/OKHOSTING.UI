@@ -1,90 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Collections.Generic;
+using OKHOSTING.Core;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
+using View = global::Xamarin.Forms.View;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
 	/// <summary>
-	/// It represents a container where we can be stacked controls.								
-	/// <para xml:lang="es">
-	/// Representa un contenedor donde podemos ir apilando controles.
-	/// </para>
+	/// Base control for all containers, allows for a background image
 	/// </summary>
-	public class Flow : global::Xamarin.Forms.StackLayout, IFlow
+	public abstract class Background<T> : global::Xamarin.Forms.Grid, IContainer where T : View
 	{
 		private IImage _BackgroundImage;
-		
-		/// <summary>
-		/// The children controls.
-		/// <para xml:lang="es">Lista de los controles hijos del Stack</para>
-		/// </summary>
-		protected readonly ControlList _Children;
+		protected readonly T Content;
 
-		/// <summary>
-		/// Initializes a new instance of the Stack class.
-		/// <para xml:lang="es">Inicializa una nueva instancia de la clase Stack</para>
-		/// </summary>
-		public Flow()
+		public Background()
 		{
-			_Children = new ControlList(base.Children);
-			base.Orientation = global::Xamarin.Forms.StackOrientation.Horizontal;
-		}
+			Content = BaitAndSwitch.Create<T>();
 
-		/// <summary>
-		/// Gets the controls IStack children.
-		/// <para xml:lang="es">Obtiene la lista de los controles hijos del Stack.</para>
-		/// </summary>
-		ICollection<IControl> IContainer.Children
-		{
-			get
-			{
-				return _Children;
-			}
-		}
-
-		IImage IContainer.BackgroundImage
-		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-
-				if (value != null)
-				{
-				}
-			}
-		}
-
-		/// <summary>
-		/// The identifier dispose.
-		/// <para xml:lang="es">El identificador Dispose.</para>
-		/// </summary>
-		void IDisposable.Dispose()
-		{
+			SetRow(Content, 0);
+			SetColumn(Content, 0);
+			
+			//make only 1 cell and put the content there
+			base.ColumnDefinitions.Add(new global::Xamarin.Forms.ColumnDefinition());
+			base.RowDefinitions.Add(new global::Xamarin.Forms.RowDefinition());
+			base.Children.Add(Content);
 		}
 
 		#region IControl
+
 		/// <summary>
-		/// Friendly programming name (or id) of the control. A simple view should not contain 2 controls with the same name.
-		/// <para xml:lang="es">
-		/// Nombre (o Id) de programacion amigable del control. Una simple vista no puede contener dos controles con el mismo nombre.
-		/// </para>
+		/// Gets or sets the name of the Control.
+		/// <para xml:lang="es">Obtiene o establece el nommbre del control.</para>
 		/// </summary>
 		string IControl.Name
 		{
-			get; set;
+			get;
+			set;
 		}
 
 		/// <summary>
-		/// Gets or sets wether the control is visible or not
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el control es visible o no.
-		/// </para>
+		/// Gets or sets the if the control visible.
+		/// <para xml:lang="es">Obtiene o establece si el control es visible o no.</para>
 		/// </summary>
 		bool IControl.Visible
 		{
@@ -99,9 +58,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Gets or sets wether the control is enabled or not
+		/// Gets or sets the control is enabled or not.
 		/// <para xml:lang="es">
-		/// Obtiene o establece si el control es habilitado o no.
+		/// Obtiene o establece si el control esta habilitado o no.
 		/// </para>
 		/// </summary>
 		bool IControl.Enabled
@@ -113,14 +72,13 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			set
 			{
 				base.IsEnabled = value;
+				Content.IsEnabled = value;
 			}
 		}
 
 		/// <summary>
-		/// Width of the control, in density independent pixels
-		/// <para xml:lang="es">
-		/// Ancho del control, en dencidad de pixeles independientes.
-		/// </para>
+		/// Gets or sets the width of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
 		/// </summary>
 		double? IControl.Width
 		{
@@ -133,15 +91,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				if (value.HasValue)
 				{
 					base.WidthRequest = value.Value;
+					Content.WidthRequest = value.Value;
 				}
 			}
 		}
 
 		/// <summary>
-		/// Height of the control, in density independent pixels.
-		/// <para xml:lang="es">
-		/// Altura del control, en dencididad de pixeles independiente
-		/// </para>
+		/// Gets or sets the height of the control.
+		/// <para xml:lang="es">Obtiene o establece la altura del control.</para>
 		/// </summary>
 		double? IControl.Height
 		{
@@ -154,6 +111,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				if (value.HasValue)
 				{
 					base.HeightRequest = value.Value;
+					Content.HeightRequest = value.Value;
 				}
 			}
 		}
@@ -195,10 +153,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Background color
-		/// <para xml:lang="es">
-		/// Color de fondo.
-		/// </para>
+		/// Gets or sets the backgroundcolor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color de fondo del control</para>
 		/// </summary>
 		Color IControl.BackgroundColor
 		{
@@ -209,37 +165,32 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			set
 			{
 				base.BackgroundColor = Forms.Platform.Parse(value);
+				Content.BackgroundColor = Forms.Platform.Parse(value);
 			}
 		}
 
 		/// <summary>
-		/// Border color
-		/// <para xml:lang="es">
-		/// Color del borde.
-		/// </para>
+		/// Gets or sets the bordercolor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		/// <summary>
-		/// Border width, in density independent pixels (DIP)
-		/// <para xml:lang="es">
-		/// Ancho del borde, en dencidad de pixeles independientes (DIP)
-		/// </para>
+		/// Gets or sets the borderwidth of the control.
+		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get;
-			set;
+			get; set;
 		}
 
 		/// <summary>
-		/// Horizontal alignment of the control with respect to it's container.
+		/// Gets or sets the horizontal alignment of the control.
 		/// <para xml:lang="es">
-		/// Alineación horizontal del control con respecto a su contenedor.
+		/// Obtiene o establece la alineacion horizontal del control.
 		/// </para>
 		/// </summary>
 		HorizontalAlignment IControl.HorizontalAlignment
@@ -255,11 +206,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		/// <summary>
-		/// Vertical alignment of the control with respect to it's container
-		/// <para xml:lang="es">
-		/// Alineacion vertical del control con respecto a su contenedor.
-		/// </para>
+		/// Gets or sets the vertical alignment of the control.
+		/// <para xml:lang="es">Obtiene o establevce la alineacion vertical del control.</para>
 		/// </summary>
+		/// <value>The OKHOSTING . user interface . controls. IC ontrol. vertical alignment.</value>
 		VerticalAlignment IControl.VerticalAlignment
 		{
 			get
@@ -275,13 +225,13 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// <summary>
 		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
 		/// <para xml:lang="es">
-		/// Obtiene o establece un objeto con valor arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento.
+		/// Obtiene o establece un objeto de valor arbitrario que puede ser usado para almacenar información personalizada sobre este elemento.
 		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// Returns the intended value. This property has no default value.
 		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. esta propiedad no contiene un valor predeterminado.
+		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
 		/// </para>
 		/// </remarks>
 		object IControl.Tag
@@ -312,5 +262,43 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		}
 
 		#endregion
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+
+				if (value != null)
+				{
+					//remove old background
+					if (_BackgroundImage != null & base.Children.Contains((View) _BackgroundImage))
+					{
+						base.Children.Remove((View) _BackgroundImage);
+					}
+
+					((global::Xamarin.Forms.Image) value).Aspect = global::Xamarin.Forms.Aspect.AspectFill;
+					((global::Xamarin.Forms.Image) value).HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
+					((global::Xamarin.Forms.Image) value).VerticalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
+					SetColumnSpan((global::Xamarin.Forms.Image) value, ColumnDefinitions.Count);
+					SetRowSpan((global::Xamarin.Forms.Image) value, RowDefinitions.Count);
+
+					base.Children.Add((View) value);
+				}
+			}
+		}
+
+		public new abstract ICollection<IControl> Children
+		{
+			get;
+		}
+
+		public virtual void Dispose()
+		{
+		}
 	}
 }

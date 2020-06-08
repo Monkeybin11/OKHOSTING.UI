@@ -8,6 +8,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Flow : System.Windows.Forms.FlowLayoutPanel, IFlow
 	{
+		private IImage _BackgroundImage;
+		private readonly ControlList _Children;
+
 		public Flow()
 		{
 			AutoScroll = true;
@@ -17,13 +20,24 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			_Children = new ControlList(base.Controls);
 		}
 
-		protected readonly ControlList _Children;
-
-		public ICollection<IControl> Children
+		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
 				return _Children;
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+				base.BackgroundImage = ((System.Windows.Forms.PictureBox) value)?.Image;
 			}
 		}
 

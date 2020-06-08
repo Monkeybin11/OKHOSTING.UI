@@ -9,6 +9,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class RelativePanel : System.Windows.Forms.Panel, IRelativePanel
 	{
+		private IImage _BackgroundImage;
+		private readonly ControlList _Children;
+
 		public RelativePanel()
 		{
 			//AutoScroll = true;
@@ -18,13 +21,24 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			//| System.Windows.Forms.AnchorStyles.Right)));
 		}
 
-		protected readonly ControlList _Children;
-
 		ICollection<IControl> IContainer.Children
 		{
 			get
 			{
 				return _Children;
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+				base.BackgroundImage = ((System.Windows.Forms.PictureBox) value)?.Image;
 			}
 		}
 
@@ -110,7 +124,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 				for(int i = 0; i < base.Controls.Count; i++)
 				{
 					NativeControl control = base.Controls[i];
-
 					control.BringToFront();
 				}
 
@@ -119,7 +132,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 			Platform.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
-
 		}
 
 		#region IControl

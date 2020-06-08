@@ -6,6 +6,18 @@ namespace OKHOSTING.UI.Net4.WebForms
 {
 	public static class Platform
 	{
+		public static Page CurrentPage
+		{
+			get
+			{
+				return (Page) System.Web.HttpContext.Current.Session[$"{nameof(Platform)}.{nameof(CurrentPage)}"];
+			}
+			internal set
+			{
+				System.Web.HttpContext.Current.Session[$"{nameof(Platform)}.{nameof(CurrentPage)}"] = value;
+			}
+		}
+
 		public static void Finish()
 		{
 			System.Web.Security.FormsAuthentication.SignOut();
@@ -51,6 +63,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 			throw new ArgumentOutOfRangeException("value");
 		}
 
+		#region Url rewrite methods
+
 		/// <summary>
 		/// List of rules that define which controllers are attached to wich URI paths
 		/// </summary>
@@ -89,18 +103,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 			return UriMap.Where(r => r.ControllerType.Equals(controllerType) || r.ControllerType.IsSubclassOf(controllerType)).FirstOrDefault();
 		}
 
-		public static Page CurrentPage
-		{
-			get
-			{
-				return (Page) System.Web.HttpContext.Current.Session[$"{nameof(Platform)}.{nameof(CurrentPage)}"];
-			}
-			internal set
-			{
-				System.Web.HttpContext.Current.Session[$"{nameof(Platform)}.{nameof(CurrentPage)}"] = value;
-			}
-		}
-
 		private static void App_ControllerStarted(object sender, Controller controller)
 		{
 			var rule = GetUrlRewriteRuleFor(controller.GetType());
@@ -118,5 +120,7 @@ namespace OKHOSTING.UI.Net4.WebForms
 				System.Web.HttpContext.Current.Response.Redirect(uri.ToString(), false);
 			}
 		}
+
+		#endregion
 	}
 }

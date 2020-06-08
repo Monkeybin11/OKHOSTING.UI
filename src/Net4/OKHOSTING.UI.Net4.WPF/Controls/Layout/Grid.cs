@@ -15,6 +15,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 	/// </summary>
 	public class Grid : System.Windows.Controls.Grid, IGrid
 	{
+		private IImage _BackgroundImage;
+		
 		/// <summary>
 		/// Inicialize a new intance of the Grid class.
 		/// <para xml:lang="es">	
@@ -357,6 +359,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			get
 			{
 				return IGridExtensions.GetAllControlls(this).ToList();
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+				
+				if (value != null)
+				{
+					base.Background = new System.Windows.Media.ImageBrush(((System.Windows.Controls.Image)value).Source);
+				}
 			}
 		}
 

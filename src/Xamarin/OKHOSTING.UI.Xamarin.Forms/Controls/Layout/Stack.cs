@@ -14,6 +14,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// </summary>
 	public class Stack : global::Xamarin.Forms.StackLayout, IStack
 	{
+		private IImage _BackgroundImage;
+		
 		/// <summary>
 		/// The children controls.
 		/// <para xml:lang="es">Lista de los controles hijos del Stack</para>
@@ -39,6 +41,22 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			get
 			{
 				return _Children;
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+
+				if (value != null)
+				{
+				}
 			}
 		}
 

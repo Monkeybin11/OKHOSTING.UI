@@ -254,12 +254,12 @@ namespace OKHOSTING.UI
 				}
 			}
 
-			if (!(control is Controls.IContainer))
+			if (!(control is Controls.Layout.IContainer))
 			{
 				yield break;
 			}
 
-			foreach (var children in ((Controls.IContainer) control).Children)
+			foreach (var children in ((Controls.Layout.IContainer) control).Children)
 			{
 				yield return children;
 

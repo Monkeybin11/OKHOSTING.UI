@@ -8,6 +8,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 {
 	public class Flow : System.Windows.Controls.StackPanel, IFlow
 	{
+		private IImage _BackgroundImage;
+		
 		/// <summary>
 		/// Initializes a new instance of the Flow class.
 		/// <para xml:lang="es">
@@ -39,6 +41,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			get
 			{
 				return _Children;
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+
+				if (value != null)
+				{
+					base.Background = new System.Windows.Media.ImageBrush(((System.Windows.Controls.Image) value).Source);
+				}
 			}
 		}
 

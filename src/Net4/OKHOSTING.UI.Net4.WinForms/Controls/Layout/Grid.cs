@@ -9,9 +9,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Grid : System.Windows.Forms.TableLayoutPanel, IGrid
 	{
+		private IImage _BackgroundImage;
+		
 		public Grid()
 		{
 		}
+
+		#region IGrid
 
 		Thickness IGrid.CellMargin
 		{
@@ -175,6 +179,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			return base.RowStyles[row].Height;
 		}
 
+		#endregion
+
+		#region IContainer
+
 		ICollection<IControl> IContainer.Children
 		{
 			get
@@ -183,11 +191,20 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
-		/// <summary>
-		/// Gets or sets a list of classes that define a control's style. 
-		/// Exactly the same concept as in CSS. 
-		/// </summary>
-		string IControl.CssClass { get; set; }
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+				base.BackgroundImage = ((System.Windows.Forms.PictureBox) value)?.Image;
+			}
+		}
+
+		#endregion
 
 		#region IControl
 
@@ -296,13 +313,18 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
+		#endregion
+		
 		object ICloneable.Clone()
 		{
 			return MemberwiseClone();
 		}
-
-		#endregion
-
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{

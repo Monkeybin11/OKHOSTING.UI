@@ -13,6 +13,9 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 	/// </summary>
 	public class Stack : System.Windows.Controls.StackPanel, IStack
 	{
+		private IImage _BackgroundImage;
+		private readonly ControlList _Children;
+
 		/// <summary>
 		/// Initializes a new instance of the OKHOSTING.UI.Net4.Ajax.Controls.Layout.Stack class.
 		/// <para xml:lang="es">Inicializa una nueva instancia de la clase OKHOSTING.UI.Net4.Ajax.Controls.Layout.Stack</para>
@@ -22,14 +25,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			_Children = new ControlList(base.Children);
 			base.Orientation = System.Windows.Controls.Orientation.Vertical;
 		}
-
-		/// <summary>
-		/// The children controls.
-		/// <para xml:lang="es">
-		/// Lista de los controles hijos del Stack.
-		/// </para>
-		/// </summary>
-		protected readonly ControlList _Children;
 
 		/// <summary>
 		/// Gets the controls IStack children.
@@ -42,6 +37,23 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			get
 			{
 				return _Children;
+			}
+		}
+		
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+
+				if (value != null)
+				{
+					base.Background = new System.Windows.Media.ImageBrush(((System.Windows.Controls.Image) value).Source);
+				}
 			}
 		}
 

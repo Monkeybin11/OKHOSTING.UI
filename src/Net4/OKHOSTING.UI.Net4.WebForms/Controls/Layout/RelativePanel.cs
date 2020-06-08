@@ -200,6 +200,24 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
 		}
 
+		private IImage _BackgroundImage;
+
+		public IImage BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+				var url = ((System.Web.UI.WebControls.Image) value).ImageUrl;
+				url = $"url('{url}')";
+
+				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
+			}
+		}
+
 		#region IControl
 
 		/// <summary>

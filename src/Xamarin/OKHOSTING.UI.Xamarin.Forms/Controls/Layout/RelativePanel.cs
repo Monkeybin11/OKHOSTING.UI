@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using View = global::Xamarin.Forms.View;
 using Constraint = global::Xamarin.Forms.Constraint;
+using System.Linq;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
@@ -16,6 +17,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// </summary>
 	public class RelativePanel : global::Xamarin.Forms.RelativeLayout, IRelativePanel
 	{
+		private IImage _BackgroundImage;
+		private readonly ControlList _Children;
+
 		/// <summary>
 		/// Initializes a new instance of the RelativePanel class.
 		/// <para xml:lang="es">Inicializa una nueva instancia de la clase RelativePanel</para>
@@ -24,12 +28,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			_Children = new ControlList(base.Children);
 		}
-
-		/// <summary>
-		/// The children.
-		/// <para xml:lang="es">Lista de los controles hijos.</para>
-		/// </summary>
-		protected readonly ControlList _Children;
 
 		#region IControl
 
@@ -271,6 +269,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		#endregion
 
 		#region IRelativePanel
+
 		/// <summary>
 		/// Gets the controls RelativePanel children.
 		/// <para xml:lang="es">Obtiene los controles hijos del RelativePanel.</para>
@@ -427,6 +426,35 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 
 			//finally add to children using the constraints
 			base.Children.Add((View) control, horizontalXamarinConstraint, verticalXamarinConstraint, null, null);
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get
+			{
+				return _BackgroundImage;
+			}
+			set
+			{
+				_BackgroundImage = value;
+
+				if (value != null)
+				{
+					//remove old background
+					if (_BackgroundImage != null & Children.Contains((View) _BackgroundImage))
+					{
+						Children.Remove((View) _BackgroundImage);
+					}
+
+					//backup the children
+					var children = Children.ToArray();
+
+					//remove all content so we insert the image first
+					Children.Clear();
+
+					((IRelativePanel) this).Add(value, RelativePanelHorizontalContraint.LeftWith, RelativePanelVerticalContraint.TopWith);
+				}
+			}
 		}
 
 		#endregion
