@@ -566,7 +566,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 					SetColumn((global::Xamarin.Forms.Image) value, 0);
 					SetRow((global::Xamarin.Forms.Image) value, 0);
 
-					base.Children.Add((View) value);
+					base.Children.Insert(0, (View) value);
 				}
 			}
 		}
