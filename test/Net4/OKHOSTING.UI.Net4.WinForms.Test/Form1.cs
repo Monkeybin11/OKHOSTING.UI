@@ -17,7 +17,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Test
 			App = new App();
 			App.MainPage = this;
 			
-			var index = new UI.Test.Css.BackgroundImageController(this);
+			var index = new UI.Test.IndexController(this);
 			index.Start();
 		}
 	}

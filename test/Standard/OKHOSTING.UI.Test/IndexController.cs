@@ -25,7 +25,12 @@ namespace OKHOSTING.UI.Test
 		/// </summary>
 		protected override void OnStart()
 		{
+			IImage imgPicture = Core.BaitAndSwitch.Create<IImage>();
+			imgPicture.LoadFromUrl(new Uri("https://www.merriam-webster.com/assets/mw/images/gallery/gal-wap-slideshow-slide/aztec-2666-4b768308b161027e77ae775f6abea503@1x.jpg"));
+
 			IStack stack = Core.BaitAndSwitch.Create<IStack>();
+			stack.BackgroundImage = imgPicture;
+			stack.Height = Page.Height;
 
 			// Controls
 			ILabelButton lblControls = Core.BaitAndSwitch.Create<ILabelButton>();
