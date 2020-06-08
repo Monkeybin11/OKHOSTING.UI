@@ -286,6 +286,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 					((global::Xamarin.Forms.Image) value).VerticalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
 					SetColumnSpan((global::Xamarin.Forms.Image) value, ColumnDefinitions.Count);
 					SetRowSpan((global::Xamarin.Forms.Image) value, RowDefinitions.Count);
+					SetColumn((global::Xamarin.Forms.Image) value, 0);
+					SetRow((global::Xamarin.Forms.Image) value, 0);
 
 					base.Children.Add((View) value);
 				}

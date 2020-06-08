@@ -557,11 +557,15 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 					{
 						base.Children.Remove((View) _BackgroundImage);
 					}
-
+					
 					((global::Xamarin.Forms.Image) value).Aspect = global::Xamarin.Forms.Aspect.AspectFill;
 					((global::Xamarin.Forms.Image) value).HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
 					((global::Xamarin.Forms.Image) value).VerticalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
-					
+					SetColumnSpan((global::Xamarin.Forms.Image) value, ColumnDefinitions.Count);
+					SetRowSpan((global::Xamarin.Forms.Image) value, RowDefinitions.Count);
+					SetColumn((global::Xamarin.Forms.Image) value, 0);
+					SetRow((global::Xamarin.Forms.Image) value, 0);
+
 					base.Children.Add((View) value);
 				}
 			}
