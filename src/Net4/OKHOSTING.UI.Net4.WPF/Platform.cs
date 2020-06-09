@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OKHOSTING.UI.Controls.Layout;
+using System;
 using System.Drawing;
 using System.Windows;
 
@@ -166,6 +167,17 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 
 			return TextAlignment.Left;
+		}
+
+		public static void SetBackgroundImage(System.Windows.Controls.Panel control)
+		{ 
+			var backgroundImage = ((IContainer) control).BackgroundImage;
+			var source = ((System.Windows.Controls.Image) backgroundImage)?.Source;
+
+			if (((System.Windows.Media.ImageBrush) control.Background)?.ImageSource != source)
+			{
+				control.Background = new System.Windows.Media.ImageBrush(((System.Windows.Controls.Image) backgroundImage).Source);
+			}
 		}
 	}
 }

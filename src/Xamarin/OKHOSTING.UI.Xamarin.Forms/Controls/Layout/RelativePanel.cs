@@ -1,11 +1,8 @@
-﻿using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layout;
+﻿using OKHOSTING.UI.Controls.Layout;
 using System;
-using System.Drawing;
 using System.Collections.Generic;
 using View = global::Xamarin.Forms.View;
 using Constraint = global::Xamarin.Forms.Constraint;
-using System.Linq;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 {
@@ -15,9 +12,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// Un RelativePanel inspirado por WPF y Xamarin.Forms
 	/// </para>
 	/// </summary>
-	public class RelativePanel : global::Xamarin.Forms.RelativeLayout, IRelativePanel
+	public class RelativePanel : Background<global::Xamarin.Forms.RelativeLayout>, IRelativePanel
 	{
-		private IImage _BackgroundImage;
 		private readonly ControlList _Children;
 
 		/// <summary>
@@ -26,232 +22,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// </summary>
 		public RelativePanel()
 		{
-			_Children = new ControlList(base.Children);
+			_Children = new ControlList(Content.Children);
 		}
-
-		#region IControl
-
-		/// <summary>
-		/// Gets or sets the name of the control.
-		/// <para xml:lang="es">Obtiene o establece el nombre del control.</para>
-		/// </summary>
-		string IControl.Name
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Gets or sets wether Control is visible or not.
-		/// <para xml:lang="es">Obtiene o establece si el control es visible o no.</para>
-		/// </summary>
-		bool IControl.Visible
-		{
-			get
-			{
-				return base.IsVisible;
-			}
-			set
-			{
-				base.IsVisible = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets wether Control is enabled or not.
-		/// <para xml:lang="es">Obtiene o establece si el control es habilitado o no.</para>
-		/// </summary>
-		bool IControl.Enabled
-		{
-			get
-			{
-				return base.IsEnabled;
-			}
-			set
-			{
-				base.IsEnabled = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the width of the Control.
-		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
-		/// </summary>
-		double? IControl.Width
-		{
-			get
-			{
-				return base.WidthRequest;
-			}
-			set
-			{
-				if (value.HasValue)
-				{
-					base.WidthRequest = value.Value;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the height of the Control.
-		/// <para xml:lang="es">Obtiene o establece la altura del control.</para>
-		/// </summary>
-		double? IControl.Height
-		{
-			get
-			{
-				return base.HeightRequest;
-			}
-			set
-			{
-				if (value.HasValue)
-				{
-					base.HeightRequest = value.Value;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the control margin.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el margen del control.
-		/// </para>
-		/// </summary>
-		Thickness IControl.Margin
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.Margin);
-			}
-			set
-			{
-				base.Margin = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Space that this control will set between its content and its border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre su contenido y su borde
-		/// </para>
-		/// </summary>
-		Thickness IControl.Padding
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.Padding);
-			}
-			set
-			{
-				base.Padding = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the backgroundcolor of the Control.
-		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
-		/// </summary>
-		Color IControl.BackgroundColor
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.BackgroundColor);
-			}
-			set
-			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the bordercolor of the Control.
-		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
-		/// </summary>
-		Color IControl.BorderColor
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Gets or sets the borderwidth of the Control.
-		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
-		/// </summary>
-		Thickness IControl.BorderWidth
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Gets or sets the horizontal alignment of the Control.
-		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
-		/// </summary>
-		HorizontalAlignment IControl.HorizontalAlignment
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
-			}
-			set
-			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the vertical alignment of the Control.
-		/// <para xml:lang="es">Obtiene o establece la alineacion vertical.</para>
-		/// </summary>
-		VerticalAlignment IControl.VerticalAlignment
-		{
-			get
-			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
-			}
-			set
-			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
-		/// <para xml:lang="es">
-		/// Obtiene o establece un objeto de valor arbitrario que puede ser usado para almacenar informacion personalizada sobre este elemento.
-		/// </para>
-		/// </summary>
-		/// <remarks>
-		/// Returns the intended value. This property has no default value.
-		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
-		/// </para>
-		/// </remarks>
-		object IControl.Tag
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Gets or sets a list of classes that define a control's style. 
-		/// Exactly the same concept as in CSS. 
-		/// </summary>
-		string IControl.CssClass { get; set; }
-
-		/// <summary>
-		/// Control that contains this control, like a grid, or stack
-		/// </summary>
-		IControl IControl.Parent
-		{
-			get
-			{
-				return (IControl) base.Parent;
-			}
-		}
-
-		object ICloneable.Clone()
-		{
-			return MemberwiseClone();
-		}
-
-		#endregion
 
 		#region IDisposable
 
@@ -274,7 +46,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		/// Gets the controls RelativePanel children.
 		/// <para xml:lang="es">Obtiene los controles hijos del RelativePanel.</para>
 		/// </summary>
-		ICollection<IControl> IContainer.Children
+		public override ICollection<IControl> Children
 		{
 			get
 			{
@@ -425,36 +197,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 
 			//finally add to children using the constraints
-			base.Children.Add((View) control, horizontalXamarinConstraint, verticalXamarinConstraint, null, null);
-		}
-
-		IImage IContainer.BackgroundImage
-		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-
-				if (value != null)
-				{
-					//remove old background
-					if (_BackgroundImage != null & Children.Contains((View) _BackgroundImage))
-					{
-						Children.Remove((View) _BackgroundImage);
-					}
-
-					//backup the children
-					var children = Children.ToArray();
-
-					//remove all content so we insert the image first
-					Children.Clear();
-
-					((IRelativePanel) this).Add(value, RelativePanelHorizontalContraint.LeftWith, RelativePanelVerticalContraint.TopWith);
-				}
-			}
+			Content.Children.Add((View) control, horizontalXamarinConstraint, verticalXamarinConstraint, null, null);
 		}
 
 		#endregion

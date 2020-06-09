@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows;
-using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WPF
 {
 	/// <summary>
 	/// Interaction logic for Page.xaml
 	/// </summary>
-	public partial class Page : System.Windows.Window, IPage
+	public partial class Page : Window, IPage
 	{
 		protected readonly System.Windows.Controls.ScrollViewer Scroller;
 
@@ -20,7 +19,7 @@ namespace OKHOSTING.UI.Net4.WPF
 			Scroller.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 			Scroller.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
 
-			SizeToContent = System.Windows.SizeToContent.Manual;
+			SizeToContent = SizeToContent.Manual;
 
 			base.Content = Scroller;
 		}
@@ -57,9 +56,9 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				if (this.WindowState == System.Windows.WindowState.Maximized)
+				if (this.WindowState == WindowState.Maximized)
 				{
-					return System.Windows.SystemParameters.WorkArea.Width;
+					return SystemParameters.WorkArea.Width;
 				}
 				else
 				{
@@ -72,9 +71,9 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			get
 			{
-				if (this.WindowState == System.Windows.WindowState.Maximized)
+				if (this.WindowState == WindowState.Maximized)
 				{
-					return System.Windows.SystemParameters.WorkArea.Height;
+					return SystemParameters.WorkArea.Height;
 				}
 				else
 				{
@@ -85,7 +84,7 @@ namespace OKHOSTING.UI.Net4.WPF
 
 		public void InvokeOnMainThread(Action action)
 		{
-			System.Windows.Application.Current.Dispatcher.Invoke(action);
+			Application.Current.Dispatcher.Invoke(action);
 		}
 
 		protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)

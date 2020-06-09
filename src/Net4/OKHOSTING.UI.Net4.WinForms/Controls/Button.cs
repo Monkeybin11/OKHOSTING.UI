@@ -70,7 +70,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.BackColor = Platform.RemoveAlpha(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -136,7 +136,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.ForeColor = Platform.RemoveAlpha(value);
+				base.ForeColor = value;
 			}
 		}
 
@@ -148,7 +148,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Font = new System.Drawing.Font(value, (float) base.FontHeight);
+				base.Font = new Font(value, (float) base.FontHeight);
 			}
 		}
 
@@ -172,7 +172,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Font = new System.Drawing.Font(Font.Name, base.Font.Size, value? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular);
+				base.Font = new Font(Font.Name, base.Font.Size, value? FontStyle.Bold : FontStyle.Regular);
 			}
 		}
 
@@ -184,7 +184,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.Font = new System.Drawing.Font(Font.Name, base.Font.Size, value? System.Drawing.FontStyle.Italic : System.Drawing.FontStyle.Regular);
+				base.Font = new Font(Font.Name, base.Font.Size, value? FontStyle.Italic : FontStyle.Regular);
 			}
 		}
 
@@ -197,7 +197,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 			set
 			{
-				base.Font = new System.Drawing.Font(Font.Name, base.Font.Size, value? System.Drawing.FontStyle.Underline : System.Drawing.FontStyle.Regular);
+				base.Font = new Font(Font.Name, base.Font.Size, value? FontStyle.Underline : FontStyle.Regular);
 			}
 		}
 

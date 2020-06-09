@@ -346,22 +346,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 		}
 
-		private IImage _BackgroundImage;
+		public IImage BackgroundImage
+		{
+			get;
+			set;
+		}
 
-		public IImage BackgroundImage 
-		{ 
-			get 
+		protected override void OnPreRender(EventArgs e)
+		{
+			if (BackgroundImage != null)
 			{
-				return _BackgroundImage;
-			} 
-			set 
-			{
-				_BackgroundImage = value;
-				var url = ((System.Web.UI.WebControls.Image) value).ImageUrl;
+				var url = ((System.Web.UI.WebControls.Image) BackgroundImage).ImageUrl;
 				url = $"url('{url}')";
-
 				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
-			} 
+			}
+
+			base.OnPreRender(e);
 		}
 
 		/// <summary>

@@ -9,7 +9,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class RelativePanel : System.Windows.Forms.Panel, IRelativePanel
 	{
-		private IImage _BackgroundImage;
 		private readonly ControlList _Children;
 
 		public RelativePanel()
@@ -31,15 +30,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		IImage IContainer.BackgroundImage
 		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-				base.BackgroundImage = ((System.Windows.Forms.PictureBox) value)?.Image;
-			}
+			get;
+			set;
 		}
 
 		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
@@ -118,10 +110,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
+			Platform.SetBackgroundImage(this, pevent);
+			Platform.DrawBorders(this, pevent);
+
 			//invert child index of controls so they are shown in the order which they where added
 			if (!arranged)
 			{
-				for(int i = 0; i < base.Controls.Count; i++)
+				for (int i = 0; i < base.Controls.Count; i++)
 				{
 					NativeControl control = base.Controls[i];
 					control.BringToFront();
@@ -130,7 +125,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 				arranged = true;
 			}
 
-			Platform.DrawBorders(this, pevent);
 			base.OnPaint(pevent);
 		}
 
@@ -198,7 +192,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 			set
 			{
-				base.BackColor = Platform.RemoveAlpha(value);
+				base.BackColor = value;
 			}
 		}
 

@@ -9,8 +9,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Grid : System.Windows.Forms.TableLayoutPanel, IGrid
 	{
-		private IImage _BackgroundImage;
-		
 		public Grid()
 		{
 		}
@@ -193,15 +191,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		IImage IContainer.BackgroundImage
 		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-				base.BackgroundImage = ((System.Windows.Forms.PictureBox) value)?.Image;
-			}
+			get;
+			set;
 		}
 
 		#endregion
@@ -270,7 +261,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 			set
 			{
-				base.BackColor = Platform.RemoveAlpha(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -320,7 +311,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		string IControl.CssClass { get; set; }
 
 		#endregion
-		
+
 		object ICloneable.Clone()
 		{
 			return MemberwiseClone();
@@ -328,11 +319,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
+			Platform.SetBackgroundImage(this, pevent);
 			Platform.DrawBorders(this, pevent);
+
 			base.OnPaint(pevent);
-			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			//| System.Windows.Forms.AnchorStyles.Left)
-			//| System.Windows.Forms.AnchorStyles.Right)));
 		}
 	}
 }

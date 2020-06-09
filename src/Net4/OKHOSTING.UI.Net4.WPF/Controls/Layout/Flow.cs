@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
@@ -8,8 +7,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 {
 	public class Flow : System.Windows.Controls.StackPanel, IFlow
 	{
-		private IImage _BackgroundImage;
-		
 		/// <summary>
 		/// Initializes a new instance of the Flow class.
 		/// <para xml:lang="es">
@@ -21,56 +18,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			_Children = new ControlList(base.Children);
 			base.Orientation = System.Windows.Controls.Orientation.Horizontal;
 		}
-
-		/// <summary>
-		/// The children controls.
-		/// <para xml:lang="es">
-		/// Lista de los controles hijos del Stack.
-		/// </para>
-		/// </summary>
-		protected readonly ControlList _Children;
-
-		/// <summary>
-		/// Gets the controls IStack children.
-		/// <para xml:lang="es">
-		/// Obtiene la lista de los controles hijos del Stack.
-		/// </para>
-		/// </summary>
-		ICollection<IControl> IContainer.Children
-		{
-			get
-			{
-				return _Children;
-			}
-		}
-
-		IImage IContainer.BackgroundImage
-		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-
-				if (value != null)
-				{
-					base.Background = new System.Windows.Media.ImageBrush(((System.Windows.Controls.Image) value).Source);
-				}
-			}
-		}
-
-		/// <summary>
-		/// The identifier dispose.
-		/// <para xml:lang="es">
-		/// El identificador Dispose.
-		/// </para>
-		/// </summary>
-		void IDisposable.Dispose()
-		{
-		}
-
+		
 		#region IControl
 
 		/// <summary>
@@ -194,7 +142,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// Obtiene o establece el color de fondo del control.
 		/// </para>
 		/// </summary>
-		Color IControl.BackgroundColor
+		System.Drawing.Color IControl.BackgroundColor
 		{
 			get
 			{
@@ -212,7 +160,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// Obtiene o establece el color del borde del control.
 		/// </para>
 		/// </summary>
-		Color IControl.BorderColor
+		System.Drawing.Color IControl.BorderColor
 		{
 			get; set;
 		}
@@ -287,5 +235,49 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		#endregion
+
+		/// <summary>
+		/// The children controls.
+		/// <para xml:lang="es">
+		/// Lista de los controles hijos del Stack.
+		/// </para>
+		/// </summary>
+		protected readonly ControlList _Children;
+
+		/// <summary>
+		/// Gets the controls IStack children.
+		/// <para xml:lang="es">
+		/// Obtiene la lista de los controles hijos del Stack.
+		/// </para>
+		/// </summary>
+		ICollection<IControl> IContainer.Children
+		{
+			get
+			{
+				return _Children;
+			}
+		}
+
+		IImage IContainer.BackgroundImage
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">
+		/// El identificador Dispose.
+		/// </para>
+		/// </summary>
+		void IDisposable.Dispose()
+		{
+		}
+
+		protected override void OnRender(System.Windows.Media.DrawingContext dc)
+		{
+			Platform.SetBackgroundImage(this);
+			base.OnRender(dc);
+		}
 	}
 }

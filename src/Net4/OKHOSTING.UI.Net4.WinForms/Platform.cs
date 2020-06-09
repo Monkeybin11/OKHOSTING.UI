@@ -1,4 +1,4 @@
-﻿using OKHOSTING.UI.Controls;
+﻿using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Drawing;
 
@@ -15,7 +15,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			if (thickness == null)
 			{
-				return default(System.Windows.Forms.Padding);
+				return default;
 			}
 
 			System.Windows.Forms.Padding padding = new System.Windows.Forms.Padding();
@@ -37,29 +37,29 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			switch (alignment)
 			{
-				case System.Drawing.ContentAlignment.BottomCenter:
+				case ContentAlignment.BottomCenter:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 
-				case System.Drawing.ContentAlignment.BottomLeft:
-					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
-				case
-				System.Drawing.ContentAlignment.BottomRight:
+				case ContentAlignment.BottomLeft:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 
-				case System.Drawing.ContentAlignment.MiddleCenter:
+				case ContentAlignment.BottomRight:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 
-				case System.Drawing.ContentAlignment.MiddleLeft:
+				case ContentAlignment.MiddleCenter:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 
-				case System.Drawing.ContentAlignment.MiddleRight:
+				case ContentAlignment.MiddleLeft:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 
-				case System.Drawing.ContentAlignment.TopLeft:
+				case ContentAlignment.MiddleRight:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
-				case System.Drawing.ContentAlignment.TopCenter:
+
+				case ContentAlignment.TopLeft:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
-				case System.Drawing.ContentAlignment.TopRight:
+				case ContentAlignment.TopCenter:
+					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
+				case ContentAlignment.TopRight:
 					return new Tuple<HorizontalAlignment, VerticalAlignment>(HorizontalAlignment.Center, VerticalAlignment.Bottom);
 			}
 
@@ -185,7 +185,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 				return;
 			}
 
-			var color = RemoveAlpha(((IControl) control).BorderColor);
+			var color = ((IControl) control).BorderColor;
 
 			if (color == null)
 			{
@@ -211,9 +211,15 @@ namespace OKHOSTING.UI.Net4.WinForms
 			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
 		}
 
-		public static Color RemoveAlpha(Color color)
+		public static void SetBackgroundImage(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
 		{
-			return Color.FromArgb(255, color.R, color.G, color.B);
+			var backgroundImage = ((IContainer) control).BackgroundImage;
+			var image = ((System.Windows.Forms.PictureBox) backgroundImage)?.Image;
+
+			if (control.BackgroundImage != image)
+			{
+				control.BackgroundImage = image;
+			}
 		}
 	}
 }

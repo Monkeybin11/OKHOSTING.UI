@@ -45,7 +45,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 	/// </remarks>
 	public partial class RelativePanel : Panel, IRelativePanel
 	{
-		private IImage _BackgroundImage;
 		private readonly ControlList _Children;
 
 		public RelativePanel()
@@ -578,19 +577,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 		IImage IContainer.BackgroundImage
 		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-
-				if (value != null)
-				{
-					base.Background = new System.Windows.Media.ImageBrush(((System.Windows.Controls.Image) value).Source);
-				}
-			}
+			get;
+			set;
 		}
 
 		void IRelativePanel.Add(IControl control, RelativePanelHorizontalContraint horizontalContraint, RelativePanelVerticalContraint verticalContraint, IControl referenceControl)
@@ -701,6 +689,39 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 		void IDisposable.Dispose()
 		{
+		}
+
+		protected override void OnRender(System.Windows.Media.DrawingContext dc)
+		{
+			Platform.SetBackgroundImage(this);
+			base.OnRender(dc);
+		}
+
+		public abstract class StateTriggerBase : DependencyObject
+		{
+			private bool _isActive;
+
+			/// <summary>
+			/// Initializes a new instance of the StateTriggerBase class.
+			/// </summary>
+			protected StateTriggerBase() { }
+
+			/// <summary>
+			/// Sets the value that indicates whether the state trigger is active.
+			/// </summary>
+			/// <param name="IsActive">true if the system should apply the trigger; otherwise, false.</param>
+			protected void SetActive(bool IsActive)
+			{
+				_isActive = IsActive;
+				if (Owner != null && Owner.Storyboard != null)
+				{
+					Owner.SetActive(_isActive);
+				}
+			}
+
+			internal bool IsTriggerActive { get { return _isActive; } }
+
+			internal VisualStateUwp Owner { get; set; }
 		}
 
 		public class VisualStateUwp : VisualState, System.ComponentModel.ISupportInitialize
@@ -816,34 +837,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 			/// </summary>
 			/// <returns>A collection of StateTriggerBase objects. The default is an empty collection.</returns>
 			public ObservableCollection<StateTriggerBase> StateTriggers { get { return _triggers; } }
-		}
-
-		public abstract class StateTriggerBase : DependencyObject
-		{
-			private bool _isActive;
-
-			/// <summary>
-			/// Initializes a new instance of the StateTriggerBase class.
-			/// </summary>
-			protected StateTriggerBase() { }
-
-			/// <summary>
-			/// Sets the value that indicates whether the state trigger is active.
-			/// </summary>
-			/// <param name="IsActive">true if the system should apply the trigger; otherwise, false.</param>
-			protected void SetActive(bool IsActive)
-			{
-				_isActive = IsActive;
-				if (Owner != null && Owner.Storyboard != null)
-				{
-					Owner.SetActive(_isActive);
-				}
-			}
-
-			internal bool IsTriggerActive { get { return _isActive; } }
-
-			internal VisualStateUwp Owner { get; set; }
-
 		}
 
 		public class AdaptiveTrigger : StateTriggerBase

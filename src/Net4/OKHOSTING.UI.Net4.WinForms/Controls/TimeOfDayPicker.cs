@@ -102,7 +102,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.BackColor = Platform.RemoveAlpha(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -168,7 +168,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.ForeColor = Platform.RemoveAlpha(value);
+				base.ForeColor = value;
 			}
 		}
 

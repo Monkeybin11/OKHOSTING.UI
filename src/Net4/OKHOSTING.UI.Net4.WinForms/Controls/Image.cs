@@ -22,7 +22,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			Image = System.Drawing.Image.FromStream(stream);
 		}
 
-		public void LoadFromUrl(System.Uri url)
+		public void LoadFromUrl(Uri url)
 		{
 			try
 			{
@@ -109,7 +109,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.BackColor = Platform.RemoveAlpha(value);
+				base.BackColor = value;
 			}
 		}
 

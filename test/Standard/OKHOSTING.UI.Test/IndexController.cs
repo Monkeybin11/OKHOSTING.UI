@@ -35,24 +35,28 @@ namespace OKHOSTING.UI.Test
 			// Controls
 			ILabelButton lblControls = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblControls.Text = "Controls";
+			lblControls.BackgroundColor = System.Drawing.Color.FromArgb(0, 0, 0, 0);
 			lblControls.Click += (object sender, EventArgs e) => new Controls.IndexController() { Page = Page }.Start();
 			stack.Children.Add(lblControls);
 			
 			// Css
 			ILabelButton lblCss = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblCss.Text = "CSS";
+			lblCss.BackgroundColor = System.Drawing.Color.FromArgb(0, 0, 0, 0);
 			lblCss.Click += (object sender, EventArgs e) => new Css.IndexController() { Page = Page }.Start();
 			stack.Children.Add(lblCss);
 
 			// Misc
 			ILabelButton lblMisc = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblMisc.Text = "Miscelaneous";
+			lblMisc.BackgroundColor = System.Drawing.Color.FromArgb(0, 0, 0, 0);
 			lblMisc.Click += (object sender, EventArgs e) => new Misc.IndexController() { Page = Page }.Start();
 			stack.Children.Add(lblMisc);
 
 			// animation
 			ILabelButton lblAnimation = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblAnimation.Text = "Animation";
+			lblAnimation.BackgroundColor = System.Drawing.Color.FromArgb(0, 0, 0, 0);
 			lblAnimation.Click += (object sender, EventArgs e) => new Animation.IndexController() { Page = Page }.Start();
 			stack.Children.Add(lblAnimation);
 

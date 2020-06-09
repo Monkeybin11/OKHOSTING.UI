@@ -332,7 +332,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 
 		#endregion
 
-
 		/// <summary>
 		/// The list of all the child controls
 		/// <para xml:lang="es">La lista de todos los controles hijos</para>
@@ -347,22 +346,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 		}
 
-		private IImage _BackgroundImage;
-
 		public IImage BackgroundImage
 		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-				var url = ((System.Web.UI.WebControls.Image) value).ImageUrl;
-				url = $"url('{url}')";
+			get;
+			set;
+		}
 
+		protected override void OnPreRender(EventArgs e)
+		{
+			if (BackgroundImage != null)
+			{
+				var url = ((System.Web.UI.WebControls.Image) BackgroundImage).ImageUrl;
+				url = $"url('{url}')";
 				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
 			}
+
+			base.OnPreRender(e);
 		}
 
 		/// <summary>

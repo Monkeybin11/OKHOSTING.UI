@@ -9,7 +9,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 	public class Stack : System.Windows.Forms.FlowLayoutPanel, IStack
 	{
 		private readonly ControlList _Children;
-		private IImage _BackgroundImage;
 		
 		public Stack()
 		{
@@ -36,15 +35,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		IImage IContainer.BackgroundImage
 		{
-			get 
-			{
-				return _BackgroundImage;
-			}
-			set 
-			{ 
-				_BackgroundImage = value;
-				base.BackgroundImage = ((System.Windows.Forms.PictureBox) value)?.Image;
-			}
+			get;
+			set;
 		}
 
 		#region IControl
@@ -111,7 +103,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			}
 			set
 			{
-				base.BackColor = Platform.RemoveAlpha(value);
+				base.BackColor = value;
 			}
 		}
 
@@ -169,7 +161,9 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
 		{
+			Platform.SetBackgroundImage(this, pevent);
 			Platform.DrawBorders(this, pevent);
+
 			base.OnPaint(pevent);
 		}
 	}

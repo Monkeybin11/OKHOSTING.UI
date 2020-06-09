@@ -173,9 +173,20 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			ClientScripts.Add(positionJS);
 		}
 
+		public IImage BackgroundImage
+		{
+			get;
+			set;
+		}
+
 		protected override void OnPreRender(EventArgs e)
 		{
-			base.OnPreRender(e);
+			if (BackgroundImage != null)
+			{
+				var url = ((System.Web.UI.WebControls.Image)BackgroundImage).ImageUrl;
+				url = $"url('{url}')";
+				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
+			}
 
 			if (ClientScripts.Count == 0)
 			{
@@ -198,24 +209,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			);
 
 			Page.ClientScript.RegisterStartupScript(GetType(), "position_" + base.ClientID, positionJS);
-		}
 
-		private IImage _BackgroundImage;
-
-		public IImage BackgroundImage
-		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-				var url = ((System.Web.UI.WebControls.Image) value).ImageUrl;
-				url = $"url('{url}')";
-
-				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
-			}
+			base.OnPreRender(e);
 		}
 
 		#region IControl
