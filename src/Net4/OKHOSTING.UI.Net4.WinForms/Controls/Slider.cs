@@ -9,6 +9,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public Slider()
 		{
 			base.ValueChanged += Slider_ValueChanged;
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		private void Slider_ValueChanged(object sender, EventArgs e)

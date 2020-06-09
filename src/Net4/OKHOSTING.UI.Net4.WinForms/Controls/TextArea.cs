@@ -10,6 +10,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			base.Multiline = true;
 			base.TextChanged += PasswordTextBox_TextChanged;
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IInputControl

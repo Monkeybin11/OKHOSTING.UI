@@ -10,6 +10,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public ListPicker()
 		{
 			base.SelectedIndexChanged += ListPicker_SelectedIndexChanged;
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IInputControl

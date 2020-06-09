@@ -10,6 +10,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			base.Format = System.Windows.Forms.DateTimePickerFormat.Time;
 			base.ValueChanged += Picker_ValueChanged;
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IInputControl

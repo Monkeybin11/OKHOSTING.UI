@@ -13,6 +13,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			Container.AutoScroll = true;
 			Controls.Add(Container);
 			BackColor = System.Drawing.Color.White;
+			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		/// <summary>

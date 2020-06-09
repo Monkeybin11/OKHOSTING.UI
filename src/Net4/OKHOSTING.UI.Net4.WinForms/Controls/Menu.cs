@@ -10,6 +10,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public Menu()
 		{
 			_Items = new MenuItemList(base.Items);
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IControl

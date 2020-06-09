@@ -37,6 +37,7 @@ namespace OKHOSTING.UI.Test.Controls
 			ITextBox txtText = Core.BaitAndSwitch.Create<ITextBox>();
 			txtText.Value = "This is a TextBox";
 			txtText.BorderColor = Color.FromArgb(255, 255, 0, 0);
+			txtText.BackgroundColor = Color.FromArgb(50, 100, 100, 100);
 			txtText.BorderWidth = new Thickness(1, 2, 3, 4);
 			txtText.ValueChanged += TxtText_ValueChanged;
 			stack.Children.Add(txtText);
@@ -44,6 +45,7 @@ namespace OKHOSTING.UI.Test.Controls
 			//Create an TextBox and adds it to the Stack
 			txtTextPlaceholder = Core.BaitAndSwitch.Create<ITextBox>();
 			txtTextPlaceholder.BorderColor = Color.FromArgb(255, 255, 0, 0);
+			txtTextPlaceholder.BackgroundColor = Color.FromArgb(50, 100, 100, 100);
 			txtTextPlaceholder.BorderWidth = new Thickness(1, 2, 3, 4);
 			txtTextPlaceholder.Placeholder = "Enter some text..";
 			txtTextPlaceholder.PlaceholderColor = Color.FromArgb(255, 100, 100, 100);
@@ -51,6 +53,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 			//Create the button cmdClose with specific text with the event also click and adds it to the stack.
 			IButton cmdClose = Core.BaitAndSwitch.Create<IButton>();
+			cmdClose.BackgroundColor = Color.FromArgb(0, 100, 100, 100);
 			cmdClose.Text = "Close";
 			cmdClose.Click += CmdClose_Click;
 			stack.Children.Add(cmdClose);

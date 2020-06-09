@@ -10,6 +10,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public Image()
 		{
 			SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		public void LoadFromFile(string filePath)

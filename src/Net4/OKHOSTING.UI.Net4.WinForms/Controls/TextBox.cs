@@ -11,6 +11,8 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			base.TextChanged += PasswordTextBox_TextChanged;
 			base.GotFocus += TextBox_GotFocus;
 			base.LostFocus += TextBox_LostFocus;
+
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 		
 		#region IInputControl

@@ -11,6 +11,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			AutoSize = true;
 			AutoScroll = true;
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IControl
