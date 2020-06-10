@@ -6,6 +6,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class HyperLink : System.Windows.Forms.LinkLabel, IHyperLink
 	{
+		public HyperLink()
+		{
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
+		}
+
 		public Uri Uri
 		{
 			get
@@ -251,10 +256,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
-			Platform.DrawBorders(this, pevent);
-			base.OnPaint(pevent);
+			Platform.DrawBorders(this, e);
+			base.OnPaint(e);
 		}
 	}
 }

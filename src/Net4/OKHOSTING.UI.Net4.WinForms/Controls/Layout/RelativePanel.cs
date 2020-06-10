@@ -15,9 +15,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 		{
 			//AutoScroll = true;
 			_Children = new ControlList(base.Controls);
-			//base.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			//| System.Windows.Forms.AnchorStyles.Left)
-			//| System.Windows.Forms.AnchorStyles.Right)));
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		ICollection<IControl> IContainer.Children
@@ -108,10 +106,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		protected bool arranged = false;
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
-			Platform.SetBackgroundImage(this, pevent);
-			Platform.DrawBorders(this, pevent);
+			Platform.DrawBackgroundColor(this, e);
+			Platform.DrawBorders(this, e);
 
 			//invert child index of controls so they are shown in the order which they where added
 			if (!arranged)
@@ -125,7 +123,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 				arranged = true;
 			}
 
-			base.OnPaint(pevent);
+			base.OnPaint(e);
 		}
 
 		#region IControl

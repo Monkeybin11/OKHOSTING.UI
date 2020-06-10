@@ -11,6 +11,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 	{
 		public Grid()
 		{
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IGrid
@@ -317,12 +318,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			return MemberwiseClone();
 		}
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
-			Platform.SetBackgroundImage(this, pevent);
-			Platform.DrawBorders(this, pevent);
+			Platform.DrawBackgroundImage(this, e);
+			Platform.DrawBorders(this, e);
 
-			base.OnPaint(pevent);
+			base.OnPaint(e);
 		}
 	}
 }

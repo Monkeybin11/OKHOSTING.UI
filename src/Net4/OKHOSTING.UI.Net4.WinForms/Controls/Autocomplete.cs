@@ -13,6 +13,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			AutoCompleteMode = AutoCompleteMode.Suggest;
 			AutoCompleteSource = AutoCompleteSource.CustomSource;
 			TextChanged += Autocomplete_TextChanged;
+			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		protected AutoCompleteStringCollection LoadAutoComplete()

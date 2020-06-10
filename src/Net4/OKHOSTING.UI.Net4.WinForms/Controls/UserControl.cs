@@ -191,5 +191,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		}
 
 		#endregion
+
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+		{
+			Platform.DrawBorders(this, e);
+			base.OnPaint(e);
+		}
 	}
 }

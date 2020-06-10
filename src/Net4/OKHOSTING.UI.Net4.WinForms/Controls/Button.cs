@@ -6,6 +6,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class Button : System.Windows.Forms.Button, IButton
 	{
+		public Button()
+		{
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
+		}
+
 		#region IControl
 
 		double? IControl.Width
@@ -239,10 +244,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
-			Platform.DrawBorders(this, pevent);
-			base.OnPaint(pevent);
+			Platform.DrawBorders(this, e);
+			base.OnPaint(e);
 		}
 	}
 }

@@ -9,6 +9,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public DatePicker()
 		{
 			base.ValueChanged += Calendar_ValueChanged;
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IInputControl
@@ -263,10 +264,10 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
-			Platform.DrawBorders(this, pevent);
-			base.OnPaint(pevent);
+			Platform.DrawBorders(this, e);
+			base.OnPaint(e);
 		}
 	}
 }

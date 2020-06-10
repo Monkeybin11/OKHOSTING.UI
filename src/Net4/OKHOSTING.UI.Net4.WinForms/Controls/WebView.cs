@@ -6,6 +6,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 {
 	public class WebView: System.Windows.Forms.WebBrowser, IWebView
 	{
+		public WebView()
+		{
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
+		}
+
 		#region IControl
 
 		double? IControl.Width
@@ -136,6 +141,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			{
 				base.Url = value;
 			}
+		}
+
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+		{
+			Platform.DrawBorders(this, e);
+			base.OnPaint(e);
 		}
 	}
 }

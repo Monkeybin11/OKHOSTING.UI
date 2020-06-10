@@ -8,7 +8,6 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 {
 	public class Flow : System.Windows.Forms.FlowLayoutPanel, IFlow
 	{
-		private IImage _BackgroundImage;
 		private readonly ControlList _Children;
 
 		public Flow()
@@ -18,6 +17,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 			WrapContents = false;
 
 			_Children = new ControlList(base.Controls);
+			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		ICollection<IControl> IContainer.Children
@@ -154,12 +154,12 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		#endregion
 
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs pevent)
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
-			Platform.SetBackgroundImage(this, pevent);
-			Platform.DrawBorders(this, pevent);
+			Platform.DrawBackgroundImage(this, e);
+			Platform.DrawBorders(this, e);
 
-			base.OnPaint(pevent);
+			base.OnPaint(e);
 		}
 	}
 }
