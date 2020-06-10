@@ -178,7 +178,7 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return System.Windows.Forms.HorizontalAlignment.Left;
 		}
 
-		public static void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
+		public static void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs e)
 		{
 			if (((IControl)control).BorderWidth == null)
 			{
@@ -205,21 +205,39 @@ namespace OKHOSTING.UI.Net4.WinForms
 			p4.Offset(0, control.Height); //bottom left
 
 			//draw custom border here
-			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Top), p1, p2); //top
-			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Right), p2, p3); //right
-			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Bottom), p3, p4); //bottom
-			pevent.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
+			e.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Top), p1, p2); //top
+			e.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Right), p2, p3); //right
+			e.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Bottom), p3, p4); //bottom
+			e.Graphics.DrawLine(new Pen(color, (float) ((IControl) control).BorderWidth.Left), p4, p1); //left
 		}
 
-		public static void SetBackgroundImage(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs pevent)
+		public static void DrawBackgroundImage(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs e)
 		{
 			var backgroundImage = ((IContainer) control).BackgroundImage;
 			var image = ((System.Windows.Forms.PictureBox) backgroundImage)?.Image;
+			Graphics g = e.Graphics;
 
-			if (control.BackgroundImage != image)
+			if (image != null)
 			{
-				control.BackgroundImage = image;
+				g.DrawImageUnscaled(image, 0, 0);
 			}
+		}
+
+		public static void DrawBackgroundColor(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs e)
+		{
+			Rectangle bounds = new Rectangle(0, 0, control.Width - 1, control.Height - 1);
+			Graphics g = e.Graphics;
+			Color backgroundColor = control.BackColor;
+
+			//if control is transparent, use parent color
+			if (control.BackColor.A == 0)
+			{
+				backgroundColor = control.Parent.BackColor;
+			}
+
+			SolidBrush bckColor = new SolidBrush(backgroundColor);
+
+			g.FillRectangle(bckColor, bounds);
 		}
 	}
 }

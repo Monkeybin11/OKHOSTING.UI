@@ -16,5 +16,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Test
 		{
 			InitializeComponent();
 		}
+
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+			this.Controls.Add(new TranspCtrl());
+		}
 	}
 }
