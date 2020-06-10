@@ -87,7 +87,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 			}
 			set
 			{
-				base.BackColor = value;
+				base.BackColor = Platform.Parse(value);
 			}
 		}
 

@@ -178,6 +178,16 @@ namespace OKHOSTING.UI.Net4.WinForms
 			return System.Windows.Forms.HorizontalAlignment.Left;
 		}
 
+		public static Color Parse(Color color)
+		{
+			if (color.A == 0)
+			{
+				return Color.Transparent;
+			}
+
+			return color;
+		}
+
 		public static void DrawBorders(System.Windows.Forms.Control control, System.Windows.Forms.PaintEventArgs e)
 		{
 			if (((IControl)control).BorderWidth == null)

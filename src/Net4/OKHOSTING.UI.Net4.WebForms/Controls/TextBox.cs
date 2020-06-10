@@ -32,18 +32,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// On the text changed.
-		/// <para xml:lang="es">Es el evento enviado al cambiar el texto.</para>
-		/// </summary>
-		/// <returns>The text changed.
-		/// <para xml:lang="es">El texto cambiado.</para>
-		/// </returns>
-		protected override void OnTextChanged(EventArgs e)
-		{
-			base.OnTextChanged(e);
-		}
-
-		/// <summary>
 		/// Occurs when value changed.
 		/// <para xml:lang="es">Ocurre cuando el valor fue cambiado.</para>
 		/// </summary>
