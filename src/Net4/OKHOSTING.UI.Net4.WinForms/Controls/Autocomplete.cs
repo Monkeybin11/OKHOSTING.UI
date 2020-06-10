@@ -52,7 +52,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>) this).Value);
 
-			if (!string.IsNullOrWhiteSpace(base.Text) && base.Text.Length > 5)
+			if (!string.IsNullOrWhiteSpace(base.Text) && base.Text.Length > 2)
 			{
 				base.AutoCompleteCustomSource = LoadAutoComplete();
 			}

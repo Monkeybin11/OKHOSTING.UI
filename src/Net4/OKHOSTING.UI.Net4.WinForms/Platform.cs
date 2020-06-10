@@ -215,11 +215,10 @@ namespace OKHOSTING.UI.Net4.WinForms
 		{
 			var backgroundImage = ((IContainer) control).BackgroundImage;
 			var image = ((System.Windows.Forms.PictureBox) backgroundImage)?.Image;
-			Graphics g = e.Graphics;
-
-			if (image != null)
+			
+			if (control.BackgroundImage != image)
 			{
-				g.DrawImageUnscaled(image, 0, 0);
+				control.BackgroundImage = image;
 			}
 		}
 
