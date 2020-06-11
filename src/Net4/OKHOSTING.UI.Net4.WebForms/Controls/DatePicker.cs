@@ -9,6 +9,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 	/// </summary>
 	public class DatePicker : TextBoxBase, IDatePicker, IInputControl
 	{
+		const string Format = "MM/dd/yyyy";
+
 		public DatePicker()
 		{
 			//Attributes["pattern"] = @"(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}";
@@ -38,13 +40,25 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((IInputControl<DateTime?>) this).Value != value)
+				{
+					changed = true;
+				}
+
 				if (value != null)
 				{
-					base.Text = value.Value.ToString("MM/dd/yyyy");
+					base.Text = value.Value.ToString(Format);
 				}
 				else
 				{
 					base.Text = null;
+				}
+
+				if (changed)
+				{
+					OnValueChanged();
 				}
 			}
 		}
@@ -67,22 +81,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
+			var values = postedValue?.Split('/');
 
-			if (base.Text != postedValue)
+			try
 			{
-				base.Text = postedValue;
-				return true;
+				((IDatePicker) this).Value = new DateTime(int.Parse(values[2]), int.Parse(values[0]), int.Parse(values[1]));
 			}
-			else
-			{
-				return false;
-			}
+			catch{}
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IDatePicker) this).Value);
 		}

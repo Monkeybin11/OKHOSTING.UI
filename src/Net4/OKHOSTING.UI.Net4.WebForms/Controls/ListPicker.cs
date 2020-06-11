@@ -63,6 +63,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((IListPicker) this).Value != value)
+				{
+					changed = true;
+				}
+
 				if (Items.FindByValue(value) == null)
 				{
 					DataBind();
@@ -70,6 +77,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 				_SelectedValue = value;
 				base.SelectedValue = value;
+
+				if (changed)
+				{
+					OnValueChanged();
+				}
 			}
 		}
 
@@ -688,22 +700,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID];
-
-			if (postedValue != ((IListPicker) this).Value)
-			{
-				((IListPicker) this).Value = postedValue;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			((IListPicker) this).Value = postedValue;
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IListPicker) this).Value);
 		}

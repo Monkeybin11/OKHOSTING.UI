@@ -346,7 +346,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((IPasswordTextBox) this).Value != value)
+				{
+					changed = true;
+				}
+
 				base.Text = value;
+
+				if (changed)
+				{
+					OnValueChanged();
+				}
 			}
 		}
 
@@ -372,22 +384,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
-
-			if (postedValue != ((IPasswordTextBox) this).Value)
-			{
-				((IPasswordTextBox) this).Value = postedValue;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			((IPasswordTextBox) this).Value = postedValue;
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IPasswordTextBox) this).Value);
 		}

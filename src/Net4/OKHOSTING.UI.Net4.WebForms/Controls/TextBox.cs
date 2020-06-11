@@ -27,7 +27,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((ITextBox) this).Value != value)
+				{
+					changed = true;
+				}
+
 				base.Text = value;
+
+				if (changed)
+				{
+					OnValueChanged();
+				}
 			}
 		}
 
@@ -41,22 +53,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
-
-			if (postedValue != ((ITextBox) this).Value)
-			{
-				((ITextBox) this).Value = postedValue;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			((ITextBox) this).Value = postedValue;
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}

@@ -579,9 +579,21 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((ICalendar) this).Value != value)
+				{
+					changed = true;
+				}
+
 				if (value.HasValue)
 				{
 					base.SelectedDate = value.Value;
+				}
+
+				if (changed)
+				{
+					OnValueChanged();
 				}
 			}
 		}
@@ -595,25 +607,22 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			if (Page?.Request.Form["__EVENTTARGET"] != ID)
 			{
-				return false;
+				return;
 			}
 
 			var arg = Page?.Request.Form["__EVENTARGUMENT"];
 
-			if (!int.TryParse(arg, out int i))
+			if (int.TryParse(arg, out int i))
 			{
-				return false;
+				SelectedDate = new DateTime(2000, 1, 1).AddDays(i);
 			}
-
-			SelectedDate = new DateTime(2000, 1, 1).AddDays(int.Parse(arg));
-			return true;
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((ICalendar) this).Value);
 		}

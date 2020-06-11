@@ -326,7 +326,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public new event EventHandler Click;
 
-		void IClickable.RaiseClick()
+		void IClickable.HandleClick()
 		{
 			if (Page?.Request.Form["__EVENTTARGET"] == ClientID)
 			{

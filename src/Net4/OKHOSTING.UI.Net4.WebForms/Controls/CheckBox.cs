@@ -320,23 +320,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID];
 			bool value = postedValue?.Contains("on") ?? false;
 
-			if (value != ((ICheckBox) this).Value)
-			{
-				((ICheckBox) this).Value = value;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			((ICheckBox) this).Value = value;
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((ICheckBox) this).Value);
 		}
@@ -358,7 +350,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((ICheckBox) this).Value != value)
+				{
+					changed = true;
+				}
+
 				base.Checked = value;
+
+				if (changed)
+				{
+					OnValueChanged();
+				}
 			}
 		}
 

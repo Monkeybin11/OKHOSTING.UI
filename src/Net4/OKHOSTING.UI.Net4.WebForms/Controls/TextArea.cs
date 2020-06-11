@@ -35,7 +35,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((ITextArea) this).Value != value)
+				{
+					changed = true;
+				}
+
 				base.Text = value;
+
+				if (changed)
+				{
+					OnValueChanged();
+				}
 			}
 		}
 
@@ -594,22 +606,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
-
-			if (postedValue != ((ITextArea) this).Value)
-			{
-				((ITextArea) this).Value = postedValue;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			((ITextArea) this).Value = postedValue;
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((ITextArea) this).Value);
 		}
@@ -623,7 +626,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <param name="e">E.</param>
 		protected override void OnPreRender(EventArgs e)
 		{
-			AutoPostBack = ValueChanged != null;
+			//AutoPostBack = ValueChanged != null;
 			base.OnPreRender(e);
 		}
 

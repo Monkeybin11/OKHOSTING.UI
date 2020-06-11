@@ -346,22 +346,13 @@ namespace OKHOSTING.UI.Net4.WebForms
 			//handle posted values
 			foreach (IInputControl control in allControls.Where(c => c is IInputControl))
 			{
-				if (control.HandlePostBack())
-				{
-					updatedInputControls.Add(control);
-				}
-			}
-
-			//raise IInputControl.ValueChanged events
-			foreach (IInputControl control in updatedInputControls)
-			{
-				control.RaiseValueChanged();
+				control.HandlePostBack();
 			}
 
 			//raise button click events
-			foreach (Controls.IClickable control in allControls.Where(c => c is Controls.IClickable))
+			foreach (IClickable control in allControls.Where(c => c is IClickable))
 			{
-				control.RaiseClick();
+				control.HandleClick();
 			}
 		}
 

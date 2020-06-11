@@ -3,11 +3,10 @@ using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class TimeOfDayPicker : TextBoxBase, ITimeOfDayPicker, IInputControl
+	public class TimeOfDayPicker : TextBoxBase, ITimeOfDayPicker, IInputControl, IInputControl<TimeSpan?>
 	{
 		public TimeOfDayPicker()
 		{
-			//Attributes["pattern"] = "(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}";
 			Attributes["pattern"] = "(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9])";
 			Attributes["placeholder"] = @"hh:mm";
 		}
@@ -35,6 +34,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((IInputControl<TimeSpan?>) this).Value != value)
+				{
+					changed = true;
+				}
+
 				if (value != null)
 				{
 					base.Text = value.Value.ToString("hh\\:mm");
@@ -42,6 +48,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				else
 				{
 					base.Text = null;
+				}
+
+				if (changed)
+				{
+					OnValueChanged();
 				}
 			}
 		}
@@ -55,28 +66,18 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
-			TimeSpan span = TimeSpan.Zero;
+			TimeSpan span;
 			string postedValue = Page?.Request.Form[ID];
 
-			if (TimeSpan.TryParse(postedValue, out span) && span != ((ITimeOfDayPicker) this).Value)
+			if (TimeSpan.TryParse(postedValue, out span))
 			{
 				((ITimeOfDayPicker) this).Value = span;
-				return true;
-			}
-			else if (string.IsNullOrWhiteSpace(postedValue) && ((ITimeOfDayPicker) this).Value != null)
-			{
-				((ITimeOfDayPicker) this).Value = null;
-				return true;
-			}
-			else
-			{
-				return false;
 			}
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((ITimeOfDayPicker) this).Value);
 		}

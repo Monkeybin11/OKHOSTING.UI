@@ -8,6 +8,6 @@
 		/// <summary>
 		/// Raises the Click event, when necessary
 		/// </summary>
-		void RaiseClick();
+		void HandleClick();
 	}
 }

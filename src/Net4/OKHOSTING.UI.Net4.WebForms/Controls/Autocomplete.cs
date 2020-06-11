@@ -140,7 +140,19 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
+				var changed = false;
+
+				if (((IAutocomplete) this).Value != value)
+				{
+					changed = true;
+				}
+
 				InnerTextBox.Text = value;
+
+				if (changed)
+				{
+					OnValueChanged();
+				}
 			}
 		}
 
@@ -712,22 +724,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
-		bool IInputControl.HandlePostBack()
+		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[InnerTextBox.ID];
-
-			if (postedValue != ((IAutocomplete) this).Value)
-			{
-				((IAutocomplete) this).Value = postedValue;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			((IAutocomplete) this).Value = postedValue;
 		}
 
-		void IInputControl.RaiseValueChanged()
+		protected void OnValueChanged()
 		{
 			ValueChanged?.Invoke(this, ((IAutocomplete) this).Value);
 		}

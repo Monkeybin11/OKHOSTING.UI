@@ -618,7 +618,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			return nativeItem;
 		}
 
-		public void RaiseClick()
+		public void HandleClick()
 		{
 			if (Page?.Request.Form["__EVENTTARGET"] == ClientID)
 			{

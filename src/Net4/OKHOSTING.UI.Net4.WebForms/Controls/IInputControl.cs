@@ -10,11 +10,6 @@
 		/// </summary>
 		/// <param name="value">Value posted by the user in the postback</param>
 		/// <returns>True if the value has changed, false otherwise</returns>
-		bool HandlePostBack();
-
-		/// <summary>
-		/// Raises the ValueChanged event
-		/// </summary>
-		void RaiseValueChanged();
+		void HandlePostBack();
 	}
 }
