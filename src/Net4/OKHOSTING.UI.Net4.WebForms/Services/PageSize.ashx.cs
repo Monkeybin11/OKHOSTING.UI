@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace OKHOSTING.UI.Net4.WebForms.Services
 {
@@ -35,12 +34,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Services
 			if (resized)
 			{
 				page.App?[page]?.Controller?.Refresh();
-
-				//if (page.App[page] != null)
-				//{
-				//	page.App[page].Title = page.Title;
-				//	page.App[page].Content = page.Content;
-				//}
 			}
 
 			context.Response.Write(output);

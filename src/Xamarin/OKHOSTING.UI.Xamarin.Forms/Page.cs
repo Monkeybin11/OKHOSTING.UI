@@ -1,5 +1,4 @@
 ﻿using System;
-using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms
 {
@@ -24,11 +23,11 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		{
 			get
 			{
-				return (IControl)Scroll.Content;
+				return (IControl) Scroll.Content;
 			}
 			set
 			{
-				Scroll.Content = (global::Xamarin.Forms.View)value;
+				Scroll.Content = (global::Xamarin.Forms.View) value;
 			}
 		}
 

@@ -19,8 +19,21 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 
 		public TimeSpan? Value
 		{
-			get { return (TimeSpan) GetValue(ValueProperty); }
-			set { SetValue(ValueProperty, value); }
+			get 
+			{ 
+				return (TimeSpan) GetValue(ValueProperty); 
+			}
+			set 
+			{
+				if (value == null)
+				{
+					SetValue(ValueProperty, TimeSpan.Zero);
+				}
+				else
+				{
+					SetValue(ValueProperty, value);
+				}
+			}
 		}
 
 		public static readonly DependencyProperty ValueProperty = DependencyProperty.Register

@@ -100,6 +100,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		/// </param>
 		public override void Add(IControl item)
 		{
+			if (item.Parent != null)
+			{
+				((UI.Controls.Layout.IContainer) item.Parent).Children.Remove(item);
+			}
+
 			InnerList.Add((System.Windows.FrameworkElement) item);
 		}
 

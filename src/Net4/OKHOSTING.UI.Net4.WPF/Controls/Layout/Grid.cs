@@ -435,6 +435,11 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 
 			if (content != null)
 			{
+				if (content.Parent != null)
+				{
+					((IContainer) content.Parent).Children.Remove(content);
+				}
+
 				SetRow((System.Windows.UIElement) content, row);
 				SetColumn((System.Windows.UIElement) content, column);
 
@@ -444,6 +449,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 				}
 			}
 		}
+		
 		/// <summary>
 		/// Sets the column span.
 		/// <para xml:lang="es">

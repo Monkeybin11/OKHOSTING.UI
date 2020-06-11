@@ -54,8 +54,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		// Dependency property for storing intermediate arrange state on the children
-		private static readonly DependencyProperty ArrangeStateProperty =
-			DependencyProperty.Register("ArrangeState", typeof(double[]), typeof(StateTrigger), new PropertyMetadata(null));
+		private static readonly DependencyProperty ArrangeStateProperty = DependencyProperty.Register("ArrangeState", typeof(double[]), typeof(StateTrigger), new PropertyMetadata(null));
 
 		#region IControl
 
