@@ -195,9 +195,11 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <summary>
 		/// Sets a collection of controls sequentially among the grids rows and columns,
 		/// from left to right and top to bottom. 
+		/// </summary>
+		/// <remarks>
 		/// Make sure you have sufficient rows and columns
 		/// before making this call since this does not resize the grid.
-		/// </summary>
+		/// </remarks>
 		public static void SetContent(this IGrid grid, IEnumerable<IControl> content)
 		{
 			var allControls = content.ToArray();
@@ -223,9 +225,11 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <summary>
 		/// Adds the headers as the first row of the grid, then adds every row below the header.
 		/// Usefull to create data grids.
+		/// </summary>
+		/// <remarks>
 		/// Make sure you have sufficient rows and columns
 		/// before making this call since this does not resize the grid.
-		/// </summary>
+		/// </remarks>
 		public static void SetContent(this IGrid grid, IEnumerable<IControl> headers, IEnumerable<IEnumerable<IControl>> rows)
 		{
 			var headersArray = headers.ToArray();
@@ -250,12 +254,52 @@ namespace OKHOSTING.UI.Controls.Layout
 		}
 
 		/// <summary>
+		/// Sets a collection of controls sequentially among one of the grids rows,
+		/// from left to right. 
+		/// </summary>
+		/// <remarks>
+		/// Make sure you have sufficient rows and columns
+		/// before making this call since this does not resize the grid.
+		/// </remarks>
+		public static void SetContentRow(this IGrid grid, int row, IEnumerable<IControl> content)
+		{
+			var allControls = content.ToArray();
+
+			for (int column = 0; column < grid.ColumnCount; column++)
+			{
+				var control = allControls[column];
+				grid.SetContent(row, column, control);
+			}
+		}
+
+		/// <summary>
+		/// Sets a collection of controls sequentially among one of the grids columns,
+		/// from top to bottom. 
+		/// </summary>
+		/// <remarks>
+		/// Make sure you have sufficient rows and columns
+		/// before making this call since this does not resize the grid.
+		/// </remarks>
+		public static void SetContentColumn(this IGrid grid, int column, IEnumerable<IControl> content)
+		{
+			var allControls = content.ToArray();
+
+			for (int row = 0; row < grid.RowCount; row++)
+			{
+				var control = allControls[row];
+				grid.SetContent(row, column, control);
+			}
+		}
+
+		/// <summary>
 		/// Instead of adding the header as the first row, a smaller grid containing all headers
 		/// and the values of one row will be added in each cell, sequentially. Usefull for small
 		/// devices where you need a "responsive" kind of grid layout.
+		/// </summary>
+		/// <remarks>
 		/// Make sure you have sufficient rows and columns
 		/// before making this call since this does not resize the grid.
-		/// </summary>
+		/// </remarks>
 		public static void SetContentMultipleHeaders(this IGrid grid, IEnumerable<IControl> headers, IEnumerable<IEnumerable<IControl>> rows)
 		{
 			var headersArray = headers.ToArray();
@@ -369,10 +413,11 @@ namespace OKHOSTING.UI.Controls.Layout
 
 		/// <summary>
 		/// Returns the row and column where a control is positioned inside a grid. 
-		/// If the control is not inside the grid, an exception is thrown
+		/// If the control is not inside the grid, an exception is thrown. 
 		/// </summary>
-		/// <param name="content"></param>
-		/// <returns></returns>
+		/// <returns>
+		/// Position of the control inside the grid, or NULL if the control is not found in the grid
+		/// </returns>
 		public static (int row, int column) GetPosition(this IGrid grid, IControl control)
 		{
 			if (control == null)
