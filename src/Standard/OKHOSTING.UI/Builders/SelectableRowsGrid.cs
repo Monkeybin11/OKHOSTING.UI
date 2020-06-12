@@ -7,7 +7,7 @@ namespace OKHOSTING.UI.Builders
 {
 	public class SelectableRowsGrid: IBuilder<IGrid>
 	{
-		protected readonly IGrid Grid = BaitAndSwitch.Create<IGrid>();
+		protected readonly IGrid Grid;
 
 		public ICheckBox[] CheckBoxes
 		{
@@ -29,20 +29,19 @@ namespace OKHOSTING.UI.Builders
 			}
 		}
 
-		public SelectableRowsGrid(int rows, int columns, CheckBoxesPosition checkBoxesPosition, bool firstCheckSelectsAll)
+		public SelectableRowsGrid(IGrid grid, CheckBoxesPosition checkBoxesPosition, bool firstCheckSelectsAll)
 		{
-			Grid.RowCount = rows;
-			Grid.ColumnCount = columns + 1;
+			Grid = grid;
 			int checkBoxesColumn = 0;
 
 			if (checkBoxesPosition == CheckBoxesPosition.Right)
 			{
-				checkBoxesColumn = columns - 1;
+				checkBoxesColumn = grid.ColumnCount - 1;
 			}
 
-			CheckBoxes = new ICheckBox[rows];
+			CheckBoxes = new ICheckBox[grid.RowCount];
 
-			for (int row = 0; row < rows; row++)
+			for (int row = 0; row < grid.RowCount; row++)
 			{
 				CheckBoxes[row] = BaitAndSwitch.Create<ICheckBox>();
 				Grid.SetContent(row, checkBoxesColumn, CheckBoxes[row]);
