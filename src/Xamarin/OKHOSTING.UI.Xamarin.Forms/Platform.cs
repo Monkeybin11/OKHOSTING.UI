@@ -33,7 +33,7 @@ namespace OKHOSTING.UI.Xamarin.Forms
 		/// <param name="thickness">Thickness.</param>
 		public static global::Xamarin.Forms.Thickness Parse(Thickness thickness)
 		{
-			return new global::Xamarin.Forms.Thickness(thickness.Left.Value, thickness.Top.Value, thickness.Right.Value, thickness.Bottom.Value);
+			return new global::Xamarin.Forms.Thickness(thickness.Left, thickness.Top, thickness.Right, thickness.Bottom);
 		}
 
 		/// <summary>

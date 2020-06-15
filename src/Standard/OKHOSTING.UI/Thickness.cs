@@ -12,6 +12,14 @@
 		/// Initializes a new instance of the Thickness class.
 		/// <para xml:lang="es">Inicializa una nueva instancia de la clase Thickness</para>
 		/// </summary>
+		public Thickness()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the Thickness class.
+		/// <para xml:lang="es">Inicializa una nueva instancia de la clase Thickness</para>
+		/// </summary>
 		/// <param name="uniformLength">Uniform length.
 		/// <para xml:lang="es">Longitud uniforme</para>
 		/// </param>
@@ -19,6 +27,8 @@
 		{
 			Left = Right = Top = Bottom = uniformLength;
 		}
+
+
 
 		/// <summary>
 		/// Initializes a new instance of the Thickness class.
@@ -36,7 +46,7 @@
 		/// <param name="bottom">Bottom.
 		/// <para xml:lang="es">Valor inferior.</para>
 		/// </param>
-		public Thickness(double? left = null, double? top = null, double? right = null, double? bottom = null)
+		public Thickness(double left, double top, double right, double bottom)
 		{
 			Left = left;
 			Right = right;
@@ -48,21 +58,21 @@
 		/// Gets or sets the bottom.
 		/// <para xml:lang="es">Obtiene o establece el valor inferior</para>
 		/// </summary>
-		public double? Bottom { get; set; }
+		public double Bottom { get; set; }
 		/// <summary>
 		/// Gets or sets the left.
 		/// <para xml:lang="es">Obtiene o establece el valor de izquierda.</para>
 		/// </summary>
-		public double? Left { get; set; }
+		public double Left { get; set; }
 		/// <summary>
 		/// Gets or sets the right.
 		/// <para xml:lang="es">Obtiene o establece el valor para la derecha.</para>
 		/// </summary>
-		public double? Right { get; set; }
+		public double Right { get; set; }
 		/// <summary>
 		/// Gets or sets the top.
 		/// <para xml:lang="es">Obtiene o establece el valor inferior.</para>
 		/// </summary>
-		public double? Top { get; set; }
+		public double Top { get; set; }
 	}
 }

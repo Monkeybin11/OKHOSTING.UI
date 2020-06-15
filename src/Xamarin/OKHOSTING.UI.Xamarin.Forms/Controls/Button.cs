@@ -209,10 +209,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 			set
 			{
-				if (value.Top.HasValue)
-				{
-					base.BorderWidth = value.Top.Value;
-				}
+				base.BorderWidth = value.Top;
 			}
 		}
 

@@ -672,10 +672,7 @@ namespace OKHOSTING.UI.CSS
 				margin.Left = lenght.ToPixel();
 			}
 
-			if (margin.Top != null || margin.Right != null || margin.Bottom != null || margin.Left != null)
-			{
-				control.Margin = margin;
-			}
+			control.Margin = margin;
 
 			//padding
 			Thickness padding = new Thickness();
@@ -704,10 +701,7 @@ namespace OKHOSTING.UI.CSS
 				padding.Left = lenght.ToPixel();
 			}
 
-			if (padding.Top != null || padding.Right != null || padding.Bottom != null || padding.Left != null)
-			{
-				control.Padding = padding;
-			}
+			control.Padding = padding;
 
 			//visibility
 			if (!string.IsNullOrWhiteSpace(style.GetVisibility()))
@@ -929,43 +923,43 @@ namespace OKHOSTING.UI.CSS
 				}
 			}
 
-			string gridTemplate = null;
+			//string gridTemplate = null;
 
-			try { gridTemplate = style.GetProperty("grid-template")?.Value; } catch{ }
+			//try { gridTemplate = style.GetProperty("grid-template")?.Value; } catch{ }
 
-			if (!string.IsNullOrWhiteSpace(gridTemplate))
-			{
-				var rowsColumns = Split(gridTemplate, '/');
-				int count = 0;
+			//if (!string.IsNullOrWhiteSpace(gridTemplate))
+			//{
+			//	var rowsColumns = Split(gridTemplate, '/');
+			//	int count = 0;
 
-				foreach (var rowcolumn in rowsColumns)
-				{
-					if (count == 0)
-					{
-						var rows = ParseLengths(rowcolumn);
+			//	foreach (var rowcolumn in rowsColumns)
+			//	{
+			//		if (count == 0)
+			//		{
+			//			var rows = ParseLengths(rowcolumn);
 
-						if (rows.ToArray().Length <= grid.RowCount)
-						{
-							SetRowHeights(grid, rows);
-						}
-					}
-					else if (count == 1)
-					{
-						var columns = ParseLengths(rowcolumn);
+			//			if (rows.ToArray().Length <= grid.RowCount)
+			//			{
+			//				SetRowHeights(grid, rows);
+			//			}
+			//		}
+			//		else if (count == 1)
+			//		{
+			//			var columns = ParseLengths(rowcolumn);
 
-						if (columns.ToArray().Length <= grid.ColumnCount)
-						{
-							SetColumnWidths(grid, columns);
-						}
-					}
-					else if (count == 2)
-					{
-						//this place is the same at grid-template-areas
-					}
+			//			if (columns.ToArray().Length <= grid.ColumnCount)
+			//			{
+			//				SetColumnWidths(grid, columns);
+			//			}
+			//		}
+			//		else if (count == 2)
+			//		{
+			//			//this place is the same at grid-template-areas
+			//		}
 
-					count++;
-				}
-			}
+			//		count++;
+			//	}
+			//}
 
 			var gridRowGap = style.GetProperty("grid-row-gap")?.Value;
 
@@ -994,7 +988,7 @@ namespace OKHOSTING.UI.CSS
 
 						if (controlArray[i].Margin != null)
 						{
-							marginRightValue = controlArray[i].Margin.Right.Value;
+							marginRightValue = controlArray[i].Margin.Right;
 						}
 
 						controlArray[i].Margin = new Thickness(0, 0, marginRightValue, lengthPixels);
@@ -1029,7 +1023,7 @@ namespace OKHOSTING.UI.CSS
 
 						if (controlArray[i].Margin != null)
 						{
-							marginBottonValue = controlArray[i].Margin.Bottom.Value;
+							marginBottonValue = controlArray[i].Margin.Bottom;
 						}
 
 						controlArray[i].Margin = new Thickness(0, 0, lengthPixels, marginBottonValue);
@@ -1141,6 +1135,9 @@ namespace OKHOSTING.UI.CSS
 			decimal g = decimal.Parse(colors[1]);
 			decimal b = decimal.Parse(colors[2]);
 			decimal a = decimal.Parse(colors[3]);
+
+			//seems like alpha is being parsed as a 0-1 value, so we multiply it
+			a = a * 255;
 
 			return Color.FromArgb((int) a, (int) r, (int) g, (int) b);
 		}
