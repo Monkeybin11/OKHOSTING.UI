@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// Un RelativePanel inspirado por WPF y Xamarin.Forms
 	/// </para>
 	/// </summary>
-	public class RelativePanel : Background<global::Xamarin.Forms.RelativeLayout>, IRelativePanel
+	public class RelativePanel : Container<global::Xamarin.Forms.RelativeLayout>, IRelativePanel
 	{
 		private readonly ControlList _Children;
 

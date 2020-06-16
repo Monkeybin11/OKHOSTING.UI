@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// Represents a control that is autocomplete in a Xamarin.Forms.
 	/// <para xml:lang="es">Representa un control que es autocomplete en Xamarin.Forms.</para>
 	/// </summary>
-	public class Autocomplete : global::Xamarin.Forms.StackLayout, IAutocomplete
+	public class Autocomplete : Control<global::Xamarin.Forms.StackLayout>, IAutocomplete
 	{
 		/// <summary>
 		/// Initializes a new instance of the Autocomplete class.
@@ -187,256 +187,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return GoSearchButton.Text;
+				return GoSearchButton.Text; 
 			}
 			set
 			{
 				GoSearchButton.Text = value;
 			}
-		}
-
-		#endregion
-
-		#region IControl
-
-		/// <summary>
-		/// Friendly programming name (or id) of the control. A simple view should not contain 2 controls with the same name.
-		/// <para xml:lang="es">
-		/// Nombre (o Id) de programacion amigable del control. Una simple vista no puede contener dos controles con el mismo nombre.
-		/// </para>
-		/// </summary>
-		string IControl.Name
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Control that contains this control, like a grid, or stack
-		/// </summary>
-		IControl IControl.Parent
-		{
-			get
-			{
-				return (IControl) base.Parent;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets wether the control is visible or not
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el control es visible o no.
-		/// </para>
-		/// </summary>
-		bool IControl.Visible
-		{
-			get
-			{
-				return base.IsVisible;
-			}
-			set
-			{
-				base.IsVisible = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets wether the control is enabled or not
-		/// <para xml:lang="es">
-		/// Obtiene o establece si el control es habilitado o no.
-		/// </para>
-		/// </summary>
-		bool IControl.Enabled
-		{
-			get
-			{
-				return base.IsEnabled;
-			}
-			set
-			{
-				base.IsEnabled = value;
-			}
-		}
-
-		/// <summary>
-		/// Width of the control, in density independent pixels
-		/// <para xml:lang="es">
-		/// Ancho del control, en dencidad de pixeles independientes.
-		/// </para>
-		/// </summary>
-		double? IControl.Width
-		{
-			get
-			{
-				return base.WidthRequest;
-			}
-			set
-			{
-				if (value.HasValue)
-				{
-					base.WidthRequest = value.Value;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Height of the control, in density independent pixels.
-		/// <para xml:lang="es">
-		/// Altura del control, en dencididad de pixeles independiente
-		/// </para>
-		/// </summary>
-		double? IControl.Height
-		{
-			get
-			{
-				return base.HeightRequest;
-			}
-			set
-			{
-				if (value.HasValue)
-				{
-					base.HeightRequest = value.Value;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets the control margin.
-		/// <para xml:lang="es">
-		/// Obtiene o establece el margen del control.
-		/// </para>
-		/// </summary>
-		Thickness IControl.Margin
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.Margin);
-			}
-			set
-			{
-				base.Margin = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Space that this control will set between its content and its border
-		/// <para xml:lang="es">
-		/// Espacio que este control se establecerá entre su contenido y su borde
-		/// </para>
-		/// </summary>
-		Thickness IControl.Padding
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.Padding);
-			}
-			set
-			{
-				base.Padding = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Background color
-		/// <para xml:lang="es">
-		/// Color de fondo.
-		/// </para>
-		/// </summary>
-		Color IControl.BackgroundColor
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.BackgroundColor);
-			}
-			set
-			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Border color
-		/// <para xml:lang="es">
-		/// Color del borde.
-		/// </para>
-		/// </summary>
-		Color IControl.BorderColor
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Border width, in density independent pixels (DIP)
-		/// <para xml:lang="es">
-		/// Ancho del borde, en dencidad de pixeles independientes (DIP)
-		/// </para>
-		/// </summary>
-		Thickness IControl.BorderWidth
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Horizontal alignment of the control with respect to it's container.
-		/// <para xml:lang="es">
-		/// Alineacion horizontal del control con respecto a su contenedor.
-		/// </para>
-		/// </summary>
-		HorizontalAlignment IControl.HorizontalAlignment
-		{
-			get
-			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
-			}
-			set
-			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
-			}
-		}
-
-		/// <summary>
-		/// Vertical alignment of the control with respect to it's container
-		/// <para xml:lang="es">
-		/// Alineacion vertical del control con respecto a su contenedor.
-		/// </para>
-		/// </summary>
-		VerticalAlignment IControl.VerticalAlignment
-		{
-			get
-			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
-			}
-			set
-			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
-		/// <para xml:lang="es">
-		/// Obtiene o establece un objeto de valor arbitrario que se puede usar para almacenar informacion personalizada sobre este elemento.
-		/// </para>
-		/// </summary>
-		/// <remarks>
-		/// Returns the intended value. This property has no default value.
-		/// <para xml:lang="es">
-		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
-		/// </para>
-		/// </remarks>
-		object IControl.Tag
-		{
-			get; set;
-		}
-
-		/// <summary>
-		/// Gets or sets a list of classes that define a control's style. 
-		/// Exactly the same concept as in CSS. 
-		/// </summary>
-		string IControl.CssClass { get; set; }
-
-		object ICloneable.Clone()
-		{
-			return MemberwiseClone();
 		}
 
 		#endregion
@@ -449,7 +205,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		string ITextControl.FontFamily
 		{
-			get; set;
+			get 
+			{
+				return SearchText.FontFamily;
+			} 
+			set
+			{
+				SearchText.FontFamily = value;
+			}
 		}
 
 		/// <summary>
@@ -458,7 +221,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color ITextControl.FontColor
 		{
-			get; set;
+			get
+			{
+				return SearchText.FontColor;
+			}
+			set
+			{
+				SearchText.FontColor = value;
+			}
 		}
 
 		/// <summary>
@@ -467,7 +237,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Bold
 		{
-			get; set;
+			get
+			{
+				return SearchText.Bold;
+			}
+			set
+			{
+				SearchText.Bold = value;
+			}
 		}
 
 		/// <summary>
@@ -476,7 +253,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Italic
 		{
-			get; set;
+			get
+			{
+				return SearchText.Italic;
+			}
+			set
+			{
+				SearchText.Italic = value;
+			}
 		}
 
 		/// <summary>
@@ -485,8 +269,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Underline
 		{
-			get;
-			set;
+			get
+			{
+				return SearchText.Underline;
+			}
+			set
+			{
+				SearchText.Underline = value;
+			}
 		}
 
 		/// <summary>
@@ -495,8 +285,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return SearchText.TextHorizontalAlignment;
+			}
+			set
+			{
+				SearchText.TextHorizontalAlignment = value;
+			}
 		}
 
 		/// <summary>
@@ -505,8 +301,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return SearchText.TextVerticalAlignment;
+			}
+			set
+			{
+				SearchText.TextVerticalAlignment = value;
+			}
 		}
 
 		/// <summary>
@@ -515,8 +317,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness ITextControl.TextPadding
 		{
-			get;
-			set;
+			get
+			{
+				return SearchText.TextPadding;
+			}
+			set
+			{
+				SearchText.TextPadding = value;
+			}
 		}
 
 		/// <summary>
@@ -525,8 +333,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		double ITextControl.FontSize
 		{
-			get;
-			set;
+			get
+			{
+				return SearchText.FontSize;
+			}
+			set
+			{
+				SearchText.FontSize = value;
+			}
 		}
 
 		#endregion

@@ -32,7 +32,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </para>
 		/// </summary>
 		/// <returns>The label clicked.</returns>
-		private void OnLabelClicked()
+		protected virtual void OnLabelClicked()
 		{
 			Click?.Invoke(this, new EventArgs());
 		}

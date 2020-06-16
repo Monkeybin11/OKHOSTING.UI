@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// Representa un contenedor donde podemos ir apilando controles.
 	/// </para>
 	/// </summary>
-	public class Flow : Background<global::Xamarin.Forms.StackLayout>, IFlow
+	public class Flow : Container<global::Xamarin.Forms.StackLayout>, IFlow
 	{
 		/// <summary>
 		/// The children controls.

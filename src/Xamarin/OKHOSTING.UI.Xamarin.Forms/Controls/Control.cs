@@ -1,31 +1,51 @@
-﻿using System;
+﻿using OKHOSTING.Core;
+using System;
 using System.Drawing;
-using System.Collections.Generic;
-using OKHOSTING.Core;
-using OKHOSTING.UI.Controls;
-using OKHOSTING.UI.Controls.Layout;
-using View = global::Xamarin.Forms.View;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
+namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
-	/// <summary>
-	/// Base control for all containers, allows for a background image
-	/// </summary>
-	public abstract class Background<T> : global::Xamarin.Forms.Grid, IContainer where T : View
+	public class Control<T> : global::Xamarin.Forms.Grid, IControl where T : global::Xamarin.Forms.View
 	{
-		private IImage _BackgroundImage;
 		protected readonly T Content;
 
-		public Background()
+		protected readonly global::Xamarin.Forms.BoxView LeftBoder;
+		protected readonly global::Xamarin.Forms.BoxView TopBoder;
+		protected readonly global::Xamarin.Forms.BoxView RightBoder;
+		protected readonly global::Xamarin.Forms.BoxView BottomBoder;
+
+		public Control()
 		{
+			ColumnDefinitions.Add(new global::Xamarin.Forms.ColumnDefinition() { Width = 0 });
+			ColumnDefinitions.Add(new global::Xamarin.Forms.ColumnDefinition());
+			ColumnDefinitions.Add(new global::Xamarin.Forms.ColumnDefinition() { Width = 0 });
+			
+			RowDefinitions.Add(new global::Xamarin.Forms.RowDefinition() { Height = 0 });
+			RowDefinitions.Add(new global::Xamarin.Forms.RowDefinition());
+			RowDefinitions.Add(new global::Xamarin.Forms.RowDefinition() { Height = 0 });
+
+			LeftBoder = new global::Xamarin.Forms.BoxView() { WidthRequest = 0, HeightRequest = 0 };
+			TopBoder = new global::Xamarin.Forms.BoxView() { WidthRequest = 0, HeightRequest = 0 };
+			RightBoder = new global::Xamarin.Forms.BoxView() { WidthRequest = 0, HeightRequest = 0 };
+			BottomBoder = new global::Xamarin.Forms.BoxView() { WidthRequest = 0, HeightRequest = 0 };
+
+			SetColumn(LeftBoder, 0);
+			SetColumn(TopBoder, 1);
+			SetColumn(RightBoder, 2);
+			SetColumn(BottomBoder, 1);
+
+			SetRow(LeftBoder, 1);
+			SetRow(TopBoder, 0);
+			SetRow(RightBoder, 1);
+			SetRow(BottomBoder, 2);
+
+			SetColumnSpan(TopBoder, 3);
+			SetColumnSpan(BottomBoder, 3);
+
 			Content = BaitAndSwitch.Create<T>();
 
-			SetRow(Content, 0);
-			SetColumn(Content, 0);
+			SetColumn(Content, 1);
+			SetRow(Content, 1);
 			
-			//make only 1 cell and put the content there
-			base.ColumnDefinitions.Add(new global::Xamarin.Forms.ColumnDefinition());
-			base.RowDefinitions.Add(new global::Xamarin.Forms.RowDefinition());
 			base.Children.Add(Content);
 		}
 
@@ -92,6 +112,27 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				{
 					base.WidthRequest = value.Value;
 					Content.WidthRequest = value.Value;
+
+					var borderWidth = ((IControl)this).BorderWidth;
+
+					if (borderWidth != null)
+					{
+						Content.WidthRequest -= borderWidth.Left - borderWidth.Right;
+					}
+
+					ColumnDefinitions[1].Width = Content.WidthRequest;
+
+					TopBoder.WidthRequest = value.Value;
+					BottomBoder.WidthRequest = value.Value;
+				}
+				else
+				{
+					base.WidthRequest = 0;
+					Content.WidthRequest = 0;
+					ColumnDefinitions[1].Width = 0;
+
+					TopBoder.WidthRequest = 0;
+					BottomBoder.WidthRequest = 0;
 				}
 			}
 		}
@@ -112,6 +153,27 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 				{
 					base.HeightRequest = value.Value;
 					Content.HeightRequest = value.Value;
+
+					var borderWidth = ((IControl) this).BorderWidth;
+
+					if (borderWidth != null)
+					{
+						Content.HeightRequest -= borderWidth.Top - borderWidth.Bottom;
+					}
+
+					RowDefinitions[1].Height = Content.HeightRequest;
+
+					LeftBoder.HeightRequest = value.Value - _BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom?? 0;
+					RightBoder.HeightRequest = value.Value - _BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom ?? 0;
+				}
+				else
+				{
+					base.HeightRequest = 0;
+					Content.HeightRequest = 0;
+					RowDefinitions[1].Height = 0;
+
+					LeftBoder.HeightRequest = 0;
+					RightBoder.HeightRequest = 0;
 				}
 			}
 		}
@@ -144,11 +206,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.Padding);
+				return Forms.Platform.Parse(Content.Margin);
 			}
 			set
 			{
-				base.Padding = Forms.Platform.Parse(value);
+				Content.Margin = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -169,22 +231,46 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			}
 		}
 
+		protected Color _BorderColor;
+
 		/// <summary>
 		/// Gets or sets the bordercolor of the control.
 		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get; set;
+			get
+			{
+				return _BorderColor;
+			}
+			set
+			{
+				_BorderColor = value;
+				LeftBoder.Color = TopBoder.Color = RightBoder.Color = BottomBoder.Color = value;
+			}
 		}
 
+		protected Thickness _BorderWidth;
+		
 		/// <summary>
 		/// Gets or sets the borderwidth of the control.
 		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get; set;
+			get
+			{
+				return _BorderWidth;
+			}
+			set
+			{
+				_BorderWidth = value;
+				
+				LeftBoder.WidthRequest = value?.Left ?? 0;
+				RightBoder.WidthRequest = value?.Right ?? 0;
+				TopBoder.HeightRequest = value?.Top ?? 0;
+				BottomBoder.HeightRequest = value?.Bottom ?? 0;
+			}
 		}
 
 		/// <summary>
@@ -261,48 +347,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 			return MemberwiseClone();
 		}
 
+		public void Dispose()
+		{
+		}
+
 		#endregion
-
-		IImage IContainer.BackgroundImage
-		{
-			get
-			{
-				return _BackgroundImage;
-			}
-			set
-			{
-				_BackgroundImage = value;
-
-				if (value != null)
-				{
-					//remove old background
-					if (_BackgroundImage != null & base.Children.Contains((View) _BackgroundImage))
-					{
-						base.Children.Remove((View) _BackgroundImage);
-					}
-
-					((global::Xamarin.Forms.Image) value).Aspect = global::Xamarin.Forms.Aspect.AspectFill;
-					((global::Xamarin.Forms.Image) value).HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
-					((global::Xamarin.Forms.Image) value).VerticalOptions = new global::Xamarin.Forms.LayoutOptions(global::Xamarin.Forms.LayoutAlignment.Fill, true);
-					
-					SetRow((global::Xamarin.Forms.Image) value, 0);
-					SetColumn((global::Xamarin.Forms.Image) value, 0);
-					
-					SetRowSpan((global::Xamarin.Forms.Image) value, 1);
-					SetColumnSpan((global::Xamarin.Forms.Image) value, 1);
-
-					base.Children.Insert(0, (View) value);
-				}
-			}
-		}
-
-		public new abstract ICollection<IControl> Children
-		{
-			get;
-		}
-
-		public virtual void Dispose()
-		{
-		}
 	}
 }
