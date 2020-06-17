@@ -6,10 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Application.cs" />
     <Compile Remove="Controls\Calendar.cs" />
-    <Compile Remove="Controls\DatePicker.cs" />
-    <Compile Remove="Controls\VideoPlayer.cs" />
   </ItemGroup>
 
   <ItemGroup>

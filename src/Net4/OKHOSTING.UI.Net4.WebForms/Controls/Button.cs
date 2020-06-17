@@ -175,10 +175,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				if (value.Left.HasValue) base.Style["margin-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["margin-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["margin-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
+				base.Style["margin-left"] = string.Format("{0}px", value.Left);
+				base.Style["margin-top"] = string.Format("{0}px", value.Top);
+				base.Style["margin-right"] = string.Format("{0}px", value.Right);
+				base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 		
@@ -204,10 +204,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				if (value.Left.HasValue) Style["padding-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) Style["padding-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) Style["padding-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+				Style["padding-left"] = string.Format("{0}px", value.Left);
+				Style["padding-top"] = string.Format("{0}px", value.Top);
+				Style["padding-right"] = string.Format("{0}px", value.Right);
+				Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
@@ -596,10 +596,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				if (value.Left.HasValue) base.Style["padding-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+				base.Style["padding-left"] = string.Format("{0}px", value.Left);
+				base.Style["padding-top"] = string.Format("{0}px", value.Top);
+				base.Style["padding-right"] = string.Format("{0}px", value.Right);
+				base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 

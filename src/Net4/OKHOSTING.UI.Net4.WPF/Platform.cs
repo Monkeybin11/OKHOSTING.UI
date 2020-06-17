@@ -36,10 +36,10 @@ namespace OKHOSTING.UI.Net4.WPF
 		{
 			System.Windows.Thickness nativeThickness = new System.Windows.Thickness();
 
-			if (thickness.Left.HasValue) nativeThickness.Left = (int)thickness.Left;
-			if (thickness.Top.HasValue) nativeThickness.Top = (int)thickness.Top;
-			if (thickness.Right.HasValue) nativeThickness.Right = (int)thickness.Right;
-			if (thickness.Bottom.HasValue) nativeThickness.Bottom = (int)thickness.Bottom;
+			nativeThickness.Left = (int)thickness.Left;
+			nativeThickness.Top = (int)thickness.Top;
+			nativeThickness.Right = (int)thickness.Right;
+			nativeThickness.Bottom = (int)thickness.Bottom;
 
 			return nativeThickness;
 		}

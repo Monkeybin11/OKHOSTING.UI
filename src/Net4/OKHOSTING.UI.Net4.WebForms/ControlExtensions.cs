@@ -50,10 +50,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		public static void SetMargin(this System.Web.UI.WebControls.WebControl control, Thickness value)
 		{
-			if (value.Left.HasValue) control.Style["margin-left"] = string.Format("{0}px", value.Left);
-			if (value.Top.HasValue) control.Style["margin-top"] = string.Format("{0}px", value.Top);
-			if (value.Right.HasValue) control.Style["margin-right"] = string.Format("{0}px", value.Right);
-			if (value.Bottom.HasValue) control.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
+			control.Style["margin-left"] = string.Format("{0}px", value.Left);
+			control.Style["margin-top"] = string.Format("{0}px", value.Top);
+			control.Style["margin-right"] = string.Format("{0}px", value.Right);
+			control.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
 		}
 
 		public static Thickness GetPadding(this System.Web.UI.WebControls.WebControl control)
@@ -71,10 +71,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 		public static void SetPadding(this System.Web.UI.WebControls.WebControl control, Thickness value)
 		{
-			if (value.Left.HasValue) control.Style["padding-left"] = string.Format("{0}px", value.Left);
-			if (value.Top.HasValue) control.Style["padding-top"] = string.Format("{0}px", value.Top);
-			if (value.Right.HasValue) control.Style["padding-right"] = string.Format("{0}px", value.Right);
-			if (value.Bottom.HasValue) control.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+			control.Style["padding-left"] = string.Format("{0}px", value.Left);
+			control.Style["padding-top"] = string.Format("{0}px", value.Top);
+			control.Style["padding-right"] = string.Format("{0}px", value.Right);
+			control.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
 		}
 
 		public static Thickness GetBorderWidth(this System.Web.UI.WebControls.WebControl control)
@@ -93,10 +93,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 		public static void SetBorderWidth(this System.Web.UI.WebControls.WebControl control, Thickness value)
 		{
 			control.BorderStyle = System.Web.UI.WebControls.BorderStyle.Solid;
-			if (value.Left.HasValue) control.Style["border-left-width"] = string.Format("{0}px", value.Left);
-			if (value.Top.HasValue) control.Style["border-top-width"] = string.Format("{0}px", value.Top);
-			if (value.Right.HasValue) control.Style["border-right-width"] = string.Format("{0}px", value.Right);
-			if (value.Bottom.HasValue) control.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
+			control.Style["border-left-width"] = string.Format("{0}px", value.Left);
+			control.Style["border-top-width"] = string.Format("{0}px", value.Top);
+			control.Style["border-right-width"] = string.Format("{0}px", value.Right);
+			control.Style["border-bottom-width"] = string.Format("{0}px", value.Bottom);
 		}
 	}
 }

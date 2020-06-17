@@ -701,10 +701,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				if (value.Left.HasValue) base.Style["padding-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["padding-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["padding-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
+				base.Style["padding-left"] = string.Format("{0}px", value.Left);
+				base.Style["padding-top"] = string.Format("{0}px", value.Top);
+				base.Style["padding-right"] = string.Format("{0}px", value.Right);
+				base.Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 

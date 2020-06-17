@@ -20,10 +20,10 @@ namespace OKHOSTING.UI.Net4.WinForms
 
 			System.Windows.Forms.Padding padding = new System.Windows.Forms.Padding();
 
-			if (thickness.Left.HasValue) padding.Left = (int)thickness.Left;
-			if (thickness.Top.HasValue) padding.Top = (int)thickness.Top;
-			if (thickness.Right.HasValue) padding.Right = (int)thickness.Right;
-			if (thickness.Bottom.HasValue) padding.Bottom = (int)thickness.Bottom;
+			padding.Left = (int) thickness.Left;
+			padding.Top = (int) thickness.Top;
+			padding.Right = (int) thickness.Right;
+			padding.Bottom = (int) thickness.Bottom;
 
 			return padding;
 		}
