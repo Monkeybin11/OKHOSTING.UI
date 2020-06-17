@@ -108,7 +108,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 			set
 			{
-				if (value.HasValue)
+				if (value.HasValue && value > 0)
 				{
 					base.WidthRequest = value.Value;
 					Content.WidthRequest = value.Value;
@@ -149,7 +149,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 			set
 			{
-				if (value.HasValue)
+				if (value.HasValue && value > 0)
 				{
 					base.HeightRequest = value.Value;
 					Content.HeightRequest = value.Value;
