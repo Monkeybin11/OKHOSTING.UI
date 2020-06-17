@@ -79,7 +79,11 @@ namespace OKHOSTING.UI.Builders
 
 			//set content of the row, except for expand button
 			var content = row.Content.ToArray();
-			Grid.SetContentRow(Grid.RowCount - 1, content);
+			
+			for (int column = 1; column < Grid.ColumnCount; column++)
+			{
+				Grid.SetContent(Grid.RowCount - 1, column, content[column - 1]);
+			}
 
 			if (row.Children != null && row.Children.Any())
 			{

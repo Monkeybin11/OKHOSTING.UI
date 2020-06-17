@@ -265,7 +265,7 @@ namespace OKHOSTING.UI.Controls.Layout
 		{
 			var allControls = content.ToArray();
 
-			for (int column = 0; column < grid.ColumnCount; column++)
+			for (int column = 0; column < grid.ColumnCount && column < allControls.Length; column++)
 			{
 				var control = allControls[column];
 				grid.SetContent(row, column, control);
