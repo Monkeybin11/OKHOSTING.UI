@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// Es un control que representa una cuadricula donde podemos almacenar objetos.
 	/// </para>
 	/// </summary>
-	public class Grid : Container<global::Xamarin.Forms.Grid>, IGrid
+	public class Grid : Background<global::Xamarin.Forms.Grid>, IGrid
 	{
 		#region IGrid
 

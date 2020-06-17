@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Layout
 	/// Representa un contenedor donde podemos ir apilando controles.
 	/// </para>
 	/// </summary>
-	public class Stack : Container<global::Xamarin.Forms.StackLayout>, IStack
+	public class Stack : Background<global::Xamarin.Forms.StackLayout>, IStack
 	{
 		/// <summary>
 		/// The children controls.

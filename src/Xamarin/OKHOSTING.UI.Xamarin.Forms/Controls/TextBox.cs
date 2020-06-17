@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// Un cuadro de texto de una sola linea.
 	/// </para>
 	/// </summary>
-	public class TextBox : Control<global::Xamarin.Forms.Entry>, ITextBox
+	public class TextBox : global::Xamarin.Forms.Entry, ITextBox
 	{
 		/// <summary>
 		/// Initializes a new instance of the TextBox class.
@@ -20,7 +20,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		public TextBox()
 		{
-			Content.TextChanged += TextBox_TextChanged;
+			base.TextChanged += TextBox_TextChanged;
+		}
+
+		/// <summary>
+		/// The identifier dispose.
+		/// <para xml:lang="es">
+		/// El identificador dispose.
+		/// </para>
+		/// </summary>
+		/// <returns>The identifier isposable. dispose.</returns>
+		void IDisposable.Dispose()
+		{
 		}
 
 		#region IInputControl
@@ -36,6 +47,16 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void TextBox_TextChanged(object sender, global::Xamarin.Forms.TextChangedEventArgs e)
 		{
+			//apply maxlenght
+			if (!string.IsNullOrEmpty(e.NewTextValue))
+			{
+				if (((ITextBox) this).MaxLength > 0 && e.NewTextValue.Length > ((ITextBox) this).MaxLength)
+				{
+					base.Text = e.NewTextValue.Substring(0, ((ITextBox) this).MaxLength);
+					return; //exit and do not raise ValueChanged event
+				}
+			}
+
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}
 
@@ -57,12 +78,250 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Content.Text;
+				return base.Text;
 			}
 			set
 			{
-				Content.Text = value;
+				base.Text = value;
 			}
+		}
+
+		#endregion
+
+		#region IControl
+
+		/// <summary>
+		/// Gets or sets the name of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el nombre del control.
+		/// </para>
+		/// </summary>
+		string IControl.Name
+		{
+			get; set;
+		}
+
+		/// <summary>
+		/// Gets or sets wether the control is visible or not.
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control es visible o no.
+		/// </para>
+		/// </summary>
+		bool IControl.Visible
+		{
+			get
+			{
+				return base.IsVisible;
+			}
+			set
+			{
+				base.IsVisible = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets wether the control is enabled or not
+		/// <para xml:lang="es">
+		/// Obtiene o establece si el control es habilitado o no.
+		/// </para>
+		/// </summary>
+		bool IControl.Enabled
+		{
+			get
+			{
+				return base.IsEnabled;
+			}
+			set
+			{
+				base.IsEnabled = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the width of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el ancho del control.
+		/// </para>
+		/// </summary>
+		double? IControl.Width
+		{
+			get
+			{
+				return base.WidthRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.WidthRequest = value.Value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the height of the control.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la altura del control.
+		/// </para>
+		/// </summary>
+		double? IControl.Height
+		{
+			get
+			{
+				return base.HeightRequest;
+			}
+			set
+			{
+				if (value.HasValue)
+				{
+					base.HeightRequest = value.Value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the control margin.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el margen del control.
+		/// </para>
+		/// </summary>
+		Thickness IControl.Margin
+		{
+			get
+			{
+				return Forms.Platform.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = Forms.Platform.Parse(value);
+			}
+		}
+
+		/// <summary>
+		/// Space that this control will set between its content and its border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre su contenido y su borde
+		/// </para>
+		/// </summary>
+		Thickness IControl.Padding
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Gets or sets the color of the Control background.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el color de fondo del control.
+		/// </para>
+		/// </summary>
+		Color IControl.BackgroundColor
+		{
+			get
+			{
+				return Forms.Platform.Parse(base.BackgroundColor);
+			}
+			set
+			{
+				base.BackgroundColor = Forms.Platform.Parse(value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the color of the control border.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el color del borde del control.
+		/// </para>
+		/// </summary>
+		Color IControl.BorderColor
+		{
+			get; set;
+		}
+
+		/// <summary>
+		/// Gets or sets the width of the control border.
+		/// <para xml:lang="es">
+		/// Obtiene o establece el ancho del borde del control.
+		/// </para>
+		/// </summary>
+		Thickness IControl.BorderWidth
+		{
+			get; set;
+		}
+
+		/// <summary>
+		/// Gets or sets the control horizontal alignment.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la alineación horizontal del control.
+		/// </para>
+		/// </summary>
+		HorizontalAlignment IControl.HorizontalAlignment
+		{
+			get
+			{
+				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+			}
+			set
+			{
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the control vertical alignment.
+		/// <para xml:lang="es">
+		/// Obtiene o establece la alineación vertical del control.
+		/// </para>
+		/// </summary>
+		VerticalAlignment IControl.VerticalAlignment
+		{
+			get
+			{
+				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+			}
+			set
+			{
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets an arbitrary object value that can be used to store custom information about this element. 
+		/// <para xml:lang="es">
+		/// Obtiene o establece un valor de objeto arbitrario que puede ser usado para almacenar informacion personalizada de este elemento.
+		/// </para>
+		/// </summary>
+		/// <remarks>
+		/// Returns the intended value. This property has no default value.
+		/// <para xml:lang="es">
+		/// Devuelve el valor previsto. Esta propiedad no contiene un valor predeterminado.
+		/// </para>
+		/// </remarks>
+		object IControl.Tag
+		{
+			get; set;
+		}
+
+		/// <summary>
+		/// Gets or sets a list of classes that define a control's style. 
+		/// Exactly the same concept as in CSS. 
+		/// </summary>
+		string IControl.CssClass { get; set; }
+
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		#endregion
@@ -79,11 +338,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Content.FontFamily;
+				return base.FontFamily;
 			}
 			set
 			{
-				Content.FontFamily = value;
+				base.FontFamily = value;
 			}
 		}
 
@@ -97,29 +356,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(Content.TextColor);
+				return Forms.Platform.Parse(base.TextColor);
 			}
 			set
 			{
-				Content.TextColor = Forms.Platform.Parse(value);
-			}
-		}
-
-		/// <summary>
-		/// Size of the font, in DIP
-		/// <para xml:lang="es">
-		/// Tamaño del texto, en DIP
-		/// </para>
-		/// </summary>
-		double ITextControl.FontSize
-		{
-			get
-			{
-				return Content.FontSize;
-			}
-			set
-			{
-				Content.FontSize = value;
+				base.TextColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -133,11 +374,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Content.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
+				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
 			}
 			set
 			{
-				Content.FontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
+				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
 			}
 		}
 
@@ -151,11 +392,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Content.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
+				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
 			}
 			set
 			{
-				Content.FontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
+				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
 			}
 		}
 
@@ -181,11 +422,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(Content.HorizontalTextAlignment);
+				return Forms.Platform.Parse(base.HorizontalTextAlignment);
 			}
 			set
 			{
-				Content.HorizontalTextAlignment = Forms.Platform.ParseTextAlignment(value);
+				base.HorizontalTextAlignment = Forms.Platform.ParseTextAlignment(value);
 			}
 		}
 
@@ -197,14 +438,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get
-			{
-				return Forms.Platform.ParseVerticalTextAlignment(Content.VerticalTextAlignment);
-			}
-			set
-			{
-				Content.VerticalTextAlignment = Forms.Platform.ParseTextAlignment(value);
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -221,8 +456,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 		#endregion
 
-		#region ITextBox
-
 		/// <summary>
 		/// Gets or sets the type of the user Text box input.
 		/// <para xml:lang="es">
@@ -233,11 +466,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				if (Content.Keyboard == global::Xamarin.Forms.Keyboard.Email) return ITextBoxInputType.Email;
-				if (Content.Keyboard == global::Xamarin.Forms.Keyboard.Numeric) return ITextBoxInputType.Number;
-				if (Content.Keyboard == global::Xamarin.Forms.Keyboard.Telephone) return ITextBoxInputType.Telephone;
-				if (Content.Keyboard == global::Xamarin.Forms.Keyboard.Text) return ITextBoxInputType.Text;
-				if (Content.Keyboard == global::Xamarin.Forms.Keyboard.Url) return ITextBoxInputType.Url;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Email) return ITextBoxInputType.Email;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Numeric) return ITextBoxInputType.Number;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Telephone) return ITextBoxInputType.Telephone;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Text) return ITextBoxInputType.Text;
+				if (base.Keyboard == global::Xamarin.Forms.Keyboard.Url) return ITextBoxInputType.Url;
 
 				return ITextBoxInputType.Text;
 			}
@@ -247,35 +480,35 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				{
 					case ITextBoxInputType.Date:
 					case ITextBoxInputType.DateTime:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
 						break;
 
 					case ITextBoxInputType.Email:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Email;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Email;
 						break;
 
 					case ITextBoxInputType.Number:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Numeric;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Numeric;
 						break;
 
 					case ITextBoxInputType.Telephone:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Telephone;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Telephone;
 						break;
 
 					case ITextBoxInputType.Text:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Text;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Text;
 						break;
 
 					case ITextBoxInputType.Time:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
 						break;
 
 					case ITextBoxInputType.Url:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Url;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Url;
 						break;
 
 					default:
-						Content.Keyboard = global::Xamarin.Forms.Keyboard.Default;
+						base.Keyboard = global::Xamarin.Forms.Keyboard.Default;
 						break;
 				}
 			}
@@ -289,14 +522,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		int ITextBox.MaxLength
 		{
-			get
-			{
-				return Content.MaxLength;
-			}
-			set
-			{
-				Content.MaxLength = value;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -306,29 +533,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(Content.PlaceholderColor);
+				return Forms.Platform.Parse(base.PlaceholderColor);
 			}
 			set
 			{
-				Content.PlaceholderColor = Forms.Platform.Parse(value);
+				base.PlaceholderColor = Forms.Platform.Parse(value);
 			}
 		}
-
-		/// <summary>
-		/// The text that appears when the TextBox is empty (in a lighter color), use it as an alternative to a using a separate label to indicate this TextBox expected input
-		/// </summary>
-		string ITextBox.Placeholder
-		{
-			get
-			{
-				return Content.Placeholder;
-			}
-			set
-			{
-				Content.Placeholder = value;
-			}
-		}
-
-		#endregion
 	}
 }
