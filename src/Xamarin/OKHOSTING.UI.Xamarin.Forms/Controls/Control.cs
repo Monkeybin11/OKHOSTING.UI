@@ -120,7 +120,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 						Content.WidthRequest -= borderWidth.Left - borderWidth.Right;
 					}
 
-					//ColumnDefinitions[1].Width = Content.WidthRequest;
+					ColumnDefinitions[1].Width = Content.WidthRequest;
 
 					TopBoder.WidthRequest = value.Value;
 					BottomBoder.WidthRequest = value.Value;
@@ -129,7 +129,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				{
 					base.WidthRequest = 0;
 					Content.WidthRequest = 0;
-					//ColumnDefinitions[1].Width = 0;
+					ColumnDefinitions[1].Width = 0;
 
 					TopBoder.WidthRequest = 0;
 					BottomBoder.WidthRequest = 0;
@@ -161,7 +161,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 						Content.HeightRequest -= borderWidth.Top - borderWidth.Bottom;
 					}
 
-					//RowDefinitions[1].Height = Content.HeightRequest;
+					RowDefinitions[1].Height = Content.HeightRequest;
 
 					LeftBoder.HeightRequest = value.Value - _BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom?? 0;
 					RightBoder.HeightRequest = value.Value - _BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom ?? 0;
@@ -170,7 +170,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				{
 					base.HeightRequest = 0;
 					Content.HeightRequest = 0;
-					//RowDefinitions[1].Height = 0;
+					RowDefinitions[1].Height = 0;
 
 					LeftBoder.HeightRequest = 0;
 					RightBoder.HeightRequest = 0;
@@ -270,6 +270,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 				RightBoder.WidthRequest = value?.Right ?? 0;
 				TopBoder.HeightRequest = value?.Top ?? 0;
 				BottomBoder.HeightRequest = value?.Bottom ?? 0;
+
+				ColumnDefinitions[0].Width = value?.Left ?? 0;
+				ColumnDefinitions[2].Width = value?.Right ?? 0;
+				RowDefinitions[0].Height = value?.Top ?? 0;
+				RowDefinitions[2].Height = value?.Bottom ?? 0;
+
 			}
 		}
 
