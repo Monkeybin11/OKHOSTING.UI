@@ -163,8 +163,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 
 					RowDefinitions[1].Height = Content.HeightRequest;
 
-					LeftBoder.HeightRequest = value.Value - _BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom?? 0;
-					RightBoder.HeightRequest = value.Value - _BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom ?? 0;
+					LeftBoder.HeightRequest = value.Value - (_BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom?? 0);
+					RightBoder.HeightRequest = value.Value - (_BorderWidth?.Top ?? 0 - _BorderWidth?.Bottom ?? 0);
 				}
 				else
 				{
