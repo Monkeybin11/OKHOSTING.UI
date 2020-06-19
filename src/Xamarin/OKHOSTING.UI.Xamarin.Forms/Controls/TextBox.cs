@@ -10,7 +10,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// Un cuadro de texto de una sola linea.
 	/// </para>
 	/// </summary>
-	public class TextBox : global::Xamarin.Forms.Entry, ITextBox
+	public class TextBox : BorderEntry, ITextBox
 	{
 		/// <summary>
 		/// Initializes a new instance of the TextBox class.
@@ -205,8 +205,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.Padding
 		{
-			get;
-			set;
+			get
+			{
+				return Forms.Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -235,7 +241,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get; set;
+			get
+			{
+				return Forms.Platform.Parse(base.BorderColor);
+			}
+			set
+			{
+				base.BorderColor = Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -246,7 +259,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get; set;
+			get
+			{
+				return new Thickness(base.BorderThickness);
+			}
+			set
+			{
+				base.BorderThickness = (int) (value.Left + value.Top + value.Right + value.Bottom) / 4;
+			}
 		}
 
 		/// <summary>
@@ -450,8 +470,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness ITextControl.TextPadding
 		{
-			get;
-			set;
+			get
+			{
+				return Forms.Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Forms.Platform.Parse(value);
+			}
 		}
 
 		#endregion
