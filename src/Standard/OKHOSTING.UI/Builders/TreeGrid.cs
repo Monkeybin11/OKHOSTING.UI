@@ -168,7 +168,7 @@ namespace OKHOSTING.UI.Builders
 			/// <summary>
 			/// The children rows of this row, will be visible when collapsed is false, with a little padding to the right of the current row
 			/// </summary>
-			public IEnumerable<Row> Children { get; set; }
+			public ICollection<Row> Children { get; set; }
 		}
 	}
 }

@@ -1,7 +1,6 @@
 ﻿using OKHOSTING.UI.Controls;
 using System;
 using System.Drawing;
-using System.Linq;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
 {
@@ -266,7 +265,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 			set
 			{
-				base.BorderThickness = (int) new [] { value.Left, value.Top, value.Right, value.Bottom }.Max();
+				base.BorderThickness = (int) (value.Left + value.Top + value.Right + value.Bottom) / 4;
 			}
 		}
 
