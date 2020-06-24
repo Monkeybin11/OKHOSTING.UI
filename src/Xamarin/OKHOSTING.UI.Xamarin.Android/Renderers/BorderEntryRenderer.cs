@@ -3,6 +3,7 @@ using Android.Content;
 using Android.Graphics.Drawables;
 using Xamarin.Forms.Platform.Android;
 using OKHOSTING.UI.Xamarin.Forms.Controls;
+using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.ExportRenderer(typeof(BorderEntry), typeof(OKHOSTING.UI.Xamarin.Android.Renderers.BorderEntryRenderer))]
 namespace OKHOSTING.UI.Xamarin.Android.Renderers
@@ -22,7 +23,7 @@ namespace OKHOSTING.UI.Xamarin.Android.Renderers
             return control;
         }
 
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == BorderEntry.CornerRadiusProperty.PropertyName)
             {
@@ -44,22 +45,25 @@ namespace OKHOSTING.UI.Xamarin.Android.Renderers
         {
             UpdateBackground();
         }
+
         protected void UpdateBackground(FormsEditText control)
         {
-            if (control == null) return;
+            //if (control == null) return;
 
-            var gd = new GradientDrawable();
-            gd.SetColor(Element.BackgroundColor.ToAndroid());
-            gd.SetCornerRadius(Context.ToPixels(ElementV2.CornerRadius));
-            gd.SetStroke((int)Context.ToPixels(ElementV2.BorderThickness), ElementV2.BorderColor.ToAndroid());
-            control.SetBackground(gd);
+            //var gd = new GradientDrawable();
+            //gd.SetColor(Element.BackgroundColor.ToAndroid());
+            //gd.SetCornerRadius(Context.ToPixels(ElementV2.CornerRadius));
+            //gd.SetStroke((int)Context.ToPixels(ElementV2.BorderThickness), ElementV2.BorderColor.ToAndroid());
+            //gd.SetShape(ShapeType.Rectangle);
+            
+            //control.SetBackground(gd);
 
-            var padTop = (int)Context.ToPixels(ElementV2.Padding.Top);
-            var padBottom = (int)Context.ToPixels(ElementV2.Padding.Bottom);
-            var padLeft = (int)Context.ToPixels(ElementV2.Padding.Left);
-            var padRight = (int)Context.ToPixels(ElementV2.Padding.Right);
+            //var padTop = (int)Context.ToPixels(ElementV2.Padding.Top);
+            //var padBottom = (int)Context.ToPixels(ElementV2.Padding.Bottom);
+            //var padLeft = (int)Context.ToPixels(ElementV2.Padding.Left);
+            //var padRight = (int)Context.ToPixels(ElementV2.Padding.Right);
 
-            control.SetPadding(padLeft, padTop, padRight, padBottom);
+            //control.SetPadding(padLeft, padTop, padRight, padBottom);
         }
 
         protected void UpdateBackground()
