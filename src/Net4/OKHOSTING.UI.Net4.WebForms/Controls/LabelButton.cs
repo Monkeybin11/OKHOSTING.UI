@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Web.UI;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
@@ -19,7 +20,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		void IClickable.HandleClick()
 		{
-			if (Page?.Request.Form["__EVENTTARGET"] == ClientID)
+			if (base.Page?.Request.Form["__EVENTTARGET"] == ClientID)
 			{
 				Click?.Invoke(this, new EventArgs());
 			}
@@ -61,7 +62,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				base.BackColor = value;
+				base.BackColor = Platform.Parse(value);
 			}
 		}
 
@@ -80,7 +81,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				base.BorderColor = value;
+				base.BorderColor = Platform.Parse(value);
 			}
 		}
 
@@ -343,7 +344,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <value>The FontColor of the control.
 		/// <para xml:lang="es">El color del texto del control.</para>
 		/// </value>
-		Color ITextControl.FontColor
+		Color UI.Controls.ITextControl.FontColor
 		{
 			get
 			{
@@ -351,7 +352,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				base.ForeColor = value;
+				base.ForeColor = Platform.Parse(value);
 			}
 		}
 
@@ -362,7 +363,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <value>The FontFamily of the control.
 		/// <para xml:lang="es">La tipografia del texto del control.</para>
 		/// </value>
-		string ITextControl.FontFamily
+		string UI.Controls.ITextControl.FontFamily
 		{
 			get
 			{
@@ -381,7 +382,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <value>The FontSize of the control.
 		/// <para xml:lang="es">El tamaño del texto del control.</para>
 		/// </value>
-		double ITextControl.FontSize
+		double UI.Controls.ITextControl.FontSize
 		{
 			get
 			{
@@ -400,7 +401,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <value>The text bold of the control.
 		/// <para xml:lang="es">El texto en negritas del control.</para>
 		/// </value>
-		bool ITextControl.Bold
+		bool UI.Controls.ITextControl.Bold
 		{
 			get
 			{
@@ -419,7 +420,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <value>The italic text of the control.
 		/// <para xml:lang="es">El texto en italica del control</para>
 		/// </value>
-		bool ITextControl.Italic
+		bool UI.Controls.ITextControl.Italic
 		{
 			get
 			{
@@ -438,7 +439,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <value>The UnderLine text of the control.
 		/// <para xml:lang="es">El texto en subrayado del control</para>
 		/// </value>
-		bool ITextControl.Underline
+		bool UI.Controls.ITextControl.Underline
 		{
 			get
 			{
@@ -454,7 +455,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// Gets or sets the TextHorizontalAlignment of the control.
 		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del control</para>
 		/// </summary>
-		HorizontalAlignment ITextControl.TextHorizontalAlignment
+		HorizontalAlignment UI.Controls.ITextControl.TextHorizontalAlignment
 		{
 
 			get
@@ -500,7 +501,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// Gets or sets the TextVerticalAlignment of the control.
 		/// <para xml:lang="es">Obtiene o establece la alineación vertical del control.</para>
 		/// </summary>
-		VerticalAlignment ITextControl.TextVerticalAlignment
+		VerticalAlignment UI.Controls.ITextControl.TextVerticalAlignment
 		{
 			get
 			{
@@ -545,7 +546,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// Gets or sets the padding text of the control.
 		/// <para xml:lang="es">obtiene o establece el padding del texto del control.</para>
 		/// </summary>
-		Thickness ITextControl.TextPadding
+		Thickness UI.Controls.ITextControl.TextPadding
 		{
 			get
 			{

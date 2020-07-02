@@ -189,7 +189,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				base.BackColor = value;
+				base.BackColor = Platform.Parse(value);
 			}
 		}
 
@@ -208,7 +208,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				base.BorderColor = value;
+				base.BorderColor = Platform.Parse(value);
 			}
 		}
 
@@ -479,7 +479,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				base.ForeColor = value;
+				base.ForeColor = Platform.Parse(value);
 			}
 		}
 

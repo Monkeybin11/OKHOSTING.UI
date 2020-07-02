@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms
@@ -61,6 +62,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			throw new ArgumentOutOfRangeException("value");
+		}
+
+		public static Color Parse(Color color)
+		{
+			if (color.A == 0)
+			{
+				return Color.Transparent;
+			}
+
+			return color;
 		}
 
 		#region Url rewrite methods
