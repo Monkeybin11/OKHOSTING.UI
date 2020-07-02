@@ -21,6 +21,9 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			//base.CacheDuration = new TimeSpan(6, 0, 0);
 		}
 
+		protected byte[] BytesCache;
+		protected Uri UriCache;
+
 		/// <summary>
 		/// Load a image from URL.
 		/// <para xml:lang="es">
@@ -32,6 +35,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </param>
 		void IImage.LoadFromUrl(Uri url)
 		{
+			UriCache = url;
+
 			Source = new global::Xamarin.Forms.UriImageSource
 			{
 				Uri = url,
@@ -67,10 +72,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </param>
 		void IImage.LoadFromStream(Stream stream)
 		{
-			Source = global::Xamarin.Forms.ImageSource.FromStream(() => stream);
+			var memory = new MemoryStream();
+			stream.CopyTo(memory);
+			BytesCache = memory.ToArray();
+			memory.Position = 0;
+
+			Source = global::Xamarin.Forms.ImageSource.FromStream(() => memory);
 		}
-
-
+		 
 		/// <summary>
 		/// Load a image from an array of bytes
 		/// <para xml:lang="es">
@@ -79,7 +88,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		void IImage.LoadFromBytes(byte[] bytes)
 		{
-			((IImage) this).LoadFromStream(new MemoryStream(bytes));
+			BytesCache = bytes;
+			Source = global::Xamarin.Forms.ImageSource.FromStream(() => new MemoryStream(bytes));
 		}
 
 		/// <summary>
@@ -325,11 +335,22 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			}
 		}
 
+		#endregion
+
 		object ICloneable.Clone()
 		{
-			return MemberwiseClone();
-		}
+			var image = (Image) MemberwiseClone();
 
-		#endregion
+			if (image.UriCache != null)
+			{
+				((IImage) image).LoadFromUrl(image.UriCache);
+			}
+			else if (image.BytesCache != null)
+			{
+				((IImage) image).LoadFromBytes(image.BytesCache);
+			}
+
+			return image;
+		}
 	}
 }

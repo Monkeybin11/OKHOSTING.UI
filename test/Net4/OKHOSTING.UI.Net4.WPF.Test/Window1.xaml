@@ -8,14 +8,6 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
 	<StackPanel Background="#FFC3A5A5">
-		<Controls:Button Height="51" Background="#FF83775E" BorderBrush="#FF641A1A">
-			44444444444444444444
-		</Controls:Button>
-		<Controls:Button Height="51" Background="#FFDAB465" BorderBrush="#FF641A1A">
-			55555555555555555555
-		</Controls:Button>
-		<Controls:Button Height="51" Background="#FFB07F19" BorderBrush="#FF641A1A">
-			77777777777777777777
-		</Controls:Button>
+		<Image x:Name="imgQROrBarCode" Height="100"/>
 	</StackPanel>
 </Window>
