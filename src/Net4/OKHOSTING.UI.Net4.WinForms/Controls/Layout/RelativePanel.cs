@@ -13,7 +13,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 
 		public RelativePanel()
 		{
-			//AutoScroll = true;
+			AutoScroll = false;
+			AutoSize = true;
+			Width = 0;
+			Height = 0;
+
 			_Children = new ControlList(base.Controls);
 			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}

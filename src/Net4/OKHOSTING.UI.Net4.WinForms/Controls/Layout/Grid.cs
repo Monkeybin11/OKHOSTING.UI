@@ -11,6 +11,11 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls.Layout
 	{
 		public Grid()
 		{
+			AutoScroll = false;
+			AutoSize = true;
+			Width = 0;
+			Height = 0;
+
 			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
