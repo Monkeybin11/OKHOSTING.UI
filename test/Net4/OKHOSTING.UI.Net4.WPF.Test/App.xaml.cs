@@ -17,6 +17,7 @@ namespace OKHOSTING.UI.Net4.WPF.Test
 			new IndexController(page).Start();
 
 			page.Show();
+			//new Window1().Show();
 		}
 	}
 }

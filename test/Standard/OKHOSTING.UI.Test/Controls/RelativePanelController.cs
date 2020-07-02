@@ -38,8 +38,6 @@ namespace OKHOSTING.UI.Test.Controls
 
 			// Create an RelativePanel.
 			IRelativePanel panel = Core.BaitAndSwitch.Create<IRelativePanel>();
-			panel.Width = Page.Width;
-			panel.Height = Page.Height;
 
 			//should be a background image
 			BackgroundImage = Core.BaitAndSwitch.Create<IImage>();

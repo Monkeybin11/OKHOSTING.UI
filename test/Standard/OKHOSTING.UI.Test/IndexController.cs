@@ -26,16 +26,15 @@ namespace OKHOSTING.UI.Test
 		protected override void OnStart()
 		{
 			IImage imgPicture = Core.BaitAndSwitch.Create<IImage>();
-			imgPicture.LoadFromUrl(new Uri("https://www.merriam-webster.com/assets/mw/images/gallery/gal-wap-slideshow-slide/aztec-2666-4b768308b161027e77ae775f6abea503@1x.jpg"));
+			imgPicture.LoadFromUrl(new Uri("https://cdn.britannica.com/69/42169-050-33D1516C/dance-Aztec-Codex-Borbonicus-detail-Xolotl-Quetzalcoatl.jpg"));
 
 			IStack stack = Core.BaitAndSwitch.Create<IStack>();
 			stack.BackgroundImage = imgPicture;
-			stack.Height = Page.Height;
 
 			// Controls
 			ILabelButton lblControls = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblControls.Text = "Controls";
-			lblControls.BackgroundColor = System.Drawing.Color.FromArgb(0, 0, 0, 0);
+			lblControls.BackgroundColor = System.Drawing.Color.FromArgb(50, 255, 0, 0);
 			lblControls.Click += (object sender, EventArgs e) => new Controls.IndexController() { Page = Page }.Start();
 			stack.Children.Add(lblControls);
 			

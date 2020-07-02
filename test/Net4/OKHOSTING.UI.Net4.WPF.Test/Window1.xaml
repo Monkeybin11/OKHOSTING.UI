@@ -7,38 +7,15 @@
         xmlns:Controls="clr-namespace:OKHOSTING.UI.Net4.WPF.Controls;assembly=OKHOSTING.UI.Net4.WPF" x:Class="OKHOSTING.UI.Net4.WPF.Test.Window1"
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
-	<Grid>
-
-		<Controls:Button HorizontalAlignment="Left" Margin="204,107,0,0" VerticalAlignment="Top" Width="75"/>
-		<Button Content="Button" HorizontalAlignment="Left" Margin="156,194,0,0" VerticalAlignment="Top" Width="214" Height="58">
-			<Button.Background>
-				<ImageBrush ImageSource="octopuses-are-alien-creatures-2-750x500.jpg"/>
-			</Button.Background>
-		</Button>
-		<Label Content="Label" HorizontalAlignment="Left" Margin="268,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" Width="164">
-			<Label.Background>
-				<ImageBrush ImageSource="octopuses-are-alien-creatures-2-750x500.jpg"/>
-			</Label.Background>
-			<Label.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform Angle="-6.013"/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Label.RenderTransform>
-		</Label>
-		<Grid HorizontalAlignment="Left" Height="100" Margin="90,279,0,0" VerticalAlignment="Top" Width="100"/>
-		<ListView HorizontalAlignment="Left" Height="100" Margin="529,219,0,0" VerticalAlignment="Top" Width="100">
-			<ListView.Background>
-				<ImageBrush ImageSource="octopuses-are-alien-creatures-2-750x500.jpg"/>
-			</ListView.Background>
-			<ListView.View>
-				<GridView>
-					<GridViewColumn/>
-				</GridView>
-			</ListView.View>
-		</ListView>
-
-	</Grid>
+	<StackPanel Background="#FFC3A5A5">
+		<Controls:Button Height="51" Background="#FF83775E" BorderBrush="#FF641A1A">
+			44444444444444444444
+		</Controls:Button>
+		<Controls:Button Height="51" Background="#FFDAB465" BorderBrush="#FF641A1A">
+			55555555555555555555
+		</Controls:Button>
+		<Controls:Button Height="51" Background="#FFB07F19" BorderBrush="#FF641A1A">
+			77777777777777777777
+		</Controls:Button>
+	</StackPanel>
 </Window>

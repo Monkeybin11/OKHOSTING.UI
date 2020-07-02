@@ -16,12 +16,22 @@ namespace OKHOSTING.UI.Net4.WPF
 			Scroller = new System.Windows.Controls.ScrollViewer();
 			Scroller.HorizontalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
 			Scroller.VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto;
-			Scroller.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-			Scroller.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-
+			
 			SizeToContent = SizeToContent.Manual;
 
 			base.Content = Scroller;
+		}
+
+		string IPage.Title
+		{
+			get 
+			{
+				return base.Title;
+			}
+			set
+			{
+				base.Title = value ?? string.Empty;
+			}
 		}
 
 		/// <summary>
@@ -43,11 +53,6 @@ namespace OKHOSTING.UI.Net4.WPF
 			}
 			set
 			{
-				//if (value != null)
-				//{
-				//	value.HorizontalAlignment = UI.HorizontalAlignment.Fill;
-				//	value.VerticalAlignment = UI.VerticalAlignment.Fill;
-				//}
 				Scroller.Content = value;
 			}
 		}
