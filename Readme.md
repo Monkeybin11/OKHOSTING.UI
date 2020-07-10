@@ -32,7 +32,7 @@ PM> Install-Package OKHOSTING.UI.Xamarin.Forms
 * The UI is defined from code (XAML designer on the way)
 * 100% native controls are used in all platforms
 * You have the "common" UI api surface among all platforms by default, ands it's easily extendible 
-* Supports click, doble click and, for user input controls, value changed events
+* Supports click, and for user input controls, value changed events
 * Using OKHOSTING.UI.CSS you can use CSS files to define the styles of your controls (thanks to AngleSharp)
 
 ## Supported controls
