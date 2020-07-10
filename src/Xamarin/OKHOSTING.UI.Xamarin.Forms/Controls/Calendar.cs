@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using OKHOSTING.UI.Controls;
 
 namespace OKHOSTING.UI.Xamarin.Forms.Controls
@@ -7,7 +8,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// It is a control that represents a calendar in a Xamarin.Forms.
 	/// <para xml:lang="es">Es un control que representa un calendario en un Xamarin.Forms</para>
 	/// </summary>
-	public class Calendar : global::Xamarin.Forms.cal, ICalendar
+	public class Calendar : XamForms.Controls.Calendar, ICalendar
 	{
 		/// <summary>
 		/// Initializes a new instance of the Calendar class.
@@ -17,7 +18,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		public Calendar()
 		{
-			base.DateSelected += Calendar_DateSelected;
+			base.DateClicked += calendar_DateClicked;
 		}
 
 		/// <summary>
@@ -31,7 +32,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 		}
 
-		#region IInputControl
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
 
 		/// <summary>
 		/// Calendars the date selected.
@@ -44,10 +48,12 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </returns>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">E.</param>
-		private void Calendar_DateSelected(object sender, global::Xamarin.Forms.DateChangedEventArgs e)
+		private void calendar_DateClicked(object sender, XamForms.Controls.DateTimeEventArgs e)
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>)this).Value);
 		}
+
+		#region IInputControl
 
 		/// <summary>
 		/// Occurs when value changed.
@@ -67,14 +73,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return base.Date;
+				return base.SelectedDate;
 			}
 			set
 			{
-				if (value.HasValue)
-				{
-					base.Date = value.Value;
-				}
+				base.SelectedDate = value;
 			}
 		}
 
@@ -173,7 +176,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.Margin
 		{
-			get; set;
+			get
+			{
+				return Forms.Platform.Parse(base.Margin);
+			}
+			set
+			{
+				base.Margin = Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -184,11 +194,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.BackgroundColor);
+				return Forms.Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Platform.Parse(value);
+				base.BackgroundColor = Forms.Platform.Parse(value);
 			}
 		}
 
@@ -198,8 +208,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get;
-			set;
+			get
+			{
+				return Forms.Platform.Parse(base.BorderColor);
+			}
+			set
+			{
+				base.BorderColor = Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -220,11 +236,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.Parse(base.HorizontalOptions.Alignment);
+				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -236,11 +252,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -261,6 +277,32 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 			get; set;
 		}
 
+		Thickness IControl.Padding
+		{
+			get
+			{
+				return Forms.Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Forms.Platform.Parse(value);
+			}
+		}
+
+		public string CssClass
+		{
+			get;
+			set;
+		}
+
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
 		#endregion
 
 		#region ITextControl
@@ -271,8 +313,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		string ITextControl.FontFamily
 		{
-			get;
-			set;
+			get
+			{
+				return base.DatesFontFamily;
+			}
+			set
+			{
+				base.DatesFontFamily =
+					base.WeekdaysFontFamily =
+					base.DisabledFontFamily =
+					base.NumberOfWeekFontFamily =
+					base.SelectedFontFamily =
+					base.TitleLabelFontFamily =
+					base.TitleLeftArrowFontFamily =
+					base.TitleRightArrowFontFamily = value;
+			}
 		}
 
 		/// <summary>
@@ -281,8 +336,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color ITextControl.FontColor
 		{
-			get;
-			set;
+			get
+			{
+				return base.DatesTextColor;
+			}
+			set
+			{
+				base.DatesTextColor =
+					base.WeekdaysTextColor =
+					base.DisabledTextColor =
+					base.NumberOfWeekTextColor =
+					base.SelectedTextColor =
+					base.TitleLabelTextColor =
+					base.TitleLeftArrowTextColor =
+					base.TitleRightArrowTextColor = value;
+			}
 		}
 
 		/// <summary>
@@ -293,8 +361,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Bold
 		{
-			get;
-			set;
+			get
+			{
+				return base.DatesFontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
+			}
+			set
+			{
+				base.DatesFontAttributes =
+					base.WeekdaysFontAttributes =
+					base.DisabledFontAttributes =
+					base.NumberOfWeekFontAttributes =
+					base.SelectedFontAttributes =
+					base.TitleLabelFontAttributes =
+					base.TitleLeftArrowFontAttributes =
+					base.TitleRightArrowFontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
+			}
 		}
 
 		/// <summary>
@@ -303,8 +384,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		bool ITextControl.Italic
 		{
-			get;
-			set;
+			get
+			{
+				return base.DatesFontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
+			}
+			set
+			{
+				base.DatesFontAttributes =
+					base.WeekdaysFontAttributes =
+					base.DisabledFontAttributes =
+					base.NumberOfWeekFontAttributes =
+					base.SelectedFontAttributes =
+					base.TitleLabelFontAttributes =
+					base.TitleLeftArrowFontAttributes =
+					base.TitleRightArrowFontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
+			}
 		}
 
 		/// <summary>
@@ -323,8 +417,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return Forms.Platform.Parse(base.TitleLabelHorizontalTextAlignment);
+			}
+			set
+			{
+				base.TitleLabelHorizontalTextAlignment = Forms.Platform.ParseTextAlignment(value);
+			}
 		}
 
 		/// <summary>
@@ -333,8 +433,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return Forms.Platform.ParseVerticalTextAlignment(base.TitleLabelVerticalTextAlignment);
+			}
+			set
+			{
+				base.TitleLabelVerticalTextAlignment = Forms.Platform.ParseTextAlignment(value);
+			}
 		}
 
 		/// <summary>
@@ -355,8 +461,21 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		double ITextControl.FontSize
 		{
-			get;
-			set;
+			get
+			{
+				return base.DatesFontSize;
+			}
+			set
+			{
+				base.DatesFontSize =
+					base.WeekdaysFontSize =
+					base.DisabledFontSize =
+					base.NumberOfWeekFontSize =
+					base.SelectedFontSize =
+					base.TitleLabelFontSize =
+					base.TitleLeftArrowFontSize =
+					base.TitleRightArrowFontSize = value;
+			}
 		}
 
 		#endregion
