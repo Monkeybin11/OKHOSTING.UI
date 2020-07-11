@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using System.Drawing;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Controls
+namespace OKHOSTING.UI.Xamarin.Forms.Material.Forms.Controls
 {
 	/// <summary>
 	/// List picker.
@@ -12,7 +12,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 	/// Una lista de elementos donde el usuario puede seleccionar un elemento.
 	/// </para>
 	/// </summary>
-	public class ListPicker : global::Xamarin.Forms.Picker, IListPicker
+	public class ListPicker : Plugin.MaterialDesignControls.MaterialPicker, IListPicker
 	{
 		/// <summary>
 		/// Initializes a new instance of the ListPicker class.
@@ -35,19 +35,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return base.Items;
+				return (IList<string>) base.ItemsSource;
 			}
 			set
 			{
-				if (base.Items.Any())
-				{
-					base.Items.Clear();
-				}
-				
-				foreach (string item in value)
-				{
-					base.Items.Add(item);
-				}
+				base.ItemsSource = value;
 			}
 		}
 
@@ -75,7 +67,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void ListPicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
+			ValueChanged?.Invoke(this, base.SelectedItem);
 		}
 
 		/// <summary>
@@ -96,19 +88,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				if(base.SelectedIndex == -1)
-				{
-					return null;
-				}
-				else
-				{
-					return ((IListPicker)this).Items.ToArray()[base.SelectedIndex];
-				}
+				return base.SelectedItem;
 			}
 			set
 			{
-				int index = ((IListPicker)this).Items.ToList().IndexOf(value);
-				base.SelectedIndex = index;
+				base.SelectedItem = value;
 			}
 		}
 
@@ -215,11 +199,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.Margin);
+				return Xamarin.Forms.Platform.Parse(base.Margin);
 			}
 			set
 			{
-				base.Margin = Forms.Platform.Parse(value);
+				base.Margin = Xamarin.Forms.Platform.Parse(value);
 			}
 		}
 
@@ -231,8 +215,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Thickness IControl.Padding
 		{
-			get;
-			set;
+			get
+			{
+				return Xamarin.Forms.Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Xamarin.Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -245,11 +235,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.BackgroundColor);
+				return Xamarin.Forms.Platform.Parse(base.BackgroundColor);
 			}
 			set
 			{
-				base.BackgroundColor = Forms.Platform.Parse(value);
+				base.BackgroundColor = Xamarin.Forms.Platform.Parse(value);
 			}
 		}
 
@@ -261,8 +251,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get;
-			set;
+			get
+			{
+				return Xamarin.Forms.Platform.Parse(base.BorderColor);
+			}
+			set
+			{
+				base.BorderColor = Xamarin.Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -287,11 +283,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.Parse(base.HorizontalOptions.Alignment);
+				return Xamarin.Forms.Platform.Parse(base.HorizontalOptions.Alignment);
 			}
 			set
 			{
-				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.HorizontalOptions = new global::Xamarin.Forms.LayoutOptions(Xamarin.Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -305,11 +301,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get
 			{
-				return Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+				return Xamarin.Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
 			}
 			set
 			{
-				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Forms.Platform.Parse(value), false);
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Xamarin.Forms.Platform.Parse(value), false);
 			}
 		}
 
@@ -357,18 +353,6 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		#region ITextControl
 
 		/// <summary>
-		/// Gets or sets text control font family.
-		/// <para xml:lang="es">
-		/// Obtiene o establece la tipografia del texto del control.
-		/// </para>
-		/// </summary>
-		string ITextControl.FontFamily
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
 		/// Gets or sets the color of the text control font.
 		/// <para xml:lang="es">
 		/// Obtiene o establece el color del texto del control.
@@ -376,8 +360,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		Color ITextControl.FontColor
 		{
-			get;
-			set;
+			get
+			{
+				return Xamarin.Forms.Platform.Parse(base.TextColor);
+			}
+			set
+			{
+				base.TextColor = Xamarin.Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>
@@ -424,8 +414,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		HorizontalAlignment ITextControl.TextHorizontalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return Xamarin.Forms.Platform.Parse(base.HorizontalTextAlignment);
+			}
+			set
+			{
+				base.HorizontalTextAlignment = Xamarin.Forms.Platform.ParseTextAlignment(value);
+			}
 		}
 
 		/// <summary>
@@ -436,8 +432,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </summary>
 		VerticalAlignment ITextControl.TextVerticalAlignment
 		{
-			get;
-			set;
+			get
+			{
+				return Xamarin.Forms.Platform.ParseVerticalAlignment(base.VerticalOptions.Alignment);
+			}
+			set
+			{
+				base.VerticalOptions = new global::Xamarin.Forms.LayoutOptions(Xamarin.Forms.Platform.Parse(value), false);
+			}
 		}
 
 		/// <summary>
@@ -460,6 +462,18 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		{
 			get;
 			set;
+		}
+		
+		int IListPicker.SelectedIndex 
+		{
+			get
+			{
+				return base.SelectedIndex;
+			}
+			set
+			{
+				base.SelectedItem = ((IList<string>) ItemsSource).ToArray()[value];
+			}
 		}
 
 		#endregion

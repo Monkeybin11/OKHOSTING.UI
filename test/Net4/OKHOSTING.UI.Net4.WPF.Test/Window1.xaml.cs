@@ -48,8 +48,11 @@ namespace OKHOSTING.UI.Net4.WPF.Test
                 }
             }
 
-            imgQROrBarCode.Visibility = Visibility.Visible;
-            imgQROrBarCode.Source = new BitmapImage(new Uri(path));
         }
+
+		private void ButtonAdv_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 }
