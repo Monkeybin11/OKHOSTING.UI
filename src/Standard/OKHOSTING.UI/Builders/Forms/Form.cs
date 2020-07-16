@@ -86,24 +86,24 @@ namespace OKHOSTING.UI.Builders.Forms
 			#region Sort fields and init values
 
 			//sort fields by required, category
-			var sorted = fields.ToList();
+			//var sorted = fields.ToList();
 
-			sorted.Sort
-			(
-				delegate (Field f1, Field f2)
-				{
-					//set a "Category.SortOrder.Name" string comparission
-					string val1, val2;
+			//sorted.Sort
+			//(
+			//	delegate (Field f1, Field f2)
+			//	{
+			//		//set a "Category.SortOrder.Name" string comparission
+			//		string val1, val2;
 
-					val1 = f1.SortOrder.ToString("0:000000000000000") + f1.Category + "." + (f1.Editor.Control.Enabled ? "1" : "0") + "." + (f1.Editor.Required ? "0" : "1") + (f1.TableWide ? "1" : "0") + f1.Name;
-					val2 = f2.SortOrder.ToString("0:000000000000000") + f2.Category + "." + (f2.Editor.Control.Enabled ? "1" : "0") + "." + (f2.Editor.Required ? "0" : "1") + (f2.TableWide ? "1" : "0") + f2.Name;
+			//		val1 = f1.SortOrder.ToString("0:000000000000000") + f1.Category + "." + (f1.Editor.Control.Enabled ? "1" : "0") + "." + (f1.Editor.Required ? "0" : "1") + (f1.TableWide ? "1" : "0") + f1.Name;
+			//		val2 = f2.SortOrder.ToString("0:000000000000000") + f2.Category + "." + (f2.Editor.Control.Enabled ? "1" : "0") + "." + (f2.Editor.Required ? "0" : "1") + (f2.TableWide ? "1" : "0") + f2.Name;
 
-					//compare categories
-					return val1.CompareTo(val2);
-				}
-			);
+			//		//compare categories
+			//		return val1.CompareTo(val2);
+			//	}
+			//);
 			
-			Fields = sorted.ToArray();
+			Fields = fields.ToArray();
 
 			//init all fields
 			foreach (Field field in Fields)

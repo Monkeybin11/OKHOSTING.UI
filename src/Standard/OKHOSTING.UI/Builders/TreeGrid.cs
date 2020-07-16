@@ -85,7 +85,9 @@ namespace OKHOSTING.UI.Builders
 				Grid.SetContent(Grid.RowCount - 1, column, content[column - 1]);
 			}
 
-			if (row.Children != null && row.Children.Any())
+			var children = row.Children?.ToArray();
+
+			if (children != null && children.Length > 0)
 			{
 				//create expand/collapse button and put it on the first cell
 				IClickable cmdExpand;
@@ -108,8 +110,6 @@ namespace OKHOSTING.UI.Builders
 				{
 					var childrenMargin = content[0].Margin ?? new Thickness(0);
 					childrenMargin = new Thickness(childrenMargin.Left + 20, childrenMargin.Top, childrenMargin.Right, childrenMargin.Bottom);
-
-					var children = row.Children.ToArray();
 
 					for (int childrenIndex = 0; childrenIndex < children.Length; childrenIndex++)
 					{
@@ -155,6 +155,11 @@ namespace OKHOSTING.UI.Builders
 		public class Row
 		{
 			/// <summary>
+			/// An object that identifies this row as unique
+			/// </summary>
+			public object Tag { get; set; }
+
+			/// <summary>
 			/// The content that must be placed in the row, each control will be put in a column
 			/// </summary>
 			public IEnumerable<IControl> Content { get; set; }
@@ -168,7 +173,7 @@ namespace OKHOSTING.UI.Builders
 			/// <summary>
 			/// The children rows of this row, will be visible when collapsed is false, with a little padding to the right of the current row
 			/// </summary>
-			public ICollection<Row> Children { get; set; }
+			public IEnumerable<Row> Children { get; set; }
 		}
 	}
 }

@@ -4,11 +4,11 @@ using System.Drawing;
 
 namespace OKHOSTING.UI.Net4.WPF.Syncfusion.Controls
 {
-	public class Button : global::Syncfusion.Windows.Tools.Controls.ButtonAdv, IButton
+	public class Autocomplete : global::Syncfusion.Windows.Tools.Controls.AutoComplete, IAutocomplete
 	{
-		public Button()
+		public Autocomplete()
 		{
-			base.Click += Button_Click;
+			base.SelectionChanged += Autocomplete_SelectionChanged;
 		}
 
 		#region IControl
@@ -397,17 +397,19 @@ namespace OKHOSTING.UI.Net4.WPF.Syncfusion.Controls
 
 		#endregion
 
-		public new event EventHandler Click;
+		public event EventHandler<string> ValueChanged;
 
-		public string Text
+		public event EventHandler<AutocompleteSearchEventArgs> Searching;
+
+		public string Value 
 		{
 			get
 			{
-				return (string) base.Content;
+				return (string) base.SelectedValue;
 			}
-			set
+			set 
 			{
-				base.Content = value;
+				base.SelectedValue = value;
 			}
 		}
 
@@ -420,9 +422,18 @@ namespace OKHOSTING.UI.Net4.WPF.Syncfusion.Controls
 		{
 		}
 
-		private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+		private void Autocomplete_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
-			Click?.Invoke(sender, e);
+			ValueChanged?.Invoke(sender, e);
+		}
+
+		public AutocompleteSearchEventArgs OnSearching(string text)
+		{
+			var e = new AutocompleteSearchEventArgs(text);
+
+			Searching?.Invoke(this, e);
+
+			return e;
 		}
 	}
 }

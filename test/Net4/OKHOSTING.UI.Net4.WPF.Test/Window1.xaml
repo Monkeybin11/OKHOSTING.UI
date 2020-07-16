@@ -6,16 +6,4 @@
         xmlns:local="clr-namespace:OKHOSTING.UI.Net4.WPF.Test"
         xmlns:Controls="clr-namespace:OKHOSTING.UI.Net4.WPF.Controls;assembly=OKHOSTING.UI.Net4.WPF" xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="OKHOSTING.UI.Net4.WPF.Test.Window1"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-	<StackPanel Background="#FFC3A5A5">
-		<syncfusion:ButtonAdv Content="dddasdasdasdas&#xD;&#xA;dasdadas" Height="270" Label="ButtonAdv" Margin="234,0,347,0" RenderTransformOrigin="-0.84,5.625" Click="ButtonAdv_Click" Foreground="#FFA4A419">
-			<syncfusion:ButtonAdv.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="#FFECECEC" Offset="0.469"/>
-					<GradientStop Color="#FFDBDBDB" Offset="0.531"/>
-					<GradientStop Color="#FF8D3636" Offset="0.954"/>
-				</LinearGradientBrush>
-			</syncfusion:ButtonAdv.Background>
-		</syncfusion:ButtonAdv>
-	</StackPanel>
-</Window>
+        Title="Window1"/>
