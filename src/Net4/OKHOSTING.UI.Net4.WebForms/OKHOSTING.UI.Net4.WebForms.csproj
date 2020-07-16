@@ -118,6 +118,10 @@
     <Content Include="Services\Autocomplete.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Net4\OKHOSTING.Core.Net4\OKHOSTING.Core.Net4.csproj">
+      <Project>{46bdaec2-7677-4223-b009-940db478a220}</Project>
+      <Name>OKHOSTING.Core.Net4</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj">
       <Project>{6cf50275-9d06-4d23-8f5a-66efcfe8c278}</Project>
       <Name>OKHOSTING.Core</Name>
