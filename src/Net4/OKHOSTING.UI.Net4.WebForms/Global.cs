@@ -17,6 +17,8 @@ namespace OKHOSTING.UI.Net4.WebForms
 
 				return control;
 			}));
+
+			Core.Net4.SessionIdProvider.Setup();
 		}
 
 		protected virtual void Application_BeginRequest(object sender, EventArgs e)
