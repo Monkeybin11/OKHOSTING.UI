@@ -15,5 +15,15 @@ namespace OKHOSTING.UI.HTML.Controls
 
 			return label.OuterHtml;
 		}
+
+		public void Parse(IHtmlLabelElement htmlControl)
+		{
+			Text = htmlControl.TextContent;
+			Name = htmlControl.Id;
+			var css = htmlControl.Attributes["style"].Value;
+			CSS.Style style = new CSS.Style();
+			var parsed = style.ParseDeclaration(css);
+			CSS.Style.Apply(parsed, this);
+		}
 	}
 }

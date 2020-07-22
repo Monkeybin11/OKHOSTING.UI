@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using AngleSharp;
 using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
 
 namespace OKHOSTING.UI.HTML.Controls
 {
@@ -52,6 +53,17 @@ namespace OKHOSTING.UI.HTML.Controls
 		public object Clone()
 		{
 			return MemberwiseClone();
+		}
+
+		public virtual void Parse(IHtmlElement htmlControl)
+		{
+			Visible = !htmlControl.IsHidden;
+			Name = htmlControl.Id;
+
+			var css = htmlControl.Attributes["style"].Value;
+			CSS.Style style = new CSS.Style();
+			var parsed = style.ParseDeclaration(css);
+			CSS.Style.Apply(parsed, this);
 		}
 	}
 }

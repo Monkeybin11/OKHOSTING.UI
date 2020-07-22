@@ -5,10 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.12.1" />
+    <PackageReference Include="AngleSharp" Version="0.14.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OKHOSTING.UI.CSS\OKHOSTING.UI.CSS.csproj" />
     <ProjectReference Include="..\OKHOSTING.UI\OKHOSTING.UI.csproj" />
   </ItemGroup>
 

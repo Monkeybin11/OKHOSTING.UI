@@ -20,5 +20,17 @@ namespace OKHOSTING.UI.HTML.Controls
 
 			return button.OuterHtml;
 		}
+
+		public void Parse(IHtmlButtonElement htmlControl)
+		{
+			Text = htmlControl.TextContent;
+			Visible = !htmlControl.IsHidden;
+			Name = htmlControl.Id ?? htmlControl.Name;
+			
+			var css = htmlControl.Attributes["style"].Value;
+			CSS.Style style = new CSS.Style();
+			var parsed = style.ParseDeclaration(css);
+			CSS.Style.Apply(parsed, this);
+		}
 	}
 }

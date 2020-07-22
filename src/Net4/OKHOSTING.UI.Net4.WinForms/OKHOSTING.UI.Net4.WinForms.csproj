@@ -40,6 +40,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ActivityIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Layout\StackBase.cs">
       <SubType>Component</SubType>
     </Compile>
