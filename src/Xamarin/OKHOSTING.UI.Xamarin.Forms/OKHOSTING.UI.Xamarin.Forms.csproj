@@ -7,7 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="Octane.Xam.VideoPlayer" Version="3.1.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="4.7.0.1179" />
     <PackageReference Include="XamForms.Enhanced.Calendar" Version="1.4.0" />
   </ItemGroup>
 
