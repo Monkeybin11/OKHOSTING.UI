@@ -14,7 +14,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls.Maps
 			Pins = new PinCollection(this);
 		}
 
-		public Map(MapSpan mapSpan) : base(Parse(mapSpan))
+		public Map(MapSpan region) : base(Parse(region))
 		{
 			Pins = new PinCollection(this);
 		}

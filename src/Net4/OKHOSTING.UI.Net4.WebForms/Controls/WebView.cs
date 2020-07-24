@@ -1,9 +1,10 @@
 ﻿using OKHOSTING.UI.Controls;
+using System.Drawing;
 using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class WebView: System.Web.UI.HtmlControls.HtmlIframe, IWebView
+	public class WebView: System.Web.UI.WebControls.ifr, IWebView
 	{
 		#region IControl
 
@@ -38,7 +39,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get
 			{
 				if (double.TryParse(base.Style["background-color"], out left)) thickness.Left = left;
-				return Platform.Current.Parse(base.BackColor);
+				return base.BackColor;
 			}
 			set
 			{
