@@ -90,6 +90,7 @@
     <Compile Include="Controls\TimeOfDayPicker.xaml.cs">
       <DependentUpon>TimeOfDayPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\WebView.cs" />
     <Compile Include="DragDrop.cs" />
     <Compile Include="Controls\MenuItemList.cs" />
     <Compile Include="Platform.cs" />

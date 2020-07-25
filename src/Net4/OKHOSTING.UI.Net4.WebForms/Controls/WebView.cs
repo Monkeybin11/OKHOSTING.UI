@@ -1,18 +1,30 @@
 ﻿using OKHOSTING.UI.Controls;
+using System;
 using System.Drawing;
 using System.Linq;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls
 {
-	public class WebView: System.Web.UI.WebControls.ifr, IWebView
+	public class WebView: System.Web.UI.WebControls.Panel, IWebView
 	{
+		protected readonly System.Web.UI.HtmlControls.HtmlIframe IFrame;
+
+		public WebView()
+		{
+			IFrame = new System.Web.UI.HtmlControls.HtmlIframe();
+			IFrame.Style["width"] = "100%";
+			IFrame.Style["height"] = "100%";
+
+			base.Controls.Add(IFrame);
+		}
+
 		#region IControl
 
 		/// <summary>
-		/// Gets or sets the name of the IC ontrol.
+		/// Gets or sets the name of the control.
 		/// <para xml:lang="es">Obtiene o establece el nombre del control</para>
 		/// </summary>
-		/// <value>The name of the IC ontrol.
+		/// <value>The name of the control.
 		/// <para xml:lang="es">El nombre del control.</para>
 		/// </value>
 		string IControl.Name
@@ -28,49 +40,48 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the color of the IC ontrol. background.
+		/// Gets or sets the color of the control. background.
 		/// <para xml:lang="es">Obtiene o establece el color de fondo del control.</para>
 		/// </summary>
-		/// <value>The color of the IC ontrol. background.
+		/// <value>The color of the control. background.
 		/// <para xml:lang="es">El color de fondo del control.</para>
 		/// </value>
 		Color IControl.BackgroundColor
 		{
 			get
 			{
-				if (double.TryParse(base.Style["background-color"], out left)) thickness.Left = left;
 				return base.BackColor;
 			}
 			set
 			{
-				base.BackColor = Platform.Current.Parse(value);
+				base.BackColor = Platform.Parse(value);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the color of the IC ontrol. border.
+		/// Gets or sets the color of the control. border.
 		/// <para xml:lang="es">Obtiene o establece el color del borde del control.</para>
 		/// </summary>
-		/// <value>The color of the IC ontrol. border.
+		/// <value>The color of the control. border.
 		/// <para xml:lang="es">El color del borde del control.</para>
 		/// </value>
 		Color IControl.BorderColor
 		{
 			get
 			{
-				return Platform.Current.Parse(base.BorderColor);
+				return base.BorderColor;
 			}
 			set
 			{
-				base.BorderColor = Platform.Current.Parse(value);
+				base.BorderColor = Platform.Parse(value);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the width of the IC ontrol..
+		/// Gets or sets the width of the control..
 		/// <para xml:lang="es">Obtiene o establece el ancho del control.</para>
 		/// </summary>
-		/// <value>The width of the IC ontrol.
+		/// <value>The width of the control.
 		/// <para xml:lang="es">El ancho del control</para>
 		/// </value>
 		double? IControl.Width
@@ -98,10 +109,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the height of the IC ontrol..
+		/// Gets or sets the height of the control..
 		/// <para xml:lang="es">Obtiene o establece la altura del control</para>
 		/// </summary>
-		/// <value>The height of the IC ontrol.
+		/// <value>The height of the control.
 		/// <para xml:lang="es">La altura del control.</para>
 		/// </value>
 		double? IControl.Height
@@ -129,10 +140,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the IC ontrol. margin.
+		/// Gets or sets the control. margin.
 		/// <para xml:lang="es">Obtiene o establece el margen del control.</para>
 		/// </summary>
-		/// <value>The IC ontrol. margin.
+		/// <value>The control. margin.
 		/// <para xml:lang="es">El margen del control.</para>
 		/// </value>
 		Thickness IControl.Margin
@@ -142,24 +153,53 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 				double left, top, right, bottom;
 				Thickness thickness = new Thickness();
 
-				if (double.TryParse(base.Style["margin-left"], out left)) thickness.Left = left;
-				if (double.TryParse(base.Style["margin-top"], out top)) thickness.Top = top;
-				if (double.TryParse(base.Style["margin-right"], out right)) thickness.Right = right;
-				if (double.TryParse(base.Style["margin-bottom"], out bottom)) thickness.Bottom = bottom;
+				if (double.TryParse(base.Style["margin-left"]?.Replace("px", null), out left)) thickness.Left = left;
+				if (double.TryParse(base.Style["margin-top"]?.Replace("px", null), out top)) thickness.Top = top;
+				if (double.TryParse(base.Style["margin-right"]?.Replace("px", null), out right)) thickness.Right = right;
+				if (double.TryParse(base.Style["margin-bottom"]?.Replace("px", null), out bottom)) thickness.Bottom = bottom;
 
 				return new Thickness(left, top, right, bottom);
 			}
 			set
 			{
-				if (value.Left.HasValue) base.Style["margin-left"] = string.Format("{0}px", value.Left);
-				if (value.Top.HasValue) base.Style["margin-top"] = string.Format("{0}px", value.Top);
-				if (value.Right.HasValue) base.Style["margin-right"] = string.Format("{0}px", value.Right);
-				if (value.Bottom.HasValue) base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
+				base.Style["margin-left"] = string.Format("{0}px", value.Left);
+				base.Style["margin-top"] = string.Format("{0}px", value.Top);
+				base.Style["margin-right"] = string.Format("{0}px", value.Right);
+				base.Style["margin-bottom"] = string.Format("{0}px", value.Bottom);
+			}
+		}
+		
+		/// <summary>
+		/// Space that this control will set between itself and it's own border
+		/// <para xml:lang="es">
+		/// Espacio que este control se establecerá entre si mismo y su propio borde
+		/// </para>
+		/// </summary>
+		Thickness IControl.Padding
+		{
+			get
+			{
+				double left, top, right, bottom;
+				Thickness thickness = new Thickness();
+
+				if (double.TryParse(Style["padding-left"]?.Replace("px", null), out left)) thickness.Left = left;
+				if (double.TryParse(Style["padding-top"]?.Replace("px", null), out top)) thickness.Top = top;
+				if (double.TryParse(Style["padding-right"]?.Replace("px", null), out right)) thickness.Right = right;
+				if (double.TryParse(Style["padding-bottom"]?.Replace("px", null), out bottom)) thickness.Bottom = bottom;
+
+				return new Thickness(left, top, right, bottom);
+			}
+			set
+			{
+				Style["padding-left"] = string.Format("{0}px", value.Left);
+				Style["padding-top"] = string.Format("{0}px", value.Top);
+				Style["padding-right"] = string.Format("{0}px", value.Right);
+				Style["padding-bottom"] = string.Format("{0}px", value.Bottom);
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the width of the IC ontrol. border.
+		/// Gets or sets the width of the control. border.
 		/// <para xml:lang="es">Obtiene o establece el ancho del borde del control.</para>
 		/// </summary>
 		Thickness IControl.BorderWidth
@@ -175,10 +215,10 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		}
 
 		/// <summary>
-		/// Gets or sets the IC ontrol. horizontal alignment.
+		/// Gets or sets the control. horizontal alignment.
 		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del control.</para>
 		/// </summary>
-		/// <value>The IC ontrol. horizontal alignment.
+		/// <value>The control. horizontal alignment.
 		/// <para xml:lang="es">La alineacion horizontal del control.</para>
 		/// </value>
 		HorizontalAlignment IControl.HorizontalAlignment
@@ -217,16 +257,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "horizontal-alignment");
-				Platform.Current.AddCssClass(this, "horizontal-alignment-" + value.ToString().ToLower());
+				this.RemoveCssClassesStartingWith("horizontal-alignment");
+				this.AddCssClass("horizontal-alignment-" + value.ToString().ToLower());
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the IC ontrol. vertical alignment.
+		/// Gets or sets the control. vertical alignment.
 		/// <para xml:lang="es">Obtiene o establece la alineacio vertical del control</para>
 		/// </summary>
-		/// <value>The IC ontrol. vertical alignment.
+		/// <value>The control. vertical alignment.
 		/// <para xml:lang="es">La laineacion vertical del control.</para>
 		/// </value>
 		VerticalAlignment IControl.VerticalAlignment
@@ -265,8 +305,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 			set
 			{
-				Platform.Current.RemoveCssClassesStartingWith(this, "vertical-alignment");
-				Platform.Current.AddCssClass(this, "vertical-alignment-" + value.ToString().ToLower());
+				this.RemoveCssClassesStartingWith("vertical-alignment");
+				this.AddCssClass("vertical-alignment-" + value.ToString().ToLower());
 			}
 		}
 
@@ -283,6 +323,40 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			get; set;
 		}
 
+		/// <summary>
+		/// Control that contains this control, like a grid, or stack
+		/// </summary>
+		IControl IControl.Parent
+		{
+			get
+			{
+				return (IControl) base.Parent;
+			}
+		}
+
+		bool IControl.Focus()
+		{
+			base.Focus();
+			return true;
+		}
+
+		object ICloneable.Clone()
+		{
+			return MemberwiseClone();
+		}
+
 		#endregion
+
+		public Uri Source
+		{
+			get
+			{
+				return new Uri(IFrame.Src);
+			}
+			set
+			{
+				IFrame.Src = value.ToString();
+			}
+		}
 	}
 }
