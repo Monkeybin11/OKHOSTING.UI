@@ -24,6 +24,14 @@
     <Compile Remove="Session.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\StarGray.png" />
+    <None Remove="Resources\StarYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\StarGray.png" />
+    <EmbeddedResource Include="Resources\StarYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
@@ -31,16 +39,16 @@
     <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Resources\Icons.Designer.cs">
+    <Compile Update="Resources\Images.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Icons.resx</DependentUpon>
+      <DependentUpon>Images.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Icons.resx">
+    <EmbeddedResource Update="Resources\Images.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

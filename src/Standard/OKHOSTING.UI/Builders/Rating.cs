@@ -2,13 +2,13 @@
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 using System;
+using System.Linq;
 
 namespace OKHOSTING.UI.Builders
 {
 	public class Rating : IBuilder<IFlow>
 	{
 		protected readonly IFlow Flow = BaitAndSwitch.Create<IFlow>();
-		protected readonly IImageButton On, Off;
 
 		public IFlow Control => Flow;
 		IControl IBuilder.Control => Flow;
@@ -29,8 +29,9 @@ namespace OKHOSTING.UI.Builders
 		}
 
 		public readonly int MaxValue;
+		public readonly int Height;
 
-		public Rating(int maxValue, int value, IImageButton off, IImageButton on)
+		public Rating(int maxValue, int value, int height)
 		{
 			if (value < 1)
 			{
@@ -47,22 +48,22 @@ namespace OKHOSTING.UI.Builders
 				throw new ArgumentOutOfRangeException(nameof(maxValue), "Arugment 'maxValue' must be greather than 2");
 			}
 
-			if (off == null)
-			{
-				throw new ArgumentNullException(nameof(off));
-			}
-			
-			if (on == null)
-			{
-				throw new ArgumentNullException(nameof(on));
-			}
-
 			MaxValue = maxValue;
-			Value = value;
-			Off = off;
-			On = on;
+			Height = height;
 
-			Refresh();
+			for (int i = 1; i <= MaxValue; i++)
+			{
+				IImageButton button = BaitAndSwitch.Create<IImageButton>();
+
+				button.Click += button_Click;
+				button.Tag = i;
+				button.Width = button.Height = Height;
+
+				Flow.Children.Add(button);
+			}
+
+
+			Value = value;
 		}
 
 		private void button_Click(object sender, EventArgs e)
@@ -75,25 +76,20 @@ namespace OKHOSTING.UI.Builders
 
 		protected virtual void Refresh()
 		{
-			Flow.Children.Clear();
+			var buttons = Flow.Children.ToArray();
 
 			for (int i = 1; i <= MaxValue; i++)
 			{
-				IImageButton button;
+				var button = (IImageButton) buttons[i - 1];
 
-				if (i < Value)
+				if (i > Value)
 				{
-					button = (IImageButton) Off.Clone();
+					button.LoadFromBytes(Resources.Images.StarGray);
 				}
 				else
 				{
-					button = (IImageButton) On.Clone();
+					button.LoadFromBytes(Resources.Images.StarYellow);
 				}
-
-				button.Click += button_Click;
-				button.Tag = i;
-
-				Flow.Children.Add(button);
 			}
 		}
 	}
