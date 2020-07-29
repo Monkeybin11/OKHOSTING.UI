@@ -34,7 +34,7 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// <param name="e">E.</param>
 		private void HyperLink_Clicked(object sender, EventArgs e)
 		{
-			global::Xamarin.Forms.Device.OpenUri(((IHyperLink) this).Uri);
+			global::Xamarin.Essentials.Launcher.OpenAsync(((IHyperLink) this).Uri);
 		}
 
 		/// <summary>
