@@ -137,7 +137,10 @@ namespace OKHOSTING.UI.Xamarin.Forms.Controls
 		/// </param>
 		public void CopyTo(IControl[] array, int arrayIndex)
 		{
-			InnerList.CopyTo((Native.View[]) array, arrayIndex);
+			for (int i = arrayIndex; i < Count; i++)
+			{
+				array[i] = (IControl) InnerList[i];
+			}
 		}
 
 		/// <summary>
