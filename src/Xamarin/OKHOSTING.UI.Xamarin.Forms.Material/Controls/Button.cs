@@ -177,14 +177,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 		/// </summary>
 		Thickness IControl.BorderWidth
 		{
-			get
-			{
-				return new Thickness(base.BorderWidth);
-			}
-			set
-			{
-				base.BorderWidth = value.Top;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -302,14 +296,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 		/// </summary>
 		bool ITextControl.Bold
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Bold);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Bold;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -318,14 +306,8 @@ namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 		/// </summary>
 		bool ITextControl.Italic
 		{
-			get
-			{
-				return base.FontAttributes.HasFlag(global::Xamarin.Forms.FontAttributes.Italic);
-			}
-			set
-			{
-				base.FontAttributes = global::Xamarin.Forms.FontAttributes.Italic;
-			}
+			get;
+			set;
 		}
 
 		/// <summary>
