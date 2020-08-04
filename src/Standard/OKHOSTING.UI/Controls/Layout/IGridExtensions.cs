@@ -46,6 +46,16 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <param name="toColumn"></param>
 		public static void MoveColumnContent(this IGrid grid, int fromColumn, int toColumn)
 		{
+			if (fromColumn < 0 || fromColumn >= grid.ColumnCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(fromColumn));
+			}
+			
+			if (toColumn < 0 || toColumn >= grid.ColumnCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(toColumn));
+			}
+
 			int rows = grid.RowCount;
 
 			for (int row = 0; row < rows; row++)
@@ -67,6 +77,16 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <param name="toRow"></param>
 		public static void MoveRowContent(this IGrid grid, int fromRow, int toRow)
 		{
+			if (fromRow < 0 || fromRow >= grid.RowCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(fromRow));
+			}
+
+			if (toRow < 0 || toRow >= grid.RowCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(toRow));
+			}
+
 			int columns = grid.ColumnCount;
 
 			for (int column = 0; column < columns; column++)
@@ -88,6 +108,11 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <param name="columnReceiver"></param>
 		public static void InsertColumn(this IGrid grid, int position)
 		{
+			if (position < 0 || position >= grid.ColumnCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(position));
+			}
+
 			int columns = grid.ColumnCount;
 			grid.ColumnCount++;
 
@@ -105,6 +130,11 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <param name="rowReceiver"></param>
 		public static void InsertRow(this IGrid grid, int position)
 		{
+			if (position < 0 || position >= grid.RowCount)
+			{
+				throw new ArgumentOutOfRangeException(nameof(position));
+			}
+
 			int rows = grid.RowCount;
 			grid.RowCount++;
 
@@ -120,7 +150,7 @@ namespace OKHOSTING.UI.Controls.Layout
 		/// <param name="rowIndex">Zero based index of he row to be deleted</param>
 		public static void RemoveRow(this IGrid grid, int rowIndex)
 		{
-			if (rowIndex >= grid.RowCount)
+			if (rowIndex < 0 || rowIndex >= grid.RowCount)
 			{
 				return;
 			}
@@ -322,6 +352,29 @@ namespace OKHOSTING.UI.Controls.Layout
 				{
 					grid.SetContent(row, column, rowArray[column]);
 				}
+			}
+		}
+
+
+		/// <summary>
+		/// Removes all content in a specific row
+		/// </summary>
+		public static void ClearContentRow(this IGrid grid, int row)
+		{
+			for (int column = 0; column < grid.ColumnCount && column < grid.ColumnCount; column++)
+			{
+				grid.SetContent(row, column, null);
+			}
+		}
+
+		/// <summary>
+		/// Removes all content in a specific column
+		/// </summary>
+		public static void ClearContentColumn(this IGrid grid, int column)
+		{
+			for (int row = 0; row < grid.RowCount; row++)
+			{
+				grid.SetContent(row, column, null);
 			}
 		}
 

@@ -21,51 +21,7 @@ namespace OKHOSTING.UI.Test.Controls
 		/// </summary>
 		protected override void OnStart()
 		{
-			var headers = new IControl[Columns];
-
-			for (int column = 0; column < Columns; column++)
-			{
-				var label = Core.BaitAndSwitch.Create<ILabel>();
-				label.Text = $"Column {column}";
-
-				headers[column] = label;
-			}
-
-			var rows = new List<TreeGrid.Row>();
-
-			for (int rowIndex = 0; rowIndex < 10; rowIndex++)
-			{
-				var row = CreateRow($"{rowIndex}");
-				rows.Add(row);
-
-				if (rowIndex % 4 == 0)
-				{
-					var children = new List<TreeGrid.Row>();
-					
-					for (int childRowIndex = 0; childRowIndex < 3; childRowIndex++)
-					{
-						var child = CreateRow($"{rowIndex}.{childRowIndex}");
-						
-						children.Add(child);
-
-						if (rowIndex % 2 == 0)
-						{
-							var children2 = new List<TreeGrid.Row>();
-
-							for (int childRowIndex2 = 0; childRowIndex2 < 2; childRowIndex2++)
-							{
-								children2.Add(CreateRow($"{rowIndex}.{childRowIndex}.{childRowIndex2}"));
-							}
-
-							child.Children = children2;
-						}
-					}
-				
-					row.Children = children;
-				}
-			}
-
-			var treeGrid = new TreeGrid(headers, rows);
+			var treeGrid = new PersonTreeGrid();
 
 			var cmdClose = Core.BaitAndSwitch.Create<IButton>();
 			cmdClose.Text = "Close";
@@ -80,25 +36,6 @@ namespace OKHOSTING.UI.Test.Controls
 			Page.Content = stack;
 		}
 
-		protected TreeGrid.Row CreateRow(string text)
-		{
-			var row = new TreeGrid.Row();
-			var content = new IControl[Columns];
-
-			for (int column = 0; column < Columns; column++)
-			{
-				var label = Core.BaitAndSwitch.Create<ILabel>();
-				label.Text = text;
-
-				content[column] = label;
-			}
-			
-			row.Content = content;
-			row.Collapsed = true;
-
-			return row;
-		}
-
 		/// <summary>
 		/// It is the button click event cmdClose, what it does is end this instance.
 		/// <para xml:lang="es">
@@ -111,6 +48,78 @@ namespace OKHOSTING.UI.Test.Controls
 		private void cmdClose_Click(object sender, EventArgs e)
 		{
 			this.Finish();
+		}
+
+		public class Person
+		{
+			public string Name;
+			public string LastName;
+			public DateTime BirthDate { get; set; }
+			public bool DoesSports { get; set; }
+
+			public static IEnumerable<Person> GetSomeFolks()
+			{
+				yield return new Person()
+				{
+					Name = "Fulanito",
+					LastName = "De tal",
+					BirthDate = new DateTime(1980, 7, 30),
+					DoesSports= true,
+				};
+
+				yield return new Person()
+				{
+					Name = "Sutanito",
+					LastName = "Perez",
+					BirthDate = new DateTime(1975, 8, 17),
+					DoesSports = true,
+				};
+
+				yield return new Person()
+				{
+					Name = "Merengano",
+					LastName = "Sutano",
+					BirthDate = new DateTime(1982, 7, 1),
+					DoesSports = false,
+				};
+
+				yield return new Person()
+				{
+					Name = "Mariana",
+					LastName = "Velazco",
+					BirthDate = new DateTime(1990, 1, 1),
+					DoesSports = true,
+				};
+
+				yield return new Person()
+				{
+					Name = "Pedro",
+					LastName = "Paramo",
+					BirthDate = new DateTime(1950, 1, 15),
+					DoesSports = false,
+				};
+			}
+		}
+
+		public class PersonTreeGrid : TreeGrid<Person>
+		{
+			Random random = new Random();
+
+			public PersonTreeGrid() : base(Person.GetSomeFolks())
+			{
+			}
+
+			protected override IEnumerable<Person> GetChildren(Person item)
+			{
+				if (random.Next() % 2 == 0)
+				{
+					return Person.GetSomeFolks();
+				}
+				else
+				{
+					return null;
+				}
+			}
 		}
 	}
 }

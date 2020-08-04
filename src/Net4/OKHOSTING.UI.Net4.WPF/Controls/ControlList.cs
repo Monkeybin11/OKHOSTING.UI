@@ -1,8 +1,6 @@
-﻿using OKHOSTING.UI.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Native = global::System.Windows.Controls;
-using System.Collections;
 
 namespace OKHOSTING.UI.Net4.WPF.Controls
 {

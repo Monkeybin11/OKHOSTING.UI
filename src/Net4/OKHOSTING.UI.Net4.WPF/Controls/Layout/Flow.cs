@@ -8,6 +8,14 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 	public class Flow : System.Windows.Controls.StackPanel, IFlow
 	{
 		/// <summary>
+		/// The children controls.
+		/// <para xml:lang="es">
+		/// Lista de los controles hijos del Stack.
+		/// </para>
+		/// </summary>
+		protected readonly ControlList _Children;
+
+		/// <summary>
 		/// Initializes a new instance of the Flow class.
 		/// <para xml:lang="es">
 		/// Inicializa una nueva instancia de la clase Flow.
@@ -235,14 +243,6 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		}
 
 		#endregion
-
-		/// <summary>
-		/// The children controls.
-		/// <para xml:lang="es">
-		/// Lista de los controles hijos del Stack.
-		/// </para>
-		/// </summary>
-		protected readonly ControlList _Children;
 
 		/// <summary>
 		/// Gets the controls IStack children.

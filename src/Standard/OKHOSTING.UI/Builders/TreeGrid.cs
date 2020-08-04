@@ -4,6 +4,7 @@ using OKHOSTING.UI.Controls.Layout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace OKHOSTING.UI.Builders
 {
@@ -18,7 +19,7 @@ namespace OKHOSTING.UI.Builders
 		/// <summary>
 		/// The rows of this grid
 		/// </summary>
-		public readonly List<Row> Rows;
+		protected readonly List<Row> Rows;
 		
 		/// <summary>
 		/// The items that will be displayed, each as a row
@@ -41,53 +42,58 @@ namespace OKHOSTING.UI.Builders
 			}
 		}
 
-		public event EventHandler<Row> AddingRow;
-
 		public TreeGrid(IEnumerable<T> parentItems)
 		{
 			Grid = BaitAndSwitch.Create<IGrid>();
-			Rows = new List<Row>();
 			ParentItems = parentItems;
-			
-			Init();
-		}
 
-		public void Init()
-		{
 			IControl[] headers = CreateHeaders().ToArray();
-
+			
 			Grid.ClearContent();
-			Grid.ColumnCount = headers.Length + 1; //always add a 0 column that will display the +- icons to open and collapse the children rows
-			Grid.RowCount = 1;
+			Grid.ColumnCount = headers.Length;
 			Grid.ShowGridLines = true;
-
+			
+			Rows = CreateParentRows().ToList();
 			Row[] rows = Rows.ToArray();
 
+			Grid.RowCount = rows.Length + 1;
+
 			//set headers
-			for (int column = 1; column <= headers.Length; column++)
+			for (int column = 0; column < headers.Length; column++)
 			{
-				Grid.SetContent(0, column, headers[column - 1]);
+				if (column == 0)
+				{
+					var originalMargin = headers[column].Margin ?? new Thickness(0);
+					originalMargin = new Thickness(originalMargin.Left + 10, originalMargin.Top, originalMargin.Right, originalMargin.Bottom);
+
+					headers[column].Margin = originalMargin;
+				}
+
+				Grid.SetContent(0, column, headers[column]);
 			}
 
 			//set rows
 			for (int rowIndex = 0; rowIndex < rows.Length; rowIndex++)
 			{
-				AddRow(rows[rowIndex]);
+				rows[rowIndex].Index = rowIndex;
+				SetRowContent(rows[rowIndex]);
 			}
 		}
 
-		protected void AddRow(Row row)
+		protected virtual void SetRowContent(Row row)
 		{
-			OnAddingRow(row);
-			
-			Grid.RowCount++;
- 
 			//set content of the row, except for expand button
 			var content = row.Content.ToArray();
 			
-			for (int column = 1; column < Grid.ColumnCount; column++)
+			for (int column = 0; column < Grid.ColumnCount; column++)
 			{
-				Grid.SetContent(Grid.RowCount - 1, column, content[column - 1]);
+				Grid.SetContent(row.Index + 1, column, content[column]);
+			}
+
+			//create child rows if necessary
+			if (row.Children == null)
+			{
+				CreateChildrenRows(row);
 			}
 
 			var children = row.Children?.ToArray();
@@ -95,20 +101,20 @@ namespace OKHOSTING.UI.Builders
 			if (children != null && children.Length > 0)
 			{
 				//create expand/collapse button and put it on the first cell
-				IClickable cmdExpand;
+				ILabelButton cmdExpand = CreateExpandButton();
 
-				if (row.Collapsed)
+				if (!row.Collapsed)
 				{
-					cmdExpand = CreateExpandButton();
-				}
-				else
-				{
-					cmdExpand = CreateCollapseButton();
+					cmdExpand.Text = "-";
 				}
 
 				cmdExpand.Tag = row;
 
-				Grid.SetContent(Grid.RowCount - 1, 0, cmdExpand);
+				//add expand button to the first column
+				var flow = BaitAndSwitch.Create<IFlow>();
+				flow.Children.Add(cmdExpand);
+				flow.Children.Add(row.Content.First());
+				Grid.SetContent(row.Index + 1, 0, flow);
 
 				//show children only if the row is not collapsed
 				if (!row.Collapsed)
@@ -120,43 +126,94 @@ namespace OKHOSTING.UI.Builders
 					{
 						children[childrenIndex].Content.First().Margin = childrenMargin;
 
-						AddRow(children[childrenIndex]);
+						children[childrenIndex].Index = row.Index + childrenIndex + 1;
+						SetRowContent(children[childrenIndex]);
 					}
 				}
 			}
+			else
+			{
+				var childrenMargin = content[0].Margin ?? new Thickness(0);
+				childrenMargin = new Thickness(childrenMargin.Left + 20, childrenMargin.Top, childrenMargin.Right, childrenMargin.Bottom);
+				
+				content[0].Margin = childrenMargin;
+			}
 		}
 
-		protected void cmdExpand_Click(object sender, EventArgs e)
+		protected virtual void cmdExpand_Click(object sender, EventArgs e)
 		{
 			var cmdExpand = (ILabelButton) sender;
 			var row = (Row) cmdExpand.Tag;
+			var newCollapsedValue = !row.Collapsed;
 
-			//reverse value
-			row.Collapsed = !row.Collapsed;
-			Init();
+			//from non-collapsed to collapsed
+			if (newCollapsedValue)
+			{
+				var children = row.RecursiveNonCollapsedChildern.ToArray();
+
+				//delete rows that where collapsed
+				foreach (var child in children)
+				{
+					Grid.ClearContentRow(child.Index);
+				}
+
+				//move bottom content up
+				for (int childIndex = 0; childIndex < children.Length; childIndex++)
+				{
+					Grid.MoveRowContent(row.Index + children.Length + 1, row.Index + childIndex + 1);
+				}
+
+				Grid.RowCount = Grid.RowCount - children.Length;
+				row.Collapsed = newCollapsedValue;
+				cmdExpand.Text = "+";
+			}
+			//from collapsed to non-collapsed
+			else
+			{
+				//create new rows if necessary
+				if (row.Children == null)
+				{
+					CreateChildrenRows(row);
+				}
+
+				row.Collapsed = newCollapsedValue;
+
+				var children = row.Children.ToArray();
+				var bottomCount = Grid.RowCount - row.Index - 1;
+				Grid.RowCount = Grid.RowCount + children.Length;
+
+				//move content to the bottom
+				for (int childIndex = 0; childIndex < bottomCount; childIndex++)
+				{
+					Grid.MoveRowContent(row.Index + childIndex + 1, row.Index + childIndex + children.Length + 1);
+				}
+				
+				var childrenMargin = row.Content.First().Margin ?? new Thickness(0);
+				childrenMargin = new Thickness(childrenMargin.Left + 20, childrenMargin.Top, childrenMargin.Right, childrenMargin.Bottom);
+
+				//insert the just expanded content
+				for (int childIndex = 0; childIndex < children.Length; childIndex++)
+				{
+					var child = children[childIndex];
+					child.Index = row.Index + childIndex;
+					child.Content.First().Margin = childrenMargin;
+
+					SetRowContent(child);
+				}
+				
+				cmdExpand.Text = "-";
+			}
 		}
 
-		protected IClickable CreateExpandButton()
+		protected ILabelButton CreateExpandButton()
 		{
 			var control = BaitAndSwitch.Create<ILabelButton>();
 			control.Text = "+";
 			control.Click += cmdExpand_Click;
-
+			control.TextHorizontalAlignment = HorizontalAlignment.Center;
+			control.TextVerticalAlignment = VerticalAlignment.Center;
+			
 			return control;
-		}
-
-		protected IClickable CreateCollapseButton()
-		{
-			var control = BaitAndSwitch.Create<ILabelButton>();
-			control.Text = "-";
-			control.Click += cmdExpand_Click;
-
-			return control;
-		}
-
-		protected void OnAddingRow(Row row)
-		{
-			AddingRow?.Invoke(this, row);
 		}
 
 		/// <summary>
@@ -175,7 +232,7 @@ namespace OKHOSTING.UI.Builders
 		/// <summary>
 		/// Creates a control that will be placed at the top of the grid, displaying the member name
 		/// </summary>
-		protected virtual IControl CreateHeader(System.Reflection.MemberInfo member)
+		protected virtual IControl CreateHeader(MemberInfo member)
 		{
 			var lblHeader = BaitAndSwitch.Create<ILabelButton>();
 			lblHeader.Text = Translator.Translate(member);
@@ -195,11 +252,16 @@ namespace OKHOSTING.UI.Builders
 		/// <summary>
 		/// Creates all rows, one for each of the items
 		/// </summary>
-		protected virtual IEnumerable<Row> CreateRows()
+		protected virtual IEnumerable<Row> CreateParentRows()
 		{
+			int index = 0;
+
 			foreach (var item in ParentItems)
 			{
-				yield return CreateRow(item);
+				var row = CreateRow(item);
+				row.Index = index++;
+				
+				yield return row;
 			}
 		}
 
@@ -208,9 +270,12 @@ namespace OKHOSTING.UI.Builders
 		/// </summary>
 		protected virtual Row CreateRow(T item)
 		{
-			var members = GetMembers();
 			var row = new Row();
+			row.Tag = item;
+			row.Collapsed = true;
+
 			var controls = new List<IControl>();
+			var members = GetMembers();
 
 			foreach (var member in members)
 			{
@@ -227,7 +292,7 @@ namespace OKHOSTING.UI.Builders
 			return row;
 		}
 
-		protected virtual IControl CreateContent(T item, System.Reflection.MemberInfo member)
+		protected virtual IControl CreateContent(T item, MemberInfo member)
 		{ 
 			var content = BaitAndSwitch.Create<ILabelButton>();
 			content.Click += content_Click;
@@ -243,9 +308,16 @@ namespace OKHOSTING.UI.Builders
 		/// <summary>
 		/// Returns the members that showld be dispolayed in the grid as columns
 		/// </summary>
-		protected virtual IEnumerable<System.Reflection.MemberInfo> GetMembers()
+		protected virtual IEnumerable<MemberInfo> GetMembers()
 		{ 
-			return typeof(T).GetAllMemberInfos().Where(m => !Data.MemberExpression.GetReturnType(m).IsCollection());
+			return typeof(T).GetAllMemberInfos().Where(m => 
+			(
+				(m is FieldInfo && ((FieldInfo) m).IsPublic)
+				|| 
+				(m is PropertyInfo && ((PropertyInfo) m).GetMethod != null && ((PropertyInfo) m).GetMethod.IsPublic)
+			)
+			&& 
+			!Data.MemberExpression.GetReturnType(m).IsCollection());
 		}
 
 		protected virtual IEnumerable<T> GetChildren(T item)
@@ -263,6 +335,27 @@ namespace OKHOSTING.UI.Builders
 			return children;
 		}
 
+		protected virtual IEnumerable<Row> CreateChildrenRows(Row parent)
+		{
+			var newRows = new List<Row>();
+			var childrenItems = GetChildren(parent.Tag);
+
+			if (childrenItems == null)
+			{
+				parent.Children = newRows;
+				return newRows;
+			}
+
+			foreach (var childItem in childrenItems)
+			{
+				var childRow = CreateRow(childItem);
+				newRows.Add(childRow);
+			}
+
+			parent.Children = newRows;
+			return newRows;
+		}
+
 		/// <summary>
 		/// Represents a row in a TreeGrid, with optional children rows
 		/// </summary>
@@ -275,6 +368,11 @@ namespace OKHOSTING.UI.Builders
 			/// </para>
 			/// </summary>
 			public T Tag { get; set; }
+
+			/// <summary>
+			/// The position of this row in the grid, top to bottom
+			/// </summary>
+			public int Index { get; set; }
 
 			/// <summary>
 			/// When true, the row will not display it's children. 
@@ -291,6 +389,48 @@ namespace OKHOSTING.UI.Builders
 			/// The children rows of this row, will be visible when collapsed is false, with a little padding to the right of the current row
 			/// </summary>
 			public IEnumerable<Row> Children { get; set; }
+
+			public IEnumerable<Row> RecursiveChildern
+			{
+				get 
+				{
+					if (Children == null)
+					{
+						yield break;
+					}
+
+					foreach (var child in Children)
+					{
+						yield return child;
+
+						foreach (var subChild in child.RecursiveChildern)
+						{
+							yield return subChild;
+						}
+					}
+				}
+			}
+
+			public IEnumerable<Row> RecursiveNonCollapsedChildern
+			{
+				get
+				{
+					if (Collapsed || Children == null)
+					{
+						yield break;
+					}
+
+					foreach (var child in Children)
+					{
+						yield return child;
+
+						foreach (var subChild in child.RecursiveNonCollapsedChildern)
+						{
+							yield return subChild;
+						}
+					}
+				}
+			}
 		}
 	}
 }

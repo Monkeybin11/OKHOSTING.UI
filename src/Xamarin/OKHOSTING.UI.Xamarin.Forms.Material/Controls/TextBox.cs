@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Material.Forms.Controls
+namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 {
 	/// <summary>
 	/// A single line textbox

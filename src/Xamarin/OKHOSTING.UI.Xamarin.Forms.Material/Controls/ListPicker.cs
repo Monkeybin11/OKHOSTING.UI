@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using OKHOSTING.UI.Controls;
 using System.Drawing;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Material.Forms.Controls
+namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 {
 	/// <summary>
 	/// List picker.

@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Material.Forms.Material.Controls
+namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 {
 	public class Button: Plugin.MaterialDesignControls.MaterialButton, IButton
 	{

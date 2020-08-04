@@ -15,6 +15,8 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 	/// </summary>
 	public class Grid : System.Windows.Controls.Grid, IGrid
 	{
+		private readonly ControlList _Children;
+
 		/// <summary>
 		/// Inicialize a new intance of the Grid class.
 		/// <para xml:lang="es">	
@@ -23,6 +25,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		/// </summary>
 		public Grid()
 		{
+			_Children = new ControlList(base.Children);
 			//HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 			//VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
 
@@ -578,7 +581,7 @@ namespace OKHOSTING.UI.Net4.WPF.Controls.Layout
 		{
 			get
 			{
-				return IGridExtensions.GetAllControlls(this).ToList();
+				return _Children;
 			}
 		}
 

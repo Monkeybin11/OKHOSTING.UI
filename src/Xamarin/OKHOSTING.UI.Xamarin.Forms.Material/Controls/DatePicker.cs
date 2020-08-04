@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using OKHOSTING.UI.Controls;
 
-namespace OKHOSTING.UI.Xamarin.Forms.Material.Forms.Controls
+namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 {
 	/// <summary>
 	/// It is a control that represents a calendar in a Xamarin.Forms.
