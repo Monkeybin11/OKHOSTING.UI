@@ -229,6 +229,7 @@ namespace OKHOSTING.UI.Builders
 			var content = BaitAndSwitch.Create<ILabelButton>();
 			content.Click += content_Click;
 			content.Text = Data.MemberExpression.GetValue(member, item)?.ToString();
+			content.Tag = item;
 
 			return content;
 		}
