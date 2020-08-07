@@ -11,8 +11,6 @@ namespace OKHOSTING.UI.Test.Controls
 	/// </summary>
 	public class TreeGridTest : Controller
 	{
-		const int Columns = 4;
-
 		/// <summary>
 		/// Start this instance.
 		/// <para xml:lang="es">
@@ -52,6 +50,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 		public class Person
 		{
+			public int Id;
 			public string Name;
 			public string LastName;
 			public DateTime BirthDate { get; set; }
@@ -61,6 +60,7 @@ namespace OKHOSTING.UI.Test.Controls
 			{
 				yield return new Person()
 				{
+					Id = 1,
 					Name = "Fulanito",
 					LastName = "De tal",
 					BirthDate = new DateTime(1980, 7, 30),
@@ -69,6 +69,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
+					Id = 2,
 					Name = "Sutanito",
 					LastName = "Perez",
 					BirthDate = new DateTime(1975, 8, 17),
@@ -77,6 +78,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
+					Id = 3,
 					Name = "Merengano",
 					LastName = "Sutano",
 					BirthDate = new DateTime(1982, 7, 1),
@@ -85,6 +87,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
+					Id = 4,
 					Name = "Mariana",
 					LastName = "Velazco",
 					BirthDate = new DateTime(1990, 1, 1),
@@ -93,6 +96,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
+					Id = 5,
 					Name = "Pedro",
 					LastName = "Paramo",
 					BirthDate = new DateTime(1950, 1, 15),

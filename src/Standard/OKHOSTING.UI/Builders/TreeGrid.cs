@@ -20,7 +20,12 @@ namespace OKHOSTING.UI.Builders
 		/// The rows of this grid
 		/// </summary>
 		protected readonly List<Row> Rows;
-		
+
+		/// <summary>
+		/// The ammount of pixels that a subrow will move to the right, compared to it's parent
+		/// </summary>
+		public int SubRowMargin { get; set; } = 20;
+
 		/// <summary>
 		/// The items that will be displayed, each as a row
 		/// </summary>
@@ -58,17 +63,13 @@ namespace OKHOSTING.UI.Builders
 
 			Grid.RowCount = rows.Length + 1;
 
-			//set headers
-			for (int column = 0; column < headers.Length; column++)
+			//set first header with margin
+			headers[0].Margin = new Thickness(SubRowMargin, 0, 0, 0);
+			Grid.SetContent(0, 0, headers[0]);
+
+			//set rest of the headers
+			for (int column = 1; column < headers.Length; column++)
 			{
-				if (column == 0)
-				{
-					var originalMargin = headers[column].Margin ?? new Thickness(0);
-					originalMargin = new Thickness(originalMargin.Left + 10, originalMargin.Top, originalMargin.Right, originalMargin.Bottom);
-
-					headers[column].Margin = originalMargin;
-				}
-
 				Grid.SetContent(0, column, headers[column]);
 			}
 
@@ -80,16 +81,11 @@ namespace OKHOSTING.UI.Builders
 			}
 		}
 
+		/// <summary>
+		/// Puts the contents of a row in the grid, using row.Index to locate the appropiate position
+		/// </summary>
 		protected virtual void SetRowContent(Row row)
 		{
-			//set content of the row, except for expand button
-			var content = row.Content.ToArray();
-			
-			for (int column = 0; column < Grid.ColumnCount; column++)
-			{
-				Grid.SetContent(row.Index + 1, column, content[column]);
-			}
-
 			//create child rows if necessary
 			if (row.Children == null)
 			{
@@ -98,121 +94,104 @@ namespace OKHOSTING.UI.Builders
 
 			var children = row.Children?.ToArray();
 
-			if (children != null && children.Length > 0)
+			//create expand/collapse button 
+			if (children != null && children.Length > 0 && row.ExpandButton == null)
 			{
-				//create expand/collapse button and put it on the first cell
-				ILabelButton cmdExpand = CreateExpandButton();
+				row.ExpandButton = CreateExpandButton(row);
+			}
 
-				if (!row.Collapsed)
-				{
-					cmdExpand.Text = "-";
-				}
+			//set the content of the first column, including expand button if this row has children
+			var first = row.GetFirstColumnContent();
 
-				cmdExpand.Tag = row;
-
-				//add expand button to the first column
-				var flow = BaitAndSwitch.Create<IFlow>();
-				flow.Children.Add(cmdExpand);
-				flow.Children.Add(row.Content.First());
-				Grid.SetContent(row.Index + 1, 0, flow);
-
-				//show children only if the row is not collapsed
-				if (!row.Collapsed)
-				{
-					var childrenMargin = content[0].Margin ?? new Thickness(0);
-					childrenMargin = new Thickness(childrenMargin.Left + 20, childrenMargin.Top, childrenMargin.Right, childrenMargin.Bottom);
-
-					for (int childrenIndex = 0; childrenIndex < children.Length; childrenIndex++)
-					{
-						children[childrenIndex].Content.First().Margin = childrenMargin;
-
-						children[childrenIndex].Index = row.Index + childrenIndex + 1;
-						SetRowContent(children[childrenIndex]);
-					}
-				}
+			if (row.ExpandButton == null)
+			{
+				first.Margin = new Thickness(SubRowMargin * (row.Depth + 1), 0, 0, 0);
 			}
 			else
 			{
-				var childrenMargin = content[0].Margin ?? new Thickness(0);
-				childrenMargin = new Thickness(childrenMargin.Left + 20, childrenMargin.Top, childrenMargin.Right, childrenMargin.Bottom);
-				
-				content[0].Margin = childrenMargin;
+				first.Margin = new Thickness(SubRowMargin * row.Depth, 0, 0, 0);
+			}
+
+			Grid.SetContent(row.Index + 1, 0, first);
+
+			//set content for the rest of the row
+			var content = row.Content.ToArray();
+
+			for (int column = 1; column < Grid.ColumnCount; column++)
+			{
+				Grid.SetContent(row.Index + 1, column, content[column]);
+			}
+
+			//show children only if the row is not collapsed
+			if (children != null && children.Length > 0 && !row.Collapsed)
+			{
+				for (int childrenIndex = 0; childrenIndex < children.Length; childrenIndex++)
+				{
+					children[childrenIndex].Index = row.Index + childrenIndex + 1;
+					SetRowContent(children[childrenIndex]);
+				}
 			}
 		}
 
-		protected virtual void cmdExpand_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Returns the members that showld be dispolayed in the grid as columns
+		/// </summary>
+		protected virtual IEnumerable<MemberInfo> GetMembers()
+		{ 
+			return typeof(T).GetAllMemberInfos().Where(m => 
+			(
+				(m is FieldInfo && ((FieldInfo) m).IsPublic)
+				|| 
+				(m is PropertyInfo && ((PropertyInfo) m).GetMethod != null && ((PropertyInfo) m).GetMethod.IsPublic)
+			)
+			&& 
+			!Data.MemberExpression.GetReturnType(m).IsCollection());
+		}
+
+		/// <summary>
+		/// Returns the children items of a parent. 
+		/// </summary>
+		/// <remarks>
+		/// Override this method to implement custom children loading, pe: files, database rows, etc.
+		/// </remarks>
+		protected virtual IEnumerable<T> GetChildren(T item)
 		{
-			var cmdExpand = (ILabelButton) sender;
-			var row = (Row) cmdExpand.Tag;
-			var newCollapsedValue = !row.Collapsed;
+			var type = typeof(T);
+			var enumerableType = typeof(IEnumerable<T>);
+			var childrenMember = type.GetAllMemberInfos().Where(m => Data.MemberExpression.GetReturnType(m).IsAssignableFrom(enumerableType)).FirstOrDefault();
 
-			//from non-collapsed to collapsed
-			if (newCollapsedValue)
+			if (childrenMember == null)
 			{
-				var children = row.RecursiveNonCollapsedChildern.ToArray();
-
-				//delete rows that where collapsed
-				foreach (var child in children)
-				{
-					Grid.ClearContentRow(child.Index);
-				}
-
-				//move bottom content up
-				for (int childIndex = 0; childIndex < children.Length; childIndex++)
-				{
-					Grid.MoveRowContent(row.Index + children.Length + 1, row.Index + childIndex + 1);
-				}
-
-				Grid.RowCount = Grid.RowCount - children.Length;
-				row.Collapsed = newCollapsedValue;
-				cmdExpand.Text = "+";
+				return null;
 			}
-			//from collapsed to non-collapsed
-			else
-			{
-				//create new rows if necessary
-				if (row.Children == null)
-				{
-					CreateChildrenRows(row);
-				}
 
-				row.Collapsed = newCollapsedValue;
-
-				var children = row.Children.ToArray();
-				var bottomCount = Grid.RowCount - row.Index - 1;
-				Grid.RowCount = Grid.RowCount + children.Length;
-
-				//move content to the bottom
-				for (int childIndex = 0; childIndex < bottomCount; childIndex++)
-				{
-					Grid.MoveRowContent(row.Index + childIndex + 1, row.Index + childIndex + children.Length + 1);
-				}
-				
-				var childrenMargin = row.Content.First().Margin ?? new Thickness(0);
-				childrenMargin = new Thickness(childrenMargin.Left + 20, childrenMargin.Top, childrenMargin.Right, childrenMargin.Bottom);
-
-				//insert the just expanded content
-				for (int childIndex = 0; childIndex < children.Length; childIndex++)
-				{
-					var child = children[childIndex];
-					child.Index = row.Index + childIndex;
-					child.Content.First().Margin = childrenMargin;
-
-					SetRowContent(child);
-				}
-				
-				cmdExpand.Text = "-";
-			}
+			var children = (IEnumerable<T>) Data.MemberExpression.GetValue(childrenMember, item);
+			return children;
 		}
+		
+		#region Create controls
 
-		protected ILabelButton CreateExpandButton()
+		/// <summary>
+		/// Creates an expand/collapse button
+		/// </summary>
+		protected virtual ILabelButton CreateExpandButton(Row row)
 		{
 			var control = BaitAndSwitch.Create<ILabelButton>();
-			control.Text = "+";
 			control.Click += cmdExpand_Click;
 			control.TextHorizontalAlignment = HorizontalAlignment.Center;
 			control.TextVerticalAlignment = VerticalAlignment.Center;
-			
+			control.Tag = row;
+			control.Width = SubRowMargin;
+
+			if (row.Collapsed)
+			{
+				control.Text = "+";
+			}
+			else
+			{ 
+				control.Text = "-";
+			}
+
 			return control;
 		}
 
@@ -243,14 +222,19 @@ namespace OKHOSTING.UI.Builders
 		}
 
 		/// <summary>
-		/// Raised when the user clicks aon a header
+		/// Creates a control to display the value of a member in a cell
 		/// </summary>
-		protected virtual void lblHeader_Click(object sender, EventArgs e)
+		protected virtual IControl CreateCell(T item, MemberInfo member)
 		{
+			var content = BaitAndSwitch.Create<ILabelButton>();
+			content.Click += content_Click;
+			content.Text = Data.MemberExpression.GetValue(member, item)?.ToString();
+
+			return content;
 		}
-		
+
 		/// <summary>
-		/// Creates all rows, one for each of the items
+		/// Creates all initial rows, one for each of the parent items
 		/// </summary>
 		protected virtual IEnumerable<Row> CreateParentRows()
 		{
@@ -279,7 +263,7 @@ namespace OKHOSTING.UI.Builders
 
 			foreach (var member in members)
 			{
-				var content = CreateContent(item, member);
+				var content = CreateCell(item, member);
 				
 				if (content != null)
 				{
@@ -292,49 +276,9 @@ namespace OKHOSTING.UI.Builders
 			return row;
 		}
 
-		protected virtual IControl CreateContent(T item, MemberInfo member)
-		{ 
-			var content = BaitAndSwitch.Create<ILabelButton>();
-			content.Click += content_Click;
-			content.Text = Data.MemberExpression.GetValue(member, item)?.ToString();
-
-			return content;
-		}
-
-		protected virtual void content_Click(object sender, EventArgs e)
-		{
-		}
-
 		/// <summary>
-		/// Returns the members that showld be dispolayed in the grid as columns
+		/// Creates the children rows of a parent
 		/// </summary>
-		protected virtual IEnumerable<MemberInfo> GetMembers()
-		{ 
-			return typeof(T).GetAllMemberInfos().Where(m => 
-			(
-				(m is FieldInfo && ((FieldInfo) m).IsPublic)
-				|| 
-				(m is PropertyInfo && ((PropertyInfo) m).GetMethod != null && ((PropertyInfo) m).GetMethod.IsPublic)
-			)
-			&& 
-			!Data.MemberExpression.GetReturnType(m).IsCollection());
-		}
-
-		protected virtual IEnumerable<T> GetChildren(T item)
-		{
-			var type = typeof(T);
-			var enumerableType = typeof(IEnumerable<T>);
-			var childrenMember = type.GetAllMemberInfos().Where(m => Data.MemberExpression.GetReturnType(m).IsAssignableFrom(enumerableType)).FirstOrDefault();
-
-			if (childrenMember == null)
-			{
-				return null;
-			}
-
-			var children = (IEnumerable<T>) Data.MemberExpression.GetValue(childrenMember, item);
-			return children;
-		}
-
 		protected virtual IEnumerable<Row> CreateChildrenRows(Row parent)
 		{
 			var newRows = new List<Row>();
@@ -349,12 +293,98 @@ namespace OKHOSTING.UI.Builders
 			foreach (var childItem in childrenItems)
 			{
 				var childRow = CreateRow(childItem);
+				childRow.Parent = parent;
+				childRow.Depth = parent.Depth + 1;
+
 				newRows.Add(childRow);
 			}
 
 			parent.Children = newRows;
 			return newRows;
 		}
+
+		#endregion
+
+		#region Event handling
+
+
+		protected virtual void cmdExpand_Click(object sender, EventArgs e)
+		{
+			var cmdExpand = (ILabelButton) sender;
+			var row = (Row) cmdExpand.Tag;
+			var newCollapsedValue = !row.Collapsed;
+
+			//from expanded to collapsed
+			if (newCollapsedValue)
+			{
+				var children = row.RecursiveNonCollapsedChildern.ToArray();
+
+				//delete rows that where collapsed
+				foreach (var child in children)
+				{
+					Grid.ClearContentRow(child.Index + 1);
+				}
+
+				//move bottom content up
+				var bottomCount = Grid.RowCount - children.Length - row.Index - 2;
+				
+				for (int childIndex = 0; childIndex < bottomCount; childIndex++)
+				{
+					Grid.MoveRowContent(row.Index + childIndex + children.Length + 2, row.Index + childIndex + 2);
+				}
+
+				Grid.RowCount = Grid.RowCount - children.Length;
+				row.Collapsed = newCollapsedValue;
+				cmdExpand.Text = "+";
+			}
+			//from collapsed to expanded
+			else
+			{
+				//create new rows if necessary
+				if (row.Children == null)
+				{
+					CreateChildrenRows(row);
+				}
+
+				row.Collapsed = newCollapsedValue;
+
+				var children = row.Children.ToArray();
+				var bottomCount = Grid.RowCount - row.Index - 2;
+				Grid.RowCount = Grid.RowCount + children.Length;
+
+				//move content to the bottom
+				for (int childIndex = 0; childIndex < bottomCount; childIndex++)
+				{
+					Grid.MoveRowContent(row.Index + childIndex + 2, row.Index + childIndex + children.Length + 2);
+				}
+
+				//insert the just expanded content
+				for (int childIndex = 0; childIndex < children.Length; childIndex++)
+				{
+					var child = children[childIndex];
+					child.Index = row.Index + childIndex + 1;
+
+					SetRowContent(child);
+				}
+
+				cmdExpand.Text = "-";
+			}
+		}
+
+		/// <summary>
+		/// Raised when the user clicks aon a header
+		/// </summary>
+		protected virtual void lblHeader_Click(object sender, EventArgs e)
+		{
+		}
+
+		protected virtual void content_Click(object sender, EventArgs e)
+		{
+		}
+
+		#endregion
+
+		#region Row class
 
 		/// <summary>
 		/// Represents a row in a TreeGrid, with optional children rows
@@ -375,10 +405,28 @@ namespace OKHOSTING.UI.Builders
 			public int Index { get; set; }
 
 			/// <summary>
+			/// Means how many parents this row has. The more parents, the more margin to the right
+			/// </summary>
+			public int Depth { get; set; }
+
+			/// <summary>
+			/// The expand button associated with this row, if it contains children. 
+			/// </summary>
+			/// <remarks>
+			/// Might be null when the row has no children
+			/// </remarks>
+			public ILabelButton ExpandButton { get; set; }
+
+			/// <summary>
 			/// When true, the row will not display it's children. 
 			/// When false, the children rows will be visible.
 			/// </summary>
 			public bool Collapsed { get; set; }
+
+			/// <summary>
+			/// Parent row
+			/// </summary>
+			public Row Parent { get; set; }
 
 			/// <summary>
 			/// The content that must be placed in the row, each control will be put in a column
@@ -431,6 +479,27 @@ namespace OKHOSTING.UI.Builders
 					}
 				}
 			}
+
+			/// <summary>
+			/// Returns the content that will be placed on the first column of this row.
+			/// If the row contains children rows, an IFlow containing an expand button and the content
+			/// of the first column will be returned, otherwise, just the content of the first column
+			/// </summary>
+			public IControl GetFirstColumnContent()
+			{
+				var flow = BaitAndSwitch.Create<IFlow>();
+
+				if (ExpandButton != null)
+				{
+					flow.Children.Add(ExpandButton);
+				}
+
+				flow.Children.Add(Content.First());
+
+				return flow;
+			}
 		}
+
+		#endregion
 	}
 }
