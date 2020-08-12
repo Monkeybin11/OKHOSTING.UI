@@ -222,7 +222,14 @@ namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 		/// </summary>
 		Color IControl.BorderColor
 		{
-			get; set;
+			get
+			{
+				return Forms.Platform.Parse(base.BorderColor);
+			}
+			set
+			{
+				base.BorderColor = base.FocusedBorderColor = Forms.Platform.Parse(value);
+			}
 		}
 
 		/// <summary>

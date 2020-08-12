@@ -227,11 +227,11 @@ namespace OKHOSTING.UI.Xamarin.Forms.Material.Controls
 		{
 			get
 			{
-				return Xamarin.Forms.Platform.Parse(base.BorderColor);
+				return Forms.Platform.Parse(base.BorderColor);
 			}
 			set
 			{
-				base.BorderColor = Xamarin.Forms.Platform.Parse(value);
+				base.BorderColor = base.FocusedBorderColor = Forms.Platform.Parse(value);
 			}
 		}
 
