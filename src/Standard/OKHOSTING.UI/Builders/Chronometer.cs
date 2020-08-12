@@ -14,6 +14,8 @@ namespace OKHOSTING.UI.Builders
 
 		public readonly bool ShowMilliseconds;
 
+		protected string Format;
+
 		IControl IBuilder.Control
 		{
 			get
@@ -44,6 +46,15 @@ namespace OKHOSTING.UI.Builders
 
 		protected void Init()
 		{
+			if (ShowMilliseconds)
+			{
+				Format = "hh:mm:ss:fff";
+			}
+			else
+			{
+				Format = "hh:mm:ss";
+			}
+
 			if (ShowMilliseconds)
 			{
 				Timer.Interval = TimeSpan.FromMilliseconds(1);
@@ -82,18 +93,7 @@ namespace OKHOSTING.UI.Builders
 
 		protected void UpdateDisplay()
 		{
-			string format;
-
-			if (ShowMilliseconds)
-			{
-				format = "hh:mm:ss:fff";
-			}
-			else
-			{
-				format = "hh:mm:ss";
-			}
-
-			Display.Text = Elapsed.ToString(format);
+			Display.Text = Elapsed.ToString(Format);
 		}
 	}
 }
