@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Media\AudioBuffer.cs" />
     <Compile Include="Media\AudioPlayer.cs" />
-    <Compile Include="Media\OpenFile.cs" />
     <Compile Include="Media\StreamingPlayback.cs" />
     <Compile Include="Media\Thumbnail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

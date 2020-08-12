@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using OKHOSTING.UI.Builders;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
@@ -50,7 +52,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 		public class Person
 		{
-			public int Id;
+			public string Id;
 			public string Name;
 			public string LastName;
 			public DateTime BirthDate { get; set; }
@@ -60,7 +62,7 @@ namespace OKHOSTING.UI.Test.Controls
 			{
 				yield return new Person()
 				{
-					Id = 1,
+					Id = "1",
 					Name = "Fulanito",
 					LastName = "De tal",
 					BirthDate = new DateTime(1980, 7, 30),
@@ -69,7 +71,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
-					Id = 2,
+					Id = "2",
 					Name = "Sutanito",
 					LastName = "Perez",
 					BirthDate = new DateTime(1975, 8, 17),
@@ -78,7 +80,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
-					Id = 3,
+					Id = "3",
 					Name = "Merengano",
 					LastName = "Sutano",
 					BirthDate = new DateTime(1982, 7, 1),
@@ -87,7 +89,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
-					Id = 4,
+					Id = "4",
 					Name = "Mariana",
 					LastName = "Velazco",
 					BirthDate = new DateTime(1990, 1, 1),
@@ -96,7 +98,7 @@ namespace OKHOSTING.UI.Test.Controls
 
 				yield return new Person()
 				{
-					Id = 5,
+					Id = "5",
 					Name = "Pedro",
 					LastName = "Paramo",
 					BirthDate = new DateTime(1950, 1, 15),
@@ -107,22 +109,40 @@ namespace OKHOSTING.UI.Test.Controls
 
 		public class PersonTreeGrid : TreeGrid<Person>
 		{
-			Random random = new Random();
-
 			public PersonTreeGrid() : base(Person.GetSomeFolks())
 			{
 			}
 
 			protected override IEnumerable<Person> GetChildren(Person item)
 			{
-				if (random.Next() % 2 == 0)
+				if (item.Id.EndsWith("1") || item.Id.EndsWith("3") || item.Id.EndsWith("5"))
 				{
-					return Person.GetSomeFolks();
+					var folks = Person.GetSomeFolks().ToArray();
+
+					int i = 1;
+
+					foreach (var f in folks)
+					{
+						f.Id = $"{item.Id}.{i++}";
+					}
+
+					return folks;
 				}
 				else
 				{
 					return null;
 				}
+			}
+
+			protected override IEnumerable<MemberInfo> GetMembers()
+			{
+				Type type = typeof(Person);
+
+				yield return type.GetMember(nameof(Person.Id))[0];
+				yield return type.GetMember(nameof(Person.Name))[0];
+				yield return type.GetMember(nameof(Person.LastName))[0];
+				yield return type.GetMember(nameof(Person.BirthDate))[0];
+				yield return type.GetMember(nameof(Person.DoesSports))[0];
 			}
 		}
 	}

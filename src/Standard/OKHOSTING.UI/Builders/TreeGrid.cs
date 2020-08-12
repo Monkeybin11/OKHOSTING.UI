@@ -59,9 +59,8 @@ namespace OKHOSTING.UI.Builders
 			Grid.ShowGridLines = true;
 			
 			Rows = CreateParentRows().ToList();
-			Row[] rows = Rows.ToArray();
 
-			Grid.RowCount = rows.Length + 1;
+			Grid.RowCount = Rows.Count + 1;
 
 			//set first header with margin
 			headers[0].Margin = new Thickness(SubRowMargin, 0, 0, 0);
@@ -74,10 +73,9 @@ namespace OKHOSTING.UI.Builders
 			}
 
 			//set rows
-			for (int rowIndex = 0; rowIndex < rows.Length; rowIndex++)
+			foreach (var row in Rows)
 			{
-				rows[rowIndex].Index = rowIndex;
-				SetRowContent(rows[rowIndex]);
+				SetRowContent(row);
 			}
 		}
 
@@ -86,6 +84,8 @@ namespace OKHOSTING.UI.Builders
 		/// </summary>
 		protected virtual void SetRowContent(Row row)
 		{
+			int index = Rows.IndexOf(row);
+
 			//create child rows if necessary
 			if (row.Children == null)
 			{
@@ -112,24 +112,14 @@ namespace OKHOSTING.UI.Builders
 				first.Margin = new Thickness(SubRowMargin * row.Depth, 0, 0, 0);
 			}
 
-			Grid.SetContent(row.Index + 1, 0, first);
+			Grid.SetContent(index + 1, 0, first);
 
 			//set content for the rest of the row
 			var content = row.Content.ToArray();
 
 			for (int column = 1; column < Grid.ColumnCount; column++)
 			{
-				Grid.SetContent(row.Index + 1, column, content[column]);
-			}
-
-			//show children only if the row is not collapsed
-			if (children != null && children.Length > 0 && !row.Collapsed)
-			{
-				for (int childrenIndex = 0; childrenIndex < children.Length; childrenIndex++)
-				{
-					children[childrenIndex].Index = row.Index + childrenIndex + 1;
-					SetRowContent(children[childrenIndex]);
-				}
+				Grid.SetContent(index + 1, column, content[column]);
 			}
 		}
 
@@ -230,6 +220,7 @@ namespace OKHOSTING.UI.Builders
 			content.Click += content_Click;
 			content.Text = Data.MemberExpression.GetValue(member, item)?.ToString();
 			content.Tag = item;
+			content.VerticalAlignment = VerticalAlignment.Center;
 
 			return content;
 		}
@@ -239,14 +230,9 @@ namespace OKHOSTING.UI.Builders
 		/// </summary>
 		protected virtual IEnumerable<Row> CreateParentRows()
 		{
-			int index = 0;
-
 			foreach (var item in ParentItems)
 			{
-				var row = CreateRow(item);
-				row.Index = index++;
-				
-				yield return row;
+				yield return CreateRow(item);
 			}
 		}
 
@@ -308,11 +294,11 @@ namespace OKHOSTING.UI.Builders
 
 		#region Event handling
 
-
 		protected virtual void cmdExpand_Click(object sender, EventArgs e)
 		{
 			var cmdExpand = (ILabelButton) sender;
 			var row = (Row) cmdExpand.Tag;
+			int index = Rows.IndexOf(row);
 			var newCollapsedValue = !row.Collapsed;
 
 			//from expanded to collapsed
@@ -323,15 +309,22 @@ namespace OKHOSTING.UI.Builders
 				//delete rows that where collapsed
 				foreach (var child in children)
 				{
-					Grid.ClearContentRow(child.Index + 1);
+					int childIndex = Rows.IndexOf(child);
+					Grid.ClearContentRow(childIndex + 1);
+				}
+
+				//delete rows from Rows collection
+				foreach (var child in children)
+				{
+					Rows.Remove(child);
 				}
 
 				//move bottom content up
-				var bottomCount = Grid.RowCount - children.Length - row.Index - 2;
-				
+				var bottomCount = Grid.RowCount - children.Length - index - 2;
+
 				for (int childIndex = 0; childIndex < bottomCount; childIndex++)
 				{
-					Grid.MoveRowContent(row.Index + childIndex + children.Length + 2, row.Index + childIndex + 2);
+					Grid.MoveRowContent(index + childIndex + children.Length + 2, index + childIndex + 2);
 				}
 
 				Grid.RowCount = Grid.RowCount - children.Length;
@@ -349,22 +342,22 @@ namespace OKHOSTING.UI.Builders
 
 				row.Collapsed = newCollapsedValue;
 
-				var children = row.Children.ToArray();
-				var bottomCount = Grid.RowCount - row.Index - 2;
+				var children = row.RecursiveNonCollapsedChildern.ToArray();
+				var bottomCount = Grid.RowCount - index - 2;
 				Grid.RowCount = Grid.RowCount + children.Length;
 
+				//insert children to Rows colelction
+				Rows.InsertRange(index + 1, children);
+
 				//move content to the bottom
-				for (int childIndex = 0; childIndex < bottomCount; childIndex++)
+				for (int childIndex = bottomCount - 1; childIndex >= 0; childIndex--)
 				{
-					Grid.MoveRowContent(row.Index + childIndex + 2, row.Index + childIndex + children.Length + 2);
+					Grid.MoveRowContent(index + childIndex + 2, index + childIndex + children.Length + 2);
 				}
 
 				//insert the just expanded content
-				for (int childIndex = 0; childIndex < children.Length; childIndex++)
+				foreach (var child in children)
 				{
-					var child = children[childIndex];
-					child.Index = row.Index + childIndex + 1;
-
 					SetRowContent(child);
 				}
 
@@ -399,11 +392,6 @@ namespace OKHOSTING.UI.Builders
 			/// </para>
 			/// </summary>
 			public T Tag { get; set; }
-
-			/// <summary>
-			/// The position of this row in the grid, top to bottom
-			/// </summary>
-			public int Index { get; set; }
 
 			/// <summary>
 			/// Means how many parents this row has. The more parents, the more margin to the right
