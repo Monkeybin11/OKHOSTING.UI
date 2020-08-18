@@ -5,6 +5,9 @@ using System;
 
 namespace OKHOSTING.UI.Builders.Editors
 {
+	/// <summary>
+	/// A control builder that creates an interface to let the user see and modify a value of any kind
+	/// </summary>
 	public abstract class Editor : IDisposable, IBuilder
 	{
 		/// <summary>
