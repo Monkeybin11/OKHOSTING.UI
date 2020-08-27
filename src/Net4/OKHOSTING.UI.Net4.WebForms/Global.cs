@@ -48,6 +48,10 @@ namespace OKHOSTING.UI.Net4.WebForms
 		{
 		}
 
+		protected virtual void Session_Start(object sender, EventArgs e)
+		{ 
+		}
+
 		protected virtual void Session_End(object sender, EventArgs e)
 		{
 		}
