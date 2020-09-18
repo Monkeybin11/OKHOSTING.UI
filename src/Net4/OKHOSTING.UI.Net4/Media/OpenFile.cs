@@ -1,13 +1,15 @@
-﻿namespace OKHOSTING.UI.Net4.Media
+﻿using System;
+
+namespace OKHOSTING.UI.Net4.Media
 {
-	public class OpenFile : UI.Media.IOpenFile
+	public class OpenUri : UI.Media.IOpenUri
 	{
 		/// <summary>
 		/// Opens a file locally
 		/// </summary>
-		public void Open(string fullPath)
+		public void Open(Uri uri)
 		{
-			System.Diagnostics.Process.Start(fullPath);
+			System.Diagnostics.Process.Start(uri.ToString());
 		}
 	}
 }

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Media\AudioPlayer.cs" />
+    <Compile Include="Media\OpenUri.cs" />
     <Compile Include="Media\OpenFile.cs" />
     <Compile Include="Media\Thumbnail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
