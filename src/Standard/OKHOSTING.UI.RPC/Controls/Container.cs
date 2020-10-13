@@ -14,6 +14,17 @@ namespace OKHOSTING.UI.RPC.Controls
 		{
 			get; protected set;
 		}
+		public IImage BackgroundImage
+		{
+			get 
+			{
+				return (IImage) base.Get(nameof(BackgroundImage));
+			}
+			set 
+			{
+				base.Set(nameof(BackgroundImage), value);
+			}
+		}
 
 		public override void Init()
 		{

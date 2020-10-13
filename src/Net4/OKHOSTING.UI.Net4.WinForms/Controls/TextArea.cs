@@ -9,13 +9,13 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		public TextArea()
 		{
 			base.Multiline = true;
-			base.TextChanged += PasswordTextBox_TextChanged;
+			base.TextChanged += TextArea_TextChanged;
 			SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
 		}
 
 		#region IInputControl
 
-		private void PasswordTextBox_TextChanged(object sender, System.EventArgs e)
+		private void TextArea_TextChanged(object sender, System.EventArgs e)
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}

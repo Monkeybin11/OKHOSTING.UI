@@ -157,6 +157,120 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 
 		#endregion
 
+		#region ITextControl
+
+		Color ITextControl.FontColor
+		{
+			get
+			{
+				return base.ForeColor;
+			}
+			set
+			{
+				base.ForeColor = value;
+			}
+		}
+
+		string ITextControl.FontFamily
+		{
+			get
+			{
+				return base.Font.FontFamily.Name;
+			}
+			set
+			{
+				base.Font = new Font(value, (float)base.FontHeight);
+			}
+		}
+
+		double ITextControl.FontSize
+		{
+			get
+			{
+				return base.FontHeight;
+			}
+			set
+			{
+				base.FontHeight = (int)value;
+			}
+		}
+
+		bool ITextControl.Bold
+		{
+			get
+			{
+				return base.Font.Bold;
+			}
+			set
+			{
+				base.Font = new Font(Font.Name, base.Font.Size, value ? FontStyle.Bold : FontStyle.Regular);
+			}
+		}
+
+		bool ITextControl.Italic
+		{
+			get
+			{
+				return base.Font.Italic;
+			}
+			set
+			{
+				base.Font = new Font(Font.Name, base.Font.Size, value ? FontStyle.Italic : FontStyle.Regular);
+			}
+		}
+
+		bool ITextControl.Underline
+		{
+			get
+			{
+				return base.Font.Underline;
+			}
+
+			set
+			{
+				base.Font = new Font(Font.Name, base.Font.Size, value ? FontStyle.Underline : FontStyle.Regular);
+			}
+		}
+
+		HorizontalAlignment ITextControl.TextHorizontalAlignment
+		{
+			get
+			{
+				return Platform.Parse(base.TextAlign);
+			}
+			set
+			{
+				base.TextAlign = Platform.Parse(value);
+			}
+		}
+
+		VerticalAlignment ITextControl.TextVerticalAlignment
+		{
+			get
+			{
+				return VerticalAlignment.Top;
+			}
+			set
+			{
+				//not supported
+			}
+		}
+
+		Thickness ITextControl.TextPadding
+		{
+			get
+			{
+				return Platform.Parse(base.Padding);
+			}
+			set
+			{
+				base.Padding = Platform.Parse(value);
+			}
+		}
+
+
+		#endregion
+
 		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
 		{
 			Platform.DrawBorders(this, e);

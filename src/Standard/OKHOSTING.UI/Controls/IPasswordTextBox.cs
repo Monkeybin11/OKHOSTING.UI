@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Controls
 	/// Es un cuadro de texto que visiblemente enmascara la entrada del usuario.
 	/// </para>
 	/// </summary>
-	public interface IPasswordTextBox: IControl, IInputControl<string>
+	public interface IPasswordTextBox: ITextControl, IInputControl<string>
 	{
 	}
 }

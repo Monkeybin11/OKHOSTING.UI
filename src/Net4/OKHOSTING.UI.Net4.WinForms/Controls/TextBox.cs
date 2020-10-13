@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 	{
 		public TextBox()
 		{
-			base.TextChanged += PasswordTextBox_TextChanged;
+			base.TextChanged += TextBox_TextChanged;
 			base.GotFocus += TextBox_GotFocus;
 			base.LostFocus += TextBox_LostFocus;
 
@@ -17,7 +17,7 @@ namespace OKHOSTING.UI.Net4.WinForms.Controls
 		
 		#region IInputControl
 
-		private void PasswordTextBox_TextChanged(object sender, System.EventArgs e)
+		private void TextBox_TextChanged(object sender, System.EventArgs e)
 		{
 			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
 		}

@@ -8,7 +8,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Syncfusion
 	{
 		public void Configuration(IAppBuilder app)
 		{
-			ConfigureAuth(app);
+			//ConfigureAuth(app);
 		}
 	}
 }

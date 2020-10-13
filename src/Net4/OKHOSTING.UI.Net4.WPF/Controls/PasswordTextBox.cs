@@ -204,5 +204,123 @@ namespace OKHOSTING.UI.Net4.WPF.Controls
 		}
 
 		#endregion
+
+		#region ITextControl
+
+		string ITextControl.FontFamily
+		{
+			get
+			{
+				return NativeTextBox.FontFamily.Source;
+			}
+			set
+			{
+				NativeTextBox.FontFamily = new System.Windows.Media.FontFamily(value);
+			}
+		}
+
+		/// <summary>
+		/// Private member to store the FontColor
+		/// </summary>
+		private Color _FontColor;
+
+		Color ITextControl.FontColor
+		{
+			get
+			{
+				return _FontColor;
+			}
+			set
+			{
+				_FontColor = value;
+				NativeTextBox.Foreground = new System.Windows.Media.SolidColorBrush(Platform.Parse(value));
+			}
+		}
+
+		bool ITextControl.Bold
+		{
+			get
+			{
+				return NativeTextBox.FontWeight == System.Windows.FontWeights.Bold;
+			}
+			set
+			{
+				NativeTextBox.FontWeight = System.Windows.FontWeights.Bold;
+			}
+		}
+
+		bool ITextControl.Italic
+		{
+			get
+			{
+				return NativeTextBox.FontStyle == System.Windows.FontStyles.Italic;
+			}
+			set
+			{
+				NativeTextBox.FontStyle = System.Windows.FontStyles.Italic;
+			}
+		}
+
+		bool ITextControl.Underline
+		{
+			get
+			{
+				return false;
+			}
+			set
+			{
+				//throw new NotImplementedException();
+			}
+		}
+
+		HorizontalAlignment ITextControl.TextHorizontalAlignment
+		{
+			get
+			{
+				return Platform.Parse(NativeTextBox.HorizontalContentAlignment);
+			}
+			set
+			{
+				NativeTextBox.HorizontalContentAlignment = Platform.Parse(value);
+			}
+		}
+
+		VerticalAlignment ITextControl.TextVerticalAlignment
+		{
+			get
+			{
+				return Platform.Parse(NativeTextBox.VerticalContentAlignment);
+			}
+			set
+			{
+				NativeTextBox.VerticalContentAlignment = Platform.Parse(value);
+			}
+		}
+
+		Thickness ITextControl.TextPadding
+		{
+			get
+			{
+				return Platform.Parse(NativeTextBox.Padding);
+			}
+			set
+			{
+				NativeTextBox.Padding = Platform.Parse(value);
+			}
+		}
+
+		public double FontSize 
+		{
+			get
+			{
+				return NativeTextBox.FontSize;
+			}
+			set
+			{
+				NativeTextBox.FontSize = value;
+			}
+		}
+
+		#endregion
 	}
 }

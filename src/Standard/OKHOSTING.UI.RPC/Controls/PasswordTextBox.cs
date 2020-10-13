@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.RPC.Controls
 	/// Es un cuadro de texto que visiblemente enmascara la entrada del usuario.
 	/// </para>
 	/// </summary>
-	public class PasswordTextBox : Control, IInputControl<string>
+	public class PasswordTextBox : TextControl, IPasswordTextBox
 	{
 		public string Value
 		{
