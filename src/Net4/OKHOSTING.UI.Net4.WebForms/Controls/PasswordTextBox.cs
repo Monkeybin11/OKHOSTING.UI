@@ -397,6 +397,231 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
+		#region ITextControl
+
+		/// <summary>
+		/// Gets or sets the FontColor of the control.
+		/// <para xml:lang="es">Obtiene o establece el color del texto del control.</para>
+		/// </summary>
+		/// <value>The FontColor of the control.
+		/// <para xml:lang="es">El color del texto del control.</para>
+		/// </value>
+		Color ITextControl.FontColor
+		{
+			get
+			{
+				return base.ForeColor;
+			}
+			set
+			{
+				base.ForeColor = Platform.Parse(value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the FontFamily of the control.
+		/// <para xml:lang="es">Obtiene o establece la tipografia del texto del control</para>
+		/// </summary>
+		/// <value>The FontFamily of the control.
+		/// <para xml:lang="es">La tipografia del texto del control.</para>
+		/// </value>
+		string ITextControl.FontFamily
+		{
+			get
+			{
+				return base.Font.Name;
+			}
+			set
+			{
+				base.Font.Name = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the FontSize of the control.
+		/// <para xml:lang="es">Obtiene o establece el tamaño del texto del control.</para>
+		/// </summary>
+		/// <value>The FontSize of the control.
+		/// <para xml:lang="es">El tamaño del texto del control.</para>
+		/// </value>
+		double ITextControl.FontSize
+		{
+			get
+			{
+				return base.Font.Size.Unit.Value;
+			}
+			set
+			{
+				base.Font.Size = new System.Web.UI.WebControls.FontUnit(value, System.Web.UI.WebControls.UnitType.Pixel);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the bold text of the control.
+		/// <para xml:lang="es">Obtiene o establece el texto en negritas del control.</para>
+		/// </summary>
+		/// <value>The text bold of the control.
+		/// <para xml:lang="es">El texto en negritas del control.</para>
+		/// </value>
+		bool ITextControl.Bold
+		{
+			get
+			{
+				return base.Font.Bold;
+			}
+			set
+			{
+				base.Font.Bold = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the italic text of the control.
+		/// <para xml:lang="es">Obtiene o establece el texto en italica del control</para>
+		/// </summary>
+		/// <value>The italic text of the control.
+		/// <para xml:lang="es">El texto en italica del control</para>
+		/// </value>
+		bool ITextControl.Italic
+		{
+			get
+			{
+				return base.Font.Italic;
+			}
+			set
+			{
+				base.Font.Italic = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the UnderLine text of the control.
+		/// <para xml:lang="es">Obtiene o establece el texto en subrayado del control</para>
+		/// </summary>
+		/// <value>The UnderLine text of the control.
+		/// <para xml:lang="es">El texto en subrayado del control</para>
+		/// </value>
+		bool ITextControl.Underline
+		{
+			get
+			{
+				return base.Font.Underline;
+			}
+			set
+			{
+				base.Font.Underline = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the TextHorizontalAlignment of the control.
+		/// <para xml:lang="es">Obtiene o establece la alineacion horizontal del texto del control</para>
+		/// </summary>
+		HorizontalAlignment ITextControl.TextHorizontalAlignment
+		{
+
+			get
+			{
+				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-horizontal-alignment")).SingleOrDefault();
+
+				//if not text horizontal alignment is provided, the alignment back to the left.
+				if (string.IsNullOrWhiteSpace(cssClass))
+				{
+					return HorizontalAlignment.Left;
+				}
+
+				//Verify the text horizontal alignment provided.
+				if (cssClass.EndsWith("left"))
+				{
+					return HorizontalAlignment.Left;
+				}
+				else if (cssClass.EndsWith("right"))
+				{
+					return HorizontalAlignment.Right;
+				}
+				else if (cssClass.EndsWith("center"))
+				{
+					return HorizontalAlignment.Center;
+				}
+				else if (cssClass.EndsWith("fill"))
+				{
+					return HorizontalAlignment.Fill;
+				}
+				else
+				{
+					return HorizontalAlignment.Left;
+				}
+			}
+			set
+			{
+				this.RemoveCssClassesStartingWith("text-horizontal-alignment");
+				this.AddCssClass("text-horizontal-alignment-" + value.ToString().ToLower());
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the TextVerticalAlignment of the control.
+		/// <para xml:lang="es">Obtiene o establece la alineación vertical del control.</para>
+		/// </summary>
+		VerticalAlignment ITextControl.TextVerticalAlignment
+		{
+			get
+			{
+				string cssClass = base.CssClass.Split().Where(c => c.StartsWith("text-vertical-alignment")).SingleOrDefault();
+
+				//if not text vertical alignment is provided, the alignment back to the top.
+				if (string.IsNullOrWhiteSpace(cssClass))
+				{
+					return VerticalAlignment.Top;
+				}
+
+				//Verify the vertical alignment provided.
+				if (cssClass.EndsWith("top"))
+				{
+					return VerticalAlignment.Top;
+				}
+				else if (cssClass.EndsWith("bottom"))
+				{
+					return VerticalAlignment.Bottom;
+				}
+				else if (cssClass.EndsWith("center"))
+				{
+					return VerticalAlignment.Center;
+				}
+				else if (cssClass.EndsWith("fill"))
+				{
+					return VerticalAlignment.Fill;
+				}
+				else
+				{
+					return VerticalAlignment.Top;
+				}
+			}
+			set
+			{
+				this.RemoveCssClassesStartingWith("text-vertical-alignment");
+				this.AddCssClass("text-vertical-alignment-" + value.ToString().ToLower());
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the padding text of the control.
+		/// <para xml:lang="es">Obtiene o establece el padding del texto del control.</para>
+		/// </summary>
+		Thickness ITextControl.TextPadding
+		{
+			get
+			{
+				return this.GetPadding();
+			}
+			set
+			{
+				this.SetPadding(value);
+			}
+		}
+
+		#endregion
+
 		/// <summary>
 		/// Ons the pre render.
 		/// <para xml:lang="es">Ocurre antes de hacer el cambio.</para>
