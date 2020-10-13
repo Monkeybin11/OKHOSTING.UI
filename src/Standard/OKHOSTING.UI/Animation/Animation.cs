@@ -125,7 +125,6 @@ namespace OKHOSTING.UI.Animation
 			}
 		}
 
-
 		/// <summary>
 		/// Gets a list of values that represent a gradient from one color to another
 		/// </summary>

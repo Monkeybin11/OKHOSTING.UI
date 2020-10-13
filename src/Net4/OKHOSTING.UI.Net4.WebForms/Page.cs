@@ -161,6 +161,16 @@ namespace OKHOSTING.UI.Net4.WebForms
 				HandleEvents();
 				HandleDragDrop();
 			}
+
+			//refresh content
+			Form.Controls.Clear();
+
+			if (Content != null)
+			{
+				Form.Controls.Add((System.Web.UI.Control) Content);
+			}
+
+			Title = ((IPage)this).Title;
 		}
 
 		/// <summary>
@@ -171,16 +181,6 @@ namespace OKHOSTING.UI.Net4.WebForms
 		/// <param name="e">E.</param>
 		protected override void OnPreRender(EventArgs e)
 		{
-			//refresh content from session
-			Form.Controls.Clear();
-
-			if (Content != null)
-			{
-				Form.Controls.Add((System.Web.UI.Control) Content);
-			}
-
-			Title = ((IPage) this).Title;
-
 			//allow friendly urls on forms
 			Form.Action = Request.RawUrl;
 

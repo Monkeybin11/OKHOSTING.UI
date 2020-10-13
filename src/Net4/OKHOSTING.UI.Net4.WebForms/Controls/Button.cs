@@ -349,7 +349,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		bool IControl.Focus()
 		{
-			base.Focus();
+			//base.Focus();
 			return true;
 		}
 

@@ -492,6 +492,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
 				Content[(row, column)] = content;
 			}
+			
+			RebuildGrid();
 		}
 
 		/// <summary>
@@ -512,6 +514,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 
 			ColumnSpans[content] = columnSpan;
+			RebuildGrid();
 		}
 
 		/// <summary>
@@ -552,6 +555,8 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			}
 
 			RowSpans[content] = rowSpan;
+
+			RebuildGrid();
 		}
 
 		/// <summary>
@@ -587,6 +592,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		void IGrid.SetWidth(int column, double width)
 		{
 			ColumnWidths[column] = width;
+			RebuildGrid();
 		}
 
 		/// <summary>
@@ -622,6 +628,7 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 		void IGrid.SetHeight(int row, double height)
 		{
 			RowHeights[row] = height;
+			RebuildGrid();
 		}
 
 		/// <summary>
@@ -659,7 +666,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 				Style[System.Web.UI.HtmlTextWriterStyle.BackgroundImage] = url;
 			}
 
-			RebuildGrid();
 			base.OnPreRender(e);
 		}
 
