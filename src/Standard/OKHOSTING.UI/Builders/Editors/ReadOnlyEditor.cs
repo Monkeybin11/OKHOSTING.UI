@@ -29,7 +29,7 @@
 		/// </summary>
 		protected override void SetValue(object value)
 		{
-			Control.Text = (string) value;
+			Control.Text = value?.ToString();
 		}
 	}
 }
