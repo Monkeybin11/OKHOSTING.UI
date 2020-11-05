@@ -83,7 +83,6 @@ namespace OKHOSTING.UI
 			return GetString(parameter.Member.DeclaringType, RemoveSpecialChars($"{parameter.Member.GetFriendlyFullName()}.{parameter.Name}")) ?? parameter.Name;
 		}
 
-
 		/// <summary>
 		/// Translate the specified enumValue.
 		/// </summary>
@@ -91,6 +90,22 @@ namespace OKHOSTING.UI
 		public static string Translate(Enum enumValue)
 		{
 			return GetString(enumValue.GetType(), RemoveSpecialChars(enumValue.GetType().GetFriendlyFullName()) + '_' + enumValue) ?? enumValue.ToString();
+		}
+
+		/// <summary>
+		/// Translate the specified bool value
+		/// </summary>
+		/// <param name="enumValue">Enum value.</param>
+		public static string Translate(bool value)
+		{
+			if (value)
+			{
+				return Resources.Strings.OKHOSTING_UI_Controls_Forms_BoolField_True;
+			}
+			else
+			{
+				return Resources.Strings.OKHOSTING_UI_Controls_Forms_BoolField_False;
+			}
 		}
 
 		/// <summary>

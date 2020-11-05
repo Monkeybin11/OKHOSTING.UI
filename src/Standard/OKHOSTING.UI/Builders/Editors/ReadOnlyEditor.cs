@@ -29,7 +29,14 @@
 		/// </summary>
 		protected override void SetValue(object value)
 		{
-			Control.Text = value?.ToString();
+			if (value is bool)
+			{
+				Control.Text = Translator.Translate((bool)value);
+			}
+			else
+			{
+				Control.Text = value?.ToString();
+			}
 		}
 	}
 }
