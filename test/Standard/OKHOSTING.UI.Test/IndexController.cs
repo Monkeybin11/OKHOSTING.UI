@@ -56,7 +56,7 @@ namespace OKHOSTING.UI.Test
 			ILabelButton lblAnimation = Core.BaitAndSwitch.Create<ILabelButton>();
 			lblAnimation.Text = "Animation";
 			lblAnimation.BackgroundColor = System.Drawing.Color.FromArgb(0, 0, 0, 0);
-			lblAnimation.Click += (object sender, EventArgs e) => new Animation.IndexController() { Page = Page }.Start();
+			lblAnimation.Click += (object sender, EventArgs e) => new Animations.IndexController() { Page = Page }.Start();
 			stack.Children.Add(lblAnimation);
 
 			// Establishes the content and title of the page.

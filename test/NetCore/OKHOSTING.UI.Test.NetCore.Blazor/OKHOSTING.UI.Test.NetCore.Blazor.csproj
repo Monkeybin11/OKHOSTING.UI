@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
+    <ProjectReference Include="..\..\..\src\NetCore\OKHOSTING.UI.NetCore.Web.Blazor\OKHOSTING.UI.NetCore.Web.Blazor.csproj" />
+    <ProjectReference Include="..\..\..\src\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
+    <PackageReference Include="Radzen.Blazor" Version="2.15.21" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Core\src\Standard\OKHOSTING.Core\OKHOSTING.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\OKHOSTING.Data\src\Standard\OKHOSTING.Data\OKHOSTING.Data.csproj" />
+    <ProjectReference Include="..\..\Standard\OKHOSTING.UI.CSS\OKHOSTING.UI.CSS.csproj" />
+    <ProjectReference Include="..\..\Standard\OKHOSTING.UI.HTML\OKHOSTING.UI.HTML.csproj" />
+    <ProjectReference Include="..\..\Standard\OKHOSTING.UI\OKHOSTING.UI.csproj" />
+  </ItemGroup>
+
+</Project>

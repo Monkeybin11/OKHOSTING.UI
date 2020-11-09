@@ -3,7 +3,7 @@ using System.Drawing;
 using OKHOSTING.UI.Controls;
 using OKHOSTING.UI.Controls.Layout;
 
-namespace OKHOSTING.UI.Test.Animation
+namespace OKHOSTING.UI.Test.Animations
 {
 	public class IndexController: Controller 
 	{

@@ -372,7 +372,7 @@ namespace OKHOSTING.UI.CSS
 		{
 			CssParser parser = new CssParser();
 			ICssStyleSheet cssStylesSheet = parser.ParseStyleSheet(styleSheet);
-			
+
 			//get only the rules that are actually styles
 			foreach (var rule in cssStylesSheet.Rules)
 			{
