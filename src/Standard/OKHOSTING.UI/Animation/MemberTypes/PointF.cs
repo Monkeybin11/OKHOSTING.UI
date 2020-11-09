@@ -33,19 +33,19 @@ namespace OKHOSTING.UI.Animations.MemberTypes
 		/// <summary>
 		/// Creates an intermediate value for the colors depending on the percentage passed in.
 		/// </summary>
-		public object GetIntermediateValue(object start, object end, double dPercentage)
+		public object GetIntermediateValue(object start, object end, double percentage)
 		{
 			System.Drawing.PointF _start = (System.Drawing.PointF) start;
 			System.Drawing.PointF _end = (System.Drawing.PointF) end;
 
-			float iStart_X = _start.X;
-			float iStart_Y = _start.Y;
+			float start_X = _start.X;
+			float start_Y = _start.Y;
 
-			float iEnd_X = _end.X;
-			float iEnd_Y = _end.Y;
+			float end_X = _end.X;
+			float end_Y = _end.Y;
 
-			float new_X = Utility.interpolate(iStart_X, iEnd_X, dPercentage);
-			float new_Y = Utility.interpolate(iStart_Y, iEnd_Y, dPercentage);
+			float new_X = Utility.Interpolate(start_X, end_X, percentage);
+			float new_Y = Utility.Interpolate(start_Y, end_Y, percentage);
 
 			return new System.Drawing.PointF(new_X, new_Y);
 		}

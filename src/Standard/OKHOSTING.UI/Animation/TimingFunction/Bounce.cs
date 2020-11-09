@@ -14,13 +14,13 @@ namespace OKHOSTING.UI.Animations.TimingFunction
         /// <summary>
         /// Constructor. You pass in the total time taken for the bounce.
         /// </summary>
-        public Bounce(int iTransitionTime)
+        public Bounce(int transitionTime)
         {
             // We create a custom "user-defined" transition to do the work...
             IList<TransitionElement> elements = new List<TransitionElement>();
             elements.Add(new TransitionElement(50, 100, InterpolationMethod.Accleration));
             elements.Add(new TransitionElement(100, 0, InterpolationMethod.Deceleration));
-            base.setup(elements, iTransitionTime);
+            base.setup(elements, transitionTime);
         }
 
         #endregion

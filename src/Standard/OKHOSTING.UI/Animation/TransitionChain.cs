@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OKHOSTING.UI.Animations
 {
@@ -16,11 +15,11 @@ namespace OKHOSTING.UI.Animations
             // We store the list of transitions...
             foreach (Transition transition in transitions)
             {
-                m_listTransitions.AddLast(transition);
+                ListTransitions.AddLast(transition);
             }
 
             // We start running them...
-            runNextTransition();
+            RunNextTransition();
         }
 
         #endregion
@@ -30,9 +29,9 @@ namespace OKHOSTING.UI.Animations
         /// <summary>
         /// Runs the next transition in the list.
         /// </summary>
-        private void runNextTransition()
+        private void RunNextTransition()
         {
-            if (m_listTransitions.Count == 0)
+            if (ListTransitions.Count == 0)
             {
                 return;
             }
@@ -40,24 +39,24 @@ namespace OKHOSTING.UI.Animations
             // We find the next transition and run it. We also register
             // for its completed event, so that we can start the next transition
             // when this one completes...
-            Transition nextTransition = m_listTransitions.First.Value;
-            nextTransition.TransitionCompleted += onTransitionCompleted;
+            Transition nextTransition = ListTransitions.First.Value;
+            nextTransition.TransitionCompleted += OnTransitionCompleted;
             nextTransition.Run();
         }
 
         /// <summary>
         /// Called when the transition we have just run has completed.
         /// </summary>
-        private void onTransitionCompleted(object sender, EventArgs e)
+        private void OnTransitionCompleted(object sender, EventArgs e)
         {
             // We unregister from the completed event...
             Transition transition = (Transition)sender;
-            transition.TransitionCompleted -= onTransitionCompleted;
+            transition.TransitionCompleted -= OnTransitionCompleted;
 
             // We remove the completed transition from our collection, and
             // run the next one...
-            m_listTransitions.RemoveFirst();
-            runNextTransition();
+            ListTransitions.RemoveFirst();
+            RunNextTransition();
         }
 
         #endregion
@@ -65,7 +64,7 @@ namespace OKHOSTING.UI.Animations
         #region Private data
 
         // The list of transitions in the chain...
-        private LinkedList<Transition> m_listTransitions = new LinkedList<Transition>();
+        private LinkedList<Transition> ListTransitions = new LinkedList<Transition>();
 
         #endregion
     }

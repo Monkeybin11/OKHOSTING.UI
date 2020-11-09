@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OKHOSTING.UI.Animations
+﻿namespace OKHOSTING.UI.Animations
 {
-    public interface ITransitionType
-    {
+    public interface ITimingFunction
+	{
 		/// <summary>
 		/// Called by the Transition framework when its timer ticks to pass in the
 		/// time (in ms) since the transition started. 
@@ -21,6 +17,6 @@ namespace OKHOSTING.UI.Animations
 		/// You should return (in an out parameter) whether the transition has completed.
 		/// (This may not be at the same time as the percentage has moved to 100%.)
 		/// </summary>
-		void OnTimer(int iTime, out double dPercentage, out bool bCompleted);
+		void OnTimer(int time, out double percentage, out bool completed);
     }
 }

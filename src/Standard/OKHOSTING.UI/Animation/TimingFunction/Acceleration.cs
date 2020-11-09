@@ -5,7 +5,7 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 	/// <summary>
 	/// Manages transitions under constant acceleration from a standing start.
 	/// </summary>
-	public class Acceleration : ITransitionType
+	public class Acceleration : ITimingFunction
 	{
 		#region Public methods
 
@@ -13,13 +13,14 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
 		/// </summary>
-		public Acceleration(int iTransitionTime)
+		public Acceleration(int transitionTime)
 		{
-			if (iTransitionTime <= 0)
+			if (transitionTime <= 0)
 			{
 				throw new Exception("Transition time must be greater than zero.");
 			}
-			TransitionTime = iTransitionTime;
+
+			TransitionTime = transitionTime;
 		}
 
 		#endregion
@@ -34,19 +35,20 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 		/// at t=1.0 is 2, so the formula just becomes:
 		///   s = t^2
 		/// </summary>
-		public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
+		public void OnTimer(int time, out double percentage, out bool completed)
 		{
 			// We find the percentage time elapsed...
-			double dElapsed = iTime / TransitionTime;
-			dPercentage = dElapsed * dElapsed;
-			if (dElapsed >= 1.0)
+			double elapsed = time / TransitionTime;
+			percentage = elapsed * elapsed;
+
+			if (elapsed >= 1.0)
 			{
-				dPercentage = 1.0;
-				bCompleted = true;
+				percentage = 1.0;
+				completed = true;
 			}
 			else
 			{
-				bCompleted = false;
+				completed = false;
 			}
 		}
 

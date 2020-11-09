@@ -12,36 +12,13 @@ namespace OKHOSTING.UI.Animations
     /// </remarks>
     internal class Utility
 	{
-        /// <summary>
-        /// Returns the value of the property passed in.
-        /// </summary>
-        public static object getValue(object target, string strPropertyName)
-        {
-            Type targetType = target.GetType();
-            PropertyInfo propertyInfo = targetType.GetProperty(strPropertyName);
-            if (propertyInfo == null)
-            {
-                throw new Exception("Object: " + target.ToString() + " does not have the property: " + strPropertyName);
-            }
-            return propertyInfo.GetValue(target, null);
-        }
-
-        /// <summary>
-        /// Sets the value of the property passed in.
-        /// </summary>
-        public static void setValue(object target, Data.MemberExpression member, object value)
-        {
-            Type targetType = target.GetType();
-            member.SetValue(target, value);
-        }
-
 		/// <summary>
 		/// Returns a value between d1 and d2 for the percentage passed in.
 		/// </summary>
-		public static double interpolate(double d1, double d2, double dPercentage)
+		public static double Interpolate(double d1, double d2, double percentage)
 		{
 			double dDifference = d2 - d1;
-			double dDistance = dDifference * dPercentage;
+			double dDistance = dDifference * percentage;
 			double dResult = d1 + dDistance;
 			return dResult;
 		}
@@ -49,49 +26,50 @@ namespace OKHOSTING.UI.Animations
         /// <summary>
         /// Returns a value betweeen i1 and i2 for the percentage passed in.
         /// </summary>
-        public static int interpolate(int i1, int i2, double dPercentage)
+        public static int Interpolate(int i1, int i2, double percentage)
         {
-            return (int)interpolate((double)i1, (double)i2, dPercentage);
+            return (int) Interpolate((double) i1, (double) i2, percentage);
         }
     
         /// <summary>
         /// Returns a value betweeen f1 and f2 for the percentage passed in.
         /// </summary>
-        public static float interpolate(float f1, float f2, double dPercentage)
+        public static float Interpolate(float f1, float f2, double percentage)
         {
-            return (float)interpolate((double)f1, (double)f2, dPercentage);
+            return (float) Interpolate((double) f1, (double) f2, percentage);
         }
 
         /// <summary>
         /// Converts a fraction representing linear time to a fraction representing
         /// the distance traveled under an ease-in-ease-out transition.
         /// </summary>
-        public static double convertLinearToEaseInEaseOut(double dElapsed)
+        public static double ConvertLinearToEaseInEaseOut(double elapsed)
         {
             // The distance traveled is made up of two parts: the initial acceleration,
             // and then the subsequent deceleration...
-            double dFirstHalfTime = (dElapsed > 0.5) ? 0.5 : dElapsed;
-            double dSecondHalfTime = (dElapsed > 0.5) ? dElapsed - 0.5 : 0.0;
-            double dResult = 2 * dFirstHalfTime * dFirstHalfTime + 2 * dSecondHalfTime * (1.0 - dSecondHalfTime);
-            return dResult;
+            double firstHalfTime = (elapsed > 0.5) ? 0.5 : elapsed;
+            double secondHalfTime = (elapsed > 0.5) ? elapsed - 0.5 : 0.0;
+            double result = 2 * firstHalfTime * firstHalfTime + 2 * secondHalfTime * (1.0 - secondHalfTime);
+
+            return result;
         }
 
         /// <summary>
         /// Converts a fraction representing linear time to a fraction representing
         /// the distance traveled under a constant acceleration transition.
         /// </summary>
-        public static double convertLinearToAcceleration(double dElapsed)
+        public static double ConvertLinearToAcceleration(double elapsed)
         {
-            return dElapsed * dElapsed;
+            return elapsed * elapsed;
         }
 
         /// <summary>
         /// Converts a fraction representing linear time to a fraction representing
         /// the distance traveled under a constant deceleration transition.
         /// </summary>
-        public static double convertLinearToDeceleration(double dElapsed)
+        public static double ConvertLinearToDeceleration(double elapsed)
         {
-            return dElapsed * (2.0 - dElapsed);
+            return elapsed * (2.0 - elapsed);
         }
 
         /// <summary>
@@ -104,7 +82,7 @@ namespace OKHOSTING.UI.Animations
         /// or we are on the same thread as the target, then the event is fired on the same
         /// thread as this is called from.
         /// </remarks>
-        public static void raiseEvent<T>(EventHandler<T> theEvent, object sender, T args) where T : System.EventArgs
+        public static void RaiseEvent<T>(EventHandler<T> theEvent, object sender, T args) where T : EventArgs
         {
             // Is the event set up?
             if (theEvent == null)
@@ -120,6 +98,7 @@ namespace OKHOSTING.UI.Animations
                 try
                 {
                     ISynchronizeInvoke target = handler.Target as ISynchronizeInvoke;
+                    
                     if (target == null || target.InvokeRequired == false)
                     {
                         // Either the target is not a form or control, or we are already
@@ -141,6 +120,5 @@ namespace OKHOSTING.UI.Animations
                 }
             }
         }
-
     }
 }

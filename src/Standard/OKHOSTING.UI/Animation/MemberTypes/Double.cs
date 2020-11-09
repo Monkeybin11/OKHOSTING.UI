@@ -30,11 +30,11 @@ namespace OKHOSTING.UI.Animations.MemberTypes
 		/// <summary>
 		/// Returns the value between start and end for the percentage passed in.
 		/// </summary>
-		public object GetIntermediateValue(object start, object end, double dPercentage)
+		public object GetIntermediateValue(object start, object end, double percentage)
 		{
 			double dStart = (double)start;
 			double dEnd = (double)end;
-			return Utility.interpolate(dStart, dEnd, dPercentage);
+			return Utility.Interpolate(dStart, dEnd, percentage);
 		}
 	}
 }

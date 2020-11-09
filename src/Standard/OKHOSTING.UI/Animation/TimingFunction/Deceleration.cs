@@ -11,7 +11,7 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 	/// <remarks>
 	/// Based on a great project by Uwe Keim https://github.com/UweKeim/dot-net-transitions
 	/// </remarks>
-	public class Deceleration : ITransitionType
+	public class Deceleration : ITimingFunction
 	{
 		#region Public methods
 
@@ -19,13 +19,14 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 		/// Constructor. You pass in the time that the transition 
 		/// will take (in milliseconds).
 		/// </summary>
-		public Deceleration(int iTransitionTime)
+		public Deceleration(int transitionTime)
 		{
-			if (iTransitionTime <= 0)
+			if (transitionTime <= 0)
 			{
 				throw new Exception("Transition time must be greater than zero.");
 			}
-			m_dTransitionTime = iTransitionTime;
+
+			TransitionTime = transitionTime;
 		}
 
 		#endregion
@@ -40,19 +41,19 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 		/// at t=1.0 is -2, so the formula becomes:
 		///   s = t(2-t)
 		/// </summary>
-		public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
+		public void OnTimer(int time, out double percentage, out bool completed)
 		{
 			// We find the percentage time elapsed...
-			double dElapsed = iTime / m_dTransitionTime;
-			dPercentage = dElapsed * (2.0 - dElapsed);
-			if (dElapsed >= 1.0)
+			double elapsed = time / TransitionTime;
+			percentage = elapsed * (2.0 - elapsed);
+			if (elapsed >= 1.0)
 			{
-				dPercentage = 1.0;
-				bCompleted = true;
+				percentage = 1.0;
+				completed = true;
 			}
 			else
 			{
-				bCompleted = false;
+				completed = false;
 			}
 		}
 
@@ -60,7 +61,7 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 
 		#region Private data
 
-		private double m_dTransitionTime = 0.0;
+		private double TransitionTime = 0.0;
 
 		#endregion
 	}

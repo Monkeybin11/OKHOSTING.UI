@@ -38,19 +38,22 @@ namespace OKHOSTING.UI.Animations
     /// Based on a great project by Uwe Keim https://github.com/UweKeim/dot-net-transitions
     /// </remarks>
     public class Transition
-	{
+    {
+        /// <summary>
+        /// The page where the controls are being displayed
+        /// </summary>
         public IPage Page { get; set; }
 
-		#region Registration
+        #region Registration
 
-		/// <summary>
+        /// <summary>
         /// You should register all managed-types here.
         /// </summary>
         static Transition()
         {
             RegisterType(new MemberTypes.Int());
             RegisterType(new MemberTypes.Float());
-			RegisterType(new MemberTypes.Double());
+            RegisterType(new MemberTypes.Double());
             RegisterType(new MemberTypes.Color());
             RegisterType(new MemberTypes.String());
             RegisterType(new MemberTypes.Thickness());
@@ -73,7 +76,7 @@ namespace OKHOSTING.UI.Animations
         /// <summary>
         /// Creates and immediately runs a transition on the property passed in.
         /// </summary>
-        public static void Run<T, TReturn>(T target, Expression<Func<T, TReturn>> expression, TReturn destinationValue, ITransitionType transitionMethod)
+        public static void Run<T, TReturn>(T target, Expression<Func<T, TReturn>> expression, TReturn destinationValue, ITimingFunction transitionMethod)
         {
             var member = new Data.MemberExpression<T, TReturn>(expression);
             Transition t = new Transition(transitionMethod);
@@ -85,10 +88,10 @@ namespace OKHOSTING.UI.Animations
         /// Sets the property passed in to the initial value passed in, then creates and 
         /// immediately runs a transition on it.
         /// </summary>
-        public static void Run<T, TReturn>(T target, Expression<Func<T, TReturn>> expression, TReturn initialValue, TReturn destinationValue, ITransitionType transitionMethod)
+        public static void Run<T, TReturn>(T target, Expression<Func<T, TReturn>> expression, TReturn initialValue, TReturn destinationValue, ITimingFunction transitionMethod)
         {
             var member = new Data.MemberExpression<T, TReturn>(expression);
-            Utility.setValue(target, member, initialValue);
+            member.SetValue(target, initialValue);
             Run(target, expression, destinationValue, transitionMethod);
         }
 
@@ -108,9 +111,9 @@ namespace OKHOSTING.UI.Animations
         /// Constructor. You pass in the object that holds the properties 
         /// that you are performing transitions on.
         /// </summary>
-        public Transition(ITransitionType transitionMethod)
+        public Transition(ITimingFunction transitionMethod)
         {
-			TransitionMethod = transitionMethod;
+            TransitionMethod = transitionMethod;
         }
 
         /// <summary>
@@ -125,9 +128,9 @@ namespace OKHOSTING.UI.Animations
         /// Adds a property that should be animated as part of this transition.
         /// </summary>
         public void Add<T, TReturn>(T target, Expression<Func<T, TReturn>> expression, TReturn startValue, TReturn endValue)
-		{
-			// We get the property info...
-			Type targetType = target.GetType();
+        {
+            // We get the property info...
+            Type targetType = target.GetType();
 
             var member = new Data.MemberExpression<T, TReturn>(expression);
 
@@ -138,11 +141,11 @@ namespace OKHOSTING.UI.Animations
             {
                 propertyType = Nullable.GetUnderlyingType(propertyType);
             }
-            
-			if (MemberTypes.ContainsKey(propertyType) == false)
-			{
-				throw new Exception("Transition does not handle properties of type: " + propertyType.ToString());
-			}
+
+            if (MemberTypes.ContainsKey(propertyType) == false)
+            {
+                throw new Exception("Transition does not handle properties of type: " + propertyType.ToString());
+            }
 
             // We can only transition properties that are both getable and setable...
             if (Data.MemberExpression.IsReadOnly(member.FinalMemberInfo))
@@ -151,14 +154,14 @@ namespace OKHOSTING.UI.Animations
             }
 
             IMemberType managedType = MemberTypes[propertyType];
-            
+
             // We can manage this type, so we store the information for the
-			// transition of this property...
-			TransitionedMember info = new TransitionedMember();
-			info.endValue = endValue;
-			info.target = target;
-			info.Member = member;
-			info.managedType = managedType;
+            // transition of this property...
+            TransitionedMember info = new TransitionedMember();
+            info.endValue = endValue;
+            info.target = target;
+            info.Member = member;
+            info.managedType = managedType;
 
             if (startValue != null && !startValue.Equals(default(TReturn)))
             {
@@ -169,7 +172,7 @@ namespace OKHOSTING.UI.Animations
             {
                 ListTransitionedProperties.Add(info);
             }
-		}
+        }
 
         /// <summary>
         /// Starts the transition.
@@ -184,14 +187,14 @@ namespace OKHOSTING.UI.Animations
                 info.startValue = info.managedType.Copy(value);
             }
 
-			// We start the stopwatch. We use this when the timer ticks to measure 
-			// how long the transition has been runnning for...
-			Stopwatch.Reset();
-			Stopwatch.Start();
+            // We start the stopwatch. We use this when the timer ticks to measure 
+            // how long the transition has been runnning for...
+            Stopwatch.Reset();
+            Stopwatch.Start();
 
             // We register this transition with the transition manager...
-            TransitionManager.getInstance().register(this);
-		}
+            TransitionManager.GetInstance().Register(this);
+        }
 
         #endregion
 
@@ -231,9 +234,9 @@ namespace OKHOSTING.UI.Animations
             int iElapsedTime = (int)Stopwatch.ElapsedMilliseconds;
 
             // b.
-            double dPercentage;
-            bool bCompleted;
-            TransitionMethod.OnTimer(iElapsedTime, out dPercentage, out bCompleted);
+            double percentage;
+            bool completed;
+            TransitionMethod.OnTimer(iElapsedTime, out percentage, out completed);
 
             // We take a copy of the list of properties we are transitioning, as
             // they can be changed by another thread while this method is running...
@@ -242,7 +245,7 @@ namespace OKHOSTING.UI.Animations
             {
                 foreach (TransitionedMember info in ListTransitionedProperties)
                 {
-                    listTransitionedProperties.Add(info.copy());
+                    listTransitionedProperties.Add(info.Copy());
                 }
             }
 
@@ -250,22 +253,22 @@ namespace OKHOSTING.UI.Animations
             foreach (TransitionedMember info in listTransitionedProperties)
             {
                 // We get the current value for this property...
-                object value = info.managedType.GetIntermediateValue(info.startValue, info.endValue, dPercentage);
+                object value = info.managedType.GetIntermediateValue(info.startValue, info.endValue, percentage);
 
                 // We set it...
                 PropertyUpdateArgs args = new PropertyUpdateArgs(info.target, info.Member, value);
-                
+
                 SetProperty(this, args);
             }
 
             // Has the transition completed?
-            if (bCompleted == true)
+            if (completed == true)
             {
                 // We stop the stopwatch and the timer...
                 Stopwatch.Stop();
 
                 // We raise an event to notify any observers that the transition has completed...
-                Utility.raiseEvent(TransitionCompleted, this, new EventArgs());
+                Utility.RaiseEvent(TransitionCompleted, this, new EventArgs());
             }
         }
 
@@ -273,13 +276,13 @@ namespace OKHOSTING.UI.Animations
 
         #region Private functions
 
-		/// <summary>
-		/// Sets a property on the object passed in to the value passed in. This method
-		/// invokes itself on the GUI thread if the property is being invoked on a GUI 
-		/// object.
-		/// </summary>
-		private void SetProperty(object sender, PropertyUpdateArgs args)
-		{
+        /// <summary>
+        /// Sets a property on the object passed in to the value passed in. This method
+        /// invokes itself on the GUI thread if the property is being invoked on a GUI 
+        /// object.
+        /// </summary>
+        private void SetProperty(object sender, PropertyUpdateArgs args)
+        {
             try
             {
                 // If the target is a control that has been disposed then we don't 
@@ -291,6 +294,7 @@ namespace OKHOSTING.UI.Animations
                 }
 
                 ISynchronizeInvoke invokeTarget = args.target as ISynchronizeInvoke;
+
                 if (invokeTarget != null && invokeTarget.InvokeRequired)
                 {
                     // There is some history behind the next two lines, which is worth
@@ -313,7 +317,7 @@ namespace OKHOSTING.UI.Animations
                     // disposed - for example, it is on a form that is being closed. See
                     // here for details: 
                     // http://social.msdn.microsoft.com/Forums/en-US/winforms/thread/7d2c941a-0016-431a-abba-67c5d5dac6a5
-                    
+
                     // To solve this, we use a combination of the two earlier approaches. 
                     // We use BeginInvoke as this does not block and lock up, even if the
                     // underlying object is being disposed. But we do want to wait to give
@@ -334,7 +338,7 @@ namespace OKHOSTING.UI.Animations
                 // We silently catch any exceptions. These could be things like 
                 // bounds exceptions when setting properties.
             }
-		}
+        }
 
         /// <summary>
         /// Returns true if the object passed in is a Control and is disposed
@@ -362,58 +366,58 @@ namespace OKHOSTING.UI.Animations
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Private static functions
+        #region Private static functions
 
-		/// <summary>
-		/// Registers a transition-type. We hold them in a map.
-		/// </summary>
-		private static void RegisterType(IMemberType transitionType)
-		{
-            Type type = transitionType.GetManagedType();
-			MemberTypes[type] = transitionType;
-		}
+        /// <summary>
+        /// Registers a transition-type. We hold them in a map.
+        /// </summary>
+        private static void RegisterType(IMemberType memberType)
+        {
+            Type type = memberType.GetManagedType();
+            MemberTypes[type] = memberType;
+        }
 
-		#endregion
-		
-		#region Private static data
+        #endregion
 
-		// A map of Type info to IManagedType objects. These are all the types that we
+        #region Private static data
+
+        // A map of Type info to IManagedType objects. These are all the types that we
         // know how to perform transitions on...
         private static IDictionary<Type, IMemberType> MemberTypes = new Dictionary<Type, IMemberType>();
 
         #endregion
 
-		#region Private data
+        #region Private data
 
-		// The transition method used by this transition...
-		private ITransitionType TransitionMethod = null;
+        // The transition method used by this transition...
+        private ITimingFunction TransitionMethod = null;
 
-		// The collection of properties that the current transition is animating...
-		private readonly IList<TransitionedMember> ListTransitionedProperties = new List<TransitionedMember>();
+        // The collection of properties that the current transition is animating...
+        private readonly IList<TransitionedMember> ListTransitionedProperties = new List<TransitionedMember>();
 
-		// Helps us find the time interval from the time the transition starts to each timer tick...
-		private Stopwatch Stopwatch = new Stopwatch();
+        // Helps us find the time interval from the time the transition starts to each timer tick...
+        private Stopwatch Stopwatch = new Stopwatch();
 
         // Event args used for the event we raise when updating a property...
-		private class PropertyUpdateArgs : EventArgs
-		{
-			public PropertyUpdateArgs(object t, Data.MemberExpression pi, object v)
-			{
-				target = t;
-				Member = pi;
-				value = v;
-			}
-			public object target;
-			public Data.MemberExpression Member;
-			public object value;
-		}
+        private class PropertyUpdateArgs : EventArgs
+        {
+            public PropertyUpdateArgs(object t, Data.MemberExpression pi, object v)
+            {
+                target = t;
+                Member = pi;
+                value = v;
+            }
+            public object target;
+            public Data.MemberExpression Member;
+            public object value;
+        }
 
         // An object used to lock the list of transitioned properties, as it can be 
         // accessed by multiple threads...
         private object Lock = new object();
 
-		#endregion
-	}
+        #endregion
+    }
 }

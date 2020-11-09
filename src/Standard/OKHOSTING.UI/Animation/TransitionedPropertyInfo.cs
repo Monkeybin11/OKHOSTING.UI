@@ -11,7 +11,7 @@
 		public Data.MemberExpression Member;
 		public IMemberType managedType;
 
-		public TransitionedMember copy()
+		public TransitionedMember Copy()
 		{
 			TransitionedMember info = new TransitionedMember();
 			info.startValue = startValue;

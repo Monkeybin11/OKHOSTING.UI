@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OKHOSTING.UI.Animations
+﻿namespace OKHOSTING.UI.Animations
 {
     public enum InterpolationMethod
     {

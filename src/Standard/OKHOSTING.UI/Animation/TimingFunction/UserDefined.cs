@@ -37,7 +37,7 @@ namespace OKHOSTING.UI.Animations.TimingFunction
     /// <remarks>
     /// Based on a great project by Uwe Keim https://github.com/UweKeim/dot-net-transitions
     /// </remarks>
-    public class UserDefined : ITransitionType
+    public class UserDefined : ITimingFunction
     {
         #region Public methods
 
@@ -52,18 +52,18 @@ namespace OKHOSTING.UI.Animations.TimingFunction
         /// Constructor. You pass in the list of TransitionElements and the total time
         /// (in milliseconds) for the transition.
         /// </summary>
-        public UserDefined(IList<TransitionElement> elements, int iTransitionTime)
+        public UserDefined(IList<TransitionElement> elements, int transitionTime)
         {
-            setup(elements, iTransitionTime);
+            setup(elements, transitionTime);
         }
 
         /// <summary>
         /// Sets up the transitions. 
         /// </summary>
-        public void setup(IList<TransitionElement> elements, int iTransitionTime)
+        public void setup(IList<TransitionElement> elements, int transitionTime)
         {
             m_Elements = elements;
-            m_dTransitionTime = iTransitionTime;
+            TransitionTime = transitionTime;
 
             // We check that the elements list has some members...
             if (elements.Count == 0)
@@ -79,9 +79,9 @@ namespace OKHOSTING.UI.Animations.TimingFunction
         /// <summary>
         /// Called to find the value for the movement of properties for the time passed in.
         /// </summary>
-        public void OnTimer(int iTime, out double dPercentage, out bool bCompleted)
+        public void OnTimer(int time, out double percentage, out bool completed)
         {
-            double dTransitionTimeFraction = iTime / m_dTransitionTime;
+            double dTransitionTimeFraction = time / TransitionTime;
 
             // We find the information for the element that we are currently processing...
             double dElementStartTime;
@@ -106,15 +106,15 @@ namespace OKHOSTING.UI.Animations.TimingFunction
                     break;
 
                 case InterpolationMethod.Accleration:
-                    dElementDistance = Utility.convertLinearToAcceleration(dElementTimeFraction);
+                    dElementDistance = Utility.ConvertLinearToAcceleration(dElementTimeFraction);
                     break;
 
                 case InterpolationMethod.Deceleration:
-                    dElementDistance = Utility.convertLinearToDeceleration(dElementTimeFraction);
+                    dElementDistance = Utility.ConvertLinearToDeceleration(dElementTimeFraction);
                     break;
 
                 case InterpolationMethod.EaseInEaseOut:
-                    dElementDistance = Utility.convertLinearToEaseInEaseOut(dElementTimeFraction);
+                    dElementDistance = Utility.ConvertLinearToEaseInEaseOut(dElementTimeFraction);
                     break;
 
                 default:
@@ -123,19 +123,19 @@ namespace OKHOSTING.UI.Animations.TimingFunction
 
             // We now know how far through the transition we have moved, so we can interpolate
             // the start and end values by this amount...
-            dPercentage = Utility.interpolate(dElementStartValue, dElementEndValue, dElementDistance);
+            percentage = Utility.Interpolate(dElementStartValue, dElementEndValue, dElementDistance);
 
             // Has the transition completed?
-            if (iTime >= m_dTransitionTime)
+            if (time >= TransitionTime)
             {
                 // The transition has completed, so we make sure that
                 // it is at its final value...
-                bCompleted = true;
-                dPercentage = dElementEndValue;
+                completed = true;
+                percentage = dElementEndValue;
             }
             else
             {
-                bCompleted = false;
+                completed = false;
             }
         }
 
@@ -194,7 +194,7 @@ namespace OKHOSTING.UI.Animations.TimingFunction
         private IList<TransitionElement> m_Elements = null;
 
         // The total transition time...
-        private double m_dTransitionTime = 0.0;
+        private double TransitionTime = 0.0;
 
         // The element that we are currently in (i.e. the current time within this element)...
         private int m_iCurrentElement = 0;

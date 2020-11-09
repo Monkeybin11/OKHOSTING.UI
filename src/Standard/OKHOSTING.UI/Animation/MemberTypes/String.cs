@@ -24,22 +24,22 @@ namespace OKHOSTING.UI.Animations.MemberTypes
         /// </summary>
         public object Copy(object o)
         {
-            string s = (string)o;
+            string s = (string) o;
             return new string(s.ToCharArray());
         }
 
         /// <summary>
         /// Returns an "interpolated" string.
         /// </summary>
-        public object GetIntermediateValue(object start, object end, double dPercentage)
+        public object GetIntermediateValue(object start, object end, double percentage)
         {
-            string strStart = (string)start;
-            string strEnd = (string)end;
+            string strStart = (string) start;
+            string strEnd = (string) end;
 
             // We find the length of the interpolated string...
-            int iStartLength = strStart.Length;
-            int iEndLength = strEnd.Length;
-            int iLength = Utility.interpolate(iStartLength, iEndLength, dPercentage);
+            int startLength = strStart.Length;
+            int endLength = strEnd.Length;
+            int iLength = Utility.Interpolate(startLength, endLength, percentage);
             char[] result = new char[iLength];
 
             // Now we assign the letters of the results by interpolating the
@@ -48,12 +48,12 @@ namespace OKHOSTING.UI.Animations.MemberTypes
             {
                 // We get the start and end chars at this position...
                 char cStart = 'a';
-                if(i < iStartLength)
+                if(i < startLength)
                 {
                     cStart = strStart[i];
                 }
                 char cEnd = 'a';
-                if(i < iEndLength)
+                if(i < endLength)
                 {
                     cEnd = strEnd[i];
                 }
@@ -69,9 +69,9 @@ namespace OKHOSTING.UI.Animations.MemberTypes
 				else
 				{
 					// The end character is not a space, so we interpolate...
-					int iStart = Convert.ToInt32(cStart);
-					int iEnd = Convert.ToInt32(cEnd);
-					int iInterpolated = Utility.interpolate(iStart, iEnd, dPercentage);
+					int _start = Convert.ToInt32(cStart);
+					int _end = Convert.ToInt32(cEnd);
+					int iInterpolated = Utility.Interpolate(_start, _end, percentage);
 					cInterpolated = Convert.ToChar(iInterpolated);
 				}
 
