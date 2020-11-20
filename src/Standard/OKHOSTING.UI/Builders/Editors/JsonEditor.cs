@@ -9,7 +9,7 @@ namespace OKHOSTING.UI.Builders.Editors
 	/// Un campo para valores Xml.
 	/// </para>
 	/// </summary>
-	public class JsonEditor : TextBoxEditor<object>
+	public class JsonEditor : TextAreaEditor<object>
 	{
 		public readonly Type SerializableType;
 

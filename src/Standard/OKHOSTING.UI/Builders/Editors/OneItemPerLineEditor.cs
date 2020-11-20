@@ -55,7 +55,9 @@ namespace OKHOSTING.UI.Builders.Editors
 		/// <returns></returns>
 		protected override object GetValue()
 		{
-			List<object> values = new List<object>();
+			var genericListType = typeof(List<>).MakeGenericType(ItemType);
+
+			IList values = (IList) Core.TypeExtensions.CreateInstance(genericListType);
 
 			if (string.IsNullOrWhiteSpace(Control.Value))
 			{

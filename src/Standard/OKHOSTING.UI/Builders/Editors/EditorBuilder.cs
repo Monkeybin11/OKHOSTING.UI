@@ -110,6 +110,11 @@ namespace OKHOSTING.UI.Builders.Editors
 				return new BinaryEditor();
 			}
 
+			else if (type.IsEnumerable())
+			{
+				return new OneItemPerLineEditor(type.GetEnumerableItemType());
+			}
+
 			//otherwise just create a json textbox
 			else
 			{
