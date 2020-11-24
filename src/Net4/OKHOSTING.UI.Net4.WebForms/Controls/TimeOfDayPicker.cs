@@ -62,9 +62,29 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<TimeSpan?> ValueChanged;
 
+		protected void OnValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ITimeOfDayPicker)this).Value);
+		}
+
 		#endregion
 
 		#region IWebInputControl
+
+		bool IInputControl.CheckPostBack()
+		{
+			TimeSpan span;
+			string postedValue = Page?.Request.Form[ID];
+
+			if (TimeSpan.TryParse(postedValue, out span))
+			{
+				return ((ITimeOfDayPicker) this).Value != span;
+			}
+			else
+			{
+				return false;
+			}
+		}
 
 		void IInputControl.HandlePostBack()
 		{
@@ -75,11 +95,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				((ITimeOfDayPicker) this).Value = span;
 			}
-		}
-
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((ITimeOfDayPicker) this).Value);
 		}
 
 		#endregion

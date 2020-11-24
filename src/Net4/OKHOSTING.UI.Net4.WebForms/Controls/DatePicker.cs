@@ -68,18 +68,29 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<DateTime?> ValueChanged;
 
-		/// <summary>
-		/// Raises the value changed.
-		/// </summary>
-		/// <returns>The value changed.</returns>
-		protected internal void RaiseValueChanged()
+		protected void OnValueChanged()
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<DateTime?>) this).Value);
+			ValueChanged?.Invoke(this, ((IDatePicker)this).Value);
 		}
 
 		#endregion
 
 		#region IWebInputControl
+
+		bool IInputControl.CheckPostBack()
+		{
+			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
+			var values = postedValue?.Split('/');
+
+			try
+			{
+				return ((IDatePicker) this).Value != new DateTime(int.Parse(values[2]), int.Parse(values[0]), int.Parse(values[1]));
+			}
+			catch 
+			{
+				return false;
+			}
+		}
 
 		void IInputControl.HandlePostBack()
 		{
@@ -88,14 +99,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 			try
 			{
-				((IDatePicker) this).Value = new DateTime(int.Parse(values[2]), int.Parse(values[0]), int.Parse(values[1]));
+				((IDatePicker)this).Value = new DateTime(int.Parse(values[2]), int.Parse(values[0]), int.Parse(values[1]));
 			}
-			catch{}
-		}
-
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((IDatePicker) this).Value);
+			catch { }
 		}
 
 		#endregion

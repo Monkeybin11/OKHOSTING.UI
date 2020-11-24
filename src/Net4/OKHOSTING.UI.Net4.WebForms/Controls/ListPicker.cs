@@ -91,16 +91,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
-		/// <summary>
-		/// Raises the value changed.
-		/// <para xml:lang="es">Muestra el valor cambiado.</para>
-		/// </summary>
-		/// <returns>The value changed.
-		/// <para xml:lang="es">El valor cambiado.</para>
-		/// </returns>
-		protected internal void RaiseValueChanged()
+		protected void OnValueChanged()
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
+			ValueChanged?.Invoke(this, ((IListPicker)this).Value);
 		}
 
 		#endregion
@@ -700,15 +693,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
+		bool IInputControl.CheckPostBack()
+		{
+			string postedValue = Page?.Request.Form[ID];
+			return ((IListPicker) this).Value != postedValue;
+		}
+
 		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID];
-			((IListPicker) this).Value = postedValue;
-		}
-
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((IListPicker) this).Value);
+			((IListPicker)this).Value = postedValue;
 		}
 
 		#endregion

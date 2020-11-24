@@ -603,9 +603,33 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<DateTime?> ValueChanged;
 
+		protected void OnValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ICalendar)this).Value);
+		}
+
 		#endregion
 
-		#region IInputControl
+		#region IWebInputControl
+
+		bool IInputControl.CheckPostBack()
+		{
+			if (Page?.Request.Form["__EVENTTARGET"] != ID)
+			{
+				return false;
+			}
+
+			var arg = Page?.Request.Form["__EVENTARGUMENT"];
+
+			if (int.TryParse(arg, out int i))
+			{
+				return SelectedDate != new DateTime(2000, 1, 1).AddDays(i);
+			}
+			else
+			{
+				return false;
+			}
+		}
 
 		void IInputControl.HandlePostBack()
 		{
@@ -620,11 +644,6 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			{
 				SelectedDate = new DateTime(2000, 1, 1).AddDays(i);
 			}
-		}
-
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((ICalendar) this).Value);
 		}
 
 		#endregion

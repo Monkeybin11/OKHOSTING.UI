@@ -57,6 +57,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
+		protected void OnValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ITextArea)this).Value);
+		}
+
 		#endregion
 
 		#region IControl
@@ -606,15 +611,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
+		bool IInputControl.CheckPostBack()
+		{
+			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
+			return ((ITextArea) this).Value != postedValue;
+		}
+
 		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
 			((ITextArea) this).Value = postedValue;
-		}
-
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((ITextArea) this).Value);
 		}
 
 		#endregion

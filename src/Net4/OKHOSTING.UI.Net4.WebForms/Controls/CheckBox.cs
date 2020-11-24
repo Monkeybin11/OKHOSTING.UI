@@ -318,7 +318,15 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#endregion
 
-		#region IInputControl
+		#region IWebInputControl
+
+		bool IInputControl.CheckPostBack()
+		{
+			string postedValue = Page?.Request.Form[ID];
+			bool value = postedValue?.Contains("on") ?? false;
+
+			return ((ICheckBox) this).Value != value;
+		}
 
 		void IInputControl.HandlePostBack()
 		{
@@ -328,12 +336,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			((ICheckBox) this).Value = value;
 		}
 
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((ICheckBox) this).Value);
-		}
-
 		#endregion
+
+		#region IInputControl
 
 		/// <summary>
 		/// Gets or sets the input value of the checkbox
@@ -371,6 +376,13 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// <para xml:lang="es">Se produce cuando cambia el valor</para>
 		/// </summary>
 		public event EventHandler<bool> ValueChanged;
+
+		protected void OnValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((ICheckBox)this).Value);
+		}
+		
+		#endregion
 
 		/// <summary>
 		/// Does nothing since we manage state ourselves

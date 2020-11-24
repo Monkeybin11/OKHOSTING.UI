@@ -368,31 +368,25 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 		/// </summary>
 		public event EventHandler<string> ValueChanged;
 
-		/// <summary>
-		/// Raises the value changed.
-		/// <para xml:lang="es">Cambia el valor.</para>
-		/// </summary>
-		/// <returns>The value changed.
-		/// <para xml:lang="es">El valor cambiado</para>
-		/// </returns>
-		protected internal void RaiseValueChanged()
+		protected void OnValueChanged()
 		{
-			ValueChanged?.Invoke(this, ((IInputControl<string>)this).Value);
+			ValueChanged?.Invoke(this, ((IPasswordTextBox) this).Value);
 		}
 
 		#endregion
 
 		#region IWebInputControl
 
+		bool IInputControl.CheckPostBack()
+		{
+			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
+			return ((IPasswordTextBox) this).Value != postedValue;
+		}
+
 		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
 			((IPasswordTextBox) this).Value = postedValue;
-		}
-
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((IPasswordTextBox) this).Value);
 		}
 
 		#endregion

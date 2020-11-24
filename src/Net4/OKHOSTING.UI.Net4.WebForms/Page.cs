@@ -344,7 +344,19 @@ namespace OKHOSTING.UI.Net4.WebForms
 			}
 
 			//handle posted values
+			List<IInputControl> valueChanged = new List<IInputControl>();
+
+			//check wich input controls had their value changed by the user
 			foreach (IInputControl control in allControls.Where(c => c is IInputControl))
+			{
+				if (control.CheckPostBack())
+				{
+					valueChanged.Add(control);
+				}
+			}
+
+			//handle posted values for the controls which value changed
+			foreach (IInputControl control in valueChanged)
 			{
 				control.HandlePostBack();
 			}

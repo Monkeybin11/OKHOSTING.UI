@@ -156,6 +156,11 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 			}
 		}
 
+		protected void OnValueChanged()
+		{
+			ValueChanged?.Invoke(this, ((IAutocomplete)this).Value);
+		}
+
 		#endregion
 
 		#region IControl
@@ -724,15 +729,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
+		bool IInputControl.CheckPostBack()
+		{
+			string postedValue = Page?.Request.Form[InnerTextBox.ID];
+			return ((IAutocomplete) this).Value != postedValue;
+		}
+
 		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[InnerTextBox.ID];
 			((IAutocomplete) this).Value = postedValue;
-		}
-
-		protected void OnValueChanged()
-		{
-			ValueChanged?.Invoke(this, ((IAutocomplete) this).Value);
 		}
 
 		#endregion

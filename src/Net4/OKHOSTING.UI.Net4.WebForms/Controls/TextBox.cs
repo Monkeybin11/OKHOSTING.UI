@@ -53,10 +53,16 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls
 
 		#region IWebInputControl
 
+		bool IInputControl.CheckPostBack()
+		{
+			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
+			return ((ITextBox) this).Value != postedValue;
+		}
+
 		void IInputControl.HandlePostBack()
 		{
 			string postedValue = Page?.Request.Form[ID] ?? string.Empty;
-			((ITextBox) this).Value = postedValue;
+			((ITextBox)this).Value = postedValue;
 		}
 
 		protected void OnValueChanged()
