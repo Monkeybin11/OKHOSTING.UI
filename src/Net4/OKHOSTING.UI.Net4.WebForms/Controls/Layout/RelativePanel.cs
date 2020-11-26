@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NativeControl = System.Web.UI.Control;
+using NativeControl = System.Web.UI.WebControls.WebControl;
 
 namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 {
@@ -66,6 +66,9 @@ namespace OKHOSTING.UI.Net4.WebForms.Controls.Layout
 			{
 				throw new ArgumentNullException(nameof(control));
 			}
+
+			//avoid wrong layouts by assigning display: block to all controls, needed for labels at least
+			((NativeControl) control).Style["display"] = "block";
 
 			//if no reference control is provided, then use this panel as reference
 			if (referenceControl == null)
